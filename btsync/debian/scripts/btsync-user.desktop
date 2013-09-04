@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=BitTorrent Sync Management
 Comment=BitTorrent Sync management interface
-Exec=sensible-browser http://127.0.0.1:9999
+Exec=sensible-browser http://127.0.0.1:PORTNUM
 Icon=btsync-user
 Terminal=false
 Type=Application

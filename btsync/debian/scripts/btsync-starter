@@ -6,6 +6,8 @@ DATADIR=${DESTDIR}/.btsync
 CFGFILE=${DESTDIR}/.btsync.conf
 PIDFILE=${DESTDIR}/.btsync.pid
 USRFILE=${DESTDIR}/btsync.conf
+APPLDIR=${HOME}/.local/share/applications
+APPFILE=${APPLDIR}/btsync-user.desktop
 DEVNAME="$(hostname) - $(whoami)"
 RUNNING_STATEFILE="${DATADIR}/running"
 UPDATING_STATEFILE="/var/run/btsync-user-updating"
@@ -15,6 +17,7 @@ AGENT=/usr/lib/btsync-user/btsync-agent
 XDATADIR="$(echo ${DATADIR} | sed -e "s/\\//\\\\\//g")"
 XPIDFILE="$(echo ${PIDFILE} | sed -e "s/\\//\\\\\//g")"
 XDEVNAME="$(echo ${DEVNAME} | sed -e "s/\\//\\\\\//g")"
+XPORTNUM="$((8999+$(id -u)))"
 
 runagent() {
 	CONFIG="$1"
@@ -49,8 +52,17 @@ else
 		-e "s/DATADIR/${XDATADIR}/g" \
 		-e "s/PIDFILE/${XPIDFILE}/g" \
 		-e "s/DEVNAME/${XDEVNAME}/g" \
+		-e "s/PORTNUM/${XPORTNUM}/g" \
 		> ${CFGFILE} < /etc/btsync-user/btsync-user.conf
 	mkdir -p ${DATADIR}
+	mkdir -p ${APPLDIR}
+	sed \
+		-e "s/DATADIR/${XDATADIR}/g" \
+		-e "s/PIDFILE/${XPIDFILE}/g" \
+		-e "s/DEVNAME/${XDEVNAME}/g" \
+		-e "s/PORTNUM/${XPORTNUM}/g" \
+		> ${APPFILE} < /etc/btsync-user/btsync-user.desktop
+
 	if [ -f "${USRFILE}" ]; then
 		runagent ${USRFILE} &
 	else
