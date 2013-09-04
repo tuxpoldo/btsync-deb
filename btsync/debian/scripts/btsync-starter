@@ -7,11 +7,36 @@ CFGFILE=${DESTDIR}/.btsync.conf
 PIDFILE=${DESTDIR}/.btsync.pid
 USRFILE=${DESTDIR}/btsync.conf
 DEVNAME="$(hostname) - $(whoami)"
+RUNNING_STATEFILE="${DATADIR}/running"
+UPDATING_STATEFILE="/var/run/btsync-user-updating"
+AGENT=/usr/lib/btsync-user/btsync-agent
 
 # "sedify" replacemnt data
 XDATADIR="$(echo ${DATADIR} | sed -e "s/\\//\\\\\//g")"
 XPIDFILE="$(echo ${PIDFILE} | sed -e "s/\\//\\\\\//g")"
 XDEVNAME="$(echo ${DEVNAME} | sed -e "s/\\//\\\\\//g")"
+
+runagent() {
+	CONFIG="$1"
+	touch "${RUNNING_STATEFILE}"
+	while [ -f "${RUNNING_STATEFILE}" ]; do
+		if ! [ -f "${UPDATING_STATEFILE}" ]; then
+			${AGENT} --config "${CONFIG}"
+			sleep 1 # give the agent some time to fork
+			if pgrep -x btsync-agent -U $(id -u) > /dev/null; then
+				# wait for process to finish
+				while pgrep -x btsync-agent -U $(id -u) > /dev/null; do
+					 sleep 10
+				done
+			else # something went wrong, startup failed, quit loop here
+				rm "${RUNNING_STATEFILE}"
+				return
+			fi
+		else
+			sleep 10 # avoid active waiting loop while updating
+		fi
+	done
+}
 
 if pgrep -x btsync-agent -U $(id -u) > /dev/null; then
 	echo btsync-agent already running
@@ -25,10 +50,10 @@ else
 		-e "s/PIDFILE/${XPIDFILE}/g" \
 		-e "s/DEVNAME/${XDEVNAME}/g" \
 		> ${CFGFILE} < /etc/btsync-user/btsync-user.conf
+	mkdir -p ${DATADIR}
 	if [ -f "${USRFILE}" ]; then
-		/usr/lib/btsync-user/btsync-agent --config ${USRFILE}
+		runagent ${USRFILE} &
 	else
-		mkdir -p ${DATADIR}
-		/usr/lib/btsync-user/btsync-agent --config ${CFGFILE}
+		runagent ${CFGFILE} &
 	fi
 fi

@@ -2,54 +2,23 @@
 
 set -e
 
-UPDATENOTIFIERDIR=/var/lib/update-notifier/user.d
-
 case "$1" in
-    configure)
+configure)
 	unset DISPLAY # No GUI launched from postinst please
 
-        if [ -d $UPDATENOTIFIERDIR ] ; then
-          # pgrep matches application names from /proc/<pid>/status which is
-          # truncated according to sys/procfs.h definition. Problem is it's
-          # platform dependent. Either 15 or 16 chars.
-          if pgrep -x btsync-agent > /dev/null 2>&1 ;  then
-            cat > $UPDATENOTIFIERDIR/btsync-restart-required <<BTSYNCEND
-Name: BitTorrent Sync Restart Required
-Priority: High
-Terminal: False
-Command: /usr/lib/btsync-user/btsync-stopper
-ButtonText: _Restart BTsync
-DontShowAfterReboot: True
-DisplayIf: pgrep -x btsync-agent -U \$(id -u) > /dev/null
-Description: BitTorrent Sync must be restarted to function properly.
-BTSYNCEND
-          else
-            rm -f $UPDATENOTIFIERDIR/btsync-restart-required
-          fi
-        fi
-
-        if [ "$2" = "" ] && [ -d $UPDATENOTIFIERDIR ] ; then
-            cat > $UPDATENOTIFIERDIR/btsync-start-required <<BTSYNCEND
-Name: BitTorrent Sync Start Required
-Priority: High
-Command: /usr/lib/btsync-user/btsync-starter
-Terminal: False
-DontShowAfterReboot: True
-DisplayIf: /usr/lib/btsync/btsync-tester
-Description: Start BitTorrent Sync Agent to finish installation.
-ButtonText: _Start BTSync
-BTSYNCEND
-        fi
+	if [ -f /var/run/btsync-user-updating ]; then
+		rm /var/run/btsync-user-updating
+	fi
 
 	;;
 
-    abort-upgrade|abort-remove|abort-deconfigure)
-    ;;
+abort-upgrade|abort-remove|abort-deconfigure)
+	;;
 
-    *)
-        echo "postinst called with unknown argument '$1'" >&2
-        exit 1
-    ;;
+*)
+	echo "postinst called with unknown argument '$1'" >&2
+	exit 1
+	;;
 esac
 
 # dh_installdeb will replace this with shell code automatically

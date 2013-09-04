@@ -1,2 +1,11 @@
 #!/bin/sh
+
+# compute user specific directories
+DESTDIR=${HOME}
+DATADIR=${DESTDIR}/.btsync
+RUNNING_STATEFILE="${DATADIR}/running"
+
+if [ -f "${RUNNING_STATEFILE}" ]; then
+	rm "${RUNNING_STATEFILE}"
+fi
 pkill -u $(id -u) btsync-agent
