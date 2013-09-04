@@ -1,0 +1,38 @@
+btsync-user for Debian
+----------------------
+
+This package of BitTorrent Sync is mainly intended for generic desktop usage.
+It tries to create a desktop experience similar to Windows or Mac OS/X: When
+the user logs in, an instance of BitTorrent Sync is automatically launched
+under the user's credentials.
+
+By default the user instance has an automatical created configuration file
+in ~/.btsync.conf and keeps its internal data in the directory ~/.btsync
+
+The user is able to configure its BitTorrent Sync instance via the web ui
+with the URL http://localhost:9999
+
+A desktop shortcut to the web ui is installed into the system.
+
+In order to give more freedom to the advanced user, there is also a
+possibility to launch BitTorrent Sync with a custom configuration file
+instead of the automatically created file: the startup routine of BitTorrent
+Sync checks, if there is a file named btsync.conf in the home directory of
+the user. If ~/btsync.conf is found, then it is used as configuration file.
+If not, BitTorrent Sync uses the automatically created default configuration
+file ~/.btsync.conf that will be recreated on every restart.
+
+The simplest way to create a custom configuration file, is to create a copy
+of the default configuration file and then to edit it according to your
+needs:
+
+cp ~/.btsync.conf ~/btsync.conf
+
+When you are ready with your modifications, you can restart BitTorrent Sync
+by executing:
+
+btsync-restart
+
+on the command line.
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sun, 7 July 2013 15:19:57 +0200

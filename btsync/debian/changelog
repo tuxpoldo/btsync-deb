@@ -1,0 +1,239 @@
+btsync (1.1.70-1~sid) sid; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 15 Aug 2013 10:44:11 +0200
+
+btsync (1.1.69-1~sid) sid; urgency=low
+
+  * New upstream release
+  - Fixed: Additional error message on startup
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Tue, 13 Aug 2013 00:41:27 +0200
+
+btsync (1.1.48-1~sid) sid; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Tue, 23 Jul 2013 22:51:39 +0200
+
+btsync (1.1.42-2~sid) sid; urgency=low
+
+  - Fixed: On slow systems the init scripts may fail
+    under certain conditions (Reported by Christian Wantia)
+  - Fixed: The init script did not reliably detect if a
+    btsync instance is really started when more than one
+    instance was defined
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Tue, 18 Jul 2013 14:03:27 +0200
+
+btsync (1.1.42-1~sid) sid; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Tue, 16 Jul 2013 17:45:08 +0200
+
+btsync (1.1.40-1~sid) sid; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Mon, 15 Jul 2013 16:13:43 +0200
+
+btsync (1.1.33-1~sid) sid; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 11 Jul 2013 22:10:09 +0200
+
+btsync (1.1.30-2~sid) sid; urgency=low
+
+  - New: The init script now detects startup failures and shows
+    an error message.
+  - New: The init script now issues some syslog messages on
+    failures
+  - New: The init script now supports the "status" command
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 11 Jul 2013 16:07:24 +0200
+
+btsync (1.1.30-1~sid) sid; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Wed, 10 Jul 2013 00:31:45 +0200
+
+btsync (1.1.27-2~sid) sid; urgency=low
+
+  - Fixed: AUTOSTART in /etc/default/btsync had no effect
+  - Added support for custom configuration files in btsync-user
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sun, 07 Jul 2013 15:29:51 +0200
+
+btsync (1.1.27-1~sid) sid; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 04 Jul 2013 16:59:15 +0200
+
+btsync (1.1.26-1~sid) sid; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Wed, 03 Jul 2013 22:20:42 +0200
+
+btsync (1.1.22-1~sid) sid; urgency=low
+
+  * New upstream release
+  - Added support for specifying the credentials in the configuration
+    file using DAEMON_UID=xyz and DAEMONGID=xyz in the comments
+  - Added support for specifying the umask in the configuration
+    file using DAEMON_UMASK=nnnn in the comments
+  - Added debconf support for specifying the umask
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sat, 29 Jun 2013 16:17:11 +0200
+
+btsync (1.1.15-1~sid) sid; urgency=low
+
+  * New upstream release
+  - Added possibility to reconfigure the device name
+  - Added debconf support for disk_low_priority
+  - Added debconf support for folder_rescan_interval
+  - Added debconf support for lan_encrypt_data
+  - Added debconf support for lan_use_tcp
+  - Added debconf support for rate_limit_local_peers
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sat, 15 Jun 2013 14:52:14 +0200
+
+btsync (1.1.12-1~sid) sid; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Wed, 12 Jun 2013 17:28:12 +0200
+
+btsync (1.0.134.2-1~sid) sid; urgency=low
+
+  - Fixed: REALLY Replaced binary version for i386 and amd64 with
+    versions that support the current libc
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sun, 02 June 2013 15:34:39 +0200
+    
+btsync (1.0.134.1-1~sid) sid; urgency=low
+
+  - Fixed: Replaced binary version for i386 and amd64 with
+    versions that support the current libc
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sun, 02 June 2013 00:51:12 +0200
+    
+btsync (1.0.134-5~sid) sid; urgency=low
+
+  - Fixed: btsync did not start if web gui was configured to
+    operate with no credentials
+  - Fixed: btsync did not stop under certain circumstances
+    if there is more than one btsync.*.pid file in /var/run
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Mon, 28 May 2013 17:08:21 +0200
+    
+btsync (1.0.134-4~sid) sid; urgency=low
+
+  - Really Fixed: btsync-user does not work correctly due to
+    relative paths in configuration file. Now the configuration
+    file /etc/btsync-user/btsync-user.conf is only a template
+    for generating a user specific configuration file into the
+    home directory
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Mon, 21 May 2013 23:31:47 +0200
+
+btsync (1.0.134-3~sid) sid; urgency=low
+
+  - Fixed: broken parsing of usernames with dashes in btsync
+    configuration files
+  - Fixed: btsync-user does not work correctly due to relative
+    paths in configuration file. Now the configuration file
+    /etc/btsync-user/btsync-user.conf is only a template for
+    generating a user specific configuration file into the home
+    directory
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Mon, 20 May 2013 18:14:11 +0200
+
+btsync (1.0.134-2~sid) sid; urgency=low
+
+  - Fixed: bug in prerm script prevented uninstallation of
+    btsync-user
+  - Fixed: broken autostart and startup script in btsync-user
+  - Fixed: broken icons in btsync-user
+  - Added po-debconf support to templates
+  - Added force-reload pseudo-support to init script
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 16 May 2013 23:55:26 +0200
+
+btsync (1.0.134-1~sid) sid; urgency=low
+
+  * New upstream release
+    - Fixed: Crashes on Windows
+    - Other bugfixes and stability improvements
+  * Merged source for btsync and btsync-user
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 16 May 2013 14:52:26 +0200
+
+btsync (1.0.132-5~sid) sid; urgency=low
+
+  - Added documentation in README.Debian
+  - Changed daemon location
+  - Changed versioning scheme
+  - Fixed: added needed lintian overrides
+  - Fixed: broken icons for administartion
+  - Fixed: init script variable name conflict
+  - Fixed: license information
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 15 May 2013 14:37:12 +0200
+
+btsync (1.0.132-4) sid; urgency=low
+
+  * Fixed: syntax errors in sample configuration file
+    user.jdoe.conf
+  * Changed arm building platform to armel
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 10 May 2013 16:04:21 +0200
+
+btsync (1.0.132-1) sid; urgency=low
+
+  * New upstream release
+    + Added menu entry and icons
+    - Fixed: Crashes on Windows
+    - FreeBSD support
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 09 May 2013 02:33:59 +0200
+
+btsync (1.0.130-1) sid; urgency=low
+
+  * New upstream release
+    - Changed local date mechanism to avoid sync conflicts
+    - Fixed: saving settings in WebUI after restart
+    - Fixed: known hosts configuration on Linux
+    - Fixed: Most popular crashes
+    - Other bugfixes and stability improvements
+    - Fixed: access to files outside of sync folder 
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Wed, 08 May 2013 15:41:33 +0200
+
+btsync (1.0.125-1) sid; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Mon, 06 May 2013 07:30:06 +0200
+
+btsync (1.0.116-2) sid; urgency=low
+
+  * Bugfixes:
+    - Fixed broken check for enabled autoupdate in init script (Reported by
+      Bryan Larsen)
+  * Improvements:
+    - All debconf questions now have a decent default making it possible
+      to install non interactively using the "noninteractive" frontend 
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Fri, 03 May 2013 13:01:25 +0100
+
+btsync (1.0.116-1) sid; urgency=low
+
+  * Initial release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Tue, 25 April 2013 15:45:30 +0100

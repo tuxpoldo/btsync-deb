@@ -1,0 +1,73 @@
+btsync for Debian
+-----------------
+
+This version of BitTorrent Sync is mainly intended for server usage.
+It allows to start one or more BitTorrent Sync daemons based on
+configuration files located in /etc/btsync
+
+The package installation offers a possibility to create a default
+instance of BitTorrent Sync. All relevant parameters can be specified
+interactively during the installation. At any time, the configuration
+of the default instance can be changed by executing the command:
+
+sudo dpkg-reconfigure btsync
+
+When creating configuration files manually, there are some possibilities
+to specify additional configuration parameters.
+
+Configuration parameters not parsed by btsync but by the daemon
+scripts can be supplied as comments in the configuration file.
+
+The following parameters are supported:
+
+DAEMON_UID:      A uid for supplying the user under which
+                 the btsync daemon should run
+
+DAEMON_GID:      A gid for supplying the group under which
+                 the btsync daemon should run. If omitted
+                 the daemon will run under the primary group
+                 of the user
+
+DAEMON_UMASK:    The umask for the btsync damon. If omitted
+                 the default umask is used.
+
+The parameter definition must use an equal sign ("="):
+
+//
+// DAEMON_UID=jdoe
+// DAEMON_UMASK=0002
+//
+
+This example will launch the instance running under the credentials
+of the user "jdoe" using 0002 as umask
+
+
+The old mechanism using the encoding in the configuration file
+name following the naming scheme
+
+  <damon name>[.<user>[.<group>]].conf
+
+is still supported but is superseded by data supplied in the configuration
+file itself. Support may be dismissed in future releases.
+
+By specifying <user> and <group> it is possible to specify under which
+credentials the daemon runs. In this case it must be assured that the
+daemon is able to write into the data directory specified in the
+configuration file. Some example files are provided under
+
+/etc/btsync/samples
+
+The file /etc/default/btsync allows to configure the way the daemon
+starts:
+
+The variable AUTOSTART defines which daemons are started automatically.
+It can assume the values
+
+  none		No daemon is started automatically
+  all		(default) All daemons are started automatically
+  <list>	Only the specified daemons are started automatically
+
+The variable DAEMON_ARGS allows to specify additional commandline
+parameters passed to the daemon.
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sat, 29 Jun 2013 16:42:10 +0200

@@ -1,0 +1,10 @@
+# files
+btsync-daemon				usr/lib/btsync
+complex.conf				etc/btsync/samples
+debian/samples/simple.conf		etc/btsync/samples
+debian/samples/user-new.conf		etc/btsync/samples
+debian/samples/user-old.jdoe.conf	etc/btsync/samples
+debian/icons/96/btsync.png		usr/share/icons/hicolor/96x96/apps
+debian/icons/48/btsync.png		usr/share/icons/hicolor/48x48/apps
+debian/icons/32/btsync.png		usr/share/icons/hicolor/32x32/apps
+debian/icons/16/btsync.png		usr/share/icons/hicolor/16x16/apps

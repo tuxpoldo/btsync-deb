@@ -1,0 +1,29 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+%:
+	dh $@ 
+
+override_dh_auto_build:
+	dh_auto_build
+	if [ "$(DEB_BUILD_ARCH)" = "amd64" ];   then cp -a $(DEB_BUILD_ARCH)/btsync btsync-daemon; fi
+	if [ "$(DEB_BUILD_ARCH)" = "i386" ];    then cp -a $(DEB_BUILD_ARCH)/btsync btsync-daemon; fi
+	if [ "$(DEB_BUILD_ARCH)" = "powerpc" ]; then cp -a $(DEB_BUILD_ARCH)/btsync btsync-daemon; fi
+	if [ "$(DEB_BUILD_ARCH)" = "arm" ];     then cp -a $(DEB_BUILD_ARCH)/btsync btsync-daemon; fi
+	if [ "$(DEB_BUILD_ARCH)" = "armel" ];   then cp -a arm/btsync btsync-daemon; fi
+	if [ "$(DEB_BUILD_ARCH)" = "armhf" ];   then cp -a arm/btsync btsync-daemon; fi
+	cp -a btsync-daemon btsync-agent
+	cp -a debian/samples/complex.conf complex.conf
+	./btsync-daemon --dump-sample-config >> complex.conf
+
+override_dh_clean:
+	dh_clean
+	rm -f btsync-daemon btsync-agent complex.conf

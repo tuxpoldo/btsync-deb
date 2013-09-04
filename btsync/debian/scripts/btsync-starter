@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# compute user specific directories
+DESTDIR=${HOME}
+DATADIR=${DESTDIR}/.btsync
+CFGFILE=${DESTDIR}/.btsync.conf
+PIDFILE=${DESTDIR}/.btsync.pid
+USRFILE=${DESTDIR}/btsync.conf
+DEVNAME="$(hostname) - $(whoami)"
+
+# "sedify" replacemnt data
+XDATADIR="$(echo ${DATADIR} | sed -e "s/\\//\\\\\//g")"
+XPIDFILE="$(echo ${PIDFILE} | sed -e "s/\\//\\\\\//g")"
+XDEVNAME="$(echo ${DEVNAME} | sed -e "s/\\//\\\\\//g")"
+
+if pgrep -x btsync-agent -U $(id -u) > /dev/null; then
+	echo btsync-agent already running
+	exit 0
+else
+	# move to user's home directory
+	cd ~
+
+	sed \
+		-e "s/DATADIR/${XDATADIR}/g" \
+		-e "s/PIDFILE/${XPIDFILE}/g" \
+		-e "s/DEVNAME/${XDEVNAME}/g" \
+		> ${CFGFILE} < /etc/btsync-user/btsync-user.conf
+	if [ -f "${USRFILE}" ]; then
+		/usr/lib/btsync-user/btsync-agent --config ${USRFILE}
+	else
+		mkdir -p ${DATADIR}
+		/usr/lib/btsync-user/btsync-agent --config ${CFGFILE}
+	fi
+fi

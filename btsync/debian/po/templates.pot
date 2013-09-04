@@ -1,0 +1,278 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: btsync\n"
+"Report-Msgid-Bugs-To: btsync@packages.debian.org\n"
+"POT-Creation-Date: 2013-06-29 17:00+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:1001
+msgid "Do you want to define a default BitTorrent Sync instance?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:1001
+msgid ""
+"BitTorrent Sync can run one or more daemons based on configuration files "
+"located in /etc/btsync. You can choose to create a default instance running "
+"under root credentials that can be also reconfigured via dpkg-reconfigure or "
+"manage the whole configuration manually. In both cases you can manually "
+"manage additional instances with their own configuration files."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:2001
+msgid "On which portnumber should BitTorrent Sync listen?"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:2001
+msgid ""
+"Specify here the port BitTorrent Sync will listen on for the file "
+"synchronisation protocol."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:2001
+msgid ""
+"Specify 0 to let btsync take a random port number each time it starts. Valid "
+"range is 1000-65534"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:3001
+msgid "Do you want BitTorrent Sync to request port mapping via UPNP?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:3001
+msgid ""
+"Specify here if you want BitTorrent Sync to request a port mapping from the "
+"default router using the Universal Plug and Play protocol."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:3001
+msgid ""
+"This technique is useful only if BitTorrent Sync is running behind a NAT "
+"SOHO router supporting UPNP."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:4001
+msgid "Do you want to limit the download rate of BitTorrent Sync?"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:4001
+msgid "Specify here a download rate limit expressed in KB/Second"
+msgstr ""
+
+#. Type: string
+#. Description
+#. Type: string
+#. Description
+#: ../btsync.templates:4001 ../btsync.templates:5001
+msgid "If 0 is specified, no limit is applied."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:5001
+msgid "Do you want to limit the upload rate of BitTorrent Sync?"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:5001
+msgid "Specify here an upload rate limit expressed in KB/Second"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:6001
+msgid "On which IP address should the web interface listen?"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:6001
+msgid ""
+"BitTorrent Sync's web interface can listen on a specific IP address or on "
+"all addresses configured on this machine."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:6001
+msgid ""
+"If you want BitTorrent Sync to listen on all interfaces and addresses, leave "
+"this value to 0.0.0.0"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:6001
+msgid ""
+"If you want BitTorrent Sync to listen on a specific IP address, specify it "
+"now."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:7001
+msgid "On which port should the web interface listen?"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:7001
+msgid ""
+"Specify here the port BitTorrent Sync will listen to for the web interfce. "
+"This port number in the range from 80 to 65534 shall not conflict with any "
+"other services running on this machine."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:8001
+msgid "The username for accessing the web interface:"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:8001
+msgid ""
+"Specify here a username for accessing the web interface. If left empty, no "
+"user authorization is needed to access the web interface."
+msgstr ""
+
+#. Type: password
+#. Description
+#: ../btsync.templates:9001
+msgid "The password for accessing the web interface:"
+msgstr ""
+
+#. Type: password
+#. Description
+#: ../btsync.templates:9001
+msgid "Specify here a password for accessing the web interface."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:10001
+msgid "The visible device name of this instance:"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:10001
+msgid ""
+"Specify here the visible device name for this instance. If left empty, a "
+"default device name based on the host name will be created."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:11001
+msgid "Disk operations with low priority:"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:11001
+msgid ""
+"Sets priority for the Lile operations on disc. If set to false, Sync will "
+"perform read and write file operations with the highest speed and priority "
+"which can result in degradation of performance for other applications."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:12001
+msgid "Encrypt data on local network:"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:12001
+msgid "If set to true, will use encryption in the local network."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:13001
+msgid "Use TCP in local network:"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:13001
+msgid "If set to true, Sync will use TCP instead of UDP in local network."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:14001
+msgid "Apply speed limits in local network:"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:14001
+msgid ""
+"Applies speed limits to the peers in local network. By default the limits "
+"are not applied in LAN."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:15001
+msgid "Fall back folder rescan interval in seconds:"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:15001
+msgid ""
+"Syncing happens in real time. In addition, as a fall back, BitTorrent Sync "
+"also rescans files/folders every 10 minutes by default. This interval can be "
+"modified here."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:16001
+msgid "Umask value to set for the daemon:"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:16001
+msgid ""
+"Applies the supplied umask to the btsync damon. If leaved empty, the default "
+"umask value applies."
+msgstr ""

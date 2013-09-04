@@ -1,0 +1,132 @@
+Template: btsync/managed-configuration
+Type: boolean
+Default: true
+_Description: Do you want to define a default BitTorrent Sync instance?
+ BitTorrent Sync can run one or more daemons based on configuration files
+ located in /etc/btsync. You can choose to create a default
+ instance running under root credentials that can be also reconfigured
+ via dpkg-reconfigure or manage the whole configuration manually.
+ In both cases you can manually manage additional instances with
+ their own configuration files.
+
+Template: btsync/bind-port
+Type: string
+Default: 0
+_Description: On which portnumber should BitTorrent Sync listen?
+ Specify here the port BitTorrent Sync will listen on for the file
+ synchronisation protocol.
+ .
+ Specify 0 to let btsync take a random port number each time
+ it starts. Valid range is 1000-65534
+
+Template: btsync/use-upnp
+Type: boolean
+Default: false
+_Description: Do you want BitTorrent Sync to request port mapping via UPNP?
+ Specify here if you want BitTorrent Sync to request a port mapping
+ from the default router using the Universal Plug and Play protocol.
+ .
+ This technique is useful only if BitTorrent Sync is running behind
+ a NAT SOHO router supporting UPNP.
+
+Template: btsync/limit-download
+Type: string
+Default: 0
+_Description: Do you want to limit the download rate of BitTorrent Sync?
+ Specify here a download rate limit expressed in KB/Second
+ .
+ If 0 is specified, no limit is applied.
+
+Template: btsync/limit-upload
+Type: string
+Default: 0
+_Description: Do you want to limit the upload rate of BitTorrent Sync?
+ Specify here an upload rate limit expressed in KB/Second
+ .
+ If 0 is specified, no limit is applied.
+
+Template: btsync/webgui-bindaddr
+Type: string
+Default: 0.0.0.0
+_Description: On which IP address should the web interface listen?
+ BitTorrent Sync's web interface can listen on a specific IP address
+ or on all addresses configured on this machine.
+ .
+ If you want BitTorrent Sync to listen on all interfaces and
+ addresses, leave this value to 0.0.0.0
+ .
+ If you want BitTorrent Sync to listen on a specific IP address,
+ specify it now.
+
+Template: btsync/webgui-bindport
+Type: string
+Default: 8888
+_Description: On which port should the web interface listen?
+ Specify here the port BitTorrent Sync will listen to for the web
+ interfce. This port number in the range from 80 to 65534 shall
+ not conflict with any other services running on this machine.
+
+Template: btsync/webgui-username
+Type: string
+Default: admin
+_Description: The username for accessing the web interface:
+ Specify here a username for accessing the web interface. If
+ left empty, no user authorization is needed to access the
+ web interface.
+
+Template: btsync/webgui-password
+Type: password
+Default: AdminPassword
+_Description: The password for accessing the web interface:
+ Specify here a password for accessing the web interface.
+
+Template: btsync/device-name
+Type: string
+Default:
+_Description: The visible device name of this instance:
+ Specify here the visible device name for this instance. If
+ left empty, a default device name based on the host name
+ will be created.
+
+Template: btsync/disk_low_priority
+Type: boolean
+Default: true
+_Description: Disk operations with low priority:
+ Sets priority for the Lile operations on disc. If set to
+ false, Sync will perform read and write file operations with
+ the highest speed and priority which can result in degradation
+ of performance for other applications.
+
+Template: btsync/lan_encrypt_data
+Type: boolean
+Default: true
+_Description: Encrypt data on local network:
+ If set to true, will use encryption in the local network.
+
+Template: btsync/lan_use_tcp
+Type: boolean
+Default: false
+_Description: Use TCP in local network:
+ If set to true, Sync will use TCP instead of UDP in local network.
+
+Template: btsync/rate_limit_local_peers
+Type: boolean
+Default: false
+_Description: Apply speed limits in local network:
+ Applies speed limits to the peers in local network.
+ By default the limits are not applied in LAN.
+
+Template: btsync/folder_rescan_interval
+Type: string
+Default: 600
+_Description: Fall back folder rescan interval in seconds:
+ Syncing happens in real time. In addition, as a fall back, BitTorrent
+ Sync also rescans files/folders every 10 minutes by default. This
+ interval can be modified here.
+
+Template: btsync/daemon_umask
+Type: string
+Default:
+_Description: Umask value to set for the daemon:
+ Applies the supplied umask to the btsync damon. If leaved
+ empty, the default umask value applies.

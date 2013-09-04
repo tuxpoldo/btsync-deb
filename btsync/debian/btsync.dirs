@@ -1,0 +1,5 @@
+# dirs
+etc/btsync
+etc/btsync/samples
+usr/lib/btsync
+var/lib/btsync

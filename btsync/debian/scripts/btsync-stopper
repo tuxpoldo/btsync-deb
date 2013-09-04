@@ -1,0 +1,2 @@
+#!/bin/sh
+pkill -u $(id -u) btsync-agent

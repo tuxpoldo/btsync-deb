@@ -1,0 +1,79 @@
+#!/bin/bash
+
+# base download locations
+BASE_BIN_LOCATION=http://syncapp.bittorrent.com
+BASE_DOC_LOCATION=http://btsync.s3-website-us-east-1.amazonaws.com
+
+function cleanup_temp() {
+	for ARCH in arm powerpc i386 x64; do
+		rm -f btsync_${ARCH}-${VERSION}.tar.gz
+	done
+	rm -f BitTorrentSyncUserGuide.pdf
+	rm -rf temp-btsync
+}
+
+function get_downloads() {
+	echo "Getting BitTorrentSyncUserGuide.pdf"
+	if ! wget -q ${BASE_DOC_LOCATION}/BitTorrentSyncUserGuide.pdf; then
+		echo "Failed to get BitTorrentSyncUserGuide.pdf" >&2
+		return 1
+	fi
+	mkdir -p temp-btsync/btsync
+	mv BitTorrentSyncUserGuide.pdf temp-btsync/btsync
+	for ARCH in arm powerpc i386 x64; do
+		case ${ARCH} in
+		*)
+			DEST=${ARCH}
+			;;
+		x64)
+			DESC=amd64
+			;;
+		esac
+		echo "Getting btsync_${ARCH}-${VERSION}.tar.gz"
+		if ! wget -q ${BASE_BIN_LOCATION}/${VERSION}/btsync_${ARCH}-${VERSION}.tar.gz; then
+			echo "Failed to get btsync_${ARCH}-${VERSION}.tar.gz" >&2
+			return 1
+		fi
+		mkdir -p temp-btsync/btsync/${DEST}
+		if ! tar xzf btsync_${ARCH}-${VERSION}.tar.gz -C temp-btsync/btsync/${DEST}; then
+			echo "Failed to extract btsync_${ARCH}-${VERSION}.tar.gz" >&2
+			return 1
+		fi
+		touch -r temp-btsync/btsync/${DEST}/btsync temp-btsync/btsync/${DEST}
+		touch -r temp-btsync/btsync/${DEST}/btsync temp-btsync/btsync
+	done
+	return 0
+}
+
+
+if [ -z $1 ]; then
+	echo 'USAGE: makesrcarchive <version>'
+	exit 1;
+fi
+
+VERSION=$1
+
+if ! get_downloads; then
+	cleanup_temp
+	exit 1;
+fi
+
+# get the real version number from binary
+# BINVERSION=$(temp-btsync/btsync/amd64/btsync --help | grep "BitTorrent Sync" | cut -d' ' -f 3)
+BINVERSION=${VERSION}
+
+# rename source directory
+mv temp-btsync/btsync temp-btsync/btsync-${BINVERSION}
+
+# create archive
+echo "Creating source archive btsync-${BINVERSION}.tar.gz"
+tar czf btsync-${BINVERSION}.tar.gz -C temp-btsync btsync-${BINVERSION}
+touch -r temp-btsync/btsync-${BINVERSION} btsync-${BINVERSION}.tar.gz
+echo "Creating symbolic link to .orig archive"
+ln -sf btsync-${BINVERSION}.tar.gz btsync_${BINVERSION}.orig.tar.gz
+touch -h -r temp-btsync/btsync-${BINVERSION} btsync_${BINVERSION}.orig.tar.gz
+
+# tidy up
+cleanup_temp
+
+exit 0

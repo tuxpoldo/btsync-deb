@@ -1,0 +1,21 @@
+#!/bin/sh
+# postrm script for btsync
+
+set -e
+
+if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
+    # Possibly installed desktop file
+    if [ -f /usr/share/applications/btsync.desktop ] ; then
+        rm -f /usr/share/applications/btsync.desktop
+    fi
+    if [ "$1" = "purge" ]; then
+        if [ -h /etc/avahi/services/btsync.service ] ; then
+            rm -f /etc/avahi/services/btsync.service
+        fi
+        rm -rf /etc/btsync /var/lib/btsync /usr/lib/btsync
+    fi
+fi
+
+#DEBHELPER#
+
+exit 0

@@ -1,0 +1,18 @@
+# source archives
+/btsync-*.tar.gz
+/btsync_*.orig.tar.gz
+
+# unpacked sources
+/btsync/amd64
+/btsync/amd64/LICENSE.TXT
+/btsync/amd64/btsync
+/btsync/arm
+/btsync/arm/LICENSE.TXT
+/btsync/arm/btsync
+/btsync/i386
+/btsync/i386/LICENSE.TXT
+/btsync/i386/btsync
+/btsync/powerpc
+/btsync/powerpc/LICENSE.TXT
+/btsync/powerpc/btsync
+/btsync/BitTorrentSyncUserGuide.pdf
