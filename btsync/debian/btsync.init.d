@@ -209,6 +209,7 @@ start_btsync () {
 	# since btsync does not return an acceptable error
 	# code, we must check that it is really running
 	WAITCNT=0
+	sleep 1
 	until test_running $BASENAME; do
 		# and wait for the process to come up
 		if [ $WAITCNT -ge $TIMEOUT ]; then

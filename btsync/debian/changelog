@@ -1,10 +1,12 @@
-btsync (1.1.70-2~raring) raring; urgency=low
+btsync (1.1.70-2~sid) sid; urgency=low
 
-  * Fixed: Restart on update will work in future versions on btsync-user
+  - Fixed: Restart on update will work in future versions on btsync-user
     (Reported and fixed by dswd)
-  * Added multiuser support for btsync-user as suggested by user pjssilva
+  - Added multiuser support for btsync-user as suggested by user pjssilva
     (See http://bit.ly/13dBmOP)
     THIS MAY CHANGE THE PORT NUMBER FOR THE WEB UI
+  - Fixed: Sometime btsync is still not running when the startup sequence
+    checks if the process runs. Added sleep 1 (Suggested by raveur)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Wed, 04 Sep 2013 16:07:28 +0200
 
