@@ -16,3 +16,6 @@
 /btsync/powerpc/LICENSE.TXT
 /btsync/powerpc/btsync
 /btsync/BitTorrentSyncUserGuide.pdf
+
+# intermediate files
+/btsync_*~*
