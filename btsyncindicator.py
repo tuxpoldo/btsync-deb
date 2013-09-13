@@ -5,13 +5,9 @@
 #
 # Authors: Mark Johnson
 #
-# This program is free software: you can redistribute it and/or modify it
-# under the terms of either or both of the following licenses:
-#
-# 1) the GNU Lesser General Public License version 3, as published by the
-# Free Software Foundation; and/or
-# 2) the GNU Lesser General Public License version 2.1, as published by
-# the Free Software Foundation.
+# Based on the PyGTK Application Indicators example by Jono Bacon
+# and Neil Jagdish Patel
+# http://developer.ubuntu.com/resources/technologies/application-indicators/
 #
 # This program is distributed in the hope that it will be useful, but
 # WITHOUT ANY WARRANTY; without even the implied warranties of
@@ -19,8 +15,8 @@
 # PURPOSE.  See the applicable version of the GNU Lesser General Public
 # License for more details.
 #
-# You should have received a copy of both the GNU Lesser General Public
-# License version 3 and version 2.1 along with this program.  If not, see
+# You should have received a copy of the GNU Lesser General Public
+# License version 3 along with this program.  If not, see
 # <http://www.gnu.org/licenses/>
 #
 import gobject
@@ -34,7 +30,7 @@ import sys
 import re
 import json
 
-PING_FREQUENCY = 2 # seconds
+TIMEOUT = 2 # seconds
 
 class BtSyncIndicator:
     def __init__(self):
@@ -185,7 +181,7 @@ class BtSyncIndicator:
         self.setup_session()
         self.check_status()
 
-        gtk.timeout_add(PING_FREQUENCY * 1000, self.check_status)
+        gtk.timeout_add(TIMEOUT * 1000, self.check_status)
         gtk.main()
 
     def quit(self, widget):
