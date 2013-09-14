@@ -36,7 +36,7 @@ TIMEOUT = 2 # seconds
 
 class BtSyncIndicator:
     def __init__(self):
-        self.ind = appindicator.Indicator ("example-simple-client",
+        self.ind = appindicator.Indicator ("btsync-indicator",
                                           "btsync",
                                           appindicator.CATEGORY_APPLICATION_STATUS,
                                           os.path.dirname(os.path.realpath(__file__))+"/icons")
@@ -50,6 +50,7 @@ class BtSyncIndicator:
         self.info = {}
 	self.clipboard = gtk.Clipboard()
         self.animate = None
+        self.error_item = None
 
         self.menu_setup()
         self.ind.set_menu(self.menu)
@@ -71,30 +72,48 @@ class BtSyncIndicator:
         self.menu.append(self.quit_item)
 
     def setup_session(self):
-      tokenparams = {'t': time.time()}
-      tokenurl = self.urlroot+'token.html'
-      tokenresponse = requests.post(tokenurl, params=tokenparams)
-      regex = re.compile("<html><div[^>]+>([^<]+)</div></html>")
-      html = tokenresponse.text
-      r = regex.search(html)
-      self.token = r.group(1)
-      self.cookies = tokenresponse.cookies
+        try:
+            tokenparams = {'t': time.time()}
+            tokenurl = self.urlroot+'token.html'
+            tokenresponse = requests.post(tokenurl, params=tokenparams)
+            regex = re.compile("<html><div[^>]+>([^<]+)</div></html>")
+            html = tokenresponse.text
+            r = regex.search(html)
+            self.token = r.group(1)
+            self.cookies = tokenresponse.cookies
 
-      actions = [
-              'license', 
-              'getostype', 
-              'getsettings', 
-              'getversion', 
-              'getdir', 
-              'checknewversion', 
-              'getuserlang', 
-              'iswebuilanguageset']
+            actions = [
+                  'license', 
+                  'getostype', 
+                  'getsettings', 
+                  'getversion', 
+                  'getdir', 
+                  'checknewversion', 
+                  'getuserlang', 
+                  'iswebuilanguageset']
 
 
-      for a in actions:
-           params = {'token': self.token, 'action': a}
-           response = requests.get(self.urlroot, params=params, cookies=self.cookies)
-           self.info[a] = json.loads(response.text)
+            for a in actions:
+               params = {'token': self.token, 'action': a}
+               response = requests.get(self.urlroot, params=params, cookies=self.cookies)
+               self.info[a] = json.loads(response.text)
+
+            if self.error_item != None:
+                self.menu.remove(self.error_item)
+                self.error_item == None
+
+            gtk.timeout_add(TIMEOUT * 1000, self.check_status)
+            return False
+
+        except requests.exceptions.ConnectionError:
+            if self.error_item == None:                    
+                self.set_icon('-error')
+                self.error_item = gtk.MenuItem("Couldn't connect to Bittorrent Sync at "+self.urlroot)
+                self.error_item.set_sensitive(False)
+                self.menu.prepend(self.error_item)
+                self.error_item.show()
+
+            return True
 
     def check_status(self):
         params = {'token': self.token, 'action': 'getsyncfolders'}
@@ -217,10 +236,7 @@ class BtSyncIndicator:
         return False
 
     def main(self):
-        self.setup_session()
-        self.check_status()
-
-        gtk.timeout_add(TIMEOUT * 1000, self.check_status)
+        gtk.timeout_add(TIMEOUT * 1000, self.setup_session)
         gtk.main()
 
     def quit(self, widget):
