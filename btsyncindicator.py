@@ -30,6 +30,7 @@ import sys
 import re
 import json
 import os
+import argparse
 
 TIMEOUT = 2 # seconds
 
@@ -42,7 +43,9 @@ class BtSyncIndicator:
         self.ind.set_status (appindicator.STATUS_ACTIVE)
         self.ind.set_attention_icon ("btsync-attention")
 
-        self.urlroot = 'http://localhost:8888/gui/'
+        self.load_config()
+
+        self.urlroot = 'http://'+self.config['webui']['listen']+'/gui/'
         self.folderitems = {}
         self.info = {}
 	self.clipboard = gtk.Clipboard()
@@ -50,6 +53,13 @@ class BtSyncIndicator:
 
         self.menu_setup()
         self.ind.set_menu(self.menu)
+
+    def load_config(self):
+        config = ""
+        for line in open(args.config, 'r'):
+            if line.find('//') == -1:
+                config += line
+        self.config = json.loads(config)
 
     def menu_setup(self):
         # create a menu
@@ -217,5 +227,11 @@ class BtSyncIndicator:
         sys.exit(0)
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--config', 
+                        default=os.environ['HOME']+'/.btsync.conf',
+                        help="Location of Bittorrent Sync config file")
+    args = parser.parse_args()
+
     indicator = BtSyncIndicator()
     indicator.main()
