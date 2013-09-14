@@ -138,7 +138,7 @@ class BtSyncIndicator:
                     else:
                         self.add_peer(folderitem, peer)
             else:
-                if len(folderitem['peersitems']) > 0:
+                if len(folderitem['peeritems']) > 0:
                     for peeritem in folderitem['peeritems']:
                         self.remove_peer(folderitem, peeritem)
 
