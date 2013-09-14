@@ -98,68 +98,69 @@ class BtSyncIndicator:
                response = requests.get(self.urlroot, params=params, cookies=self.cookies)
                self.info[a] = json.loads(response.text)
 
-            if self.error_item != None:
-                self.menu.remove(self.error_item)
-                self.error_item == None
+            self.clear_error()
 
             gtk.timeout_add(TIMEOUT * 1000, self.check_status)
             return False
 
         except requests.exceptions.ConnectionError:
-            if self.error_item == None:                    
-                self.set_icon('-error')
-                self.error_item = gtk.MenuItem("Couldn't connect to Bittorrent Sync at "+self.urlroot)
-                self.error_item.set_sensitive(False)
-                self.menu.prepend(self.error_item)
-                self.error_item.show()
-
+            self.show_error("Couldn't connect to Bittorrent Sync at "+self.urlroot)
             return True
 
     def check_status(self):
-        params = {'token': self.token, 'action': 'getsyncfolders'}
-        response = requests.get(self.urlroot, params=params, cookies=self.cookies)
-        status = json.loads(response.text)
+        try:
+            params = {'token': self.token, 'action': 'getsyncfolders'}
+            response = requests.get(self.urlroot, params=params, cookies=self.cookies)
 
-        self.check_activity(status['folders'])
+            self.clear_error()
 
-        for folder in status['folders']:
-            name = folder['name']
-            buf = name+" "+folder['size']
-            if name in self.folderitems:
-                folderitem = self.folderitems[name]
-                menuitem = folderitem['menuitem']
-                buf = menuitem.set_label(buf)
-            else:
-                menuitem = gtk.MenuItem(buf)
-                self.menu.prepend(menuitem)
-                menuitem.show()
-                menuitem.set_sensitive(False)
-		folderitem = {'menuitem': menuitem, 'peeritems': {}}
-                self.folderitems[name] = folderitem
+            status = json.loads(response.text)
 
-		pos = self.menu.get_children().index(menuitem)
+            self.check_activity(status['folders'])
 
-		buf = "Get Secret"
-		secretitem = gtk.MenuItem(buf)
-		secretmenu = self.build_secret_menu(folder)
-		secretitem.set_submenu(secretmenu)
-		self.menu.insert(secretitem, pos+1)
-		secretitem.show()
+            for folder in status['folders']:
+                name = folder['name']
+                buf = name+" "+folder['size']
+                if name in self.folderitems:
+                    folderitem = self.folderitems[name]
+                    menuitem = folderitem['menuitem']
+                    buf = menuitem.set_label(buf)
+                else:
+                    menuitem = gtk.MenuItem(buf)
+                    self.menu.prepend(menuitem)
+                    menuitem.show()
+                    menuitem.set_sensitive(False)
+                    folderitem = {'menuitem': menuitem, 'peeritems': {}}
+                    self.folderitems[name] = folderitem
 
-		sep = gtk.SeparatorMenuItem()
-		self.menu.insert(sep, pos+2)
-		sep.show()
+                    pos = self.menu.get_children().index(menuitem)
 
-            if len(folder['peers']) > 0:
-                for peer in folder['peers']:
-                    if peer['name'] in folderitem['peeritems']:
-                        self.update_peer(folderitem['peeritems'][peer['name']], peer)
-                    else:
-                        self.add_peer(folderitem, peer)
-            else:
-                if len(folderitem['peeritems']) > 0:
-                    for peeritem in folderitem['peeritems']:
-                        self.remove_peer(folderitem, peeritem)
+                    buf = "Get Secret"
+                    secretitem = gtk.MenuItem(buf)
+                    secretmenu = self.build_secret_menu(folder)
+                    secretitem.set_submenu(secretmenu)
+                    self.menu.insert(secretitem, pos+1)
+                    secretitem.show()
+
+                    sep = gtk.SeparatorMenuItem()
+                    self.menu.insert(sep, pos+2)
+                    sep.show()
+
+                if len(folder['peers']) > 0:
+                    for peer in folder['peers']:
+                        if peer['name'] in folderitem['peeritems']:
+                            self.update_peer(folderitem['peeritems'][peer['name']], peer)
+                        else:
+                            self.add_peer(folderitem, peer)
+                else:
+                    if len(folderitem['peeritems']) > 0:
+                        for peeritem in folderitem['peeritems']:
+                            self.remove_peer(folderitem, peeritem)
+
+        except requests.exceptions.ConnectionError:
+            self.show_error("Lost connection to Bittorrent Sync")
+            self.folderitems = {}
+            gtk.timeout_add(5000, self.setup_session)
 
         return True;
 
@@ -217,6 +218,26 @@ class BtSyncIndicator:
 	readonly.show()
 	readwrite.show()
 	return menu
+
+    def show_error(self, message):
+        self.active = False
+        if self.error_item == None:                    
+            self.set_icon('-error')
+
+            for child in self.menu.get_children():
+                if child != self.quit_item:
+                    self.menu.remove(child)
+
+            self.error_item = gtk.MenuItem(message)
+            self.error_item.set_sensitive(False)
+            self.menu.prepend(self.error_item)
+            self.error_item.show()
+
+    def clear_error(self):
+        if self.error_item != None:
+            self.menu.remove(self.error_item)
+            self.error_item = None
+            self.set_icon('')
 
     def copy_secret(self, menuitem, secret):
 	self.clipboard.set_text(secret)
