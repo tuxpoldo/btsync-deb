@@ -10,8 +10,6 @@ Shows syncing folders and the status of connected peers.
 Also allows you copy the secret for each folder to the clipboard.
 
 Current limitations:
-- Uses default indicator icon (envelope)
-- Icon doesn't change when syncing
 - Can't add or remove folders
 - Only works for default btsync config (i.e. running on localhost:8888)
 

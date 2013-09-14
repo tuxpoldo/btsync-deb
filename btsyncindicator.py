@@ -29,21 +29,24 @@ import time
 import sys
 import re
 import json
+import os
 
 TIMEOUT = 2 # seconds
 
 class BtSyncIndicator:
     def __init__(self):
         self.ind = appindicator.Indicator ("example-simple-client",
-                                          "indicator-messages",
-                                          appindicator.CATEGORY_APPLICATION_STATUS)
+                                          "btsync",
+                                          appindicator.CATEGORY_APPLICATION_STATUS,
+                                          os.path.dirname(os.path.realpath(__file__))+"/icons")
         self.ind.set_status (appindicator.STATUS_ACTIVE)
-        self.ind.set_attention_icon ("indicator-messages-new")
+        self.ind.set_attention_icon ("btsync-attention")
 
         self.urlroot = 'http://localhost:8888/gui/'
         self.folderitems = {}
         self.info = {}
 	self.clipboard = gtk.Clipboard()
+        self.animate = None
 
         self.menu_setup()
         self.ind.set_menu(self.menu)
@@ -87,7 +90,9 @@ class BtSyncIndicator:
         params = {'token': self.token, 'action': 'getsyncfolders'}
         response = requests.get(self.urlroot, params=params, cookies=self.cookies)
         status = json.loads(response.text)
-        
+
+        self.check_activity(status['folders'])
+
         for folder in status['folders']:
             name = folder['name']
             buf = name+" "+folder['size']
@@ -127,12 +132,23 @@ class BtSyncIndicator:
                     for peeritem in folderitem['peeritems']:
                         self.remove_peer(folderitem, peeritem)
 
-
-            # this is where you would connect your menu item up with a function:
-            # menu_items.connect("activate", menuitem_response, buf)
-            # show the items
-
         return True;
+
+    def check_activity(self, folders):
+        isactive = False
+        for folder in folders:
+            for peer in folder['peers']:
+                if peer['status'].find('Synced') == -1:
+                    isactive = True
+                    break
+
+        self.active = isactive
+        if self.active:
+            if self.animate == None:
+                gtk.timeout_add(1000, self.animate_icon)
+
+
+
 
     def add_peer(self, folderitem, peer):
 	name = peer['name']
@@ -176,6 +192,19 @@ class BtSyncIndicator:
     def copy_secret(self, menuitem, secret):
 	self.clipboard.set_text(secret)
 	return True;
+
+    def animate_icon(self):
+        if self.active == False:
+            self.animate = None
+            return False
+        else:
+            self.set_icon('-active')
+            gtk.timeout_add(500, self.set_icon, '')
+            return True
+        
+    def set_icon(self, variant):
+        self.ind.set_icon('btsync'+variant)
+        return False
 
     def main(self):
         self.setup_session()
