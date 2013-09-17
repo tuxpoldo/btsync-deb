@@ -36,10 +36,11 @@ TIMEOUT = 2 # seconds
 
 class BtSyncIndicator:
     def __init__(self):
+	print args
         self.ind = appindicator.Indicator ("btsync-indicator",
                                           "btsync",
                                           appindicator.CATEGORY_APPLICATION_STATUS,
-                                          os.path.dirname(os.path.realpath(__file__))+"/icons")
+                                          args.iconpath)
         self.ind.set_status (appindicator.STATUS_ACTIVE)
         self.ind.set_attention_icon ("btsync-attention")
 
@@ -268,6 +269,9 @@ if __name__ == "__main__":
     parser.add_argument('--config', 
                         default=os.environ['HOME']+'/.btsync.conf',
                         help="Location of Bittorrent Sync config file")
+    parser.add_argument('--iconpath', 
+                        default=os.path.dirname(os.path.realpath(__file__))+"/icons",
+                        help="Path to icon theme folder")
     args = parser.parse_args()
 
     indicator = BtSyncIndicator()
