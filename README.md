@@ -43,6 +43,7 @@ sudo apt-get install btsync-user
 The indicator will start on login with btsync
 
 ### Other Distros
+The indicator isn't packaed for other distros. You will have to [download btsync](http://labs.bittorrent.com/experiments/sync.html), then download and run the indicator seperately:
 ```
 cd ~/
 git clone https://github.com/marxjohnson/btsyncindicator.git
