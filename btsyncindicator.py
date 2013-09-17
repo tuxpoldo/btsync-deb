@@ -37,7 +37,6 @@ TIMEOUT = 2 # seconds
 
 class BtSyncIndicator:
     def __init__(self):
-	print args
         self.ind = appindicator.Indicator ("btsync-indicator",
                                           "btsync",
                                           appindicator.CATEGORY_APPLICATION_STATUS,
