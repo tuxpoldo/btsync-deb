@@ -4,11 +4,12 @@ btsyncindicator
 Bittorrent Sync indicator for linux desktops
 
 ```
-usage: btsyncindicator.py [-h] [--config CONFIG]
+usage: btsyncindicator.py [-h] [--config CONFIG] [--iconpath ICONPATH]
 
 optional arguments:
-  -h, --help       show this help message and exit
-  --config CONFIG  Location of Bittorrent Sync config file
+  -h, --help           show this help message and exit
+  --config CONFIG      Location of Bittorrent Sync config file
+  --iconpath ICONPATH  Path to icon theme folder
 ```
 
 Displays an application indicator for Bittorrent Sync on Linux desktops.
