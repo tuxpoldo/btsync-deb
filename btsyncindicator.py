@@ -31,6 +31,7 @@ import re
 import json
 import os
 import argparse
+import webbrowser
 
 TIMEOUT = 2 # seconds
 
@@ -66,6 +67,11 @@ class BtSyncIndicator:
     def menu_setup(self):
         # create a menu
         self.menu = gtk.Menu()
+
+	self.webui_item = gtk.MenuItem("Open Web Interface")
+	self.webui_item.connect("activate", self.open_webui)
+	self.webui_item.show()
+	self.menu.append(self.webui_item)
 
         self.quit_item = gtk.MenuItem("Quit")
         self.quit_item.connect("activate", self.quit)
@@ -256,6 +262,10 @@ class BtSyncIndicator:
     def set_icon(self, variant):
         self.ind.set_icon('btsync'+variant)
         return False
+
+    def open_webui(self, widget):
+	webbrowser.open('http://'+self.config['webui']['listen'], 2)
+	return True
 
     def main(self):
         gtk.timeout_add(TIMEOUT * 1000, self.setup_session)
