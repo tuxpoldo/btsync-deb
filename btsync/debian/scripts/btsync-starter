@@ -12,6 +12,7 @@ DEVNAME="$(hostname) - $(whoami)"
 RUNNING_STATEFILE="${DATADIR}/running"
 UPDATING_STATEFILE="/var/run/btsync-user-updating"
 AGENT=/usr/lib/btsync-user/btsync-agent
+FRONT=/usr/lib/btsync-user/btsyncindicator.py
 
 # "sedify" replacemnt data
 XDATADIR="$(echo ${DATADIR} | sed -e "s/\\//\\\\\//g")"
@@ -19,18 +20,45 @@ XPIDFILE="$(echo ${PIDFILE} | sed -e "s/\\//\\\\\//g")"
 XDEVNAME="$(echo ${DEVNAME} | sed -e "s/\\//\\\\\//g")"
 XPORTNUM="$((8999+$(id -u)))"
 
+start_frontend() {
+	if ! pgrep -U $(id -u) -f btsyncindicator.py > /dev/null; then
+		if [ -f "${USRFILE}" ]; then
+			${FRONT} --config "${USRFILE}" &
+		else
+			${FRONT} --config "${CFGFILE}" &
+		fi
+	fi
+}
+
+stop_frontend() {
+	pkill -u $(id -u) -f btsyncindicator.py
+}
+
+start_agent() {
+	if ! pgrep -U $(id -u) -x btsync-agent > /dev/null; then
+		if [ -f "${USRFILE}" ]; then
+			${AGENT} --config "${USRFILE}"
+		else
+			${AGENT} --config "${CFGFILE}"
+		fi
+	fi
+}
+
+
 runagent() {
-	CONFIG="$1"
+	trap stopagent INT QUIT TERM EXIT
 	touch "${RUNNING_STATEFILE}"
 	while [ -f "${RUNNING_STATEFILE}" ]; do
 		if ! [ -f "${UPDATING_STATEFILE}" ]; then
-			${AGENT} --config "${CONFIG}"
+			start_frontend
+			start_agent
 			sleep 1 # give the agent some time to fork
 			if pgrep -x btsync-agent -U $(id -u) > /dev/null; then
 				# wait for process to finish
 				while pgrep -x btsync-agent -U $(id -u) > /dev/null; do
 					 sleep 10
 				done
+				stop_frontend
 			else # something went wrong, startup failed, quit loop here
 				rm "${RUNNING_STATEFILE}"
 				return
@@ -39,7 +67,21 @@ runagent() {
 			sleep 10 # avoid active waiting loop while updating
 		fi
 	done
+	trap - INT QUIT TERM EXIT
 }
+
+stopagent() {
+	trap - INT QUIT TERM EXIT
+	if [ -f "${RUNNING_STATEFILE}" ]; then
+		rm ${RUNNING_STATEFILE}
+	fi
+	pkill -u $(id -u) btsync-agent
+	pkill -u $(id -u) -f btsyncindicator.py
+	exit
+}
+
+
+start_frontend
 
 if pgrep -x btsync-agent -U $(id -u) > /dev/null; then
 	echo btsync-agent already running
@@ -63,9 +105,5 @@ else
 		-e "s/PORTNUM/${XPORTNUM}/g" \
 		> ${APPFILE} < /etc/btsync-user/btsync-user.desktop
 
-	if [ -f "${USRFILE}" ]; then
-		runagent ${USRFILE} &
-	else
-		runagent ${CFGFILE} &
-	fi
+	runagent &
 fi

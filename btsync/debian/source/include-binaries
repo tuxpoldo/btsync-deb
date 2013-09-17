@@ -6,3 +6,7 @@ debian/icons/48/btsync.png
 debian/icons/48/btsync-user.png
 debian/icons/96/btsync.png
 debian/icons/96/btsync-user.png
+debian/btsyncindicator/icons/btsync.png
+debian/btsyncindicator/icons/btsync-active.png
+debian/btsyncindicator/icons/btsync-attention.png
+debian/btsyncindicator/icons/btsync-error.png

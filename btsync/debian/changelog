@@ -1,3 +1,11 @@
+btsync (1.1.70-3~sid) sid; urgency=low
+
+  - Fixed: added autostart support for KDE SC (/usr/share/autostart/)
+    and OpenBox (/etc/xdg/openbox/autostart) in btsync-user
+  - Added status indicator for btsync-user (Thank to Mark Johnson)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Tue, 17 Sep 2013 13:25:09 +0200
+
 btsync (1.1.70-2~sid) sid; urgency=low
 
   - Fixed: Restart on update will work in future versions on btsync-user

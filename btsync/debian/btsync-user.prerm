@@ -26,6 +26,9 @@ remove|upgrade|deconfigure)
 	set +e
 	touch /var/run/btsync-user-updating
 	pkill btsync-agent
+	rm -f /etc/xdg/autostart/btsync-agent.desktop
+	rm -f /etc/xdg/openbox/autostart/btsync-agent.desktop
+	rm -f /usr/share/autostart/btsync-agent.desktop
 	set -e
 	;;
 
