@@ -72,6 +72,15 @@ class BtSyncIndicator:
 	self.webui_item.connect("activate", self.open_webui)
 	self.webui_item.show()
 	self.menu.append(self.webui_item)
+                    
+        sep = gtk.SeparatorMenuItem()
+        sep.show()
+        self.menu.append(sep)
+
+	self.debug_item = gtk.CheckMenuItem("Enable Debug Logging")
+	self.debug_item.connect("activate", self.toggle_debugging)
+	self.debug_item.show()
+	self.menu.append(self.debug_item)
 
         self.quit_item = gtk.MenuItem("Quit")
         self.quit_item.connect("activate", self.quit)
@@ -266,6 +275,16 @@ class BtSyncIndicator:
     def open_webui(self, widget):
 	webbrowser.open('http://'+self.config['webui']['listen'], 2)
 	return True
+
+    def toggle_debugging(self, widget):
+	filepath = self.config['storage_path']+'/debug.txt'
+	if (os.path.isfile(filepath)):
+	    os.unlink(filepath)
+	else:
+	    f = open(filepath, 'w')
+	    f.write('FFFF')
+	return True
+
 
     def main(self):
         gtk.timeout_add(TIMEOUT * 1000, self.setup_session)
