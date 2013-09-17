@@ -33,6 +33,7 @@ import os
 import argparse
 import webbrowser
 
+VERSION = '0.5'
 TIMEOUT = 2 # seconds
 
 class BtSyncIndicator:
@@ -281,7 +282,14 @@ if __name__ == "__main__":
     parser.add_argument('--iconpath', 
                         default=os.path.dirname(os.path.realpath(__file__))+"/icons",
                         help="Path to icon theme folder")
+    parser.add_argument('-v', '--version',
+			action='store_true',
+                        help="Print version information and exit")
     args = parser.parse_args()
+
+    if (args.version):
+	print os.path.basename(__file__)+" Version "+VERSION;
+	exit()
 
     indicator = BtSyncIndicator()
     indicator.main()
