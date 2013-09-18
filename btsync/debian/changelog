@@ -1,3 +1,16 @@
+btsync (1.1.70-4~sid) sid; urgency=low
+
+  - Fixed: added missing python dependencies for btsync-user
+  - Fixed: small cosmetic improvements in package texts
+  - Fixed: btsyncindicator Issue #2 - made location of bitmaps
+    debian conformant
+  - Added possibility to open the web ui directly from btsyncindicator
+    menu (Issue #3)
+  - Added menu entry "Enable Debug Logging" in btsyncindicator
+    menu (Issue #4)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Tue, 18 Sep 2013 11:20:44 +0200
+
 btsync (1.1.70-3~sid) sid; urgency=low
 
   - Fixed: added autostart support for KDE SC (/usr/share/autostart/)

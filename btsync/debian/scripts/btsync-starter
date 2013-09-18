@@ -13,6 +13,7 @@ RUNNING_STATEFILE="${DATADIR}/running"
 UPDATING_STATEFILE="/var/run/btsync-user-updating"
 AGENT=/usr/lib/btsync-user/btsync-agent
 FRONT=/usr/lib/btsync-user/btsyncindicator.py
+ICONS=/usr/share/icons/hicolor/22x22/status
 
 # "sedify" replacemnt data
 XDATADIR="$(echo ${DATADIR} | sed -e "s/\\//\\\\\//g")"
@@ -23,9 +24,9 @@ XPORTNUM="$((8999+$(id -u)))"
 start_frontend() {
 	if ! pgrep -U $(id -u) -f btsyncindicator.py > /dev/null; then
 		if [ -f "${USRFILE}" ]; then
-			${FRONT} --config "${USRFILE}" &
+			${FRONT} --config "${USRFILE}" --iconpath "${ICONS}" &
 		else
-			${FRONT} --config "${CFGFILE}" &
+			${FRONT} --config "${CFGFILE}" --iconpath "${ICONS}" &
 		fi
 	fi
 }

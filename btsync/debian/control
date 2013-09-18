@@ -14,16 +14,17 @@ Description: Private network P2P file synchronisation daemon(s)
  direct live folder sync with maximum security, network speed and
  storage capacity. It has native versions for Mac, Windows and
  Linux, as well as native NAS integration.
- This package installt BitTorrent Sync as a single or multiple
- service for server deployment.
+ This package installs BitTorrent Sync as a single or multiple
+ service with or without WebUI for server/NAS deployment.
 
 Package: btsync-user
 Architecture: i386 amd64 armel armhf powerpc
-Depends: debconf | debconf-2.0, ${shlibs:Depends}, ${misc:Depends}
+Depends: debconf | debconf-2.0, ${shlibs:Depends}, ${misc:Depends},
+ ${python:Depends}, python-requests
 Description: Private network P2P file synchronisation daemon(s)
  BitTorrent Sync is a simple tool that applies p2p protocol for
  direct live folder sync with maximum security, network speed and
  storage capacity. It has native versions for Mac, Windows and
  Linux, as well as native NAS integration.
- This package installt BitTorrent Sync as a desktop application
- for interactive users
+ This package installs BitTorrent Sync as a WebUI application
+ for desktop users.

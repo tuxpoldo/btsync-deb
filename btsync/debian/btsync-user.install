@@ -13,7 +13,7 @@ debian/icons/32/btsync-user.png				usr/share/icons/hicolor/32x32/apps
 debian/icons/16/btsync-user.png				usr/share/icons/hicolor/16x16/apps
 
 debian/btsyncindicator/btsyncindicator.py		usr/lib/btsync-user
-debian/btsyncindicator/icons/btsync.png			usr/lib/btsync-user/icons
-debian/btsyncindicator/icons/btsync-active.png		usr/lib/btsync-user/icons
-debian/btsyncindicator/icons/btsync-attention.png	usr/lib/btsync-user/icons
-debian/btsyncindicator/icons/btsync-error.png		usr/lib/btsync-user/icons
+debian/btsyncindicator/icons/btsync.png			usr/share/icons/hicolor/22x22/status
+debian/btsyncindicator/icons/btsync-active.png		usr/share/icons/hicolor/22x22/status
+debian/btsyncindicator/icons/btsync-attention.png	usr/share/icons/hicolor/22x22/status
+debian/btsyncindicator/icons/btsync-error.png		usr/share/icons/hicolor/22x22/status

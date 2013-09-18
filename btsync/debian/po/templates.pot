@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: btsync\n"
 "Report-Msgid-Bugs-To: btsync@packages.debian.org\n"
-"POT-Creation-Date: 2013-06-29 17:00+0200\n"
+"POT-Creation-Date: 2013-09-18 10:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,7 +37,7 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../btsync.templates:2001
-msgid "On which portnumber should BitTorrent Sync listen?"
+msgid "On which port should BitTorrent Sync listen?"
 msgstr ""
 
 #. Type: string

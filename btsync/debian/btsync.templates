@@ -12,7 +12,7 @@ _Description: Do you want to define a default BitTorrent Sync instance?
 Template: btsync/bind-port
 Type: string
 Default: 0
-_Description: On which portnumber should BitTorrent Sync listen?
+_Description: On which port should BitTorrent Sync listen?
  Specify here the port BitTorrent Sync will listen on for the file
  synchronisation protocol.
  .
