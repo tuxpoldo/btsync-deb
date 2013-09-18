@@ -94,7 +94,7 @@ class BtSyncIndicator:
             tokenurl = self.urlroot+'token.html'
             tokenresponse = requests.post(tokenurl, params=tokenparams)
             regex = re.compile("<html><div[^>]+>([^<]+)</div></html>")
-            html = tokenresponse.text
+            html = self.get_response_text(tokenresponse)
             r = regex.search(html)
             self.token = r.group(1)
             self.cookies = tokenresponse.cookies
@@ -113,7 +113,7 @@ class BtSyncIndicator:
             for a in actions:
                params = {'token': self.token, 'action': a}
                response = requests.get(self.urlroot, params=params, cookies=self.cookies)
-               self.info[a] = json.loads(response.text)
+               self.info[a] = json.loads(self.get_response_text(response))
 
             self.clear_error()
 
@@ -131,7 +131,7 @@ class BtSyncIndicator:
 
             self.clear_error()
 
-            status = json.loads(response.text)
+            status = json.loads(self.get_response_text(response))
 
             self.check_activity(status['folders'])
 
@@ -289,6 +289,8 @@ class BtSyncIndicator:
 	    f.write('FFFF')
 	return True
 
+    def get_response_text(self, response):
+        return response.text if hasattr(response, "text") else response.content
 
     def main(self):
         gtk.timeout_add(TIMEOUT * 1000, self.setup_session)
