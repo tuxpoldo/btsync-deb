@@ -29,7 +29,7 @@ sudo apt-get install btsync-user
 The indicator will start on login with btsync
 
 ### Debian 
-(i386 and amd64)
+(i386, amd64, armel and armhf)
 ```
 sudo gpg --keyserver pgp.mit.edu --recv-keys 6BF18B15
 sudo gpg --armor --export 6BF18B15 | sudo apt-key add -
@@ -55,5 +55,5 @@ You may want to add it to your startup applications to run on login
 
 The API used by the indicator is (partially) documented on the [GitHub Wiki](https://github.com/marxjohnson/btsyncindicator/wiki)
 
-Copyright Mark Johnson <mark@barrenfrozenwasteland.com> 2013
+Copyright Mark Johnson <mark@barrenfrozenwasteland.com> and contributors 2013
 Released under GNU Lesser General Public License V3
