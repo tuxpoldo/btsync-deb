@@ -31,7 +31,9 @@ import re
 import json
 import os
 import argparse
+import webbrowser
 
+VERSION = '0.6'
 TIMEOUT = 2 # seconds
 
 class BtSyncIndicator:
@@ -39,7 +41,7 @@ class BtSyncIndicator:
         self.ind = appindicator.Indicator ("btsync-indicator",
                                           "btsync",
                                           appindicator.CATEGORY_APPLICATION_STATUS,
-                                          os.path.dirname(os.path.realpath(__file__))+"/icons")
+                                          args.iconpath)
         self.ind.set_status (appindicator.STATUS_ACTIVE)
         self.ind.set_attention_icon ("btsync-attention")
 
@@ -65,6 +67,20 @@ class BtSyncIndicator:
     def menu_setup(self):
         # create a menu
         self.menu = gtk.Menu()
+
+	self.webui_item = gtk.MenuItem("Open Web Interface")
+	self.webui_item.connect("activate", self.open_webui)
+	self.webui_item.show()
+	self.menu.append(self.webui_item)
+                    
+        sep = gtk.SeparatorMenuItem()
+        sep.show()
+        self.menu.append(sep)
+
+	self.debug_item = gtk.CheckMenuItem("Enable Debug Logging")
+	self.debug_item.connect("activate", self.toggle_debugging)
+	self.debug_item.show()
+	self.menu.append(self.debug_item)
 
         self.quit_item = gtk.MenuItem("Quit")
         self.quit_item.connect("activate", self.quit)
@@ -256,6 +272,20 @@ class BtSyncIndicator:
         self.ind.set_icon('btsync'+variant)
         return False
 
+    def open_webui(self, widget):
+	webbrowser.open('http://'+self.config['webui']['listen'], 2)
+	return True
+
+    def toggle_debugging(self, widget):
+	filepath = self.config['storage_path']+'/debug.txt'
+	if (os.path.isfile(filepath)):
+	    os.unlink(filepath)
+	else:
+	    f = open(filepath, 'w')
+	    f.write('FFFF')
+	return True
+
+
     def main(self):
         gtk.timeout_add(TIMEOUT * 1000, self.setup_session)
         gtk.main()
@@ -268,7 +298,17 @@ if __name__ == "__main__":
     parser.add_argument('--config', 
                         default=os.environ['HOME']+'/.btsync.conf',
                         help="Location of Bittorrent Sync config file")
+    parser.add_argument('--iconpath', 
+                        default=os.path.dirname(os.path.realpath(__file__))+"/icons",
+                        help="Path to icon theme folder")
+    parser.add_argument('-v', '--version',
+			action='store_true',
+                        help="Print version information and exit")
     args = parser.parse_args()
+
+    if (args.version):
+	print os.path.basename(__file__)+" Version "+VERSION;
+	exit()
 
     indicator = BtSyncIndicator()
     indicator.main()
