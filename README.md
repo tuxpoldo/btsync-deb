@@ -48,7 +48,7 @@ The indicator isn't packaed for other distros. You will have to [download btsync
 cd ~/
 git clone https://github.com/marxjohnson/btsyncindicator.git
 ```
-Run `~/btsyncindicator/btsyncindicator`
+Run `~/btsyncindicator/btsyncindicator.py`
 You may want to add it to your startup applications to run on login
 
 ## Documentation
