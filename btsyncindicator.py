@@ -240,8 +240,8 @@ class BtSyncIndicator:
             self.set_icon('')
 
     def copy_secret(self, menuitem, secret):
-	self.clipboard.set_text(secret)
-	return True;
+    	self.clipboard.set_text(secret)
+    	return True;
 
     def animate_icon(self):
         if self.active == False:
