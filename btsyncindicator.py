@@ -50,9 +50,10 @@ class BtSyncIndicator:
         self.urlroot = 'http://'+self.config['webui']['listen']+'/gui/'
         self.folderitems = {}
         self.info = {}
-	self.clipboard = gtk.Clipboard()
+        self.clipboard = gtk.Clipboard()
         self.animate = None
         self.error_item = None
+        self.frame = 0
 
         self.menu_setup()
         self.ind.set_menu(self.menu)
@@ -256,16 +257,19 @@ class BtSyncIndicator:
             self.set_icon('')
 
     def copy_secret(self, menuitem, secret):
-	self.clipboard.set_text(secret)
-	return True;
+    	self.clipboard.set_text(secret)
+    	return True;
 
     def animate_icon(self):
         if self.active == False:
             self.animate = None
+            self.set_icon('')
+            self.frame = 0
             return False
         else:
-            self.set_icon('-active')
-            gtk.timeout_add(500, self.set_icon, '')
+            self.animate = True
+            self.set_icon('-active-{}'.format(self.frame % 3))
+            self.frame += 1
             return True
         
     def set_icon(self, variant):
