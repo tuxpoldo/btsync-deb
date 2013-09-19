@@ -38,6 +38,12 @@ TIMEOUT = 2 # seconds
 
 class BtSyncIndicator:
     def __init__(self):
+        """
+        Initialise the indicator, load the config file,
+        intialise some properties and set up the basic
+        menu
+        """
+
         self.ind = appindicator.Indicator ("btsync-indicator",
                                           "btsync",
                                           appindicator.CATEGORY_APPLICATION_STATUS,
@@ -59,6 +65,9 @@ class BtSyncIndicator:
         self.ind.set_menu(self.menu)
 
     def load_config(self):
+        """
+        Open the config file specified in args load into self.config
+        """
         config = ""
         for line in open(args.config, 'r'):
             if line.find('//') == -1:
@@ -66,6 +75,9 @@ class BtSyncIndicator:
         self.config = json.loads(config)
 
     def menu_setup(self):
+        """
+        Create the menu with some basic items
+        """
         # create a menu
         self.menu = gtk.Menu()
 
@@ -89,6 +101,13 @@ class BtSyncIndicator:
         self.menu.append(self.quit_item)
 
     def setup_session(self):
+        """
+        Attempt to setup the session with the btsync server
+        * Calls token.html, stores the token and cookie
+        * Calls various actions called by the web interface on init and stores results
+        * Initialises check_status loop
+        If the server cannot be contacted, waits 5 seconds and retries.
+        """
         try:
             tokenparams = {'t': time.time()}
             tokenurl = self.urlroot+'token.html'
@@ -125,6 +144,13 @@ class BtSyncIndicator:
             return True
 
     def check_status(self):
+        """
+        Gets the current status of btsync and updates the menu accordingly
+        Shows each shared folder with connected peer and any transfer activity 
+        with it.  Also retrieves the secrets for each folder.
+        If the server cannot be contacted, stops polling and attempts calls setup_session
+        to establish a new session.
+        """
         try:
             params = {'token': self.token, 'action': 'getsyncfolders'}
             response = requests.get(self.urlroot, params=params, cookies=self.cookies)
@@ -137,42 +163,17 @@ class BtSyncIndicator:
 
             for folder in status['folders']:
                 name = folder['name']
-                buf = name+" "+folder['size']
                 if name in self.folderitems:
-                    folderitem = self.folderitems[name]
-                    menuitem = folderitem['menuitem']
-                    buf = menuitem.set_label(buf)
+		    self.update_folder_menu(folder)
                 else:
-                    menuitem = gtk.MenuItem(buf)
+                    menuitem = gtk.MenuItem(name)
                     self.menu.prepend(menuitem)
                     menuitem.show()
-                    menuitem.set_sensitive(False)
-                    folderitem = {'menuitem': menuitem, 'peeritems': {}}
+		    folderitem = {'menuitem': menuitem, 'sizeitem': {}, 'peeritems': {}}
                     self.folderitems[name] = folderitem
 
-                    pos = self.menu.get_children().index(menuitem)
-
-                    buf = "Get Secret"
-                    secretitem = gtk.MenuItem(buf)
-                    secretmenu = self.build_secret_menu(folder)
-                    secretitem.set_submenu(secretmenu)
-                    self.menu.insert(secretitem, pos+1)
-                    secretitem.show()
-
-                    sep = gtk.SeparatorMenuItem()
-                    self.menu.insert(sep, pos+2)
-                    sep.show()
-
-                if len(folder['peers']) > 0:
-                    for peer in folder['peers']:
-                        if peer['name'] in folderitem['peeritems']:
-                            self.update_peer(folderitem['peeritems'][peer['name']], peer)
-                        else:
-                            self.add_peer(folderitem, peer)
-                else:
-                    if len(folderitem['peeritems']) > 0:
-                        for peeritem in folderitem['peeritems']:
-                            self.remove_peer(folderitem, peeritem)
+		    submenu = self.build_folder_menu(folder)
+		    menuitem.set_submenu(submenu)
 
         except requests.exceptions.ConnectionError:
             self.show_error("Lost connection to Bittorrent Sync")
@@ -182,6 +183,11 @@ class BtSyncIndicator:
         return True;
 
     def check_activity(self, folders):
+        """
+        Given the current folder list from the server, determines
+        whether there is any network activity and sets a flag in
+        self.active
+        """
         isactive = False
         for folder in folders:
             for peer in folder['peers']:
@@ -198,6 +204,10 @@ class BtSyncIndicator:
 
 
     def add_peer(self, folderitem, peer):
+        """
+        Adds a peer with the specified data below the specified menu
+        item.
+        """
 	name = peer['name']
         buf = self.format_status(peer)
         peeritem = gtk.MenuItem(buf)
@@ -209,34 +219,110 @@ class BtSyncIndicator:
         return True;
 
     def update_peer(self, peeritem, peer):
+        """
+        Updates the specified menu item with the peer information provided
+        """
         buf = self.format_status(peer)
         peeritem.set_label(buf)
         return True;
 
     def remove_peer(self, folderitem, peeritem):
+        """
+        Removes the peer item below the folder item
+        """
         self.menu.remove(peer)
         del folderitem['peeritems'][peeritem]
         return True;
 
     def format_status(self, peer):
+        """
+        Formats the peer status information for display.
+        Substitues HTML tags with appropriate unicode characters and 
+        returns name followed by status.
+        """
 	name = peer['name']
 	status = peer['status'].replace("<div class='uparrow' />", "⇧")
 	status = status.replace("<div class='downarrow' />", "⇩")
         return name+': '+status
 
-    def build_secret_menu(self, folder):
+    def build_folder_menu(self, folder):
+	"""
+	Build a submenu for the specified folder,
+	including items to show the size, open the folder in
+	the file manager, show each connected peer, and to 
+	copy the secrets to the clipboard.
+	
+	Stores references to the size and peer items so they
+	can easily be updated.
+	"""
 	menu = gtk.Menu()
-	readonly = gtk.MenuItem('Read only')
+	
+	folderitem = self.folderitems[folder['name']]
+	folderitem['sizeitem'] = gtk.MenuItem(folder['size'])
+	folderitem['sizeitem'].set_sensitive(False)
+	folderitem['sizeitem'].show()
+	openfolder = gtk.MenuItem('Open in File Browser')
+	openfolder.connect("activate", self.open_fm, folder['name'])
+	openfolder.show()
+
+	menu.append(folderitem['sizeitem'])
+	menu.append(openfolder)
+
+	if len(folder['peers']) > 0:
+	    sep = gtk.SeparatorMenuItem()
+	    sep.show()
+	    menu.append(sep)
+	    for peer in folder['peers']:
+		buf = self.format_status(peer)
+		peeritem = gtk.MenuItem(buf)
+		peeritem.set_sensitive(False)
+		peeritem.show()
+		folderitem['peeritems'][peer['name']] = peeritem
+		menu.append(peeritem)
+
+        sep = gtk.SeparatorMenuItem()
+	sep.show()
+	menu.append(sep)
+
+	readonly = gtk.MenuItem('Get Read Only Secret')
 	readonly.connect("activate", self.copy_secret, folder['readonlysecret'])
-	readwrite = gtk.MenuItem('Full access')
+	readwrite = gtk.MenuItem('Get Full Access Secret')
 	readwrite.connect("activate", self.copy_secret, folder['secret'])
-	menu.append(readonly)
-	menu.append(readwrite)
+
 	readonly.show()
 	readwrite.show()
+
+	menu.append(readonly)
+	menu.append(readwrite)
+	
 	return menu
+    
+    def update_folder_menu(self, folder):
+	"""
+	Updates the submenu for the given folder with the current size
+	and updates each peer.
+	"""
+	folderitem = self.folderitems[folder['name']]
+	folderitem['sizeitem'].set_label(folder['size'])
+	
+	for peer in folder['peers']:
+	    buf = self.format_status(peer)
+	    if peer['name'] in folderitem['peeritems']:
+		folderitem['peeritems'][peer['name']].set_label(buf)
+	    else:
+		buf = self.format_status(peer)
+		peeritem = gtk.MenuItem(buf)
+		peeritem.set_sensitive(False)
+		peeritem.show()
+		folderitem['peeritems'][peer['name']] = peeritem
+		menu.append(peeritem)
+		
 
     def show_error(self, message):
+        """
+        Removes all items from the menu (except quit) and displays an error
+        message in their place. Also changes the icon to an error icon.
+        """
         self.active = False
         if self.error_item == None:                    
             self.set_icon('-error')
@@ -251,16 +337,26 @@ class BtSyncIndicator:
             self.error_item.show()
 
     def clear_error(self):
+        """
+        Removes the error message from the menu and changes the icon back
+        to normal
+        """
         if self.error_item != None:
             self.menu.remove(self.error_item)
             self.error_item = None
             self.set_icon('')
 
     def copy_secret(self, menuitem, secret):
+        """
+        Copies the supplied secret to the clipboard
+        """
     	self.clipboard.set_text(secret)
     	return True;
 
     def animate_icon(self):
+        """
+        Cycles the icon through 3 frames to indicate network activity
+        """
         if self.active == False:
             self.animate = None
             self.set_icon('')
@@ -273,14 +369,27 @@ class BtSyncIndicator:
             return True
         
     def set_icon(self, variant):
+        """
+        Changes the icon to the given variant
+        """
         self.ind.set_icon('btsync'+variant)
         return False
 
     def open_webui(self, widget):
+        """
+        Opens a browser to the address of the WebUI indicated in the config file
+        """
 	webbrowser.open('http://'+self.config['webui']['listen'], 2)
 	return True
 
+    def open_fm(self, widget, path):
+	if os.path.isdir(path):
+	    os.system('xdg-open '+path)
+
     def toggle_debugging(self, widget):
+        """
+        Creates or clears the debugging flags for btsync
+        """
 	filepath = self.config['storage_path']+'/debug.txt'
 	if (os.path.isfile(filepath)):
 	    os.unlink(filepath)
@@ -290,6 +399,10 @@ class BtSyncIndicator:
 	return True
 
     def get_response_text(self, response):
+        """
+        Version-safe way to get the response text from a requests module response object
+        Older versions use response.content instead of response.text
+        """
         return response.text if hasattr(response, "text") else response.content
 
     def main(self):
