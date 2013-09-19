@@ -276,11 +276,12 @@ class BtSyncIndicator:
 		buf = self.format_status(peer)
 		img = gtk.Image()
 		if peer['direct']:
-			img.set_from_icon_name('btsync-direct', 16)
+			img.set_from_file(args.iconpath+'/btsync-direct.png')
 		else:
-			img.set_from_icon_name('btsync-relay', 16)
+			img.set_from_file(args.iconpath+'/btsync-relay.png')
 		peeritem = gtk.ImageMenuItem(gtk.STOCK_NEW, buf)
 		peeritem.set_image(img)
+                peeritem.set_always_show_image(True)
 		peeritem.set_sensitive(False)
 		peeritem.show()
 		folderitem['peeritems'][peer['name']] = peeritem
