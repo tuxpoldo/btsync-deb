@@ -297,7 +297,7 @@ start)
 			fi
 		done
 	fi
-	exit ${STATUS:-0}
+	# exit ${STATUS:-0}
 	;;
 stop)
 	log_action_begin_msg "Stopping $DESC"
@@ -326,7 +326,7 @@ stop)
 			fi
 		done
 	fi
-	exit ${STATUS:-0}
+	# exit ${STATUS:-0}
 	;;
 status)
 	PIDFILE=
