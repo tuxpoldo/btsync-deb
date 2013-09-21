@@ -8,7 +8,8 @@ Homepage: http://www.bittorrent.com
 
 Package: btsync
 Architecture: i386 amd64 armel armhf powerpc
-Depends: debconf | debconf-2.0, ${shlibs:Depends}, ${misc:Depends}
+Pre-Depends: debconf | debconf-2.0
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Private network P2P file synchronisation daemon(s)
  BitTorrent Sync is a simple tool that applies p2p protocol for
  direct live folder sync with maximum security, network speed and

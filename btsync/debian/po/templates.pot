@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: btsync\n"
 "Report-Msgid-Bugs-To: btsync@packages.debian.org\n"
-"POT-Creation-Date: 2013-09-18 10:50+0200\n"
+"POT-Creation-Date: 2013-09-21 14:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,7 +37,7 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../btsync.templates:2001
-msgid "On which port should BitTorrent Sync listen?"
+msgid "BitTorrent Sync Listen Port:"
 msgstr ""
 
 #. Type: string
@@ -81,7 +81,7 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../btsync.templates:4001
-msgid "Do you want to limit the download rate of BitTorrent Sync?"
+msgid "Download Bandwith Limit:"
 msgstr ""
 
 #. Type: string
@@ -101,7 +101,7 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../btsync.templates:5001
-msgid "Do you want to limit the upload rate of BitTorrent Sync?"
+msgid "Upload Bandwith Limit:"
 msgstr ""
 
 #. Type: string
@@ -113,7 +113,7 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../btsync.templates:6001
-msgid "On which IP address should the web interface listen?"
+msgid "Web Interface Bind IP Address:"
 msgstr ""
 
 #. Type: string
@@ -143,7 +143,7 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../btsync.templates:7001
-msgid "On which port should the web interface listen?"
+msgid "Web Interface Listen Port:"
 msgstr ""
 
 #. Type: string
@@ -198,7 +198,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../btsync.templates:11001
-msgid "Disk operations with low priority:"
+msgid "Should BitTorrent Sync perform disk operations with low priority?"
 msgstr ""
 
 #. Type: boolean
@@ -213,7 +213,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../btsync.templates:12001
-msgid "Encrypt data on local network:"
+msgid "Should BitTorrent Sync encrypt data on the local network?"
 msgstr ""
 
 #. Type: boolean
@@ -225,7 +225,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../btsync.templates:13001
-msgid "Use TCP in local network:"
+msgid "Should BitTorrent Sync use TCP on the local network?"
 msgstr ""
 
 #. Type: boolean
@@ -237,7 +237,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../btsync.templates:14001
-msgid "Apply speed limits in local network:"
+msgid "Should BitTorrent Sync apply speed limits also in local networks?"
 msgstr ""
 
 #. Type: boolean

@@ -2,7 +2,7 @@ btsync for Debian
 -----------------
 
 This version of BitTorrent Sync is mainly intended for server usage.
-It allows to start one or more BitTorrent Sync daemons based on
+It allows one to start one or many BitTorrent Sync daemons based on
 configuration files located in /etc/btsync
 
 The package installation offers a possibility to create a default
@@ -57,7 +57,7 @@ configuration file. Some example files are provided under
 
 /etc/btsync/samples
 
-The file /etc/default/btsync allows to configure the way the daemon
+The file /etc/default/btsync allows one to configure the way the daemon
 starts:
 
 The variable AUTOSTART defines which daemons are started automatically.
@@ -67,7 +67,7 @@ It can assume the values
   all		(default) All daemons are started automatically
   <list>	Only the specified daemons are started automatically
 
-The variable DAEMON_ARGS allows to specify additional commandline
+The variable DAEMON_ARGS allows one to specify additional commandline
 parameters passed to the daemon.
 
  -- Leo Moll <leo.moll@yeasoft.com>  Sat, 29 Jun 2013 16:42:10 +0200
