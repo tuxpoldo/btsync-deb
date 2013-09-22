@@ -32,6 +32,8 @@ import json
 import os
 import argparse
 import webbrowser
+import logging
+from pprint import pprint
 
 VERSION = '0.6'
 TIMEOUT = 2 # seconds
@@ -60,6 +62,8 @@ class BtSyncIndicator:
         self.animate = None
         self.error_item = None
         self.frame = 0
+        self.status = None
+        self.count = 0
 
         self.menu_setup()
         self.ind.set_menu(self.menu)
@@ -68,16 +72,19 @@ class BtSyncIndicator:
         """
         Open the config file specified in args load into self.config
         """
+        logging.info('Opening config file '+args.config)
         config = ""
         for line in open(args.config, 'r'):
             if line.find('//') == -1:
                 config += line
         self.config = json.loads(config)
+        logging.info('Config loaded')
 
     def menu_setup(self):
         """
         Create the menu with some basic items
         """
+        logging.info('Creating menu')
         # create a menu
         self.menu = gtk.Menu()
 
@@ -99,6 +106,7 @@ class BtSyncIndicator:
         self.quit_item.connect("activate", self.quit)
         self.quit_item.show()
         self.menu.append(self.quit_item)
+        logging.info('Menu initalisation complete')
 
     def setup_session(self):
         """
@@ -109,6 +117,7 @@ class BtSyncIndicator:
         If the server cannot be contacted, waits 5 seconds and retries.
         """
         try:
+            logging.info('Requesting Token');
             tokenparams = {'t': time.time()}
             tokenurl = self.urlroot+'token.html'
             tokenresponse = requests.post(tokenurl, params=tokenparams)
@@ -117,6 +126,7 @@ class BtSyncIndicator:
             r = regex.search(html)
             self.token = r.group(1)
             self.cookies = tokenresponse.cookies
+            logging.info('Token '+self.token+' Retrieved');
 
             actions = [
                   'license', 
@@ -136,10 +146,15 @@ class BtSyncIndicator:
 
             self.clear_error()
 
+            logging.info('Session setup complete, initialising check_status loop');
+
+            self.status = { 'folders': [] }
+
             gtk.timeout_add(TIMEOUT * 1000, self.check_status)
             return False
 
         except requests.exceptions.ConnectionError:
+            logging.warning('Connection Error caught, displaying error message');
             self.show_error("Couldn't connect to Bittorrent Sync at "+self.urlroot)
             return True
 
@@ -152,6 +167,7 @@ class BtSyncIndicator:
         to establish a new session.
         """
         try:
+            logging.info('Requesting status');
             params = {'token': self.token, 'action': 'getsyncfolders'}
             response = requests.get(self.urlroot, params=params, cookies=self.cookies)
 
@@ -161,21 +177,36 @@ class BtSyncIndicator:
 
             self.check_activity(status['folders'])
 
-            for folder in status['folders']:
-                name = folder['name']
-                if name in self.folderitems:
-		    self.update_folder_menu(folder)
-                else:
-                    menuitem = gtk.MenuItem(name)
-                    self.menu.prepend(menuitem)
-                    menuitem.show()
-		    folderitem = {'menuitem': menuitem, 'sizeitem': {}, 'peeritems': {}}
-                    self.folderitems[name] = folderitem
+            curfoldernames = [ folder['name'] for folder in self.status['folders'] ]
+            newfoldernames = [ folder['name'] for folder in status['folders'] ]
 
-		    submenu = self.build_folder_menu(folder)
-		    menuitem.set_submenu(submenu)
+            updatefolders = [ folder for folder in status['folders'] if folder['name'] in curfoldernames ]
+            newfolders = [ folder for folder in status['folders'] if folder['name'] not in curfoldernames ]
+            oldfolders = [ folder for folder in self.status['folders'] if folder['name'] not in newfoldernames ]
+            
+            for folder in newfolders:
+                name = folder['name']
+                menuitem = gtk.MenuItem(name)
+                self.menu.prepend(menuitem)
+                menuitem.show()
+                folderitem = {'menuitem': menuitem, 'sizeitem': {}, 'peeritems': {}}
+                self.folderitems[name] = folderitem
+
+                submenu = self.build_folder_menu(folder)
+                menuitem.set_submenu(submenu)
+
+            for folder in updatefolders:
+                self.update_folder_menu(folder)
+
+            for folder in oldfolders:
+                name = folder['name']
+                self.menu.remove(self.folderitems[name]['menuitem'])
+                del self.folderitems[name]
+
+            self.status = status
 
         except requests.exceptions.ConnectionError:
+            logging.warning('Status request failed, attempting to re-initialise session')
             self.show_error("Lost connection to Bittorrent Sync")
             self.folderitems = {}
             gtk.timeout_add(5000, self.setup_session)
@@ -192,12 +223,14 @@ class BtSyncIndicator:
         for folder in folders:
             for peer in folder['peers']:
                 if peer['status'].find('Synced') == -1:
+                    logging.info('Sync activity detected')
                     isactive = True
                     break
 
         self.active = isactive
         if self.active:
             if self.animate == None:
+                logging.info('Starting animation loop')
                 gtk.timeout_add(1000, self.animate_icon)
 
 
@@ -272,6 +305,7 @@ class BtSyncIndicator:
 	    sep = gtk.SeparatorMenuItem()
 	    sep.show()
 	    menu.append(sep)
+            folderitem['topsepitem'] = sep
 	    for peer in folder['peers']:
 		buf = self.format_status(peer)
 		img = gtk.Image()
@@ -286,10 +320,13 @@ class BtSyncIndicator:
 		peeritem.show()
 		folderitem['peeritems'][peer['name']] = peeritem
 		menu.append(peeritem)
+        else:
+            folderitem['topsepitem'] = None
 
         sep = gtk.SeparatorMenuItem()
 	sep.show()
 	menu.append(sep)
+        folderitem['bottomsepitem'] = sep
 
 	readonly = gtk.MenuItem('Get Read Only Secret')
 	readonly.connect("activate", self.copy_secret, folder['readonlysecret'])
@@ -311,19 +348,48 @@ class BtSyncIndicator:
 	"""
 	folderitem = self.folderitems[folder['name']]
 	folderitem['sizeitem'].set_label(folder['size'])
-	
-	for peer in folder['peers']:
+        menu = folderitem['menuitem'].get_submenu()
+
+        curfolder = [ f for f in self.status['folders'] if folder['name'] == f['name'] ].pop()
+        curpeernames = [ peer['name'] for peer in curfolder['peers'] ]
+        newpeernames = [ peer['name'] for peer in folder['peers'] ]
+
+        updatepeers = [ peer for peer in folder['peers'] if peer['name'] in curpeernames ]
+        newpeers = [ peer for peer in folder['peers'] if peer['name'] not in curpeernames ]
+        oldpeers = [ peer for peer in curfolder['peers'] if peer['name'] not in newpeernames ]
+
+        bottomseppos = menu.get_children().index(folderitem['bottomsepitem'])
+
+        for peer in newpeers:
+            buf = self.format_status(peer)
+            peeritem = gtk.MenuItem(buf)
+            peeritem.set_sensitive(False)
+            peeritem.show()
+            folderitem['peeritems'][peer['name']] = peeritem
+
+            pos = bottomseppos
+
+            if (folderitem['topsepitem'] == None):
+                sep = gtk.SeparatorMenuItem()
+                sep.show()
+                menu.insert(sep, pos)
+                folderitem['topsepitem'] = sep
+                pos = pos+1
+
+            menu.insert(peeritem, pos)
+
+        for peer in updatepeers:
 	    buf = self.format_status(peer)
-	    if peer['name'] in folderitem['peeritems']:
-		folderitem['peeritems'][peer['name']].set_label(buf)
-	    else:
-		buf = self.format_status(peer)
-		peeritem = gtk.MenuItem(buf)
-		peeritem.set_sensitive(False)
-		peeritem.show()
-		folderitem['peeritems'][peer['name']] = peeritem
-		menu.append(peeritem)
-		
+            folderitem['peeritems'][peer['name']].set_label(buf)
+
+        for peer in oldpeers:
+            menu.remove(folderitem['peeritems'][peer['name']])
+            topseppos = menu.get_children().index(folderitem['topsepitem'])
+            bottomseppos = menu.get_children().index(folderitem['bottomsepitem'])
+            if (topseppos == bottomseppos-1):
+                menu.remove(folderitem['topsepitem'])
+                folderitem['topsepitem'] = None
+
 
     def show_error(self, message):
         """
@@ -358,6 +424,8 @@ class BtSyncIndicator:
         Copies the supplied secret to the clipboard
         """
     	self.clipboard.set_text(secret)
+        logging.info('Secret copied to clipboard')
+        logging.debug(secret)
     	return True;
 
     def animate_icon(self):
@@ -365,12 +433,14 @@ class BtSyncIndicator:
         Cycles the icon through 3 frames to indicate network activity
         """
         if self.active == False:
+            logging.info('Terminating animation loop; Resetting icon');
             self.animate = None
             self.set_icon('')
             self.frame = 0
             return False
         else:
             self.animate = True
+            logging.debug('Setting animation frame to {}'.format(self.frame % 3))
             self.set_icon('-active-{}'.format(self.frame % 3))
             self.frame += 1
             return True
@@ -379,6 +449,7 @@ class BtSyncIndicator:
         """
         Changes the icon to the given variant
         """
+        logging.debug('Setting icon to '+args.iconpath+'/btsync'+variant)
         self.ind.set_icon('btsync'+variant)
         return False
 
@@ -386,10 +457,12 @@ class BtSyncIndicator:
         """
         Opens a browser to the address of the WebUI indicated in the config file
         """
+        logging.info('Opening Web Browser to http://'+self.config['webui']['listen'])
 	webbrowser.open('http://'+self.config['webui']['listen'], 2)
 	return True
 
     def open_fm(self, widget, path):
+        logging.info('Opening File manager to '+path)
 	if os.path.isdir(path):
 	    os.system('xdg-open '+path)
 
@@ -400,9 +473,11 @@ class BtSyncIndicator:
 	filepath = self.config['storage_path']+'/debug.txt'
 	if (os.path.isfile(filepath)):
 	    os.unlink(filepath)
+            logging.info('Bittorrent Sync debugging disabled')
 	else:
 	    f = open(filepath, 'w')
 	    f.write('FFFF')
+            logging.info('Bittorrent Sync debugging enabled')
 	return True
 
     def get_response_text(self, response):
@@ -417,6 +492,7 @@ class BtSyncIndicator:
         gtk.main()
 
     def quit(self, widget):
+        logging.info('Exiting')
         sys.exit(0)
 
 if __name__ == "__main__":
@@ -430,7 +506,16 @@ if __name__ == "__main__":
     parser.add_argument('-v', '--version',
 			action='store_true',
                         help="Print version information and exit")
+    parser.add_argument('--log',
+                        default='WARNING',
+                        help="Set logging level")
     args = parser.parse_args()
+
+    numeric_level = getattr(logging, args.log.upper(), None)
+    if not isinstance(numeric_level, int):
+        raise ValueError('Invalid log level: %s' % args.log)
+
+    logging.basicConfig(level=numeric_level)
 
     if (args.version):
 	print os.path.basename(__file__)+" Version "+VERSION;
