@@ -233,40 +233,6 @@ class BtSyncIndicator:
                 logging.info('Starting animation loop')
                 gtk.timeout_add(1000, self.animate_icon)
 
-
-
-
-    def add_peer(self, folderitem, peer):
-        """
-        Adds a peer with the specified data below the specified menu
-        item.
-        """
-	name = peer['name']
-        buf = self.format_status(peer)
-        peeritem = gtk.MenuItem(buf)
-	folderposition = self.menu.get_children().index(folderitem['menuitem'])
-	self.menu.insert(peeritem, folderposition+1)
-	peeritem.set_sensitive(False)
-	peeritem.show()
-	folderitem['peeritems'][name] = peeritem
-        return True;
-
-    def update_peer(self, peeritem, peer):
-        """
-        Updates the specified menu item with the peer information provided
-        """
-        buf = self.format_status(peer)
-        peeritem.set_label(buf)
-        return True;
-
-    def remove_peer(self, folderitem, peeritem):
-        """
-        Removes the peer item below the folder item
-        """
-        self.menu.remove(peer)
-        del folderitem['peeritems'][peeritem]
-        return True;
-
     def format_status(self, peer):
         """
         Formats the peer status information for display.
@@ -358,9 +324,9 @@ class BtSyncIndicator:
         newpeers = [ peer for peer in folder['peers'] if peer['name'] not in curpeernames ]
         oldpeers = [ peer for peer in curfolder['peers'] if peer['name'] not in newpeernames ]
 
-        bottomseppos = menu.get_children().index(folderitem['bottomsepitem'])
 
         for peer in newpeers:
+            bottomseppos = menu.get_children().index(folderitem['bottomsepitem'])
             buf = self.format_status(peer)
             peeritem = gtk.MenuItem(buf)
             peeritem.set_sensitive(False)
