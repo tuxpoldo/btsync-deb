@@ -33,7 +33,6 @@ import os
 import argparse
 import webbrowser
 import logging
-from pprint import pprint
 
 VERSION = '0.6'
 TIMEOUT = 2 # seconds
