@@ -50,7 +50,7 @@ import argparse
 import webbrowser
 import logging
 
-VERSION = '0.7'
+VERSION = '0.8'
 TIMEOUT = 2 # seconds
 
 class BtSyncIndicator:
