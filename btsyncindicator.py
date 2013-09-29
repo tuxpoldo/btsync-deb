@@ -24,7 +24,21 @@ import gtk
 import appindicator
 
 import urllib
-import requests
+
+#---------------------------------
+"""
+    Requests is not installed by default
+    pip is not installed by default either
+    sudo apt-get install python-pip
+"""
+try:
+    import requests
+except ImportError:
+    print "You need to install the requests lib..."
+    print "sudo pip install requests"
+    exit(1)
+#---------------------------------
+
 import time
 import sys
 import re
