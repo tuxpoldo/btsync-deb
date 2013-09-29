@@ -25,19 +25,21 @@ import appindicator
 
 import urllib
 
-#---------------------------------
 """
     Requests is not installed by default
-    pip is not installed by default either
-    sudo apt-get install python-pip
+    If it's missing, display instructions to install with apt or pip
 """
 try:
     import requests
 except ImportError:
-    print "You need to install the requests lib..."
-    print "sudo pip install requests"
+    print "requests library not found."
+    print "To install, try:"
+    print "sudo apt-get install python-requests"
+    print "If python-requests isn't found, try:"
+    print "sudo apt-get install python-pip && sudo pip install requests"
+    print "If apt-get isn't available, use your system's package manager or install pip manually:"
+    print "http://www.pip-installer.org/en/latest/installing.html"
     exit(1)
-#---------------------------------
 
 import time
 import sys
