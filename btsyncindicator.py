@@ -86,12 +86,15 @@ class BtSyncIndicator:
     def load_config(self):
         """
         Open the config file specified in args load into self.config
+	Removes commented lines starting in //, or multi-line comments
+	wrapped in /* */
         """
         logging.info('Opening config file '+args.config)
         config = ""
         for line in open(args.config, 'r'):
             if line.find('//') == -1:
                 config += line
+        config = re.sub("/\*[^*]*\*/", "", config)
         self.config = json.loads(config)
         logging.info('Config loaded')
 
