@@ -49,6 +49,7 @@ import os
 import argparse
 import webbrowser
 import logging
+import subprocess
 
 VERSION = '0.8'
 TIMEOUT = 2 # seconds
@@ -79,6 +80,16 @@ class BtSyncIndicator:
         self.frame = 0
         self.status = None
         self.count = 0
+
+        # Determine whether the script was installed with the btsync-user package
+        try:
+            output = subprocess.check_output(["dpkg", "-S", os.path.abspath(__file__)])
+            if (output.find("btsync-user") > -1):
+                self.btsync_user = True
+            else:
+                self.btsync_user = False
+        except subprocess.CalledProcessError, e:
+            self.btsync_user = False
 
         self.menu_setup()
         self.ind.set_menu(self.menu)
@@ -120,7 +131,11 @@ class BtSyncIndicator:
 	self.debug_item.show()
 	self.menu.append(self.debug_item)
 
-        self.quit_item = gtk.MenuItem("Quit")
+        if self.btsync_user:
+            buf = "Quit Bittorrent Sync"
+        else:
+            buf = "Quit"
+        self.quit_item = gtk.MenuItem(buf)
         self.quit_item.connect("activate", self.quit)
         self.quit_item.show()
         self.menu.append(self.quit_item)
@@ -477,6 +492,22 @@ class BtSyncIndicator:
 
     def quit(self, widget):
         logging.info('Exiting')
+        
+        if self.btsync_user:
+            logging.info('Running btsync-stopper before exit')
+            try:
+                stopper = os.path.dirname(os.path.realpath(__file__))+"/btsync-stopper"
+                if (os.path.exists(stopper)):
+                    logging.info('Calling '+stopper)
+                    subprocess.check_call(stopper)
+                else:
+                    logging.error("Cant find btsync-stopper at "+stopper)
+            except subprocess.CalledProcessError, e:
+                logging.warning('btsync-stopper failed with status '+e.returncode)
+                logging.warning(e.output)
+                print "Cannot Exit btsync: "+e.output
+                print "Please Exit btsync manually"
+
         sys.exit(0)
 
 if __name__ == "__main__":
