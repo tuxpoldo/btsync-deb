@@ -1,3 +1,21 @@
+btsync (1.1.70-5) unstable; urgency=low
+
+  - Updated btsyncindicator to version 0.8 in btsync-user
+  - Added "BitTorrent Sync" desktop icon in btsync-user (Issue #6)
+  - Fixed: 'Response' object has no attribute 'text' bug (Issue #2)
+  - Fixed: removed lintian warnings (Issue #1)
+  - Fixed: service startup/shutdown does not affect any more
+    installation/update/uninstallation (Issue #3)
+  - Fixed: the packages now install EXACTLY the same executable btsync
+    binary as distributed by BitTorrent Inc. - Previously the binary
+    was stripped by debhelper (dh_strip) (Issue #4)
+  - Fixed: both btsync and btsync-user will not specify and strict
+    library version dependency making it possible to install the same
+    package on different Debian/Ubuntu/XXXbian versions without the
+    need to create a specific package (Issue #5)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sat, 30 Sep 2013 15:31:16 +0200
+
 btsync (1.1.70-4~sid) sid; urgency=low
 
   - Fixed: added missing python dependencies for btsync-user
