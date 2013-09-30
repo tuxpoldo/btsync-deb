@@ -27,3 +27,6 @@ override_dh_auto_build:
 override_dh_clean:
 	dh_clean
 	rm -f btsync-daemon btsync-agent complex.conf
+
+override_dh_strip:
+# do not strip...
