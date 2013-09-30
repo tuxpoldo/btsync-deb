@@ -1,6 +1,6 @@
 # files
 btsync-agent						usr/lib/btsync-user
-debian/scripts/btsync-agent.desktop			etc/btsync-user
+debian/scripts/btsync-agent.desktop			usr/share/applications
 debian/scripts/btsync-user.conf				etc/btsync-user
 debian/scripts/btsync-user.desktop			etc/btsync-user
 debian/scripts/btsync-starter				usr/lib/btsync-user

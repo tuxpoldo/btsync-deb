@@ -9,15 +9,15 @@ configure)
 	# generate autostart link
 	set +e
 	if [ -d /etc/xdg/autostart ]; then
-		ln -sf /etc/btsync-user/btsync-agent.desktop /etc/xdg/autostart/btsync-agent.desktop
+		ln -sf /usr/share/applications/btsync-agent.desktop /etc/xdg/autostart/btsync-agent.desktop
 	elif [ -d /etc/xdg/openbox/autostart ]; then
-		ln -sf /etc/btsync-user/btsync-agent.desktop /etc/xdg/openbox/autostart/btsync-agent.desktop
+		ln -sf /usr/share/applications/btsync-agent.desktop /etc/xdg/openbox/autostart/btsync-agent.desktop
 	elif [ -d /usr/share/autostart ]; then
-		ln -sf /etc/btsync-user/btsync-agent.desktop /usr/share/autostart/btsync-agent.desktop
+		ln -sf /usr/share/applications/btsync-agent.desktop /usr/share/autostart/btsync-agent.desktop
 	else
 		# fallback: no /etc/xdg/autostart - create one
 		mkdir /etc/xdg/autostart
-		ln -sf /etc/btsync-user/btsync-agent.desktop /etc/xdg/autostart/btsync-agent.desktop
+		ln -sf /usr/share/applications/btsync-agent.desktop /etc/xdg/autostart/btsync-agent.desktop
 	fi
 	set -e
 

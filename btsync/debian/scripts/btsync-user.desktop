@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=BitTorrent Sync Management
+Name=BitTorrent Sync Web UI
 Comment=BitTorrent Sync management interface
 Exec=sensible-browser http://127.0.0.1:PORTNUM
 Icon=btsync-user

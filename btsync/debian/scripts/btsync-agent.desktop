@@ -1,8 +1,7 @@
 [Desktop Entry]
-Name=BitTorrent Sync User Agent
-Comment=BitTorrent Sync User Agent
+Name=BitTorrent Sync
+Comment=Synchronize your folders with maximum security, network speed and storage capacity
 Exec=/usr/lib/btsync-user/btsync-starter
 Icon=btsync-user
 Terminal=false
 Type=Application
-NoDisplay=true
