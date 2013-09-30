@@ -19,3 +19,5 @@ debian/btsyncindicator/icons/btsync-active-1.png	usr/share/icons/hicolor/22x22/s
 debian/btsyncindicator/icons/btsync-active-2.png	usr/share/icons/hicolor/22x22/status
 debian/btsyncindicator/icons/btsync-attention.png	usr/share/icons/hicolor/22x22/status
 debian/btsyncindicator/icons/btsync-error.png		usr/share/icons/hicolor/22x22/status
+debian/btsyncindicator/icons/btsync-direct.png		usr/share/icons/hicolor/22x22/status
+debian/btsyncindicator/icons/btsync-relay.png		usr/share/icons/hicolor/22x22/status

@@ -12,3 +12,5 @@ debian/btsyncindicator/icons/btsync-active-1.png
 debian/btsyncindicator/icons/btsync-active-2.png
 debian/btsyncindicator/icons/btsync-attention.png
 debian/btsyncindicator/icons/btsync-error.png
+debian/btsyncindicator/icons/btsync-relay.png
+debian/btsyncindicator/icons/btsync-direct.png
