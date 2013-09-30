@@ -18,4 +18,8 @@
 /btsync/BitTorrentSyncUserGuide.pdf
 
 # intermediate files
-/btsync_*~*
+/btsync_*.dsc
+/btsync_*.build
+/btsync_*.changes
+/btsync_*.upload
+/btsync_*.debian.tar.gz
