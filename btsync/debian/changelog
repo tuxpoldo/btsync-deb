@@ -1,6 +1,6 @@
 btsync (1.1.70-5) unstable; urgency=low
 
-  - Updated btsyncindicator to version 0.8 in btsync-user
+  - Updated btsyncindicator to version 0.9 in btsync-user
   - Added "BitTorrent Sync" desktop icon in btsync-user (Issue #6)
   - Fixed: 'Response' object has no attribute 'text' bug (Issue #2)
   - Fixed: removed lintian warnings (Issue #1)
