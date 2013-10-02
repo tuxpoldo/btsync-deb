@@ -1,0 +1,78 @@
+.TH btsync 7 "October 2013" "BitTorrent Sync" "Private network P2P file synchronisation daemon"
+.SH NAME
+btsync - Private network P2P file synchronisation daemon
+
+.SH SYNOPSIS
+.SP
+.B btsync
+.I <command>
+.B [
+.I <args>
+.B ]
+
+.SH DESCRIPTION
+.B BitTorrent Sync
+.R is a simple tool that applies p2p protocol for
+direct live folder sync with maximum security, network speed and
+storage capacity. It has native versions for Mac, Windows and
+Linux, as well as native NAS integration.
+
+
+.SH COMMANDS
+.R The following commands are available:
+
+.TP
+.B btsync start
+starts the whole btsync system (agent and applet)
+
+.TP
+.B btsync stop
+stops the whole btsync system (agent and applet)
+
+.TP
+.B btsync restart
+restarts the whole btsync system (agent and applet)
+
+.TP
+.B btsync pause|suspend
+stops the btsync agent but leaves the desktop applet running
+
+.TP
+.B btsync resume
+resumes the btsync agent
+
+.TP
+.B btsync status
+returns the status of the btsync agent
+
+.SH FILES
+.TP
+.I /etc/btsync-user/btsync-user.conf
+.R Template for the btsync agent configuration files
+.I ~/.btsync.conf
+.R Automatically created user specific configuration file for the btsync agent
+.TP
+.I /etc/btsync-user/btsync-user.desktop
+.R Template for the btsync web UI desktop shortcut
+.TP
+.I ~/.local/share/applications/btsync-user.desktop
+.R Automatically created user specific web UI desktop shortcut
+.TP
+.I ~/.btsync.pid
+.R User specific btsync PID file
+
+.SH DIRECTORIES
+.TP
+.I ~/.btsync
+.R User specific storage path of the btsync agent
+
+.SH AUTHOR
+.TP
+.B BitTorrent Sync
+.R itself was written by BitTorrent Inc. (See http://labs.bittorrent.com/experiments/sync.html)
+.TP
+.B btsyncindicator
+.R was written by Mark Johnson <mark@barrenfrozenwasteland.com>
+.TP
+.B btsync-user
+.R Debian/Ubuntu packaging was written by Leo Moll <leo.moll@yeasoft.com>
