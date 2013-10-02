@@ -1,11 +1,21 @@
 #!/bin/sh
+#
+# (c) 2013 YeaSoft Int'l - Leo Moll
+#
+# This script stops and cleanup a running btsync
+
+#####################################
+# variables section
 
 # compute user specific directories
 DESTDIR=${HOME}
 DATADIR=${DESTDIR}/.btsync
 RUNNING_STATEFILE="${DATADIR}/running"
+PAUSED_STATEFILE="${DATADIR}/paused"
 
-if [ -f "${RUNNING_STATEFILE}" ]; then
-	rm "${RUNNING_STATEFILE}"
-fi
-pkill -u $(id -u) btsync-agent
+#####################################
+# the main script
+
+rm -f "${RUNNING_STATEFILE}"
+rm -f "${PAUSED_STATEFILE}"
+pkill -u $(id -u) -x btsync-agent

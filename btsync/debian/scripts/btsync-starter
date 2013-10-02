@@ -1,4 +1,32 @@
 #!/bin/sh
+#
+# (c) 2013 YeaSoft Int'l - Leo Moll
+#
+# This script manages the runtime environment and behaviour
+# of BitTorrent Sync (btsync) in a desktop environment
+
+# In order to create clear isolated user environments, all
+# configuration and runtime data of btsync must be kept in
+# the users home directory and there shall be no conflicts
+# between concurrent btsync instances of different users
+# since more than one user can be logged in
+# Furthermore the script must be able to handle the update
+# of btsync initiated under root credentials
+
+# The configuration file for each user is created automatically
+# based on the template /etc/btsync-user/btsync-user.conf in
+# his home directory as ~/.btsync.conf defining a user specific
+# storage directory (~/.btsync), a user specific device name, a
+# user specific PID file and a user specific port number for
+# the web ui. A user specific web ui shortcut is created in
+# ~/.local/share/applications
+
+# The user can override the settings of his personal
+# configuration file by creating a configuration file in his
+# home directory named ~./btsync.conf
+
+#####################################
+# variables section
 
 # compute user specific directories
 DESTDIR=${HOME}
@@ -9,8 +37,11 @@ USRFILE=${DESTDIR}/btsync.conf
 APPLDIR=${HOME}/.local/share/applications
 APPFILE=${APPLDIR}/btsync-user.desktop
 DEVNAME="$(hostname) - $(whoami)"
+
 RUNNING_STATEFILE="${DATADIR}/running"
+PAUSED_STATEFILE="${DATADIR}/paused"
 UPDATING_STATEFILE="/var/run/btsync-user-updating"
+
 AGENT=/usr/lib/btsync-user/btsync-agent
 FRONT=/usr/lib/btsync-user/btsyncindicator.py
 ICONS=/usr/share/icons/hicolor/22x22/status
@@ -21,8 +52,29 @@ XPIDFILE="$(echo ${PIDFILE} | sed -e "s/\\//\\\\\//g")"
 XDEVNAME="$(echo ${DEVNAME} | sed -e "s/\\//\\\\\//g")"
 XPORTNUM="$((8999+$(id -u)))"
 
+#####################################
+# utility functions
+
+make_userfiles() {
+	mkdir -p ${DATADIR}
+	mkdir -p ${APPLDIR}
+	sed \
+		-e "s/DATADIR/${XDATADIR}/g" \
+		-e "s/PIDFILE/${XPIDFILE}/g" \
+		-e "s/DEVNAME/${XDEVNAME}/g" \
+		-e "s/PORTNUM/${XPORTNUM}/g" \
+		> ${CFGFILE} < /etc/btsync-user/btsync-user.conf
+	sed \
+		-e "s/DATADIR/${XDATADIR}/g" \
+		-e "s/PIDFILE/${XPIDFILE}/g" \
+		-e "s/DEVNAME/${XDEVNAME}/g" \
+		-e "s/PORTNUM/${XPORTNUM}/g" \
+		> ${APPFILE} < /etc/btsync-user/btsync-user.desktop
+}
+
+
 start_frontend() {
-	if ! pgrep -U $(id -u) -f btsyncindicator.py > /dev/null; then
+	if ! pgrep -u $(id -u) -f btsyncindicator.py > /dev/null; then
 		if [ -f "${USRFILE}" ]; then
 			${FRONT} --config "${USRFILE}" --iconpath "${ICONS}" &
 		else
@@ -36,7 +88,7 @@ stop_frontend() {
 }
 
 start_agent() {
-	if ! pgrep -U $(id -u) -x btsync-agent > /dev/null; then
+	if ! pgrep -u $(id -u) -x btsync-agent > /dev/null; then
 		if [ -f "${USRFILE}" ]; then
 			${AGENT} --config "${USRFILE}"
 		else
@@ -45,66 +97,71 @@ start_agent() {
 	fi
 }
 
-
-runagent() {
-	trap stopagent INT QUIT TERM EXIT
-	touch "${RUNNING_STATEFILE}"
-	while [ -f "${RUNNING_STATEFILE}" ]; do
-		if ! [ -f "${UPDATING_STATEFILE}" ]; then
-			start_frontend
-			start_agent
-			sleep 1 # give the agent some time to fork
-			if pgrep -x btsync-agent -U $(id -u) > /dev/null; then
-				# wait for process to finish
-				while pgrep -x btsync-agent -U $(id -u) > /dev/null; do
-					 sleep 10
-				done
-				stop_frontend
-			else # something went wrong, startup failed, quit loop here
-				rm "${RUNNING_STATEFILE}"
-				return
-			fi
-		else
-			sleep 10 # avoid active waiting loop while updating
-		fi
-	done
+stop_agent() {
 	trap - INT QUIT TERM EXIT
-}
-
-stopagent() {
-	trap - INT QUIT TERM EXIT
-	if [ -f "${RUNNING_STATEFILE}" ]; then
-		rm ${RUNNING_STATEFILE}
-	fi
-	pkill -u $(id -u) btsync-agent
+	rm -f "${RUNNING_STATEFILE}"
+	rm -f "${PAUSED_STATEFILE}"
+	pkill -u $(id -u) -x btsync-agent
 	pkill -u $(id -u) -f btsyncindicator.py
 	exit
 }
 
 
+agent_runner() {
+	trap stop_agent INT QUIT TERM EXIT
+	touch "${RUNNING_STATEFILE}"
+	while [ -f "${RUNNING_STATEFILE}" ]; do
+		if [ -f "${UPDATING_STATEFILE}" ]; then
+			# System is beeing updated. Sleep a while
+			# and wait for restarting everything
+			sleep 2
+		elif [ -f "${PAUSED_STATEFILE}" ]; then
+			# System is paused. Sleep a while and
+			# wait for system resume
+			sleep 1
+		else
+			cd ~
+			# Normal situation. Regenerate user files and
+			# startup normally
+			make_userfiles
+			# make sure the frontend is running
+			start_frontend
+			# start the agent
+			start_agent
+			# give the agent some time to fork
+			sleep 1
+			# wait for process to finish
+			while pgrep -u $(id -u) -x btsync-agent > /dev/null; do
+				sleep 1
+			done
+			if [ -f "${UPDATING_STATEFILE}" ]; then
+				# we should stop the frontend since it could
+				# also be updated
+				stop_frontned
+			elif [ ! -f "${PAUSED_STATEFILE}" ]; then
+				# no reason to stay online. stop the whole game
+				stop_agent
+			fi
+		fi
+	done
+	trap - INT QUIT TERM EXIT
+}
+
+
+#####################################
+# the main script
+
+# make sure the frontend is running
 start_frontend
 
-if pgrep -x btsync-agent -U $(id -u) > /dev/null; then
+if pgrep -u $(id -u) -x btsync-agent > /dev/null; then
 	echo btsync-agent already running
 	exit 0
+elif [ -f "${PAUSED_STATEFILE}" ]; then
+	echo btsync-agent was paused. resuming...
+	rm -r "${PAUSED_STATEFILE}"
+	exit 0
 else
-	# move to user's home directory
-	cd ~
-
-	sed \
-		-e "s/DATADIR/${XDATADIR}/g" \
-		-e "s/PIDFILE/${XPIDFILE}/g" \
-		-e "s/DEVNAME/${XDEVNAME}/g" \
-		-e "s/PORTNUM/${XPORTNUM}/g" \
-		> ${CFGFILE} < /etc/btsync-user/btsync-user.conf
-	mkdir -p ${DATADIR}
-	mkdir -p ${APPLDIR}
-	sed \
-		-e "s/DATADIR/${XDATADIR}/g" \
-		-e "s/PIDFILE/${XPIDFILE}/g" \
-		-e "s/DEVNAME/${XDEVNAME}/g" \
-		-e "s/PORTNUM/${XPORTNUM}/g" \
-		> ${APPFILE} < /etc/btsync-user/btsync-user.desktop
-
-	runagent &
+	# fork the agent runner
+	agent_runner &
 fi

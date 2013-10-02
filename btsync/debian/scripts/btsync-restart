@@ -1,6 +1,0 @@
-#!/bin/sh
-
-while pgrep -x btsync-agent -U $(id -u) > /dev/null; do
-	pkill -u $(id -u) btsync-agent
-	sleep 1
-done

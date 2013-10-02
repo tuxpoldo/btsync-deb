@@ -1,5 +1,11 @@
 #!/bin/sh
+#
+# (c) 2013 YeaSoft Int'l - Leo Moll
+#
+# This script tests if ANY btsync agents are running
 
+#####################################
+# the main script
 if pgrep -x btsync-agent > /dev/null; then
 	exit 1
 else
