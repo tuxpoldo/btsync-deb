@@ -6,7 +6,7 @@ debian/scripts/btsync-user.desktop			etc/btsync-user
 debian/scripts/btsync-starter				usr/lib/btsync-user
 debian/scripts/btsync-stopper				usr/lib/btsync-user
 debian/scripts/btsync-tester				usr/lib/btsync-user
-debian/scripts/btsync-restart				usr/bin
+debian/scripts/btsync					usr/bin
 debian/icons/96/btsync-user.png				usr/share/icons/hicolor/96x96/apps
 debian/icons/48/btsync-user.png				usr/share/icons/hicolor/48x48/apps
 debian/icons/32/btsync-user.png				usr/share/icons/hicolor/32x32/apps

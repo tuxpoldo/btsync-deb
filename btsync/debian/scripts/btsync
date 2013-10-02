@@ -1,0 +1,162 @@
+#!/bin/bash
+#
+# (c) 2013 YeaSoft Int'l - Leo Moll
+#
+# This script allows to manage the
+# btsync user agent
+
+#####################################
+# variables section
+
+# compute user specific directories
+DESTDIR=${HOME}
+DATADIR=${DESTDIR}/.btsync
+CFGFILE=${DESTDIR}/.btsync.conf
+PIDFILE=${DESTDIR}/.btsync.pid
+USRFILE=${DESTDIR}/btsync.conf
+APPLDIR=${HOME}/.local/share/applications
+APPFILE=${APPLDIR}/btsync-user.desktop
+DEVNAME="$(hostname) - $(whoami)"
+
+RUNNING_STATEFILE="${DATADIR}/running"
+PAUSED_STATEFILE="${DATADIR}/paused"
+UPDATING_STATEFILE="/var/run/btsync-user-updating"
+
+# initialize runtime variables
+VERBOSE=1
+
+#####################################
+# basic script functions
+
+function usage {
+	cat <<EOF
+usage: btsync [-vq] <command> [param]
+
+Commands:
+ start              start the btsync system
+ stop               stop the btsync system
+ restart            restarts the btsync system
+ pause              suspends the btsync system
+ stop               resumes the btsync system
+ status             output the btsync status
+
+Options:
+ -v, --verbose      increase verbosity
+ -q, --quiet        say nothing - only return error codes
+
+This script allows to manage the BitTorrent Sync Desktop application
+
+EOF
+}
+
+function show_verbose {
+	if [ $VERBOSE -ge $1 ]; then
+		echo "${*:2}"
+	fi
+}
+
+function show_error {
+	echo "btsync error: $*" >&2
+}
+
+PARSER=$(getopt --name "$SCRIPTNAME" --options h,v,q --longoptions help,verbose,quiet -- "$@")
+case $? in
+0);;
+1) show_error "syntax or usage error (code $?)"; exit $?;;
+2) show_error "syntax or usage error (code $?) in [getopt]"; exit $?;;
+3) show_error "internal error (code $?) in [getopt]"; exit $?;;
+4) show_error "wrong getopt version istalled"; exit $?;;
+*) show_error "Unknown getopt error (code $?)"; exit $?;;
+esac
+
+# Parameter parsing
+eval set -- "$PARSER"
+while true; do
+	case "$1" in
+	-h|--help)			usage; exit 0;;
+	-v|--verbose)			(( VERBOSE++ )); shift;;
+	-q|--quiet)			VERBOSE=0; shift;;
+	--)				shift; break;;
+        *)				echo "btsync: $1: unknown option"; show_error "syntax or usage error (code 1)"; exit 1;;
+        esac
+done
+
+# configuration checking
+
+if [ -z $1 ]; then
+	usage
+	exit 0
+fi
+
+RESULT=0
+
+case "$1" in
+start)
+	show_verbose 2 "Starting btsync..."
+	/usr/lib/btsync-user/btsync-starter
+	RESULT=$?
+	show_verbose 2 "Done."
+	;;
+stop)
+	show_verbose 2 "Stopping btsync..."
+	/usr/lib/btsync-user/btsync-stopper
+	RESULT=$?
+	show_verbose 2 "Done."
+	;;
+restart)
+	show_verbose 2 "Restarting btsync..."
+	/usr/lib/btsync-user/btsync-stopper
+	sleep 5
+	/usr/lib/btsync-user/btsync-starter
+	RESULT=$?
+	show_verbose 2 "Done."
+	;;
+pause|suspend)
+	if [ -f "${PAUSED_STATEFILE}" ]; then
+		show_verbose 1 "btsync is already paused"
+		RESULT=1
+	elif [ -f "${RUNNING_STATEFILE}" ]; then
+		show_verbose 2 "Suspending..."
+		touch "${PAUSED_STATEFILE}"
+		pkill -u $(id -u) -x btsync-agent
+		RESULT=$?
+		show_verbose 2 "Done."
+	else
+		show_verbose 1 "Cannot suspend since btsync is not running"
+		RESULT=2
+	fi
+	;;
+resume)
+	if [ -f "${PAUSED_STATEFILE}" ]; then
+		show_verbose 2 "Resuming btsync..."
+		rm -f "${PAUSED_STATEFILE}"
+		RESULT=$?
+		show_verbose 2 "Done."
+	elif [ -f "${RUNNING_STATEFILE}" ]; then
+		show_verbose 1 "btsync is already running"
+		RESULT=1
+	else
+		show_verbose 1 "Cannot resume since btsync is not running"
+		RESULT=2
+	fi
+	;;
+status)
+	if [ -f "${RUNNING_STATEFILE}" ]; then
+		if [ -f "${PAUSED_STATEFILE}" ]; then
+			show_verbose 1 "paused"
+			RESULT=1
+		else
+			show_verbose 1 "running"
+			RESULT=0
+		fi
+	else
+		show_verbose 1 "stopped"
+		RESULT=2
+	fi
+	;;
+*)
+	show_error "Unknown command $1"
+	RESULT=1
+	;;
+esac
+exit ${RESULT}
