@@ -248,14 +248,16 @@ class BtSyncIndicator:
                 del self.folderitems[name]
 
             self.status = status
+            return True
 
         except requests.exceptions.ConnectionError:
             logging.warning('Status request failed, attempting to re-initialise session')
             self.show_error("Lost connection to Bittorrent Sync")
             self.folderitems = {}
+            self.status = { 'folders': [] }
             gtk.timeout_add(5000, self.setup_session)
+            return False
 
-        return True;
 
     def check_activity(self, folders):
         """
