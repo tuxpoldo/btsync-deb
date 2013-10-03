@@ -126,8 +126,10 @@ class BtSyncIndicator:
         sep.show()
         self.menu.append(sep)
 
+        filepath = self.config['storage_path']+'/debug.txt'
 	self.debug_item = gtk.CheckMenuItem("Enable Debug Logging")
-	self.debug_item.connect("activate", self.toggle_debugging)
+	self.debug_item.set_active(os.path.isfile(filepath))
+	self.debug_item_handler = self.debug_item.connect("activate", self.toggle_debugging)
 	self.debug_item.show()
 	self.menu.append(self.debug_item)
 
@@ -199,6 +201,15 @@ class BtSyncIndicator:
         If the server cannot be contacted, stops polling and attempts calls setup_session
         to establish a new session.
         """
+        """
+        Since some state information from the btsync-agent may be changed from outside,
+        we should keep it also up to date in the menu...
+        """
+        filepath = self.config['storage_path']+'/debug.txt'
+        self.debug_item.disconnect(self.debug_item_handler)
+	self.debug_item.set_active(os.path.isfile(filepath))
+	self.debug_item_handler = self.debug_item.connect("activate", self.toggle_debugging)
+
         try:
             logging.info('Requesting status');
             params = {'token': self.token, 'action': 'getsyncfolders'}
