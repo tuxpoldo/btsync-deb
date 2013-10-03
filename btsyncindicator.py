@@ -121,6 +121,13 @@ class BtSyncIndicator:
         self.sep1.show()
         self.menu.append(self.sep1)
 
+	if self.btsync_user:
+            filepath = self.config['storage_path']+'/paused'
+            self.pause_item = gtk.CheckMenuItem("Pause Syncing")
+            self.pause_item_handler = self.pause_item.connect("activate", self.toggle_pause)
+            self.pause_item.show()
+            self.menu.append(self.pause_item)
+
 	self.webui_item = gtk.MenuItem("Open Web Interface")
 	self.webui_item.connect("activate", self.open_webui)
 	self.webui_item.show()
@@ -213,6 +220,12 @@ class BtSyncIndicator:
         self.debug_item.disconnect(self.debug_item_handler)
 	self.debug_item.set_active(os.path.isfile(filepath))
 	self.debug_item_handler = self.debug_item.connect("activate", self.toggle_debugging)
+
+	if self.btsync_user:
+            filepath = self.config['storage_path']+'/paused'
+            self.pause_item.disconnect(self.pause_item_handler)
+            self.pause_item.set_active(os.path.isfile(filepath))
+            self.pause_item_handler = self.pause_item.connect("activate", self.toggle_pause)
 
         try:
             logging.info('Requesting status');
@@ -417,6 +430,8 @@ class BtSyncIndicator:
             for child in self.menu.get_children():
                 if child == self.sep1:
                     pass
+                elif child == self.pause_item:
+                    pass
                 elif child == self.webui_item:
                     self.webui_item.set_sensitive(False)
                 elif child == self.sep2:
@@ -504,6 +519,29 @@ class BtSyncIndicator:
 	    f.write('FFFF')
             logging.info('Bittorrent Sync debugging enabled')
 	return True
+
+    def toggle_pause(self, widget):
+        """
+        handles the pause/resume feature
+        """
+        btsyncmanager = "/usr/bin/btsync"
+        if (os.path.exists(btsyncmanager)):
+            try:
+                filepath = self.config['storage_path']+'/paused'
+                if (os.path.isfile(filepath)):
+                    logging.info('Calling '+btsyncmanager+ ' resume')
+                    subprocess.check_call([btsyncmanager, 'resume'])
+	            logging.info('Bittorrent Sync resumed')
+                else:
+                    logging.info('Calling '+btsyncmanager+ ' pause')
+                    subprocess.check_call([btsyncmanager, 'pause'])
+	            logging.info('Bittorrent Sync paused')
+            except subprocess.CalledProcessError, e:
+                logging.warning('btsync manager failed with status '+e.returncode)
+                logging.warning(e.output)
+        else:
+            logging.error("Cant find btsync manager at "+btsyncmanager)
+        return True
 
     def get_response_text(self, response):
         """
