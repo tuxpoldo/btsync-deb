@@ -117,14 +117,18 @@ class BtSyncIndicator:
         # create a menu
         self.menu = gtk.Menu()
 
+        self.sep1 = gtk.SeparatorMenuItem()
+        self.sep1.show()
+        self.menu.append(self.sep1)
+
 	self.webui_item = gtk.MenuItem("Open Web Interface")
 	self.webui_item.connect("activate", self.open_webui)
 	self.webui_item.show()
 	self.menu.append(self.webui_item)
                     
-        sep = gtk.SeparatorMenuItem()
-        sep.show()
-        self.menu.append(sep)
+        self.sep2 = gtk.SeparatorMenuItem()
+        self.sep2.show()
+        self.menu.append(self.sep2)
 
         filepath = self.config['storage_path']+'/debug.txt'
 	self.debug_item = gtk.CheckMenuItem("Enable Debug Logging")
@@ -235,7 +239,6 @@ class BtSyncIndicator:
                 menuitem.show()
                 folderitem = {'menuitem': menuitem, 'sizeitem': {}, 'peeritems': {}}
                 self.folderitems[name] = folderitem
-
                 submenu = self.build_folder_menu(folder)
                 menuitem.set_submenu(submenu)
 
@@ -257,7 +260,6 @@ class BtSyncIndicator:
             self.status = { 'folders': [] }
             gtk.timeout_add(5000, self.setup_session)
             return False
-
 
     def check_activity(self, folders):
         """
@@ -413,7 +415,17 @@ class BtSyncIndicator:
             self.set_icon('-error')
 
             for child in self.menu.get_children():
-                if child != self.quit_item:
+                if child == self.sep1:
+                    pass
+                elif child == self.webui_item:
+                    self.webui_item.set_sensitive(False)
+                elif child == self.sep2:
+                    pass
+                elif child == self.debug_item:
+                    pass
+                elif child == self.quit_item:
+                    pass
+                else:
                     self.menu.remove(child)
 
             self.error_item = gtk.MenuItem(message)
@@ -426,6 +438,7 @@ class BtSyncIndicator:
         Removes the error message from the menu and changes the icon back
         to normal
         """
+        self.webui_item.set_sensitive(True)
         if self.error_item != None:
             self.menu.remove(self.error_item)
             self.error_item = None
