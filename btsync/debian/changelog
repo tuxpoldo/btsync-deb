@@ -1,3 +1,17 @@
+btsync (1.1.82-1) unstable; urgency=low
+
+  * New upstream release 1.1.82 of btsync
+  * New upstream release 0.10 of btsyncindicator
+  - Fixed: missing dependency to python-appindicator in btsync-user
+    (Issue #7)
+  - Added possibility to suspend/pause the btsync-agent in
+    btsync-user (Issue #8)
+  - Added a unique managing command in btsync-user (Issue #9)
+  - Added man page for the managing command (/usr/bin/btsync)
+  - Released powerpc packages
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sat, 12 Oct 2013 01:46:51 +0200
+
 btsync (1.1.70-5) unstable; urgency=low
 
   - Updated btsyncindicator to version 0.9 in btsync-user
