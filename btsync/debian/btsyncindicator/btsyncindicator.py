@@ -51,7 +51,7 @@ import webbrowser
 import logging
 import subprocess
 
-VERSION = '0.9'
+VERSION = '0.10'
 TIMEOUT = 2 # seconds
 
 class BtSyncIndicator:
@@ -81,9 +81,20 @@ class BtSyncIndicator:
         self.status = None
         self.count = 0
 
-        # Determine whether the script was installed with the btsync-user package
+        # If we have dpkg in $PATH, Determine whether the script was installed with 
+	# the btsync-user package if it is, we can use the packages btsync management
+	# scripts for some extra features
         try:
-            output = subprocess.check_output(["dpkg", "-S", os.path.abspath(__file__)])
+            have_dpkg = False
+            for p in os.environ["PATH"].split(os.pathsep):
+                if os.path.exists(os.path.join(p, 'dpkg')):
+                    have_dpkg = True
+
+            if have_dpkg:
+                output = subprocess.check_output(["dpkg", "-S", os.path.abspath(__file__)])
+            else:
+                output = ""
+
             if (output.find("btsync-user") > -1):
                 self.btsync_user = True
             else:
@@ -117,17 +128,30 @@ class BtSyncIndicator:
         # create a menu
         self.menu = gtk.Menu()
 
+        self.sep1 = gtk.SeparatorMenuItem()
+        self.sep1.show()
+        self.menu.append(self.sep1)
+
+	if self.btsync_user:
+            filepath = self.config['storage_path']+'/paused'
+            self.pause_item = gtk.CheckMenuItem("Pause Syncing")
+            self.pause_item_handler = self.pause_item.connect("activate", self.toggle_pause)
+            self.pause_item.show()
+            self.menu.append(self.pause_item)
+
 	self.webui_item = gtk.MenuItem("Open Web Interface")
 	self.webui_item.connect("activate", self.open_webui)
 	self.webui_item.show()
 	self.menu.append(self.webui_item)
                     
-        sep = gtk.SeparatorMenuItem()
-        sep.show()
-        self.menu.append(sep)
+        self.sep2 = gtk.SeparatorMenuItem()
+        self.sep2.show()
+        self.menu.append(self.sep2)
 
+        filepath = self.config['storage_path']+'/debug.txt'
 	self.debug_item = gtk.CheckMenuItem("Enable Debug Logging")
-	self.debug_item.connect("activate", self.toggle_debugging)
+	self.debug_item.set_active(os.path.isfile(filepath))
+	self.debug_item_handler = self.debug_item.connect("activate", self.toggle_debugging)
 	self.debug_item.show()
 	self.menu.append(self.debug_item)
 
@@ -199,6 +223,21 @@ class BtSyncIndicator:
         If the server cannot be contacted, stops polling and attempts calls setup_session
         to establish a new session.
         """
+        """
+        Since some state information from the btsync-agent may be changed from outside,
+        we should keep it also up to date in the menu...
+        """
+        filepath = self.config['storage_path']+'/debug.txt'
+        self.debug_item.disconnect(self.debug_item_handler)
+	self.debug_item.set_active(os.path.isfile(filepath))
+	self.debug_item_handler = self.debug_item.connect("activate", self.toggle_debugging)
+
+	if self.btsync_user:
+            filepath = self.config['storage_path']+'/paused'
+            self.pause_item.disconnect(self.pause_item_handler)
+            self.pause_item.set_active(os.path.isfile(filepath))
+            self.pause_item_handler = self.pause_item.connect("activate", self.toggle_pause)
+
         try:
             logging.info('Requesting status');
             params = {'token': self.token, 'action': 'getsyncfolders'}
@@ -224,7 +263,6 @@ class BtSyncIndicator:
                 menuitem.show()
                 folderitem = {'menuitem': menuitem, 'sizeitem': {}, 'peeritems': {}}
                 self.folderitems[name] = folderitem
-
                 submenu = self.build_folder_menu(folder)
                 menuitem.set_submenu(submenu)
 
@@ -237,14 +275,15 @@ class BtSyncIndicator:
                 del self.folderitems[name]
 
             self.status = status
+            return True
 
         except requests.exceptions.ConnectionError:
             logging.warning('Status request failed, attempting to re-initialise session')
             self.show_error("Lost connection to Bittorrent Sync")
             self.folderitems = {}
+            self.status = { 'folders': [] }
             gtk.timeout_add(5000, self.setup_session)
-
-        return True;
+            return False
 
     def check_activity(self, folders):
         """
@@ -400,7 +439,19 @@ class BtSyncIndicator:
             self.set_icon('-error')
 
             for child in self.menu.get_children():
-                if child != self.quit_item:
+                if child == self.sep1:
+                    pass
+                elif child == self.pause_item:
+                    pass
+                elif child == self.webui_item:
+                    self.webui_item.set_sensitive(False)
+                elif child == self.sep2:
+                    pass
+                elif child == self.debug_item:
+                    pass
+                elif child == self.quit_item:
+                    pass
+                else:
                     self.menu.remove(child)
 
             self.error_item = gtk.MenuItem(message)
@@ -413,6 +464,7 @@ class BtSyncIndicator:
         Removes the error message from the menu and changes the icon back
         to normal
         """
+        self.webui_item.set_sensitive(True)
         if self.error_item != None:
             self.menu.remove(self.error_item)
             self.error_item = None
@@ -478,6 +530,29 @@ class BtSyncIndicator:
 	    f.write('FFFF')
             logging.info('Bittorrent Sync debugging enabled')
 	return True
+
+    def toggle_pause(self, widget):
+        """
+        handles the pause/resume feature
+        """
+        btsyncmanager = "/usr/bin/btsync"
+        if (os.path.exists(btsyncmanager)):
+            try:
+                filepath = self.config['storage_path']+'/paused'
+                if (os.path.isfile(filepath)):
+                    logging.info('Calling '+btsyncmanager+ ' resume')
+                    subprocess.check_call([btsyncmanager, 'resume'])
+	            logging.info('Bittorrent Sync resumed')
+                else:
+                    logging.info('Calling '+btsyncmanager+ ' pause')
+                    subprocess.check_call([btsyncmanager, 'pause'])
+	            logging.info('Bittorrent Sync paused')
+            except subprocess.CalledProcessError, e:
+                logging.warning('btsync manager failed with status '+e.returncode)
+                logging.warning(e.output)
+        else:
+            logging.error("Cant find btsync manager at "+btsyncmanager)
+        return True
 
     def get_response_text(self, response):
         """
