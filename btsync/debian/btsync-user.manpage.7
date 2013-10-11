@@ -4,7 +4,7 @@ btsync - Private network P2P file synchronisation daemon
 
 .SH SYNOPSIS
 .SP
-.B btsync
+.B btsync  [-hvq]
 .I <command>
 .B [
 .I <args>
@@ -17,6 +17,19 @@ direct live folder sync with maximum security, network speed and
 storage capacity. It has native versions for Mac, Windows and
 Linux, as well as native NAS integration.
 
+.SH OPTIONS
+.TP
+.B -h, --help
+shows the help for the command.
+
+.TP
+.B -v, --verbose
+increases the verbosity level of the command. If specified more than once, the verbosity level will be increased.
+
+.TP
+.B -q, --quiet
+sets the verbosity level to a minimum. If specified, commands will produce no output and return only their result
+by setting a return value.
 
 .SH COMMANDS
 .R The following commands are available:
@@ -45,34 +58,58 @@ resumes the btsync agent
 .B btsync status
 returns the status of the btsync agent
 
+.TP
+.B btsync debug|setdebug [on|off|status|<hexmask>]
+controls verbose logging or returns the verbose logging state. Instead of
+activating full logging, a specific logging mask can be specified as a 16
+bit hex value
+
+.TP
+.B btsync nodebug
+.RB "disables verbose logging (same as " "btsync debug off" ")"
+
 .SH FILES
+
 .TP
 .I /etc/btsync-user/btsync-user.conf
 .R Template for the btsync agent configuration files
-.I ~/.btsync.conf
-.R Automatically created user specific configuration file for the btsync agent
+
 .TP
 .I /etc/btsync-user/btsync-user.desktop
 .R Template for the btsync web UI desktop shortcut
+
+.TP
+.I ~/.btsync.conf
+.R Automatically created user specific configuration file for the btsync agent
+
 .TP
 .I ~/.local/share/applications/btsync-user.desktop
 .R Automatically created user specific web UI desktop shortcut
+
+.TP
+.I ~/.btsync/sync.log
+.R User specific log file of the btsync agent
+
 .TP
 .I ~/.btsync.pid
 .R User specific btsync PID file
 
 .SH DIRECTORIES
+
 .TP
 .I ~/.btsync
 .R User specific storage path of the btsync agent
 
-.SH AUTHOR
+.SH AUTHORS
+
 .TP
 .B BitTorrent Sync
 .R itself was written by BitTorrent Inc. (See http://labs.bittorrent.com/experiments/sync.html)
+
 .TP
-.B btsyncindicator
+.B btsyncindicator.py
 .R was written by Mark Johnson <mark@barrenfrozenwasteland.com>
+
 .TP
 .B btsync-user
 .R Debian/Ubuntu packaging was written by Leo Moll <leo.moll@yeasoft.com>

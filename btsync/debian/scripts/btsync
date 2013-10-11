@@ -92,10 +92,17 @@ RESULT=0
 
 case "$1" in
 start)
-	show_verbose 2 "Starting btsync..."
-	/usr/lib/btsync-user/btsync-starter
-	RESULT=$?
-	show_verbose 2 "Done."
+	if [ -f "${RUNNING_STATEFILE}" -a -f "${PAUSED_STATEFILE}" ]; then
+		show_verbose 2 "Resuming btsync instead of starting..."
+		rm -f "${PAUSED_STATEFILE}"
+		RESULT=$?
+		show_verbose 2 "Done."
+	else
+		show_verbose 2 "Starting btsync..."
+		/usr/lib/btsync-user/btsync-starter
+		RESULT=$?
+		show_verbose 2 "Done."
+	fi
 	;;
 stop)
 	show_verbose 2 "Stopping btsync..."
@@ -154,9 +161,49 @@ status)
 		RESULT=2
 	fi
 	;;
+debug|setdebug)
+	case "$2" in
+	1|on|On|ON)
+		show_verbose 1 "Enabling verbose logging"
+		echo "FFFF" > "${DATADIR}/debug.txt"
+		;;
+	0|off|Off|OFF)
+		show_verbose 1 "Disabling verbose logging"
+		rm -f "${DATADIR}/debug.txt"
+		;;
+	[0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f])
+		show_verbose 1 "Enabling verbose logging (Mask: $2)"
+		echo "$2" > "${DATADIR}/debug.txt"
+		;;
+	*)
+		if [ -f "${DATADIR}/debug.txt" ]; then
+			case "$(head -n 1 ${DATADIR}/debug.txt)" in
+			FFFF|ffff)
+				show_verbose 1 "debug=on"
+				RESULT=1
+				;;
+			*)
+				show_verbose 1 "debug=$(head -n 1 ${DATADIR}/debug.txt)"
+				RESULT=1
+				;;
+			esac
+		else
+			show_verbose 1 "debug=off"
+			RESULT=0
+		fi
+		;;
+	esac
+	;;
+nodebug)
+	show_verbose 1 "Disabling verbose logging"
+	rm -f "${DATADIR}/debug.txt"
+	;;
+help)
+	usage
+	;;
 *)
 	show_error "Unknown command $1"
-	RESULT=1
+	RESULT=99
 	;;
 esac
 exit ${RESULT}
