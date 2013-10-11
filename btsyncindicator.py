@@ -51,7 +51,7 @@ import webbrowser
 import logging
 import subprocess
 
-VERSION = '0.9'
+VERSION = '0.10'
 TIMEOUT = 2 # seconds
 
 class BtSyncIndicator:
