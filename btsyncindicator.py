@@ -81,10 +81,10 @@ class BtSyncIndicator:
         self.status = None
         self.count = 0
 
-        # Determine whether the script was installed with the btsync-user package
+        # If we have dpkg in $PATH, Determine whether the script was installed with 
+	# the btsync-user package if it is, we can use the packages btsync management
+	# scripts for some extra features
         try:
-            # This cause a `raise child_exception` on distros where `dpkg` is not available
-            # even though we are inside a `try:`
             have_dpkg = False
             for p in os.environ["PATH"].split(os.pathsep):
                 if os.path.exists(os.path.join(p, 'dpkg')):
