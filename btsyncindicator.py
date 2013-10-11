@@ -83,7 +83,18 @@ class BtSyncIndicator:
 
         # Determine whether the script was installed with the btsync-user package
         try:
-            output = subprocess.check_output(["dpkg", "-S", os.path.abspath(__file__)])
+            # This cause a `raise child_exception` on distros where `dpkg` is not available
+            # even though we are inside a `try:`
+            have_dpkg = False
+            for p in os.environ["PATH"].split(os.pathsep):
+                if os.path.exists(os.path.join(p, 'dpkg')):
+                    have_dpkg = True
+
+            if have_dpkg:
+                output = subprocess.check_output(["dpkg", "-S", os.path.abspath(__file__)])
+            else:
+                output = ""
+
             if (output.find("btsync-user") > -1):
                 self.btsync_user = True
             else:
