@@ -14,12 +14,13 @@
 
 override_dh_auto_build:
 	dh_auto_build
-	if [ "$(DEB_BUILD_ARCH)" = "amd64" ];   then cp -a $(DEB_BUILD_ARCH)/btsync btsync-daemon; fi
-	if [ "$(DEB_BUILD_ARCH)" = "i386" ];    then cp -a $(DEB_BUILD_ARCH)/btsync btsync-daemon; fi
-	if [ "$(DEB_BUILD_ARCH)" = "powerpc" ]; then cp -a $(DEB_BUILD_ARCH)/btsync btsync-daemon; fi
-	if [ "$(DEB_BUILD_ARCH)" = "arm" ];     then cp -a $(DEB_BUILD_ARCH)/btsync btsync-daemon; fi
-	if [ "$(DEB_BUILD_ARCH)" = "armel" ];   then cp -a arm/btsync btsync-daemon; fi
-	if [ "$(DEB_BUILD_ARCH)" = "armhf" ];   then cp -a arm/btsync btsync-daemon; fi
+	if [ "$(DEB_HOST_ARCH)" = "amd64" ];   then cp -a $(DEB_HOST_ARCH)/btsync btsync-daemon; fi
+	if [ "$(DEB_HOST_ARCH)" = "i386" ];    then cp -a $(DEB_HOST_ARCH)/btsync btsync-daemon; fi
+	if [ "$(DEB_HOST_ARCH)" = "powerpc" ]; then cp -a $(DEB_HOST_ARCH)/btsync btsync-daemon; fi
+	if [ "$(DEB_HOST_ARCH)" = "arm" ];     then cp -a $(DEB_HOST_ARCH)/btsync btsync-daemon; fi
+	if [ "$(DEB_HOST_ARCH)" = "armel" ];   then cp -a arm/btsync btsync-daemon; fi
+	if [ "$(DEB_HOST_ARCH)" = "armhf" ];   then cp -a arm/btsync btsync-daemon; fi
+	/bin/bash
 	cp -a btsync-daemon btsync-agent
 	cp -a debian/samples/complex.conf complex.conf
 	./btsync-daemon --dump-sample-config >> complex.conf
