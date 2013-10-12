@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+
+pushd btsync
+
+for destarch in i386 amd64 armel armhf powerpc; do
+	debuild clean
+	debuild -uc -us -b -a${destarch}
+	rm -f ../*${destarch}.build
+	rm -f ../*${destarch}.changes
+done
+
+debuild clean
+debuild -S -sa
+
+popd
+
+set +e
