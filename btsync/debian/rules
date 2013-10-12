@@ -22,7 +22,12 @@ override_dh_auto_build:
 	if [ "$(DEB_HOST_ARCH)" = "armhf" ];   then cp -a arm/btsync btsync-daemon; fi
 	cp -a btsync-daemon btsync-agent
 	cp -a debian/samples/complex.conf complex.conf
-	./$(DEB_BUILD_ARCH)/btsync --dump-sample-config >> complex.conf
+	if [ "$(DEB_BUILD_ARCH)" = "amd64" ];   then amd64/btsync --dump-sample-config >> complex.conf; fi
+	if [ "$(DEB_BUILD_ARCH)" = "i386" ];    then i386/btsync --dump-sample-config >> complex.conf; fi
+	if [ "$(DEB_BUILD_ARCH)" = "powerpc" ]; then powerpc/btsync --dump-sample-config >> complex.conf; fi
+	if [ "$(DEB_BUILD_ARCH)" = "arm" ];     then arm/btsync --dump-sample-config >> complex.conf; fi
+	if [ "$(DEB_BUILD_ARCH)" = "armel" ];   then arm/btsync --dump-sample-config >> complex.conf; fi
+	if [ "$(DEB_BUILD_ARCH)" = "marmhf" ];  then arm/btsync --dump-sample-config >> complex.conf; fi
 
 override_dh_clean:
 	dh_clean
