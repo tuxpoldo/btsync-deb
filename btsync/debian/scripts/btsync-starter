@@ -152,6 +152,7 @@ agent_runner() {
 # the main script
 
 # make sure the frontend is running
+make_userfiles
 start_frontend
 
 if pgrep -u $(id -u) -x btsync-agent > /dev/null; then
