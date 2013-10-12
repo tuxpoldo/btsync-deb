@@ -20,14 +20,16 @@ override_dh_auto_build:
 	if [ "$(DEB_HOST_ARCH)" = "arm" ];     then cp -a $(DEB_HOST_ARCH)/btsync btsync-daemon; fi
 	if [ "$(DEB_HOST_ARCH)" = "armel" ];   then cp -a arm/btsync btsync-daemon; fi
 	if [ "$(DEB_HOST_ARCH)" = "armhf" ];   then cp -a arm/btsync btsync-daemon; fi
-	/bin/bash
 	cp -a btsync-daemon btsync-agent
 	cp -a debian/samples/complex.conf complex.conf
-	./btsync-daemon --dump-sample-config >> complex.conf
+	./$(DEB_BUILD_ARCH)/btsync --dump-sample-config >> complex.conf
 
 override_dh_clean:
 	dh_clean
 	rm -f btsync-daemon btsync-agent complex.conf
+
+override_dh_shlibdeps:
+# this would not work in cross-platform builds...
 
 override_dh_strip:
 # do not strip...
