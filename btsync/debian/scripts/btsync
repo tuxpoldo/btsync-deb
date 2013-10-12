@@ -39,6 +39,8 @@ Commands:
  pause              suspends the btsync system
  stop               resumes the btsync system
  status             output the btsync status
+ debug|setdebug	    enables/configures/disables verbose logging
+ nodebug            disables verbose logging
 
 Options:
  -v, --verbose      increase verbosity
