@@ -1,3 +1,14 @@
+btsync (1.1.82-2) unstable; urgency=low
+
+  - Fixed: Package fails to build on native arm builder (Issue #15)
+  - Fixed: missing config file prevented btsyncindicator to
+    start on fresh installations of btsync-user (Issue #14)
+  - Fixed: btsync --help does not show all available commands
+    in package btsync-user (Issue #13)
+  - Fixed: manpage btsync.7 was not installed in btsync-user (Issue #11)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sun, 13 Oct 2013 17:32:26 +0200
+
 btsync (1.1.82-1) unstable; urgency=low
 
   * New upstream release 1.1.82 of btsync
