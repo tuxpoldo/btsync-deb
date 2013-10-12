@@ -22,11 +22,11 @@ function get_downloads() {
 	mv BitTorrentSyncUserGuide.pdf temp-btsync/btsync
 	for ARCH in arm powerpc i386 x64; do
 		case ${ARCH} in
+		x64)
+			DEST=amd64
+			;;
 		*)
 			DEST=${ARCH}
-			;;
-		x64)
-			DESC=amd64
 			;;
 		esac
 		echo "Getting btsync_${ARCH}-${VERSION}.tar.gz"
