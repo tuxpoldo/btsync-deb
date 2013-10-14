@@ -1,20 +1,20 @@
 # source archives
-/btsync-*.tar.gz
-/btsync_*.orig.tar.gz
+/btsync*.tar.gz
+/btsync*.orig.tar.gz
+/btsync*.debian.tar.gz
+
+# intermediate files
+/btsync*.dsc
+/btsync*.build
+/btsync*.changes
+/btsync*.upload
+/btsync*.deb
 
 # unpacked sources
 /btsync/amd64
-/btsync/amd64/LICENSE.TXT
-/btsync/amd64/btsync
 /btsync/arm
-/btsync/arm/LICENSE.TXT
-/btsync/arm/btsync
 /btsync/i386
-/btsync/i386/LICENSE.TXT
-/btsync/i386/btsync
 /btsync/powerpc
-/btsync/powerpc/LICENSE.TXT
-/btsync/powerpc/btsync
 /btsync/BitTorrentSyncUserGuide.pdf
 
 # unpacked sources
@@ -24,10 +24,5 @@
 /btsync-common/powerpc
 /btsync-common/BitTorrentSyncUserGuide.pdf
 
-# intermediate files
-/btsync_*.dsc
-/btsync_*.build
-/btsync_*.changes
-/btsync_*.upload
-/btsync_*.debian.tar.gz
-/btsync*.deb
+# maintainers helpers
+/putrepo
