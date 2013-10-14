@@ -41,7 +41,7 @@ get-orig-source:
 		mkdir -p temp-orig-source/$(DEB_SOURCE_PACKAGE); \
 		for arch in arm powerpc i386 x64; do \
 			if ! wget -q -c http://syncapp.bittorrent.com/$(DEB_UPSTREAM_VERSION)/btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; then \
-				wget -q -c http://debian.yeasoft.net/archive/btsync/$(DEB_UPSTREAM_VERSION)/btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; \
+				wget -q -c http://archive.yeasoft.net/btsync/$(DEB_UPSTREAM_VERSION)/btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; \
 			fi; \
 			mkdir -p temp-orig-source/$(DEB_SOURCE_PACKAGE)/$${arch}; \
 			tar -C temp-orig-source/$(DEB_SOURCE_PACKAGE)/$${arch} -xzf btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; \
@@ -49,7 +49,7 @@ get-orig-source:
 		done; \
 		mv temp-orig-source/$(DEB_SOURCE_PACKAGE)/x64 temp-orig-source/$(DEB_SOURCE_PACKAGE)/amd64; \
 		if ! wget -q -c http://btsync.s3-website-us-east-1.amazonaws.com/BitTorrentSyncUserGuide.pdf; then \
-			wget -q -c http://debian.yeasoft.net/archive/btsync/$(DEB_UPSTREAM_VERSION)/BitTorrentSyncUserGuide.pdf; \
+			wget -q -c http://archive.yeasoft.net/btsync/$(DEB_UPSTREAM_VERSION)/BitTorrentSyncUserGuide.pdf; \
 		fi; \
 		mv BitTorrentSyncUserGuide.pdf temp-orig-source/$(DEB_SOURCE_PACKAGE); \
 		tar -C temp-orig-source -czf ../$(DEB_SOURCE_PACKAGE)_$(DEB_UPSTREAM_VERSION).orig.tar.gz $(DEB_SOURCE_PACKAGE); \

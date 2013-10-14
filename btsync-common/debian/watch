@@ -9,7 +9,10 @@ version=3
 # since currently there is no official repository for
 # versionably btsync binaries, this file is only
 # a stub and will be updated as soon as the functionality
-# will be possible
+# will be possible. in the meantime the yeasoft archive
+# acts as a valid source
+
+http://archive.yeasoft.net/btsync/([\d\.]+)/btsync-common-([\d\.]+)\.tar\.gz
 
 # Uncomment to examine a Webpage
 # <Webpage URL> <string match>
