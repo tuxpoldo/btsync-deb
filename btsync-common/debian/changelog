@@ -1,5 +1,5 @@
 btsync-common (1.1.82-1) unstable; urgency=low
 
-  * Initial release
+  * Initial release (Closes #16)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Mon, 14 Oct 2013 13:23:17 +0200
