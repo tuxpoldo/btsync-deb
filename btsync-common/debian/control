@@ -1,0 +1,18 @@
+Source: btsync-common
+Section: net
+Priority: extra
+Maintainer: Leo Moll <leo.moll@yeasoft.com>
+Build-Depends: debhelper (>= 7.0.50), cdbs
+Standards-Version: 3.9.2
+Homepage: http://www.bittorrent.com
+
+Package: btsync-common
+Architecture: i386 amd64 armel armhf powerpc
+Depends: libc6
+Description: Private network P2P file synchronisation daemon
+ BitTorrent Sync is a simple tool that applies p2p protocol for
+ direct live folder sync with maximum security, network speed and
+ storage capacity. It has native versions for Mac, Windows and
+ Linux, as well as native NAS integration.
+ This package installs the core components provided by
+ BitTorrent Inc.

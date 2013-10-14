@@ -17,6 +17,13 @@
 /btsync/powerpc/btsync
 /btsync/BitTorrentSyncUserGuide.pdf
 
+# unpacked sources
+/btsync-common/amd64
+/btsync-common/arm
+/btsync-common/i386
+/btsync-common/powerpc
+/btsync-common/BitTorrentSyncUserGuide.pdf
+
 # intermediate files
 /btsync_*.dsc
 /btsync_*.build

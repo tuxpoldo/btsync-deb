@@ -1,0 +1,14 @@
+btsync-common for Debian
+------------------------
+
+This package installs the original btsync binary from BitTorrent Inc.
+in /usr/lib/btsync-common as btsync-core
+The original documentation including a sample configuration file and
+all included README and LICENSE files will be installed in
+/usr/share/doc/btsync/
+
+This package does not provide any ready to use functionality but is
+solely intended as a base for other packages like btsync-user that
+rely on the btsync functionality
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Mon, 14 Oct 2013 13:23:17 +0200

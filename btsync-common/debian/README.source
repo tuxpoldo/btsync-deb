@@ -1,0 +1,8 @@
+btsync-common for Debian
+------------------------
+
+The source archive of this package contains nothing, since the original
+btsync binaries will be retrieved directly either from BitTorrent Inc.
+or alternatively from the maintainers site during package generation.
+
+See the get-orig-source target in the rules file.
