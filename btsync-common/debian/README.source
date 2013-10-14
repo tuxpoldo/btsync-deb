@@ -1,8 +1,10 @@
 btsync-common for Debian
 ------------------------
 
-The source archive of this package contains nothing, since the original
-btsync binaries will be retrieved directly either from BitTorrent Inc.
-or alternatively from the maintainers site during package generation.
+The source archive of this package can be generated from scratch by
+executing make -f debian/rules get-orig-source
+
+The original btsync binaries will be retrieved directly either from
+BitTorrent Inc. or alternatively from the maintainers site
 
 See the get-orig-source target in the rules file.
