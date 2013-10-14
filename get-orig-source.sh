@@ -1,5 +1,2 @@
 #!/bin/bash
-pushd btsync-common
-make -f debian/rules  get-orig-source
-popd
-
+make -f btsync-common/debian/rules  get-orig-source

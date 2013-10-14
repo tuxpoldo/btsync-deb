@@ -2,7 +2,7 @@ Source: btsync-common
 Section: net
 Priority: extra
 Maintainer: Leo Moll <leo.moll@yeasoft.com>
-Build-Depends: debhelper (>= 7.0.50), cdbs
+Build-Depends: debhelper (>= 7.0.50)
 Standards-Version: 3.9.2
 Homepage: http://www.bittorrent.com
 

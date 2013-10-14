@@ -6,12 +6,18 @@
 # dh-make output file, you may use that output file without restriction.
 # This special exception was added by Craig Small in version 0.37 of dh-make.
 
-include /usr/share/cdbs/1/rules/buildvars.mk
-
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-.PHONY: get-orig-source
+# make it work without cddb since cdbs assumes that the makefile
+# will be executed from the project directory but we need this vars
+# in target get-orig-source that MUST work from every directory
+
+DEB_DEBIAN_DIR=$(dir $(firstword $(MAKEFILE_LIST)))
+DEB_UPSTREAM_VERSION=$(shell dpkg-parsechangelog -l$(DEB_DEBIAN_DIR)/changelog \
+				| sed -rne 's,^Version: ([^-]+).*,\1,p')
+DEB_SOURCE_PACKAGE=$(shell dpkg-parsechangelog -l$(DEB_DEBIAN_DIR)/changelog \
+				| sed -rne 's,^Source: (.*),\1,p')
 
 %:
 	dh $@ 
@@ -36,7 +42,7 @@ override_dh_strip:
 
 # create an original source archive out of the original distribution, if not present
 get-orig-source:
-	if [ ! -f ../$(DEB_SOURCE_PACKAGE)_$(DEB_UPSTREAM_VERSION).orig.tar.gz ]; then \
+	if [ ! -f $(DEB_DEBIAN_DIR)../../$(DEB_SOURCE_PACKAGE)_$(DEB_UPSTREAM_VERSION).orig.tar.gz ]; then \
 		rm -rf temp-orig-source; \
 		mkdir -p temp-orig-source/$(DEB_SOURCE_PACKAGE); \
 		for arch in arm powerpc i386 x64; do \
@@ -52,6 +58,6 @@ get-orig-source:
 			wget -q -c http://archive.yeasoft.net/btsync/$(DEB_UPSTREAM_VERSION)/BitTorrentSyncUserGuide.pdf; \
 		fi; \
 		mv BitTorrentSyncUserGuide.pdf temp-orig-source/$(DEB_SOURCE_PACKAGE); \
-		tar -C temp-orig-source -czf ../$(DEB_SOURCE_PACKAGE)_$(DEB_UPSTREAM_VERSION).orig.tar.gz $(DEB_SOURCE_PACKAGE); \
+		tar -C temp-orig-source -czf $(DEB_DEBIAN_DIR)../../$(DEB_SOURCE_PACKAGE)_$(DEB_UPSTREAM_VERSION).orig.tar.gz $(DEB_SOURCE_PACKAGE); \
 		rm -rf temp-orig-source; \
 	fi
