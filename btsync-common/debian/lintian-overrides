@@ -1,0 +1,5 @@
+btsync-common: embedded-library usr/lib/btsync-common/btsync-core: sqlite
+btsync-common: embedded-library usr/lib/btsync-common/btsync-core: openssl
+btsync-common: hardening-no-relro usr/lib/btsync-common/btsync-core
+btsync-common: hardening-no-fortify-functions usr/lib/btsync-common/btsync-core
+btsync-common: extra-license-file usr/share/doc/btsync-common/LICENSE.TXT
