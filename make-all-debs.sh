@@ -2,39 +2,35 @@
 
 set -e
 
-# old stuff
-if [ -d btsync ]; then
-	pushd btsync
-	# make binary targets
-	for destarch in i386 amd64 armel armhf powerpc; do
-		debuild clean
-		debuild -uc -us -b -a${destarch}
-		rm -f ../*${destarch}.build
-		rm -f ../*${destarch}.changes
-	done
-	# cleanup garbage
-	debuild clean
-	# return
-	popd
-fi
+SOURCES="btsync-common btsync"
 
+function enter_build() {
+	pushd $1
+	trap exit_build INT QUIT TERM EXIT
+}
 
-# new stuff
-if [ -d btsync-common ]; then
-	pushd btsync-common
-	# make binary targets
-	for destarch in i386 amd64 armel armhf powerpc; do
-		debuild clean
-		debuild -uc -us -b -a${destarch}
-		rm -f ../btsync-common*${destarch}.build
-		rm -f ../btsync-common*${destarch}.changes
-	done
-	# cleanup garbage
-	debuild clean
-	# return
+function exit_build() {
+	trap - INT QUIT TERM EXIT
 	popd
-else
-	echo ERROR: source tree btsync-common not found >&2
-fi
+}
+
+for SRCDIR in ${SOURCES}; do
+	if [ -d ${SRCDIR} ]; then
+		enter_build ${SRCDIR}
+		# make binary targets
+		for destarch in i386 amd64 armel armhf powerpc; do
+			debuild clean
+			debuild -uc -us -b -a${destarch}
+			rm -f ../*${destarch}.build
+			rm -f ../*${destarch}.changes
+		done
+		# cleanup garbage
+		debuild clean
+		# return
+		exit_build
+	else
+		echo ERROR: source tree ${SRCDIR} not found >&2
+	fi
+done
 
 set +e
