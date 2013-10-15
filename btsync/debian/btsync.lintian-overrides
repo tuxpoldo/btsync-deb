@@ -1,5 +1,0 @@
-btsync: embedded-library usr/lib/btsync/btsync-daemon: sqlite
-btsync: embedded-library usr/lib/btsync/btsync-daemon: openssl
-btsync: hardening-no-relro usr/lib/btsync/btsync-daemon
-btsync: hardening-no-fortify-functions usr/lib/btsync/btsync-daemon
-btsync: extra-license-file usr/share/doc/btsync/LICENSE.TXT

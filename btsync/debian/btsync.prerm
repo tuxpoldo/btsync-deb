@@ -20,6 +20,7 @@ set -e
 . /usr/share/debconf/confmodule
 
 CONFFILE=/etc/btsync/debconf-default.conf
+DESKFILE=/usr/share/applications/btsync.desktop
 
 case "$1" in
     remove|upgrade|deconfigure)

@@ -1,3 +1,9 @@
+btsync (1.1.82.1-3) unstable; urgency=low
+
+  - mom
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Tue, 15 Oct 2013 18:10:38 +0200
+
 btsync (1.1.82-2) unstable; urgency=low
 
   - Fixed: Package fails to build on native arm builder (Issue #15)

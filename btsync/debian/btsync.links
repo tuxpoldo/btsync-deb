@@ -1,0 +1,3 @@
+# links - src dest
+usr/lib/btsync-common/btsync-core		usr/lib/btsync/btsync-daemon
+usr/share/doc/btsync-common/btsync.conf.sample	etc/btsync/samples/complex.conf

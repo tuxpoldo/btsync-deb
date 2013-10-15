@@ -14,27 +14,6 @@
 
 override_dh_auto_build:
 	dh_auto_build
-	if [ "$(DEB_HOST_ARCH)" = "amd64" ];   then cp -a $(DEB_HOST_ARCH)/btsync btsync-daemon; fi
-	if [ "$(DEB_HOST_ARCH)" = "i386" ];    then cp -a $(DEB_HOST_ARCH)/btsync btsync-daemon; fi
-	if [ "$(DEB_HOST_ARCH)" = "powerpc" ]; then cp -a $(DEB_HOST_ARCH)/btsync btsync-daemon; fi
-	if [ "$(DEB_HOST_ARCH)" = "arm" ];     then cp -a $(DEB_HOST_ARCH)/btsync btsync-daemon; fi
-	if [ "$(DEB_HOST_ARCH)" = "armel" ];   then cp -a arm/btsync btsync-daemon; fi
-	if [ "$(DEB_HOST_ARCH)" = "armhf" ];   then cp -a arm/btsync btsync-daemon; fi
-	cp -a btsync-daemon btsync-agent
-	cp -a debian/samples/complex.conf complex.conf
-	if [ "$(DEB_BUILD_ARCH)" = "amd64" ];   then amd64/btsync --dump-sample-config >> complex.conf; fi
-	if [ "$(DEB_BUILD_ARCH)" = "i386" ];    then i386/btsync --dump-sample-config >> complex.conf; fi
-	if [ "$(DEB_BUILD_ARCH)" = "powerpc" ]; then powerpc/btsync --dump-sample-config >> complex.conf; fi
-	if [ "$(DEB_BUILD_ARCH)" = "arm" ];     then arm/btsync --dump-sample-config >> complex.conf; fi
-	if [ "$(DEB_BUILD_ARCH)" = "armel" ];   then arm/btsync --dump-sample-config >> complex.conf; fi
-	if [ "$(DEB_BUILD_ARCH)" = "marmhf" ];  then arm/btsync --dump-sample-config >> complex.conf; fi
 
 override_dh_clean:
 	dh_clean
-	rm -f btsync-daemon btsync-agent complex.conf
-
-override_dh_shlibdeps:
-# this would not work in cross-platform builds...
-
-override_dh_strip:
-# do not strip...
