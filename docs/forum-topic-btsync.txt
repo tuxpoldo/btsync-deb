@@ -1,51 +1,106 @@
-Since I was one of the alfa-testers, I was able to develop a deployment concept for [b]linux servers[/b] which permits to deploy BitTorrent Sync as single or multiple daemons with specific configurations. There are now ready-to-use deb packages available both for Ubuntu or Debian with full debconf-support for automated creation of an optional default configuration. If you are searching for a version [b]more suitable for personal desktop use,[/b] [url="http://forum.bittorrent.com/topic/19560-debian-and-ubuntu-desktop-packages-for-bittorrent-sync/"][b]please look here[/b][/url].
+[color=#4b0082][b]BTSYNC PACKAGES FOR DEBIAN, UBUNTU AND OTHER DERIVED DISTRIBUTIONS[/b][/color]
 
-[color=#a52a2a][b]INSTALLATION IN UBUNTU[/b][/color]
+If you are using Ubuntu, Debian, Raspian or other derived distributions based on Debian and you are searching for an easy way to deploy BitTorrent Sync on your systems, this topic is definitively for you. Here you will find information about a family of easy to install deb-packages that offers both a solution for the need of typical server/cloud operators as for interactive users.
 
-Currently there are packages available for Ubuntu precise, quantal, raring and saucy supporting both i386 and amd64. The packages can be easily installed by adding the PPA and then installing as usual:
+The [b]server packages[/b] offer full debconf-support for the automated creation and maintenance of an optional default configuration as well as the possibility to manually configure single or multiple BitTorrent Sync instances with highly customised configurations.
+
+The [b]desktop user packages[/b] try to create a user experience similar to BitTorrent Sync on Windows or Mac OSX by still giving the user the possibility to customise his installation if he has special needs.
+
+This topic covers only the [b]server packages[/b]. If you are searching for the [b]desktop user packages,[/b]  [url="http://forum.bittorrent.com/topic/19560-debian-and-ubuntu-desktop-packages-for-bittorrent-sync/"][b]please look here[/b][/url].
+
+The deb-packages are available for the same architectures as released by BitTorrent Inc.:
+
+[LIST]
+[*][b]i386[/b] Intel/AMD 32 Bit[/*]
+[*][b]amd64[/b] Intel/AMD 64 Bit[/*]
+[*][b]armel[/b] ARM hard float[/*]
+[*][b]armhf[/b] ARM EABI[/*]
+[*][b]powerpc[/b] PowerPC[/*]
+[/LIST]
+
+[color=#FF8C00][b]CONTRIBUTION AND SOURCES[/b][/color]
+
+If you want to contribute to the development of the packages or if you are curious how this all works, you may find the current sources of the deployment scripts and packaging on GitHub under the following URL: [b]https://github.com/tuxpoldo/btsync-deb[/b]
+
+[color=#008000][b]ADDING THE REPOSITORIES[/b][/color]
+
+Debian and Debian based distributions (Linspire, Xandros, Ubuntu, and Mepis to name a few) use a tool called APT (Advanced Packaging Tool) to manage all software on the system. The term "package" refers to an individual file with a .deb extension that contains either all or part of an application.
+
+Your distribution comes with some default repositories that are already setup, but these contain only the software officially distributed by the creator of your distribution. In order to install the btsync packages, you have to add the specific repositories where btsync is hosted.
+
+[b]If you are using Ubuntu[/b], you may also use the Launchpad PPA instead of the default repositories. Although it is easier to install, there are some disadvantages:
+
+[LIST=1]
+[*]The PPA only supports Ubuntu versions that are supported (currently lucid, precise, quantal, raring and saucy)[/*]
+[*]The PPA only supports the [b]i386[/b] and [b]amd64[/b] architectures[/*]
+[*]Sometimes it takes some hours for the packages to be published[/*]
+[/LIST]
+
+If you are OK with this, you can add the Launchpad PPA by issuing the following commands:
 
 [code]
-sudo add-apt-repository ppa:tuxpoldo/btsync
-sudo apt-get update
-sudo apt-get install btsync
+`which sudo` add-apt-repository ppa:tuxpoldo/btsync
+`which sudo` apt-get update
 [/CODE]
 
+After this, you can directly proceed with the installation.
 
-[color=#008000][b]INSTALLATION IN DEBIAN[/b][/color]
+[b]If you are not using Ubuntu[/b] or you are using an unsupported version or architecture or by any other reason you prefer the default repositories, continue here.
 
-Currently there are packages available for Debian [i][b]squeeze[/b][/i], [i][b]wheezy[/b][/i] and [i][b]sid[/b][/i] supporting both [b]i386[/b] and [b]amd64[/b]. Builds for [b]armhf[/b] and [b]armel[/b] are available for Debian (and raspian) [b][i]wheezy[/i][/b], builds for [b]armel[/b] are available for Debian [b][i]squeeze[/i][/b]. The packages can be easily installed by adding the btsync repository and then installing as usual:
+The btsync packages are all signed with a key in order to guarantee its authenticity. Before using the repository, you should add the key to the package manager. To do that, run the following command:
 
 [code]
-sudo gpg --keyserver pgp.mit.edu --recv-keys 6BF18B15
-sudo gpg --armor --export 6BF18B15 | sudo apt-key add -
+`which sudo` apt-key adv --keyserver keys.gnupg.net --recv-keys 6BF18B15
+[/code]
 
-sudo echo deb http://debian.yeasoft.net/btsync $(lsb_release -cs) main contrib non-free >> /etc/apt/sources.list.d/btsync.list
-sudo echo deb-src http://debian.yeasoft.net/btsync $(lsb_release -cs) main contrib non-free >> /etc/apt/sources.list.d/btsync.list
+On success you should see an output like this:
+ 
+[code]
+gpg: requesting key 6BF18B15 from hkp server keys.gnupg.net
+gpg: key 6BF18B15: public key "Leo Moll <leo.moll@yeasoft.com>" imported
+gpg: no ultimately trusted keys found
+gpg: Total number processed: 1
+gpg:               imported: 1
+[/code]
 
-sudo apt-get update
-sudo apt-get install btsync
-[/CODE]
-
-[b]If you want to install on Debian jessie:[/b]
-
-Currently there are no specific repositories for Debian [i]jessie[/i] (that's the testing release) since [i]jessie[/i] is identical to [i]sid[/i]. As soon as the development of jessie is split from sid, I will support jessie as a separate release. In the meantime, you should use the sid repository:
+Now you can easily add the package sources, by executing the following commands:
 
 [code]
-sudo echo deb http://debian.yeasoft.net/btsync sid main contrib non-free >> /etc/apt/sources.list.d/btsync.list
-sudo echo deb-src http://debian.yeasoft.net/btsync sid main contrib non-free >> /etc/apt/sources.list.d/btsync.list
-[/CODE]
+CODENAME=$(lsb_release -cs | sed -n '/lucid\|precise\|quantal\|raring\|saucy\|squeeze\|wheezy\|jessie\|sid/p')
+`which sudo` echo deb http://debian.yeasoft.net/btsync ${CODENAME:-sid} main > /etc/apt/sources.list.d/btsync.list
+`which sudo` echo deb-src http://debian.yeasoft.net/btsync ${CODENAME:-sid} main >> /etc/apt/sources.list.d/btsync.list
+unset CODENAME
+[/code]
 
-[b]If you run into this problem:[/b]
+Remember to update the local cache:
 
-[quote name='sparkman' timestamp='1371913557' post='55106']
-3. here is where i run into problems, i typed,
-sudo echo deb [url="http://debian.yeasoft.net/btsync"]http://debian.yeasoft.net/btsync[/url] $(lsb_release -cs) main contrib non-free >> /etc/apt/sources.list.d/btsync.list
-"bash: lsb_release: command not found"
-[/quote]
+[code]
+`which sudo` apt-get update
+[/code]
 
-...you should replace $(lsb_release -cs) with the specific name of your release (either squeeze, wheezy or sid).
+After that you can proceed with the installation.
 
-If you are not using Ubuntu or Debian or you want only to understand how this kind of deployment works, download the [url="http://www.yeasoft.com/downloads/various/btsync-linux-deploy.tar.gz"]btsync deployment scripts here[/url]. (Updated on July, 11 2013)
+
+[color=#008000][b]INSTALLATION OF BTSYNC[/b][/color]
+
+The installation of btsync is really easy:
+
+[code]
+`which sudo` apt-get install btsync
+[/code]
+
+After downloading the packages, the installation begins. The package manager will ask you, if you want a default instance of btsync to be created. If you say [b]yes[/b], you will be guided through the installation and at the end you will have a fully operational btsync daemon maintained by debconf. The configuration can be modified and fine tuned at any time by performing the following command:
+
+[code]
+`which sudo` dpkg-reconfigure btsync
+[/code]
+
+Here you can select also delete the default instance, by answering [b]no[/b] to the question if you want a default instance to be created.
+
+Beside the presence of a default instance of btsync, the advanced administrator will be able, to create many instances of btsync, by creating configuration files in the directory [b][font=courier new', courier, monospace]/etc/btsync[/font][/b]
+
+More details can be found in the usages notes:
+
 
 [color=#800080][b]USAGE NOTES[/b][/color]
 
@@ -54,8 +109,8 @@ This version of BitTorrent Sync is mainly intended for server usage. It allows t
 The package installation offers a possibility to create a default instance of BitTorrent Sync. All relevant parameters can be specified interactively during the installation. At any time, the configuration of the default instance can be changed by executing the command:
 
 [code]
-sudo dpkg-reconfigure btsync
-[/CODE]
+`which sudo` dpkg-reconfigure btsync
+[/code]
 
 When creating configuration files manually, there are some possibilities to specify additional configuration parameters.
 
@@ -75,7 +130,7 @@ The parameter definition must use an equal sign ("="):
 // DAEMON_UMASK=0002
 //
 
-[/CODE]
+[/code]
 
 This example will launch the instance running under the credentials of the user "[b]jdoe[/b]" using [b]0002[/b] as umask
 
@@ -109,10 +164,30 @@ Please look also at the sample configuration files installed in
 /etc/btsync/samples
 [/code]
 
+The additional configuration file [font=courier new', courier, monospace][b]/etc/default/btsync[/b][/font] permits to specify which btsync instances should be started automatically and to specify some additional parameters to pass to the btsync daemon. The default setting is to start all instances. Additional documentation can be found in the file:
+
+[code]
+# This is the configuration file for /etc/init.d/btsync
+
+#
+# Start only these btsync instances automatically via
+# init script.
+# Allowed values are "all", "none" or space separated list of
+# names of the instances. If empty, "all" is assumed.
+# The instance name refers to the btsync configutation file name.
+# i.e. "general" would be /etc/btsync/general.conf or
+# /etc/btsync/general.root.root.conf
+#
+#AUTOSTART="all"
+#AUTOSTART="none"
+#AUTOSTART="general special"
+#
+# Optional arguments to btsync's command line
+DAEMON_ARGS=""
+[/code]
+
+
 [color=#ff0000][b]SOME ADDITIONAL WORDS ABOUT AUTOUPDATE[/b][/color]
 
 The daemon scripts require that autoupdate is disabled in the configuration script, otherwise the instance will not be started. The reason for that is, that updates are handled by the Debian/Ubuntu package handling utility itself.
 
-[color=#FF8C00][b]CONTRIBUTION[/b][/color]
-
-If you want to contribute, you may find the current sources of the deployment scripts and packaging on Github under the following URL: https://github.com/Tuxpoldo/btsync-deb
