@@ -6,8 +6,8 @@
 # Allowed values are "all", "none" or space separated list of
 # names of the instances. If empty, "all" is assumed.
 # The instance name refers to the btsync configutation file name.
-# i.e. "general" would be /etc/btsync/general.json or
-# /etc/btsync/general.root.root.json
+# i.e. "general" would be /etc/btsync/general.conf or
+# /etc/btsync/general.root.root.conf
 #
 #AUTOSTART="all"
 #AUTOSTART="none"
