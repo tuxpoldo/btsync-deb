@@ -1,0 +1,118 @@
+Since I was one of the alfa-testers, I was able to develop a deployment concept for [b]linux servers[/b] which permits to deploy BitTorrent Sync as single or multiple daemons with specific configurations. There are now ready-to-use deb packages available both for Ubuntu or Debian with full debconf-support for automated creation of an optional default configuration. If you are searching for a version [b]more suitable for personal desktop use,[/b] [url="http://forum.bittorrent.com/topic/19560-debian-and-ubuntu-desktop-packages-for-bittorrent-sync/"][b]please look here[/b][/url].
+
+[color=#a52a2a][b]INSTALLATION IN UBUNTU[/b][/color]
+
+Currently there are packages available for Ubuntu precise, quantal, raring and saucy supporting both i386 and amd64. The packages can be easily installed by adding the PPA and then installing as usual:
+
+[code]
+sudo add-apt-repository ppa:tuxpoldo/btsync
+sudo apt-get update
+sudo apt-get install btsync
+[/CODE]
+
+
+[color=#008000][b]INSTALLATION IN DEBIAN[/b][/color]
+
+Currently there are packages available for Debian [i][b]squeeze[/b][/i], [i][b]wheezy[/b][/i] and [i][b]sid[/b][/i] supporting both [b]i386[/b] and [b]amd64[/b]. Builds for [b]armhf[/b] and [b]armel[/b] are available for Debian (and raspian) [b][i]wheezy[/i][/b], builds for [b]armel[/b] are available for Debian [b][i]squeeze[/i][/b]. The packages can be easily installed by adding the btsync repository and then installing as usual:
+
+[code]
+sudo gpg --keyserver pgp.mit.edu --recv-keys 6BF18B15
+sudo gpg --armor --export 6BF18B15 | sudo apt-key add -
+
+sudo echo deb http://debian.yeasoft.net/btsync $(lsb_release -cs) main contrib non-free >> /etc/apt/sources.list.d/btsync.list
+sudo echo deb-src http://debian.yeasoft.net/btsync $(lsb_release -cs) main contrib non-free >> /etc/apt/sources.list.d/btsync.list
+
+sudo apt-get update
+sudo apt-get install btsync
+[/CODE]
+
+[b]If you want to install on Debian jessie:[/b]
+
+Currently there are no specific repositories for Debian [i]jessie[/i] (that's the testing release) since [i]jessie[/i] is identical to [i]sid[/i]. As soon as the development of jessie is split from sid, I will support jessie as a separate release. In the meantime, you should use the sid repository:
+
+[code]
+sudo echo deb http://debian.yeasoft.net/btsync sid main contrib non-free >> /etc/apt/sources.list.d/btsync.list
+sudo echo deb-src http://debian.yeasoft.net/btsync sid main contrib non-free >> /etc/apt/sources.list.d/btsync.list
+[/CODE]
+
+[b]If you run into this problem:[/b]
+
+[quote name='sparkman' timestamp='1371913557' post='55106']
+3. here is where i run into problems, i typed,
+sudo echo deb [url="http://debian.yeasoft.net/btsync"]http://debian.yeasoft.net/btsync[/url] $(lsb_release -cs) main contrib non-free >> /etc/apt/sources.list.d/btsync.list
+"bash: lsb_release: command not found"
+[/quote]
+
+...you should replace $(lsb_release -cs) with the specific name of your release (either squeeze, wheezy or sid).
+
+If you are not using Ubuntu or Debian or you want only to understand how this kind of deployment works, download the [url="http://www.yeasoft.com/downloads/various/btsync-linux-deploy.tar.gz"]btsync deployment scripts here[/url]. (Updated on July, 11 2013)
+
+[color=#800080][b]USAGE NOTES[/b][/color]
+
+This version of BitTorrent Sync is mainly intended for server usage. It allows to start one or more BitTorrent Sync daemons based on configuration files located in [font=courier new', courier, monospace][b]/etc/btsync[/b][/font]
+
+The package installation offers a possibility to create a default instance of BitTorrent Sync. All relevant parameters can be specified interactively during the installation. At any time, the configuration of the default instance can be changed by executing the command:
+
+[code]
+sudo dpkg-reconfigure btsync
+[/CODE]
+
+When creating configuration files manually, there are some possibilities to specify additional configuration parameters.
+
+Configuration parameters not parsed by BitTorrent Sync but by the daemon scripts can be supplied as comments in the configuration file.
+
+The following parameters are supported:
+[LIST]
+[*][b]DAEMON_UID[/b]: A uid for supplying the user under which the btsync daemon should run[/*]
+[*][b]DAEMON_GID[/b]: A gid for supplying the group under which the btsync daemon should run. If omitted the daemon will run under the primary group of the user[/*]
+[*][b]DAEMON_UMASK[/b]: The umask for the btsync damon. If omitted the default umask is used.[/*]
+[/LIST]
+The parameter definition must use an equal sign ("="):
+
+[code]
+//
+// DAEMON_UID=jdoe
+// DAEMON_UMASK=0002
+//
+
+[/CODE]
+
+This example will launch the instance running under the credentials of the user "[b]jdoe[/b]" using [b]0002[/b] as umask
+
+The old mechanism using the encoding in the configuration file name following the naming scheme
+
+[b][font=courier new', courier, monospace]<damon name>[.<user>[.<group>]].conf[/font][/b]
+
+is still supported but is superseded by data supplied in the configuration file itself. Support may be dismissed in future releases.
+
+
+By specifying [font=courier new', courier, monospace][b]<user>[/b][/font] and [font=courier new', courier, monospace][b]<group>[/b][/font] it is possible to specify under which credentials the daemon runs. In this case it must be assured that the daemon is able to write into the data directory specified in the configuration file.
+
+Some example files are provided under
+
+[font=courier new', courier, monospace][b]/etc/btsync/samples[/b][/font]
+
+The file [font=courier new', courier, monospace][b]/etc/default/btsync[/b][/font] allows to configure the way the daemon starts:
+
+The variable [b]AUTOSTART[/b] defines which daemons are started automatically.
+It can assume the values:
+[LIST]
+[*][font=courier new', courier, monospace][b]none [/b][/font]No daemon is started automatically[/*]
+[*][font=courier new', courier, monospace][b]all [/b][/font](default) All daemons are started automatically[/*]
+[*][font=courier new', courier, monospace][b]<list> [/b][/font]Only the specified daemons are started automatically[/*]
+[/LIST]
+The variable [b]DAEMON_ARGS[/b] allows to specify additional command line parameters passed to the daemon.
+
+Please look also at the sample configuration files installed in
+
+[code]
+/etc/btsync/samples
+[/code]
+
+[color=#ff0000][b]SOME ADDITIONAL WORDS ABOUT AUTOUPDATE[/b][/color]
+
+The daemon scripts require that autoupdate is disabled in the configuration script, otherwise the instance will not be started. The reason for that is, that updates are handled by the Debian/Ubuntu package handling utility itself.
+
+[color=#FF8C00][b]CONTRIBUTION[/b][/color]
+
+If you want to contribute, you may find the current sources of the deployment scripts and packaging on Github under the following URL: https://github.com/Tuxpoldo/btsync-deb

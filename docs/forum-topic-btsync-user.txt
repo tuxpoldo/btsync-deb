@@ -1,0 +1,67 @@
+I'm glad to announce the release of BitTorrent Sync desktop mode packages for all current Debian and Ubuntu versions. If you are searching for a version [b]more suitable for server use, [/b][url=http://forum.bittorrent.com/topic/18974-debian-and-ubuntu-packages-for-bittorrent-sync-available/][b]please look [/b][/url][b][url=http://forum.bittorrent.com/topic/18974-debian-and-ubuntu-packages-for-bittorrent-sync-available/]here[/url][/b].
+
+These packages are explicitly intended for [b]desktop usage[/b] and provide a user experience similar to the Windows and MacOSX versions (except the fact that there is no tray applet). When installed, an instance of BitTorrent Sync will automatically start when the user logs in. The BitTorrent Sync management interface is made available as a normal application icon in the desktop environment:
+
+[img=http://www.yeasoft.com/assets/images/articles/btsync-linux.png]
+ 
+Starting from Version 1.1.70-3 the great indicator applet from Mark Johnson is included:
+ 
+[img=http://s21.postimg.org/87ia2xmjb/btsync_user_indicator.png]
+
+Since the packages still have not been tested with KDE/LXDE and Debian, so any feedback is highly appreciated.
+
+
+[color=#800080][b]USAGE NOTES[/b][/color]
+
+This package of BitTorrent Sync is mainly intended for generic desktop usage. It tries to create a desktop experience similar to Windows or Mac OS/X: When the user logs in, an instance of BitTorrent Sync is automatically launched under the user's credentials.
+
+By default the user instance has an automatical created configuration file in [font='courier new', courier, monospace][b]~/.btsync.conf[/b][/font] and keeps its internal data in the directory [font='courier new', courier, monospace][b]~/.btsync[/b][/font]
+
+[color=#ff0000][b]OBSOLETE: [/b][/color]The user is able to configure its BitTorrent Sync instance via the web ui with the URL [b][url=http://localhost:9999]http://localhost:9999[/url][/b]
+
+[color=#008000][b]UPDATED: [/b][/color]A user specific desktop shortcut to the web UI is installed into the system. Since every user has it's web UI on a different port number, the desktop shortcut should be used to invoke the web UI.
+
+In order to give more freedom to the advanced user, there is also a possibility to launch BitTorrent Sync with a custom configuration file instead of the automatically created file: the startup routine of BitTorrent Sync checks, if there is a file named [b][font='courier new', courier, monospace]btsync.conf[/font][/b] in the home directory of the user. If [font=courier, monospace][b]~/btsync.conf[/b][/font] is found, then it is used as configuration file. If not, BitTorrent Sync uses the automatically created default configuration file [font='courier new', courier, monospace][b]~/.btsync.conf[/b][/font] that will be recreated on every restart.
+
+The simplest way to create a custom configuration file, is to create a copy of the default configuration file and then to edit it according to your needs:
+ 
+[code=auto:0]cp ~/.btsync.conf ~/btsync.conf
+[/code]
+When you are ready with your modifications, you can restart BitTorrent Sync by executing:
+ 
+[code=auto:0]btsync-restart
+[/code]
+ 
+on the command line.
+ 
+ 
+ 
+[color=#b22222][b]INSTALLATION IN UBUNTU[/b][/color]
+
+Currently there are packages available for Ubuntu [b]precise[/b], [b]quantal[/b], [b]raring[/b] and [b]saucy[/b] supporting both [b]i386[/b] and [b]amd64[/b]. The packages can be easily installed by adding the PPA and then installing as usual:
+ 
+[code=auto:0]sudo add-apt-repository ppa:tuxpoldo/btsync
+sudo apt-get update
+sudo apt-get install btsync-user
+[/code]
+ 
+ 
+[color=#008000][b]INSTALLATION IN DEBIAN[/b][/color]
+
+Currently there are packages available for Debian [b]squeeze[/b], [b]wheezy[/b] and [b]sid[/b] supporting both [b]i386[/b] and [b]amd64[/b]. In addition, there are [color=#282828][font=tahoma, 'open sans', arial, sans-serif][b]armhf[/b] and [b]armel[/b] packages for [b]wheezy[/b] (usable also with raspbian) and [b]armel[/b] packages for [b]squeeze[/b]. [/font][/color]The packages can be easily installed by adding the btsync repository and then installing as usual:
+
+ 
+[code=auto:0]sudo gpg --keyserver pgp.mit.edu --recv-keys 6BF18B15
+sudo gpg --armor --export 6BF18B15 | sudo apt-key add -
+
+
+sudo echo deb http://debian.yeasoft.net/btsync $(lsb_release -cs) main contrib non-free >> /etc/apt/sources.list.d/btsync.list
+sudo echo deb-src http://debian.yeasoft.net/btsync $(lsb_release -cs) main contrib non-free >> /etc/apt/sources.list.d/btsync.list
+
+sudo apt-get update
+sudo apt-get install btsync-user
+[/code]
+
+[color=#ff8c00][b]CONTRIBUTION[/b][/color]
+
+If you want to contribute, you may find the current sources of the deployment scripts and packaging on Github under the following URL: [url=https://github.com/Tuxpoldo/btsync-deb]https://github.com/Tuxpoldo/btsync-deb[/url]
