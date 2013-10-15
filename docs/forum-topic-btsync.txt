@@ -13,8 +13,8 @@ The deb-packages are available for the same architectures as released by BitTorr
 [LIST]
 [*][b]i386[/b] Intel/AMD 32 Bit[/*]
 [*][b]amd64[/b] Intel/AMD 64 Bit[/*]
-[*][b]armel[/b] ARM hard float[/*]
-[*][b]armhf[/b] ARM EABI[/*]
+[*][b]armel[/b] ARM EABI[/*]
+[*][b]armhf[/b] ARM hard float[/*]
 [*][b]powerpc[/b] PowerPC[/*]
 [/LIST]
 
