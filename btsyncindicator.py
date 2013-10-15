@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 # coding=utf-8
 #
 # Copyright 2013 Mark Johnson
@@ -174,16 +174,18 @@ class BtSyncIndicator:
         If the server cannot be contacted, waits 5 seconds and retries.
         """
         try:
-            logging.info('Requesting Token');
             tokenparams = {'t': time.time()}
             tokenurl = self.urlroot+'token.html'
+            logging.info('Requesting Token from ' + tokenurl)
             tokenresponse = requests.post(tokenurl, params=tokenparams)
+            logging.info('Token response ' + str(tokenresponse))
             regex = re.compile("<html><div[^>]+>([^<]+)</div></html>")
             html = self.get_response_text(tokenresponse)
+            logging.info('HTML Response ' + html)
             r = regex.search(html)
             self.token = r.group(1)
             self.cookies = tokenresponse.cookies
-            logging.info('Token '+self.token+' Retrieved');
+            logging.info('Token '+self.token+' Retrieved')
 
             actions = [
                   'license', 
@@ -203,7 +205,7 @@ class BtSyncIndicator:
 
             self.clear_error()
 
-            logging.info('Session setup complete, initialising check_status loop');
+            logging.info('Session setup complete, initialising check_status loop')
 
             self.status = { 'folders': [] }
 
@@ -211,7 +213,7 @@ class BtSyncIndicator:
             return False
 
         except requests.exceptions.ConnectionError:
-            logging.warning('Connection Error caught, displaying error message');
+            logging.warning('Connection Error caught, displaying error message')
             self.show_error("Couldn't connect to Bittorrent Sync at "+self.urlroot)
             return True
 
@@ -239,7 +241,7 @@ class BtSyncIndicator:
             self.pause_item_handler = self.pause_item.connect("activate", self.toggle_pause)
 
         try:
-            logging.info('Requesting status');
+            logging.info('Requesting status')
             params = {'token': self.token, 'action': 'getsyncfolders'}
             response = requests.get(self.urlroot, params=params, cookies=self.cookies)
 
@@ -477,14 +479,14 @@ class BtSyncIndicator:
     	self.clipboard.set_text(secret)
         logging.info('Secret copied to clipboard')
         logging.debug(secret)
-    	return True;
+    	return True
 
     def animate_icon(self):
         """
         Cycles the icon through 3 frames to indicate network activity
         """
         if self.active == False:
-            logging.info('Terminating animation loop; Resetting icon');
+            logging.info('Terminating animation loop; Resetting icon')
             self.animate = None
             self.set_icon('')
             self.frame = 0
@@ -608,7 +610,7 @@ if __name__ == "__main__":
     logging.basicConfig(level=numeric_level)
 
     if (args.version):
-	print os.path.basename(__file__)+" Version "+VERSION;
+	print os.path.basename(__file__)+" Version "+VERSION
 	exit()
 
     indicator = BtSyncIndicator()
