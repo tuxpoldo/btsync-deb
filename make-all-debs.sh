@@ -4,6 +4,8 @@ set -e
 
 SOURCES="btsync-common btsync"
 
+[ -n "$1" ] && SOURCES="$1"
+
 function enter_build() {
 	pushd $1
 	trap exit_build INT QUIT TERM EXIT
