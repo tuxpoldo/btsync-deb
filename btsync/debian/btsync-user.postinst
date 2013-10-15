@@ -1,4 +1,19 @@
 #!/bin/sh
+# postinst script for btsync-user
+#
+# see: dh_installdeb(1)
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <postinst> `abort-remove'
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
 
 set -e
 
@@ -22,7 +37,7 @@ configure)
 	set -e
 
 	if [ -f /var/run/btsync-user-updating ]; then
-		rm /var/run/btsync-user-updating
+		rm -f /var/run/btsync-user-updating
 	fi
 
 	;;

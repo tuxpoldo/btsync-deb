@@ -1,5 +1,5 @@
 #!/bin/sh
-# prerm script for btsync
+# prerm script for btsync-user
 #
 # see: dh_installdeb(1)
 
@@ -22,17 +22,25 @@ set -e
 CONFFILE=/etc/btsync/debconf-user-default.conf
 
 case "$1" in
-remove|upgrade|deconfigure)
+remove|deconfigure)
+	set +e
+	rm -f /var/run/btsync-user-updating
+	pkill -f btsync-starter
+	pkill -f btsyncindicator.py
+	pkill -x btsync-agent
+	set -e
+	;;
+upgrade)
 	set +e
 	touch /var/run/btsync-user-updating
 	pkill btsync-agent
-	rm -f /etc/xdg/autostart/btsync-agent.desktop
-	rm -f /etc/xdg/openbox/autostart/btsync-agent.desktop
-	rm -f /usr/share/autostart/btsync-agent.desktop
 	set -e
 	;;
 
 failed-upgrade)
+	set +e
+	rm -f /var/run/btsync-user-updating
+	set -e
 	;;
 
 *)

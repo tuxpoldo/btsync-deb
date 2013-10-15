@@ -6,6 +6,8 @@ btsync (1.1.82.1-3) unstable; urgency=low
     documentation (Closes #18) (Closes #19)
   - Fixed: frontend was not be stopped on update in btsync-user
     (Closes #20)
+  - Fixed: handling of update and remove of btsync-user is now
+    working as expected (Closes #22)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Tue, 15 Oct 2013 18:10:38 +0200
 
