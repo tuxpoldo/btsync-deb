@@ -137,7 +137,7 @@ agent_runner() {
 			if [ -f "${UPDATING_STATEFILE}" ]; then
 				# we should stop the frontend since it could
 				# also be updated
-				stop_frontned
+				stop_frontend
 			elif [ ! -f "${PAUSED_STATEFILE}" ]; then
 				# no reason to stay online. stop the whole game
 				stop_agent
