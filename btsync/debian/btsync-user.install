@@ -1,16 +1,15 @@
 # files
-btsync-agent						usr/lib/btsync-user
-debian/scripts/btsync-agent.desktop			usr/share/applications
-debian/scripts/btsync-user.conf				etc/btsync-user
-debian/scripts/btsync-user.desktop			etc/btsync-user
-debian/scripts/btsync-starter				usr/lib/btsync-user
-debian/scripts/btsync-stopper				usr/lib/btsync-user
-debian/scripts/btsync-tester				usr/lib/btsync-user
-debian/scripts/btsync					usr/bin
-debian/icons/96/btsync-user.png				usr/share/icons/hicolor/96x96/apps
-debian/icons/48/btsync-user.png				usr/share/icons/hicolor/48x48/apps
-debian/icons/32/btsync-user.png				usr/share/icons/hicolor/32x32/apps
-debian/icons/16/btsync-user.png				usr/share/icons/hicolor/16x16/apps
+scripts/btsync-agent.desktop			usr/share/applications
+scripts/btsync-user.conf			etc/btsync-user
+scripts/btsync-user.desktop			etc/btsync-user
+scripts/btsync-starter				usr/lib/btsync-user
+scripts/btsync-stopper				usr/lib/btsync-user
+scripts/btsync-tester				usr/lib/btsync-user
+scripts/btsync					usr/bin
+icons/96/btsync-user.png			usr/share/icons/hicolor/96x96/apps
+icons/48/btsync-user.png			usr/share/icons/hicolor/48x48/apps
+icons/32/btsync-user.png			usr/share/icons/hicolor/32x32/apps
+icons/16/btsync-user.png			usr/share/icons/hicolor/16x16/apps
 
 debian/btsyncindicator/btsyncindicator.py		usr/lib/btsync-user
 debian/btsyncindicator/icons/btsync.png			usr/share/icons/hicolor/22x22/status

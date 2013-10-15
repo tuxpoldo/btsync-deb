@@ -1,0 +1,2 @@
+# links - src dest
+usr/lib/btsync-common/btsync-core	usr/lib/btsync-user/btsync-agent

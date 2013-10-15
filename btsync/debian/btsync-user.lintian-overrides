@@ -1,5 +1,0 @@
-btsync-user: embedded-library usr/lib/btsync-user/btsync-agent: sqlite
-btsync-user: embedded-library usr/lib/btsync-user/btsync-agent: openssl
-btsync-user: hardening-no-relro usr/lib/btsync-user/btsync-agent
-btsync-user: hardening-no-fortify-functions usr/lib/btsync-user/btsync-agent
-btsync-user: extra-license-file usr/share/doc/btsync-user/LICENSE.TXT
