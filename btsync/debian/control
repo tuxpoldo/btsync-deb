@@ -12,6 +12,7 @@ Package: btsync
 Architecture: i386 amd64 armel armhf powerpc
 Pre-Depends: debconf | debconf-2.0
 Depends: libc6, btsync-common
+Provides: btsync-server-daemon
 Description: Private network P2P file synchronisation daemon(s)
  BitTorrent Sync is a simple tool that applies p2p protocol for
  direct live folder sync with maximum security, network speed and
@@ -25,6 +26,7 @@ Package: btsync-user
 Architecture: i386 amd64 armel armhf powerpc
 Depends: debconf | debconf-2.0, libc6, ${python:Depends},
  python-requests, python-appindicator, btsync-common
+Provides: btsync-user-application
 Description: Private network P2P file synchronisation daemon(s)
  BitTorrent Sync is a simple tool that applies p2p protocol for
  direct live folder sync with maximum security, network speed and
