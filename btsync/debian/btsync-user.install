@@ -11,12 +11,12 @@ icons/48/btsync-user.png			usr/share/icons/hicolor/48x48/apps
 icons/32/btsync-user.png			usr/share/icons/hicolor/32x32/apps
 icons/16/btsync-user.png			usr/share/icons/hicolor/16x16/apps
 
-debian/btsyncindicator/btsyncindicator.py		usr/lib/btsync-user
-debian/btsyncindicator/icons/btsync.png			usr/share/icons/hicolor/22x22/status
-debian/btsyncindicator/icons/btsync-active-0.png	usr/share/icons/hicolor/22x22/status
-debian/btsyncindicator/icons/btsync-active-1.png	usr/share/icons/hicolor/22x22/status
-debian/btsyncindicator/icons/btsync-active-2.png	usr/share/icons/hicolor/22x22/status
-debian/btsyncindicator/icons/btsync-attention.png	usr/share/icons/hicolor/22x22/status
-debian/btsyncindicator/icons/btsync-error.png		usr/share/icons/hicolor/22x22/status
-debian/btsyncindicator/icons/btsync-direct.png		usr/share/icons/hicolor/22x22/status
-debian/btsyncindicator/icons/btsync-relay.png		usr/share/icons/hicolor/22x22/status
+btsyncindicator/btsyncindicator.py		usr/lib/btsync-user
+btsyncindicator/icons/btsync.png		usr/share/icons/hicolor/22x22/status
+btsyncindicator/icons/btsync-active-0.png	usr/share/icons/hicolor/22x22/status
+btsyncindicator/icons/btsync-active-1.png	usr/share/icons/hicolor/22x22/status
+btsyncindicator/icons/btsync-active-2.png	usr/share/icons/hicolor/22x22/status
+btsyncindicator/icons/btsync-attention.png	usr/share/icons/hicolor/22x22/status
+btsyncindicator/icons/btsync-error.png		usr/share/icons/hicolor/22x22/status
+btsyncindicator/icons/btsync-direct.png		usr/share/icons/hicolor/22x22/status
+btsyncindicator/icons/btsync-relay.png		usr/share/icons/hicolor/22x22/status
