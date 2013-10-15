@@ -42,6 +42,12 @@ sudo apt-get install btsync-user
 ```
 The indicator will start on login with btsync
 
+### Arch Linux
+btsyncindicator is available in the [AUR](https://aur.archlinux.org).
+```
+sudo packer -S --noedit --noconfirm btsyncindicator
+```
+
 ### Other Distros
 The indicator isn't packaed for other distros. You will have to [download btsync](http://labs.bittorrent.com/experiments/sync.html), then download and run the indicator seperately:
 ```
