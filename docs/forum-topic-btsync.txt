@@ -18,9 +18,11 @@ The deb-packages are available for the same architectures as released by BitTorr
 [*][b]powerpc[/b] PowerPC[/*]
 [/LIST]
 
+
 [color=#FF8C00][b]CONTRIBUTION AND SOURCES[/b][/color]
 
 If you want to contribute to the development of the packages or if you are curious how this all works, you may find the current sources of the deployment scripts and packaging on GitHub under the following URL: [b]https://github.com/tuxpoldo/btsync-deb[/b]
+
 
 [color=#008000][b]ADDING THE REPOSITORIES[/b][/color]
 
@@ -37,7 +39,6 @@ Your distribution comes with some default repositories that are already setup, b
 [/LIST]
 
 If you are OK with this, you can add the Launchpad PPA by issuing the following commands:
-
 [code]
 `which sudo` add-apt-repository ppa:tuxpoldo/btsync
 `which sudo` apt-get update
@@ -45,16 +46,14 @@ If you are OK with this, you can add the Launchpad PPA by issuing the following 
 
 After this, you can directly proceed with the installation.
 
-[b]If you are not using Ubuntu[/b] or you are using an unsupported version or architecture or by any other reason you prefer the default repositories, continue here.
+[b]If you are not using Ubuntu or you are using an unsupported version or architecture or by any other reason you prefer the default repositories, continue here.[/b]
 
-The btsync packages are all signed with a key in order to guarantee its authenticity. Before using the repository, you should add the key to the package manager. To do that, run the following command:
-
+The btsync packages are all signed with a key in order to guarantee their authenticity. Before using the repository, you should add the key to the package manager. To do that, run the following command:
 [code]
 `which sudo` apt-key adv --keyserver keys.gnupg.net --recv-keys 6BF18B15
 [/code]
 
 On success you should see an output like this:
- 
 [code]
 gpg: requesting key 6BF18B15 from hkp server keys.gnupg.net
 gpg: key 6BF18B15: public key "Leo Moll <leo.moll@yeasoft.com>" imported
@@ -64,7 +63,6 @@ gpg:               imported: 1
 [/code]
 
 Now you can easily add the package sources, by executing the following commands:
-
 [code]
 CODENAME=$(lsb_release -cs | sed -n '/lucid\|precise\|quantal\|raring\|saucy\|squeeze\|wheezy\|jessie\|sid/p')
 `which sudo` echo deb http://debian.yeasoft.net/btsync ${CODENAME:-sid} main > /etc/apt/sources.list.d/btsync.list
@@ -73,7 +71,6 @@ unset CODENAME
 [/code]
 
 Remember to update the local cache:
-
 [code]
 `which sudo` apt-get update
 [/code]
@@ -84,13 +81,11 @@ After that you can proceed with the installation.
 [color=#008000][b]INSTALLATION OF BTSYNC[/b][/color]
 
 The installation of btsync is really easy:
-
 [code]
 `which sudo` apt-get install btsync
 [/code]
 
 After downloading the packages, the installation begins. The package manager will ask you, if you want a default instance of btsync to be created. If you say [b]yes[/b], you will be guided through the installation and at the end you will have a fully operational btsync daemon maintained by debconf. The configuration can be modified and fine tuned at any time by performing the following command:
-
 [code]
 `which sudo` dpkg-reconfigure btsync
 [/code]
@@ -107,7 +102,6 @@ More details can be found in the usages notes:
 This version of BitTorrent Sync is mainly intended for server usage. It allows to start one or more BitTorrent Sync daemons based on configuration files located in [font=courier new', courier, monospace][b]/etc/btsync[/b][/font]
 
 The package installation offers a possibility to create a default instance of BitTorrent Sync. All relevant parameters can be specified interactively during the installation. At any time, the configuration of the default instance can be changed by executing the command:
-
 [code]
 `which sudo` dpkg-reconfigure btsync
 [/code]
@@ -123,16 +117,14 @@ The following parameters are supported:
 [*][b]DAEMON_UMASK[/b]: The umask for the btsync damon. If omitted the default umask is used.[/*]
 [/LIST]
 The parameter definition must use an equal sign ("="):
-
 [code]
 //
 // DAEMON_UID=jdoe
 // DAEMON_UMASK=0002
 //
-
 [/code]
 
-This example will launch the instance running under the credentials of the user "[b]jdoe[/b]" using [b]0002[/b] as umask
+This example will launch the instance running under the credentials of the user "[b]jdoe[/b]" using [b]0002[/b] as umask.
 
 The old mechanism using the encoding in the configuration file name following the naming scheme
 
@@ -158,14 +150,9 @@ It can assume the values:
 [/LIST]
 The variable [b]DAEMON_ARGS[/b] allows to specify additional command line parameters passed to the daemon.
 
-Please look also at the sample configuration files installed in
-
-[code]
-/etc/btsync/samples
-[/code]
+Please look also at the sample configuration files installed in [font=courier new', courier, monospace][b]/etc/btsync/samples[/b][/font].
 
 The additional configuration file [font=courier new', courier, monospace][b]/etc/default/btsync[/b][/font] permits to specify which btsync instances should be started automatically and to specify some additional parameters to pass to the btsync daemon. The default setting is to start all instances. Additional documentation can be found in the file:
-
 [code]
 # This is the configuration file for /etc/init.d/btsync
 
