@@ -4,7 +4,7 @@ If you are using Ubuntu, Debian, Raspian or other derived distributions based on
 
 The [b]server packages[/b] offer full debconf-support for the automated creation and maintenance of an optional default configuration as well as the possibility to manually configure single or multiple BitTorrent Sync instances with highly customised configurations.
 
-The [b]desktop user packages[/b] try to create a user experience similar to BitTorrent Sync on Windows or Mac OSX by still giving the user the possibility to customise his installation if he has special needs.
+The [b]desktop user packages[/b] are explicitly intended for [b]desktop usage[/b] and provide a user experience similar to BitTorrent Sync on Windows or Mac OSX by still giving the user the possibility to customise his installation if he has special needs.
 
 This topic covers only the [b]server packages[/b]. If you are searching for the [b]desktop user packages,[/b]  [url="http://forum.bittorrent.com/topic/19560-debian-and-ubuntu-desktop-packages-for-bittorrent-sync/"][b]please look here[/b][/url].
 
@@ -17,6 +17,8 @@ The deb-packages are available for the same architectures as released by BitTorr
 [*][b]armhf[/b] ARM hard float[/*]
 [*][b]powerpc[/b] PowerPC[/*]
 [/LIST]
+
+Since the packages still have not been tested on every platform, any related feedback is highly appreciated.
 
 
 [color=#FF8C00][b]CONTRIBUTION AND SOURCES[/b][/color]
