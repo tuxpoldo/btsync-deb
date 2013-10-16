@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: btsync\n"
 "Report-Msgid-Bugs-To: btsync@packages.debian.org\n"
-"POT-Creation-Date: 2013-09-21 14:10+0200\n"
+"POT-Creation-Date: 2013-10-17 01:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -150,7 +150,7 @@ msgstr ""
 #. Description
 #: ../btsync.templates:7001
 msgid ""
-"Specify here the port BitTorrent Sync will listen to for the web interfce. "
+"Specify here the port BitTorrent Sync will listen on for the web interfce. "
 "This port number in the range from 80 to 65534 shall not conflict with any "
 "other services running on this machine."
 msgstr ""
@@ -166,7 +166,7 @@ msgstr ""
 #: ../btsync.templates:8001
 msgid ""
 "Specify here a username for accessing the web interface. If left empty, no "
-"user authorization is needed to access the web interface."
+"user authorisation is required to access the web interface."
 msgstr ""
 
 #. Type: password
@@ -205,7 +205,7 @@ msgstr ""
 #. Description
 #: ../btsync.templates:11001
 msgid ""
-"Sets priority for the Lile operations on disc. If set to false, Sync will "
+"Sets priority for the file operations on disc. If set to false, Sync will "
 "perform read and write file operations with the highest speed and priority "
 "which can result in degradation of performance for other applications."
 msgstr ""
@@ -273,6 +273,6 @@ msgstr ""
 #. Description
 #: ../btsync.templates:16001
 msgid ""
-"Applies the supplied umask to the btsync damon. If leaved empty, the default "
-"umask value applies."
+"Applies the supplied umask to the BitTorrent Sync daemon. If leaved empty, "
+"the default umask value applies."
 msgstr ""

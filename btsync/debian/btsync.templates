@@ -62,7 +62,7 @@ Template: btsync/webgui-bindport
 Type: string
 Default: 8888
 _Description: Web Interface Listen Port:
- Specify here the port BitTorrent Sync will listen to for the web
+ Specify here the port BitTorrent Sync will listen on for the web
  interfce. This port number in the range from 80 to 65534 shall
  not conflict with any other services running on this machine.
 
@@ -71,7 +71,7 @@ Type: string
 Default: admin
 _Description: The username for accessing the web interface:
  Specify here a username for accessing the web interface. If
- left empty, no user authorization is needed to access the
+ left empty, no user authorisation is required to access the
  web interface.
 
 Template: btsync/webgui-password
@@ -92,7 +92,7 @@ Template: btsync/disk_low_priority
 Type: boolean
 Default: true
 _Description: Should BitTorrent Sync perform disk operations with low priority?
- Sets priority for the Lile operations on disc. If set to
+ Sets priority for the file operations on disc. If set to
  false, Sync will perform read and write file operations with
  the highest speed and priority which can result in degradation
  of performance for other applications.
@@ -128,5 +128,5 @@ Template: btsync/daemon_umask
 Type: string
 Default:
 _Description: Umask value to set for the daemon:
- Applies the supplied umask to the btsync damon. If leaved
+ Applies the supplied umask to the BitTorrent Sync daemon. If leaved
  empty, the default umask value applies.
