@@ -11,13 +11,6 @@
 /btsync*.deb
 
 # unpacked sources
-/btsync/amd64
-/btsync/arm
-/btsync/i386
-/btsync/powerpc
-/btsync/BitTorrentSyncUserGuide.pdf
-
-# unpacked sources
 /btsync-common/amd64
 /btsync-common/arm
 /btsync-common/i386
@@ -25,4 +18,5 @@
 /btsync-common/BitTorrentSyncUserGuide.pdf
 
 # maintainers helpers
+/conf
 /putrepo
