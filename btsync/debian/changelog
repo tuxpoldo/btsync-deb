@@ -8,7 +8,9 @@ btsync (1.1.82.1-3) unstable; urgency=low
     (Closes #20)
   - Fixed: handling of update and remove of btsync-user is now
     working as expected (Closes #22)
-  - Added german translation to debconf templates (Closes #23)
+  - Added German translation to debconf templates (Closes #23)
+  - Added French translation to debconf templates contributed
+    by Quentin Scouflaire (Closes #25)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Tue, 15 Oct 2013 18:10:38 +0200
 
