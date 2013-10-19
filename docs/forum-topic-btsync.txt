@@ -21,9 +21,10 @@ The deb-packages are available for the same architectures as released by BitTorr
 Since the packages still have not been tested on every platform, any related feedback is highly appreciated.
 
 
-[color=#FF8C00][b]CONTRIBUTION AND SOURCES[/b][/color]
+[color=#FF8C00][b]BUG REPORTS, CONTRIBUTION AND SOURCES[/b][/color]
 
 If you want to contribute to the development of the packages or if you are curious how this all works, you may find the current sources of the deployment scripts and packaging on GitHub under the following URL: [b]https://github.com/tuxpoldo/btsync-deb[/b]
+If you have experienced a reproducible issue that [b]is related to the packaging and not to BitTorrent Sync itself[/b] you are strongly encouraged to [url="https://github.com/tuxpoldo/btsync-deb/issues"]open an issue on the project's GitHub Page[/url]. Issues related to the native functionality of BitTorrent Sync should rather by creating a new topic or partecipating to an already existing topic in the [url="http://forum.bittorrent.com/forum/56-bittorrent-sync/"]BitTorrent Sync Forum[/url].
 
 
 [color=#008000][b]ADDING THE REPOSITORIES[/b][/color]

@@ -20,3 +20,5 @@
 # maintainers helpers
 /conf
 /putrepo
+/nbproject
+/nbproject/private/
