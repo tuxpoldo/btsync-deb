@@ -17,7 +17,7 @@ msgstr "Möchten Sie eine Standardinstanz von BitTorrent Sync einrichten?"
 #. Description
 #: ../btsync.templates:1001
 msgid "BitTorrent Sync can run one or more daemons based on configuration files located in /etc/btsync. You can choose to create a default instance running under root credentials that can be also reconfigured via dpkg-reconfigure or manage the whole configuration manually. In both cases you can manually manage additional instances with their own configuration files."
-msgstr "BitTorrent Sync kann eine oder mehrere Instanzen auf der Basis von Konfigurationsdateien im /etc/btsync Verzeichnis starten. Sie können wählen, eine Standard-Instanz die unter root-Rechten ausgeführt wird und mit dpkg-reconfigure verwaltet werden kann, zu erzeugen, oder die gesamte Konfiguration manuell zu verwalten. In beiden Fällen ist es möglich, zusätzliche Instanzen durch Erzeugen entsprechender Konfigurationsdateien zu definieren."
+msgstr "BitTorrent Sync kann eine oder mehrere Instanzen auf der Basis von Konfigurationsdateien im Verzeichnis /etc/btsync starten. Sie können wählen, eine Standard-Instanz die unter root-Rechten ausgeführt wird und mit dpkg-reconfigure verwaltet werden kann, zu erzeugen, oder die gesamte Konfiguration manuell zu verwalten. In beiden Fällen ist es möglich, zusätzliche Instanzen durch Erzeugen entsprechender Konfigurationsdateien zu definieren."
 
 #. Type: string
 #. Description
