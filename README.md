@@ -28,7 +28,7 @@ sudo apt-get install btsync-user
 ```
 The indicator will start on login with BitTorrent Sync.
 
-If you get a *command not found* error, run `sudo apt-get install python-software-properties python-software-common` first.
+If you get a *command not found* error, run `sudo apt-get install python-software-properties software-properties-common` first.
 
 ### Arch Linux
 btsyncindicator is available in the [AUR](https://aur.archlinux.org).
