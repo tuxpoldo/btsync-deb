@@ -20,15 +20,26 @@ optional arguments:
 
 The recommended installation method is using the [Debian and Ubuntu Desktop Packages for BitTorrent Sync](http://forum.bittorrent.com/topic/19560-debian-and-ubuntu-desktop-packages-for-bittorrent-sync/) which includes the indicator.
 
-### Ubuntu/Debian (i386, amd64, armel, and armhf)
+### Ubuntu/Debian (i386, and amd64)
 ```
 sudo add-apt-repository ppa:tuxpoldo/btsync
 sudo apt-get update
 sudo apt-get install btsync-user
 ```
+If you get a *command not found* error, run `sudo apt-get install python-software-properties software-properties-common` first. 
+
 The indicator will start on login with BitTorrent Sync.
 
-If you get a *command not found* error, run `sudo apt-get install python-software-properties software-properties-common` first.
+### Debian (i386, amd64, armel,c and armhf)
+```
+sudo gpg --keyserver pgp.mit.edu --recv-keys 6BF18B15
+sudo gpg --armor --export 6BF18B15 | sudo apt-key add -
+sudo echo deb http://debian.yeasoft.net/btsync $(lsb_release -cs) main contrib non-free >> /etc/apt/sources.list.d/btsync.list
+sudo echo deb-src http://debian.yeasoft.net/btsync $(lsb_release -cs) main contrib non-free >> /etc/apt/sources.list.d/btsync.list
+sudo apt-get update
+sudo apt-get install btsync-user
+```
+The indicator will start on login with BitTorrent Sync.
 
 ### Arch Linux
 btsyncindicator is available in the [AUR](https://aur.archlinux.org).
