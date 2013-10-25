@@ -17,7 +17,7 @@ msgstr "Wil je een standaard BitTorrent Sync proces definiëren? "
 #. Description
 #: ../btsync.templates:1001
 msgid "BitTorrent Sync can run one or more daemons based on configuration files located in /etc/btsync. You can choose to create a default instance running under root credentials that can be also reconfigured via dpkg-reconfigure or manage the whole configuration manually. In both cases you can manually manage additional instances with their own configuration files."
-msgstr "BitTorrent Sync kan een of meer daemons gebaseerd op de configuratiebestanden in /etc/btsync draaien. U kunt ervoor kiezen om een ​​standaardexemplaar draait onder root-referenties die opnieuw kan worden geconfigureerd via dpkg-reconfigure of handmatig beheren van de gehele configuratie te maken. In beide gevallen kunt u handmatig extra exemplaren met hun eigen configuratiebestanden te beheren."
+msgstr "BitTorrent Sync kan één of meer daemons gebaseerd op de configuratiebestanden in /etc/btsync draaien. U kunt ervoor kiezen om een ​​standaard-configuratie aan te maken onder root. Deze kan opnieuw worden geconfigureerd via dpkg-reconfigure. Of u kunt handmatig de configuratie file maken. In beide gevallen kunt u handmatig extra processen met hun eigen configuratiebestanden beheren."
 
 #. Type: string
 #. Description
@@ -29,31 +29,31 @@ msgstr "BitTorrent Sync Listen Port:"
 #. Description
 #: ../btsync.templates:2001
 msgid "Specify here the port BitTorrent Sync will listen on for the file synchronisation protocol."
-msgstr "Geef hier aan de haven BitTorrent Sync zal luisteren op voor het bestand synchronisatie protocol."
+msgstr "Geef hier de poort waarop het BitTorrent Sync protocol werkt."
 
 #. Type: string
 #. Description
 #: ../btsync.templates:2001
 msgid "Specify 0 to let btsync take a random port number each time it starts. Valid range is 1000-65534"
-msgstr "Geef op 0 te laten btsync neem een ​​willekeurig poortnummer iedere start. Geldige bereik is 1000-65534"
+msgstr "Specificeer een 0 om btsync bij elke start een ​​willekeurig poortnummer te laten kiezen. Geldige bereik is 1000-65534"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:3001
 msgid "Do you want BitTorrent Sync to request port mapping via UPNP?"
-msgstr "Wil je BitTorrent Sync om port mapping aanvragen via UPnP?"
+msgstr "Wil je BitTorrent Sync poort mapping laten verlopen via UPnP?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:3001
 msgid "Specify here if you want BitTorrent Sync to request a port mapping from the default router using the Universal Plug and Play protocol."
-msgstr "Geef hier aan of u BitTorrent Sync een poort mapping vragen van de standaard router met behulp van de Universal Plug and Play-protocol."
+msgstr "Geef hier aan of u BitTorrent Sync een poort mapping wil laten aanvragen via de standaard router met behulp van het Universal Plug and Play-protocol."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:3001
 msgid "This technique is useful only if BitTorrent Sync is running behind a NAT SOHO router supporting UPNP."
-msgstr "Deze techniek is alleen nuttig als BitTorrent Sync wordt uitgevoerd achter een NAT-router SOHO ondersteunende UPnP."
+msgstr "Deze techniek is alleen nuttig als BitTorrent Sync wordt uitgevoerd achter een NAT-router welke UPNP ondersteunt."
 
 #. Type: string
 #. Description
@@ -65,7 +65,7 @@ msgstr "Download Bandbreedte Limiet:"
 #. Description
 #: ../btsync.templates:4001
 msgid "Specify here a download rate limit expressed in KB/Second"
-msgstr "Geef hier een download snelheid limiet uitgedrukt in KB / Second"
+msgstr "Geef hier een download snelheid limiet uitgedrukt in KB/sec"
 
 #. Type: string
 #. Description
@@ -85,31 +85,31 @@ msgstr "Upload Bandbreedte Limiet:"
 #. Description
 #: ../btsync.templates:5001
 msgid "Specify here an upload rate limit expressed in KB/Second"
-msgstr "Geef hier een upload snelheid limiet uitgedrukt in KB / Second"
+msgstr "Geef hier een upload snelheid limiet uitgedrukt in KB/sec"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:6001
 msgid "Web Interface Bind IP Address:"
-msgstr "Webinterface Bind IP-adres:"
+msgstr "Webinterface IP-adres:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:6001
 msgid "BitTorrent Sync's web interface can listen on a specific IP address or on all addresses configured on this machine."
-msgstr "BitTorrent Sync webinterface kunt luisteren op een bepaald IP-adres of op alle adressen geconfigureerd op deze machine."
+msgstr "De BitTorrent Sync webinterface luistert op een bepaald IP-adres of op alle adressen geconfigureerd op deze machine."
 
 #. Type: string
 #. Description
 #: ../btsync.templates:6001
 msgid "If you want BitTorrent Sync to listen on all interfaces and addresses, leave this value to 0.0.0.0"
-msgstr "Als u wilt BitTorrent Sync luisteren op alle interfaces en adressen, laat deze waarde naar 0.0.0.0"
+msgstr "Als u BitTorrent Sync wilt laten luisteren op alle interfaces en adressen, laat deze waarde op 0.0.0.0"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:6001
 msgid "If you want BitTorrent Sync to listen on a specific IP address, specify it now."
-msgstr "Als u wilt BitTorrent Sync luisteren op een specifiek IP-adres, geef het nu."
+msgstr "Als u BitTorrent Sync wilt laten luisteren op een specifiek IP-adres, geef het dan hier op."
 
 #. Type: string
 #. Description
@@ -121,7 +121,7 @@ msgstr "Web Interface Listen Port:"
 #. Description
 #: ../btsync.templates:7001
 msgid "Specify here the port BitTorrent Sync will listen on for the web interfce. This port number in the range from 80 to 65534 shall not conflict with any other services running on this machine."
-msgstr "Geef hier aan de haven BitTorrent Sync zal luisteren op de web interfce. Dit poortnummer in het bereik 80-65534 mogen niet strijdig zijn met andere services die op deze machine."
+msgstr "Geef hier het poortnummer waarop de BitTorrent Sync webinterface zal luisteren. Dit poortnummer met bereik 80-65534 mag niet conflicteren met andere services op deze computer."
 
 #. Type: string
 #. Description
@@ -133,7 +133,7 @@ msgstr "De gebruikersnaam voor toegang tot de web-interface:"
 #. Description
 #: ../btsync.templates:8001
 msgid "Specify here a username for accessing the web interface. If left empty, no user authorisation is required to access the web interface."
-msgstr "Geef hier een gebruikersnaam voor toegang tot de web-interface. Indien leeg gelaten, wordt er geen gebruiker toestemming nodig voor toegang tot de web-interface."
+msgstr "Geef hier een gebruikersnaam voor toegang tot de web-interface. Indien leeg gelaten, is er geen gebruiker toestemming nodig voor toegang tot de web-interface."
 
 #. Type: password
 #. Description
@@ -151,73 +151,73 @@ msgstr "Geef hier een wachtwoord voor toegang tot de web-interface."
 #. Description
 #: ../btsync.templates:10001
 msgid "The visible device name of this instance:"
-msgstr "De zichtbare apparaat naam van deze instantie:"
+msgstr "De zichtbare apparaat naam van deze BitTorrent Sync instantie:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:10001
 msgid "Specify here the visible device name for this instance. If left empty, a default device name based on the host name will be created."
-msgstr "Geef hier aan het zichtbare apparaat naam voor deze instantie. Indien leeg gelaten, zal een standaard apparaat naam gebaseerd op de hostnaam worden gecreëerd."
+msgstr "Geef hier de zichtbare apparaat naam voor deze instantie. Indien leeg gelaten, zal een standaard apparaat naam gebaseerd op de hostnaam worden gecreëerd."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:11001
 msgid "Should BitTorrent Sync perform disk operations with low priority?"
-msgstr "Moet BitTorrent Sync voeren schijfbewerkingen met lage prioriteit?"
+msgstr "Moet BitTorrent Sync schijfbewerkingen met lage prioriteit uitvoeren?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:11001
 msgid "Sets priority for the file operations on disc. If set to false, Sync will perform read and write file operations with the highest speed and priority which can result in degradation of performance for other applications."
-msgstr "Stelt prioriteit voor het bestand operaties op disc. Als ingesteld op false, wordt Sync presteren lezen en schrijven bestand operaties met de hoogste snelheid en de prioriteit die kan resulteren in slechte prestaties als voor andere toepassingen."
+msgstr "Geeft de prioriteit voor bestandoperaties op de schijf. Als ingesteld op false, dan leest en schrijft BitTorrent Sync bestanden met de hoogste snelheid. Dit kan resulteren in slechte prestaties van andere toepassingen."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:12001
 msgid "Should BitTorrent Sync encrypt data on the local network?"
-msgstr "Moet BitTorrent Sync versleutelen gegevens op het lokale netwerk?"
+msgstr "Moet BitTorrent Sync gegevens op het lokale netwerk versleutelen?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:12001
 msgid "If set to true, will use encryption in the local network."
-msgstr "Indien ingesteld op true, zal gebruik maken van encryptie in het lokale netwerk."
+msgstr "Indien ingesteld op true, zal gebruik gemaakt worden van encryptie op het lokale netwerk."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:13001
 msgid "Should BitTorrent Sync use TCP on the local network?"
-msgstr "Moet BitTorrent Sync gebruiken TCP op het lokale netwerk?"
+msgstr "Moet BitTorrent Sync TCP gebruiken op het lokale netwerk?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:13001
 msgid "If set to true, Sync will use TCP instead of UDP in local network."
-msgstr "Indien ingesteld op true, wordt Sync TCP in plaats van UDP gebruiken in het lokale netwerk."
+msgstr "Indien ingesteld op true, gebruikt Sync TCP in plaats van UDP op het lokale netwerk."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:14001
 msgid "Should BitTorrent Sync apply speed limits also in local networks?"
-msgstr "Moet BitTorrent Sync snelheidsbeperkingen gelden ook in lokale netwerken?"
+msgstr "Moet de BitTorrent Sync snelheidsbeperking ook gelden in lokale netwerken?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:14001
 msgid "Applies speed limits to the peers in local network. By default the limits are not applied in LAN."
-msgstr "Geldt snelheidslimieten aan de collega's in het lokale netwerk. Standaard worden de limieten niet worden toegepast in LAN."
+msgstr "Past snelheidslimieten toe op peers in het lokale netwerk. Standaard worden de limieten niet worden toegepast in LAN."
 
 #. Type: string
 #. Description
 #: ../btsync.templates:15001
 msgid "Fall back folder rescan interval in seconds:"
-msgstr "Terugvallen map opnieuw scannen interval in seconden:"
+msgstr "Terugval map her-scan interval in seconden:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:15001
 msgid "Syncing happens in real time. In addition, as a fall back, BitTorrent Sync also rescans files/folders every 10 minutes by default. This interval can be modified here."
-msgstr "Synchroniseren gebeurt in real time. Bovendien, als een fall back, BitTorrent Sync scant ook bestanden / mappen elke 10 minuten standaard. Dit interval kan hier worden aangepast."
+msgstr "Synchroniseren gebeurt in real time. Bovendien, als een terugval optie zal BitTorrent Sync de bestanden/mappen elke 10 minuten (standaard) scannen. Dit interval kan hier worden aangepast."
 
 #. Type: string
 #. Description
@@ -229,5 +229,5 @@ msgstr "Umask waarde in te stellen voor de daemon:"
 #. Description
 #: ../btsync.templates:16001
 msgid "Applies the supplied umask to the BitTorrent Sync daemon. If leaved empty, the default umask value applies."
-msgstr "Geldt de meegeleverde umask om de BitTorrent Sync daemon. Als leaved leeg, de standaard umask waarde geldt."
+msgstr "Past de meegeleverde umask toe op de BitTorrent Sync daemon. Indien geen waarde is opgegeven zal de standaard umask waarde gelden."
 
