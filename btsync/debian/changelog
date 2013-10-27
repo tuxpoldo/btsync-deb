@@ -24,6 +24,8 @@ btsync (1.1.82.1-3) unstable; urgency=low
     by Andras Kiss (Closes #29)
   - Added Czech translation to debconf templates contributed
     by Marek Lukas (Closes #30)
+  - Added Greek translation to debconf templates contributed
+    by Thanos Papaoikonomou (Closes #33)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Tue, 15 Oct 2013 18:10:38 +0200
 
