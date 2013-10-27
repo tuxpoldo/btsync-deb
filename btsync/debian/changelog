@@ -3,7 +3,10 @@ btsync (1.1.82.1-3) unstable; urgency=low
   - The native upstream components from BitTorrent Inc. are no more
     included. All packages are now dependant upon the external
     package btsync-common which contains the btsync executables and
-    documentation (Closes #18) (Closes #19)
+    documentation (Closes #18 and #19)
+  - Fixed: The init script now tests on ARM systems if the btsync
+    executable is compatible with the alignment handling and adapts
+    it when needed (Closes #31)
   - Fixed: frontend was not be stopped on update in btsync-user
     (Closes #20)
   - Fixed: handling of update and remove of btsync-user is now

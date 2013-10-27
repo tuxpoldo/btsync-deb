@@ -184,6 +184,18 @@ test_running () {
 	return 1
 }
 
+adjust_arm_alignment () {
+	if [ -r /proc/cpu/alignment ]; then
+		if ! $DAEMON --help > /dev/null 2> /dev/null; then
+			# something is wrong
+			if $DAEMON --help | grep -i "Alignment error" > /dev/null 2> /dev/null; then
+				log_info "Changing alignment setting for executing btsync"
+				echo 2 > /proc/cpu/alignment
+			fi
+		fi
+	fi
+}
+
 start_btsync () {
 # debug helpers
 #	echo "== START ==========================="
@@ -193,6 +205,7 @@ start_btsync () {
 #	echo "Run As User: '$CRED_UID'"
 #	echo "Run As Group: '$CRED_GID'"
 #	echo "Run with umask: '$UMASK'"
+	adjust_arm_alignment
 	STATUS=0
 	start-stop-daemon --start --quiet --oknodo \
 		--pidfile /var/run/$NAME.$BASENAME.pid \
@@ -232,6 +245,7 @@ stop_btsync () {
 #	echo "Run As User: '$CRED_UID'"
 #	echo "Run As Group: '$CRED_GID'"
 #	echo "Run with umask: '$UMASK'"
+	adjust_arm_alignment
 	STATUS=0
 	start-stop-daemon --stop --quiet \
 		--retry=TERM/30/KILL/5 \
