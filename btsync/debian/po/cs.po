@@ -1,0 +1,234 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: btsync-deb\n"
+"Language: cs\n"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:1001
+#, fuzzy
+msgid "Do you want to define a default BitTorrent Sync instance?"
+msgstr "Chcete nastavit základní BitTorrent Sync instanci?"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:1001
+msgid "BitTorrent Sync can run one or more daemons based on configuration files located in /etc/btsync. You can choose to create a default instance running under root credentials that can be also reconfigured via dpkg-reconfigure or manage the whole configuration manually. In both cases you can manually manage additional instances with their own configuration files."
+msgstr "BitTorrent Sync může spouštět jeden nebo více procesů založených na konfiguračních souborech umístěných v /etc/btsync. Můžete vytvořit základní instanci běžící jako root, která může být přenastavena pomocí dpkg-reconfigure nebo spravovat celý proces nastavení ručně.V obou případech můžete ručně spravovat dodatečné instance pomocí jejich vlastních configů."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:2001
+msgid "BitTorrent Sync Listen Port:"
+msgstr "Port pro naslouchání:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:2001
+msgid "Specify here the port BitTorrent Sync will listen on for the file synchronisation protocol."
+msgstr "Uveďte zde port, kterému bude BitTorrent Sync naslouchat pro synchronizační protokol."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:2001
+msgid "Specify 0 to let btsync take a random port number each time it starts. Valid range is 1000-65534"
+msgstr "Necháte-li 0, btsync vybere náhodný port při každém startu.Platný rozsah je 1000-65534"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:3001
+msgid "Do you want BitTorrent Sync to request port mapping via UPNP?"
+msgstr "Chcete, aby BitTorrent Sync použil mapování portu pomocí UPNP?"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:3001
+msgid "Specify here if you want BitTorrent Sync to request a port mapping from the default router using the Universal Plug and Play protocol."
+msgstr "Uveďte zde, zda chcete, aby BitTorrent Sync použil mapování portu z defaultního routeru pomocí Univerzálního Plug and Play protokolu."
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:3001
+msgid "This technique is useful only if BitTorrent Sync is running behind a NAT SOHO router supporting UPNP."
+msgstr "Tato metoda je užitečná jen, když je BitTorrent Sync za NATem a SOHO směrovačem podporující UPNP."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:4001
+msgid "Download Bandwith Limit:"
+msgstr "Maximální download:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:4001
+msgid "Specify here a download rate limit expressed in KB/Second"
+msgstr "Uveďte zde limit rychlosti stahování v KB/s"
+
+#. Type: string
+#. Description
+#. Type: string
+#. Description
+#: ../btsync.templates:4001 ../btsync.templates:5001
+msgid "If 0 is specified, no limit is applied."
+msgstr "0 znamená žádný limit."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:5001
+msgid "Upload Bandwith Limit:"
+msgstr "Limit uploadu:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:5001
+msgid "Specify here an upload rate limit expressed in KB/Second"
+msgstr "Uveďte zde limit rychlosti uploadu v KB/s"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:6001
+msgid "Web Interface Bind IP Address:"
+msgstr "IP adresa webového rozhraní"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:6001
+msgid "BitTorrent Sync's web interface can listen on a specific IP address or on all addresses configured on this machine."
+msgstr "Grafické rozhraní BitTorrent Syncu může naslouchat určité IP adrese či všem adresám nastaveným na tomto stroji."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:6001
+msgid "If you want BitTorrent Sync to listen on all interfaces and addresses, leave this value to 0.0.0.0"
+msgstr "Pokud chcete nechat BItTorrent Sync naslouchat všem rozhraním a adresám, nechte toto pole 0.0.0.0"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:6001
+msgid "If you want BitTorrent Sync to listen on a specific IP address, specify it now."
+msgstr "Chcete-li, aby BItTorrent Sync naslouchal určité IP adrese, určete ji nyní."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:7001
+msgid "Web Interface Listen Port:"
+msgstr "Port webového rozhraní:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:7001
+msgid "Specify here the port BitTorrent Sync will listen on for the web interfce. This port number in the range from 80 to 65534 shall not conflict with any other services running on this machine."
+msgstr "Určete zde port BItTorrent Syncu , kterému bude naslouchat pro webové rozhraní.Číslo tohoto portu v rozmezí 80 až 65534 by nemělo  nijak ovlivnit jakékoli jiné služby na tomto stroji."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:8001
+msgid "The username for accessing the web interface:"
+msgstr "Jméno pro přístup do webového rozhraní."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:8001
+msgid "Specify here a username for accessing the web interface. If left empty, no user authorisation is required to access the web interface."
+msgstr "Zadejte zde uživatelské jméno pro přístup do webového rozhraní.Pokud pole necháte prázdné, nebude požadována jakákoli uživatelská autorizace."
+
+#. Type: password
+#. Description
+#: ../btsync.templates:9001
+msgid "The password for accessing the web interface:"
+msgstr "Heslo pro přístup do webového rozhraní:"
+
+#. Type: password
+#. Description
+#: ../btsync.templates:9001
+msgid "Specify here a password for accessing the web interface."
+msgstr "Sem zadejte heslo pro přihlášení do webového rozhraní."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:10001
+msgid "The visible device name of this instance:"
+msgstr "Viditelné jméno tohoto zařízení:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:10001
+msgid "Specify here the visible device name for this instance. If left empty, a default device name based on the host name will be created."
+msgstr "Zadejte zde jméno pro tuto instanci, které se zobrazí ostatním uživatelům.Pokud toto pole necháte prázdné, btsync použije defaultní jméno zařízení podle hostujícího stroje."
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:11001
+msgid "Should BitTorrent Sync perform disk operations with low priority?"
+msgstr "Měl by BItTorrent Sync konat diskové operace s nízkou prioritou?"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:11001
+msgid "Sets priority for the file operations on disc. If set to false, Sync will perform read and write file operations with the highest speed and priority which can result in degradation of performance for other applications."
+msgstr "Nastaví prioritu pro souborové operace na disku.Pokud nastaveno false, Sync bude vykonávat čtení a zapisování souborů nejvyšší možnou rychlostí a prioritou, která může spět ke snížení výkonu pro ostatní aplikace."
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:12001
+msgid "Should BitTorrent Sync encrypt data on the local network?"
+msgstr "Měl by BItTorrent Sync šifrovat data na lokální síti?"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:12001
+msgid "If set to true, will use encryption in the local network."
+msgstr "Pokud nastaveno true, Sync bude data šifrovat i v lokální síti."
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:13001
+msgid "Should BitTorrent Sync use TCP on the local network?"
+msgstr "Měl by BItTorrent Sync používat TCP v lokální síti?"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:13001
+msgid "If set to true, Sync will use TCP instead of UDP in local network."
+msgstr "Pokud nastaveno true, Sync použije TCP namísto UDP v lokální síti."
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:14001
+msgid "Should BitTorrent Sync apply speed limits also in local networks?"
+msgstr "Měly by BItTorrent Sync používat rychlostní limity i po lokální síti?"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:14001
+msgid "Applies speed limits to the peers in local network. By default the limits are not applied in LAN."
+msgstr "Použije rychlostní limity pro peery v lokální síti.Defaultně nejsou limity použiti při LAN připojení."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:15001
+msgid "Fall back folder rescan interval in seconds:"
+msgstr "Interval přeskenování složky v sekundách:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:15001
+msgid "Syncing happens in real time. In addition, as a fall back, BitTorrent Sync also rescans files/folders every 10 minutes by default. This interval can be modified here."
+msgstr "Synchronizace se děje živě.Jinak BItTorrent Sync přeskenuje složky a soubory každých 10 minut.Tento interval lze ale upravit právě zde."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:16001
+msgid "Umask value to set for the daemon:"
+msgstr "Hodnota umask pro daemon proces:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:16001
+msgid "Applies the supplied umask to the BitTorrent Sync daemon. If leaved empty, the default umask value applies."
+msgstr "Použije přiloženou umask daemonu BItTorrent Syncu.Pokud toto pole zanecháte prázdné, Sync použije defaultní hodnotu umask."
+
