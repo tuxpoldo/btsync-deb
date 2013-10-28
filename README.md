@@ -30,7 +30,7 @@ If you get a *command not found* error, run `sudo apt-get install python-softwar
 
 The indicator will start on login with BitTorrent Sync.
 
-### Debian (i386, amd64, armel,c and armhf)
+### Debian (i386, amd64, powerpc, armel, and armhf)
 ```
 sudo gpg --keyserver pgp.mit.edu --recv-keys 6BF18B15
 sudo gpg --armor --export 6BF18B15 | sudo apt-key add -
