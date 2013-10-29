@@ -1,0 +1,233 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: btsync-deb\n"
+"Language: ca\n"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:1001
+msgid "Do you want to define a default BitTorrent Sync instance?"
+msgstr "Vols definir un usuari per defecte de BitTorrent Sync?"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:1001
+msgid "BitTorrent Sync can run one or more daemons based on configuration files located in /etc/btsync. You can choose to create a default instance running under root credentials that can be also reconfigured via dpkg-reconfigure or manage the whole configuration manually. In both cases you can manually manage additional instances with their own configuration files."
+msgstr "BitTorrent Sync pot executar un o més processos fantasma (daemon) basats en els arxius de configuració localitzats a /etc/btsync. Pots crear un usuari per defecte executant-se amb credencials root que pot ser reconfigurat via dpkg-reconfigure o gestionant tota la configuració manualment. En els dos casos, pots gestionar manualment usuaris addicionals i els seus respectius arxius de configuració."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:2001
+msgid "BitTorrent Sync Listen Port:"
+msgstr "Port que BitTorrent Sync escoltarà:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:2001
+msgid "Specify here the port BitTorrent Sync will listen on for the file synchronisation protocol."
+msgstr "Especifica aquí el port que BitTorrent Sync escoltarà pel protocol de sincronització d'arxius."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:2001
+msgid "Specify 0 to let btsync take a random port number each time it starts. Valid range is 1000-65534"
+msgstr "Introdueix 0 per deixar que BitSync esculli un port aleatori cada copque s'inicii. El rang vàlid és de 1000 a 65534"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:3001
+msgid "Do you want BitTorrent Sync to request port mapping via UPNP?"
+msgstr "Vols que BitSync sol·liciti l'assignació dels ports via UPNP?"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:3001
+msgid "Specify here if you want BitTorrent Sync to request a port mapping from the default router using the Universal Plug and Play protocol."
+msgstr "Indica aquí si vols que BitTorrent Sync sol·liciti una assignació dels ports a l'encaminador per defecte utilitzant el protocol Universal Plug and Play."
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:3001
+msgid "This technique is useful only if BitTorrent Sync is running behind a NAT SOHO router supporting UPNP."
+msgstr "Aquest mètode és útil només quan BitTorrent Sync s'executa darrere un encaminador NAT SOHO que suporti UPNP."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:4001
+msgid "Download Bandwith Limit:"
+msgstr "Màxim d'ample de banda per la baixada de fitxers:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:4001
+msgid "Specify here a download rate limit expressed in KB/Second"
+msgstr "Indica un límit en la velocitat de baixada expressat en kB/segon"
+
+#. Type: string
+#. Description
+#. Type: string
+#. Description
+#: ../btsync.templates:4001 ../btsync.templates:5001
+msgid "If 0 is specified, no limit is applied."
+msgstr "Si és 0, no s'aplica cap restricció"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:5001
+msgid "Upload Bandwith Limit:"
+msgstr "Màxim d'ample de banda per la pujada de fitxers:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:5001
+msgid "Specify here an upload rate limit expressed in KB/Second"
+msgstr "Indica un límit en la velocitat de pujada expressat en kB/segon"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:6001
+msgid "Web Interface Bind IP Address:"
+msgstr "Adreça IP de la inferfície web:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:6001
+msgid "BitTorrent Sync's web interface can listen on a specific IP address or on all addresses configured on this machine."
+msgstr "La interfície web de BitTorrent Sync pot escoltar una IP específica o totes les adreces IP configurades en aquesta màquina."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:6001
+msgid "If you want BitTorrent Sync to listen on all interfaces and addresses, leave this value to 0.0.0.0"
+msgstr "Si vols que BitTorrent Sync escolti totes les interfícies i adreces, deixa aquest valor a 0.0.0.0"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:6001
+msgid "If you want BitTorrent Sync to listen on a specific IP address, specify it now."
+msgstr "Si vols que BitTorrent Sync escolti una adreça IP específica, introdueix-la ara:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:7001
+msgid "Web Interface Listen Port:"
+msgstr "Port que escoltarà la interfície web:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:7001
+msgid "Specify here the port BitTorrent Sync will listen on for the web interfce. This port number in the range from 80 to 65534 shall not conflict with any other services running on this machine."
+msgstr "Introdueix el port que BitTorrent Sync escoltarà per la interfície web. Aquest hauria d'estar en el rang del 80 al 65534 i no hauria d'entrar en conflicte amb cap altre servei executant-se en aquesta màquina."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:8001
+msgid "The username for accessing the web interface:"
+msgstr "El nom d'usuari per accedir a la inferfície web:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:8001
+msgid "Specify here a username for accessing the web interface. If left empty, no user authorisation is required to access the web interface."
+msgstr "Introdueix un nom d'usuari per accedir a la interfície web. Si es deixa en blanc, no es requerirà cap autorització d'usuari per accedir-hi. "
+
+#. Type: password
+#. Description
+#: ../btsync.templates:9001
+msgid "The password for accessing the web interface:"
+msgstr "Contrassenya per accedir a la interfície web:"
+
+#. Type: password
+#. Description
+#: ../btsync.templates:9001
+msgid "Specify here a password for accessing the web interface."
+msgstr "Introdueix una contrassenya per accedir a la interfície web."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:10001
+msgid "The visible device name of this instance:"
+msgstr "El nom visible del dispositiu d'aquest usuari:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:10001
+msgid "Specify here the visible device name for this instance. If left empty, a default device name based on the host name will be created."
+msgstr "Introdueix aquí el nom visible del dispositiu per aquest usuari. Si es deixa en blanc, es crearà un nom per defecte basat en el nom del host."
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:11001
+msgid "Should BitTorrent Sync perform disk operations with low priority?"
+msgstr "BitTorrent Sync hauria d'executar operacions al disc amb prioritat baixa?"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:11001
+msgid "Sets priority for the file operations on disc. If set to false, Sync will perform read and write file operations with the highest speed and priority which can result in degradation of performance for other applications."
+msgstr "Estableix la prioritat per les operacions d'arxiu al disc. Si s'estableix \"false\", Sync executarà "
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:12001
+msgid "Should BitTorrent Sync encrypt data on the local network?"
+msgstr "BitTorrent Sync ha d'encriptar les dades a la xarxa local?"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:12001
+msgid "If set to true, will use encryption in the local network."
+msgstr "Si s'estableix \"true\", s'utilitzarà encriptació per la xarxa local."
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:13001
+msgid "Should BitTorrent Sync use TCP on the local network?"
+msgstr "BitTorrent Sync hauria d'usar TCP a la xarxa local?"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:13001
+msgid "If set to true, Sync will use TCP instead of UDP in local network."
+msgstr "Si es defineix \"true\", Btsync utilitzarà TCP en comptes de UDP a la xarxa local."
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:14001
+msgid "Should BitTorrent Sync apply speed limits also in local networks?"
+msgstr "BitTorrent Sync ha d'aplicar també els mímits de velocitat a la xarxa local?"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:14001
+msgid "Applies speed limits to the peers in local network. By default the limits are not applied in LAN."
+msgstr "Aplica els límits de velocitat als iguals (peers) a la xarxa local. Per defecte, no s'apliquen a la LAN."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:15001
+msgid "Fall back folder rescan interval in seconds:"
+msgstr "Interval en segons per tornar a examinar la carpeta:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:15001
+msgid "Syncing happens in real time. In addition, as a fall back, BitTorrent Sync also rescans files/folders every 10 minutes by default. This interval can be modified here."
+msgstr "La sincronització passa a temps real. A més, BitTorren Sync també torna a examinar els arxius/carpetes cada 10 minuts per defecte. Aques interval es pot ajustar aquí."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:16001
+msgid "Umask value to set for the daemon:"
+msgstr "Elstablir el valor umask pel daemon:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:16001
+msgid "Applies the supplied umask to the BitTorrent Sync daemon. If leaved empty, the default umask value applies."
+msgstr "Aplica l'umask proporcionat al daemon de BitTorrent Sync. Si es deixa en blanc, s'aplica el valor d'umask per defecte."
+
