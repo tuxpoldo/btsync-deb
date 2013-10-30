@@ -115,8 +115,8 @@ Configuration parameters not parsed by BitTorrent Sync but by the daemon scripts
 
 The following parameters are supported:
 [LIST]
-[*][b]DAEMON_UID[/b]: A uid for supplying the user under which the btsync daemon should run[/*]
-[*][b]DAEMON_GID[/b]: A gid for supplying the group under which the btsync daemon should run. If omitted the daemon will run under the primary group of the user[/*]
+[*][b]DAEMON_UID[/b]: A uid for specifying the user under which the btsync daemon should run[/*]
+[*][b]DAEMON_GID[/b]: A gid for specifying the group under which the btsync daemon should run. If omitted the daemon will run under the primary group of the user[/*]
 [*][b]DAEMON_UMASK[/b]: The umask for the btsync damon. If omitted the default umask is used.[/*]
 [/LIST]
 The parameter definition must use an equal sign ("="):
@@ -133,12 +133,17 @@ The old mechanism using the encoding in the configuration file name following th
 
 [b][font=courier new', courier, monospace]<damon name>[.<user>[.<group>]].conf[/font][/b]
 
-is still supported but is superseded by data supplied in the configuration file itself. Support may be dismissed in future releases.
+is still supported but is superseded by data supplied in the configuration file itself. Support [b]WILL[/b] be dismissed in future releases. [b]PLEASE DO NOT USE THIS METHOD ANY MORE AND UPGRADE YOUR EXISTING CONFIGURATIONS![/b]
 
+By specifying [font=courier new', courier, monospace][b]<user>[/b][/font] and [font=courier new', courier, monospace][b]<group>[/b][/font] it is possible to specify under which credentials the daemon runs. In this case it [b]MUST[/b] be assured that the daemon is able to read and write all files he has to access:
 
-By specifying [font=courier new', courier, monospace][b]<user>[/b][/font] and [font=courier new', courier, monospace][b]<group>[/b][/font] it is possible to specify under which credentials the daemon runs. In this case it must be assured that the daemon is able to write into the data directory specified in the configuration file.
+[LIST=1]
+[*]The daemon must be able to read his own configuration file. Since the configuration file may contain sensitive data (the userame and password for the web interface), it is usually [b]owned by the user[/b] under which the daemon runs and has the mode [font=courier new', courier, monospace][b]400 (-r--------)[/b][/font] in order to limit the access to the specific user.[/*]
+[*]The daemon must be able to read and write in his [font=courier new', courier, monospace][b]storage_path[/b][/font], since all internal control and status files (and the database of file hashes) are kept there. The ideal solution is to keep the storage_path somewhere in the home directory of the user under which the daemon will run.[/*]
+[*]Obviously the daemon must be able to read and write into the directories that will be synchronized.[/*]
+[/LIST]
 
-Some example files are provided under
+Some example configuration files are provided under
 
 [font=courier new', courier, monospace][b]/etc/btsync/samples[/b][/font]
 

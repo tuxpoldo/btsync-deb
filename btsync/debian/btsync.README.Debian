@@ -10,7 +10,7 @@ instance of BitTorrent Sync. All relevant parameters can be specified
 interactively during the installation. At any time, the configuration
 of the default instance can be changed by executing the command:
 
-sudo dpkg-reconfigure btsync
+`which sudo` dpkg-reconfigure btsync
 
 When creating configuration files manually, there are some possibilities
 to specify additional configuration parameters.
@@ -20,10 +20,10 @@ scripts can be supplied as comments in the configuration file.
 
 The following parameters are supported:
 
-DAEMON_UID:      A uid for supplying the user under which
+DAEMON_UID:      A uid for specifying the user under which
                  the btsync daemon should run
 
-DAEMON_GID:      A gid for supplying the group under which
+DAEMON_GID:      A gid for specifying the group under which
                  the btsync daemon should run. If omitted
                  the daemon will run under the primary group
                  of the user
@@ -48,12 +48,30 @@ name following the naming scheme
   <damon name>[.<user>[.<group>]].conf
 
 is still supported but is superseded by data supplied in the configuration
-file itself. Support may be dismissed in future releases.
+file itself. Support WILL be dismissed in future releases. PLEASE DO NOT USE
+THIS METHOD ANY MORE AND UPGRADE YOUR EXISTING CONFIGURATIONS!
 
 By specifying <user> and <group> it is possible to specify under which
-credentials the daemon runs. In this case it must be assured that the
-daemon is able to write into the data directory specified in the
-configuration file. Some example files are provided under
+credentials the daemon runs. In this case it MUST be assured that the
+daemon is able to read and write all files he has to access:
+
+1. The daemon must be able to read his own configuration file. Since the
+   configuration file may contain sensitive data (the userame and password
+   for the web interface), it is usually owned by the user under which the
+   daemon runs and has the mode 400 (-r--------) in order to limit the
+   access to the specific user.
+
+2. The daemon must be able to read and write in his storage_path, since
+   all internal control and status files (and the database of file hashes)
+   are kept there. The ideal solution is to keep the storage_path somewhere
+   in the home directory of the user under which the daemon will run.
+
+3. Obviously the daemon must be able to read and write into the directories
+   that will be synchronized.
+
+
+
+Some example configuration files are provided under
 
 /etc/btsync/samples
 
