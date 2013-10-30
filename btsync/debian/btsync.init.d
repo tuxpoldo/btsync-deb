@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh
 
 ### BEGIN INIT INFO
 # Provides:          btsync
@@ -50,6 +50,7 @@ test -d $CONFIG_DIR || exit 0
 STATUSREFRESH=10
 OMIT_SENDSIGS=0
 
+set +e
 
 log_message () {
 	if which logger > /dev/null; then
@@ -78,7 +79,6 @@ log_error () {
 
 config_from_conffile () {
 	# $1 : config file
-	set +e
 	BASENAME=${1%%.*${CONFIG_EXT}}
 	# old method: credentials encoded into the filename
 	CREDENTIALS=`expr match "${1}" ${BASENAME}'\.\([a-z,0-9,_,\.,-]*\)\.'${CONFIG_EXT}`
@@ -103,7 +103,6 @@ config_from_conffile () {
 		fi
 	fi
 	UMASK=$(grep 'DAEMON_UMASK[ \t]*=' ${CONFIG_DIR}/$1 | cut -d= -f 2 | sed -e "s/ //g" -e "s/\t//g")
-	set -e
 }
 
 config_from_name () {
@@ -118,16 +117,13 @@ config_from_name () {
 
 config_from_pidfile () {
 	# $1 : pid file
-	set +e
 	BASENAME=$(basename $1 | cut -c8-)
 	BASENAME=${BASENAME%%.pid}
-	set -e
 	config_from_name "${BASENAME}"
 }
 
 test_valid_conffile () {
 	# $1 : config file
-	set +e
 	CHECK=$(grep '^[[:space:]]*"check_for_updates"' $CONFIG_DIR/$1  | cut -d":" -f 2 | cut -d"/" -f 1 | cut -d"," -f 1 | grep -c false)
 	if [ $CHECK -ne 1 ]; then
 		log_error "Instance name $BASENAME has autoupdate enabled. Interrupting sequence."
@@ -135,7 +131,6 @@ test_valid_conffile () {
 		unset CHECK
 		exit 1
 	fi
-	set -e
 	unset CHECK
 }
 
@@ -153,9 +148,7 @@ test_valid_config () {
 	if [ -z "{UMASK}" ]; then
 		UMASK="$(umask)"
 	fi
-	set +e
 	CHECK=$(ls -l ${CONFIG_DIR}/${BASENAME}*.${CONFIG_EXT} 2> /dev/null | wc -l)
-	set -e
 	if [ ${CHECK} -gt 1 ]; then
 		log_failure_msg "Duplicate instance name $BASENAME found. Interrupting sequence."
 		unset CHECK
@@ -345,10 +338,8 @@ stop)
 status)
 	PIDFILE=
 	for PIDFILE in `ls /var/run/$NAME.*.pid 2> /dev/null`; do
-		set +e
 		config_from_pidfile $PIDFILE
 		status_of_proc -p $PIDFILE $(basename $DAEMON) "BTSYNC '${BASENAME}'"
-		set -e
 	done
 	;;
 restart|force-reload)
