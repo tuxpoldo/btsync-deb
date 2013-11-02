@@ -156,7 +156,7 @@ class BtSyncIndicator:
 	self.menu.append(self.debug_item)
 
         if self.btsync_user:
-            buf = "Quit Bittorrent Sync"
+            buf = "Quit BitTorrent Sync"
         else:
             buf = "Quit"
         self.quit_item = gtk.MenuItem(buf)
@@ -553,7 +553,7 @@ class BtSyncIndicator:
                 logging.warning('btsync manager failed with status '+e.returncode)
                 logging.warning(e.output)
         else:
-            logging.error("Cant find btsync manager at "+btsyncmanager)
+            logging.error("Could not find BitTorrent Sync Manager at "+btsyncmanager)
         return True
 
     def get_response_text(self, response):
@@ -582,8 +582,8 @@ class BtSyncIndicator:
             except subprocess.CalledProcessError, e:
                 logging.warning('btsync-stopper failed with status '+e.returncode)
                 logging.warning(e.output)
-                print "Cannot Exit btsync: "+e.output
-                print "Please Exit btsync manually"
+                print "Cannot exit BitTorrent Sync: "+e.output
+                print "Please exit BitTorrent Sync manually"
 
         sys.exit(0)
 
@@ -591,7 +591,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--config', 
                         default=os.environ['HOME']+'/.btsync.conf',
-                        help="Location of Bittorrent Sync config file")
+                        help="Location of BitTorrent Sync config file")
     parser.add_argument('--iconpath', 
                         default=os.path.dirname(os.path.realpath(__file__))+"/icons",
                         help="Path to icon theme folder")
