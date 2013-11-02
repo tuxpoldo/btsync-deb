@@ -1,3 +1,10 @@
+btsync (1.1.82.1-4) unstable; urgency=low
+
+  - Added Galician translation to debconf templates contributed
+    by Miguel Anxo Bouzada (Closes #35)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Xxx, XX Nov 2013 14:57:49 +0100
+
 btsync (1.1.82.1-3) unstable; urgency=low
 
   - The native upstream components from BitTorrent Inc. are no more
