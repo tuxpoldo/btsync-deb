@@ -2,6 +2,8 @@ btsync (1.1.82.1-4) unstable; urgency=low
 
   - Added Galician translation to debconf templates contributed
     by Miguel Anxo Bouzada (Closes #35)
+  - Added Spanish translation to debconf templates contributed
+    by VCLL (Closes #26)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Xxx, XX Nov 2013 14:57:49 +0100
 
