@@ -50,6 +50,27 @@ import argparse
 import webbrowser
 import logging
 import subprocess
+from contextlib import contextmanager
+
+@contextmanager
+def file_lock(lock_file):
+    if os.path.exists(lock_file):
+        # is it a zombie?
+        f = open(lock_file, 'r')
+        pid = f.read()
+        f.close()
+        if not os.path.exists('/proc/' + pid):
+            os.remove(lock_file)
+        else:
+            print 'Only one indicator can run at once. '\
+                  'Indicator is locked with %s' % lock_file
+            sys.exit(-1)
+
+    open(lock_file, 'w').write(str(os.getpid()))
+    try:
+        yield
+    finally:
+        os.remove(lock_file)
 
 VERSION = '0.10'
 TIMEOUT = 2 # seconds
@@ -324,12 +345,12 @@ class BtSyncIndicator:
 	including items to show the size, open the folder in
 	the file manager, show each connected peer, and to 
 	copy the secrets to the clipboard.
-	
+
 	Stores references to the size and peer items so they
 	can easily be updated.
 	"""
 	menu = gtk.Menu()
-	
+
 	folderitem = self.folderitems[folder['name']]
 	folderitem['sizeitem'] = gtk.MenuItem(folder['size'])
 	folderitem['sizeitem'].set_sensitive(False)
@@ -378,7 +399,7 @@ class BtSyncIndicator:
 
 	menu.append(readonly)
 	menu.append(readwrite)
-	
+
 	return menu
     
     def update_folder_menu(self, folder):
@@ -613,5 +634,8 @@ if __name__ == "__main__":
 	print os.path.basename(__file__)+" Version "+VERSION
 	exit()
 
-    indicator = BtSyncIndicator()
-    indicator.main()
+    home = os.getenv('HOME')
+    with file_lock(home + '/.btsync/indicator.lock'):
+        indicator = BtSyncIndicator()
+        indicator.main()
+
