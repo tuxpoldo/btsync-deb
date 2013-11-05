@@ -72,11 +72,32 @@ def file_lock(lock_file):
     finally:
         os.remove(lock_file)
 
+
+class BtSyncConfig:
+    def __init__(self):
+        self.load_config()
+
+    def load_config(self):
+        """
+        Open the config file specified in args load into self.config
+	Removes commented lines starting in //, or multi-line comments
+	wrapped in /* */
+        """
+        logging.info('Opening config file '+args.config)
+        config = ""
+        for line in open(args.config, 'r'):
+            if line.find('//') == -1:
+                config += line
+        config = re.sub("/\*[^*]*\*/", "", config)
+        self.config = json.loads(config)
+        logging.info('Config loaded')
+
+
 VERSION = '0.10'
 TIMEOUT = 2 # seconds
 
 class BtSyncIndicator:
-    def __init__(self):
+    def __init__(self,btconf):
         """
         Initialise the indicator, load the config file,
         intialise some properties and set up the basic
@@ -90,7 +111,7 @@ class BtSyncIndicator:
         self.ind.set_status (appindicator.STATUS_ACTIVE)
         self.ind.set_attention_icon ("btsync-attention")
 
-        self.load_config()
+        self.config = btconf.config
 
         self.urlroot = 'http://'+self.config['webui']['listen']+'/gui/'
         self.folderitems = {}
@@ -125,21 +146,6 @@ class BtSyncIndicator:
 
         self.menu_setup()
         self.ind.set_menu(self.menu)
-
-    def load_config(self):
-        """
-        Open the config file specified in args load into self.config
-	Removes commented lines starting in //, or multi-line comments
-	wrapped in /* */
-        """
-        logging.info('Opening config file '+args.config)
-        config = ""
-        for line in open(args.config, 'r'):
-            if line.find('//') == -1:
-                config += line
-        config = re.sub("/\*[^*]*\*/", "", config)
-        self.config = json.loads(config)
-        logging.info('Config loaded')
 
     def menu_setup(self):
         """
@@ -634,8 +640,9 @@ if __name__ == "__main__":
 	print os.path.basename(__file__)+" Version "+VERSION
 	exit()
 
-    home = os.getenv('HOME')
-    with file_lock(home + '/.btsync/indicator.lock'):
-        indicator = BtSyncIndicator()
+    btconf = BtSyncConfig()
+
+    with file_lock(btconf.config['storage_path'] + '/indicator.lock'):
+        indicator = BtSyncIndicator(btconf)
         indicator.main()
 
