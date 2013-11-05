@@ -30,6 +30,11 @@ case "$1" in
     echo '//' >> ${SAMPLECFG}
     /usr/lib/btsync-common/btsync-core --dump-sample-config >> ${SAMPLECFG}
     touch -r /usr/lib/btsync-common/btsync-core ${SAMPLECFG}
+    if [ -x /etc/init.d/btsync ]; then
+        set +e
+        /etc/init.d/btsync restart
+        set -e
+    fi
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
