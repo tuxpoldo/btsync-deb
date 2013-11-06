@@ -2,7 +2,7 @@
 
 set -e
 
-SOURCES="btsync-common btsync"
+SOURCES="btsync-common btsync-user btsync"
 
 [ -n "$1" ] && SOURCES="$1"
 

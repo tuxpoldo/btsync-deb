@@ -1,0 +1,219 @@
+btsync-user (1.1.90-1) unstable; urgency=low
+
+  * Separated source from server version
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Xxx, xx Xxx 2013 xx:xx:xx +0100
+
+btsync-user (1.1.82.1-3) unstable; urgency=low
+
+  * The native upstream components from BitTorrent Inc. are no more
+    included. All packages are now dependant upon the external
+    package btsync-common which contains the btsync executables and
+    documentation (Closes #18 and #19)
+  * Fixed: frontend was not be stopped on update (Closes #20)
+  * Fixed: handling of update and remove is now working as
+    expected (Closes #22)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 31 Oct 2013 14:57:49 +0100
+
+btsync-user (1.1.82-2) unstable; urgency=low
+
+  * Fixed: Package fails to build on native arm builder (Closes #15)
+  * Fixed: missing config file prevented btsyncindicator to
+    start on fresh installations (Closes #14)
+  * Fixed: btsync --help does not show all available commands (Closes #13)
+  * Fixed: manpage btsync.7 was not installed (Closes #11)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sun, 13 Oct 2013 17:32:26 +0200
+
+btsync-user (1.1.82-1) unstable; urgency=low
+
+  * New upstream release 1.1.82 of btsync
+  * New upstream release 0.10 of btsyncindicator
+  * Fixed: missing dependency to python-appindicator (Closes #7)
+  * Added possibility to suspend/pause the btsync-agent (Closes #8)
+  * Added a unique managing command (Closes #9)
+  * Added man page for the managing command (/usr/bin/btsync)
+  * Released powerpc packages
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sat, 12 Oct 2013 01:46:51 +0200
+
+btsync-user (1.1.70-5) unstable; urgency=low
+
+  * Updated btsyncindicator to version 0.9
+  * Added "BitTorrent Sync" desktop icon (Closes #6)
+  * Fixed: 'Response' object has no attribute 'text' bug (Closes #2)
+  * Fixed: removed lintian warnings (Closes #1)
+  * Fixed: the packages now install EXACTLY the same executable btsync
+    binary as distributed by BitTorrent Inc. - Previously the binary
+    was stripped by debhelper (dh_strip) (Closes #4)
+  * Fixed: both btsync and btsync-user will not specify and strict
+    library version dependency making it possible to install the same
+    package on different Debian/Ubuntu/XXXbian versions without the
+    need to create a specific package (Closes #5)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sat, 30 Sep 2013 15:31:16 +0200
+
+btsync-user (1.1.70-4~sid) sid; urgency=low
+
+  * Fixed: added missing python dependencies for btsync-user
+  * Fixed: small cosmetic improvements in package texts
+  * Fixed: btsyncindicator Issue #2 - made location of bitmaps
+    debian conformant
+  * Added possibility to open the web ui directly from btsyncindicator
+    menu (Closes #3)
+  * Added menu entry "Enable Debug Logging" in btsyncindicator
+    menu (Closes #4)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Tue, 18 Sep 2013 11:20:44 +0200
+
+btsync-user (1.1.70-3~sid) sid; urgency=low
+
+  * Fixed: added autostart support for KDE SC (/usr/share/autostart/)
+    and OpenBox (/etc/xdg/openbox/autostart) in btsync-user
+  * Added Mark Johnson's status indicator applet btsyncindicator
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Tue, 17 Sep 2013 13:25:09 +0200
+
+btsync-user (1.1.70-2~sid) sid; urgency=low
+
+  * Fixed: Restart on update will work in future versions
+    (Reported and fixed by dswd)
+  * Added multiuser support as suggested by user pjssilva
+    (See http://bit.ly/13dBmOP)
+    THIS MAY CHANGE THE PORT NUMBER FOR THE WEB UI
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Wed, 04 Sep 2013 16:07:28 +0200
+
+btsync-user (1.1.70-1~sid) sid; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 15 Aug 2013 10:44:11 +0200
+
+btsync-user (1.1.69-1~sid) sid; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Tue, 13 Aug 2013 00:41:27 +0200
+
+btsync-user (1.1.48-1~sid) sid; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Tue, 23 Jul 2013 22:51:39 +0200
+
+btsync-user (1.1.42-1~sid) sid; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Tue, 16 Jul 2013 17:45:08 +0200
+
+btsync-user (1.1.40-1~sid) sid; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Mon, 15 Jul 2013 16:13:43 +0200
+
+btsync-user (1.1.33-1~sid) sid; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 11 Jul 2013 22:10:09 +0200
+
+btsync-user (1.1.30-1~sid) sid; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Wed, 10 Jul 2013 00:31:45 +0200
+
+btsync-user (1.1.27-2~sid) sid; urgency=low
+
+  * Added support for custom configuration files
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sun, 07 Jul 2013 15:29:51 +0200
+
+btsync-user (1.1.27-1~sid) sid; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 04 Jul 2013 16:59:15 +0200
+
+btsync-user (1.1.26-1~sid) sid; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Wed, 03 Jul 2013 22:20:42 +0200
+
+btsync-user (1.1.22-1~sid) sid; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sat, 29 Jun 2013 16:17:11 +0200
+
+btsync-user (1.1.15-1~sid) sid; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sat, 15 Jun 2013 14:52:14 +0200
+
+btsync-user (1.1.12-1~sid) sid; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Wed, 12 Jun 2013 17:28:12 +0200
+
+btsync-user (1.0.134.2-1~sid) sid; urgency=low
+
+  * Fixed: REALLY Replaced binary version for i386 and amd64 with
+    versions that support the current libc
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sun, 02 June 2013 15:34:39 +0200
+    
+btsync-user (1.0.134.1-1~sid) sid; urgency=low
+
+  * Fixed: Replaced binary version for i386 and amd64 with
+    versions that support the current libc
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sun, 02 June 2013 00:51:12 +0200
+    
+btsync-user (1.0.134-4~sid) sid; urgency=low
+
+  * Really Fixed: btsync-user does not work correctly due to
+    relative paths in configuration file. Now the configuration
+    file /etc/btsync-user/btsync-user.conf is only a template
+    for generating a user specific configuration file into the
+    home directory
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Mon, 21 May 2013 23:31:47 +0200
+
+btsync-user (1.0.134-3~sid) sid; urgency=low
+
+  * Fixed: btsync-user does not work correctly due to relative
+    paths in configuration file. Now the configuration file
+    /etc/btsync-user/btsync-user.conf is only a template for
+    generating a user specific configuration file into the home
+    directory
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Mon, 20 May 2013 18:14:11 +0200
+
+btsync-user (1.0.134-2~sid) sid; urgency=low
+
+  * Fixed: bug in prerm script prevented uninstallation
+  * Fixed: broken autostart and startup script
+  * Fixed: broken icons
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 16 May 2013 23:55:26 +0200
+
+btsync-user (1.0.134-1~sid) sid; urgency=low
+
+  * New upstream release
+  * Merged source for btsync and btsync-user
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 16 May 2013 14:52:26 +0200
+
+btsync-user (1.0.132-5~sid) sid; urgency=low
+
+  * Initial release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 15 May 2013 14:37:12 +0200

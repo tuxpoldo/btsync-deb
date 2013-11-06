@@ -1,0 +1,24 @@
+Source: btsync-user
+Section: net
+Priority: extra
+Maintainer: Leo Moll <leo.moll@yeasoft.com>
+Build-Depends: debhelper (>= 7.0.50)
+Standards-Version: 3.9.4
+Vcs-Git: https://github.com/tuxpoldo/btsync-deb.git
+Vcs-browser: https://github.com/tuxpoldo/btsync-deb
+Homepage: http://www.bittorrent.com
+
+Package: btsync-user
+Architecture: i386 amd64 armel armhf powerpc
+Depends: debconf | debconf-2.0, libc6, ${python:Depends},
+ python-requests, python-appindicator, btsync-common
+Provides: btsync-user-application
+Description: Private network P2P file synchronisation daemon(s)
+ BitTorrent Sync is a simple tool that applies p2p protocol for
+ direct live folder sync with maximum security, network speed and
+ storage capacity. It has native versions for Mac, Windows and
+ Linux, as well as native NAS integration.
+ .
+ This package installs BitTorrent Sync as a WebUI and system tray
+ application for desktop users. It includes Mark Johnson's
+ btsyncindicator applet.
