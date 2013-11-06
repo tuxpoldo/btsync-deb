@@ -1,0 +1,165 @@
+1.2.68 (November 6, 2013)
+ - Fix crash on Windows when adding root of disk
+
+
+1.2.67 (November 5, 2013)
+ - Improved speed with large files (in 1Gb LAN and on low-end
+   CPU devices)
+ - Restore modified files in read-only folder
+ - API and UI-less mode
+ - Advanced features available through API :  
+    * new secrets with support of read-only encrypted peers  
+    * synchronize selected files only
+
+
+1.2.61 (October 30, 2013)
+ - "api_key" in config moved to "webui" section, and now API uses the
+   same authentication as WebUI (HTTP basic)
+ - "enable_api" removed from config (API is now controlled only by
+   "api_key" option)
+ - fixed displaying read-only secret in WebUI
+ - various bugfixes
+
+
+1.2.55 (October 25, 2013)
+ - Improved speed with large files (in 1Gb LAN and on low-end CPU devices)
+ - Improved memory utilization
+ - Restore modified files in read-only folder
+ - API and UI-less mode
+ - Config file is supported for Mac and Windows
+ - Advanced features available through API:
+   + new secrets with support of read-only encrypted peers
+   + selective syncing
+
+
+1.2.36 (September 6, 2013)
+ - Fixed PPC build
+ - Correctly apply SyncIgnore rules both for local and remote
+   (incoming) files
+ - Various bugfixes
+
+
+1.2.24 (August 23, 2013)
+ - improved SyncIgnore - now it does not have to be the same on every
+   peer, should not cause removal of ignored files on remote peers,
+   does not require Sync restart
+ - improved error handling - if some file can not be downloaded (file
+   can not be read on source machine or written on destination), Sync
+   should skip it go to next file
+ - improved performance on ARM (did some ARM-specific code optimization)
+ - limit memory used for network buffers (should reduce total memory usage)
+ - do not pre-allocate entire file in the beginning of download (better
+   performance with large files)
+ - improved performance on Windows Vista+ (use different crypto API)
+ - bug fixes
+ - speed improvements
+
+
+1.1.70 (August 14, 2013)
+ - Fix issue with Web UI (Linux builds only)
+
+
+1.1.69 (August 12, 2013)
+ - Now Sync talk in different languages;
+ - Bug Fixes;
+
+
+1.1.48 (July 23, 2013)
+ - Fixed handling config file on Linux (folder could be added twice
+   and cause database lock)
+ - Fixed crash on shutdown (all platforms)
+ - Various bugfixes
+
+
+1.1.42 (July 16, 2013)
+ - SyncArchive is renamed to .SyncArchive
+ - Fixed few crashes
+
+
+1.1.40 (July 15, 2013)
+ - Implemented upgrade from 1.0.x without need to re-indexing folder;
+ - .SyncTrash is renamed to SyncArchive
+ - Ui message if miches has time difference more than 10 minutes;
+ - Various bug fixes.
+
+
+1.1.33 (July 11, 2013)
+ - Fixed re-indexing on start on Windows;
+ - Fixed handling file renames;
+ - Fixed few cases when sync may get stuck;
+ - Fixed overwrite new files with old ones.
+
+
+1.1.30 (July 10, 2013)
+ - auto-cleanup of .SyncTrash (default 30 days)
+ - fixed using umask on POSIX
+ - do not require admin rights on Win during install
+ - improved performance when syncing list of files
+ - fixed one-time secrets
+ - fixed UNC paths
+ - fixed adding disk root on Win (e.g. C:\)
+ - fixed incorrect file removal (failed to check signature errors in log)
+ - fixed crash during manual check for update on Win
+
+
+1.1.27 (July 4, 2013)
+ - Bug fixes;
+ - Fixed DHT option.
+
+
+1.1.26 (July 2, 2013)
+ - memory leak on Windows
+ - high CPU
+ - fixed tracker & relay selection
+ - don't create backup copy of file when only modification time is changed
+
+
+1.1.22 (June 28, 2013)
+ - Versioning. Changed file will be copied to .SyncTrash
+ - Significant improvements in Sync protocol
+ - Lot of bug fixes
+
+
+1.1.15 (June 14, 2013)
+ - Added support for mobile devices
+ - Fixed crashes on FreeBSD
+ - Various bug fixes
+
+
+1.1.12 (June 12, 2013)
+ - Improved memory and CPU usage when working with many files
+ - Improved transfer speed for small and medium files
+ - Do not create metadata file for each file in shared folder,
+   now all metadata is stored in single database file
+ - Do not read .SyncID every second. Now it should be checked only
+   when some file event occurs (should allow hard drive to sleep)
+ - When file path can not be created on target OS (incompatible file
+   system characters), it will be skipped from sync
+ - Added option to configure rescan time
+ - Various bugfixes
+
+
+1.0.134 (May 16, 2013)
+ - Fixed: Crashes on Windows
+ - Other bugfixes and stability improvements
+
+
+1.0.132 (May 09, 2013)
+ - Fixed: Crashes on Windows
+
+
+1.0.130 (May 08,2013)
+ - FreeBSD support
+ - Changed local date mechanism to avoid sync conflicts
+ - Fixed: saving settings in WebUI after restart
+ - Fixed: known hosts configuration on Linux
+ - Fixed: Most popular crashes
+ - Other bugfixes and stability improvements
+ - Fixed: access to files outside of sync folder
+
+
+1.0.125 (May 06, 2013)
+ -
+
+1.0.116 (April 25, 2013)
+ - First official beta release
