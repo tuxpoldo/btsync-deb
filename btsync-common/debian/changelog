@@ -5,7 +5,7 @@ btsync-common (1.2.68-2) unstable; urgency=low
   * Added original upstream changelog based on information found in
     the BitTorrent Forum
 
- -- Leo Moll <leo.moll@yeasoft.com>  Mon, 11 Nov 2013 14:22:43 +0100
+ -- Leo Moll <leo.moll@yeasoft.com>  Mon, 11 Nov 2013 18:04:41 +0100
 
 btsync-common (1.2.68-1) unstable; urgency=low
 
