@@ -19,31 +19,34 @@ set -e
 
 
 case "$1" in
-    configure)
-    SAMPLECFG=/usr/share/doc/btsync-common/btsync.conf.sample
-    echo '//!/usr/lib/btsync-common/btsync-core --config' > ${SAMPLECFG}
-    echo '//' >> ${SAMPLECFG}
-    echo '// (c) 2013 BitTorrent Inc.' >> ${SAMPLECFG}
-    echo '//' >> ${SAMPLECFG}
-    echo '// This btsync configuration file features the complete set of' >> ${SAMPLECFG}
-    echo '// commented configuration directives' >> ${SAMPLECFG}
-    echo '//' >> ${SAMPLECFG}
-    /usr/lib/btsync-common/btsync-core --dump-sample-config >> ${SAMPLECFG}
-    touch -r /usr/lib/btsync-common/btsync-core ${SAMPLECFG}
-    if [ -x /etc/init.d/btsync ]; then
-        set +e
-        /etc/init.d/btsync restart
-        set -e
-    fi
-    ;;
-
-    abort-upgrade|abort-remove|abort-deconfigure)
-    ;;
-
-    *)
-        echo "postinst called with unknown argument \`$1'" >&2
-        exit 1
-    ;;
+configure)
+	SAMPLECFG=/usr/share/doc/btsync-common/btsync.conf.sample
+	echo '//!/usr/lib/btsync-common/btsync-core --config' > ${SAMPLECFG}
+	echo '//' >> ${SAMPLECFG}
+	echo '// (c) 2013 BitTorrent Inc.' >> ${SAMPLECFG}
+	echo '//' >> ${SAMPLECFG}
+	echo '// This btsync configuration file features the complete set of' >> ${SAMPLECFG}
+	echo '// commented configuration directives' >> ${SAMPLECFG}
+	echo '//' >> ${SAMPLECFG}
+	/usr/lib/btsync-common/btsync-core --dump-sample-config >> ${SAMPLECFG}
+	touch -r /usr/lib/btsync-common/btsync-core ${SAMPLECFG}
+	set +e
+	# handle btsync-user if installed
+	if [ -f /var/run/btsync-user-updating ]; then
+		rm -f /var/run/btsync-user-updating
+	fi
+	# handle btsync daemon if installed
+	if [ -x /etc/init.d/btsync ]; then
+		/etc/init.d/btsync restart
+	fi
+	set -e
+	;;
+abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+*)
+	echo "postinst called with unknown argument \`$1'" >&2
+	exit 1
+	;;
 esac
 
 # dh_installdeb will replace this with shell code automatically

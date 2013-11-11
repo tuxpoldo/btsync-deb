@@ -18,17 +18,37 @@ set -e
 
 
 case "$1" in
-    remove|upgrade|deconfigure)
-    rm -f /usr/share/doc/btsync-common/btsync.conf.sample
-    ;;
-
-    failed-upgrade)
-    ;;
-
-    *)
-        echo "prerm called with unknown argument \`$1'" >&2
-        exit 1
-    ;;
+remove|deconfigure)
+	rm -f /usr/share/doc/btsync-common/btsync.conf.sample
+	;;
+upgrade)
+	set +e
+	# handle btsync-user if installed
+	# it is secure to assume it installed also if it is not
+	touch /var/run/btsync-user-updating
+	pkill btsync-agent
+	# handle btsync daemon if installed
+	if [ -x /etc/init.d/btsync ]; then
+		service btsync stop
+	fi
+	set -e
+	;;
+failed-upgrade)
+	set +e
+	# handle btsync-user if installed
+	if [ -f /var/run/btsync-user-updating ]; then
+		rm -f /var/run/btsync-user-updating
+	fi
+	# handle btsync daemon if installed
+	if [ -x /etc/init.d/btsync ]; then
+		service btsync start
+	fi
+	set -e
+	;;
+*)
+	echo "prerm called with unknown argument \`$1'" >&2
+	exit 1
+	;;
 esac
 
 # dh_installdeb will replace this with shell code automatically
