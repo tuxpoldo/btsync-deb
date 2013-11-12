@@ -76,10 +76,12 @@ gpg:               imported: 1
 
 Now you can easily add the package sources, by executing the following commands:
 [code]
-CODENAME=$(lsb_release -cs | sed -n '/lucid\|precise\|quantal\|raring\|saucy\|squeeze\|wheezy\|jessie\|sid/p')
-`which sudo` echo deb http://debian.yeasoft.net/btsync ${CODENAME:-sid} main > /etc/apt/sources.list.d/btsync.list
-`which sudo` echo deb-src http://debian.yeasoft.net/btsync ${CODENAME:-sid} main >> /etc/apt/sources.list.d/btsync.list
+CODENAME=$(lsb_release -cs | sed -n '/lucid\|precise\|quantal\|raring\|saucy\|trusty\|squeeze\|wheezy\|jessie\|sid/p')
+echo deb http://debian.yeasoft.net/btsync ${CODENAME:-sid} main > ~/btsync.list
+echo deb-src http://debian.yeasoft.net/btsync ${CODENAME:-sid} main >> ~/btsync.list
 unset CODENAME
+`which sudo` mv ~/btsync.list /etc/apt/sources.list.d/btsync.list
+`which sudo` chown root:root /etc/apt/sources.list.d/btsync.list
 [/code]
 
 Remember to update the local cache:
