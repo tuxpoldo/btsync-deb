@@ -1,3 +1,9 @@
+btsync-common (1.2.71-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Tue, 12 Nov 2013 11:27:12 +0100
+
 btsync-common (1.2.68-2) unstable; urgency=low
 
   * Installation now should restart all known dependent services

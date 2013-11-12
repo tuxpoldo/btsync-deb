@@ -1,3 +1,8 @@
+1.2.71 (November 11, 2013)
+ - Fix crash when removing shared folder
+ - Fix hang on shutdown
+
+
 1.2.68 (November 6, 2013)
  - Fix crash on Windows when adding root of disk
 
