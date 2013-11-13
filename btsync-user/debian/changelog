@@ -1,6 +1,7 @@
 btsync-user (1.1.90-1) unstable; urgency=low
 
-  * Separated source from server version
+  * Separated source from server version (Closes #38)
+  * Added missing dependency from python-gtk2 (Closes #39)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Xxx, xx Xxx 2013 xx:xx:xx +0100
 

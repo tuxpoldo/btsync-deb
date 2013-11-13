@@ -11,7 +11,7 @@ Homepage: http://www.bittorrent.com
 Package: btsync-user
 Architecture: i386 amd64 armel armhf powerpc
 Depends: debconf | debconf-2.0, libc6, ${python:Depends},
- python-requests, python-appindicator, btsync-common
+ python-requests, python-appindicator, python-gtk2, btsync-common
 Provides: btsync-user-application
 Description: Private network P2P file synchronisation daemon(s)
  BitTorrent Sync is a simple tool that applies p2p protocol for
