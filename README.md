@@ -25,7 +25,7 @@ tray application for desktop users is named __btsync-user__
 Userful Links
 -------------
 
-Home Page: http://labs.bittorrent.com/experiments/sync.html
+Home Page: http://www.bittorrent.com/sync
 
 Support Forum: http://forum.bittorrent.com/forum/56-bittorrent-sync/
 
