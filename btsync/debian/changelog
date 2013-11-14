@@ -2,6 +2,8 @@ btsync (1.1.90-1) unstable; urgency=low
 
   * Separated server from desktop package in order to permit
     separate releases (Closes #38)
+  * Fixed missing logfile generation broken with new btsync
+    version 1.2.67 (Closes #40)
   * Added Galician translation to debconf templates contributed
     by Miguel Anxo Bouzada (Closes #35)
   * Added Spanish translation to debconf templates contributed
