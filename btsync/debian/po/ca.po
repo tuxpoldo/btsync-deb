@@ -11,13 +11,13 @@ msgstr ""
 #. Description
 #: ../btsync.templates:1001
 msgid "Do you want to define a default BitTorrent Sync instance?"
-msgstr "Vols definir una configuració per defecte de BitTorrent Sync?"
+msgstr "Vols definir una configuració predeterminada de BitTorrent Sync?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:1001
 msgid "BitTorrent Sync can run one or more daemons based on configuration files located in /etc/btsync. You can choose to create a default instance running under root credentials that can be also reconfigured via dpkg-reconfigure or manage the whole configuration manually. In both cases you can manually manage additional instances with their own configuration files."
-msgstr "BitTorrent Sync pot executar un o més processos en segon pla (daemon) basats en els arxius de configuració localitzats a /etc/btsync. Pots crear una configuració per defecte executant-se amb credencials root que pot ser reconfigurat via dpkg-reconfigure o gestionant tota la configuració manualment. En els dos casos, pots gestionar manualment les configuracions addicionals i els seus respectius arxius de configuració."
+msgstr "BitTorrent Sync pot executar un o més processos en segon pla (daemon) basats en els arxius de configuració localitzats a /etc/btsync. Pots crear una configuració predeterminada executant-se amb credencials root que pot ser reconfigurat via dpkg-reconfigure o gestionant tota la configuració manualment. En els dos casos, pots gestionar manualment les configuracions addicionals i els seus respectius arxius de configuració."
 
 #. Type: string
 #. Description
@@ -157,7 +157,7 @@ msgstr "El nom visible del dispositiu d'aquesta configuració:"
 #. Description
 #: ../btsync.templates:10001
 msgid "Specify here the visible device name for this instance. If left empty, a default device name based on the host name will be created."
-msgstr "Introdueix aquí el nom visible del dispositiu per aquesta configuració. Si es deixa en blanc, es crearà un nom per defecte basat en el nom del host."
+msgstr "Introdueix aquí el nom visible del dispositiu per aquesta configuració. Si es deixa en blanc, es crearà un nom predeterminat basat en el nom del host."
 
 #. Type: boolean
 #. Description
@@ -169,7 +169,7 @@ msgstr "BitTorrent Sync hauria d'executar operacions al disc amb prioritat baixa
 #. Description
 #: ../btsync.templates:11001
 msgid "Sets priority for the file operations on disc. If set to false, Sync will perform read and write file operations with the highest speed and priority which can result in degradation of performance for other applications."
-msgstr "Estableix la prioritat per les operacions d'arxiu al disc. Si s'estableix \"false\", Sync executarà les operacions de lectura i escritptura de fitxers amb la màima velocitat disponible, cosa que pot degradar el rendiment d'altres aplicacions. "
+msgstr "Estableix la prioritat per les operacions d'arxiu al disc. Si s'estableix \"false\", Sync executarà les operacions de lectura i escritptura de fitxers amb la màima velocitat disponible, cosa que pot degradar el rendiment d'altres aplicacions."
 
 #. Type: boolean
 #. Description
@@ -217,7 +217,7 @@ msgstr "Interval en segons per tornar a examinar les carpetes:"
 #. Description
 #: ../btsync.templates:15001
 msgid "Syncing happens in real time. In addition, as a fall back, BitTorrent Sync also rescans files/folders every 10 minutes by default. This interval can be modified here."
-msgstr "La sincronització passa a temps real. A més, BitTorren Sync també torna a examinar els arxius/carpetes cada 10 minuts per defecte. Aques interval es pot ajustar aquí."
+msgstr "La sincronització passa a temps real. A més, BitTorren Sync també torna a examinar els arxius/carpetes cada 10 minuts de forma predeterminada. Aques interval es pot ajustar aquí."
 
 #. Type: string
 #. Description
@@ -230,4 +230,76 @@ msgstr "Elstablir el valor umask pel daemon:"
 #: ../btsync.templates:16001
 msgid "Applies the supplied umask to the BitTorrent Sync daemon. If leaved empty, the default umask value applies."
 msgstr "Aplica l'umask proporcionat al daemon de BitTorrent Sync. Si es deixa en blanc, s'aplica el valor d'umask per defecte."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:17001
+msgid "Maximum file size difference for patching:"
+msgstr "Diferència màxima de tamany dels fitxers actualitzats:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:17001
+msgid "Determines a size difference in MB between versions of one file for patching. When it is reached or exceeded, the file will be updated by downloading missing chunks of information (patches). Updates for a file with a smaller size difference will be downloaded as separate files. If leaved empty, the default value applies."
+msgstr "Imposa una diferència de tamany (en MB) entre les versions d'un arxiu per actualitzar. Quan s'assoleix o s'excedeix el valor, l'arxiu s'actualitzarà descarregant els trossos d'informació que falten. Les actualitzacions d'un arxiu per diferències de tamany petites es descarregaran com arxius separats. Si es deixa en blanc, s'aplica el valor predeterminat."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:18001
+msgid "Maximum file size for versioning:"
+msgstr "Tamany màxim de l'arxiu per versionar:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:18001
+msgid "Determines maximum file size in MB for creating file versions. When this size is exceeded, versions will not be created to save space on disk. If leaved empty, the default value applies."
+msgstr "Determina un tamany màxim en MB per crear versions d'un fitxer. Quan s'excedeix aquest tamany, les versions no es crearan per guardar espai al disc. i es deixa en blanc, s'aplicarà el valor predeterminat."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:19001
+msgid "Send Buffer Size:"
+msgstr "Tamany del buffer d'enviament:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:19001
+msgid "This is the amount of real memory in MB that will be used for cached send operations. This value can be set in the range from 1 to 100 MB. If leaved empty, the default value applies."
+msgstr "Quantitat de memòria real en MB que s'usarà per \"cachejar\" les operacions d'enviar arxius. Aquest valor pot ser establert entre 1 a 100 MB. Si es deixa en blanc, s'aplicarà el valor per defecte."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:20001
+msgid "Receive buffer size:"
+msgstr "Tamany del buffer de rebuda:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:20001
+msgid "This is the amount of real memory in MB that will be used for cached receive operations. This value can be set in the range from 1 to 100 MB. If leaved empty, the default value applies."
+msgstr "Quantitat de memòria real en MB que s'usarà per \"cachejar\" les operacions de rebre arxius. Aquest valor pot ser establert entre 1 a 100 MB. Si es deixa en blanc, s'aplicarà el valor predeterminat."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:21001
+msgid "Maximum time difference between devices:"
+msgstr "Temps mèxim de diferència entre dispositius:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:21001
+msgid "Maximum allowed time difference in seconds between devices. If the difference exceeds this limit, the devices will not be synced as it may result in incorrect tracing of file changes. If leaved empty, the default value applies."
+msgstr "Diferència de temps màxim permès entre aparells mesurat en segons. Si la diferència supera aquest límit, els dispositius no es sincronitzaran ja que podria donar lloc al seguiment incorrecte dels canvis en els arxius. Si es deixa en blanc, s'aplica el valor predeterminat."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:22001
+msgid "Maximum time to live for versioned copies:"
+msgstr "Tems de vida màxim de les còpies de les versions:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:22001
+msgid "Sets the number of days after reaching which files will be automatically deleted from the .SyncArchive folder. If leaved empty, the default value applies."
+msgstr "Estableix el nombre de dies a partir del qual una còpia s'esborrarà automàticament de la carpeta .SyncArchive. Si es deixa en blanc, s'aplica el valor predeterminat."
 

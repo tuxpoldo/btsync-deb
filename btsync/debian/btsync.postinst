@@ -54,6 +54,18 @@ create_default_instance () {
 	PASSWORD="${RET}"
 	db_get btsync/daemon_umask || RET=""
 	UMASK="${RET}"
+	db_get btsync/max_file_size_diff_for_patching || RET=""
+	MAX_FILE_DIFF_PATCH="${RET}"
+	db_get btsync/max_file_size_for_versioning || RET=""
+	MAX_FILE_VERSIONING="${RET}"
+	db_get btsync/send_buf_size || RET=""
+	SEND_BUF_SIZE="${RET}"
+	db_get btsync/recv_buf_size || RET=""
+	RECV_BUF_SIZE="${RET}"
+	db_get btsync/sync_max_time_diff || RET=""
+	MAX_TIME_DIFF="${RET}"
+	db_get btsync/sync_trash_ttl || RET=""
+	TRASH_TTL="${RET}"
 	(
 	cat <<EOF
 //!/usr/lib/btsync/btsync-daemon --config
@@ -82,10 +94,32 @@ create_default_instance () {
 	"lan_use_tcp" : ${LAN_USE_TCP},
 	"rate_limit_local_peers" : ${RATE_LIMIT_LOCAL_PEERS},
 	"folder_rescan_interval" : ${FOLDER_RESCAN_INTERVAL},
+EOF
+	) > ${CONFFILE}
+	if [ -n "$MAX_FILE_DIFF_PATCH" ]; then
+		echo "	\"max_file_size_diff_for_patching\" : ${MAX_FILE_DIFF_PATCH}," >> ${CONFFILE}
+	fi
+	if [ -n "$MAX_FILE_VERSIONING" ]; then
+		echo "	\"max_file_size_for_versioning\" : ${MAX_FILE_VERSIONING}," >> ${CONFFILE}
+	fi
+	if [ -n "$SEND_BUF_SIZE" ]; then
+		echo "	\"send_buf_size\" : ${SEND_BUF_SIZE}," >> ${CONFFILE}
+	fi
+	if [ -n "$RECV_BUF_SIZE" ]; then
+		echo "	\"recv_buf_size\" : ${RECV_BUF_SIZE}," >> ${CONFFILE}
+	fi
+	if [ -n "$MAX_TIME_DIFF" ]; then
+		echo "	\"sync_max_time_diff\" : ${MAX_TIME_DIFF}," >> ${CONFFILE}
+	fi
+	if [ -n "$TRASH_TTL" ]; then
+		echo "	\"sync_trash_ttl\" : ${TRASH_TTL}," >> ${CONFFILE}
+	fi
+	(
+	cat <<EOF
 	"webui" :
 	{
 EOF
-	) > ${CONFFILE}
+	) >> ${CONFFILE}
 	if [ "x$LOGIN" != "x" ]; then
 		(
 		cat <<EOF
@@ -138,6 +172,12 @@ EOF
 	unset DOWNLOAD_LIMIT
 	unset USE_UPNP
 	unset LISTENING_PORT
+	unset MAX_FILE_DIFF_PATCH
+	unset MAX_FILE_VERSIONING
+	unset SEND_BUF_SIZE
+	unset RECV_BUF_SIZE
+	unset MAX_TIME_DIFF
+	unset TRASH_TTL
 	chmod 400 ${CONFFILE}
 }
 

@@ -128,7 +128,7 @@ msgstr "Určete zde port BItTorrent Syncu , kterému bude naslouchat pro webové
 #. Description
 #: ../btsync.templates:8001
 msgid "The username for accessing the web interface:"
-msgstr "Jméno pro přístup do webového rozhraní."
+msgstr "Jméno pro přístup do webového rozhraní:"
 
 #. Type: string
 #. Description
@@ -230,5 +230,77 @@ msgstr "Hodnota umask pro daemon proces:"
 #. Description
 #: ../btsync.templates:16001
 msgid "Applies the supplied umask to the BitTorrent Sync daemon. If leaved empty, the default umask value applies."
-msgstr "Použije přiloženou umask daemonu BItTorrent Syncu.Pokud toto pole zanecháte prázdné, Sync použije defaultní hodnotu umask."
+msgstr "Použije přiloženou umask daemonu BItTorrent Syncu. Pokud toto pole zanecháte prázdné, Sync použije defaultní hodnotu umask."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:17001
+msgid "Maximum file size difference for patching:"
+msgstr "Limit velikosti rozdílu souboru pro patchování:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:17001
+msgid "Determines a size difference in MB between versions of one file for patching. When it is reached or exceeded, the file will be updated by downloading missing chunks of information (patches). Updates for a file with a smaller size difference will be downloaded as separate files. If leaved empty, the default value applies."
+msgstr "Určuje velikostní rozdíl souborů v MB mezi verzemi jednoho souboru pro patchování(upravení jen části souboru).Pokud je limit překročen, soubor bude aktualizován stahováním chybějících sektorů informací. "
+
+#. Type: string
+#. Description
+#: ../btsync.templates:18001
+msgid "Maximum file size for versioning:"
+msgstr "Limit velikosti souboru pro verzování:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:18001
+msgid "Determines maximum file size in MB for creating file versions. When this size is exceeded, versions will not be created to save space on disk. If leaved empty, the default value applies."
+msgstr "Určuje maximální velikost v MB pro vytváření verzí souboru. Pokud je tato velikost překročena, verze nebudou ukládány.Děje se tak pro zachování volného místa na disku."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:19001
+msgid "Send Buffer Size:"
+msgstr "Send Buffer Size:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:19001
+msgid "This is the amount of real memory in MB that will be used for cached send operations. This value can be set in the range from 1 to 100 MB. If leaved empty, the default value applies."
+msgstr "Toto je skutečné množství paměti, která bude použita ke cachování při uploadu. Tato hodnota se může pohybovat mezi čísly 1 až 100MB. Pokud necháte pole prázdné, bude aplikována defaultní hodnota."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:20001
+msgid "Receive buffer size:"
+msgstr "Receive buffer size:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:20001
+msgid "This is the amount of real memory in MB that will be used for cached receive operations. This value can be set in the range from 1 to 100 MB. If leaved empty, the default value applies."
+msgstr "Toto je skutečné množství paměti, která bude použita ke cachování při stahování. Tato hodnota se může pohybovat mezi čísly 1 až 100MB. Pokud necháte pole prázdné, bude aplikována defaultní hodnota."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:21001
+msgid "Maximum time difference between devices:"
+msgstr "Maximální časový rozdíl mezi zařízeními:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:21001
+msgid "Maximum allowed time difference in seconds between devices. If the difference exceeds this limit, the devices will not be synced as it may result in incorrect tracing of file changes. If leaved empty, the default value applies."
+msgstr "Maximum allowed time difference in seconds between devices. If the difference exceeds this limit, the devices will not be synced as it may result in incorrect tracing of file changes. If leaved empty, the default value applies."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:22001
+msgid "Maximum time to live for versioned copies:"
+msgstr "Doba po kterou budou zachovány verze souboru:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:22001
+msgid "Sets the number of days after reaching which files will be automatically deleted from the .SyncArchive folder. If leaved empty, the default value applies."
+msgstr "Sets the number of days after reaching which files will be automatically deleted from the .SyncArchive folder. If leaved empty, the default value applies."
 

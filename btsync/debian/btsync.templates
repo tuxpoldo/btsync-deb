@@ -130,3 +130,54 @@ Default:
 _Description: Umask value to set for the daemon:
  Applies the supplied umask to the BitTorrent Sync daemon. If leaved
  empty, the default umask value applies.
+
+Template: btsync/max_file_size_diff_for_patching
+Type: string
+Default:
+_Description: Maximum file size difference for patching:
+ Determines a size difference in MB between versions of one file for patching.
+ When it is reached or exceeded, the file will be updated by downloading
+ missing chunks of information (patches). Updates for a file with a smaller
+ size difference will be downloaded as separate files. If leaved
+ empty, the default value applies.
+
+Template: btsync/max_file_size_for_versioning
+Type: string
+Default:
+_Description: Maximum file size for versioning:
+ Determines maximum file size in MB for creating file versions. When this size
+ is exceeded, versions will not be created to save space on disk. If leaved
+ empty, the default value applies.
+
+Template: btsync/send_buf_size
+Type: string
+Default:
+_Description: Send Buffer Size:
+ This is the amount of real memory in MB that will be used for cached send
+ operations. This value can be set in the range from 1 to 100 MB. If leaved
+ empty, the default value applies.
+
+Template: btsync/recv_buf_size
+Type: string
+Default:
+_Description: Receive buffer size:
+ This is the amount of real memory in MB that will be used for cached receive
+ operations. This value can be set in the range from 1 to 100 MB. If leaved
+ empty, the default value applies.
+
+Template: btsync/sync_max_time_diff
+Type: string
+Default:
+_Description: Maximum time difference between devices:
+ Maximum allowed time difference in seconds between devices. If the difference
+ exceeds this limit, the devices will not be synced as it may result in
+ incorrect tracing of file changes. If leaved empty, the default value
+ applies.
+
+Template: btsync/sync_trash_ttl
+Type: string
+Default:
+_Description: Maximum time to live for versioned copies:
+ Sets the number of days after reaching which files will be automatically
+ deleted from the .SyncArchive folder. If leaved empty, the default value
+ applies.

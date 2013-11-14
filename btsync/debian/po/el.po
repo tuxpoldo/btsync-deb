@@ -231,3 +231,75 @@ msgstr "Umask τιμή για την ρύθμιση του daemon:"
 msgid "Applies the supplied umask to the BitTorrent Sync daemon. If leaved empty, the default umask value applies."
 msgstr "Εφαρμόζει την παρεχόμενη umask στο BitTorrent Sync daemon. Αν μείνει κενό, τότε θα εφαρμοστεί η προκαθορισμένη τιμή για το umask."
 
+#. Type: string
+#. Description
+#: ../btsync.templates:17001
+msgid "Maximum file size difference for patching:"
+msgstr "Μέγιστη διαφορά μεγέθους αρχείων για ενημέρωση:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:17001
+msgid "Determines a size difference in MB between versions of one file for patching. When it is reached or exceeded, the file will be updated by downloading missing chunks of information (patches). Updates for a file with a smaller size difference will be downloaded as separate files. If leaved empty, the default value applies."
+msgstr "Ορίζει την διαφορά μεγέθους σε MB μεταξύ των εκδόσεων ενός αρχείου για ενημέρωση. Όταν η διαφορά επιτευχθει,το αρχείο θα ενημερωθεί με τα κομμάτια πληροφορίας που λείπουν. Ενημερώσεις για ένα αρχείο με μικρότερη διαφορά μεγέθους θα κατέβουν ως διαφορετικά αρχεία. Αν μείνει κενό, εφαρμόζεται η προκαθορισμένη τιμή."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:18001
+msgid "Maximum file size for versioning:"
+msgstr "Μέγιστο μέγεθος αρχείου για καινούρια έκδοση."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:18001
+msgid "Determines maximum file size in MB for creating file versions. When this size is exceeded, versions will not be created to save space on disk. If leaved empty, the default value applies."
+msgstr "Ορίζει το μέγιστο μέγεθος αρχείου σε MB για την δημιουργία διαφορετικών εκδόσεων .Όταν το μέγεθος του αρχείου υπερβεί το όριο αυτό, δεν θα δημιουργούνται νέες εκδόσεις για εξοικονόμηση χώρου στον δίσκο. Αν μείνει κενό, εφαρμόζεται η προκαθορισμένη τιμή."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:19001
+msgid "Send Buffer Size:"
+msgstr "Μέγεθος προσωρινής μνήμης προς αποστολή."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:19001
+msgid "This is the amount of real memory in MB that will be used for cached send operations. This value can be set in the range from 1 to 100 MB. If leaved empty, the default value applies."
+msgstr "Αυτό ειναι το μέγεθος της πραγματική μνήμης σε MB που θα χρησιμοποιηθεί για λειτουργίες αποστολής. Αυτή η τιμή λαμβάνει τιμή από 1 έως 100 MB. Αν είναι κενό, εφαρμόζεται η προκαθορισμένη τιμή."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:20001
+msgid "Receive buffer size:"
+msgstr "Μέγεθος προσωρινής μνήμης υποδοχεα:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:20001
+msgid "This is the amount of real memory in MB that will be used for cached receive operations. This value can be set in the range from 1 to 100 MB. If leaved empty, the default value applies."
+msgstr "Αυτό είναι το μέγεθος της πραγματικής μνήμης σε ΜΒ που θα χρησιμοποιηθεί σε λειτουργίες προσωρινής υποδοχής δεδομένων. Επιτρεπτές τιμές είναι στο διάστημα από 1 έως 100 MB. Αν μείνει κενό, θα εφαρμοστεί η προκαθορισμένη τιμή."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:21001
+msgid "Maximum time difference between devices:"
+msgstr "Μέγιστη διαφορά ώρας μεταξύ των συσκευών:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:21001
+msgid "Maximum allowed time difference in seconds between devices. If the difference exceeds this limit, the devices will not be synced as it may result in incorrect tracing of file changes. If leaved empty, the default value applies."
+msgstr "Μέγιστη επιτρεπόμενη διαφορά ώρας σε δευτερόλεπτα μεταξύ των συσκευών.Αν η διαφορά υπερβεί αυτό το όριο, οι συσκευές δεν θα συγχρονιστούν γιατί μπορεί να προκαλέσει λανθασμένη ανίχνευση αλλαγών στα αρχεία. Αν μέινει κενό,εφαρμόζεται η προκαθορισμένη τιμή."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:22001
+msgid "Maximum time to live for versioned copies:"
+msgstr "Μέγιστο διάστημα αποθήκευσης διαφορετικών εκδόσεων:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:22001
+msgid "Sets the number of days after reaching which files will be automatically deleted from the .SyncArchive folder. If leaved empty, the default value applies."
+msgstr "Θέτει τον αριθμό των ημερών πέρα από τον οποίο, τα αρχεία που βρίσκονται στο φάκελο .SyncArchive θα σβήνονται. Αν μείνει κενό, εφαρμόζεται η προκαθορισμένη τιμή."
+

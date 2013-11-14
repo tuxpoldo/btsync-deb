@@ -231,3 +231,75 @@ msgstr "A démon Umask értéke:"
 msgid "Applies the supplied umask to the BitTorrent Sync daemon. If leaved empty, the default umask value applies."
 msgstr "A megadott umask értéket használja a BitTorrent Sync démonja. Ha üresen hagyja, az alap érték fog évényesülni."
 
+#. Type: string
+#. Description
+#: ../btsync.templates:17001
+msgid "Maximum file size difference for patching:"
+msgstr "Legnagyobb méretbeli eltérés a patcheléshez:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:17001
+msgid "Determines a size difference in MB between versions of one file for patching. When it is reached or exceeded, the file will be updated by downloading missing chunks of information (patches). Updates for a file with a smaller size difference will be downloaded as separate files. If leaved empty, the default value applies."
+msgstr "Megadja a méretbeli különbséget MB-ban. E fölött csak a fájl hiányzó darabjai (patchek) lesznek letöltve. A megadott érték alatt az egész fájl letöltésre kerül. Ha üresen hagyod ezt a mezőt, az alapértelmezett érték lesz érvényben."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:18001
+msgid "Maximum file size for versioning:"
+msgstr "Legnagyobb fájlméret a verziókövetéshez:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:18001
+msgid "Determines maximum file size in MB for creating file versions. When this size is exceeded, versions will not be created to save space on disk. If leaved empty, the default value applies."
+msgstr "A verziókövetéshez használt legnagyobb fájlméretet MB-ban. Helymegtakarítási célból e méret fölött nem lesz verziókövetés. Üresen hagyva ezt a mezőt, az alapértelmezett érték lesz érvényben."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:19001
+msgid "Send Buffer Size:"
+msgstr "Küldő gyorsítótár mérete:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:19001
+msgid "This is the amount of real memory in MB that will be used for cached send operations. This value can be set in the range from 1 to 100 MB. If leaved empty, the default value applies."
+msgstr "A küldő gyorsítótár valós memóriamérete MB-ban. Az érték 1 és 100MB közötti lehet. Üresen hagyva ezt a mezőt, az alapértelmezett érték lesz érvényben."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:20001
+msgid "Receive buffer size:"
+msgstr "Fogadó gyorsítótár mérete:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:20001
+msgid "This is the amount of real memory in MB that will be used for cached receive operations. This value can be set in the range from 1 to 100 MB. If leaved empty, the default value applies."
+msgstr "A fogadó gyorsítótár valós memóriamérete MB-ban. Az érték 1 és 100MB közötti lehet. Üresen hagyva ezt a mezőt, az alapértelmezett érték lesz érvényben."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:21001
+msgid "Maximum time difference between devices:"
+msgstr "Legnagyobb időbeli eltérés a gépek között:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:21001
+msgid "Maximum allowed time difference in seconds between devices. If the difference exceeds this limit, the devices will not be synced as it may result in incorrect tracing of file changes. If leaved empty, the default value applies."
+msgstr "A gépek órái között megengedett legnagyobb eltérés másodpercben. Nagyobb időkülönbség esetén már nem biztosítható megfelelően a fájlok megfelelő változás-figyelése, így azok nem is lesznek szinkronizálva. Üresen hagyva ezt a mezőt, az alapértelmezett érték lesz érvényben."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:22001
+msgid "Maximum time to live for versioned copies:"
+msgstr "Legnagyobb időeltérés a verziókövetett fájlok másolatai között:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:22001
+msgid "Sets the number of days after reaching which files will be automatically deleted from the .SyncArchive folder. If leaved empty, the default value applies."
+msgstr "Ennyi nap után a fájlok a .SyncArchive mappából törlésre kerülnek. Üresen hagyva ezt a mezőt, az alapértelmezett érték lesz érvényben."
+

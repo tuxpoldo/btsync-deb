@@ -231,3 +231,75 @@ msgstr "Valeur Umask à attribuer au démon :"
 msgid "Applies the supplied umask to the BitTorrent Sync daemon. If leaved empty, the default umask value applies."
 msgstr "Affecte la valeur Umask indiquée au démon BitTorrent Sync. Si non renseigné, la valeur Umask par défaut est appliquée."
 
+#. Type: string
+#. Description
+#: ../btsync.templates:17001
+msgid "Maximum file size difference for patching:"
+msgstr "Différence maximale de taille de fichier pour patcher :"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:17001
+msgid "Determines a size difference in MB between versions of one file for patching. When it is reached or exceeded, the file will be updated by downloading missing chunks of information (patches). Updates for a file with a smaller size difference will be downloaded as separate files. If leaved empty, the default value applies."
+msgstr "Définit la différence de taille en Mo entre versions d'un fichier autorisant le recours à des patchs. À partir de cette différence et au-delà, le fichier est mis à jour par téléchargement des pièces manquantes (patchs). Pour un fichier dont la différence de taille est inférieure, les mises à jour sont téléchargées en tant que fichiers distincts. Si laissé vide, la valeur par défaut s'applique."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:18001
+msgid "Maximum file size for versioning:"
+msgstr "Taille de fichier maximale pour la gestion des versions :"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:18001
+msgid "Determines maximum file size in MB for creating file versions. When this size is exceeded, versions will not be created to save space on disk. If leaved empty, the default value applies."
+msgstr "Définit la taille de fichier maximale en Mo autorisant la création de versions des fichiers. Au-delà de cette taille, les versions ne sont pas créées afin d'économiser l'espace disque. Si laissé vide, la valeur par défaut s'applique."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:19001
+msgid "Send Buffer Size:"
+msgstr "Taille du tampon d'envoi :"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:19001
+msgid "This is the amount of real memory in MB that will be used for cached send operations. This value can be set in the range from 1 to 100 MB. If leaved empty, the default value applies."
+msgstr "Il s'agit de la quantité de mémoire réelle en Mo utilisée pour la mise en cache des opérations d'envoi. Cette valeur peut être ajustée de 1 à 100 Mo. Si laissé vide, la valeur par défaut s'applique."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:20001
+msgid "Receive buffer size:"
+msgstr "Taille du tampon de réception :"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:20001
+msgid "This is the amount of real memory in MB that will be used for cached receive operations. This value can be set in the range from 1 to 100 MB. If leaved empty, the default value applies."
+msgstr "Il s'agit de la quantité de mémoire réelle en Mo utilisée pour la mise en cache des opérations de réception. Cette valeur peut être ajustée de 1 à 100 Mo. Si laissé vide, la valeur par défaut s'applique."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:21001
+msgid "Maximum time difference between devices:"
+msgstr "Décalage horaire maximal entre périphériques :"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:21001
+msgid "Maximum allowed time difference in seconds between devices. If the difference exceeds this limit, the devices will not be synced as it may result in incorrect tracing of file changes. If leaved empty, the default value applies."
+msgstr "Décalage horaire maximal autorisé entre périphériques, en secondes. Si le décalage excède cette valeur limite, les périphériques ne sont pas synchronisés car le suivi des modifications des fichiers pourrait être perturbé. Si laissé vide, la valeur par défaut s'applique."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:22001
+msgid "Maximum time to live for versioned copies:"
+msgstr "Durée de vie maximale des versions archivées :"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:22001
+msgid "Sets the number of days after reaching which files will be automatically deleted from the .SyncArchive folder. If leaved empty, the default value applies."
+msgstr "Définit le nombre de jours maximal au-delà duquel des fichiers seront automatiquement supprimés du dossier .SyncArchive. Si laissé vide, la valeur par défaut s'applique."
+
