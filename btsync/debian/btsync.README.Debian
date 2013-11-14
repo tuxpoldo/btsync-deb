@@ -16,20 +16,28 @@ When creating configuration files manually, there are some possibilities
 to specify additional configuration parameters.
 
 Configuration parameters not parsed by btsync but by the daemon
-scripts can be supplied as comments in the configuration file.
+init script can be supplied as comments in the configuration file.
 
 The following parameters are supported:
 
-DAEMON_UID:      A uid for specifying the user under which
+DAEMON_UID:      A uid for supplying the user under which
                  the btsync daemon should run
 
-DAEMON_GID:      A gid for specifying the group under which
+DAEMON_GID:      A gid for supplying the group under which
                  the btsync daemon should run. If omitted
                  the daemon will run under the primary group
                  of the user
 
-DAEMON_UMASK:    The umask for the btsync damon. If omitted
-                 the default umask is used.
+DAEMON_UMASK:    The umask (up to 4 octal digits) for the
+                 btsync daemon. If omitted the default umask
+                 is used.
+
+DAEMON_DEBUG:    The debug mask (4 hex digits) for the btsync
+                 daemon. If omitted the init script will not
+                 touch potential settings defined manually.
+                 If set to 0000, a potential settings file
+                 will be deleted. Full detail is set by
+                 specifying FFFF
 
 The parameter definition must use an equal sign ("="):
 
