@@ -113,13 +113,14 @@ The package installation offers a possibility to create a default instance of Bi
 
 When creating configuration files manually, there are some possibilities to specify additional configuration parameters.
 
-Configuration parameters not parsed by BitTorrent Sync but by the daemon scripts can be supplied as comments in the configuration file.
+Configuration parameters not parsed by BitTorrent Sync but by the daemon init script can be supplied as comments in the configuration file.
 
 The following parameters are supported:
 [LIST]
 [*][b]DAEMON_UID[/b]: A uid for specifying the user under which the btsync daemon should run[/*]
 [*][b]DAEMON_GID[/b]: A gid for specifying the group under which the btsync daemon should run. If omitted the daemon will run under the primary group of the user[/*]
-[*][b]DAEMON_UMASK[/b]: The umask for the btsync damon. If omitted the default umask is used.[/*]
+[*][b]DAEMON_UMASK[/b]: The umask (up to 4 octal digits) for the btsync daemon. If omitted the default umask is used.[/*]
+[*][b]DAEMON_DEBUG[/b]: The debug mask (4 hex digits) for the btsync daemon. If omitted the init script will not touch potential settings defined manually. If set to [b]0000[/b], a potential settings file will be deleted. Full detail is set by specifying [b]FFFF[/b][/*]
 [/LIST]
 The parameter definition must use an equal sign ("="):
 [code]
@@ -165,22 +166,27 @@ Please look also at the sample configuration files installed in [font=courier ne
 The additional configuration file [font=courier new', courier, monospace][b]/etc/default/btsync[/b][/font] permits to specify which btsync instances should be started automatically and to specify some additional parameters to pass to the btsync daemon. The default setting is to start all instances. Additional documentation can be found in the file:
 [code]
 # This is the configuration file for /etc/init.d/btsync
-
 #
 # Start only these btsync instances automatically via
 # init script.
 # Allowed values are "all", "none" or space separated list of
 # names of the instances. If empty, "all" is assumed.
-# The instance name refers to the btsync configutation file name.
-# i.e. "general" would be /etc/btsync/general.conf or
-# /etc/btsync/general.root.root.conf
+#
+# The instance name refers to the btsync configuration file name.
+# i.e. "general" would be /etc/btsync/general.conf
 #
 #AUTOSTART="all"
 #AUTOSTART="none"
 #AUTOSTART="general special"
 #
-# Optional arguments to btsync's command line
+# Optional arguments to btsync's command line. Be careful!
+# You should only add thngs here if you know EXACTLY what
+# you are doing!
 DAEMON_ARGS=""
+#
+# Enable this to see more output during the init script
+# execution
+#DAEMON_INIT_DEBUG=1
 [/code]
 
 

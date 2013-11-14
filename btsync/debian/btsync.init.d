@@ -18,10 +18,10 @@
 
 # PATH should only include /usr/* if it runs after the mountnfs.sh script
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
-DESC="P2P file synchronisation daemon(s)"       # Introduce a short description here
-NAME=btsync                                     # Introduce the short server's name here
-DAEMON=/usr/lib/btsync/btsync-daemon            # Introduce the server's location here
-DAEMON_ARGS=""                                  # Arguments to run the daemon with
+DESC="P2P file synchronisation daemon(s)"
+NAME=btsync
+DAEMON=/usr/lib/btsync/btsync-daemon
+DAEMON_ARGS=""
 SCRIPTNAME=/etc/init.d/$NAME
 CONFIG_DIR=/etc/$NAME
 CONFIG_EXT=conf
@@ -43,12 +43,7 @@ TIMEOUT=5
 
 test $DEBIAN_SCRIPT_DEBUG && set -v -x
 
-test -x $DAEMON || exit 0
 test -d $CONFIG_DIR || exit 0
-
-# Source defaults file; edit that file to configure this script.
-STATUSREFRESH=10
-OMIT_SENDSIGS=0
 
 set +e
 
@@ -77,6 +72,26 @@ log_error () {
 	log_message "err" "$@"
 }
 
+log_echo_info () {
+	echo "$@"
+	log_message "info" "$@"
+}
+
+config_debug () {
+	if [ $DAEMON_INIT_DEBUG ]; then
+		log_echo_info "== ${1} ==========================="
+		log_echo_info "File Name: '$CONFFILE'"
+		log_echo_info "Name Part: '$BASENAME'"
+		log_echo_info "Credential Part: '$CREDENTIALS'"
+		log_echo_info "Run As User: '$CRED_UID'"
+		log_echo_info "Run As Group: '$CRED_GID'"
+		log_echo_info "Run with umask: '$UMASK'"
+		log_echo_info "Storage Path: '$STORAGE_PATH'"
+		log_echo_info "PID File: '$PID_FILE'"
+		log_echo_info "Debug flags: '$DMASK'"
+	fi
+}
+
 config_from_conffile () {
 	# $1 : config file
 	BASENAME=${1%%.*${CONFIG_EXT}}
@@ -88,7 +103,7 @@ config_from_conffile () {
 	# new method: credentials encoded in comments in the config file
 	#             if found this supersedes credentials encoded into
 	#             the filename
-	if grep 'DAEMON_.ID' ${CONFIG_DIR}/$1 > /dev/null; then
+	if grep -w 'DAEMON_[UI]ID' ${CONFIG_DIR}/$1 > /dev/null; then
 		# credential information found
 		CRED_UID=$(grep 'DAEMON_UID[ \t]*=' ${CONFIG_DIR}/$1 | cut -d= -f 2 | sed -e "s/ //g" -e "s/\t//g")
 		CRED_GID=$(grep 'DAEMON_GID[ \t]*=' ${CONFIG_DIR}/$1 | cut -d= -f 2 | sed -e "s/ //g" -e "s/\t//g")
@@ -102,7 +117,22 @@ config_from_conffile () {
 			CREDENTIALS=""
 		fi
 	fi
+	CRED_UID=${CRED_UID:-root}
+	CRED_GID=${CRED_GID:-root}
+	# umask encoded in comments in the config file
 	UMASK=$(grep 'DAEMON_UMASK[ \t]*=' ${CONFIG_DIR}/$1 | cut -d= -f 2 | sed -e "s/ //g" -e "s/\t//g")
+	UMASK=$(expr match "${UMASK}" '\([0-7]\{1,4\}\)')
+	UMASK=${UMASK:-$(umask)}
+	# debug mask encoded in comments in the config file
+	DMASK=$(grep 'DAEMON_DEBUG[ \t]*=' ${CONFIG_DIR}/$1 | cut -d= -f 2 | sed -e "s/ //g" -e "s/\t//g")
+	DMASK=$(expr match "${DMASK}" '\([0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f]\)' | tr "[a-f]" "[A-F]")
+	# storage_path as saved in config file. This parameter is mandatory
+	STORAGE_PATH=$(grep '^[[:space:]]*"storage_path"' ${CONFIG_DIR}/$1  | cut -d":" -f 2 | cut -d"," -f 1)
+	STORAGE_PATH=$(expr match "${STORAGE_PATH}" '^[[:space:]]*"\(.*\)".*')
+	# pid_file as saved in config file. If not specified defaults to ${storage_path}/sync.pid
+	PID_FILE=$(grep '^[[:space:]]*"pid_file"' ${CONFIG_DIR}/$1  | cut -d":" -f 2 | cut -d"," -f 1)
+	PID_FILE=$(expr match "${PID_FILE}" '^[[:space:]]*"\(.*\)".*')
+	PID_FILE=${PID_FILE:-${STORAGE_PATH}/sync.pid}
 }
 
 config_from_name () {
@@ -139,15 +169,15 @@ test_valid_config () {
 		log_failure_msg "No instance name detected. Interrupting sequence."
 		exit 1
 	fi
-	if [ -z "${CRED_UID}" ]; then
-		CRED_UID="root"
+	if [ -z "${STORAGE_PATH}" ]; then
+		log_failure_msg "Cannot determine storage path for ${BASENAME}. Interrupting sequence."
+		exit 2
 	fi
-	if [ -z "${CRED_GID}" ]; then
-		CRED_GID="root"
+	if [ $(expr match "${STORAGE_PATH}" '/.*') -lt 2 ]; then
+		log_failure_msg "Storage path for ${BASENAME} must be absolute. Interrupting sequence."
+		exit 1
 	fi
-	if [ -z "{UMASK}" ]; then
-		UMASK="$(umask)"
-	fi
+	# this can only happen with old style credentials encoded into the config file name
 	CHECK=$(ls -l ${CONFIG_DIR}/${BASENAME}*.${CONFIG_EXT} 2> /dev/null | wc -l)
 	if [ ${CHECK} -gt 1 ]; then
 		log_failure_msg "Duplicate instance name $BASENAME found. Interrupting sequence."
@@ -189,16 +219,37 @@ adjust_arm_alignment () {
 	fi
 }
 
+
+adjust_debug_flags () {
+	if [ -z ${STORAGE_PATH} ]; then
+		return
+	fi
+	if [ -n "${DMASK}" ]; then
+		if [ "${DMASK}" = "0000" ]; then
+			# remove mask specification file
+			rm -f "${CREDENTIALS}" "${STORAGE_PATH}/debug.txt"
+		else
+			if [ ! -d "${STORAGE_PATH}" ]; then
+				# initial launch: storage path does not exist
+				mkdir -p "${STORAGE_PATH}"
+				# make sure the owner is correct
+				if [ -n "${CREDENTIALS}" ]; then
+					chown "${CREDENTIALS}" "${STORAGE_PATH}"
+				fi
+			fi
+			echo "${DMASK}" > "${STORAGE_PATH}/debug.txt"
+			if [ -n "${CREDENTIALS}" ]; then
+				chown "${CREDENTIALS}" "${STORAGE_PATH}/debug.txt"
+			fi
+		fi
+	fi
+	# ignore mask specification file if DAEMON_DEBUG is not specified
+}
+
 start_btsync () {
-# debug helpers
-#	echo "== START ==========================="
-#	echo "File Name: '$CONFFILE'"
-#	echo "Name Part: '$BASENAME'"
-#	echo "Credential Part: '$CREDENTIALS'"
-#	echo "Run As User: '$CRED_UID'"
-#	echo "Run As Group: '$CRED_GID'"
-#	echo "Run with umask: '$UMASK'"
+	config_debug "START"
 	adjust_arm_alignment
+	adjust_debug_flags
 	STATUS=0
 	start-stop-daemon --start --quiet --oknodo \
 		--pidfile /var/run/$NAME.$BASENAME.pid \
@@ -230,14 +281,7 @@ start_btsync () {
 }
 
 stop_btsync () {
-# debug helpers
-#	echo "== STOP ==========================="
-#	echo "File Name: '$CONFFILE'"
-#	echo "Name Part: '$BASENAME'"
-#	echo "Credential Part: '$CREDENTIALS'"
-#	echo "Run As User: '$CRED_UID'"
-#	echo "Run As Group: '$CRED_GID'"
-#	echo "Run with umask: '$UMASK'"
+	config_debug "STOP"
 	adjust_arm_alignment
 	STATUS=0
 	start-stop-daemon --stop --quiet \
@@ -339,6 +383,7 @@ status)
 	PIDFILE=
 	for PIDFILE in `ls /var/run/$NAME.*.pid 2> /dev/null`; do
 		config_from_pidfile $PIDFILE
+		config_debug "STATUS"
 		status_of_proc -p $PIDFILE $(basename $DAEMON) "BTSYNC '${BASENAME}'"
 	done
 	;;

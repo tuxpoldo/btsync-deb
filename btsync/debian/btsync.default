@@ -16,3 +16,7 @@
 # You should only add thngs here if you know EXACTLY what
 # you are doing!
 DAEMON_ARGS=""
+#
+# Enable this to see more output during the init script
+# execution
+#DAEMON_INIT_DEBUG=1

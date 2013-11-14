@@ -5,6 +5,8 @@ btsync (1.1.90-1) unstable; urgency=low
   * Added debconf support for all advanced settings (Closes #36)
   * Fixed missing logfile generation broken with new btsync
     version 1.2.67 (Closes #40)
+  * Added support for configuring verbose logging in the configuration
+    file using DAEMON_DEBUG= (Closes #44)
   * Added Galician translation to debconf templates contributed
     by Miguel Anxo Bouzada (Closes #35)
   * Added Spanish translation to debconf templates contributed
