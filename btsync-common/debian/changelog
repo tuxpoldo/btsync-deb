@@ -1,3 +1,9 @@
+btsync-common (1.2.73-2) unstable; urgency=low
+
+  * Installation and execution failures on ARM systems (Closes #45)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 14 Nov 2013 23:11:20 +0100
+
 btsync-common (1.2.73-1) unstable; urgency=low
 
   * New upstream release
