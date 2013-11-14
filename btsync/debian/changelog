@@ -9,6 +9,8 @@ btsync (1.1.90-1) unstable; urgency=low
     by Miguel Anxo Bouzada (Closes #35)
   * Added Spanish translation to debconf templates contributed
     by VCLL (Closes #26)
+  * Added Chinese simplified translation to debconf templates contributed
+    by Julian (Closes #43)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Tue, 12 Nov 2013 14:57:49 +0100
 
