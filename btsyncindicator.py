@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # coding=utf-8
 #
 # Copyright 2013 Mark Johnson
@@ -91,8 +91,14 @@ class BtSyncIndicator:
         self.ind.set_attention_icon ("btsync-attention")
 
         self.load_config()
-
-        self.urlroot = 'http://'+self.config['webui']['listen']+'/gui/'
+        
+        if 'login' in self.config['webui']:
+            login = self.config['webui']['login']
+            password = self.config['webui']['password']
+            self.urlroot = 'http://'+login+':'+password+'@'+self.config['webui']['listen']+'/gui/'
+        else:
+            self.urlroot = 'http://'+self.config['webui']['listen']+'/gui/'
+            
         self.folderitems = {}
         self.info = {}
         self.clipboard = gtk.Clipboard()
@@ -194,6 +200,7 @@ class BtSyncIndicator:
         * Initialises check_status loop
         If the server cannot be contacted, waits 5 seconds and retries.
         """
+        
         try:
             tokenparams = {'t': time.time()}
             tokenurl = self.urlroot+'token.html'
