@@ -3,7 +3,7 @@
 #
 # Copyright 2013 Mark Johnson
 #
-# Authors: Mark Johnson
+# Authors: Mark Johnson and Contributors (see CREDITS)
 #
 # Based on the PyGTK Application Indicators example by Jono Bacon
 # and Neil Jagdish Patel
@@ -52,6 +52,9 @@ import logging
 import subprocess
 from contextlib import contextmanager
 
+VERSION = '0.11'
+TIMEOUT = 2 # seconds
+
 @contextmanager
 def file_lock(lock_file):
     if os.path.exists(lock_file):
@@ -92,9 +95,6 @@ class BtSyncConfig:
         self.config = json.loads(config)
         logging.info('Config loaded')
 
-
-VERSION = '0.10'
-TIMEOUT = 2 # seconds
 
 class BtSyncIndicator:
     def __init__(self,btconf):

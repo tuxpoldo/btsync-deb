@@ -1,4 +1,10 @@
 The following people have contributed to this project:
 * Brian Boucheron "beardicus" <brian@boucheron.org> - Icons
-* Leo Moll "tuxpoldo" - Packaging
-* "dswd" - Fix for Issue #10
+* Leo Moll "tuxpoldo" - Packaging, bug fixes and testing
+* "dswd" - Bug fixes
+* Léo Lam "leoetlino" <leo@innovatetechnologi.es> - Documentation
+* Martin Wimpress "flexiondotorg" - Bug fixes
+* Pavel Ilin "PIlin" - Bug fixes
+* Andrew "hotice" <andrew@webupd8.org> - Testing
+
+If you think you should be credited in this file and you aren't, please add yourself and send me a pull request.
