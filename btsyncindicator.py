@@ -88,7 +88,7 @@ class BtSyncConfig:
         for line in open(args.config, 'r'):
             if line.find('//') == -1:
                 config += line
-        config = re.sub("/\*[^*]*\*/", "", config)
+        config = re.sub("/\*(.|[\r\n])*?\*/", "", config)
         self.config = json.loads(config)
         logging.info('Config loaded')
 
