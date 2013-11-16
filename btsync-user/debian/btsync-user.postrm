@@ -5,6 +5,7 @@
 
 set -e
 
+#echo btsync-user.postrm $1 >> /root/btsync-user.inst.log
 case "$1" in
 remove|purge)
 	set +e

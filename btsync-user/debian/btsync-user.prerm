@@ -21,6 +21,7 @@ set -e
 
 CONFFILE=/etc/btsync/debconf-user-default.conf
 
+#echo btsync-user.prerm $1 >> /root/btsync-user.inst.log
 case "$1" in
 remove|deconfigure)
 	set +e
@@ -33,7 +34,7 @@ remove|deconfigure)
 upgrade)
 	set +e
 	touch /var/run/btsync-user-updating
-	pkill btsync-agent
+	pkill -x btsync-agent
 	set -e
 	;;
 

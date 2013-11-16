@@ -17,6 +17,7 @@
 
 set -e
 
+#echo btsync-user.postinst $1 >> /root/btsync-user.inst.log
 case "$1" in
 configure)
 	unset DISPLAY # No GUI launched from postinst please
