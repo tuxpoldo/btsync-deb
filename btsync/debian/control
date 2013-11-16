@@ -9,7 +9,7 @@ Vcs-browser: https://github.com/tuxpoldo/btsync-deb
 Homepage: http://www.bittorrent.com/sync
 
 Package: btsync
-Architecture: i386 amd64 armel armhf powerpc
+Architecture: all
 Pre-Depends: debconf | debconf-2.0
 Depends: libc6, btsync-common (>= 1.2.73-1)
 Provides: btsync-server-daemon

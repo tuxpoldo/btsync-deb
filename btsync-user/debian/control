@@ -9,7 +9,7 @@ Vcs-browser: https://github.com/tuxpoldo/btsync-deb
 Homepage: http://www.bittorrent.com/sync
 
 Package: btsync-user
-Architecture: i386 amd64 armel armhf powerpc
+Architecture: all
 Depends: debconf | debconf-2.0, libc6, ${python:Depends},
  python-requests, python-appindicator, python-gtk2, btsync-common
 Provides: btsync-user-application

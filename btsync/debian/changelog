@@ -1,3 +1,10 @@
+btsync (1.2.0-2) unstable; urgency=low
+
+  * Tagged package as platform independent (Speeds up builds in
+    Launchpad)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sat, 16 Nov 2013 18:48:55 +0100
+
 btsync (1.2.0-1) unstable; urgency=low
 
   * Separated server from desktop package in order to permit
