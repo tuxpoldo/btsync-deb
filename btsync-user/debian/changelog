@@ -1,9 +1,10 @@
-btsync-user (1.1.90-1) unstable; urgency=low
+btsync-user (1.11.0-1) unstable; urgency=low
 
   * Separated source from server version (Closes #38)
+  * New upstream release 0.11 of btsyncindicator
   * Added missing dependency from python-gtk2 (Closes #39)
 
- -- Leo Moll <leo.moll@yeasoft.com>  Xxx, xx Xxx 2013 xx:xx:xx +0100
+ -- Leo Moll <leo.moll@yeasoft.com>  Sat, 16 Nov 2013 11:24:04 +0100
 
 btsync-user (1.1.82.1-3) unstable; urgency=low
 
