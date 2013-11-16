@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 7.0.50)
 Standards-Version: 3.9.4
 Vcs-Git: https://github.com/tuxpoldo/btsync-deb.git
 Vcs-browser: https://github.com/tuxpoldo/btsync-deb
-Homepage: http://www.bittorrent.com
+Homepage: http://www.bittorrent.com/sync
 
 Package: btsync-user
 Architecture: i386 amd64 armel armhf powerpc
