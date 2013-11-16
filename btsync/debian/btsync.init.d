@@ -72,23 +72,28 @@ log_error () {
 	log_message "err" "$@"
 }
 
-log_echo_info () {
+log_display_msg () {
 	echo "$@"
 	log_message "info" "$@"
 }
 
+log_error_msg () {
+	log_failure_msg "$@"
+	log_message "err" "$@"
+}
+
 config_debug () {
 	if [ $DAEMON_INIT_DEBUG ]; then
-		log_echo_info "== ${1} ==========================="
-		log_echo_info "File Name: '$CONFFILE'"
-		log_echo_info "Name Part: '$BASENAME'"
-		log_echo_info "Credential Part: '$CREDENTIALS'"
-		log_echo_info "Run As User: '$CRED_UID'"
-		log_echo_info "Run As Group: '$CRED_GID'"
-		log_echo_info "Run with umask: '$UMASK'"
-		log_echo_info "Storage Path: '$STORAGE_PATH'"
-		log_echo_info "PID File: '$PID_FILE'"
-		log_echo_info "Debug flags: '$DMASK'"
+		log_display_msg "== ${1} ==========================="
+		log_display_msg "File Name: '$CONFFILE'"
+		log_display_msg "Name Part: '$BASENAME'"
+		log_display_msg "Credential Part: '$CREDENTIALS'"
+		log_display_msg "Run As User: '$CRED_UID'"
+		log_display_msg "Run As Group: '$CRED_GID'"
+		log_display_msg "Run with umask: '$UMASK'"
+		log_display_msg "Storage Path: '$STORAGE_PATH'"
+		log_display_msg "PID File: '$PID_FILE'"
+		log_display_msg "Debug flags: '$DMASK'"
 	fi
 }
 
@@ -133,6 +138,8 @@ config_from_conffile () {
 	PID_FILE=$(grep '^[[:space:]]*"pid_file"' ${CONFIG_DIR}/$1  | cut -d":" -f 2 | cut -d"," -f 1)
 	PID_FILE=$(expr match "${PID_FILE}" '^[[:space:]]*"\(.*\)".*')
 	PID_FILE=${PID_FILE:-${STORAGE_PATH}/sync.pid}
+	# load update check setting
+	UPDATE_CHECK_DISABLED=$(grep '^[[:space:]]*"check_for_updates"' ${CONFIG_DIR}/$1  | cut -d":" -f 2 | cut -d"/" -f 1 | cut -d"," -f 1 | grep -c false)
 }
 
 config_from_name () {
@@ -152,39 +159,38 @@ config_from_pidfile () {
 	config_from_name "${BASENAME}"
 }
 
-test_valid_conffile () {
-	# $1 : config file
-	CHECK=$(grep '^[[:space:]]*"check_for_updates"' $CONFIG_DIR/$1  | cut -d":" -f 2 | cut -d"/" -f 1 | cut -d"," -f 1 | grep -c false)
-	if [ $CHECK -ne 1 ]; then
-		log_error "Instance name $BASENAME has autoupdate enabled. Interrupting sequence."
-		log_failure_msg "Instance name $BASENAME has autoupdate enabled. Interrupting sequence."
-		unset CHECK
-		exit 1
-	fi
-	unset CHECK
-}
-
 test_valid_config () {
-	if [ -z "${BASENAME}" ]; then
-		log_failure_msg "No instance name detected. Interrupting sequence."
+	# test for undetected base name (this should never happen)
+	if [ -z ${BASENAME} ]; then
+		log_error_msg "No instance name detected. Interrupting sequence."
 		exit 1
 	fi
-	if [ -z "${STORAGE_PATH}" ]; then
-		log_failure_msg "Cannot determine storage path for ${BASENAME}. Interrupting sequence."
+	# test for duplicate instance name with different credentials.
+	# this can only happen with old style credentials encoded into the config file name
+	if [ $(ls -l ${CONFIG_DIR}/${BASENAME}*.${CONFIG_EXT} 2> /dev/null | wc -l) -gt 1 ]; then
+		log_error_msg "Duplicate instance name $BASENAME found. Interrupting sequence."
+		exit 1
+	fi
+	# test for disabled update check
+	if [ ${UPDATE_CHECK_DISABLED} -ne 1 ]; then
+		log_error_msg "Instance name $BASENAME has autoupdate enabled. Interrupting sequence."
+		exit 1
+	fi
+	# test for undetected storage path in config file
+	if [ -z ${STORAGE_PATH} ]; then
+		log_error_msg "Cannot determine storage path for ${BASENAME}. Interrupting sequence."
 		exit 2
 	fi
-	if [ $(expr match "${STORAGE_PATH}" '/.*') -lt 2 ]; then
-		log_failure_msg "Storage path for ${BASENAME} must be absolute. Interrupting sequence."
+	# test for absolute storage path in config file AND storage path not /
+	case $(expr match "${STORAGE_PATH}" '/.*') in
+	0)	log_error_msg "Storage path for ${BASENAME} must be absolute. Interrupting sequence."
 		exit 1
-	fi
-	# this can only happen with old style credentials encoded into the config file name
-	CHECK=$(ls -l ${CONFIG_DIR}/${BASENAME}*.${CONFIG_EXT} 2> /dev/null | wc -l)
-	if [ ${CHECK} -gt 1 ]; then
-		log_failure_msg "Duplicate instance name $BASENAME found. Interrupting sequence."
-		unset CHECK
+		;;
+	1)	log_error_msg "Storage path for ${BASENAME} cannot be the root of filesystem. Interrupting sequence."
 		exit 1
-	fi
-	unset CHECK
+		;;
+	*)	;;
+	esac
 }
 
 test_running () {
@@ -219,6 +225,14 @@ adjust_arm_alignment () {
 	fi
 }
 
+adjust_storage_path () {
+	# make sure the specified storage path exists....
+	mkdir -p "${STORAGE_PATH}"
+	# and adapt the ownership of the storage path
+	if [ -n "${CREDENTIALS}" ]; then
+		chown -R ${CREDENTIALS} "${STORAGE_PATH}"
+	fi
+}
 
 adjust_debug_flags () {
 	if [ -z ${STORAGE_PATH} ]; then
@@ -249,6 +263,7 @@ adjust_debug_flags () {
 start_btsync () {
 	config_debug "START"
 	adjust_arm_alignment
+	adjust_storage_path
 	adjust_debug_flags
 	STATUS=0
 	start-stop-daemon --start --quiet --oknodo \
@@ -260,7 +275,7 @@ start_btsync () {
 
 	if [ $STATUS -gt 0 ]; then
 		# start-stop-daemon failed. Let's exit immediately
-		log_error "Failed to start $NAME instance $BASENAME - please check the configuration file $CONFIG_DIR/$CONFFILE"
+		log_error_msg "Failed to start $NAME instance $BASENAME - please check the configuration file $CONFIG_DIR/$CONFFILE"
 		return 1
 	fi
 	# since btsync does not return an acceptable error
@@ -270,7 +285,7 @@ start_btsync () {
 	until test_running $BASENAME; do
 		# and wait for the process to come up
 		if [ $WAITCNT -ge $TIMEOUT ]; then
-			log_error "Failed to start $NAME instance $BASENAME - please check the configuration file $CONFIG_DIR/$CONFFILE"
+			log_error_msg "Failed to start $NAME instance $BASENAME - please check the configuration file $CONFIG_DIR/$CONFFILE"
 			STATUS=1
 			return 1
 		fi
@@ -306,7 +321,6 @@ start)
 			# all btsync instances shall be started automatically
 			for CONFFILE in `cd $CONFIG_DIR; ls *.${CONFIG_EXT} 2> /dev/null`; do
 				config_from_conffile "${CONFFILE}"
-				test_valid_conffile "${CONFFILE}"
 				test_valid_config
 				log_daemon_msg "Autostarting btsync instance '$BASENAME'"
 				start_btsync
@@ -317,13 +331,12 @@ start)
 			for BASENAME in $AUTOSTART ; do
 				config_from_name "${BASENAME}"
 				if [ -f $CONFIG_DIR/$CONFFILE ]; then
-					test_valid_conffile "${CONFFILE}"
 					test_valid_config
 					log_daemon_msg "Autostarting btsync instance '$BASENAME'"
 					start_btsync
 					log_end_msg $STATUS
 				else
-					log_failure_msg "Autostarting btsync instance '$BASENAME': missing $CONFIG_DIR/$CONFFILE file !"
+					log_error_msg "Autostarting btsync instance '$BASENAME': missing $CONFIG_DIR/$CONFFILE file !"
 					STATUS=1
 				fi
 			done
@@ -334,16 +347,15 @@ start)
 			[ -z "$1" ] && break
 			config_from_name "$1"
 			if [ -z "$CONFFILE" ]; then
-				log_failure_msg "Requested btsync instance '$1' does not exist"
+				log_error_msg "Requested btsync instance '$1' does not exist"
 				STATUS=1
 			elif [ -f $CONFIG_DIR/$CONFFILE ]; then
-				test_valid_conffile "${CONFFILE}"
 				test_valid_config
 				log_daemon_msg "Autostarting btsync instance '$BASENAME'"
 				start_btsync
 				log_end_msg $STATUS
 			else
-				log_failure_msg "Autostarting btsync instance '$BASENAME': missing $CONFIG_DIR/$CONFFILE file !"
+				log_error_msg "Autostarting btsync instance '$BASENAME': missing $CONFIG_DIR/$CONFFILE file !"
 				STATUS=1
 			fi
 		done
@@ -373,7 +385,7 @@ stop)
 				stop_btsync
 				log_end_msg $STATUS
 			else
-				log_failure_msg "Stopping btsync instance '$1': No such btsync instance is running."
+				log_error_msg "Stopping btsync instance '$1': No such btsync instance is running."
 			fi
 		done
 	fi
