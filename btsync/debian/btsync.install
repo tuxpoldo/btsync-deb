@@ -1,7 +1,6 @@
 # files
 samples/simple.conf			etc/btsync/samples
-samples/user-new.conf			etc/btsync/samples
-samples/user-old.jdoe.conf		etc/btsync/samples
+samples/user.conf			etc/btsync/samples
 icons/96/btsync.png			usr/share/icons/hicolor/96x96/apps
 icons/48/btsync.png			usr/share/icons/hicolor/48x48/apps
 icons/32/btsync.png			usr/share/icons/hicolor/32x32/apps
