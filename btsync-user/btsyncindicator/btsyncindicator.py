@@ -3,7 +3,7 @@
 #
 # Copyright 2013 Mark Johnson
 #
-# Authors: Mark Johnson
+# Authors: Mark Johnson and Contributors (see CREDITS)
 #
 # Based on the PyGTK Application Indicators example by Jono Bacon
 # and Neil Jagdish Patel
@@ -50,12 +50,54 @@ import argparse
 import webbrowser
 import logging
 import subprocess
+from contextlib import contextmanager
 
-VERSION = '0.10'
+VERSION = '0.11'
 TIMEOUT = 2 # seconds
 
-class BtSyncIndicator:
+@contextmanager
+def file_lock(lock_file):
+    if os.path.exists(lock_file):
+        # is it a zombie?
+        f = open(lock_file, 'r')
+        pid = f.read()
+        f.close()
+        if not os.path.exists('/proc/' + pid):
+            os.remove(lock_file)
+        else:
+            print 'Only one indicator can run at once. '\
+                  'Indicator is locked with %s' % lock_file
+            sys.exit(-1)
+
+    open(lock_file, 'w').write(str(os.getpid()))
+    try:
+        yield
+    finally:
+        os.remove(lock_file)
+
+
+class BtSyncConfig:
     def __init__(self):
+        self.load_config()
+
+    def load_config(self):
+        """
+        Open the config file specified in args load into self.config
+	Removes commented lines starting in //, or multi-line comments
+	wrapped in /* */
+        """
+        logging.info('Opening config file '+args.config)
+        config = ""
+        for line in open(args.config, 'r'):
+            if line.find('//') == -1:
+                config += line
+        config = re.sub("/\*(.|[\r\n])*?\*/", "", config)
+        self.config = json.loads(config)
+        logging.info('Config loaded')
+
+
+class BtSyncIndicator:
+    def __init__(self,btconf):
         """
         Initialise the indicator, load the config file,
         intialise some properties and set up the basic
@@ -69,9 +111,15 @@ class BtSyncIndicator:
         self.ind.set_status (appindicator.STATUS_ACTIVE)
         self.ind.set_attention_icon ("btsync-attention")
 
-        self.load_config()
-
-        self.urlroot = 'http://'+self.config['webui']['listen']+'/gui/'
+        self.config = btconf.config
+        
+        if 'login' in self.config['webui']:
+            login = self.config['webui']['login']
+            password = self.config['webui']['password']
+            self.urlroot = 'http://'+login+':'+password+'@'+self.config['webui']['listen']+'/gui/'
+        else:
+            self.urlroot = 'http://'+self.config['webui']['listen']+'/gui/'
+            
         self.folderitems = {}
         self.info = {}
         self.clipboard = gtk.Clipboard()
@@ -104,21 +152,6 @@ class BtSyncIndicator:
 
         self.menu_setup()
         self.ind.set_menu(self.menu)
-
-    def load_config(self):
-        """
-        Open the config file specified in args load into self.config
-	Removes commented lines starting in //, or multi-line comments
-	wrapped in /* */
-        """
-        logging.info('Opening config file '+args.config)
-        config = ""
-        for line in open(args.config, 'r'):
-            if line.find('//') == -1:
-                config += line
-        config = re.sub("/\*[^*]*\*/", "", config)
-        self.config = json.loads(config)
-        logging.info('Config loaded')
 
     def menu_setup(self):
         """
@@ -156,7 +189,7 @@ class BtSyncIndicator:
 	self.menu.append(self.debug_item)
 
         if self.btsync_user:
-            buf = "Quit Bittorrent Sync"
+            buf = "Quit BitTorrent Sync"
         else:
             buf = "Quit"
         self.quit_item = gtk.MenuItem(buf)
@@ -173,17 +206,20 @@ class BtSyncIndicator:
         * Initialises check_status loop
         If the server cannot be contacted, waits 5 seconds and retries.
         """
+        
         try:
-            logging.info('Requesting Token');
             tokenparams = {'t': time.time()}
             tokenurl = self.urlroot+'token.html'
+            logging.info('Requesting Token from ' + tokenurl)
             tokenresponse = requests.post(tokenurl, params=tokenparams)
+            logging.info('Token response ' + str(tokenresponse))
             regex = re.compile("<html><div[^>]+>([^<]+)</div></html>")
             html = self.get_response_text(tokenresponse)
+            logging.info('HTML Response ' + html)
             r = regex.search(html)
             self.token = r.group(1)
             self.cookies = tokenresponse.cookies
-            logging.info('Token '+self.token+' Retrieved');
+            logging.info('Token '+self.token+' Retrieved')
 
             actions = [
                   'license', 
@@ -203,7 +239,7 @@ class BtSyncIndicator:
 
             self.clear_error()
 
-            logging.info('Session setup complete, initialising check_status loop');
+            logging.info('Session setup complete, initialising check_status loop')
 
             self.status = { 'folders': [] }
 
@@ -211,7 +247,7 @@ class BtSyncIndicator:
             return False
 
         except requests.exceptions.ConnectionError:
-            logging.warning('Connection Error caught, displaying error message');
+            logging.warning('Connection Error caught, displaying error message')
             self.show_error("Couldn't connect to Bittorrent Sync at "+self.urlroot)
             return True
 
@@ -239,7 +275,7 @@ class BtSyncIndicator:
             self.pause_item_handler = self.pause_item.connect("activate", self.toggle_pause)
 
         try:
-            logging.info('Requesting status');
+            logging.info('Requesting status')
             params = {'token': self.token, 'action': 'getsyncfolders'}
             response = requests.get(self.urlroot, params=params, cookies=self.cookies)
 
@@ -322,12 +358,12 @@ class BtSyncIndicator:
 	including items to show the size, open the folder in
 	the file manager, show each connected peer, and to 
 	copy the secrets to the clipboard.
-	
+
 	Stores references to the size and peer items so they
 	can easily be updated.
 	"""
 	menu = gtk.Menu()
-	
+
 	folderitem = self.folderitems[folder['name']]
 	folderitem['sizeitem'] = gtk.MenuItem(folder['size'])
 	folderitem['sizeitem'].set_sensitive(False)
@@ -376,7 +412,7 @@ class BtSyncIndicator:
 
 	menu.append(readonly)
 	menu.append(readwrite)
-	
+
 	return menu
     
     def update_folder_menu(self, folder):
@@ -477,14 +513,14 @@ class BtSyncIndicator:
     	self.clipboard.set_text(secret)
         logging.info('Secret copied to clipboard')
         logging.debug(secret)
-    	return True;
+    	return True
 
     def animate_icon(self):
         """
         Cycles the icon through 3 frames to indicate network activity
         """
         if self.active == False:
-            logging.info('Terminating animation loop; Resetting icon');
+            logging.info('Terminating animation loop; Resetting icon')
             self.animate = None
             self.set_icon('')
             self.frame = 0
@@ -551,7 +587,7 @@ class BtSyncIndicator:
                 logging.warning('btsync manager failed with status '+e.returncode)
                 logging.warning(e.output)
         else:
-            logging.error("Cant find btsync manager at "+btsyncmanager)
+            logging.error("Could not find BitTorrent Sync Manager at "+btsyncmanager)
         return True
 
     def get_response_text(self, response):
@@ -580,8 +616,8 @@ class BtSyncIndicator:
             except subprocess.CalledProcessError, e:
                 logging.warning('btsync-stopper failed with status '+e.returncode)
                 logging.warning(e.output)
-                print "Cannot Exit btsync: "+e.output
-                print "Please Exit btsync manually"
+                print "Cannot exit BitTorrent Sync: "+e.output
+                print "Please exit BitTorrent Sync manually"
 
         sys.exit(0)
 
@@ -589,7 +625,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--config', 
                         default=os.environ['HOME']+'/.btsync.conf',
-                        help="Location of Bittorrent Sync config file")
+                        help="Location of BitTorrent Sync config file")
     parser.add_argument('--iconpath', 
                         default=os.path.dirname(os.path.realpath(__file__))+"/icons",
                         help="Path to icon theme folder")
@@ -608,8 +644,12 @@ if __name__ == "__main__":
     logging.basicConfig(level=numeric_level)
 
     if (args.version):
-	print os.path.basename(__file__)+" Version "+VERSION;
+	print os.path.basename(__file__)+" Version "+VERSION
 	exit()
 
-    indicator = BtSyncIndicator()
-    indicator.main()
+    btconf = BtSyncConfig()
+
+    with file_lock(btconf.config['storage_path'] + '/indicator.lock'):
+        indicator = BtSyncIndicator(btconf)
+        indicator.main()
+
