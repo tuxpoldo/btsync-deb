@@ -292,6 +292,7 @@ start_btsync () {
 		sleep 1
 		WAITCNT=$(($WAITCNT + 1))
 	done
+	log_info "$NAME instance $BASENAME started successfully"
 	STATUS=0
 }
 
@@ -303,6 +304,11 @@ stop_btsync () {
 		--retry=TERM/30/KILL/5 \
 		--exec $DAEMON --pidfile /var/run/$NAME.$BASENAME.pid  || STATUS=1
 	rm /var/run/$NAME.$BASENAME.pid
+	if [ $STATUS -gt 0 ]; then
+		log_error "Failed to stop $NAME instance $BASENAME"
+	else
+		log_info "$NAME instance $BASENAME started successfully"
+	fi
 }
 
 
