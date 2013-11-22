@@ -167,7 +167,7 @@ test_valid_config () {
 	fi
 	# test for duplicate instance name with different credentials.
 	# this can only happen with old style credentials encoded into the config file name
-	if [ $(ls -l ${CONFIG_DIR}/${BASENAME}*.${CONFIG_EXT} 2> /dev/null | wc -l) -gt 1 ]; then
+	if [ $(ls -l ${CONFIG_DIR}/${BASENAME}.${CONFIG_EXT} ${CONFIG_DIR}/${BASENAME}.*.${CONFIG_EXT} 2> /dev/null | wc -l) -gt 1 ]; then
 		log_error_msg "Duplicate instance name $BASENAME found. Interrupting sequence."
 		exit 1
 	fi
