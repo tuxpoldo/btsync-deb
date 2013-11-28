@@ -1,6 +1,11 @@
+1.2.82 (November 28, 2013)
+ - Fixed issues with incremental file downloads
+ - Fixed auto-update
+
+
 1.2.73 (November 14, 2013)
-- Fixed issue with infinite indexing
-- Added command line options for force logging on linux 
+ - Fixed issue with infinite indexing
+ - Added command line options for force logging on linux 
 
 
 1.2.72 (November 13, 2013)
