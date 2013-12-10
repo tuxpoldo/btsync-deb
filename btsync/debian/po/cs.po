@@ -260,7 +260,7 @@ msgstr "Určuje maximální velikost v MB pro vytváření verzí souboru. Pokud
 #. Description
 #: ../btsync.templates:19001
 msgid "Send Buffer Size:"
-msgstr "Send Buffer Size:"
+msgstr ""
 
 #. Type: string
 #. Description
@@ -272,7 +272,7 @@ msgstr "Toto je skutečné množství paměti, která bude použita ke cachován
 #. Description
 #: ../btsync.templates:20001
 msgid "Receive buffer size:"
-msgstr "Receive buffer size:"
+msgstr ""
 
 #. Type: string
 #. Description
@@ -290,7 +290,7 @@ msgstr "Maximální časový rozdíl mezi zařízeními:"
 #. Description
 #: ../btsync.templates:21001
 msgid "Maximum allowed time difference in seconds between devices. If the difference exceeds this limit, the devices will not be synced as it may result in incorrect tracing of file changes. If leaved empty, the default value applies."
-msgstr "Maximum allowed time difference in seconds between devices. If the difference exceeds this limit, the devices will not be synced as it may result in incorrect tracing of file changes. If leaved empty, the default value applies."
+msgstr ""
 
 #. Type: string
 #. Description
@@ -302,5 +302,5 @@ msgstr "Doba po kterou budou zachovány verze souboru:"
 #. Description
 #: ../btsync.templates:22001
 msgid "Sets the number of days after reaching which files will be automatically deleted from the .SyncArchive folder. If leaved empty, the default value applies."
-msgstr "Sets the number of days after reaching which files will be automatically deleted from the .SyncArchive folder. If leaved empty, the default value applies."
+msgstr ""
 
