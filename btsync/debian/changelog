@@ -1,11 +1,13 @@
-btsync (1.2.0-3) unstable; urgency=low
+btsync (1.2.1-1) unstable; urgency=low
 
+  * Allow the default instance to run also as dedicated user
+    instead of root (Closes #47)
+  * Added support for API key in default instance (Closes #48)
   * Duplicate instance check a startup not always working with
     certain name patterns (Closes #49)
   * Improved syslog messages
-  * Added support for API key in default instance (Closes #48)
 
- -- Leo Moll <leo.moll@yeasoft.com>  Sat, 16 Nov 2013 18:48:55 +0100
+ -- Leo Moll <leo.moll@yeasoft.com>  Tue, 10 Dec 2013 18:18:52 +0100
 
 btsync (1.2.0-2) unstable; urgency=low
 
