@@ -304,3 +304,39 @@ msgstr "Máximo tiempo de vida para las copias versionadas:"
 msgid "Sets the number of days after reaching which files will be automatically deleted from the .SyncArchive folder. If leaved empty, the default value applies."
 msgstr "Establece el número de días tras los cuales los archivos se borrarán automáticamente de la carpeta .SyncArchive. Si se deja en blanco, se aplica el valor predeterminado."
 
+#. Type: string
+#. Description
+#: ../btsync.templates:23001
+msgid "BitTorrent Sync API Key:"
+msgstr "Clave del API de BitTorrent Sync:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:23001
+msgid "To enable the BitTorrent Sync API, an API key supplied by BitTorrent must be specified into the configuration file. If leaved empty, the API of BitTorrent Sync is disabled (default). API Keys can be requested on the BitTorrent Web Site."
+msgstr "Para activar el API de BitTorrent Sync, se debe indicar una clave de API proporcionada por BitTorrent en el archivo de configuración. Si se deja en blanco, se desactiva el API de BitTorrent Sync (por defecto). Se pueden solicitar claves de API en el sitio web de BitTorrent."
+
+#. Type: select
+#. Description
+#: ../btsync.templates:24001
+msgid "BitTorrent Sync Daemon Credentials:"
+msgstr "Credenciales del servicio de BitTorrent Sync:"
+
+#. Type: select
+#. Description
+#: ../btsync.templates:24001
+msgid "You can choose, if you want BitTorrent Sync to run as root (not reccomended) or under it's own unprivileged credentials (user: btsync, group: btsync). WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
+msgstr "Puede elegir si desea que BitTorrent Sync se ejecute como «root» (no recomendado) o bajo sus propias credenciales sin privilegios (usuario: btsync, grupo: btsync). AVISO: si cambia este parámetro en una instancia en ejecución, deberá encargarse de cambiar la pertenencia de todos los archivos de la carpetas compartidas gestionadas para asegurarse de que BitTorrent Sync sigue siendo capaz de acceder y modificar las mismas."
+
+#. Type: note
+#. Description
+#: ../btsync.templates:25001
+msgid "BitTorrent Sync Daemon Credentials have been changed!"
+msgstr "¡Las credenciales del servicio de BitTorrent Sync han cambiado!"
+
+#. Type: note
+#. Description
+#: ../btsync.templates:25001
+msgid "Please make sure, that BitTorrent Sync will still be able to access and write to files and directories in your configured shared folders."
+msgstr "Asegúrese de que BitTorrent Sync es todavía capaz de acceder y escribir los archivos y directorios en las carpetas compartidas que ha configurado."
+
