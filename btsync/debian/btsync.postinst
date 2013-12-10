@@ -52,6 +52,8 @@ create_default_instance () {
 	LOGIN="${RET}"
 	db_get btsync/webgui-password || RET="btsyncPassword"
 	PASSWORD="${RET}"
+	db_get btsync/api_key  || RET=""
+	API_KEY="${RET}"
 	db_get btsync/daemon_umask || RET=""
 	UMASK="${RET}"
 	db_get btsync/max_file_size_diff_for_patching || RET=""
@@ -120,6 +122,13 @@ EOF
 	{
 EOF
 	) >> ${CONFFILE}
+	if [ "x$API_KEY" != "x" ]; then
+		(
+		cat <<EOF
+		"api_key" : "${API_KEY}",
+EOF
+		) >> ${CONFFILE}
+	fi
 	if [ "x$LOGIN" != "x" ]; then
 		(
 		cat <<EOF

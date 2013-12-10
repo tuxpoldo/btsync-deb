@@ -181,3 +181,12 @@ _Description: Maximum time to live for versioned copies:
  Sets the number of days after reaching which files will be automatically
  deleted from the .SyncArchive folder. If leaved empty, the default value
  applies.
+
+Template: btsync/api_key
+Type: string
+Default:
+_Description: BitTorrent Sync API Key:
+ To enable the BitTorrent Sync API, an API key supplied by BitTorrent must
+ be specified into the configuration file. If leaved empty, the API of
+ BitTorrent Sync is disabled (default). API Keys can be requested on
+ the BitTorrent Web Site.

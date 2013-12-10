@@ -3,6 +3,7 @@ btsync (1.2.0-3) unstable; urgency=low
   * Duplicate instance check a startup not always working with
     certain name patterns (Closes #49)
   * Improved syslog messages
+  * Added support for API key in default instance (Closes #48)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Sat, 16 Nov 2013 18:48:55 +0100
 
