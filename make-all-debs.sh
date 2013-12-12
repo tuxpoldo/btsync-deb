@@ -20,12 +20,19 @@ for SRCDIR in ${SOURCES}; do
 	if [ -d ${SRCDIR} ]; then
 		enter_build ${SRCDIR}
 		# make binary targets
-		for destarch in i386 amd64 armel armhf powerpc; do
+		if [ "${SRCDIR}" != "btsync-common" ]; then
 			debuild clean
-			debuild -uc -us -b -a${destarch}
-			rm -f ../*${destarch}.build
-			rm -f ../*${destarch}.changes
-		done
+			debuild -uc -us -b
+			rm -f ../*all.build
+			rm -f ../*all.changes
+		else
+			for destarch in i386 amd64 armel armhf powerpc; do
+				debuild clean
+				debuild -uc -us -b -a${destarch}
+				rm -f ../*${destarch}.build
+				rm -f ../*${destarch}.changes
+			done
+		fi
 		# cleanup garbage
 		debuild clean
 		# return
