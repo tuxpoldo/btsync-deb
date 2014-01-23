@@ -6,9 +6,15 @@ applies p2p protocol for direct live folder sync with maximum security, network
 speed and storage capacity. It has native versions for Mac, Windows and Linux,
 as well as native NAS integration.
 
-BitTorrent&reg; Inc. delivers only the raw binaries for Linux. The scope of
+BitTorrent&reg; Inc. **delivers only the raw binaries for Linux**. The scope of
 this project is to provide everything needed to create ready to use packages
 for Debian based servers and workstations.
+
+**THESE PACKAGES ARE UNOFFICIAL AND NOT THE WORK OF BITTORRENT&reg; INC.
+PLEASE DO NOT CONTACT THE BITTORRENT&reg; INC. SUPPORT WITH QUESTIONS OR
+PROBLEMS RELATED TO THE USE OF THE PACKAGES. YOU WILL FIND COMPETENT HELP
+AND SUPPORT IN THE RELATED DISCUSSION THREAD IN THE SUPPORT FORUM (Links
+below)**
 
 The mere executables and documentation provided by BitTorrent&reg; Inc. are
 distributed in a package named __btsync-common__ - all other packages are
