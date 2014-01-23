@@ -14,6 +14,7 @@ This topic covers only the [b]desktop user packages[/b]. If you are searching fo
 [img=http://s6.postimg.org/7qnsqcbg1/btsync_user_3.jpg]
 [/center]
 
+[color=#ff0000][b]THESE PACKAGES ARE UNOFFICIAL AND NOT THE WORK OF BITTORRENT® INC. PLEASE DO NOT CONTACT THE BITTORRENT® INC. SUPPORT WITH QUESTIONS OR PROBLEMS RELATED TO THE USE OF THE PACKAGES. YOU WILL FIND COMPETENT HELP AND SUPPORT IN THIS THREAD[/b][/color]
 
 The deb-packages are available for the same architectures as released by BitTorrent Inc.:
 
