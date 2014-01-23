@@ -18,6 +18,10 @@ special needs.
 
 ![BitTorrent Sync Desktop](http://s6.postimg.org/7qnsqcbg1/btsync_user_3.jpg)
 
+__THESE PACKAGES ARE UNOFFICIAL AND NOT THE WORK OF BITTORRENT® INC.
+PLEASE DO NOT CONTACT THE BITTORRENT® INC. SUPPORT WITH QUESTIONS OR
+PROBLEMS RELATED TO THE USE OF THE PACKAGES. YOU WILL FIND COMPETENT
+HELP AND SUPPORT IN THE [SUPPORT FORUM](http://forum.bittorrent.com/topic/19560-debian-and-ubuntu-desktop-unofficial-packages-for-bittorrent-sync/)__
 
 The deb-packages are available for the same architectures as released by
 BitTorrent Inc.:
