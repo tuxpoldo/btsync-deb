@@ -13,6 +13,11 @@ creation and maintenance of an optional default configuration as well as
 the possibility to manually configure single or multiple BitTorrent Sync
 instances with highly customised configurations.
 
+__THESE PACKAGES ARE UNOFFICIAL AND NOT THE WORK OF BITTORRENT® INC.
+PLEASE DO NOT CONTACT THE BITTORRENT® INC. SUPPORT WITH QUESTIONS OR
+PROBLEMS RELATED TO THE USE OF THE PACKAGES. YOU WILL FIND COMPETENT
+HELP AND SUPPORT IN THE [SUPPORT FORUM](http://forum.bittorrent.com/topic/18974-debian-and-ubuntu-server-unofficial-packages-for-bittorrent-sync/)__
+
 The deb-packages are available for the same architectures as released by
 BitTorrent Inc.:
 
