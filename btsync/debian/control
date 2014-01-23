@@ -15,9 +15,15 @@ Depends: libc6, btsync-common (>= 1.2.73-1)
 Provides: btsync-server-daemon
 Description: Private network P2P file synchronisation daemon(s)
  BitTorrent Sync is a simple tool that applies p2p protocol for
- direct live folder sync with maximum security, network speed and
- storage capacity. It has native versions for Mac, Windows and
- Linux, as well as native NAS integration.
+ direct live folder sync with maximum security, network speed
+ and storage capacity. It has native versions for Mac, Windows
+ and Linux, as well as native NAS integration.
+ .
+ THIS PACKAGE IS UNOFFICIAL AND NOT THE WORK OF BITTORRENT INC.
+ PLEASE DO NOT CONTACT THE BITTORRENT INC. SUPPORT WITH
+ QUESTIONS OR PROBLEMS RELATED TO THE USE OF THE PACKAGES. YOU
+ WILL FIND COMPETENT HELP AND SUPPORT IN THE RELATED DISCUSSION
+ THREAD IN THE SUPPORT FORUM (http://goo.gl/NN4RL5)
  .
  This package installs BitTorrent Sync as a single or multiple
  service with or without WebUI for server/NAS deployment.
