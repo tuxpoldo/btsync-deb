@@ -8,6 +8,8 @@ The [b]desktop user packages[/b] are explicitly intended for [b]desktop usage[/b
 
 This topic covers only the [b]server packages[/b]. If you are searching for the [b]desktop user packages,[/b]  [url="http://forum.bittorrent.com/topic/19560-debian-and-ubuntu-desktop-packages-for-bittorrent-sync/"][b]please look here[/b][/url].
 
+[color=#ff0000][b]THESE PACKAGES ARE UNOFFICIAL AND NOT THE WORK OF BITTORRENT® INC. PLEASE DO NOT CONTACT THE BITTORRENT® INC. SUPPORT WITH QUESTIONS OR PROBLEMS RELATED TO THE USE OF THE PACKAGES. YOU WILL FIND COMPETENT HELP AND SUPPORT IN THIS THREAD[/b][/color]
+
 The deb-packages are available for the same architectures as released by BitTorrent Inc.:
 
 [LIST]
