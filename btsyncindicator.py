@@ -402,16 +402,20 @@ class BtSyncIndicator:
 	menu.append(sep)
         folderitem['bottomsepitem'] = sep
 
-	readonly = gtk.MenuItem('Get Read Only Secret')
-	readonly.connect("activate", self.copy_secret, folder['readonlysecret'])
-	readwrite = gtk.MenuItem('Get Full Access Secret')
-	readwrite.connect("activate", self.copy_secret, folder['secret'])
+        readonlysecret = folder['secret']
+        if folder['iswritable']:
+                readonlysecret = folder['readonlysecret']
+                readwrite = gtk.MenuItem('Get Full Access Secret')
+                readwrite.connect("activate", self.copy_secret, folder['secret'])
 
-	readonly.show()
-	readwrite.show()
+                readwrite.show()
+                menu.append(readwrite)
 
-	menu.append(readonly)
-	menu.append(readwrite)
+        readonly = gtk.MenuItem('Get Read Only Secret')
+        readonly.connect("activate", self.copy_secret, readonlysecret)
+
+        readonly.show()
+        menu.append(readonly)
 
 	return menu
     
