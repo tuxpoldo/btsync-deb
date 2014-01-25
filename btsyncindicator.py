@@ -116,8 +116,14 @@ class BtSyncIndicator:
         if 'login' in self.config['webui']:
             login = self.config['webui']['login']
             password = self.config['webui']['password']
+            if self.btsync_user:
+                # autologin
+                self.webui = 'http://'+login+':'+password+'@'+self.config['webui']['listen']
+            else
+                self.webui = 'http://'+self.config['webui']['listen']
             self.auth = (login, password)
         else:
+            self.webui = 'http://'+self.config['webui']['listen']
             self.auth = None
 
         self.urlroot = 'http://'+self.config['webui']['listen']+'/gui/'
@@ -567,7 +573,7 @@ class BtSyncIndicator:
         Opens a browser to the address of the WebUI indicated in the config file
         """
         logging.info('Opening Web Browser to http://'+self.config['webui']['listen'])
-	webbrowser.open('http://'+self.config['webui']['listen'], 2)
+	webbrowser.open(self.webui, 2)
 	return True
 
     def open_fm(self, widget, path):
