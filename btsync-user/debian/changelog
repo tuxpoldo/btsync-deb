@@ -5,6 +5,8 @@ btsync-user (1.12.0-1) unstable; urgency=low
   * Reorganized the file structure in the home directory to make
     things more compliant and clean. All configuration data is now
     stored in ~/.config/btsync (Closes #55)
+  * Better check to avoid that the indicator starts twice 
+    (Closes #50)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Sat, 25 Jan 2014 18:10:21 +0100
 

@@ -99,6 +99,11 @@ adjust_arm_alignment() {
 
 start_frontend() {
 	if ! pgrep -u $(id -u) -f btsyncindicator.py > /dev/null; then
+		if [ -n "$1" ]; then
+			sleep $1
+		fi
+	fi
+	if ! pgrep -u $(id -u) -f btsyncindicator.py > /dev/null; then
 		if [ -f "${USRFILE}" ]; then
 			${FRONT} --config "${USRFILE}" --iconpath "${ICONS}" &
 		else
@@ -150,7 +155,7 @@ agent_runner() {
 			# startup normally
 			make_userfiles
 			# make sure the frontend is running
-			start_frontend
+			start_frontend 1
 			# start the agent
 			start_agent
 			# give the agent some time to fork
