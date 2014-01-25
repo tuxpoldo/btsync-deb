@@ -207,7 +207,13 @@ class BtSyncIndicator:
         * Initialises check_status loop
         If the server cannot be contacted, waits 5 seconds and retries.
         """
-        
+        if self.btsync_user:
+            filepath = self.config['storage_path']+'/paused'
+            if (os.path.isfile(filepath)):
+                logging.info('BitTorrent Sync is paused. Skipping session setup')
+                self.show_error("BitTorrent Sync is paused")
+                return True
+
         try:
             tokenparams = {'t': time.time()}
             tokenurl = self.urlroot+'token.html'
@@ -274,6 +280,13 @@ class BtSyncIndicator:
             self.pause_item.disconnect(self.pause_item_handler)
             self.pause_item.set_active(os.path.isfile(filepath))
             self.pause_item_handler = self.pause_item.connect("activate", self.toggle_pause)
+            if (os.path.isfile(filepath)):
+                logging.info('BitTorrent Sync is paused. Cleaning menu')
+                self.show_error("BitTorrent Sync is paused")
+                self.folderitems = {}
+                self.status = { 'folders': [] }
+                gtk.timeout_add(5000, self.setup_session)
+                return False
 
         try:
             logging.info('Requesting status')
