@@ -116,10 +116,11 @@ class BtSyncIndicator:
         if 'login' in self.config['webui']:
             login = self.config['webui']['login']
             password = self.config['webui']['password']
-            self.urlroot = 'http://'+login+':'+password+'@'+self.config['webui']['listen']+'/gui/'
+            self.auth = (login, password)
         else:
-            self.urlroot = 'http://'+self.config['webui']['listen']+'/gui/'
-            
+            self.auth = None
+
+        self.urlroot = 'http://'+self.config['webui']['listen']+'/gui/'
         self.folderitems = {}
         self.info = {}
         self.clipboard = gtk.Clipboard()
@@ -218,7 +219,8 @@ class BtSyncIndicator:
             tokenparams = {'t': time.time()}
             tokenurl = self.urlroot+'token.html'
             logging.info('Requesting Token from ' + tokenurl)
-            tokenresponse = requests.post(tokenurl, params=tokenparams)
+            tokenresponse = requests.post(tokenurl, params=tokenparams, auth=self.auth)
+            tokenresponse.raise_for_status()
             logging.info('Token response ' + str(tokenresponse))
             regex = re.compile("<html><div[^>]+>([^<]+)</div></html>")
             html = self.get_response_text(tokenresponse)
@@ -241,7 +243,8 @@ class BtSyncIndicator:
 
             for a in actions:
                params = {'token': self.token, 'action': a}
-               response = requests.get(self.urlroot, params=params, cookies=self.cookies)
+               response = requests.get(self.urlroot, params=params, cookies=self.cookies, auth=self.auth)
+               response.raise_for_status()
                self.info[a] = json.loads(self.get_response_text(response))
 
             self.clear_error()
@@ -291,7 +294,8 @@ class BtSyncIndicator:
         try:
             logging.info('Requesting status')
             params = {'token': self.token, 'action': 'getsyncfolders'}
-            response = requests.get(self.urlroot, params=params, cookies=self.cookies)
+            response = requests.get(self.urlroot, params=params, cookies=self.cookies, auth=self.auth)
+            response.raise_for_status()
 
             self.clear_error()
 
