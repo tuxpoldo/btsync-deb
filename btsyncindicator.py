@@ -165,9 +165,10 @@ class BtSyncIndicator:
         self.sep1.show()
         self.menu.append(self.sep1)
 
-	if self.btsync_user:
+        if self.btsync_user:
             filepath = self.config['storage_path']+'/paused'
             self.pause_item = gtk.CheckMenuItem("Pause Syncing")
+            self.pause_item.set_active(os.path.isfile(filepath))
             self.pause_item_handler = self.pause_item.connect("activate", self.toggle_pause)
             self.pause_item.show()
             self.menu.append(self.pause_item)
