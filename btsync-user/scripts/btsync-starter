@@ -31,9 +31,11 @@
 # compute user specific directories
 DESTDIR=${HOME}
 DATADIR=${DESTDIR}/.btsync
-CFGFILE=${DESTDIR}/.btsync.conf
-PIDFILE=${DESTDIR}/.btsync.pid
-USRFILE=${DESTDIR}/btsync.conf
+CFGPATH=${DESTDIR}/.config/btsync
+PIDFILE=${CFGPATH}/btsync.pid
+CFGFILE=${CFGPATH}/btsync-auto.conf
+USRFILE=${CFGPATH}/btsync-user.conf
+
 APPLDIR=${HOME}/.local/share/applications
 APPFILE=${APPLDIR}/btsync-user.desktop
 DEVNAME="$(hostname) - $(whoami)"
@@ -56,6 +58,7 @@ XPORTNUM="$((8999+$(id -u)))"
 # utility functions
 
 make_userfiles() {
+	mkdir -p ${CFGPATH}
 	mkdir -p ${DATADIR}
 	mkdir -p ${APPLDIR}
 	sed \
@@ -70,6 +73,17 @@ make_userfiles() {
 		-e "s/DEVNAME/${XDEVNAME}/g" \
 		-e "s/PORTNUM/${XPORTNUM}/g" \
 		> ${APPFILE} < /etc/btsync-user/btsync-user.desktop
+}
+
+update_configuration() {
+	# remove old configuration and PID files if still there
+	[ -f ${DESTDIR}/.btsync.conf ] && rm -f ${DESTDIR}/.btsync.conf
+	[ -f ${DESTDIR}/.btsync.pid ]  && rm -f ${DESTDIR}/.btsync.pid
+	# if a user specific configuration file is defined, move it to
+	# the new configuration location and rename it
+	if [ -f ${DESTDIR}/btsync.conf ]; then
+		mv ${DESTDIR}/btsync.conf ${USRFILE}
+	fi
 }
 
 adjust_arm_alignment() {
@@ -162,8 +176,11 @@ agent_runner() {
 #####################################
 # the main script
 
-# make sure the frontend is running
+# create user specific files
 make_userfiles
+# update file structure in user directory
+update_configuration
+# make sure the frontend is running
 start_frontend
 
 if pgrep -u $(id -u) -x btsync-agent > /dev/null; then

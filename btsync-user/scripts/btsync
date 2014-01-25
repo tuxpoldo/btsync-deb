@@ -11,9 +11,11 @@
 # compute user specific directories
 DESTDIR=${HOME}
 DATADIR=${DESTDIR}/.btsync
-CFGFILE=${DESTDIR}/.btsync.conf
-PIDFILE=${DESTDIR}/.btsync.pid
-USRFILE=${DESTDIR}/btsync.conf
+CFGPATH=${DESTDIR}/.config/btsync
+PIDFILE=${CFGPATH}/btsync.pid
+CFGFILE=${CFGPATH}/btsync-auto.conf
+USRFILE=${CFGPATH}/btsync-user.conf
+
 APPLDIR=${HOME}/.local/share/applications
 APPFILE=${APPLDIR}/btsync-user.desktop
 DEVNAME="$(hostname) - $(whoami)"
