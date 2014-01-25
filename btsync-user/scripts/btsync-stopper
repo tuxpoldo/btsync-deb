@@ -17,6 +17,5 @@ PAUSED_STATEFILE="${DATADIR}/paused"
 # the main script
 
 rm -f "${RUNNING_STATEFILE}"
-rm -f "${PAUSED_STATEFILE}"
 pkill -u $(id -u) -x btsync-agent
 pkill -u $(id -u) -f btsyncindicator.py

@@ -191,10 +191,15 @@ start_frontend
 if pgrep -u $(id -u) -x btsync-agent > /dev/null; then
 	echo btsync-agent already running
 	exit 0
-elif [ -f "${PAUSED_STATEFILE}" ]; then
-	echo btsync-agent was paused. resuming...
-	rm -r "${PAUSED_STATEFILE}"
-	exit 0
+elif [ -f "${RUNNING_STATEFILE}" ]; then
+	if [ $(pgrep -u $(id -u) -f btsync-starter | wc -l) -gt 1 ]; then
+		# the agent is not running, but there is an agent runner
+		# that means that the agent is paused
+	else
+		# the forked agent runner must be crashed without deleting
+		# the run file. Let's fork one....
+		agent_runner &
+	fi
 else
 	# fork the agent runner
 	agent_runner &

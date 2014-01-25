@@ -1,4 +1,4 @@
-btsync-user (1.12.0-1) unstable; urgency=low
+btsync-user (1.11.0-3) unstable; urgency=low
 
   * New upstream release 0.11 of btsyncindicator (Fixes keyerror
     when creating menu for read-only folders)
@@ -7,6 +7,7 @@ btsync-user (1.12.0-1) unstable; urgency=low
     stored in ~/.config/btsync (Closes #55)
   * Better check to avoid that the indicator starts twice 
     (Closes #50)
+  * The paused state is now persistent over reboots (Closes #12)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Sat, 25 Jan 2014 18:10:21 +0100
 
