@@ -303,3 +303,52 @@ msgstr "Legnagyobb időeltérés a verziókövetett fájlok másolatai között:
 msgid "Sets the number of days after reaching which files will be automatically deleted from the .SyncArchive folder. If leaved empty, the default value applies."
 msgstr "Ennyi nap után a fájlok a .SyncArchive mappából törlésre kerülnek. Üresen hagyva ezt a mezőt, az alapértelmezett érték lesz érvényben."
 
+#. Type: string
+#. Description
+#: ../btsync.templates:23001
+msgid "BitTorrent Sync API Key:"
+msgstr "BitTorrent Sync API kulcs:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:23001
+msgid "To enable the BitTorrent Sync API, an API key supplied by BitTorrent must be specified into the configuration file. If leaved empty, the API of BitTorrent Sync is disabled (default). API Keys can be requested on the BitTorrent Web Site."
+msgstr "BitTorrent Sync API használatához a konfigurációs fájlban egy Bittorrent API kulcs beállítása szükséges. Kulcs nélkül a BitTorrent Sync kikapcsolt állapotban marad. API kulcs a BitTorrent webolalán igényelhető."
+
+#. Type: select
+#. Description
+#: ../btsync.templates:24001
+msgid "BitTorrent Sync Daemon Credentials:"
+msgstr "BitTorrent Sync Démon jogosultságai:"
+
+#. Type: select
+#. Description
+#: ../btsync.templates:24001
+#, fuzzy
+msgid "You can choose, if you want BitTorrent Sync to run as root (not recommended), under it's own unprivileged credentials (user: btsync, group: btsync) or under an arbitrary user of your choice. WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
+msgstr "Beállítható hogy a BitTorrent Sync rendszergazdai (nem ajánlott) vagy a saját felhasználói  (felhasznlónév: btsync, csoport: btsync)  jogkörökkel fusson. FIGYELEM: Ha úgy változtatjuk ezt a beállítást, hogy a BitTorrent Sync már futott korábban, akkor gondoskodnunk kell a megosztott könyváraknak és fájloknak a megfelelő jogosultsági beállításairól, hogy a BitTorrent Sync továbrra  is írhassa és olvashassa azokat."
+
+#. Type: note
+#. Description
+#: ../btsync.templates:25001
+msgid "BitTorrent Sync Daemon Credentials have been changed!"
+msgstr "BitTorrent Sync Démon jogisultságai megváltoztak!"
+
+#. Type: note
+#. Description
+#: ../btsync.templates:25001
+msgid "Please make sure, that BitTorrent Sync will still be able to access and write to files and directories in your configured shared folders."
+msgstr "Gondoskodjon arról, hogy a BitTorrent Sync Démonnak legyen jogosultsága írni és olvasni a megosztott könyvárakat és azok fájljait."
+
+#. Type: select
+#. Description
+#: ../btsync.templates:26001
+msgid "BitTorrent Sync Daemon Group:"
+msgstr "BitTorrent Sync démon felhasználói csoportja:"
+
+#. Type: select
+#. Description
+#: ../btsync.templates:26001
+msgid "You can choose, if you want BitTorrent Sync to run under a different group as the selected user credential. WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
+msgstr "Beállítható, hogy a BitTorrent Sync milyen felhasználói csoportként fusson. FIGYELEM: Ha megváltoztatja ezt a beállítást egy már futó példány alatt, gondoskodnia kell a fájlok tulajdonosainak átállításáról is az összes megosztott könyvtárban, hogy a BitTorrent Sync továbbra is írni és olvasni tudja őket."
+
