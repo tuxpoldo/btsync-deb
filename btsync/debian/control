@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 7.0.50), po-debconf
 Standards-Version: 3.9.4
 Vcs-Git: https://github.com/tuxpoldo/btsync-deb.git
 Vcs-browser: https://github.com/tuxpoldo/btsync-deb
-Homepage: http://www.bittorrent.com/sync
+Homepage: http://www.yeasoft.com/site/projects:btsync-deb:btsync-server
 
 Package: btsync
 Architecture: all
