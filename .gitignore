@@ -18,6 +18,7 @@
 /btsync-common/BitTorrentSyncUserGuide.pdf
 
 # maintainers helpers
+/publishall.sh
 /conf
 /putrepo
 /nbproject
