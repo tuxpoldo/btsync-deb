@@ -112,15 +112,12 @@ class BtSyncIndicator:
         self.ind.set_attention_icon ("btsync-attention")
 
         self.config = btconf.config
+	self.detect_btsync_user()
         
         if 'login' in self.config['webui']:
             login = self.config['webui']['login']
             password = self.config['webui']['password']
-            if self.btsync_user:
-                # autologin
-                self.webui = 'http://'+login+':'+password+'@'+self.config['webui']['listen']
-            else
-                self.webui = 'http://'+self.config['webui']['listen']
+            self.webui = 'http://'+login+':'+password+'@'+self.config['webui']['listen'] if self.btsync_user else 'http://'+self.config['webui']['listen']
             self.auth = (login, password)
         else:
             self.webui = 'http://'+self.config['webui']['listen']
@@ -136,6 +133,10 @@ class BtSyncIndicator:
         self.status = None
         self.count = 0
 
+        self.menu_setup()
+        self.ind.set_menu(self.menu)
+
+    def detect_btsync_user(self):
         # If we have dpkg in $PATH, Determine whether the script was installed with 
 	# the btsync-user package if it is, we can use the packages btsync management
 	# scripts for some extra features
@@ -156,9 +157,7 @@ class BtSyncIndicator:
                 self.btsync_user = False
         except subprocess.CalledProcessError, e:
             self.btsync_user = False
-
-        self.menu_setup()
-        self.ind.set_menu(self.menu)
+        return self.btsync_user
 
     def menu_setup(self):
         """
@@ -225,15 +224,15 @@ class BtSyncIndicator:
             tokenparams = {'t': time.time()}
             tokenurl = self.urlroot+'token.html'
             logging.info('Requesting Token from ' + tokenurl)
-            tokenresponse = requests.post(tokenurl, params=tokenparams, auth=self.auth)
-            tokenresponse.raise_for_status()
-            logging.info('Token response ' + str(tokenresponse))
+            response = requests.post(tokenurl, params=tokenparams, auth=self.auth)
+            response.raise_for_status()
+            logging.info('Token response ' + str(response))
             regex = re.compile("<html><div[^>]+>([^<]+)</div></html>")
-            html = self.get_response_text(tokenresponse)
+            html = self.get_response_text(response)
             logging.info('HTML Response ' + html)
             r = regex.search(html)
             self.token = r.group(1)
-            self.cookies = tokenresponse.cookies
+            self.cookies = response.cookies
             logging.info('Token '+self.token+' Retrieved')
 
             actions = [
@@ -265,6 +264,10 @@ class BtSyncIndicator:
         except requests.exceptions.ConnectionError:
             logging.warning('Connection Error caught, displaying error message')
             self.show_error("Couldn't connect to Bittorrent Sync at "+self.urlroot)
+            return True
+        except requests.exceptions.HTTPError:
+            logging.warning('Communication Error caught, displaying error message')
+            self.show_error("Communication Error "+response.status_code)
             return True
 
     def check_status(self):
@@ -344,6 +347,13 @@ class BtSyncIndicator:
             self.status = { 'folders': [] }
             gtk.timeout_add(5000, self.setup_session)
             return False
+        except requests.exceptions.HTTPError:
+            logging.warning('Communication Error caught, displaying error message')
+            self.show_error("Communication Error "+response.status_code)
+            self.folderitems = {}
+            self.status = { 'folders': [] }
+            gtk.timeout_add(5000, self.setup_session)
+            return True
 
     def check_activity(self, folders):
         """
