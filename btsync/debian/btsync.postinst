@@ -35,18 +35,22 @@ add_btsync_system_user() {
 }
 
 create_default_instance() {
+	set +e
 	db_get btsync/runas || RET="btsync"
 	BTUSER=${RET}
 	db_get btsync/device-name || RET="$(hostname) - Default Instance"
 	DEVICE_NAME="${RET:-$(hostname) - Default Instance}"
 	db_get btsync/bind-port || RET=0
-	LISTENING_PORT=${RET}
+	LISTENING_PORT=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
+	LISTENING_PORT=${LISTENING_PORT:-0}
 	db_get btsync/use-upnp || RET=false
 	USE_UPNP=${RET}
 	db_get btsync/limit-download || RET=0
-	DOWNLOAD_LIMIT=${RET}
+	DOWNLOAD_LIMIT=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
+	DOWNLOAD_LIMIT=${DOWNLOAD_LIMIT:-0}
 	db_get btsync/limit-upload || RET=0
-	UPLOAD_LIMIT=${RET}
+	UPLOAD_LIMIT=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
+	UPLOAD_LIMIT=${UPLOAD_LIMIT:-0}
 	db_get btsync/disk_low_priority || RET="true"
 	DISK_LOW_PRIORITY=${RET}
 	db_get btsync/lan_encrypt_data || RET="true"
@@ -56,11 +60,12 @@ create_default_instance() {
 	db_get btsync/rate_limit_local_peers || RET="false"
 	RATE_LIMIT_LOCAL_PEERS=${RET}
 	db_get btsync/folder_rescan_interval || RET=600
-	FOLDER_RESCAN_INTERVAL=${RET}
+	FOLDER_RESCAN_INTERVAL=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
+	FOLDER_RESCAN_INTERVAL=${FOLDER_RESCAN_INTERVAL:-600}
 	db_get btsync/webgui-bindaddr || RET="0.0.0.0"
 	LISTEN_ADDR="${RET}"
 	db_get btsync/webgui-bindport || RET="8888"
-	LISTEN_PORT="${RET}"
+	LISTEN_PORT=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
 	db_get btsync/webgui-username || RET="admin"
 	LOGIN="${RET}"
 	db_get btsync/webgui-password || RET="btsyncPassword"
@@ -70,17 +75,18 @@ create_default_instance() {
 	db_get btsync/daemon_umask || RET=""
 	UMASK="${RET}"
 	db_get btsync/max_file_size_diff_for_patching || RET=""
-	MAX_FILE_DIFF_PATCH="${RET}"
+	MAX_FILE_DIFF_PATCH=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
 	db_get btsync/max_file_size_for_versioning || RET=""
-	MAX_FILE_VERSIONING="${RET}"
+	MAX_FILE_VERSIONING=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
 	db_get btsync/send_buf_size || RET=""
-	SEND_BUF_SIZE="${RET}"
+	SEND_BUF_SIZE=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
 	db_get btsync/recv_buf_size || RET=""
-	RECV_BUF_SIZE="${RET}"
+	RECV_BUF_SIZE=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
 	db_get btsync/sync_max_time_diff || RET=""
-	MAX_TIME_DIFF="${RET}"
+	MAX_TIME_DIFF=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
 	db_get btsync/sync_trash_ttl || RET=""
-	TRASH_TTL="${RET}"
+	TRASH_TTL=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
+	set -e
 	(
 	cat <<EOF
 //!/usr/lib/btsync/btsync-daemon --config

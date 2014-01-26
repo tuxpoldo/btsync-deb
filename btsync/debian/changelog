@@ -1,3 +1,10 @@
+btsync (1.2.2-1) unstable; urgency=low
+
+  * Fixed malformed number formatting in default instance
+    configuration file generation (Closes #56)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sun, 26 Jan 2014 16:16:16 +0100
+
 btsync (1.2.1-1) unstable; urgency=low
 
   * Allow the default instance to run also as dedicated user
