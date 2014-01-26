@@ -112,7 +112,7 @@ class BtSyncIndicator:
         self.ind.set_attention_icon ("btsync-attention")
 
         self.config = btconf.config
-	self.detect_btsync_user()
+        self.detect_btsync_user()
         
         if 'login' in self.config['webui']:
             login = self.config['webui']['login']
