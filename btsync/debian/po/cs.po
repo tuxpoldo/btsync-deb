@@ -10,7 +10,6 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../btsync.templates:1001
-#, fuzzy
 msgid "Do you want to define a default BitTorrent Sync instance?"
 msgstr "Chcete nastavit základní BitTorrent Sync instanci?"
 
@@ -260,7 +259,7 @@ msgstr "Určuje maximální velikost v MB pro vytváření verzí souboru. Pokud
 #. Description
 #: ../btsync.templates:19001
 msgid "Send Buffer Size:"
-msgstr ""
+msgstr "Velikost bufferu pri odesilani:"
 
 #. Type: string
 #. Description
@@ -272,7 +271,7 @@ msgstr "Toto je skutečné množství paměti, která bude použita ke cachován
 #. Description
 #: ../btsync.templates:20001
 msgid "Receive buffer size:"
-msgstr ""
+msgstr "Velikost bufferu pri prijmu:"
 
 #. Type: string
 #. Description
@@ -290,7 +289,7 @@ msgstr "Maximální časový rozdíl mezi zařízeními:"
 #. Description
 #: ../btsync.templates:21001
 msgid "Maximum allowed time difference in seconds between devices. If the difference exceeds this limit, the devices will not be synced as it may result in incorrect tracing of file changes. If leaved empty, the default value applies."
-msgstr ""
+msgstr "Maximální povolený časový rozdíl v sekundách mezi zařízeními. Pokud rozdíl překročí tento limit, zařízení nebudou synchronizovány, z důvodu možného ovlivnění sledování verzí souborů. Pokud toto pole necháte prázdné, budou použity výchozí hodnoty."
 
 #. Type: string
 #. Description
@@ -302,5 +301,54 @@ msgstr "Doba po kterou budou zachovány verze souboru:"
 #. Description
 #: ../btsync.templates:22001
 msgid "Sets the number of days after reaching which files will be automatically deleted from the .SyncArchive folder. If leaved empty, the default value applies."
-msgstr ""
+msgstr "Určuje počet dní po kterém budou soubory automaticky smazány ze složky .SyncArchive. Pokud toto pole necháte prázdné, bude použita výchozí hodnota."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:23001
+msgid "BitTorrent Sync API Key:"
+msgstr "API klíč služby BitTorrent Sync:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:23001
+msgid "To enable the BitTorrent Sync API, an API key supplied by BitTorrent must be specified into the configuration file. If leaved empty, the API of BitTorrent Sync is disabled (default). API Keys can be requested on the BitTorrent Web Site."
+msgstr "Chtete-li aktivovat vývojářské API služby BitTorrent Sync, musíte nastavit API klíč v konfiguračním souboru. Pokud necháte toto pole prázdné, API bude zakázané (výchozí). API klíče mohou být získané ze stránky služby BitTorrent."
+
+#. Type: select
+#. Description
+#: ../btsync.templates:24001
+msgid "BitTorrent Sync Daemon Credentials:"
+msgstr "Vlastnosti daemona služby BitTorrent Sync:"
+
+#. Type: select
+#. Description
+#: ../btsync.templates:24001
+#, fuzzy
+msgid "You can choose, if you want BitTorrent Sync to run as root (not reccomended) or under it's own unprivileged credentials (user: btsync, group: btsync). WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
+msgstr "Můžete si vybrat, zda chcete BitTorrent Sync spustit jako root (není doporučeno), nebo na základě jeho vlastního neprivilegované pověření (uživatel: btsync, skupina: btsync). UPOZORNĚNÍ: Změníte-li toto nastavení v již spuštěné instanci, musíte se postarat o změnu vlastnictví u všech souborů ve spravovaných sdílených složkách, abyste se ujistil, že je služba BitTorrent Sync bude moci nadále spravovat."
+
+#. Type: note
+#. Description
+#: ../btsync.templates:25001
+msgid "BitTorrent Sync Daemon Credentials have been changed!"
+msgstr "Vlastnosti daemona služby BitTorrent Sync byly úspěšně změněny."
+
+#. Type: note
+#. Description
+#: ../btsync.templates:25001
+msgid "Please make sure, that BitTorrent Sync will still be able to access and write to files and directories in your configured shared folders."
+msgstr "Ujistěte se, že služba BitTorrent Sync bude moci nadále číst a zapisovat do souborů a složek ve vašich sdílených složkách."
+
+#. Type: select
+#. Description
+#: ../btsync.templates:26001
+msgid "BitTorrent Sync Daemon Group:"
+msgstr "Daemon skupina služby BitTorrent Synchronizace:"
+
+#. Type: select
+#. Description
+#: ../btsync.templates:26001
+msgid "You can choose, if you want BitTorrent Sync to run under a different group as the selected user credential. WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
+msgstr "Chcete-li, můžete rozhodnout zda služba BitTorrent Sync bude spouštěna pod jinou skupinou než zvolené přihlašovací údaje. POZOR! Pokud toto nastaveni změníte při již spuštěné instanci Syncu, budete nuceni změnit vlastníka VŠECH souborů a podsložek ve spravované synchronizované složce, aby služba BitTorrent Sync mohla nadále spravovat dané soubory."
 
