@@ -325,18 +325,30 @@ msgstr "Credenciais do servizo do BitTorrent Sync"
 #. Type: select
 #. Description
 #: ../btsync.templates:24001
-msgid "You can choose, if you want BitTorrent Sync to run as root (not reccomended) or under it's own unprivileged credentials (user: btsync, group: btsync). WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
-msgstr "Pode escoller se quere que o BitTorrent Sync se execute como administrador (root), cousa que non recomendamos, ou baixo as credenciais sen privilexios (usuario: btsync, grupo: btsync). AVISO: Se cambia esta configuración nunha instancia en execución, ten que ter a precaución de cambiar a titularidade (propietario) de todos os ficheiros na administración de cartafoles compartidos a fin de asegurar que o BitTorrent Sync aínda poderá acceder a eles e modificalos."
+msgid "You can choose, if you want BitTorrent Sync to run as root (not recommended), under it's own unprivileged credentials (user: btsync, group: btsync) or under an arbitrary user of your choice. WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
+msgstr "Pode escoller se quere que o BitTorrent Sync se execute como administrador (root), cousa que non recomendamos, coas credenciais sen privilexios (usuario: btsync, grupo: btsync) ou como un usuario segundo a súa escolla. AVISO: Se cambia esta configuración nunha instancia en execución, ten que ter a precaución de cambiar a titularidade (propietario) de todos os ficheiros na administración de cartafoles compartidos a fin de asegurar que o BitTorrent Sync aínda poderá acceder a eles e modificalos."
 
 #. Type: note
 #. Description
 #: ../btsync.templates:25001
 msgid "BitTorrent Sync Daemon Credentials have been changed!"
-msgstr "Cambiáronse as credenciais de servizo do BitTorrent Sync:"
+msgstr "Cambiáronse as credenciais do servizo do BitTorrent Sync:"
 
 #. Type: note
 #. Description
 #: ../btsync.templates:25001
 msgid "Please make sure, that BitTorrent Sync will still be able to access and write to files and directories in your configured shared folders."
 msgstr "Asegúrese de que BitTorrent Sync aínda pode acceder e escribir nos ficheiro e directorios dos cartafoles compartidos configurados."
+
+#. Type: select
+#. Description
+#: ../btsync.templates:26001
+msgid "BitTorrent Sync Daemon Group:"
+msgstr "Grupo do servizo do BitTorrent Sync:"
+
+#. Type: select
+#. Description
+#: ../btsync.templates:26001
+msgid "You can choose, if you want BitTorrent Sync to run under a different group as the selected user credential. WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
+msgstr "Pode escoller se quere que o BitTorrent Sync se execute desde un grupo diferente ao da credencial do usuario seleccionado. AVISO: Se cambia esta configuración nunha instancia en execución, ten que ter a precaución de cambiar a titularidade (propietario) de todos os ficheiros na administración de cartafoles compartidos a fin de asegurar que o BitTorrent Sync aínda poderá acceder a eles e modificalos."
 
