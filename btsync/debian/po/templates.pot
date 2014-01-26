@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: btsync\n"
 "Report-Msgid-Bugs-To: btsync@packages.debian.org\n"
-"POT-Creation-Date: 2013-12-10 18:42+0100\n"
+"POT-Creation-Date: 2014-01-26 17:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -396,24 +396,41 @@ msgstr ""
 #. Description
 #: ../btsync.templates:24001
 msgid ""
-"You can choose, if you want BitTorrent Sync to run as root (not reccomended) "
-"or under it's own unprivileged credentials (user: btsync, group: btsync). "
-"WARNING: If you change this setting in an already running instance, you must "
-"take care of changing the ownership of all files in the managed folder "
-"shares in order to make sure that BitTorrent Sync will still be able to "
-"access and modify them."
+"You can choose, if you want BitTorrent Sync to run as root (not "
+"recommended), under it's own unprivileged credentials (user: btsync, group: "
+"btsync) or under an arbitrary user of your choice. WARNING: If you change "
+"this setting in an already running instance, you must take care of changing "
+"the ownership of all files in the managed folder shares in order to make "
+"sure that BitTorrent Sync will still be able to access and modify them."
 msgstr ""
 
-#. Type: note
+#. Type: error
 #. Description
 #: ../btsync.templates:25001
 msgid "BitTorrent Sync Daemon Credentials have been changed!"
 msgstr ""
 
-#. Type: note
+#. Type: error
 #. Description
 #: ../btsync.templates:25001
 msgid ""
 "Please make sure, that BitTorrent Sync will still be able to access and "
 "write to files and directories in your configured shared folders."
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../btsync.templates:26001
+msgid "BitTorrent Sync Daemon Group:"
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../btsync.templates:26001
+msgid ""
+"You can choose, if you want BitTorrent Sync to run under a different group "
+"as the selected user credential. WARNING: If you change this setting in an "
+"already running instance, you must take care of changing the ownership of "
+"all files in the managed folder shares in order to make sure that BitTorrent "
+"Sync will still be able to access and modify them."
 msgstr ""

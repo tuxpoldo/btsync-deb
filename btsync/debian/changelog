@@ -1,5 +1,9 @@
 btsync (1.2.2-1) unstable; urgency=low
 
+  * It is now possible to select arbitrary system users as
+    credentials for running the btsync daemon
+  * It is now possible to select arbitrary system group as
+    credentials for running the btsync daemon (Closes #53)
   * Fixed malformed number formatting in default instance
     configuration file generation (Closes #56)
 

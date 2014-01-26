@@ -38,6 +38,8 @@ create_default_instance() {
 	set +e
 	db_get btsync/runas || RET="btsync"
 	BTUSER=${RET}
+	db_get btsync/runasgroup || RET="default"
+	BTGROUP=${RET}
 	db_get btsync/device-name || RET="$(hostname) - Default Instance"
 	DEVICE_NAME="${RET:-$(hostname) - Default Instance}"
 	db_get btsync/bind-port || RET=0
@@ -105,7 +107,11 @@ EOF
 	) > ${CONFFILE}
 	if [ "${BTUSER}" != "root" ]; then
 		echo "// DAEMON_UID=${BTUSER}" >> ${CONFFILE}
-		echo "// DAEMON_GID=${BTUSER}" >> ${CONFFILE}
+	fi
+	if [ "${BTGROUP}" != "default" ]; then
+		echo "// DAEMON_GID=${BTGROUP}" >> ${CONFFILE}
+	elif [ "${BTUSER}" = "btsync" ]; then
+		echo "// DAEMON_GID=btsync" >> ${CONFFILE}
 	fi
 	if [ "${UMASK}" != "" ]; then
 		echo "// DAEMON_UMASK=${UMASK}" >> ${CONFFILE}
@@ -226,8 +232,25 @@ remove_default_instance() {
 
 fix_permissions() {
 	if [ -f ${CONFFILE} ]; then
-		chown ${BTUSER}:${BTUSER} ${CONFFILE}
-		chown -R ${BTUSER}:${BTUSER} /var/lib/btsync
+		if [ "${BTGROUP}" != "default" ]; then
+			chown ${BTUSER}:${BTGROUP} ${CONFFILE}
+			chown -R ${BTUSER}:${BTGROUP} /var/lib/btsync
+		else
+			case "${BTUSER}" in
+			btsync)
+				chown btsync:btsync ${CONFFILE}
+				chown -R btsync:btsync /var/lib/btsync
+				;;
+			root)
+				chown root:root ${CONFFILE}
+				chown -R root:root /var/lib/btsync
+				;;
+			*)
+				chown ${BTUSER} ${CONFFILE}
+				chown -R ${BTUSER} /var/lib/btsync
+				;;
+			esac
+		fi
 	fi
 }
 
