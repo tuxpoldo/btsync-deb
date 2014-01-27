@@ -205,7 +205,7 @@ _Description: BitTorrent Sync Daemon Credentials:
  be able to access and modify them.
 
 Template: btsync/runas-changed
-Type: error
+Type: note
 _Description: BitTorrent Sync Daemon Credentials have been changed!
  Please make sure, that BitTorrent Sync will still be able to access and
  write to files and directories in your configured shared folders.

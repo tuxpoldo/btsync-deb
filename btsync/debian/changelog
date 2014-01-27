@@ -1,3 +1,11 @@
+btsync (1.2.2-2) unstable; urgency=low
+
+  * Updated debconf localizations (Czech, Dutch, Galician, Hungarian,
+    Spanish)
+  * Fixed wrong warning about changed credentials
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Mon, 27 Jan 2014 09:21:11 +0100
+
 btsync (1.2.2-1) unstable; urgency=low
 
   * It is now possible to select arbitrary system users as
