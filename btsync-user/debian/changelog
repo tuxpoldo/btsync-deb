@@ -1,6 +1,11 @@
-btsync-user (1.12.0-1) unstable; urgency=low
+btsync-user (1.13.0-1) unstable; urgency=low
 
-  * New upstream release 0.12 of btsyncindicator (Fixes keyerror
+  * New upstream release 0.13 of btsyncindicator
+    - Improved pause and resume support
+    - Fixed lots of problems with authentication
+    - Fixed missing http error handling
+    - Fixed keyerror when creating menu for read-only folders
+    - Autologin support to the menu function "Open Web Interface"
     when creating menu for read-only folders)
   * Improved pause/resume support in btsyncindicator
   * The paused state is now persistent over reboots (Closes #12)
@@ -10,7 +15,7 @@ btsync-user (1.12.0-1) unstable; urgency=low
   * Better check to avoid that the indicator starts twice 
     (Closes #50)
 
- -- Leo Moll <leo.moll@yeasoft.com>  Sat, 25 Jan 2014 22:42:24 +0100
+ -- Leo Moll <leo.moll@yeasoft.com>  Mon, 27 Jan 2014 14:29:24 +0100
 
 btsync-user (1.11.0-2) unstable; urgency=low
 
