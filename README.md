@@ -4,17 +4,24 @@ btsyncindicator
 **BitTorrent Sync indicator for Linux desktops**
 
 ```
-usage: btsyncindicator.py [-h] [--config CONFIG] [--iconpath ICONPATH]
+usage: btsyncindicator.py [-h] [--config CONFIG] [--iconpath ICONPATH] [-v]
+                          [--log LOG]
 
 optional arguments:
   -h, --help           show this help message and exit
-  --config CONFIG      location of BitTorrent Sync config file
-  --iconpath ICONPATH  path to icon theme folder
+  --config CONFIG      Location of BitTorrent Sync config file
+  --iconpath ICONPATH  Path to icon theme folder
+  -v, --version        Print version information and exit
+  --log LOG            Set logging level
 ```
 
 * Displays an application indicator for BitTorrent Sync on Linux desktops.
 * Shows syncing folders and the status of connected peers.
 * Allows you copy the secret for each folder to the clipboard.
+
+### Contributions welcome
+
+I'm not actively developing the indicator at the moment but am keeping an eye on bug reports and will test and merge pull requests.  If you'd like to contribute, please raise a bug in the tracker, I'll be notified and get back to you.
 
 ## Installation
 
