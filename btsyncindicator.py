@@ -112,14 +112,18 @@ class BtSyncIndicator:
         self.ind.set_attention_icon ("btsync-attention")
 
         self.config = btconf.config
+        self.detect_btsync_user()
         
         if 'login' in self.config['webui']:
             login = self.config['webui']['login']
             password = self.config['webui']['password']
-            self.urlroot = 'http://'+login+':'+password+'@'+self.config['webui']['listen']+'/gui/'
+            self.webui = 'http://'+login+':'+password+'@'+self.config['webui']['listen'] if self.btsync_user else 'http://'+self.config['webui']['listen']
+            self.auth = (login, password)
         else:
-            self.urlroot = 'http://'+self.config['webui']['listen']+'/gui/'
-            
+            self.webui = 'http://'+self.config['webui']['listen']
+            self.auth = None
+
+        self.urlroot = 'http://'+self.config['webui']['listen']+'/gui/'
         self.folderitems = {}
         self.info = {}
         self.clipboard = gtk.Clipboard()
@@ -129,6 +133,10 @@ class BtSyncIndicator:
         self.status = None
         self.count = 0
 
+        self.menu_setup()
+        self.ind.set_menu(self.menu)
+
+    def detect_btsync_user(self):
         # If we have dpkg in $PATH, Determine whether the script was installed with 
 	# the btsync-user package if it is, we can use the packages btsync management
 	# scripts for some extra features
@@ -149,9 +157,7 @@ class BtSyncIndicator:
                 self.btsync_user = False
         except subprocess.CalledProcessError, e:
             self.btsync_user = False
-
-        self.menu_setup()
-        self.ind.set_menu(self.menu)
+        return self.btsync_user
 
     def menu_setup(self):
         """
@@ -207,19 +213,26 @@ class BtSyncIndicator:
         * Initialises check_status loop
         If the server cannot be contacted, waits 5 seconds and retries.
         """
-        
+        if self.btsync_user:
+            filepath = self.config['storage_path']+'/paused'
+            if (os.path.isfile(filepath)):
+                logging.info('BitTorrent Sync is paused. Skipping session setup')
+                self.show_error("BitTorrent Sync is paused")
+                return True
+
         try:
             tokenparams = {'t': time.time()}
             tokenurl = self.urlroot+'token.html'
             logging.info('Requesting Token from ' + tokenurl)
-            tokenresponse = requests.post(tokenurl, params=tokenparams)
-            logging.info('Token response ' + str(tokenresponse))
+            response = requests.post(tokenurl, params=tokenparams, auth=self.auth)
+            response.raise_for_status()
+            logging.info('Token response ' + str(response))
             regex = re.compile("<html><div[^>]+>([^<]+)</div></html>")
-            html = self.get_response_text(tokenresponse)
+            html = self.get_response_text(response)
             logging.info('HTML Response ' + html)
             r = regex.search(html)
             self.token = r.group(1)
-            self.cookies = tokenresponse.cookies
+            self.cookies = response.cookies
             logging.info('Token '+self.token+' Retrieved')
 
             actions = [
@@ -235,7 +248,8 @@ class BtSyncIndicator:
 
             for a in actions:
                params = {'token': self.token, 'action': a}
-               response = requests.get(self.urlroot, params=params, cookies=self.cookies)
+               response = requests.get(self.urlroot, params=params, cookies=self.cookies, auth=self.auth)
+               response.raise_for_status()
                self.info[a] = json.loads(self.get_response_text(response))
 
             self.clear_error()
@@ -250,6 +264,10 @@ class BtSyncIndicator:
         except requests.exceptions.ConnectionError:
             logging.warning('Connection Error caught, displaying error message')
             self.show_error("Couldn't connect to Bittorrent Sync at "+self.urlroot)
+            return True
+        except requests.exceptions.HTTPError:
+            logging.warning('Communication Error caught, displaying error message')
+            self.show_error("Communication Error "+response.status_code)
             return True
 
     def check_status(self):
@@ -274,11 +292,19 @@ class BtSyncIndicator:
             self.pause_item.disconnect(self.pause_item_handler)
             self.pause_item.set_active(os.path.isfile(filepath))
             self.pause_item_handler = self.pause_item.connect("activate", self.toggle_pause)
+            if (os.path.isfile(filepath)):
+                logging.info('BitTorrent Sync is paused. Cleaning menu')
+                self.show_error("BitTorrent Sync is paused")
+                self.folderitems = {}
+                self.status = { 'folders': [] }
+                gtk.timeout_add(5000, self.setup_session)
+                return False
 
         try:
             logging.info('Requesting status')
             params = {'token': self.token, 'action': 'getsyncfolders'}
-            response = requests.get(self.urlroot, params=params, cookies=self.cookies)
+            response = requests.get(self.urlroot, params=params, cookies=self.cookies, auth=self.auth)
+            response.raise_for_status()
 
             self.clear_error()
 
@@ -321,6 +347,13 @@ class BtSyncIndicator:
             self.status = { 'folders': [] }
             gtk.timeout_add(5000, self.setup_session)
             return False
+        except requests.exceptions.HTTPError:
+            logging.warning('Communication Error caught, displaying error message')
+            self.show_error("Communication Error "+response.status_code)
+            self.folderitems = {}
+            self.status = { 'folders': [] }
+            gtk.timeout_add(5000, self.setup_session)
+            return True
 
     def check_activity(self, folders):
         """
@@ -550,7 +583,7 @@ class BtSyncIndicator:
         Opens a browser to the address of the WebUI indicated in the config file
         """
         logging.info('Opening Web Browser to http://'+self.config['webui']['listen'])
-	webbrowser.open('http://'+self.config['webui']['listen'], 2)
+	webbrowser.open(self.webui, 2)
 	return True
 
     def open_fm(self, widget, path):
