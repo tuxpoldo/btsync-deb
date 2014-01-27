@@ -1,3 +1,9 @@
+btsync (1.2.2-3) unstable; urgency=low
+
+  * Removed debugging log file forgotten during previous development
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Mon, 27 Jan 2014 16:24:02 +0100
+
 btsync (1.2.2-2) unstable; urgency=low
 
   * Updated debconf localizations (Czech, Dutch, Galician, Hungarian,
