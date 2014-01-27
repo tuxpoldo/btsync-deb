@@ -155,7 +155,8 @@ launched under the user's credentials and a tray applet is launched to show the
 status and manage the running instance.
 
 By default the user instance has an automatical created configuration file in
-`~/.btsync.conf` and keeps its internal data in the directory `~/.btsync`
+`~/.config/btsync/btsync-auto.conf` and keeps its internal data in the
+directory `~/.btsync`
 
 A user specific desktop shortcut to the web UI is installed into the system.
 Since every user has it's web UI on a different port number, only the desktop
@@ -164,16 +165,17 @@ shortcut or the indicator applet should be used to invoke the web UI.
 In order to give more freedom to the advanced user, there is also a possibility
 to launch BitTorrent Sync with a custom configuration file instead of the
 automatically created file: the startup routine of BitTorrent Sync checks,
-if there is a file named `btsync.conf` in the home directory of the user.
-If `~/btsync.conf` is found, then it is used as configuration file. If not,
-BitTorrent Sync uses the automatically created default configuration file
-`~/.btsync.conf` that will be recreated on every restart.
+if there is a file named `btsync-user.conf` in the configuration directory
+`~/.config/btsync` of the user. If this file is found, then it is used as
+configuration file. If not, BitTorrent Sync uses the automatically created
+default configuration file `~/.config/btsync/btsync-auto.conf` that will be
+recreated on every restart.
 
 The simplest way to create a custom configuration file, is to create a copy of
 the default configuration file and then to edit it according to your needs:
 
 ```bash
-cp ~/.btsync.conf ~/btsync.conf
+cp ~/.config/btsync/btsync-auto.conf ~/.config/btsync/btsync-user.conf
 ```
 
 When you are ready with your modifications, you can restart BitTorrent Sync by
