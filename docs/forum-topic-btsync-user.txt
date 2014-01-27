@@ -106,6 +106,7 @@ After the successful installation, you have to initially start BitTorrent Sync. 
 [*]Select [i]BitTorrent Sync[/i] from the menu or Unity-Launcher[/*]
 [*]Start it from the console by issuing the command:[/*]
 [/LIST]
+
 [code]
 btsync start
 [/code]
@@ -116,18 +117,22 @@ More details can be found in the usages notes:
 
 This package of BitTorrent Sync is explicitly intended for generic desktop usage and provide a user experience similar to BitTorrent Sync on Windows or Mac OSX: When the user logs in, an instance of BitTorrent Sync is automatically launched under the user's credentials and a tray applet is launched to show the status and manage the running instance.
 
-By default the user instance has an automatical created configuration file in [font='courier new', courier, monospace][b]~/.btsync.conf[/b][/font] and keeps its internal data in the directory [font='courier new', courier, monospace][b]~/.btsync[/b][/font]
+By default the user instance has an automatical created configuration file in [font='courier new', courier, monospace][b]~/.config/btsync/btsync-auto.conf[/b][/font] and keeps its internal data in the directory [font='courier new', courier, monospace][b]~/.btsync[/b][/font]
 
 A user specific desktop shortcut to the web UI is installed into the system. Since every user has it's web UI on a different port number, only the desktop shortcut or the indicator applet should be used to invoke the web UI.
 
-In order to give more freedom to the advanced user, there is also a possibility to launch BitTorrent Sync with a custom configuration file instead of the automatically created file: the startup routine of BitTorrent Sync checks, if there is a file named [b][font='courier new', courier, monospace]btsync.conf[/font][/b] in the home directory of the user. If [font=courier, monospace][b]~/btsync.conf[/b][/font] is found, then it is used as configuration file. If not, BitTorrent Sync uses the automatically created default configuration file [font='courier new', courier, monospace][b]~/.btsync.conf[/b][/font] that will be recreated on every restart.
+In order to give more freedom to the advanced user, there is also a possibility to launch BitTorrent Sync with a custom configuration file instead of the automatically created file: the startup routine of BitTorrent Sync checks, if there is a file named [b][font='courier new', courier, monospace]btsync-user.conf[/font][/b] in the configuration directory [font='courier new', courier, monospace][b]~/.config/btsync[/b][/font] of the user. If this file is found, then it is used as configuration file. If not, BitTorrent Sync uses the automatically created default configuration file [b][font='courier new', courier, monospace]~/.config/btsync/btsync-auto.conf[/font][/b] that will be recreated on every restart.
 
 The simplest way to create a custom configuration file, is to create a copy of the default configuration file and then to edit it according to your needs:
-[code=auto:0]cp ~/.btsync.conf ~/btsync.conf
+
+[code]
+cp ~/.config/btsync/btsync-auto.conf ~/.config/btsync/btsync-user.conf
 [/code]
 
 When you are ready with your modifications, you can restart BitTorrent Sync by executing:
- [code=auto:0]btsync restart
+
+[code]
+btsync restart
 [/code]
  
 on the command line.
