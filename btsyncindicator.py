@@ -267,7 +267,7 @@ class BtSyncIndicator:
             return True
         except requests.exceptions.HTTPError:
             logging.warning('Communication Error caught, displaying error message')
-            self.show_error("Communication Error "+response.status_code)
+            self.show_error("Communication Error "+str(response.status_code))
             return True
 
     def check_status(self):
@@ -349,7 +349,7 @@ class BtSyncIndicator:
             return False
         except requests.exceptions.HTTPError:
             logging.warning('Communication Error caught, displaying error message')
-            self.show_error("Communication Error "+response.status_code)
+            self.show_error("Communication Error "+str(response.status_code))
             self.folderitems = {}
             self.status = { 'folders': [] }
             gtk.timeout_add(5000, self.setup_session)
