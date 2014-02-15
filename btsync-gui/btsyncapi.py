@@ -3,14 +3,14 @@ import requests
 import json
 
 class BtSyncApi(object):
-	""" The BtSyncApi class is a light wrapper around the Bittorrent Sync API.
+	"""
+	The BtSyncApi class is a light wrapper around the Bittorrent Sync API.
 	Currently to use the API you will need to apply for a key. You can find out
 	how to do that, and learn more about the btsync API here:
 
 	http://www.bittorrent.com/sync/developers/api
 
 	The docstrings of this class' methods were copied from the above site.
-
 	"""
 
 	def __init__(self, host='localhost', port='8888', user=None, password=None):

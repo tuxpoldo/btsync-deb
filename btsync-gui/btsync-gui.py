@@ -1,19 +1,43 @@
 #!/usr/bin/env python
+# coding=utf-8
+#
+# Copyright 2014 Leo Moll
+#
+# Authors: Leo Moll and Contributors (see CREDITS)
+#
+# Thanks to Mark Johnson for btsyncindicator.py which gave me the
+# last nudge needed to learn python and write my first linux gui
+# application. Tnak you!
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranties of
+# MERCHANTABILITY, SATISFACTORY QUALITY or FITNESS FOR A PARTICULAR
+# PURPOSE.  See the applicable version of the GNU Lesser General Public
+# License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License version 3 along with this program.  If not, see
+# <http://www.gnu.org/licenses/>
+#
 
-from gi.repository import Gtk, Gdk
+from gi.repository import Gtk
 from btsyncapi import BtSyncApi
+from prefsadvanced import BtSyncPrefsAdvanced
+from btsyncutils import *
 
-class BtSyncApp:
+class BtSyncApp(BtInputHelper):
 
 	def __init__(self):
 		self.btsyncapi = BtSyncApi(port='9999')
 		self.builder = Gtk.Builder()
 		self.builder.add_from_file("btsync-gui.glade")
 		self.builder.connect_signals (self)
-		self.window = self.builder.get_object('mainwindow')
+
+		self.window = self.builder.get_object('btsyncapp')
 		self.window.show()
 
 		self.prefs = self.btsyncapi.get_prefs()
+#		print self.prefs
 		self.doPreferencesInitControls()
 		self.doPreferencesInitValues()
 
@@ -31,25 +55,33 @@ class BtSyncApp:
 		self.limituprate = self.builder.get_object('limituprate')
 
 	def doPreferencesInitValues(self):
+		self.lock()
 		self.preferences_locked = True
-		self.devname.set_text(self.prefs["device_name"])
+#		self.devname.set_text(self.prefs["device_name"])
+		self.attach(self.devname,BtValueDescriptor.new_from('device_name',self.prefs["device_name"]))
 		# self.autostart.set_active(self.prefs[""]);
-		self.listeningport.set_text(str(self.prefs["listening_port"]))
+#		self.listeningport.set_text(str(self.prefs["listening_port"]))
+		self.attach(self.listeningport,BtValueDescriptor.new_from('listening_port',self.prefs["listening_port"]))
 		self.upnp.set_active(self.prefs["use_upnp"] != 0)
 		self.limitdn.set_active(self.prefs["download_limit"] > 0)
 		self.limitdnrate.set_text(str(self.prefs["download_limit"]));
 		self.limitup.set_active(self.prefs["upload_limit"] > 0)
 		self.limituprate.set_text(str(self.prefs["upload_limit"]));
 		self.preferences_locked = False
+		self.unlock()
 
 	def onPreferencesChangedDeviceName(self,widget):
-		self.handleChangedTextEntry(widget,'device_name')
+		print "."
+#		self.onChangedWidget(widget)
+#		self.handleChangedTextEntry(widget,'device_name')
 
 	def onPreferencesSaveDeviceName(self,widget,iconposition,event):
 		self.handleSaveTextEntry(widget,iconposition,'device_name')
 
 	def onPreferencesChangedListeningPort(self,widget):
-		self.handleChangedNumberEntry(widget,'listening_port',minval=1025,maxval=65534)
+		print "."
+#		self.onChangedWidget(widget)
+#		self.handleChangedNumberEntry(widget,'listening_port',minval=1025,maxval=65534)
 
 	def onPreferencesSaveListeningPort(self,widget,iconposition,event):
 		self.handleSaveNumberEntry(widget,iconposition,'listening_port',minval=1025,maxval=65534)
@@ -66,20 +98,32 @@ class BtSyncApp:
 	def onPreferencesSaveUploadRate(self,widget,iconposition,event):
 		self.handleSaveNumberEntry(widget,iconposition,'upload_limit',maxval=1000000)
 
-	def onPreferencesUPnPToggled(self,widget):
-		self.handleChangedToggle(widget,'use_pnp')
+	def onPreferencesToggledUPnP(self,widget):
+		self.handleChangedToggle(widget,'use_upnp')
 
-	def onPreferencesLimitDnToggled(self,widget):
+	def onPreferencesToggledLimitDn(self,widget):
 		self.limitdnrate.set_sensitive(widget.get_active())
 		if not self.preferences_locked:
 			rate = int(self.limitdnrate.get_text()) if widget.get_active() else 0
 			self.btsyncapi.set_prefs({"download_limit" : rate})
 
-	def onPreferencesLimitUpToggled(self,widget):
+	def onPreferencesToggledLimitUp(self,widget):
 		self.limituprate.set_sensitive(widget.get_active())
 		if not self.preferences_locked:
 			rate = int(self.limituprate.get_text()) if widget.get_active() else 0
 			self.btsyncapi.set_prefs({"upload_limit" : rate})
+
+	def onPreferencesClickedAdvanced(self,widget):
+		dlgPrefsAdvanced = BtSyncPrefsAdvanced(self.btsyncapi)
+		dlgPrefsAdvanced.run()
+		dlgPrefsAdvanced.destroy()
+
+
+
+
+
+
+
 
 	def onChangedPredefinedHosts(self, *args):
 		a = 1
