@@ -37,7 +37,7 @@ class BtSyncApp(BtInputHelper):
 		self.window.show()
 
 		self.prefs = self.btsyncapi.get_prefs()
-#		print self.prefs
+		print self.prefs
 		self.doPreferencesInitControls()
 		self.doPreferencesInitValues()
 
@@ -56,60 +56,31 @@ class BtSyncApp(BtInputHelper):
 
 	def doPreferencesInitValues(self):
 		self.lock()
-		self.preferences_locked = True
-#		self.devname.set_text(self.prefs["device_name"])
-		self.attach(self.devname,BtValueDescriptor.new_from('device_name',self.prefs["device_name"]))
+		self.attach(self.devname,BtValueDescriptor.new_from('device_name',self.prefs['device_name']))
 		# self.autostart.set_active(self.prefs[""]);
-#		self.listeningport.set_text(str(self.prefs["listening_port"]))
-		self.attach(self.listeningport,BtValueDescriptor.new_from('listening_port',self.prefs["listening_port"]))
-		self.upnp.set_active(self.prefs["use_upnp"] != 0)
-		self.limitdn.set_active(self.prefs["download_limit"] > 0)
-		self.limitdnrate.set_text(str(self.prefs["download_limit"]));
-		self.limitup.set_active(self.prefs["upload_limit"] > 0)
-		self.limituprate.set_text(str(self.prefs["upload_limit"]));
-		self.preferences_locked = False
+		self.attach(self.listeningport,BtValueDescriptor.new_from('listening_port',self.prefs['listening_port']))
+		self.attach(self.upnp,BtValueDescriptor.new_from('use_upnp',self.prefs['use_upnp']))
+		self.attach(self.limitdnrate,BtValueDescriptor.new_from('download_limit',self.prefs['download_limit']))
+		self.attach(self.limituprate,BtValueDescriptor.new_from('upload_limit',self.prefs['upload_limit']))
+
+		self.limitdn.set_active(self.prefs['download_limit'] > 0)
+		self.limitup.set_active(self.prefs['upload_limit'] > 0)
 		self.unlock()
 
-	def onPreferencesChangedDeviceName(self,widget):
-		print "."
-#		self.onChangedWidget(widget)
-#		self.handleChangedTextEntry(widget,'device_name')
-
-	def onPreferencesSaveDeviceName(self,widget,iconposition,event):
-		self.handleSaveTextEntry(widget,iconposition,'device_name')
-
-	def onPreferencesChangedListeningPort(self,widget):
-		print "."
-#		self.onChangedWidget(widget)
-#		self.handleChangedNumberEntry(widget,'listening_port',minval=1025,maxval=65534)
-
-	def onPreferencesSaveListeningPort(self,widget,iconposition,event):
-		self.handleSaveNumberEntry(widget,iconposition,'listening_port',minval=1025,maxval=65534)
-
-	def onPreferencesChangedDownloadRate(self,widget):
-		self.handleChangedNumberEntry(widget,'download_limit',maxval=1000000)
-
-	def onPreferencesSaveDownloadRate(self,widget,iconposition,event):
-		self.handleSaveNumberEntry(widget,iconposition,'download_limit',maxval=1000000)
-
-	def onPreferencesChangedUploadRate(self,widget):
-		self.handleChangedNumberEntry(widget,'upload_limit')
-
-	def onPreferencesSaveUploadRate(self,widget,iconposition,event):
-		self.handleSaveNumberEntry(widget,iconposition,'upload_limit',maxval=1000000)
-
-	def onPreferencesToggledUPnP(self,widget):
-		self.handleChangedToggle(widget,'use_upnp')
+	def onSaveEntry(self,widget,valDesc,newValue):
+		self.btsyncapi.set_prefs({valDesc.Name : newValue})
+		self.prefs[valDesc.Name] = newValue
+		return True
 
 	def onPreferencesToggledLimitDn(self,widget):
 		self.limitdnrate.set_sensitive(widget.get_active())
-		if not self.preferences_locked:
+		if not self.is_locked():
 			rate = int(self.limitdnrate.get_text()) if widget.get_active() else 0
 			self.btsyncapi.set_prefs({"download_limit" : rate})
 
 	def onPreferencesToggledLimitUp(self,widget):
 		self.limituprate.set_sensitive(widget.get_active())
-		if not self.preferences_locked:
+		if not self.is_locked():
 			rate = int(self.limituprate.get_text()) if widget.get_active() else 0
 			self.btsyncapi.set_prefs({"upload_limit" : rate})
 
@@ -120,89 +91,6 @@ class BtSyncApp(BtInputHelper):
 
 
 
-
-
-
-
-
-	def onChangedPredefinedHosts(self, *args):
-		a = 1
-
-	def onNewFaSecret(self, *args):
-		a = 1
-
-	def onCopyFaSecret(self, *args):
-		a = 1
-
-	def onCopyRoSecret(self, *args):
-		a = 1
-
-	def onNewOtSecret(self, *args):
-		a = 1
-
-	def onChangedPredefinedHosts(self, *args):
-		a = 1
-
-	def handleChangedNumberEntry(self,widget,key,default=0,minval=None,maxval=None):
-		if not self.preferences_locked:
-			self.filterNumbers(widget,default,minval,maxval)
-			self.handleChangedEntry(widget,key)
-
-	def handleSaveNumberEntry(self,widget,iconposition,key,default=0,minval=None,maxval=None):
-		if not self.preferences_locked and iconposition == Gtk.EntryIconPosition.SECONDARY:
-			self.filterNumbers(widget,default,minval,maxval)
-			value = int(widget.get_text())
-			self.btsyncapi.set_prefs({key : value})
-			self.prefs[key] = value
-			widget.set_icon_from_stock(Gtk.EntryIconPosition.SECONDARY, None)
-
-	def handleChangedTextEntry(self,widget,key,default='',forbidden='\'"'):
-		if not self.preferences_locked:
-			self.filterText(widget,default,forbidden)
-			self.handleChangedEntry(widget,key)
-
-	def handleSaveTextEntry(self,widget,iconposition,key,default='',forbidden='\'"'):
-		if not self.preferences_locked and iconposition == Gtk.EntryIconPosition.SECONDARY:
-			self.filterText(widget,default,forbidden)
-			value = widget.get_text()
-			self.btsyncapi.set_prefs({key : value})
-			self.prefs[key] = value
-			widget.set_icon_from_stock(Gtk.EntryIconPosition.SECONDARY, None)
-
-	def handleChangedToggle(self,widget,key):
-		if not self.preferences_locked:
-			value = 1 if widget.get_active() else 0
-			self.btsyncapi.set_prefs({key : value})
-			self.prefs[key] = value
-
-	def handleChangedEntry(self,widget,key):
-		if widget.get_text() != str(self.prefs[key]):
-			widget.set_icon_from_stock(Gtk.EntryIconPosition.SECONDARY, 'gtk-save')
-		else:
-			widget.set_icon_from_stock(Gtk.EntryIconPosition.SECONDARY, None)
-		
-	def filterNumbers(self,widget,default=0,minval=None,maxval=None):
-		value = widget.get_text()
-		if not value.isdigit():
-			mask = value.strip('0123456789')
-			value = value.strip(mask)
-			if value is '':
-				value = str(default)
-			widget.set_text(value)
-		if minval is not None and int(value) < minval:
-			value = str(minval)
-			widget.set_text(value)
-		elif maxval is not None and int(value) > maxval:
-			value = str(maxval)
-			widget.set_text(value)
-
-	def filterText(self,widget,default='',forbidden='\'"'):
-		value = widget.get_text()
-		newvalue = value.strip(forbidden)
-		if newvalue is '':
-			newvalue = str(default)
-		if newvalue != value:
-			widget.set_text(newvalue)
 
 
 

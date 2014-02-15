@@ -244,22 +244,6 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="listeningport">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="invisible_char">●</property>
-                <property name="invisible_char_set">True</property>
-                <signal name="changed" handler="onPreferencesChangedListeningPort" swapped="no"/>
-                <signal name="icon-release" handler="onPreferencesSaveListeningPort" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">3</property>
-                <property name="width">2</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkCheckButton" id="upnp">
                 <property name="label" translatable="yes">Use NAT UPnP port mapping</property>
                 <property name="use_action_appearance">False</property>
@@ -269,7 +253,6 @@
                 <property name="use_action_appearance">False</property>
                 <property name="xalign">0</property>
                 <property name="draw_indicator">True</property>
-                <signal name="toggled" handler="onPreferencesToggledUPnP" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -304,8 +287,6 @@
                 <property name="can_focus">True</property>
                 <property name="invisible_char">●</property>
                 <property name="invisible_char_set">True</property>
-                <signal name="changed" handler="onPreferencesChangedDownloadRate" swapped="no"/>
-                <signal name="icon-release" handler="onPreferencesSaveDownloadRate" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -340,8 +321,6 @@
                 <property name="can_focus">True</property>
                 <property name="invisible_char">●</property>
                 <property name="invisible_char_set">True</property>
-                <signal name="changed" handler="onPreferencesChangedUploadRate" swapped="no"/>
-                <signal name="icon-release" handler="onPreferencesSaveUploadRate" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -373,8 +352,6 @@
                 <property name="invisible_char">●</property>
                 <property name="shadow_type">etched-out</property>
                 <property name="invisible_char_set">True</property>
-                <signal name="changed" handler="onPreferencesChangedDeviceName" swapped="no"/>
-                <signal name="icon-release" handler="onPreferencesSaveDeviceName" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -397,6 +374,20 @@
                 <property name="left_attach">2</property>
                 <property name="top_attach">7</property>
                 <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="listeningport">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="invisible_char">●</property>
+                <property name="invisible_char_set">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">3</property>
+                <property name="width">2</property>
                 <property name="height">1</property>
               </packing>
             </child>
