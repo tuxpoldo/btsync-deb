@@ -1,3 +1,23 @@
+# coding=utf-8
+#
+# Copyright 2014 Leo Moll
+#
+# Authors: Leo Moll and Contributors (see CREDITS)
+#
+# Thanks to Mark Johnson for btsyncindicator.py which gave me the
+# last nudge needed to learn python and write my first linux gui
+# application. Thank you!
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranties of
+# MERCHANTABILITY, SATISFACTORY QUALITY or FITNESS FOR A PARTICULAR
+# PURPOSE.  See the applicable version of the GNU Lesser General Public
+# License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License version 2 along with this program.  If not, see
+# <http://www.gnu.org/licenses/>
+#
 
 import requests
 import json
@@ -101,6 +121,15 @@ class BtSyncApi(object):
 		params = {'method': 'get_folders'}
 		if secret is not None:
 			params['secret'] = secret
+		return self._request(params)
+
+	def get_version(self):
+		"""
+		Returns BitTorrent Sync version.
+
+		{ "version": "1.2.48" }
+		"""
+		params = {'method': 'get_version'}
 		return self._request(params)
 
 	def _request(self,params):
