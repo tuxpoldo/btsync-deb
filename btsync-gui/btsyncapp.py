@@ -29,7 +29,7 @@ class BtSyncApp(BtInputHelper):
 	def __init__(self):
 		self.btsyncapi = BtSyncApi(port='9999')
 		self.builder = Gtk.Builder()
-		self.builder.add_from_file("btsync-gui.glade")
+		self.builder.add_from_file("btsyncapp.glade")
 		self.builder.connect_signals (self)
 
 		self.window = self.builder.get_object('btsyncapp')
