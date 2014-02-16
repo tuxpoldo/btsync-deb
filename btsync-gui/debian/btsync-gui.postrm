@@ -1,0 +1,30 @@
+#!/bin/sh
+# postrm script for btsync-user
+#
+# see: dh_installdeb(1)
+
+set -e
+
+#echo btsync-user.postrm $1 >> /root/btsync-user.inst.log
+case "$1" in
+remove|purge)
+	set +e
+#	rm -f /etc/xdg/autostart/btsync-agent.desktop
+#	rm -f /etc/xdg/openbox/autostart/btsync-agent.desktop
+#	rm -f /usr/share/autostart/btsync-agent.desktop
+	set -e
+	;;
+upgrade|disappear)
+	;;
+failed-upgrade)
+	;;
+
+*)
+	echo "postrm called with unknown argument \`$1'" >&2
+	exit 1
+	;;
+esac
+
+#DEBHELPER#
+
+exit 0
