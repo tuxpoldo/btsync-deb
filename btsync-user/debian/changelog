@@ -1,6 +1,6 @@
 btsync-user (1.13.1-1) unstable; urgency=low
 
- * Added logging to startup script
+  * Added logging to startup script
 
  -- Leo Moll <leo.moll@yeasoft.com>  Tue, 18 Feb 2014 08:27:40 +0100
 
