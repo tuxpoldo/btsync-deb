@@ -1,3 +1,9 @@
+btsync-user (1.13.1-1) unstable; urgency=low
+
+ * Added logging to startup script
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Tue, 18 Feb 2014 08:27:40 +0100
+
 btsync-user (1.13.0-1) unstable; urgency=low
 
   * New upstream release 0.13 of btsyncindicator

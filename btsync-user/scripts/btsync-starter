@@ -57,6 +57,12 @@ XPORTNUM="$((8999+$(id -u)))"
 #####################################
 # utility functions
 
+log_message() {
+	if [ -f ${DATADIR}/debug.txt ]; then
+		echo "$(date --rfc-3339=seconds) $*" >> ${DATADIR}/btsync-user.log
+	fi
+}
+
 make_userfiles() {
 	mkdir -p ${CFGPATH}
 	mkdir -p ${DATADIR}
@@ -73,6 +79,7 @@ make_userfiles() {
 		-e "s/DEVNAME/${XDEVNAME}/g" \
 		-e "s/PORTNUM/${XPORTNUM}/g" \
 		> ${APPFILE} < /etc/btsync-user/btsync-user.desktop
+	log_message "User specific files and directories created"
 }
 
 update_configuration() {
@@ -82,6 +89,7 @@ update_configuration() {
 	# if a user specific configuration file is defined, move it to
 	# the new configuration location and rename it
 	if [ -f ${DESTDIR}/btsync.conf ]; then
+		log_message "Update: Moved ${DESTDIR}/btsync.conf to ${USRFILE}"
 		mv ${DESTDIR}/btsync.conf ${USRFILE}
 	fi
 }
@@ -91,6 +99,7 @@ adjust_arm_alignment() {
 		if ! ${AGENT} --help > /dev/null 2> /dev/null; then
 			# something is wrong
 			if ${AGENT} --help | grep -i "Alignment error" > /dev/null 2> /dev/null; then
+				log_message "Adjusted alignment setting on ARM processor"
 				echo 2 > /proc/cpu/alignment
 			fi
 		fi
@@ -98,58 +107,75 @@ adjust_arm_alignment() {
 }
 
 start_frontend() {
+	log_message "start_frontend: begin"
 	if ! pgrep -u $(id -u) -f btsyncindicator.py > /dev/null; then
 		if [ -n "$1" ]; then
+			log_message "start_frontend: waiting $1 seconds"
 			sleep $1
 		fi
 	fi
 	if ! pgrep -u $(id -u) -f btsyncindicator.py > /dev/null; then
 		if [ -f "${USRFILE}" ]; then
+			log_message "start_frontend: starting frontend with user specific config file ${USRFILE}"
 			${FRONT} --config "${USRFILE}" --iconpath "${ICONS}" &
 		else
+			log_message "start_frontend: starting frontend with default config file ${CFGFILE}"
 			${FRONT} --config "${CFGFILE}" --iconpath "${ICONS}" &
 		fi
 	fi
+	log_message "start_frontend: end"
 }
 
 stop_frontend() {
+	log_message "stop_frontend: begin"
 	pkill -u $(id -u) -f btsyncindicator.py
+	log_message "stop_frontend: end"
 }
 
 start_agent() {
+	log_message "start_agent: begin"
 	if ! pgrep -u $(id -u) -x btsync-agent > /dev/null; then
 		adjust_arm_alignment
 		if [ -f "${USRFILE}" ]; then
+			log_message "start_agent: starting agent with user specific config file ${USRFILE}"
 			${AGENT} --config "${USRFILE}"
 		else
+			log_message "start_agent: starting agent with default config file ${CFGFILE}"
 			${AGENT} --config "${CFGFILE}"
 		fi
 	fi
+	log_message "start_agent: end"
 }
 
 stop_agent() {
+	log_message "stop_agent: begin"
 	trap - INT QUIT TERM EXIT
 	rm -f "${RUNNING_STATEFILE}"
 	rm -f "${PAUSED_STATEFILE}"
 	pkill -u $(id -u) -x btsync-agent
 	pkill -u $(id -u) -f btsyncindicator.py
+	log_message "stop_agent: end - exiting..."
 	exit
 }
 
 
 agent_runner() {
+	log_message "agent_runner: begin"
 	trap stop_agent INT QUIT TERM EXIT
 	touch "${RUNNING_STATEFILE}"
 	while [ -f "${RUNNING_STATEFILE}" ]; do
 		if [ -f "${UPDATING_STATEFILE}" ]; then
 			# System is beeing updated. Sleep a while
 			# and wait for restarting everything
+			log_message "agent_runner: in update - waiting..."
 			sleep 2
 		elif [ -f "${PAUSED_STATEFILE}" ]; then
 			# System is paused. Sleep a while and
 			# wait for system resume
+			log_message "agent_runner: in pause - waiting..."
 			sleep 1
 		else
+			log_message "agent_runner: starting up components..."
 			cd ~
 			# Normal situation. Regenerate user files and
 			# startup normally
@@ -164,17 +190,21 @@ agent_runner() {
 			while pgrep -u $(id -u) -x btsync-agent > /dev/null; do
 				sleep 1
 			done
+			log_message "agent_runner: agent terminated..."
 			if [ -f "${UPDATING_STATEFILE}" ]; then
 				# we should stop the frontend since it could
 				# also be updated
+				log_message "agent_runner: stop frontend during update"
 				stop_frontend
 			elif [ ! -f "${PAUSED_STATEFILE}" ]; then
 				# no reason to stay online. stop the whole game
+				log_message "agent_runner: pause requested. Stopping agent..."
 				stop_agent
 			fi
 		fi
 	done
 	trap - INT QUIT TERM EXIT
+	log_message "agent_runner: end"
 }
 
 
@@ -189,19 +219,24 @@ update_configuration
 start_frontend
 
 if pgrep -u $(id -u) -x btsync-agent > /dev/null; then
-	echo btsync-agent already running
+	log_message "btsync-starter: btsync-agent already running"
+	echo "btsync-agent already running"
 	exit 0
 elif [ -f "${RUNNING_STATEFILE}" ]; then
 	if [ $(pgrep -u $(id -u) -f btsync-starter | wc -l) -gt 1 ]; then
 		# the agent is not running, but there is an agent runner
 		# that means that the agent is paused
+		log_message "btsync-starter: btsync-agent paused"
 		exit 0
 	else
 		# the forked agent runner must be crashed without deleting
 		# the run file. Let's fork one....
+		log_message "btsync-starter: re-forking runner..."
 		agent_runner &
 	fi
 else
 	# fork the agent runner
+	log_message "btsync-starter: forking runner..."
 	agent_runner &
 fi
+log_message "btsync-starter: end"
