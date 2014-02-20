@@ -6,6 +6,7 @@ icons/48x48/apps/btsync-gui.png			usr/share/icons/hicolor/48x48/apps
 icons/32x32/apps/btsync-gui.png			usr/share/icons/hicolor/32x32/apps
 icons/16x16/apps/btsync-gui.png			usr/share/icons/hicolor/16x16/apps
 
+icons/22x22/status/btsync-gui-disconnected.png	usr/share/icons/hicolor/22x22/status
 icons/22x22/status/btsync-gui-0.png		usr/share/icons/hicolor/22x22/status
 icons/22x22/status/btsync-gui-1.png		usr/share/icons/hicolor/22x22/status
 icons/22x22/status/btsync-gui-2.png		usr/share/icons/hicolor/22x22/status
@@ -19,6 +20,7 @@ icons/22x22/status/btsync-gui-9.png		usr/share/icons/hicolor/22x22/status
 icons/22x22/status/btsync-gui-10.png		usr/share/icons/hicolor/22x22/status
 icons/22x22/status/btsync-gui-11.png		usr/share/icons/hicolor/22x22/status
 
+icons/36x36/status/btsync-gui-disconnected.png	usr/share/icons/hicolor/36x36/status
 icons/36x36/status/btsync-gui-0.png		usr/share/icons/hicolor/36x36/status
 icons/36x36/status/btsync-gui-1.png		usr/share/icons/hicolor/36x36/status
 icons/36x36/status/btsync-gui-2.png		usr/share/icons/hicolor/36x36/status
