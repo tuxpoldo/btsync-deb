@@ -152,6 +152,13 @@ class BtInputHelper(object):
 			widget.disconnect(self.assoc[widget][1])
 			del self.assoc[widget]
 
+	def sizeof_fmt(self,num):
+		for x in ['bytes','KB','MB','GB']:
+			if num < 1024.0:
+				return "%3.1f %s" % (num, x)
+			num /= 1024.0
+		return "%3.1f%s" % (num, ' TB')
+
 	def onChangedGtkSwitch(self,widget,unknown,valDesc):
 		return
 
@@ -192,7 +199,6 @@ class BtInputHelper(object):
 			widget.set_icon_from_stock(Gtk.EntryIconPosition.SECONDARY, 'gtk-save')
 		else:
 			widget.set_icon_from_stock(Gtk.EntryIconPosition.SECONDARY, None)
-
 
 ## debug stuff
 #

@@ -19,6 +19,8 @@
 # <http://www.gnu.org/licenses/>
 #
 
+import requests
+
 from os.path import dirname
 
 from gi.repository import Gtk
@@ -38,11 +40,36 @@ class BtSyncApp(BtInputHelper):
 		self.window.show()
 
 		self.prefs = self.btsyncapi.get_prefs()
+		self.init_folders_controls()
+		self.init_folders_values()
 		self.init_preferences_controls()
 		self.init_preferences_values()
 
 	def connect_close_signal(self,handler):
 		return self.window.connect('delete-event', handler)
+
+	def init_folders_controls(self):
+		self.folders = self.builder.get_object('folders_list')
+		self.folders_treeview = self.builder.get_object('folders_tree_view')
+		self.folders_add = self.builder.get_object('folders_add')
+		self.folders_remove = self.builder.get_object('folders_add')
+
+	def init_folders_values(self):
+		try:
+			folders = self.btsyncapi.get_folders()
+			if folders is not None:
+				for index, value in enumerate(folders):
+					self.folders.append ([
+						value['dir'],
+						'{0} in {1} files'.format(
+							self.sizeof_fmt(value['size']),
+							str(value['files'])
+						)
+					])
+		except requests.exceptions.ConnectionError:
+			return self.onConnectionError()
+		except requests.exceptions.HTTPError:
+			return self.onCommunicationError()
 
 	def init_preferences_controls(self):
 		self.devname = self.builder.get_object('devname')
@@ -90,5 +117,9 @@ class BtSyncApp(BtInputHelper):
 		dlgPrefsAdvanced.run()
 		dlgPrefsAdvanced.destroy()
 
+	def onConnectionError(self):
+		self.window.close()
 
+	def onCommunicationError(self):
+		self.window.close()
 
