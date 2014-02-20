@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=BitTorrent Sync
+Comment=Private network P2P file synchronisation tool
+Exec=btsync-gui
+Icon=btsync-gui
+Terminal=false
+Type=Application
+Categories=Network;FileTransfer;P2P;GTK;
