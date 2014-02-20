@@ -23,6 +23,8 @@ from gi.repository import Gtk
 from btsyncapi import BtSyncApi
 from btsyncutils import *
 
+from os.path import dirname
+
 class BtSyncPrefsAdvanced(BtInputHelper):
 
 	def __init__(self,btsyncapi):
@@ -34,7 +36,7 @@ class BtSyncPrefsAdvanced(BtInputHelper):
 	def create(self):
 		# create the dialog object from builder
 		self.builder = Gtk.Builder()
-		self.builder.add_from_file("prefsadvanced.glade")
+		self.builder.add_from_file(dirname(__file__) + "/prefsadvanced.glade")
 		self.builder.connect_signals (self)
 		self.dlg = self.builder.get_object('prefsadvanced')
 		# get the editing widgets

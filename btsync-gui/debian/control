@@ -13,6 +13,8 @@ Architecture: all
 Depends: debconf | debconf-2.0, libc6, ${python:Depends},
  python-requests, python-gtk2, btsync-common
 Provides: btsync-user-application
+Replaces: btsync-user
+Breaks: btsync-user
 Description: Private network P2P file synchronisation daemon(s)
  BitTorrent Sync is a simple tool that applies p2p protocol for
  direct live folder sync with maximum security, network speed

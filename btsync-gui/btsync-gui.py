@@ -20,14 +20,17 @@
 # <http://www.gnu.org/licenses/>
 #
 
+import sys
+import argparse
+import logging
+import subprocess
+
+sys.path.append('/usr/lib/btsync-gui')
+
 from gi.repository import Gtk
 from btsyncapp import *
 from btsyncagent import *
 from btsyncstatus import *
-
-import argparse
-import logging
-import subprocess
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser()

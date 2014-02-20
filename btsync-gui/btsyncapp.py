@@ -19,6 +19,8 @@
 # <http://www.gnu.org/licenses/>
 #
 
+from os.path import dirname
+
 from gi.repository import Gtk
 from btsyncapi import BtSyncApi
 from prefsadvanced import BtSyncPrefsAdvanced
@@ -29,7 +31,7 @@ class BtSyncApp(BtInputHelper):
 	def __init__(self):
 		self.btsyncapi = BtSyncApi(port='9999')
 		self.builder = Gtk.Builder()
-		self.builder.add_from_file("btsyncapp.glade")
+		self.builder.add_from_file(dirname(__file__) + "/btsyncapp.glade")
 		self.builder.connect_signals (self)
 
 		self.window = self.builder.get_object('btsyncapp')

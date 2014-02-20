@@ -1,4 +1,15 @@
 # files
+btsync-gui.py					usr/bin
+btsyncagent.py					usr/lib/btsync-gui
+btsyncapi.py					usr/lib/btsync-gui
+btsyncapp.glade					usr/lib/btsync-gui
+btsyncapp.py					usr/lib/btsync-gui
+btsyncstatus.glade				usr/lib/btsync-gui
+btsyncstatus.py					usr/lib/btsync-gui
+btsyncutils.py					usr/lib/btsync-gui
+prefsadvanced.glade				usr/lib/btsync-gui
+prefsadvanced.py				usr/lib/btsync-gui
+
 icons/256x256/apps/btsync-gui.png		usr/share/icons/hicolor/256x256/apps
 icons/128x128/apps/btsync-gui.png		usr/share/icons/hicolor/128x128/apps
 icons/64x64/apps/btsync-gui.png			usr/share/icons/hicolor/64x64/apps

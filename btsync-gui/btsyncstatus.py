@@ -23,6 +23,8 @@ from gi.repository import Gtk, GObject
 from btsyncapi import BtSyncApi
 from btsyncstatus import *
 
+from os.path import dirname
+
 import logging
 import requests
 
@@ -40,7 +42,7 @@ class BtSyncStatus(Gtk.StatusIcon):
 		self.set_from_icon_name('btsync-gui-disconnected')
 
 		self.builder = Gtk.Builder()
-		self.builder.add_from_file("btsyncstatus.glade")
+		self.builder.add_from_file(dirname(__file__) + "/btsyncstatus.glade")
 		self.builder.connect_signals (self)
 		self.menu = self.builder.get_object('btsyncmenu')
 		self.menustatus = self.builder.get_object('statusitem')
