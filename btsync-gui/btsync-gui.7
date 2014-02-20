@@ -1,0 +1,84 @@
+.TH btsync-gui 7 "February 2014" "BitTorrent Sync UI" "Private network P2P file synchronisation tool"
+.SH NAME
+btsync - Private network P2P file synchronisation daemon
+
+.SH SYNOPSIS
+.SP
+.B btsync-gui [-h] [--log {CRITICAL,ERROR,WARNING,INFO,DEBUG}]
+.B [--host HOST] [--port PORT] [--username USERNAME]
+.B [--password PASSWORD]
+
+
+.SH DESCRIPTION
+.B BitTorrent Sync UI
+.R is a simple tool that applies p2p protocol for
+direct live folder sync with maximum security, network speed and
+storage capacity. It has native versions for Mac, Windows and
+Linux, as well as native NAS integration.
+
+If launched without any options, the UI starts a local BitTorrent
+Sync agent and connects to it. If a hostname is specified, the UI
+will connect to the specified host without launching a local
+BitTorrent Sync agent.
+
+.SH OPTIONS
+.TP
+.B -h, --help
+Shows the help for the command
+
+.TP
+.B --log {CRITICAL,ERROR,WARNING,INFO,DEBUG}
+Sets the logging level of the BitTorrent Sync UI
+
+.TP
+.B --host HOST
+Hostname for the connection to BitTorrent Sync. If specified, the UI connects to the
+BitTorrent Sync agent running on the specified host instead of launching a local
+user specific agent.
+
+.TP
+.B --port PORT
+Port number for the connection to BitTorrent Sync when used as remote UI
+
+.TP
+.B --username USERNAME
+Optional user name for the connection to BitTorrent Sync when used as remote UI
+
+.TP
+.B --password PASSWORD
+Optional password for the connection to BitTorrent Sync when used as remote UI
+
+
+.SH FILES
+
+.TP
+.I ~/.btsync/sync.log
+.R User specific log file of the locally started BitTorrent Sync agent
+
+.TP
+.I ~/.config/btsync/btsync-gui.conf
+.R Automatically created user specific configuration file for the BitTorrent Sync agent
+
+.TP
+.I ~/.config/btsync/btsync-agent.pid
+.R User specific btsync PID file
+
+.SH DIRECTORIES
+
+.TP
+.I ~/.btsync
+.R User specific storage path of the BitTorrent Sync agent
+
+.TP
+.I ~/.config/btsync
+.R User specific configuration file path for the BitTorrent Sync agent
+
+.SH AUTHORS
+
+.TP
+.B BitTorrent Sync
+.R itself was written by BitTorrent Inc. (See http://labs.bittorrent.com/experiments/sync.html)
+
+.TP
+.B btsync-gui
+.R iteself was written by Leo Moll <leo.moll@yeasoft.com>
