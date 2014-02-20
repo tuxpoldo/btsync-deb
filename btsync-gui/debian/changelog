@@ -1,3 +1,10 @@
+btsync-gui (0.1-1) unstable; urgency=low
+
+  * First version with fully functional indicator (Closes #66) and
+    rudimentary application window with working preferences (Closes #65)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 20 Feb 2014 22:39:01 +0100
+
 btsync-gui (0.0-1) unstable; urgency=low
 
   * Initial revision - contains only the icons
