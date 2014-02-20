@@ -27,7 +27,8 @@ import logging
 
 class BtSyncAgent():
 	BINARY = '/usr/lib/btsync-common/btsync-core'
-	APIKEY = '26U2OU3LNXN4I3QFNT7JAGG5DB676PCZIEL42FBOGYUM4OUMI5YTBNLD64ZXJCLSFWKCVOFNPU65UVO5RKSMYJ24A2KX3VPS4S7HICM3U7OI3FUHMXJPSLMBV4XNRKEMNOBDK4I'
+	APIKEY = '26U2OU3LNXN4I3QFNT7JAGG5DB676PCZIEL42FBOGYUM4OUMI5YTBNLD64ZXJCLSFWKC'\
+		'VOFNPU65UVO5RKSMYJ24A2KX3VPS4S7HICM3U7OI3FUHMXJPSLMBV4XNRKEMNOBDK4I'
 
 	def __init__(self,args):
 		self.args = args
@@ -36,8 +37,11 @@ class BtSyncAgent():
 	def __del__(self):
 		self.shutdown()
 
-	def is_ours(self):
+	def is_auto(self):
 		return self.args.host == 'auto'
+
+	def get_lock_filename(self):
+		return os.environ['HOME'] + '/.config/btsync/btsync-gui.lock'
 
 	def get_host(self):
 		return 'localhost' if self.args.host == 'auto' else self.args.host
@@ -91,7 +95,7 @@ class BtSyncAgent():
 				exit (1)
 
 	def shutdown(self):
-		if self.is_ours() and self.is_running():
+		if self.is_auto() and self.is_running():
 			logging.info ('Stopping btsync agent...')
 			os.kill (self.pid, signal.SIGTERM)
 			os.remove(self.conffile)
@@ -102,6 +106,7 @@ class BtSyncAgent():
 			cfg.write('{\n')
 			cfg.write('\t"pid_file" : "{0}",\n'.format(self.pidfile))
 			cfg.write('\t"storage_path" : "{0}",\n'.format(self.storagepath))
+			# cfg.write('\t"use_gui" : false,\n')
 			cfg.write('\t"webui" : \n\t{')
 			cfg.write('\t\t"listen" : "127.0.0.1:{0}",\n'.format(self.uid + 8999))
 			cfg.write('\t\t"api_key" : "{}"\n'.format(BtSyncAgent.APIKEY))
@@ -121,6 +126,8 @@ class BtSyncAgent():
 			pidstr.replace('\n', '')
 			self.pid = int(pidstr)
 		except IOError:
+			self.pid = None
+		except AttributeError:
 			self.pid = None
 
 	def is_running(self):

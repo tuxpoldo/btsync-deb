@@ -145,15 +145,15 @@ class BtSyncStatus(Gtk.StatusIcon):
 			self.frame = -1
 			self.transferring = False
 			self.set_from_icon_name('btsync-gui-paused')
-#			self.menupause.set_sensitive(self.agent.is_ours())
+#			self.menupause.set_sensitive(self.agent.is_auto())
 			self.menupause.set_sensitive(False)
-			self.menudebug.set_sensitive(self.agent.is_ours())
+			self.menudebug.set_sensitive(self.agent.is_auto())
 			self.menudebug.set_active(self.agent.get_debug())
 			self.menuopen.set_sensitive(False)
 		else:
-#			self.menupause.set_sensitive(self.agent.is_ours())
+#			self.menupause.set_sensitive(self.agent.is_auto())
 			self.menupause.set_sensitive(False)
-			self.menudebug.set_sensitive(self.agent.is_ours())
+			self.menudebug.set_sensitive(self.agent.is_auto())
 			self.menudebug.set_active(self.agent.get_debug())
 			self.menuopen.set_sensitive(True)
 			if transferring and not self.transferring:
@@ -201,7 +201,7 @@ class BtSyncStatus(Gtk.StatusIcon):
 				self.agent.set_debug(False)
 
 	def onQuit(self,widget):
-		if self.agent.is_ours():
+		if self.agent.is_auto():
 			self.btsyncapi.shutdown()
 		Gtk.main_quit()
 

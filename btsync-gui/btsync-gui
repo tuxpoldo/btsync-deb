@@ -20,6 +20,7 @@
 # <http://www.gnu.org/licenses/>
 #
 
+import os
 import sys
 import argparse
 import logging
@@ -28,9 +29,32 @@ import subprocess
 sys.path.append('/usr/lib/btsync-gui')
 
 from gi.repository import Gtk
+from contextlib import contextmanager
 from btsyncapp import *
 from btsyncagent import *
 from btsyncstatus import *
+
+
+@contextmanager
+def file_lock(lock_file):
+	if os.path.exists(lock_file):
+		# is it a zombie?
+		f = open(lock_file, 'r')
+		pid = f.read()
+		f.close()
+		if not os.path.isdir('/proc/' + pid):
+			os.remove(lock_file)
+		else:
+			logging.warning('Only one autostart btsync-gui can run at once.')
+			logging.warning('Application locked with ' + str(lock_file))
+			sys.exit(-1)
+
+	open(lock_file, 'w').write(str(os.getpid()))
+	try:
+		yield
+	finally:
+		os.remove(lock_file)
+
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser()
@@ -64,11 +88,19 @@ if __name__ == "__main__":
 
 	# initialize agent
 	agent = BtSyncAgent(args)
-	agent.startup()
 
-#	app = BtSyncApp()
-	ind = BtSyncStatus()
-	ind.startup(agent)
-	Gtk.main()
-
-	agent.shutdown()
+	if agent.is_auto():
+		# we are a primary application - we can run only once
+		with file_lock(agent.get_lock_filename()):
+			agent.startup()
+			ind = BtSyncStatus()
+			ind.startup(agent)
+			Gtk.main()
+			agent.shutdown()
+	else:
+		# we are only a client - we can run many
+		agent.startup()
+		ind = BtSyncStatus()
+		ind.startup(agent)
+		Gtk.main()
+		agent.shutdown()
