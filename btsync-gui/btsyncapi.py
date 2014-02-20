@@ -152,6 +152,24 @@ class BtSyncApi(object):
 		params = {'method': 'get_speed'}
 		return self._request(params)
 
+	def get_os(self):
+		"""
+		Returns OS name where BitTorrent Sync is running.
+
+		{ "os": "win32" }
+		"""
+		params = {'method': 'get_os'}
+		return self._request(params)
+
+	def shutdown(self):
+		"""
+		Gracefully stops Sync.
+
+		{ "error" : 0 }
+		"""
+		params = {'method': 'shutdown'}
+		return self._request(params)
+
 	def get_status_code(self):
 		return self.response.status_code
 		
