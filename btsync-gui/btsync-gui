@@ -6,7 +6,7 @@
 # Authors: Leo Moll and Contributors (see CREDITS)
 #
 # Thanks to Mark Johnson for btsyncindicator.py which gave me the
-# last nudge needed to learn python and write my first linux gui
+# last nudge needed to learn python and write my first linux GTK
 # application. Thank you!
 #
 # This program is distributed in the hope that it will be useful, but
@@ -30,7 +30,6 @@ sys.path.append('/usr/lib/btsync-gui')
 
 from gi.repository import Gtk
 from contextlib import contextmanager
-from btsyncapp import *
 from btsyncagent import *
 from btsyncstatus import *
 
@@ -76,7 +75,6 @@ if __name__ == "__main__":
 	parser.add_argument('--password',
 				default=None,
 				help="Optional password for the connection to BitTorrent Sync")
-
 
 	args = parser.parse_args()
 

@@ -28,8 +28,8 @@ from btsyncutils import *
 
 class BtSyncApp(BtInputHelper):
 
-	def __init__(self):
-		self.btsyncapi = BtSyncApi(port='9999')
+	def __init__(self,btsyncapi):
+		self.btsyncapi = btsyncapi
 		self.builder = Gtk.Builder()
 		self.builder.add_from_file(dirname(__file__) + "/btsyncapp.glade")
 		self.builder.connect_signals (self)
@@ -38,13 +38,13 @@ class BtSyncApp(BtInputHelper):
 		self.window.show()
 
 		self.prefs = self.btsyncapi.get_prefs()
-		self.doPreferencesInitControls()
-		self.doPreferencesInitValues()
+		self.init_preferences_controls()
+		self.init_preferences_values()
 
-	def onMainWindowDelete(self, *args):
-		Gtk.main_quit(*args)
+	def connect_close_signal(self,handler):
+		return self.window.connect('delete-event', handler)
 
-	def doPreferencesInitControls(self):
+	def init_preferences_controls(self):
 		self.devname = self.builder.get_object('devname')
 		self.autostart = self.builder.get_object('autostart')
 		self.listeningport = self.builder.get_object('listeningport')
@@ -54,10 +54,11 @@ class BtSyncApp(BtInputHelper):
 		self.limitup = self.builder.get_object('limitup')
 		self.limituprate = self.builder.get_object('limituprate')
 
-	def doPreferencesInitValues(self):
+	def init_preferences_values(self):
 		self.lock()
 		self.attach(self.devname,BtValueDescriptor.new_from('device_name',self.prefs['device_name']))
 		# self.autostart.set_active(self.prefs[""]);
+		self.autostart.set_sensitive(False)
 		self.attach(self.listeningport,BtValueDescriptor.new_from('listening_port',self.prefs['listening_port']))
 		self.attach(self.upnp,BtValueDescriptor.new_from('use_upnp',self.prefs['use_upnp']))
 		self.attach(self.limitdnrate,BtValueDescriptor.new_from('download_limit',self.prefs['download_limit']))

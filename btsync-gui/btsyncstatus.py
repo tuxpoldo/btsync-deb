@@ -21,7 +21,7 @@
 
 from gi.repository import Gtk, GObject
 from btsyncapi import BtSyncApi
-from btsyncstatus import *
+from btsyncapp import *
 
 from os.path import dirname
 
@@ -59,6 +59,9 @@ class BtSyncStatus(Gtk.StatusIcon):
 		self.rotating = False
 		self.transferring = False
 
+		# application window
+		self.app = None
+
 	def startup(self,agent):
 		self.agent = agent
 		# connection
@@ -70,6 +73,18 @@ class BtSyncStatus(Gtk.StatusIcon):
 		# status
 		self.set_status(BtSyncStatus.DISCONNECTED)
 		GObject.timeout_add(1000, self.btsync_connect)
+
+	def open_app(self):
+		if isinstance(self.app, BtSyncApp):
+			self.app.window.present()
+		else:
+			self.app = BtSyncApp(self.btsyncapi)
+			self.app.connect_close_signal(self.onDeleteApp)
+
+	def close_app(self):
+		if isinstance(self.app, BtSyncApp):
+			del self.app
+			self.app = None
 
 	def btsync_connect(self):
 		if self.connection is BtSyncStatus.DISCONNECTED:
@@ -177,7 +192,8 @@ class BtSyncStatus(Gtk.StatusIcon):
 		self.menu.popup(None,None,Gtk.StatusIcon.position_menu,widget,button,activate_time)
 
 	def onActivate(self,widget):
-		self.menu.popup(None,None,Gtk.StatusIcon.position_menu,widget,3,0)
+		self.open_app()
+#		self.menu.popup(None,None,Gtk.StatusIcon.position_menu,widget,3,0)
 
 	def onAbout(self,widget):
 		self.about.set_version('Version {0} ({0})'.format(self.btsyncver['version']))
@@ -189,7 +205,10 @@ class BtSyncStatus(Gtk.StatusIcon):
 		print "onTogglePause"
 
 	def onOpenApp(self,widget):
-		print "onOpenApp"
+		self.open_app()
+
+	def onDeleteApp(self, *args):
+		self.close_app()
 
 	def onToggleLogging(self,widget):
 		if self.is_connected():
