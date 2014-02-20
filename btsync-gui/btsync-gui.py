@@ -22,9 +22,50 @@
 
 from gi.repository import Gtk
 from btsyncapp import *
+from btsyncagent import *
 from btsyncstatus import *
 
+import argparse
+import logging
+import subprocess
+
 if __name__ == "__main__":
+	parser = argparse.ArgumentParser()
+
+	parser.add_argument('--log', choices=['CRITICAL','ERROR','WARNING','INFO','DEBUG'],
+				default='WARNING',
+				help="Set logging level")
+	parser.add_argument('--host',
+				default='auto',
+				help="Hostname for the connection to BitTorrent Sync")
+	parser.add_argument('--port', type=int,
+				default=8888,
+				help="Port number for the connection to BitTorrent Sync")
+
+	parser.add_argument('--username',
+				default=None,
+				help="Optional user name for the connection to BitTorrent Sync")
+
+	parser.add_argument('--password',
+				default=None,
+				help="Optional password for the connection to BitTorrent Sync")
+
+
+	args = parser.parse_args()
+
+	# initialize logger
+	numeric_level = getattr(logging, args.log.upper(), None)
+	if not isinstance(numeric_level, int):
+		raise ValueError('Invalid log level: %s' % args.log)
+	logging.basicConfig(level=numeric_level)
+
+	# initialize agent
+	agent = BtSyncAgent(args)
+	agent.startup()
+
 #	app = BtSyncApp()
 	ind = BtSyncStatus()
+	ind.startup(agent)
 	Gtk.main()
+
+	agent.shutdown()
