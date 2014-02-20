@@ -33,7 +33,7 @@ class BtSyncApi(object):
 	The docstrings of this class' methods were copied from the above site.
 	"""
 
-	def __init__(self, host='localhost', port='8888', user=None, password=None):
+	def __init__(self, host='localhost', port='8888', user=None, password=None, exceptions=True):
 		"""
 		Parameters
 		----------
@@ -56,6 +56,8 @@ class BtSyncApi(object):
 		else:
 			self.auth = (user,password)
 		self.urlroot = 'http://'+host+':'+str(port)+'/api'
+		self.exceptions = exceptions
+		self.response = None
 
 	def get_prefs(self):
 		"""
@@ -123,6 +125,12 @@ class BtSyncApi(object):
 			params['secret'] = secret
 		return self._request(params)
 
+	def get_folder_peers(self, secret):
+		"""
+		"""
+		params = { 'method': 'get_folder_peers', 'secret' : secret }
+		return self._request(params)
+
 	def get_version(self):
 		"""
 		Returns BitTorrent Sync version.
@@ -132,10 +140,31 @@ class BtSyncApi(object):
 		params = {'method': 'get_version'}
 		return self._request(params)
 
+	def get_speed(self):
+		"""
+		Returns current upload and download speed.
+
+		{
+		    "download": 61007,
+		    "upload": 0
+		}
+		"""
+		params = {'method': 'get_speed'}
+		return self._request(params)
+
+	def get_status_code(self):
+		return self.response.status_code
+		
+
 	def _request(self,params):
 		"""
 		Internal function that handles the communication with btsync
 		"""
+		if self.exceptions:
+			self.response = requests.get(self.urlroot, params=params, auth=self.auth)
+			self.response.raise_for_status()
+			return json.loads (self._get_response_text(self.response))
+
 		try:
 			response = requests.get(self.urlroot, params=params, auth=self.auth)
 			response.raise_for_status()
