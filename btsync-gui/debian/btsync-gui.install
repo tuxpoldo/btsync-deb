@@ -1,5 +1,5 @@
 # files
-btsync-gui.py					usr/bin
+btsync-gui					usr/bin
 btsyncagent.py					usr/lib/btsync-gui
 btsyncapi.py					usr/lib/btsync-gui
 btsyncapp.glade					usr/lib/btsync-gui
