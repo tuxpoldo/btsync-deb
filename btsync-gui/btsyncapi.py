@@ -33,7 +33,7 @@ class BtSyncApi(object):
 	The docstrings of this class' methods were copied from the above site.
 	"""
 
-	def __init__(self, host='localhost', port='8888', user=None, password=None, exceptions=True):
+	def __init__(self, host='localhost', port='8888', username=None, password=None, exceptions=True):
 		"""
 		Parameters
 		----------
@@ -41,20 +41,20 @@ class BtSyncApi(object):
 		    IP address that the btsync api responds at.
 		port : str
 		    Port that the btsync api responds at.
-		user : str
+		username : str
 		    optional username to use if btsync api is protected.
-		pswd : str
+		password : str
 		    optional password to use if btsync api is protected.
 
 		Notes
 		-----
-		The host, port, user, and pswd must match the config.json file.
+		The host, port, username, and password must match the config.json file.
 
 		"""
-		if user is not None or password is not None:
+		if username is None or password is None:
 			self.auth = None
 		else:
-			self.auth = (user,password)
+			self.auth = (username,password)
 		self.urlroot = 'http://'+host+':'+str(port)+'/api'
 		self.exceptions = exceptions
 		self.response = None
