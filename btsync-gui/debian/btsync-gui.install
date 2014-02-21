@@ -7,6 +7,8 @@ btsyncapp.py					usr/lib/btsync-gui
 btsyncstatus.glade				usr/lib/btsync-gui
 btsyncstatus.py					usr/lib/btsync-gui
 btsyncutils.py					usr/lib/btsync-gui
+dialogs.glade					usr/lib/btsync-gui
+dialogs.py					usr/lib/btsync-gui
 prefsadvanced.glade				usr/lib/btsync-gui
 prefsadvanced.py				usr/lib/btsync-gui
 
