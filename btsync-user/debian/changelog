@@ -1,3 +1,10 @@
+btsync-user (1.13.2-1) unstable; urgency=low
+
+  * Updated man page to reflect recent changes in file
+    structure and naming
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Fri, 21 Feb 2014 11:38:10 +0100
+
 btsync-user (1.13.1-1) unstable; urgency=low
 
   * Added logging to startup script
