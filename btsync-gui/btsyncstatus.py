@@ -28,6 +28,8 @@ from os.path import dirname
 import logging
 import requests
 
+VERSION = '0.3'
+
 class BtSyncStatus(Gtk.StatusIcon):
 	DISCONNECTED	= 0
 	CONNECTING	= 1
@@ -208,6 +210,7 @@ class BtSyncStatus(Gtk.StatusIcon):
 
 	def onAbout(self,widget):
 		self.about.set_version('Version {0} ({0})'.format(self.btsyncver['version']))
+		self.about.set_comments('Linux UI Version {0}'.format(VERSION))
 		self.about.show()
 		self.about.run()
 		self.about.hide()

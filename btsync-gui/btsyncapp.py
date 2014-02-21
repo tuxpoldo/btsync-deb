@@ -65,19 +65,55 @@ class BtSyncApp(BtInputHelper):
 				for index, value in enumerate(folders):
 					self.folders.append ([
 						value['dir'],
-						'{0} in {1} files'.format(
-							self.sizeof_fmt(value['size']),
-							str(value['files'])
-						),
+						self.get_folder_info_string(value),
 						value['secret']
 					])
 			self.unlock()
+			GObject.timeout_add(1000, self.refresh_folders_values)
+		except requests.exceptions.ConnectionError:
+			self.unlock()
+			self.onConnectionError()
+		except requests.exceptions.HTTPError:
+			self.unlock()
+			self.onCommunicationError()
+
+	def refresh_folders_values(self):
+		try:
+			self.lock()
+			folders = self.btsyncapi.get_folders()
+			if folders is not None:
+				for index, value in enumerate(folders):
+					if not self.update_folder_values(value):
+						# it must be new (probably added via web interface) - let's add it
+						self.folders.append ([
+							value['dir'],
+							self.get_folder_info_string(value),
+							value['secret']
+						])
+			# TODO: reverse scan to delete disappeared folders...
+			self.unlock()
+			return True
 		except requests.exceptions.ConnectionError:
 			self.unlock()
 			return self.onConnectionError()
 		except requests.exceptions.HTTPError:
 			self.unlock()
 			return self.onCommunicationError()
+
+	def update_folder_values(self,value):
+		for row in self.folders:
+			if value['secret'] == row[2]:
+				# found - update information
+				row[1] = self.get_folder_info_string(value)
+				return True
+		# not found
+		return False
+
+	def get_folder_info_string(self,value):
+		if value['indexing'] == 0:
+			return '{0} in {1} files'.format(self.sizeof_fmt(value['size']), str(value['files']))
+		else:
+			return '{0} in {1} files (indexing...)'.format(self.sizeof_fmt(value['size']), str(value['files']))
 
 	def init_preferences_controls(self):
 		self.devname = self.builder.get_object('devname')
@@ -178,7 +214,9 @@ class BtSyncApp(BtInputHelper):
 
 	def onConnectionError(self):
 		self.window.close()
+		return False
 
 	def onCommunicationError(self):
 		self.window.close()
+		return False
 
