@@ -5,6 +5,9 @@ btsync-user (1.13.2-1) unstable; urgency=low
   * Added more logging to the startup script
   * Updated comment block in btsync-starter to reflect recent
     changes in file and directory structure
+  * Improved handling of context manager lock file that will
+    not be automatically deleted on indicator stop (what should
+    happen but does not)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Fri, 21 Feb 2014 11:38:10 +0100
 

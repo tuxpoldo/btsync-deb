@@ -35,6 +35,7 @@ CFGPATH=${DESTDIR}/.config/btsync
 PIDFILE=${CFGPATH}/btsync.pid
 CFGFILE=${CFGPATH}/btsync-auto.conf
 USRFILE=${CFGPATH}/btsync-user.conf
+LOKFILE=${DATADIR}/indicator.lock
 
 APPLDIR=${HOME}/.local/share/applications
 APPFILE=${APPLDIR}/btsync-user.desktop
@@ -79,7 +80,7 @@ make_userfiles() {
 		-e "s/DEVNAME/${XDEVNAME}/g" \
 		-e "s/PORTNUM/${XPORTNUM}/g" \
 		> ${APPFILE} < /etc/btsync-user/btsync-user.desktop
-	log_message "User specific files and directories created"
+	log_message "make_user_files: User specific files and directories created"
 }
 
 update_configuration() {
@@ -89,7 +90,7 @@ update_configuration() {
 	# if a user specific configuration file is defined, move it to
 	# the new configuration location and rename it
 	if [ -f ${DESTDIR}/btsync.conf ]; then
-		log_message "Update: Moved ${DESTDIR}/btsync.conf to ${USRFILE}"
+		log_message "update_configuration: Moved ${DESTDIR}/btsync.conf to ${USRFILE}"
 		mv ${DESTDIR}/btsync.conf ${USRFILE}
 	fi
 }
@@ -99,7 +100,7 @@ adjust_arm_alignment() {
 		if ! ${AGENT} --help > /dev/null 2> /dev/null; then
 			# something is wrong
 			if ${AGENT} --help | grep -i "Alignment error" > /dev/null 2> /dev/null; then
-				log_message "Adjusted alignment setting on ARM processor"
+				log_message "adjust_arm_alignment: Adjusted alignment setting on ARM processor"
 				echo 2 > /proc/cpu/alignment
 			fi
 		fi
@@ -115,11 +116,13 @@ start_frontend() {
 		fi
 	fi
 	if ! pgrep -u $(id -u) -f btsyncindicator.py > /dev/null; then
-		if [ -f "${DATADIR}/indicator.lock" ]; then
+		if [ -f "${LOKFILE}" ]; then
 			log_message "start_frontend: frontend not running but LOCKFILE detected! Strange! btsyncindicator should handle it"
-			FPID=$(cat "${DATADIR}/indicator.lock")
+			FPID=$(cat "${LOKFILE}")
 			if [ -d "/proc/${FPID}" ]; then
 				log_message "start_frontend: btsyncindicator will fail since there is another process using the PID from the lockfile!!! This should be fixed in the CONTEXTMANAGER!!!"
+				log_message "start_frontend: lockfile will be deleted here"
+				rm -f "${LOKFILE}"
 			fi
 		fi
 		if [ -f "${USRFILE}" ]; then
@@ -137,7 +140,7 @@ start_frontend() {
 	else
 		log_message "start_frontend: process is NOT running!!!! Something went wrong!"
 	fi
-	
+
 	log_message "start_frontend: end"
 }
 
@@ -145,6 +148,7 @@ stop_frontend() {
 	log_message "stop_frontend: begin"
 	pkill -u $(id -u) -f btsyncindicator.py
 	log_message "stop_frontend: end"
+	# rm -f "${LOKFILE}"
 }
 
 start_agent() {
