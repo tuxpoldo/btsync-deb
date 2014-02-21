@@ -24,17 +24,17 @@ configure)
 
 	# generate autostart link
 	set +e
-#	if [ -d /etc/xdg/autostart ]; then
-#		ln -sf /usr/share/applications/btsync-agent.desktop /etc/xdg/autostart/btsync-agent.desktop
-#	elif [ -d /etc/xdg/openbox/autostart ]; then
-#		ln -sf /usr/share/applications/btsync-agent.desktop /etc/xdg/openbox/autostart/btsync-agent.desktop
-#	elif [ -d /usr/share/autostart ]; then
-#		ln -sf /usr/share/applications/btsync-agent.desktop /usr/share/autostart/btsync-agent.desktop
+	if [ -d /etc/xdg/autostart ]; then
+		ln -sf /usr/share/applications/btsync-gui.desktop /etc/xdg/autostart/btsync-gui.desktop
+	elif [ -d /etc/xdg/openbox/autostart ]; then
+		ln -sf /usr/share/applications/btsync-gui.desktop /etc/xdg/openbox/autostart/btsync-gui.desktop
+	elif [ -d /usr/share/autostart ]; then
+		ln -sf /usr/share/applications/btsync-gui.desktop /usr/share/autostart/btsync-gui.desktop
 #	else
-#		# fallback: no /etc/xdg/autostart - create one
-#		mkdir /etc/xdg/autostart
-#		ln -sf /usr/share/applications/btsync-agent.desktop /etc/xdg/autostart/btsync-agent.desktop
-#	fi
+#		# fallback: no /etc/xdg/autostart - create one and let's hope it works...
+#		mkdir -p /etc/xdg/autostart
+#		ln -sf /usr/share/applications/btsync-gui.desktop /etc/xdg/autostart/btsync-gui.desktop
+	fi
 	set -e
 
 #	if [ -f /var/run/btsync-user-updating ]; then
