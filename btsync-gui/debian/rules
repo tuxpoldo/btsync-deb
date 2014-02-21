@@ -1,0 +1,37 @@
+#!/usr/bin/make -f
+
+# Create some helper variables without using cddb since cdbs assumes
+# that the makefile will be executed from the project directory but
+# we need this vars in target get-orig-source that MUST work from
+# every directory
+
+DEB_DEBIAN_DIR=$(dir $(firstword $(MAKEFILE_LIST)))
+DEB_UPSTREAM_VERSION=$(shell dpkg-parsechangelog -l$(DEB_DEBIAN_DIR)/changelog \
+				| sed -rne 's,^Version: ([^-]+).*,\1,p')
+DEB_SOURCE_PACKAGE=$(shell dpkg-parsechangelog -l$(DEB_DEBIAN_DIR)/changelog \
+				| sed -rne 's,^Source: (.*),\1,p')
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	dh_auto_build
+
+override_dh_clean:
+	rm -f *.pyc
+	dh_clean
+
+get-orig-source: make-orig-source
+	echo OK
+
+make-orig-source:
+	if [ ! -f $(DEB_DEBIAN_DIR)../../$(DEB_SOURCE_PACKAGE)_$(DEB_UPSTREAM_VERSION).orig.tar.gz ]; then \
+		rm -rf /tmp/$(DEB_SOURCE_PACKAGE); \
+		mkdir -p /tmp/$(DEB_SOURCE_PACKAGE); \
+		cp -a $(DEB_DEBIAN_DIR)../ /tmp/$(DEB_SOURCE_PACKAGE)/; \
+		tar -C /tmp --exclude debian --exclude '.git*' -czf $(DEB_DEBIAN_DIR)../../$(DEB_SOURCE_PACKAGE)_$(DEB_UPSTREAM_VERSION).orig.tar.gz $(DEB_SOURCE_PACKAGE); \
+		rm -rf /tmp/$(DEB_SOURCE_PACKAGE); \
+	fi

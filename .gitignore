@@ -23,3 +23,9 @@
 /putrepo
 /nbproject
 /nbproject/private/
+
+# compiled python code
+*.pyc
+
+# editor debris
+*.*~

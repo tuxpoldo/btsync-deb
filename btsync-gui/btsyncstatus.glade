@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkAboutDialog" id="aboutdialog">
+    <property name="can_focus">False</property>
+    <property name="border_width">5</property>
+    <property name="type_hint">dialog</property>
+    <property name="program_name">BitTorrent Sync</property>
+    <property name="copyright" translatable="yes">Copyright © 2013, BitTorrent Inc.</property>
+    <property name="comments" translatable="yes">Linux UI Version 0.0</property>
+    <property name="website">http://www.bittorrent.com/sync</property>
+    <property name="license" translatable="yes">By using this application, you agree to our Privacy Policy and Terms.
+http://www.bittorrent.com/legal/privacy
+http://www.bittorrent.com/legal/terms-of-use</property>
+    <property name="authors">Konstantin Lissounov and his team
+BitTorrent Inc.
+
+Linux UI written by Leo Moll
+YeaSoft International</property>
+    <property name="logo_icon_name">btsync-gui</property>
+    <property name="license_type">custom</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="aboutdialog-vbox1">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="aboutdialog-action_area1">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkMenu" id="btsyncmenu">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkMenuItem" id="menuitem1">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">About BitTorrent Sync</property>
+        <property name="use_underline">True</property>
+        <signal name="activate" handler="onAbout" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="menuitem2">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="statusitem">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="sensitive">False</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">BitTorrent Status</property>
+        <property name="use_underline">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkCheckMenuItem" id="pausesyncing">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Pause Syncing</property>
+        <property name="use_underline">True</property>
+        <signal name="toggled" handler="onTogglePause" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="menuitem5">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="openapp">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Open BitTorrent Sync...</property>
+        <property name="use_underline">True</property>
+        <signal name="activate" handler="onOpenApp" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="menuitem7">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkCheckMenuItem" id="setdebug">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Enable Debug Logging</property>
+        <property name="use_underline">True</property>
+        <signal name="toggled" handler="onToggleLogging" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="menuitem9">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Quit BitTorrent Sync</property>
+        <property name="use_underline">True</property>
+        <signal name="activate" handler="onQuit" swapped="no"/>
+      </object>
+    </child>
+  </object>
+</interface>

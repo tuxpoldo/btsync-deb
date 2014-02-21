@@ -1,0 +1,104 @@
+#!/usr/bin/env python
+# coding=utf-8
+#
+# Copyright 2014 Leo Moll
+#
+# Authors: Leo Moll and Contributors (see CREDITS)
+#
+# Thanks to Mark Johnson for btsyncindicator.py which gave me the
+# last nudge needed to learn python and write my first linux GTK
+# application. Thank you!
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranties of
+# MERCHANTABILITY, SATISFACTORY QUALITY or FITNESS FOR A PARTICULAR
+# PURPOSE.  See the applicable version of the GNU Lesser General Public
+# License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License version 2 along with this program.  If not, see
+# <http://www.gnu.org/licenses/>
+#
+
+import os
+import sys
+import argparse
+import logging
+import subprocess
+
+sys.path.append('/usr/lib/btsync-gui')
+
+from gi.repository import Gtk
+from contextlib import contextmanager
+from btsyncagent import *
+from btsyncstatus import *
+
+
+@contextmanager
+def file_lock(lock_file):
+	if os.path.exists(lock_file):
+		# is it a zombie?
+		f = open(lock_file, 'r')
+		pid = f.read()
+		f.close()
+		if not os.path.isdir('/proc/' + pid):
+			os.remove(lock_file)
+		else:
+			logging.warning('Only one autostart btsync-gui can run at once.')
+			logging.warning('Application locked with ' + str(lock_file))
+			sys.exit(-1)
+
+	open(lock_file, 'w').write(str(os.getpid()))
+	try:
+		yield
+	finally:
+		os.remove(lock_file)
+
+
+if __name__ == "__main__":
+	parser = argparse.ArgumentParser()
+
+	parser.add_argument('--log', choices=['CRITICAL','ERROR','WARNING','INFO','DEBUG'],
+				default='WARNING',
+				help="Set logging level")
+	parser.add_argument('--host',
+				default='auto',
+				help="Hostname for the connection to BitTorrent Sync")
+	parser.add_argument('--port', type=int,
+				default=8888,
+				help="Port number for the connection to BitTorrent Sync")
+
+	parser.add_argument('--username',
+				default=None,
+				help="Optional user name for the connection to BitTorrent Sync")
+
+	parser.add_argument('--password',
+				default=None,
+				help="Optional password for the connection to BitTorrent Sync")
+
+	args = parser.parse_args()
+
+	# initialize logger
+	numeric_level = getattr(logging, args.log.upper(), None)
+	if not isinstance(numeric_level, int):
+		raise ValueError('Invalid log level: %s' % args.log)
+	logging.basicConfig(level=numeric_level)
+
+	# initialize agent
+	agent = BtSyncAgent(args)
+
+	if agent.is_auto():
+		# we are a primary application - we can run only once
+		with file_lock(agent.get_lock_filename()):
+			agent.startup()
+			ind = BtSyncStatus()
+			ind.startup(agent)
+			Gtk.main()
+			agent.shutdown()
+	else:
+		# we are only a client - we can run many
+		agent.startup()
+		ind = BtSyncStatus()
+		ind.startup(agent)
+		Gtk.main()
+		agent.shutdown()
