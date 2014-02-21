@@ -1,7 +1,10 @@
 btsync-user (1.13.2-1) unstable; urgency=low
 
-  * Updated man page to reflect recent changes in file
-    structure and naming
+  * Updated man page to reflect recent changes in file and
+    directory structure
+  * Added more logging to the startup script
+  * Updated comment block in btsync-starter to reflect recent
+    changes in file and directory structure
 
  -- Leo Moll <leo.moll@yeasoft.com>  Fri, 21 Feb 2014 11:38:10 +0100
 
@@ -19,7 +22,7 @@ btsync-user (1.13.0-1) unstable; urgency=low
     - Fixed missing http error handling
     - Fixed keyerror when creating menu for read-only folders
     - Autologin support to the menu function "Open Web Interface"
-    when creating menu for read-only folders)
+      when creating menu for read-only folders)
   * Improved pause/resume support in btsyncindicator
   * The paused state is now persistent over reboots (Closes #12)
   * Reorganized the file structure in the home directory to make
