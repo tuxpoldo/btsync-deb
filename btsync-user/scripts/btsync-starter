@@ -224,6 +224,7 @@ agent_runner() {
 	done
 	trap - INT QUIT TERM EXIT
 	log_message "agent_runner: end"
+	log_message "btsync-starter: end"
 }
 
 
