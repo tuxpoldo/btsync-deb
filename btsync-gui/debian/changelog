@@ -1,3 +1,10 @@
+btsync-gui (0.2-1) unstable; urgency=low
+
+  * Improved exception handling in several situations
+  * Implemented folder deletion (Closes #62)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Fri, 21 Feb 2014 15:16:22 +0100
+
 btsync-gui (0.1-1) unstable; urgency=low
 
   * First version with fully functional indicator (Closes #66),

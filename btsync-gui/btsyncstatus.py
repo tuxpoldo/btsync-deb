@@ -62,6 +62,9 @@ class BtSyncStatus(Gtk.StatusIcon):
 		# application window
 		self.app = None
 
+		# other variables
+		self.connection = BtSyncStatus.DISCONNECTED
+
 	def startup(self,agent):
 		self.agent = agent
 		# connection
@@ -78,11 +81,19 @@ class BtSyncStatus(Gtk.StatusIcon):
 		if isinstance(self.app, BtSyncApp):
 			self.app.window.present()
 		else:
-			self.app = BtSyncApp(self.btsyncapi)
-			self.app.connect_close_signal(self.onDeleteApp)
+			try:
+				self.app = BtSyncApp(self.btsyncapi)
+				self.app.connect_close_signal(self.onDeleteApp)
+			except requests.exceptions.ConnectionError:
+				return self.onConnectionError()
+			except requests.exceptions.HTTPError:
+				return self.onCommunicationError()
 
-	def close_app(self):
+	def close_app(self,stillopen=True):
 		if isinstance(self.app, BtSyncApp):
+			if stillopen:
+				self.app.close()
+				self.app.destroy()
 			del self.app
 			self.app = None
 
@@ -208,7 +219,7 @@ class BtSyncStatus(Gtk.StatusIcon):
 		self.open_app()
 
 	def onDeleteApp(self, *args):
-		self.close_app()
+		self.close_app(False)
 
 	def onToggleLogging(self,widget):
 		if self.is_connected():
@@ -221,7 +232,7 @@ class BtSyncStatus(Gtk.StatusIcon):
 
 	def onQuit(self,widget):
 		if self.agent.is_auto():
-			self.btsyncapi.shutdown()
+			self.btsyncapi.shutdown(throw_exceptions=False)
 		Gtk.main_quit()
 
 	def onIconRotate(self):
@@ -247,6 +258,7 @@ class BtSyncStatus(Gtk.StatusIcon):
 	def onConnectionError(self):
 		self.set_status(BtSyncStatus.DISCONNECTED)
 		self.menustatus.set_label('Disconnected')
+		self.close_app();
 		logging.info('Could not connect to Bittorrent Sync')
 		GObject.timeout_add(5000, self.btsync_connect)
 		return False
@@ -254,6 +266,7 @@ class BtSyncStatus(Gtk.StatusIcon):
 	def onCommunicationError(self):
 		self.set_status(BtSyncStatus.DISCONNECTED)
 		self.menustatus.set_label('Disconnected: Communication Error ' + str(self.btsyncapi.get_status_code()))
+		self.close_app();
 		logging.warning('Communication Error ' + str(self.btsyncapi.get_status_code()))
 		GObject.timeout_add(5000, self.btsync_connect)
 		return False

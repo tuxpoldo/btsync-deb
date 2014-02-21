@@ -19,8 +19,9 @@
 # <http://www.gnu.org/licenses/>
 #
 
-import requests
 import json
+import logging
+import requests
 
 class BtSyncApi(object):
 	"""
@@ -33,7 +34,7 @@ class BtSyncApi(object):
 	The docstrings of this class' methods were copied from the above site.
 	"""
 
-	def __init__(self, host='localhost', port='8888', username=None, password=None, exceptions=True):
+	def __init__(self, host='localhost', port='8888', username=None, password=None):
 		"""
 		Parameters
 		----------
@@ -56,10 +57,9 @@ class BtSyncApi(object):
 		else:
 			self.auth = (username,password)
 		self.urlroot = 'http://'+host+':'+str(port)+'/api'
-		self.exceptions = exceptions
 		self.response = None
 
-	def get_prefs(self):
+	def get_prefs(self,throw_exceptions=True):
 		"""
 		Returns BitTorrent Sync preferences. Contains dictionary with
 		advanced preferences. Please see Sync user guide for description
@@ -86,19 +86,19 @@ class BtSyncApi(object):
 		}
 		"""
 		params = {'method': 'get_prefs'}
-		return self._request(params)
+		return self._request(params,throw_exceptions)
 
-	def set_prefs(self,prefsdict):
+	def set_prefs(self,prefs_dictionary,throw_exceptions=True):
 		"""
 		Sets BitTorrent Sync preferences. Parameters are the same as in
 		'Get preferences'. Advanced preferences are set as general
 		 settings. Returns current settings.
 		"""
 		params = {'method': 'set_prefs'}
-		params.update (prefsdict)
-		return self._request(params)
+		params.update (prefs_dictionary)
+		return self._request(params,throw_exceptions)
 
-	def get_folders(self, secret=None):
+	def get_folders(self,secret=None,throw_exceptions=True):
 		"""
 		Returns an array with folders info. If a secret is specified, will
 		return info about the folder with this secret.
@@ -123,24 +123,48 @@ class BtSyncApi(object):
 		params = {'method': 'get_folders'}
 		if secret is not None:
 			params['secret'] = secret
-		return self._request(params)
+		return self._request(params,throw_exceptions)
 
-	def get_folder_peers(self, secret):
+	def get_folder_peers(self,secret,throw_exceptions=True):
 		"""
+		Returns list of peers connected to the specified folder.
+
+		[
+		    {
+			"id": "ARRdk5XANMb7RmQqEDfEZE-k5aI=",
+			"connection": "direct", // direct or relay
+			"name": "GT-I9500",
+			"synced": 0, // timestamp when last sync completed
+			"download": 0,
+			"upload": 22455367417
+		    }
+		]
 		"""
 		params = { 'method': 'get_folder_peers', 'secret' : secret }
-		return self._request(params)
+		return self._request(params,throw_exceptions)
 
-	def get_version(self):
+	def remove_folder(self,secret,throw_exceptions=True):
+		"""
+		Removes folder from Sync while leaving actual folder and files on
+		disk. It will remove a folder from the Sync list of folders and
+		does not touch any files or folders on disk. Returns '0' if no error,
+		'1' if there’s no folder with specified secret.
+
+		{ "error": 0 }
+		"""
+		params = { 'method': 'remove_folder', 'secret' : secret }
+		return self._request(params,throw_exceptions)
+
+	def get_version(self,throw_exceptions=True):
 		"""
 		Returns BitTorrent Sync version.
 
 		{ "version": "1.2.48" }
 		"""
 		params = {'method': 'get_version'}
-		return self._request(params)
+		return self._request(params,throw_exceptions)
 
-	def get_speed(self):
+	def get_speed(self,throw_exceptions=True):
 		"""
 		Returns current upload and download speed.
 
@@ -150,35 +174,35 @@ class BtSyncApi(object):
 		}
 		"""
 		params = {'method': 'get_speed'}
-		return self._request(params)
+		return self._request(params,throw_exceptions)
 
-	def get_os(self):
+	def get_os(self,throw_exceptions=True):
 		"""
 		Returns OS name where BitTorrent Sync is running.
 
 		{ "os": "win32" }
 		"""
 		params = {'method': 'get_os'}
-		return self._request(params)
+		return self._request(params,throw_exceptions)
 
-	def shutdown(self):
+	def shutdown(self,throw_exceptions=True):
 		"""
 		Gracefully stops Sync.
 
 		{ "error" : 0 }
 		"""
 		params = {'method': 'shutdown'}
-		return self._request(params)
+		return self._request(params,throw_exceptions)
 
 	def get_status_code(self):
 		return self.response.status_code
 		
 
-	def _request(self,params):
+	def _request(self,params,throw_exceptions):
 		"""
 		Internal function that handles the communication with btsync
 		"""
-		if self.exceptions:
+		if throw_exceptions:
 			self.response = requests.get(self.urlroot, params=params, auth=self.auth)
 			self.response.raise_for_status()
 			return json.loads (self._get_response_text(self.response))
@@ -188,10 +212,10 @@ class BtSyncApi(object):
 			response.raise_for_status()
 			return json.loads (self._get_response_text(response))
 		except requests.exceptions.ConnectionError:
-			print "Couldn't connect to Bittorrent Sync"
+			logger.warning("Couldn't connect to Bittorrent Sync")
 			return None
 		except requests.exceptions.HTTPError:
-			print "Communication Error " + str(response.status_code)
+			logger.warning('Communication Error ' + str(response.status_code))
 			return None
 
 	def _get_response_text(self, response):

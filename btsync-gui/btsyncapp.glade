@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkListStore" id="folders_list">
+    <columns>
+      <!-- column-name Folder -->
+      <column type="gchararray"/>
+      <!-- column-name Content -->
+      <column type="gchararray"/>
+      <!-- column-name Secret -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkWindow" id="btsyncapp">
     <property name="can_focus">False</property>
     <property name="border_width">12</property>
     <property name="title" translatable="yes">BitTorrent Sync</property>
     <property name="window_position">center</property>
-    <property name="icon_name">btsync-user</property>
+    <property name="icon_name">btsync-gui</property>
     <child>
       <object class="GtkNotebook" id="notebook2">
         <property name="visible">True</property>
@@ -35,7 +45,9 @@
                     <property name="model">folders_list</property>
                     <property name="headers_clickable">False</property>
                     <child internal-child="selection">
-                      <object class="GtkTreeSelection" id="treeview-selection1"/>
+                      <object class="GtkTreeSelection" id="folders_selection">
+                        <signal name="changed" handler="onFoldersSelectionChanged" swapped="no"/>
+                      </object>
                     </child>
                     <child>
                       <object class="GtkTreeViewColumn" id="treeviewcolumn1">
@@ -82,6 +94,7 @@
                     <property name="receives_default">True</property>
                     <property name="use_action_appearance">False</property>
                     <property name="use_stock">True</property>
+                    <signal name="clicked" handler="onFoldersAdd" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -98,6 +111,7 @@
                     <property name="receives_default">True</property>
                     <property name="use_action_appearance">False</property>
                     <property name="use_stock">True</property>
+                    <signal name="clicked" handler="onFoldersRemove" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -429,13 +443,5 @@
         </child>
       </object>
     </child>
-  </object>
-  <object class="GtkListStore" id="folders_list">
-    <columns>
-      <!-- column-name Folder -->
-      <column type="gchararray"/>
-      <!-- column-name Content -->
-      <column type="gchararray"/>
-    </columns>
   </object>
 </interface>

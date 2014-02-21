@@ -19,6 +19,7 @@
 # <http://www.gnu.org/licenses/>
 #
 
+from os.path import dirname
 from gi.repository import Gtk, GObject
 
 import exceptions
@@ -210,4 +211,25 @@ class BtInputHelper(object):
 #		print "  Min:       " + str(valDesc.Min)
 #		print "  Max:       " + str(valDesc.Max)
 
+class BtBaseDialog(object):
+	def __init__(self,gladefile,template):
+		self.gladefile = gladefile
+		self.template = template
+
+	def create(self):
+		# create the dialog object from builder
+		self.builder = Gtk.Builder()
+		self.builder.add_from_file(dirname(__file__) + '/' + self.gladefile)
+		self.builder.connect_signals (self)
+		self.dlg = self.builder.get_object(self.template)
+
+	def run(self):
+		response = 0
+		while response >= 0:
+			response = self.dlg.run()
+		return response
+
+	def destroy(self):
+		self.dlg.destroy()
+		del self.builder
 

@@ -19,6 +19,8 @@
 # <http://www.gnu.org/licenses/>
 #
 
+import requests
+
 from gi.repository import Gtk
 from btsyncapi import BtSyncApi
 from btsyncutils import *
@@ -31,7 +33,6 @@ class BtSyncPrefsAdvanced(BtInputHelper):
 		self.btsyncapi = btsyncapi
 		self.prefs = self.btsyncapi.get_prefs()
 		self.create()
-		print self.prefs
 
 	def create(self):
 		# create the dialog object from builder
@@ -47,9 +48,8 @@ class BtSyncPrefsAdvanced(BtInputHelper):
 		self.ap_entry_value = self.builder.get_object('ap_entry_value')
 		self.ap_reset_value = self.builder.get_object('ap_reset_value')
 		# initialize content
-		self.doInitEditor()
-		self.doInitValues()
-
+		self.init_editor()
+		self.init_values()
 
 	def run(self):
 		response = 0
@@ -61,7 +61,7 @@ class BtSyncPrefsAdvanced(BtInputHelper):
 		self.dlg.destroy()
 		del self.builder
 
-	def doInitValues(self):
+	def init_values(self):
 		self.lock()
 		# fill with current values and specifications
 		self.advancedprefs.clear()
@@ -75,7 +75,7 @@ class BtSyncPrefsAdvanced(BtInputHelper):
 				]);
 		self.unlock()
 
-	def doInitEditor(self,valDesc=None):
+	def init_editor(self,valDesc=None):
 		self.lock()
 		if valDesc == None:
 			self.detach(self.ap_entry_value)
@@ -106,16 +106,21 @@ class BtSyncPrefsAdvanced(BtInputHelper):
 
 	def onSelectionChanged(self,selection):
 		model, tree_iter = selection.get_selected()
-		self.doInitEditor(None if tree_iter is None else model[tree_iter][3])
+		self.init_editor(None if tree_iter is None else model[tree_iter][3])
 
 	def onSaveEntry(self,widget,valDesc,newValue):
-		self.btsyncapi.set_prefs({valDesc.Name : newValue})
-		# GtkListStore has no search function. BAD!!! Maybe I'm too stupid?
-		for row in self.advancedprefs:
-			if row[0] == valDesc.Name:
-				row[1] = str(newValue)
-				row[2] = valDesc.get_display_width(newValue)
-		return True
+		try:
+			self.btsyncapi.set_prefs({valDesc.Name : newValue})
+			# GtkListStore has no search function. BAD!!! Maybe I'm too stupid?
+			for row in self.advancedprefs:
+				if row[0] == valDesc.Name:
+					row[1] = str(newValue)
+					row[2] = valDesc.get_display_width(newValue)
+			return True
+		except requests.exceptions.ConnectionError:
+			return self.onConnectionError()
+		except requests.exceptions.HTTPError:
+			return self.onCommunicationError()
 
 	def onPrefsAdvancedResetValue(self,widget):
 		selection = self.ap_tree_prefs.get_selection()
@@ -125,5 +130,11 @@ class BtSyncPrefsAdvanced(BtInputHelper):
 			valDesc = model[tree_iter][3]
 			self.onSaveEntry(widget,valDesc,valDesc.Default)
 			valDesc.set_default()
-			self.doInitEditor(valDesc)
+			self.init_editor(valDesc)
+
+	def onConnectionError(self):
+		self.dlg.close()
+
+	def onCommunicationError(self):
+		self.dlg.close()
 

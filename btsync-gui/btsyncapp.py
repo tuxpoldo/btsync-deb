@@ -27,6 +27,7 @@ from gi.repository import Gtk
 from btsyncapi import BtSyncApi
 from prefsadvanced import BtSyncPrefsAdvanced
 from btsyncutils import *
+from dialogs import *
 
 class BtSyncApp(BtInputHelper):
 
@@ -50,12 +51,15 @@ class BtSyncApp(BtInputHelper):
 
 	def init_folders_controls(self):
 		self.folders = self.builder.get_object('folders_list')
+		self.folders_selection = self.builder.get_object('folders_selection')
 		self.folders_treeview = self.builder.get_object('folders_tree_view')
 		self.folders_add = self.builder.get_object('folders_add')
-		self.folders_remove = self.builder.get_object('folders_add')
+		self.folders_remove = self.builder.get_object('folders_remove')
+		self.folders_remove.set_sensitive(False)
 
 	def init_folders_values(self):
 		try:
+			self.lock()
 			folders = self.btsyncapi.get_folders()
 			if folders is not None:
 				for index, value in enumerate(folders):
@@ -64,11 +68,15 @@ class BtSyncApp(BtInputHelper):
 						'{0} in {1} files'.format(
 							self.sizeof_fmt(value['size']),
 							str(value['files'])
-						)
+						),
+						value['secret']
 					])
+			self.unlock()
 		except requests.exceptions.ConnectionError:
+			self.unlock()
 			return self.onConnectionError()
 		except requests.exceptions.HTTPError:
+			self.unlock()
 			return self.onCommunicationError()
 
 	def init_preferences_controls(self):
@@ -96,26 +104,77 @@ class BtSyncApp(BtInputHelper):
 		self.unlock()
 
 	def onSaveEntry(self,widget,valDesc,newValue):
-		self.btsyncapi.set_prefs({valDesc.Name : newValue})
-		self.prefs[valDesc.Name] = newValue
+		try:
+			self.btsyncapi.set_prefs({valDesc.Name : newValue})
+			self.prefs[valDesc.Name] = newValue
+		except requests.exceptions.ConnectionError:
+			return self.onConnectionError()
+		except requests.exceptions.HTTPError:
+			return self.onCommunicationError()
 		return True
+
+	def onFoldersSelectionChanged(self,selection):
+		model, tree_iter = selection.get_selected()
+		self.folders_remove.set_sensitive(selection.count_selected_rows() > 0)
+
+	def onFoldersAdd(self,widget):
+		print "onFoldersAdd"
+
+	def onFoldersRemove(self,widget):
+		confirmation = BtSyncFolderRemove()
+		confirmation.create()
+		result = confirmation.run()
+		confirmation.destroy()
+		if result == Gtk.ResponseType.OK:
+			model, tree_iter = self.folders_selection.get_selected()
+			if tree_iter is not None:
+				# ok - let's delete it!
+				secret = model[tree_iter][2]
+				try:
+					result = self.btsyncapi.remove_folder(secret)
+					if result['error'] == 0:
+						self.folders.remove(tree_iter)
+					else:
+						logging.error('Failed to remove folder ' + str(secret))
+				except requests.exceptions.ConnectionError:
+					return self.onConnectionError()
+				except requests.exceptions.HTTPError:
+					return self.onCommunicationError()
 
 	def onPreferencesToggledLimitDn(self,widget):
 		self.limitdnrate.set_sensitive(widget.get_active())
 		if not self.is_locked():
 			rate = int(self.limitdnrate.get_text()) if widget.get_active() else 0
-			self.btsyncapi.set_prefs({"download_limit" : rate})
+			try:
+				self.btsyncapi.set_prefs({"download_limit" : rate})
+				self.prefs['download_limit'] = rate
+			except requests.exceptions.ConnectionError:
+				return self.onConnectionError()
+			except requests.exceptions.HTTPError:
+				return self.onCommunicationError()
+
 
 	def onPreferencesToggledLimitUp(self,widget):
 		self.limituprate.set_sensitive(widget.get_active())
 		if not self.is_locked():
 			rate = int(self.limituprate.get_text()) if widget.get_active() else 0
-			self.btsyncapi.set_prefs({"upload_limit" : rate})
+			try:
+				self.btsyncapi.set_prefs({"upload_limit" : rate})
+				self.prefs['upload_limit'] = rate
+			except requests.exceptions.ConnectionError:
+				return self.onConnectionError()
+			except requests.exceptions.HTTPError:
+				return self.onCommunicationError()
 
 	def onPreferencesClickedAdvanced(self,widget):
-		dlgPrefsAdvanced = BtSyncPrefsAdvanced(self.btsyncapi)
-		dlgPrefsAdvanced.run()
-		dlgPrefsAdvanced.destroy()
+		try:
+			dlgPrefsAdvanced = BtSyncPrefsAdvanced(self.btsyncapi)
+			dlgPrefsAdvanced.run()
+			dlgPrefsAdvanced.destroy()
+		except requests.exceptions.ConnectionError:
+			return self.onConnectionError()
+		except requests.exceptions.HTTPError:
+			return self.onCommunicationError()
 
 	def onConnectionError(self):
 		self.window.close()
