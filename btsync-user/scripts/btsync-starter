@@ -217,7 +217,7 @@ agent_runner() {
 				stop_frontend
 			elif [ ! -f "${PAUSED_STATEFILE}" ]; then
 				# no reason to stay online. stop the whole game
-				log_message "agent_runner: pause requested. Stopping agent..."
+				log_message "agent_runner: termination requested. Stopping agent..."
 				stop_agent
 			fi
 		fi
