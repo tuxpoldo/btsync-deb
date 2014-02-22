@@ -9,9 +9,9 @@ set -e
 case "$1" in
 remove|purge)
 	set +e
-#	rm -f /etc/xdg/autostart/btsync-agent.desktop
-#	rm -f /etc/xdg/openbox/autostart/btsync-agent.desktop
-#	rm -f /usr/share/autostart/btsync-agent.desktop
+	rm -f /etc/xdg/autostart/btsync-gui.desktop
+	rm -f /etc/xdg/openbox/autostart/btsync-gui.desktop
+	rm -f /usr/share/autostart/btsync-gui.desktop
 	set -e
 	;;
 upgrade|disappear)

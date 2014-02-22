@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=BitTorrent Sync
-Comment=Private network P2P file synchronisation tool
+Comment=Synchronize your folders with maximum security, network speed and storage capacity
 Exec=btsync-gui
 Icon=btsync-gui
 Terminal=false
