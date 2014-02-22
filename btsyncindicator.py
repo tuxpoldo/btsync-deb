@@ -57,12 +57,13 @@ TIMEOUT = 2 # seconds
 
 @contextmanager
 def file_lock(lock_file):
+    runningpids = subprocess.check_output("ps aux | grep btsyncindicator | grep -v grep | awk '{print $2}'", shell=True).split()
     if os.path.exists(lock_file):
         # is it a zombie?
         f = open(lock_file, 'r')
         pid = f.read()
         f.close()
-        if not os.path.exists('/proc/' + pid):
+        if pid not in runningpids:
             os.remove(lock_file)
         else:
             print 'Only one indicator can run at once. '\
