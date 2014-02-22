@@ -310,6 +310,11 @@ class BtSyncIndicator:
 
             status = response.json()
 
+            for folder in status['folders']:
+               folder['name'] = self.fix_encoding(folder['name'])
+               for peer in folder['peers']:
+                   peer['status'] = self.fix_encoding(peer['status'])
+
             self.check_activity(status['folders'])
 
             curfoldernames = [ folder['name'] for folder in self.status['folders'] ]
@@ -634,6 +639,9 @@ class BtSyncIndicator:
         Older versions use response.content instead of response.text
         """
         return response.text if hasattr(response, "text") else response.content
+
+    def fix_encoding(self, text):
+        return text.encode('latin-1').decode('utf-8')
 
     def main(self):
         gtk.timeout_add(TIMEOUT * 1000, self.setup_session)
