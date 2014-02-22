@@ -52,17 +52,18 @@ import logging
 import subprocess
 from contextlib import contextmanager
 
-VERSION = '0.13'
+VERSION = '0.14'
 TIMEOUT = 2 # seconds
 
 @contextmanager
 def file_lock(lock_file):
+    runningpids = subprocess.check_output("ps aux | grep btsyncindicator | grep -v grep | awk '{print $2}'", shell=True).split()
     if os.path.exists(lock_file):
         # is it a zombie?
         f = open(lock_file, 'r')
         pid = f.read()
         f.close()
-        if not os.path.exists('/proc/' + pid):
+        if pid not in runningpids:
             os.remove(lock_file)
         else:
             print 'Only one indicator can run at once. '\
@@ -250,7 +251,7 @@ class BtSyncIndicator:
                params = {'token': self.token, 'action': a}
                response = requests.get(self.urlroot, params=params, cookies=self.cookies, auth=self.auth)
                response.raise_for_status()
-               self.info[a] = json.loads(self.get_response_text(response))
+               self.info[a] = response.json()
 
             self.clear_error()
 
@@ -267,7 +268,7 @@ class BtSyncIndicator:
             return True
         except requests.exceptions.HTTPError:
             logging.warning('Communication Error caught, displaying error message')
-            self.show_error("Communication Error "+response.status_code)
+            self.show_error("Communication Error "+str(response.status_code))
             return True
 
     def check_status(self):
@@ -308,7 +309,12 @@ class BtSyncIndicator:
 
             self.clear_error()
 
-            status = json.loads(self.get_response_text(response))
+            status = response.json()
+
+            for folder in status['folders']:
+               folder['name'] = self.fix_encoding(folder['name'])
+               for peer in folder['peers']:
+                   peer['status'] = self.fix_encoding(peer['status'])
 
             self.check_activity(status['folders'])
 
@@ -349,7 +355,7 @@ class BtSyncIndicator:
             return False
         except requests.exceptions.HTTPError:
             logging.warning('Communication Error caught, displaying error message')
-            self.show_error("Communication Error "+response.status_code)
+            self.show_error("Communication Error "+str(response.status_code))
             self.folderitems = {}
             self.status = { 'folders': [] }
             gtk.timeout_add(5000, self.setup_session)
@@ -364,7 +370,7 @@ class BtSyncIndicator:
         isactive = False
         for folder in folders:
             for peer in folder['peers']:
-                if peer['status'].find('Synced') == -1:
+                if peer['status'].find('<div') != -1:
                     logging.info('Sync activity detected')
                     isactive = True
                     break
@@ -634,6 +640,9 @@ class BtSyncIndicator:
         Older versions use response.content instead of response.text
         """
         return response.text if hasattr(response, "text") else response.content
+
+    def fix_encoding(self, text):
+        return text.encode('latin-1').decode('utf-8')
 
     def main(self):
         gtk.timeout_add(TIMEOUT * 1000, self.setup_session)
