@@ -250,7 +250,7 @@ class BtSyncIndicator:
                params = {'token': self.token, 'action': a}
                response = requests.get(self.urlroot, params=params, cookies=self.cookies, auth=self.auth)
                response.raise_for_status()
-               self.info[a] = json.loads(self.get_response_text(response))
+               self.info[a] = response.json()
 
             self.clear_error()
 
@@ -308,7 +308,7 @@ class BtSyncIndicator:
 
             self.clear_error()
 
-            status = json.loads(self.get_response_text(response))
+            status = response.json()
 
             self.check_activity(status['folders'])
 
