@@ -3,6 +3,8 @@ btsync-gui (0.3-1) unstable; urgency=low
   * The @contextmanager has been replaced completely by a brand new
     singleton implementation that fixes all reported issues and
     does not fail on first start (Closes #68)
+  * Syntax error in exception handler of BtSyncApi produced a
+    cascade of exceptions preventing application shutdown
   * Folder list will now be updated once per second
   * Application version is shown correctly
 
