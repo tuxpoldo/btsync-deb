@@ -369,7 +369,7 @@ class BtSyncIndicator:
         isactive = False
         for folder in folders:
             for peer in folder['peers']:
-                if peer['status'].find('Synced') == -1:
+                if peer['status'].find('<div') != -1:
                     logging.info('Sync activity detected')
                     isactive = True
                     break
