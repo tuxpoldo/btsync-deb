@@ -251,9 +251,9 @@ class BtSingleton():
 		self.writepid(lockfilename)
 
 	def __del__(self):
-		print "preremove:" + str(self.lockfilename)
+		# print "preremove:" + str(self.lockfilename)
 		if self.lockfilename and os.path.isfile(self.lockfilename):
-			print "remove:" + str(self.lockfilename)
+			# print "remove:" + str(self.lockfilename)
 			os.remove(self.lockfilename)
 
 	def readpid(self,lockfilename):
