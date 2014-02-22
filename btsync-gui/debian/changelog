@@ -1,9 +1,12 @@
 btsync-gui (0.3-1) unstable; urgency=low
 
+  * The @contextmanager has been replaced completely by a brand new
+    singleton implementation that fixes all reported issues and
+    does not fail on first start (Closes #68)
   * Folder list will now be updated once per second
   * Application version is shown correctly
 
- -- Leo Moll <leo.moll@yeasoft.com>  Fri, 21 Feb 2014 15:16:22 +0100
+ -- Leo Moll <leo.moll@yeasoft.com>  Fri, 21 Feb 2014 23:12:59 +0100
 
 btsync-gui (0.2-1) unstable; urgency=low
 

@@ -25,6 +25,8 @@ import signal
 import subprocess
 import logging
 
+from btsyncutils import BtSingleton
+
 class BtSyncAgent():
 	BINARY = '/usr/lib/btsync-common/btsync-core'
 	APIKEY = '26U2OU3LNXN4I3QFNT7JAGG5DB676PCZIEL42FBOGYUM4OUMI5YTBNLD64ZXJCLSFWKC'\
@@ -33,12 +35,24 @@ class BtSyncAgent():
 	def __init__(self,args):
 		self.args = args
 		self.uid = int(os.getuid())
+		self.pid = None
+		self.configpath = os.environ['HOME'] + '/.config/btsync'
+		self.storagepath = os.environ['HOME'] + '/.btsync'
+		self.pidfile = self.configpath + '/btsync-agent.pid'
+		self.conffile = self.configpath + '/btsync-agent.conf'
+		self.lockfile = self.configpath + '/btsync-gui.pid'
+		self.lock = None
+		if self.is_auto():
+			self.lock = BtSingleton(self.lockfile,'btsync-gui')
 
 	def __del__(self):
 		self.shutdown()
 
 	def is_auto(self):
 		return self.args.host == 'auto'
+
+	def is_primary(self):
+		return self.args.host == 'auto' and isinstance(self.lock,BtSingleton)
 
 	def get_lock_filename(self):
 		return os.environ['HOME'] + '/.config/btsync/btsync-gui.lock'
@@ -74,10 +88,6 @@ class BtSyncAgent():
 		if self.args.host == 'auto':
 			# we have to handle everything
 			try:
-				self.configpath = os.environ['HOME'] + '/.config/btsync'
-				self.storagepath = os.environ['HOME'] + '/.btsync'
-				self.pidfile = self.configpath + '/btsync-agent.pid'
-				self.conffile = self.configpath + '/btsync-gui.conf'
 				if not os.path.isdir(self.configpath):
 					os.makedirs(self.configpath)
 				if not os.path.isdir(self.storagepath):
@@ -86,19 +96,16 @@ class BtSyncAgent():
 				if not self.is_running():
 					logging.info ('Starting btsync agent...')
 					subprocess.call([BtSyncAgent.BINARY, '--config', self.conffile])
-			except OSError:
-				logging.error('Failure to start btsync agent')
-				exit (1)
-
-			except IOError:
-				logging.error('Failure to start btsync agent')
-				exit (1)
+			except Exception:
+				logging.critical('Failure to start btsync agent - exiting...')
+				exit (-1)
 
 	def shutdown(self):
-		if self.is_auto() and self.is_running():
+		if self.is_primary() and self.is_running():
 			logging.info ('Stopping btsync agent...')
 			os.kill (self.pid, signal.SIGTERM)
-			os.remove(self.conffile)
+			if os.path.isfile(self.conffile):
+				os.remove(self.conffile)
 
 	def make_config_file(self):
 		try:
@@ -113,38 +120,35 @@ class BtSyncAgent():
 			cfg.write('\t}\n')
 			cfg.write('}\n')
 			cfg.close()
-		except IOError:
-			logging.error('Cannot create ' + self.configpath)
-			exit (1)
+		except Exception:
+			logging.critical('Cannot create {0} - exiting...'.format(self.configpath))
+			exit (-1)
 
 	def read_pid(self):
 		try:
 			pid = open (self.pidfile, 'r')
-			pidstr = pid.readline()
+			pidstr = pid.readline().strip('\r\n')
 			pid.close()
-			pidstr.replace('\r', '')
-			pidstr.replace('\n', '')
 			self.pid = int(pidstr)
-		except IOError:
+		except Exception:
 			self.pid = None
-		except AttributeError:
-			self.pid = None
+		return self.pid
 
 	def is_running(self):
 		self.read_pid()
 		if self.pid is None:
 			return False
 		# very linuxish...
-		if not os.path.isdir('/proc/' + str(self.pid)):
+		if not os.path.isdir('/proc/{0}'.format(self.pid)):
 			return False
 		try:
-			pid = open('/proc/' + str(self.pid) + '/cmdline', 'r')
+			pid = open('/proc/{0}/cmdline'.format(self.pid), 'r')
 			cmdline = pid.readline()
 			pid.close()
 			fields = cmdline.split('\0')
 			if fields[0] == BtSyncAgent.BINARY:
 				return True
 			return False
-
-		except IOError:
+		except Exception:
 			return False
+

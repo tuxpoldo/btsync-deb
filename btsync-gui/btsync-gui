@@ -29,30 +29,8 @@ import subprocess
 sys.path.append('/usr/lib/btsync-gui')
 
 from gi.repository import Gtk
-from contextlib import contextmanager
 from btsyncagent import *
 from btsyncstatus import *
-
-
-@contextmanager
-def file_lock(lock_file):
-	if os.path.exists(lock_file):
-		# is it a zombie?
-		f = open(lock_file, 'r')
-		pid = f.read()
-		f.close()
-		if not os.path.isdir('/proc/' + pid):
-			os.remove(lock_file)
-		else:
-			logging.warning('Only one autostart btsync-gui can run at once.')
-			logging.warning('Application locked with ' + str(lock_file))
-			sys.exit(-1)
-
-	open(lock_file, 'w').write(str(os.getpid()))
-	try:
-		yield
-	finally:
-		os.remove(lock_file)
 
 
 if __name__ == "__main__":
@@ -84,21 +62,25 @@ if __name__ == "__main__":
 		raise ValueError('Invalid log level: %s' % args.log)
 	logging.basicConfig(level=numeric_level)
 
-	# initialize agent
-	agent = BtSyncAgent(args)
+	try:
+		# initialize agent
+		agent = BtSyncAgent(args)
+	except Exception:
+		logging.warning('Only one full btsync-gui can run at once.')
+		exit(-1)
 
-	if agent.is_auto():
-		# we are a primary application - we can run only once
-		with file_lock(agent.get_lock_filename()):
-			agent.startup()
-			ind = BtSyncStatus()
-			ind.startup(agent)
-			Gtk.main()
-			agent.shutdown()
-	else:
-		# we are only a client - we can run many
+	try:
 		agent.startup()
+		# initialize indicator
 		ind = BtSyncStatus()
 		ind.startup(agent)
+		# giro giro tondo....
 		Gtk.main()
+	except Exception:
+		logging.error('This should never happen... ;-)')
+	finally:
+		# good night!
+		ind.shutdown()
 		agent.shutdown()
+		exit(0)
+

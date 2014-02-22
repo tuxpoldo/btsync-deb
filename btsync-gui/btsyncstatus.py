@@ -79,6 +79,9 @@ class BtSyncStatus(Gtk.StatusIcon):
 		self.set_status(BtSyncStatus.DISCONNECTED)
 		GObject.timeout_add(1000, self.btsync_connect)
 
+	def shutdown(self):
+		del self.agent
+
 	def open_app(self):
 		if isinstance(self.app, BtSyncApp):
 			self.app.window.present()

@@ -19,10 +19,10 @@
 # <http://www.gnu.org/licenses/>
 #
 
-from os.path import dirname
-from gi.repository import Gtk, GObject
-
+import os
 import exceptions
+
+from gi.repository import Gtk, GObject
 
 class BtValueDescriptor(GObject.GObject):
 
@@ -212,6 +212,7 @@ class BtInputHelper(object):
 #		print "  Max:       " + str(valDesc.Max)
 
 class BtBaseDialog(object):
+
 	def __init__(self,gladefile,template):
 		self.gladefile = gladefile
 		self.template = template
@@ -232,4 +233,54 @@ class BtBaseDialog(object):
 	def destroy(self):
 		self.dlg.destroy()
 		del self.builder
+
+
+class BtSingleton():
+
+	def __init__(self,lockfilename,procname):
+		self.lockfilename = None
+		if os.path.isfile(lockfilename):
+			pid = self.readpid(lockfilename)
+			if pid is not None and os.path.isfile('/proc/{0}/cmdline'.format(pid)):
+				args = self.getcmdline(pid)
+				for arg in args:
+					if procname in arg:
+						raise Exception('Compatible process still running')
+			# lock file must by a zombie...
+			os.remove(lockfilename)
+		self.writepid(lockfilename)
+
+	def __del__(self):
+		print "preremove:" + str(self.lockfilename)
+		if self.lockfilename and os.path.isfile(self.lockfilename):
+			print "remove:" + str(self.lockfilename)
+			os.remove(self.lockfilename)
+
+	def readpid(self,lockfilename):
+		try:
+			f = open(lockfilename, 'r')
+			pid = f.readline().rstrip('\r\n')
+			f.close()
+			return pid
+		except IOError:
+			return None
+
+	def writepid(self,lockfilename):
+		lockdir = os.path.dirname(lockfilename)
+		if lockdir and not os.path.isdir(lockdir):
+			os.makedirs(lockdir)
+		f = open(lockfilename, 'w')
+		f.write(str(os.getpid()))
+		f.close()
+		self.lockfilename = lockfilename
+
+	def getcmdline(self,pid):
+		try:
+			f = open('/proc/{0}/cmdline'.format(pid), 'r')
+			args = f.readline().split('\0')
+			args.append('')
+			f.close()
+			return args
+		except IOError:
+			return ['']
 
