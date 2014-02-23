@@ -23,6 +23,7 @@ import os
 import exceptions
 
 from gi.repository import Gtk, GObject
+from os.path import dirname,isdir
 
 class BtValueDescriptor(GObject.GObject):
 
@@ -211,18 +212,39 @@ class BtInputHelper(object):
 #		print "  Min:       " + str(valDesc.Min)
 #		print "  Max:       " + str(valDesc.Max)
 
-class BtBaseDialog(object):
+class BtMessageHelper(object):
+	def show_message(self,parent,messagetext,messagetype=Gtk.MessageType.INFO):
+		dlg = Gtk.MessageDialog (
+			parent,
+			Gtk.DialogFlags.DESTROY_WITH_PARENT,
+			messagetype,
+			Gtk.ButtonsType.CLOSE,
+			None
+		)
+		dlg.set_markup('<b>BitTorrent Sync</b>')
+		dlg.format_secondary_markup(messagetext)
+		dlg.run()
+		dlg.destroy()
 
-	def __init__(self,gladefile,template):
+	def show_warning(self,parent,messagetext):
+		self.show_message(parent,messagetext,Gtk.MessageType.WARNING)
+
+	def show_error(self,messagetext):
+		self.show_message(parent,messagetext,Gtk.MessageType.ERROR)
+
+class BtBaseDialog(BtMessageHelper):
+
+	def __init__(self,gladefile,dlgname,addobjects = []):
 		self.gladefile = gladefile
-		self.template = template
+		self.objects = [ dlgname ]
+		self.objects.extend(addobjects)
 
 	def create(self):
 		# create the dialog object from builder
 		self.builder = Gtk.Builder()
-		self.builder.add_from_file(dirname(__file__) + '/' + self.gladefile)
+		self.builder.add_objects_from_file(dirname(__file__) + '/' + self.gladefile, self.objects)
 		self.builder.connect_signals (self)
-		self.dlg = self.builder.get_object(self.template)
+		self.dlg = self.builder.get_object(self.objects[0])
 
 	def run(self):
 		response = 0
@@ -233,6 +255,15 @@ class BtBaseDialog(object):
 	def destroy(self):
 		self.dlg.destroy()
 		del self.builder
+
+	def show_message(self,messagetext,messagetype=Gtk.MessageType.INFO):
+		BtMessageHelper.show_message(self,self.dlg,messagetext,messagetype)
+
+	def show_warning(self,messagetext):
+		self.show_message(messagetext,Gtk.MessageType.WARNING)
+
+	def show_error(self,messagetext):
+		self.show_message(messagetext,Gtk.MessageType.ERROR)
 
 
 class BtSingleton():
