@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkListStore" id="folders_list">
-    <columns>
-      <!-- column-name Folder -->
-      <column type="gchararray"/>
-      <!-- column-name Content -->
-      <column type="gchararray"/>
-      <!-- column-name Secret -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
   <object class="GtkWindow" id="btsyncapp">
     <property name="can_focus">False</property>
     <property name="border_width">12</property>
@@ -44,6 +34,7 @@
                     <property name="can_focus">True</property>
                     <property name="model">folders_list</property>
                     <property name="headers_clickable">False</property>
+                    <signal name="button-press-event" handler="onFoldersContextMenu" swapped="no"/>
                     <child internal-child="selection">
                       <object class="GtkTreeSelection" id="folders_selection">
                         <signal name="changed" handler="onFoldersSelectionChanged" swapped="no"/>
@@ -441,6 +432,60 @@
             <property name="tab_fill">False</property>
           </packing>
         </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkListStore" id="folders_list">
+    <columns>
+      <!-- column-name Folder -->
+      <column type="gchararray"/>
+      <!-- column-name Content -->
+      <column type="gchararray"/>
+      <!-- column-name Secret -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkMenu" id="folders_menu">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkMenuItem" id="folder_menu_copy">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Copy secret</property>
+        <property name="use_underline">True</property>
+        <signal name="activate" handler="onFoldersCopySecret" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="folder_menu_connect">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="sensitive">False</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Connect mobile device</property>
+        <property name="use_underline">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="folder_menu_openarchive">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Open SyncArchive</property>
+        <property name="use_underline">True</property>
+        <signal name="activate" handler="onFoldersOpenArchive" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="folder_menu_prefs">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Show folder preferences</property>
+        <property name="use_underline">True</property>
+        <signal name="activate" handler="onFoldersPreferences" swapped="no"/>
       </object>
     </child>
   </object>

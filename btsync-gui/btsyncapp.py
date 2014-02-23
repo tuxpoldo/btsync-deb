@@ -23,7 +23,7 @@ import requests
 
 from os.path import dirname
 
-from gi.repository import Gtk
+from gi.repository import Gtk, Gdk
 from btsyncapi import BtSyncApi
 from prefsadvanced import BtSyncPrefsAdvanced
 from btsyncutils import *
@@ -40,6 +40,8 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.window = self.builder.get_object('btsyncapp')
 		self.window.show()
 
+		self.clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
+
 		self.prefs = self.btsyncapi.get_prefs()
 		self.init_folders_controls()
 		self.init_folders_values()
@@ -51,6 +53,8 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 
 	def init_folders_controls(self):
 		self.folders = self.builder.get_object('folders_list')
+		self.folders_menu = self.builder.get_object('folders_menu')
+		self.folders_menu_openarchive = self.builder.get_object('folder_menu_openarchive')
 		self.folders_selection = self.builder.get_object('folders_selection')
 		self.folders_treeview = self.builder.get_object('folders_tree_view')
 		self.folders_add = self.builder.get_object('folders_add')
@@ -187,6 +191,42 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 					return self.onConnectionError()
 				except requests.exceptions.HTTPError:
 					return self.onCommunicationError()
+
+	def onFoldersContextMenu(self,widget,event):
+		if event.button == 3:
+			x = int(event.x)
+			y = int(event.y)
+			time = event.time
+			pathinfo = widget.get_path_at_pos(x,y)
+			if pathinfo is not None:
+				path, column, cellx, celly = pathinfo
+				widget.grab_focus()
+				widget.set_cursor(path,column,0)
+				model, tree_iter = self.folders_selection.get_selected()
+				if tree_iter is not None:
+					self.folders_menu_openarchive.set_sensitive(
+						os.path.isdir(model[tree_iter][0] + '/.SyncArchive')
+					)
+				else:
+					self.folders_menu_openarchive.set_sensitive(False)
+
+				self.folders_menu.popup(None,None,None,None,event.button,time)
+			return True
+
+	def onFoldersCopySecret(self,widget):
+		model, tree_iter = self.folders_selection.get_selected()
+		if tree_iter is not None:
+			self.clipboard.set_text(model[tree_iter][2], -1)
+
+	def onFoldersOpenArchive(self,widget):
+		model, tree_iter = self.folders_selection.get_selected()
+		if tree_iter is not None:
+			print "onFoldersOpenArchive: " + model[tree_iter][0] + '/.SyncArchive'
+
+	def onFoldersPreferences(self,widget):
+		model, tree_iter = self.folders_selection.get_selected()
+		if tree_iter is not None:
+			print "onFoldersPreferences" + model[tree_iter][2]
 
 	def onPreferencesToggledLimitDn(self,widget):
 		self.limitdnrate.set_sensitive(widget.get_active())
