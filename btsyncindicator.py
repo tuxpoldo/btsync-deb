@@ -251,7 +251,7 @@ class BtSyncIndicator:
                params = {'token': self.token, 'action': a}
                response = requests.get(self.urlroot, params=params, cookies=self.cookies, auth=self.auth)
                response.raise_for_status()
-               self.info[a] = response.json()
+               self.info[a] = self.get_response_json(response)
 
             self.clear_error()
 
@@ -309,7 +309,7 @@ class BtSyncIndicator:
 
             self.clear_error()
 
-            status = response.json()
+            status = self.get_response_json(response)
 
             for folder in status['folders']:
                folder['name'] = self.fix_encoding(folder['name'])
@@ -640,6 +640,17 @@ class BtSyncIndicator:
         Older versions use response.content instead of response.text
         """
         return response.text if hasattr(response, "text") else response.content
+
+    def get_response_json(self, response):
+	"""
+	Version-safe way to parse json from request module response object
+	The version in the Ubuntu 12.04 LTS repositories doesnt have .json() 
+	"""
+	try:
+	    response_json = response.json()
+	except AttributeError:
+	    response_json = json.loads(self.get_response_text(response))
+	return response_json
 
     def fix_encoding(self, text):
         return text.encode('latin-1').decode('utf-8')
