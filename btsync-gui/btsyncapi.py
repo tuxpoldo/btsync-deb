@@ -107,6 +107,7 @@ class BtSyncApi(object):
 			params['secret'] = secret
 		if selective_sync:
 			params['selective_sync'] = 1
+		return self._request(params,throw_exceptions)
 
 	def remove_folder(self,secret,throw_exceptions=True):
 		"""
@@ -396,7 +397,40 @@ class BtSyncApi(object):
 		Returns the HTTP status code of the last operation
 		"""
 		return self.response.status_code
-		
+
+	@staticmethod
+	def get_error_code(result):
+		"""
+		Returns a numerical error code for the given result
+		"""
+		if result is None:
+			return 999
+		elif result.has_key('error'):
+			return result['error']
+		elif result.has_key('result'):
+			return result['result']
+		else:
+			return 0
+
+	@staticmethod
+	def get_error_message(result):
+		"""
+		Returns an error message for the given result
+		"""
+		if result is None:
+			return 'Invalid result (connection error)'
+		elif result.has_key('error') and result['error'] > 0:
+			if result.has_key('message'):
+				return result['message']
+			else:
+				return 'Unknown error {0}'.format(result.has_key('error'))
+		elif result.has_key('result') and result['result'] > 0:
+			if result.has_key('message'):
+				return result['message']
+			else:
+				return 'Unknown error {0}'.format(result.has_key('result'))
+		else:
+			return 'No error'
 
 	def _request(self,params,throw_exceptions):
 		"""
