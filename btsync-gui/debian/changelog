@@ -1,3 +1,9 @@
+btsync-gui (0.4-1) unstable; urgency=low
+
+  * Implemented folder add routine (Closes #63)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sat, 22 Feb 2014 23:23:59 +0100
+
 btsync-gui (0.3-1) unstable; urgency=low
 
   * The @contextmanager has been replaced completely by a brand new

@@ -29,7 +29,7 @@ from prefsadvanced import BtSyncPrefsAdvanced
 from btsyncutils import *
 from dialogs import *
 
-class BtSyncApp(BtInputHelper):
+class BtSyncApp(BtInputHelper,BtMessageHelper):
 
 	def __init__(self,btsyncapi):
 		self.btsyncapi = btsyncapi
@@ -154,13 +154,24 @@ class BtSyncApp(BtInputHelper):
 		self.folders_remove.set_sensitive(selection.count_selected_rows() > 0)
 
 	def onFoldersAdd(self,widget):
-		print "onFoldersAdd"
+		try:
+			dlg = BtSyncFolderAdd(self.btsyncapi)
+			dlg.create()
+			result = dlg.run()
+			dlg.destroy()
+			if result == Gtk.ResponseType.OK:
+				# all checks have already been done. let's go!
+				result = self.btsyncapi.add_folder(dlg.folder,dlg.secret)
+				if self.btsyncapi.get_error_code(result) > 0:
+					self.show_warning(self.window,self.btsyncapi.get_error_message(result))
+		except Exception:
+			self.onConnectionError()
 
 	def onFoldersRemove(self,widget):
-		confirmation = BtSyncFolderRemove()
-		confirmation.create()
-		result = confirmation.run()
-		confirmation.destroy()
+		dlg = BtSyncFolderRemove()
+		dlg.create()
+		result = dlg.run()
+		dlg.destroy()
 		if result == Gtk.ResponseType.OK:
 			model, tree_iter = self.folders_selection.get_selected()
 			if tree_iter is not None:
