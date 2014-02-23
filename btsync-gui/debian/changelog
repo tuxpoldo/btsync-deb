@@ -5,6 +5,7 @@ btsync-gui (0.4-1) unstable; urgency=low
     - Copy secret
     - Connect mobile device
     - Open Syncarchive
+    - Open shared folder on double click
 
  -- Leo Moll <leo.moll@yeasoft.com>  Sat, 22 Feb 2014 23:23:59 +0100
 

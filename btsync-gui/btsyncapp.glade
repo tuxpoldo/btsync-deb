@@ -34,7 +34,7 @@
                     <property name="can_focus">True</property>
                     <property name="model">folders_list</property>
                     <property name="headers_clickable">False</property>
-                    <signal name="button-press-event" handler="onFoldersContextMenu" swapped="no"/>
+                    <signal name="button-press-event" handler="onFoldersMouseClick" swapped="no"/>
                     <child internal-child="selection">
                       <object class="GtkTreeSelection" id="folders_selection">
                         <signal name="changed" handler="onFoldersSelectionChanged" swapped="no"/>

@@ -194,7 +194,41 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 				except requests.exceptions.HTTPError:
 					return self.onCommunicationError()
 
-	def onFoldersContextMenu(self,widget,event):
+	def onFoldersMouseClick(self,widget,event):
+		x = int(event.x)
+		y = int(event.y)
+		time = event.time
+		pathinfo = widget.get_path_at_pos(x,y)
+		if pathinfo is not None:
+			if event.button == 1:
+				if event.type == Gdk.EventType._2BUTTON_PRESS or event.type == Gdk.EventType._3BUTTON_PRESS:
+					path, column, cellx, celly = pathinfo
+					widget.grab_focus()
+					widget.set_cursor(path,column,0)
+					model, tree_iter = self.folders_selection.get_selected()
+					if tree_iter is not None:
+						if os.path.isdir(model[tree_iter][0]):
+							os.system('xdg-open '+model[tree_iter][0])
+				return True
+			elif event.button == 3:
+				path, column, cellx, celly = pathinfo
+				widget.grab_focus()
+				widget.set_cursor(path,column,0)
+				model, tree_iter = self.folders_selection.get_selected()
+				if tree_iter is not None:
+					self.folders_menu_openarchive.set_sensitive(
+						os.path.isdir(model[tree_iter][0] + '/.SyncArchive')
+					)
+				else:
+					self.folders_menu_openarchive.set_sensitive(False)
+
+				self.folders_menu.popup(None,None,None,None,event.button,time)
+				return True
+
+
+
+
+	def xxxonFoldersMouseClick(self,widget,event):
 		if event.button == 3:
 			x = int(event.x)
 			y = int(event.y)
