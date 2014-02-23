@@ -164,14 +164,17 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 			dlg = BtSyncFolderAdd(self.btsyncapi)
 			dlg.create()
 			result = dlg.run()
-			dlg.destroy()
 			if result == Gtk.ResponseType.OK:
 				# all checks have already been done. let's go!
 				result = self.btsyncapi.add_folder(dlg.folder,dlg.secret)
 				if self.btsyncapi.get_error_code(result) > 0:
 					self.show_warning(self.window,self.btsyncapi.get_error_message(result))
-		except Exception:
-			self.onConnectionError()
+		except requests.exceptions.ConnectionError:
+			logging.error('Connection error')
+		except requests.exceptions.HTTPError:
+			logging.error('HTTP error: {0}'.format(self.btsyncapi.get_status_code()))
+		finally:
+			dlg.destroy()
 
 	def onFoldersRemove(self,widget):
 		dlg = BtSyncFolderRemove()
@@ -190,9 +193,9 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 					else:
 						logging.error('Failed to remove folder ' + str(secret))
 				except requests.exceptions.ConnectionError:
-					return self.onConnectionError()
+					logging.error('Connection error')
 				except requests.exceptions.HTTPError:
-					return self.onCommunicationError()
+					logging.error('HTTP error: {0}'.format(self.btsyncapi.get_status_code()))
 
 	def onFoldersMouseClick(self,widget,event):
 		x = int(event.x)
@@ -236,7 +239,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 			result = self.btsyncapi.get_secrets(model[tree_iter][2], False)
 			if self.btsyncapi.get_error_code(result) == 0:
 				dlg = BtSyncFolderScanQR(
-					result['read_write'],
+					result['read_write'] if result.has_key('read_write') else None,
 					result['read_only'],
 					basename(model[tree_iter][0])
 				)
@@ -254,10 +257,16 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 	def onFoldersPreferences(self,widget):
 		model, tree_iter = self.folders_selection.get_selected()
 		if tree_iter is not None:
-			dlg = BtSyncFolderPrefs(model[tree_iter][2])
-			dlg.create()
-			dlg.run()
-			dlg.destroy()
+			try:
+				dlg = BtSyncFolderPrefs(model[tree_iter][2])
+				dlg.create()
+				dlg.run()
+			except requests.exceptions.ConnectionError:
+				logging.error('Connection error')
+			except requests.exceptions.HTTPError:
+				logging.error('HTTP error: {0}'.format(self.btsyncapi.get_status_code()))
+			finally:
+				dlg.destroy()
 
 	def onPreferencesToggledLimitDn(self,widget):
 		self.limitdnrate.set_sensitive(widget.get_active())

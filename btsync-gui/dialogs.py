@@ -99,21 +99,29 @@ class BtSyncFolderScanQR(BtBaseDialog):
 		self.rwsecret = rwsecret
 		self.rosecret = rosecret
 		self.basename = basename
-		version, size, image = qrencode.encode_scaled(
-			'btsync://{0}?n={1}'.format(rwsecret,basename),232
-		)
-		self.rwqrcode = self.image_to_pixbuf(image)
-		version, size, image = qrencode.encode_scaled(
-			'btsync://{0}?n={1}'.format(rosecret,basename),232
-		)
-		self.roqrcode = self.image_to_pixbuf(image)
 
 	def create(self):
 		BtBaseDialog.create(self)
 		self.qrcode_image = self.builder.get_object('qrcode_image')
-		self.qrcode_image.set_from_pixbuf(self.rwqrcode)
 		self.qrcode_fullaccess = self.builder.get_object('qrcode_fullaccess')
-		self.qrcode_fullaccess.set_active(True)
+		self.qrcode_readaccess = self.builder.get_object('qrcode_readaccess')
+		version, size, image = qrencode.encode_scaled(
+			'btsync://{0}?n={1}'.format(self.rosecret,self.basename),232
+		)
+		self.roqrcode = self.image_to_pixbuf(image)
+
+		if self.rwsecret is None:
+			self.qrcode_image.set_from_pixbuf(self.roqrcode)
+			self.qrcode_readaccess.set_active(True)
+			self.qrcode_readaccess.set_sensitive(False)
+			self.qrcode_fullaccess.set_sensitive(False)
+		else:
+			version, size, image = qrencode.encode_scaled(
+				'btsync://{0}?n={1}'.format(self.rwsecret,self.basename),232
+			)
+			self.rwqrcode = self.image_to_pixbuf(image)
+			self.qrcode_image.set_from_pixbuf(self.rwqrcode)
+			self.qrcode_fullaccess.set_active(True)
 
 	def image_to_pixbuf(self,image):
 		filebuf = StringIO()  
@@ -140,4 +148,8 @@ class BtSyncFolderScanQR(BtBaseDialog):
 class BtSyncFolderPrefs(BtBaseDialog):
 	def __init__(self,rwsecret):
 		BtBaseDialog.__init__(self, 'dialogs.glade', 'folderprefs')
+		self.rwsecret = rwsecret
 
+	def create(self):
+		BtBaseDialog.create(self)
+		result = self.btsyncapi.get_secrets(self.rwsecret)
