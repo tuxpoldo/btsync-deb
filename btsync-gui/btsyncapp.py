@@ -19,11 +19,13 @@
 # <http://www.gnu.org/licenses/>
 #
 
+import os
 import requests
 
 from os.path import dirname,basename
 
 from gi.repository import Gtk, Gdk
+
 from btsyncapi import BtSyncApi
 from prefsadvanced import BtSyncPrefsAdvanced
 from btsyncutils import *
@@ -235,7 +237,9 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 	def onFoldersOpenArchive(self,widget):
 		model, tree_iter = self.folders_selection.get_selected()
 		if tree_iter is not None:
-			print "onFoldersOpenArchive: " + model[tree_iter][0] + '/.SyncArchive'
+			syncarchive = model[tree_iter][0] + '/.SyncArchive'
+			if os.path.isdir(syncarchive):
+				os.system('xdg-open '+syncarchive)
 
 	def onFoldersPreferences(self,widget):
 		model, tree_iter = self.folders_selection.get_selected()
