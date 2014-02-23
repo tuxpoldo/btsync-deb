@@ -137,3 +137,7 @@ class BtSyncFolderScanQR(BtBaseDialog):
 			self.qrcode_image.set_from_pixbuf(self.roqrcode)
 
 
+class BtSyncFolderPrefs(BtBaseDialog):
+	def __init__(self,rwsecret):
+		BtBaseDialog.__init__(self, 'dialogs.glade', 'folderprefs')
+

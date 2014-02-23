@@ -209,7 +209,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 					if tree_iter is not None:
 						if os.path.isdir(model[tree_iter][0]):
 							os.system('xdg-open '+model[tree_iter][0])
-				return True
+							return True
 			elif event.button == 3:
 				path, column, cellx, celly = pathinfo
 				widget.grab_focus()
@@ -224,30 +224,6 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 
 				self.folders_menu.popup(None,None,None,None,event.button,time)
 				return True
-
-
-
-
-	def xxxonFoldersMouseClick(self,widget,event):
-		if event.button == 3:
-			x = int(event.x)
-			y = int(event.y)
-			time = event.time
-			pathinfo = widget.get_path_at_pos(x,y)
-			if pathinfo is not None:
-				path, column, cellx, celly = pathinfo
-				widget.grab_focus()
-				widget.set_cursor(path,column,0)
-				model, tree_iter = self.folders_selection.get_selected()
-				if tree_iter is not None:
-					self.folders_menu_openarchive.set_sensitive(
-						os.path.isdir(model[tree_iter][0] + '/.SyncArchive')
-					)
-				else:
-					self.folders_menu_openarchive.set_sensitive(False)
-
-				self.folders_menu.popup(None,None,None,None,event.button,time)
-			return True
 
 	def onFoldersCopySecret(self,widget):
 		model, tree_iter = self.folders_selection.get_selected()
@@ -278,7 +254,10 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 	def onFoldersPreferences(self,widget):
 		model, tree_iter = self.folders_selection.get_selected()
 		if tree_iter is not None:
-			print "onFoldersPreferences" + model[tree_iter][2]
+			dlg = BtSyncFolderPrefs(model[tree_iter][2])
+			dlg.create()
+			dlg.run()
+			dlg.destroy()
 
 	def onPreferencesToggledLimitDn(self,widget):
 		self.limitdnrate.set_sensitive(widget.get_active())
