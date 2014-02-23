@@ -462,10 +462,10 @@
       <object class="GtkMenuItem" id="folder_menu_connect">
         <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
-        <property name="sensitive">False</property>
         <property name="can_focus">False</property>
         <property name="label" translatable="yes">Connect mobile device</property>
         <property name="use_underline">True</property>
+        <signal name="activate" handler="onFoldersConnectMobile" swapped="no"/>
       </object>
     </child>
     <child>

@@ -11,7 +11,7 @@ Homepage: http://www.yeasoft.com/site/projects:btsync-deb:btsync-user
 Package: btsync-gui
 Architecture: all
 Depends: debconf | debconf-2.0, libc6, ${python:Depends},
- python-requests, python-gtk2, btsync-common
+ python-requests, python-gtk2, btsync-common, python-qrencode
 Provides: btsync-user-application
 Replaces: btsync-user
 Breaks: btsync-user

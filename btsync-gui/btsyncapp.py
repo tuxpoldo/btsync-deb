@@ -21,7 +21,7 @@
 
 import requests
 
-from os.path import dirname
+from os.path import dirname,basename
 
 from gi.repository import Gtk, Gdk
 from btsyncapi import BtSyncApi
@@ -217,6 +217,20 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		model, tree_iter = self.folders_selection.get_selected()
 		if tree_iter is not None:
 			self.clipboard.set_text(model[tree_iter][2], -1)
+
+	def onFoldersConnectMobile(self,widget):
+		model, tree_iter = self.folders_selection.get_selected()
+		if tree_iter is not None:
+			result = self.btsyncapi.get_secrets(model[tree_iter][2], False)
+			if self.btsyncapi.get_error_code(result) == 0:
+				dlg = BtSyncFolderScanQR(
+					result['read_write'],
+					result['read_only'],
+					basename(model[tree_iter][0])
+				)
+				dlg.create()
+				result = dlg.run()
+				dlg.destroy()
 
 	def onFoldersOpenArchive(self,widget):
 		model, tree_iter = self.folders_selection.get_selected()

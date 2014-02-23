@@ -20,8 +20,10 @@
 #
 
 import os
+import qrencode
 
-from gi.repository import Gtk
+from gi.repository import Gtk, GdkPixbuf
+from cStringIO import StringIO
 from btsyncapi import BtSyncApi
 from btsyncutils import BtBaseDialog
 
@@ -90,4 +92,48 @@ class BtSyncFolderAdd(BtBaseDialog):
 	def onFolderAddGenerate(self,widget):
 		secrets = self.btsyncapi.get_secrets()
 		self.secret_w.set_text(secrets['read_write'])
+		
+class BtSyncFolderScanQR(BtBaseDialog):
+	def __init__(self,rwsecret,rosecret,basename):
+		BtBaseDialog.__init__(self, 'dialogs.glade', 'scanqr')
+		self.rwsecret = rwsecret
+		self.rosecret = rosecret
+		self.basename = basename
+		version, size, image = qrencode.encode_scaled(
+			'btsync://{0}?n={1}'.format(rwsecret,basename),232
+		)
+		self.rwqrcode = self.image_to_pixbuf(image)
+		version, size, image = qrencode.encode_scaled(
+			'btsync://{0}?n={1}'.format(rosecret,basename),232
+		)
+		self.roqrcode = self.image_to_pixbuf(image)
+
+	def create(self):
+		BtBaseDialog.create(self)
+		self.qrcode_image = self.builder.get_object('qrcode_image')
+		self.qrcode_image.set_from_pixbuf(self.rwqrcode)
+		self.qrcode_fullaccess = self.builder.get_object('qrcode_fullaccess')
+		self.qrcode_fullaccess.set_active(True)
+
+	def image_to_pixbuf(self,image):
+		filebuf = StringIO()  
+		image.save(filebuf, "ppm")  
+		contents = filebuf.getvalue()  
+		filebuf.close()  
+		loader = GdkPixbuf.PixbufLoader.new_with_type("pnm")  
+		#height, width = image.size
+		#loader.set_size(width.height)
+		loader.write(contents)  
+		pixbuf = loader.get_pixbuf()  
+		loader.close()  
+		return pixbuf
+
+	def onToggleFullAccess(self,widget):
+		if widget.get_active():
+			self.qrcode_image.set_from_pixbuf(self.rwqrcode)
+
+	def onToggleReadOnly(self,widget):
+		if widget.get_active():
+			self.qrcode_image.set_from_pixbuf(self.roqrcode)
+
 
