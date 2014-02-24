@@ -87,6 +87,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		try:
 			self.lock()
 			folders = self.btsyncapi.get_folders()
+			# forward scan updates existing and adds new
 			if folders is not None:
 				for index, value in enumerate(folders):
 					if not self.update_folder_values(value):
@@ -96,7 +97,11 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 							self.get_folder_info_string(value),
 							value['secret']
 						])
-			# TODO: reverse scan to delete disappeared folders...
+			# reverse scan deletes disappeared folders...
+			for row in self.folders:
+				if not self.folder_exists(folders,row):
+					self.folders.remove(row.iter)
+
 			self.unlock()
 			return True
 		except requests.exceptions.ConnectionError:
@@ -112,7 +117,21 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 				# found - update information
 				row[1] = self.get_folder_info_string(value)
 				return True
+			elif value['dir'] == row[0]:
+				# found - secret was changed
+				row[1] = self.get_folder_info_string(value)
+				row[2] = value['secret']
+				return True
 		# not found
+		return False
+
+	def folder_exists(self,folders,row):
+		if folders is not None:
+			for index, value in enumerate(folders):
+				if value['secret'] == row[2]:
+					return True
+				elif value['dir'] == row[0]:
+					return True
 		return False
 
 	def get_folder_info_string(self,value):
@@ -160,8 +179,8 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.folders_remove.set_sensitive(selection.count_selected_rows() > 0)
 
 	def onFoldersAdd(self,widget):
+		dlg = BtSyncFolderAdd(self.btsyncapi)
 		try:
-			dlg = BtSyncFolderAdd(self.btsyncapi)
 			dlg.create()
 			result = dlg.run()
 			if result == Gtk.ResponseType.OK:
@@ -170,9 +189,9 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 				if self.btsyncapi.get_error_code(result) > 0:
 					self.show_warning(self.window,self.btsyncapi.get_error_message(result))
 		except requests.exceptions.ConnectionError:
-			logging.error('Connection error')
+			pass
 		except requests.exceptions.HTTPError:
-			logging.error('HTTP error: {0}'.format(self.btsyncapi.get_status_code()))
+			pass
 		finally:
 			dlg.destroy()
 
@@ -188,14 +207,14 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 				secret = model[tree_iter][2]
 				try:
 					result = self.btsyncapi.remove_folder(secret)
-					if result['error'] == 0:
+					if self.btsyncapi.get_error_code(result) == 0:
 						self.folders.remove(tree_iter)
 					else:
 						logging.error('Failed to remove folder ' + str(secret))
 				except requests.exceptions.ConnectionError:
-					logging.error('Connection error')
+					pass
 				except requests.exceptions.HTTPError:
-					logging.error('HTTP error: {0}'.format(self.btsyncapi.get_status_code()))
+					pass
 
 	def onFoldersMouseClick(self,widget,event):
 		x = int(event.x)
@@ -257,17 +276,16 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 	def onFoldersPreferences(self,widget):
 		model, tree_iter = self.folders_selection.get_selected()
 		if tree_iter is not None:
+			dlg = BtSyncFolderPrefs(self.btsyncapi)
 			try:
-				dlg = BtSyncFolderPrefs(self.btsyncapi,model[tree_iter][2])
-				try:
-					dlg.create()
-					dlg.run()
-				finally:
-					dlg.destroy()
+				dlg.create(model[tree_iter][0],model[tree_iter][2])
+				dlg.run()
 			except requests.exceptions.ConnectionError:
-				logging.error('Connection error')
+				pass
 			except requests.exceptions.HTTPError:
-				logging.error('HTTP error: {0}'.format(self.btsyncapi.get_status_code()))
+				pass
+			finally:
+				dlg.destroy()
 
 	def onPreferencesToggledLimitDn(self,widget):
 		self.limitdnrate.set_sensitive(widget.get_active())
@@ -305,10 +323,12 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 			return self.onCommunicationError()
 
 	def onConnectionError(self):
+		logger.error('BtSync API Connection Error')
 		self.window.destroy()
 		return False
 
 	def onCommunicationError(self):
+		logging.error('BtSync API HTTP error: {0}'.format(self.btsyncapi.get_status_code()))
 		self.window.destroy()
 		return False
 
