@@ -20,29 +20,26 @@
 #
 
 from gi.repository import Gtk, GObject
-from btsyncapi import BtSyncApi
-from btsyncapp import *
-
 from os.path import dirname
 
 import logging
 import requests
 
+from trayindicator import *
+from btsyncapi import BtSyncApi
+from btsyncapp import *
+
+
+
 VERSION = '0.4'
 
-class BtSyncStatus(Gtk.StatusIcon):
+class BtSyncStatus:
 	DISCONNECTED	= 0
 	CONNECTING	= 1
 	CONNECTED	= 2
 	PAUSED		= 3
 
 	def __init__(self):
-		Gtk.StatusIcon.__init__(self)
-		self.set_name('btsync')
-		self.set_title('BitTorrent Sync')
-		self.set_tooltip_text('BitTorrent Sync Status Indicator')
-		self.set_from_icon_name('btsync-gui-disconnected')
-
 		self.builder = Gtk.Builder()
 		self.builder.add_from_file(dirname(__file__) + "/btsyncstatus.glade")
 		self.builder.connect_signals (self)
@@ -53,8 +50,14 @@ class BtSyncStatus(Gtk.StatusIcon):
 		self.menuopen = self.builder.get_object('openapp')
 		self.about = self.builder.get_object('aboutdialog')
 
-		self.connect('activate', self.onActivate)
-		self.connect('popup-menu', self.onContextMenu)
+		self.ind = TrayIndicator (
+			'btsync',
+			'btsync-gui-disconnected'
+		)
+		self.ind.set_title('BitTorrent Sync')
+		self.ind.set_tooltip_text('BitTorrent Sync Status Indicator')
+		self.ind.set_menu(self.menu)
+		self.ind.set_default_action(self.onActivate)
 
 		# icon animator
 		self.frame = 0
@@ -159,7 +162,7 @@ class BtSyncStatus(Gtk.StatusIcon):
 		if connection is BtSyncStatus.DISCONNECTED:
 			self.frame = -1
 			self.transferring = False
-			self.set_from_icon_name('btsync-gui-disconnected')
+			self.ind.set_from_icon_name('btsync-gui-disconnected')
 			self.menupause.set_sensitive(False)
 			self.menudebug.set_sensitive(False)
 			self.menudebug.set_active(self.agent.get_debug())
@@ -167,7 +170,7 @@ class BtSyncStatus(Gtk.StatusIcon):
 		elif connection is BtSyncStatus.CONNECTING:
 			self.frame = -1
 			self.transferring = False
-			self.set_from_icon_name('btsync-gui-connecting')
+			self.ind.set_from_icon_name('btsync-gui-connecting')
 			self.menupause.set_sensitive(False)
 			self.menudebug.set_sensitive(False)
 			self.menudebug.set_active(self.agent.get_debug())
@@ -175,7 +178,7 @@ class BtSyncStatus(Gtk.StatusIcon):
 		elif connection is BtSyncStatus.PAUSED:
 			self.frame = -1
 			self.transferring = False
-			self.set_from_icon_name('btsync-gui-paused')
+			self.ind.set_from_icon_name('btsync-gui-paused')
 #			self.menupause.set_sensitive(self.agent.is_auto())
 			self.menupause.set_sensitive(False)
 			self.menudebug.set_sensitive(self.agent.is_auto())
@@ -195,7 +198,7 @@ class BtSyncStatus(Gtk.StatusIcon):
 					GObject.timeout_add(200, self.onIconRotate)
 			self.transferring = transferring
 			if not self.transferring:
-				self.set_from_icon_name('btsync-gui-0')
+				self.ind.set_from_icon_name('btsync-gui-0')
 		self.connection = connection
 
 	def show_status(self,statustext):
@@ -204,12 +207,9 @@ class BtSyncStatus(Gtk.StatusIcon):
 	def is_connected(self):
 		return self.connection is BtSyncStatus.CONNECTED
 
-	def onContextMenu(self,widget,button,activate_time):
-		self.menu.popup(None,None,Gtk.StatusIcon.position_menu,widget,button,activate_time)
-
 	def onActivate(self,widget):
 		self.open_app()
-#		self.menu.popup(None,None,Gtk.StatusIcon.position_menu,widget,3,0)
+		self.menu.popup(None,None,Gtk.StatusIcon.position_menu,widget,3,0)
 
 	def onAbout(self,widget):
 		self.about.set_version('Version {0} ({0})'.format(self.btsyncver['version']))
@@ -250,12 +250,12 @@ class BtSyncStatus(Gtk.StatusIcon):
 		elif not self.transferring and self.frame % 12 == 0:
 			# do not stop immediately - wait for the
 			# cycle to finish.
-			self.set_from_icon_name('btsync-gui-0')
+			self.ind.set_from_icon_name('btsync-gui-0')
 			self.rotating = False
 			self.frame = 0
 			return False
 		else:
-			self.set_from_icon_name('btsync-gui-{0}'.format(self.frame % 12))
+			self.ind.set_from_icon_name('btsync-gui-{0}'.format(self.frame % 12))
 			self.rotating = True
 			self.frame += 1
 			return True
