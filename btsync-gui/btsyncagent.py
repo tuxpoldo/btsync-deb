@@ -27,7 +27,7 @@ import logging
 
 from btsyncutils import BtSingleton
 
-class BtSyncAgent():
+class BtSyncAgent:
 	BINARY = '/usr/lib/btsync-common/btsync-core'
 	APIKEY = '26U2OU3LNXN4I3QFNT7JAGG5DB676PCZIEL42FBOGYUM4OUMI5YTBNLD64ZXJCLSFWKC'\
 		'VOFNPU65UVO5RKSMYJ24A2KX3VPS4S7HICM3U7OI3FUHMXJPSLMBV4XNRKEMNOBDK4I'
@@ -42,6 +42,8 @@ class BtSyncAgent():
 		self.conffile = self.configpath + '/btsync-agent.conf'
 		self.lockfile = self.configpath + '/btsync-gui.pid'
 		self.lock = None
+		self.username = 'btsync-gui'
+		self.password = 'P455w0rD'
 		if self.is_auto():
 			self.lock = BtSingleton(self.lockfile,'btsync-gui')
 
@@ -64,10 +66,10 @@ class BtSyncAgent():
 		return self.uid + 8999 if self.args.host == 'auto' else self.args.port
 
 	def get_username(self):
-		return self.args.username
+		return self.username if self.is_auto() else self.args.username
 
 	def get_password(self):
-		return self.args.password
+		return self.password if self.is_auto() else self.args.password
 
 	def get_debug(self):
 		if self.args.host == 'auto':
@@ -116,6 +118,8 @@ class BtSyncAgent():
 			# cfg.write('\t"use_gui" : false,\n')
 			cfg.write('\t"webui" : \n\t{\n')
 			cfg.write('\t\t"listen" : "127.0.0.1:{0}",\n'.format(self.uid + 8999))
+			cfg.write('\t\t"login" : "{0}",\n'.format(self.username))
+			cfg.write('\t\t"password" : "{0}",\n'.format(self.password))
 			cfg.write('\t\t"api_key" : "{}"\n'.format(BtSyncAgent.APIKEY))
 			cfg.write('\t}\n')
 			cfg.write('}\n')
