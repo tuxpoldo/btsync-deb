@@ -114,7 +114,7 @@ class BtSyncAgent():
 			cfg.write('\t"pid_file" : "{0}",\n'.format(self.pidfile))
 			cfg.write('\t"storage_path" : "{0}",\n'.format(self.storagepath))
 			# cfg.write('\t"use_gui" : false,\n')
-			cfg.write('\t"webui" : \n\t{')
+			cfg.write('\t"webui" : \n\t{\n')
 			cfg.write('\t\t"listen" : "127.0.0.1:{0}",\n'.format(self.uid + 8999))
 			cfg.write('\t\t"api_key" : "{}"\n'.format(BtSyncAgent.APIKEY))
 			cfg.write('\t}\n')
