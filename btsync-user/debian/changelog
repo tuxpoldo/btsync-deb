@@ -1,3 +1,11 @@
+btsync-user (1.14.2-1) unstable; urgency=low
+
+  * New upstream release 0.14.1 of btsyncindicator
+    - Restored compatibility to old versions of requests
+      library (Closes #btsyncindicator/43)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Mon, 24 Feb 2014 11:29:04 +0100
+
 btsync-user (1.14.1-1) unstable; urgency=low
 
   * New upstream release 0.14 of btsyncindicator
