@@ -28,7 +28,7 @@ from os.path import dirname
 import logging
 import requests
 
-VERSION = '0.3'
+VERSION = '0.4'
 
 class BtSyncStatus(Gtk.StatusIcon):
 	DISCONNECTED	= 0

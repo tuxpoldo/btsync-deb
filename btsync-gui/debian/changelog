@@ -6,14 +6,18 @@ btsync-gui (0.4-1) unstable; urgency=low
     - Connect mobile device
     - Open Syncarchive
     - Open shared folder on double click
+    - Show folder preferences
+  * Implemented editing of folder preferences (Closes #64):
+    - Change the folder secret
+    - Change all folder settings
 
- -- Leo Moll <leo.moll@yeasoft.com>  Sat, 22 Feb 2014 23:23:59 +0100
+ -- Leo Moll <leo.moll@yeasoft.com>  Mon, 24 Feb 2014 15:55:01 +0100
 
 btsync-gui (0.3-1) unstable; urgency=low
 
-  * The @contextmanager has been replaced completely by a brand new
-    singleton implementation that fixes all reported issues and
-    does not fail on first start (Closes #68)
+  * The @contextmanager has been completely replaced by a brand
+    new singleton implementation that fixes all reported issues
+    and does not fail on first start (Closes #68)
   * Syntax error in exception handler of BtSyncApi produced a
     cascade of exceptions preventing application shutdown
   * Folder list will now be updated once per second
@@ -31,7 +35,7 @@ btsync-gui (0.2-1) unstable; urgency=low
 btsync-gui (0.1-1) unstable; urgency=low
 
   * First version with fully functional indicator (Closes #66),
-    rudimentary application window listing folders (Closes #61) and
+    rudimentary application window listing folders (Closes #61)
     and working preferences pane (Closes #65)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Thu, 20 Feb 2014 22:39:01 +0100
