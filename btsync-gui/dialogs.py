@@ -22,7 +22,7 @@
 import os
 import qrencode
 
-from gi.repository import Gtk, GdkPixbuf
+from gi.repository import Gtk, Gdk, GdkPixbuf
 from cStringIO import StringIO
 from btsyncapi import BtSyncApi
 from btsyncutils import BtBaseDialog
@@ -146,10 +146,67 @@ class BtSyncFolderScanQR(BtBaseDialog):
 
 
 class BtSyncFolderPrefs(BtBaseDialog):
-	def __init__(self,rwsecret):
-		BtBaseDialog.__init__(self, 'dialogs.glade', 'folderprefs')
-		self.rwsecret = rwsecret
+	def __init__(self,btsyncapi,secret):
+		BtBaseDialog.__init__(self,
+			'dialogs.glade',
+			'folderprefs', [
+				'rw_secret_text',
+				'ro_secret_text',
+				'ot_secret_text'
+			]
+		)
+		result = btsyncapi.get_secrets(secret)
+		self.rwsecret = result['read_write'] if result.has_key('read_write') else None
+		self.rosecret = result['read_only']
+		self.btsyncapi = btsyncapi
+		self.clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
 
 	def create(self):
 		BtBaseDialog.create(self)
-		result = self.btsyncapi.get_secrets(self.rwsecret)
+		# secrets page
+		self.rw_secret = self.builder.get_object('rw_secret')
+		self.rw_secret_text = self.builder.get_object('rw_secret_text')
+		self.rw_secret_copy = self.builder.get_object('rw_secret_copy')
+		self.rw_secret_new  = self.builder.get_object('rw_secret_new')
+		self.ro_secret = self.builder.get_object('ro_secret')
+		self.ro_secret_text = self.builder.get_object('ro_secret_text')
+		self.ro_secret_copy = self.builder.get_object('ro_secret_copy')
+		self.ot_secret = self.builder.get_object('ro_secret')
+		self.ot_secret_text = self.builder.get_object('ot_secret_text')
+		self.ot_secret_copy = self.builder.get_object('ot_secret_copy')
+		self.ot_secret_new = self.builder.get_object('ot_secret_new')
+
+		if self.rwsecret is None:
+			self.rw_secret.set_sensitive(False)
+			self.rw_secret_new.set_sensitive(False)
+			self.rw_secret_copy.set_sensitive(False)
+		else:
+			self.rw_secret_text.set_text(str(self.rwsecret))
+
+		self.ro_secret_text.set_text(str(self.rosecret))
+		# prefs page
+
+	def onRwSecretCopy(self,widget):
+		text = self.rw_secret_text.get_text(*self.rw_secret_text.get_bounds(),include_hidden_chars=False)
+		self.clipboard.set_text(text, -1)
+
+	def onRwSecretNew(self,widget):
+		result = self.btsyncapi.get_secrets()
+		self.rwsecret = result['read_write']
+		self.rosecret = result['read_only']
+		self.rw_secret_text.set_text(str(self.rwsecret))
+		self.ro_secret_text.set_text(str(self.rosecret))
+
+	def onRoSecretCopy(self,widget):
+		text = self.ro_secret_text.get_text(*self.ro_secret_text.get_bounds(),include_hidden_chars=False)
+		self.clipboard.set_text(text, -1)
+
+
+	def onOtSecretCopy(self,widget):
+		text = self.ot_secret_text.get_text(*self.ot_secret_text.get_bounds(),include_hidden_chars=False)
+		self.clipboard.set_text(text, -1)
+
+
+	def onOtSecretNew(self,widget):
+		print "."
+

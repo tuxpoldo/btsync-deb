@@ -258,15 +258,16 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		model, tree_iter = self.folders_selection.get_selected()
 		if tree_iter is not None:
 			try:
-				dlg = BtSyncFolderPrefs(model[tree_iter][2])
-				dlg.create()
-				dlg.run()
+				dlg = BtSyncFolderPrefs(self.btsyncapi,model[tree_iter][2])
+				try:
+					dlg.create()
+					dlg.run()
+				finally:
+					dlg.destroy()
 			except requests.exceptions.ConnectionError:
 				logging.error('Connection error')
 			except requests.exceptions.HTTPError:
 				logging.error('HTTP error: {0}'.format(self.btsyncapi.get_status_code()))
-			finally:
-				dlg.destroy()
 
 	def onPreferencesToggledLimitDn(self,widget):
 		self.limitdnrate.set_sensitive(widget.get_active())
@@ -304,10 +305,10 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 			return self.onCommunicationError()
 
 	def onConnectionError(self):
-		self.window.close()
+		self.window.destroy()
 		return False
 
 	def onCommunicationError(self):
-		self.window.close()
+		self.window.destroy()
 		return False
 

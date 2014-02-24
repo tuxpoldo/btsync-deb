@@ -380,11 +380,12 @@
                     <property name="can_focus">True</property>
                     <property name="shadow_type">in</property>
                     <child>
-                      <object class="GtkTextView" id="rwsecret">
+                      <object class="GtkTextView" id="rw_secret">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="hexpand">True</property>
                         <property name="wrap_mode">char</property>
+                        <property name="buffer">rw_secret_text</property>
                       </object>
                     </child>
                   </object>
@@ -401,40 +402,19 @@
                     <property name="can_focus">True</property>
                     <property name="shadow_type">in</property>
                     <child>
-                      <object class="GtkTextView" id="rosecret">
+                      <object class="GtkTextView" id="ro_secret">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="hexpand">True</property>
                         <property name="editable">False</property>
                         <property name="wrap_mode">char</property>
+                        <property name="buffer">ro_secret_text</property>
                       </object>
                     </child>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">3</property>
-                    <property name="width">2</property>
-                    <property name="height">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkScrolledWindow" id="scrolledwindow3">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="shadow_type">in</property>
-                    <child>
-                      <object class="GtkTextView" id="textview3">
-                        <property name="visible">True</property>
-                        <property name="sensitive">False</property>
-                        <property name="can_focus">True</property>
-                        <property name="hexpand">True</property>
-                        <property name="wrap_mode">word-char</property>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">5</property>
                     <property name="width">2</property>
                     <property name="height">1</property>
                   </packing>
@@ -447,7 +427,7 @@
                     <property name="spacing">6</property>
                     <property name="homogeneous">True</property>
                     <child>
-                      <object class="GtkButton" id="button21">
+                      <object class="GtkButton" id="rw_secret_copy">
                         <property name="label">gtk-copy</property>
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
@@ -455,6 +435,7 @@
                         <property name="receives_default">True</property>
                         <property name="use_action_appearance">False</property>
                         <property name="use_stock">True</property>
+                        <signal name="clicked" handler="onRwSecretCopy" swapped="no"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -463,7 +444,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkButton" id="button22">
+                      <object class="GtkButton" id="rw_secret_new">
                         <property name="label">gtk-new</property>
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
@@ -471,6 +452,7 @@
                         <property name="receives_default">True</property>
                         <property name="use_action_appearance">False</property>
                         <property name="use_stock">True</property>
+                        <signal name="clicked" handler="onRwSecretNew" swapped="no"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -494,7 +476,7 @@
                     <property name="spacing">6</property>
                     <property name="homogeneous">True</property>
                     <child>
-                      <object class="GtkButton" id="button23">
+                      <object class="GtkButton" id="ro_secret_copy">
                         <property name="label">gtk-copy</property>
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
@@ -502,6 +484,7 @@
                         <property name="receives_default">True</property>
                         <property name="use_action_appearance">False</property>
                         <property name="use_stock">True</property>
+                        <signal name="clicked" handler="onRoSecretCopy" swapped="no"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -536,8 +519,8 @@
                     <property name="spacing">6</property>
                     <property name="homogeneous">True</property>
                     <child>
-                      <object class="GtkButton" id="button24">
-                        <property name="label">gtk-new</property>
+                      <object class="GtkButton" id="ot_secret_copy">
+                        <property name="label">gtk-copy</property>
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="sensitive">False</property>
@@ -553,9 +536,16 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label7">
+                      <object class="GtkButton" id="ot_secret_new">
+                        <property name="label">gtk-new</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="sensitive">False</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="use_stock">True</property>
+                        <signal name="clicked" handler="onOtSecretCopy" swapped="no"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -568,6 +558,29 @@
                     <property name="left_attach">2</property>
                     <property name="top_attach">5</property>
                     <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkScrolledWindow" id="scrolledwindow3">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="shadow_type">in</property>
+                    <child>
+                      <object class="GtkTextView" id="ot_secret">
+                        <property name="visible">True</property>
+                        <property name="sensitive">False</property>
+                        <property name="can_focus">True</property>
+                        <property name="hexpand">True</property>
+                        <property name="wrap_mode">char</property>
+                        <property name="buffer">ot_secret_text</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">5</property>
+                    <property name="width">2</property>
                     <property name="height">1</property>
                   </packing>
                 </child>
@@ -819,6 +832,7 @@
       <action-widget response="-5">button42</action-widget>
     </action-widgets>
   </object>
+  <object class="GtkTextBuffer" id="ot_secret_text"/>
   <object class="GtkDialog" id="removefolder">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
@@ -932,6 +946,8 @@
       <action-widget response="-5">button1</action-widget>
     </action-widgets>
   </object>
+  <object class="GtkTextBuffer" id="ro_secret_text"/>
+  <object class="GtkTextBuffer" id="rw_secret_text"/>
   <object class="GtkDialog" id="scanqr">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
