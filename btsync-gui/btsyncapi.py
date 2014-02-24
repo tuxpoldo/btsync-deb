@@ -461,7 +461,7 @@ class BtSyncApi(object):
 			logging.warning("Couldn't connect to Bittorrent Sync")
 			return None
 		except requests.exceptions.HTTPError:
-			logging.warning('Communication Error ' + str(response.status_code))
+			logging.warning('Communication Error ' + str(self.response.status_code))
 			return None
 
 	def _get_response_text(self):
