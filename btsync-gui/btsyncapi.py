@@ -399,6 +399,18 @@ class BtSyncApi(object):
 		return self.response.status_code
 
 	@staticmethod
+	def get_safe_result(result,key,default=None):
+		"""
+		Returns the value from a result key if existing, otherwise the supplied default
+		"""
+		if result is None:
+			return default
+		elif result.has_key(key):
+			return result[key]
+		else:
+			return default
+
+	@staticmethod
 	def get_error_code(result):
 		"""
 		Returns a numerical error code for the given result
