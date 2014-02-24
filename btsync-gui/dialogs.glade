@@ -209,7 +209,7 @@
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="button41">
+              <object class="GtkButton" id="fp_button_cancel">
                 <property name="label">gtk-cancel</property>
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
@@ -225,7 +225,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button42">
+              <object class="GtkButton" id="fp_button_ok">
                 <property name="label">gtk-ok</property>
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
@@ -233,6 +233,7 @@
                 <property name="receives_default">True</property>
                 <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
+                <signal name="clicked" handler="onOK" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -616,7 +617,7 @@
                 <property name="orientation">vertical</property>
                 <property name="spacing">3</property>
                 <child>
-                  <object class="GtkCheckButton" id="checkbutton31">
+                  <object class="GtkCheckButton" id="fp_use_relay">
                     <property name="label" translatable="yes">Use relay server when required</property>
                     <property name="use_action_appearance">False</property>
                     <property name="visible">True</property>
@@ -625,6 +626,7 @@
                     <property name="use_action_appearance">False</property>
                     <property name="xalign">0</property>
                     <property name="draw_indicator">True</property>
+                    <signal name="toggled" handler="onChanged" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -633,7 +635,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkCheckButton" id="checkbutton32">
+                  <object class="GtkCheckButton" id="fp_use_tracker">
                     <property name="label" translatable="yes">Use tracker server</property>
                     <property name="use_action_appearance">False</property>
                     <property name="visible">True</property>
@@ -642,6 +644,7 @@
                     <property name="use_action_appearance">False</property>
                     <property name="xalign">0</property>
                     <property name="draw_indicator">True</property>
+                    <signal name="toggled" handler="onChanged" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -650,7 +653,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkCheckButton" id="checkbutton33">
+                  <object class="GtkCheckButton" id="fp_search_lan">
                     <property name="label" translatable="yes">Search LAN</property>
                     <property name="use_action_appearance">False</property>
                     <property name="visible">True</property>
@@ -659,6 +662,7 @@
                     <property name="use_action_appearance">False</property>
                     <property name="xalign">0</property>
                     <property name="draw_indicator">True</property>
+                    <signal name="toggled" handler="onChanged" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -667,7 +671,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkCheckButton" id="checkbutton34">
+                  <object class="GtkCheckButton" id="fp_use_dht">
                     <property name="label" translatable="yes">Search DHT network</property>
                     <property name="use_action_appearance">False</property>
                     <property name="visible">True</property>
@@ -676,6 +680,7 @@
                     <property name="use_action_appearance">False</property>
                     <property name="xalign">0</property>
                     <property name="draw_indicator">True</property>
+                    <signal name="toggled" handler="onChanged" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -684,7 +689,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkCheckButton" id="checkbutton35">
+                  <object class="GtkCheckButton" id="fp_use_syncarchive">
                     <property name="label" translatable="yes">Store deleted files in SyncArchive</property>
                     <property name="use_action_appearance">False</property>
                     <property name="visible">True</property>
@@ -693,6 +698,7 @@
                     <property name="use_action_appearance">False</property>
                     <property name="xalign">0</property>
                     <property name="draw_indicator">True</property>
+                    <signal name="toggled" handler="onChanged" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -701,7 +707,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkCheckButton" id="checkbutton36">
+                  <object class="GtkCheckButton" id="fp_use_predefined">
                     <property name="label" translatable="yes">Use predefined hosts</property>
                     <property name="use_action_appearance">False</property>
                     <property name="visible">True</property>
@@ -723,7 +729,7 @@
                     <property name="can_focus">True</property>
                     <property name="shadow_type">in</property>
                     <child>
-                      <object class="GtkTreeView" id="predefinedhosts_tree">
+                      <object class="GtkTreeView" id="fp_predefined_tree">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="fixed_height_mode">True</property>
@@ -744,7 +750,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkButton" id="button31">
+                      <object class="GtkButton" id="fp_predefined_add">
                         <property name="label">gtk-add</property>
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
@@ -760,7 +766,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkButton" id="button32">
+                      <object class="GtkButton" id="fp_predefined_remove">
                         <property name="label">gtk-remove</property>
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
@@ -776,7 +782,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label31">
+                      <object class="GtkLabel" id="fp_predefined_label">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="xalign">0</property>
@@ -828,8 +834,8 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="-6">button41</action-widget>
-      <action-widget response="-5">button42</action-widget>
+      <action-widget response="-6">fp_button_cancel</action-widget>
+      <action-widget response="-5">fp_button_ok</action-widget>
     </action-widgets>
   </object>
   <object class="GtkTextBuffer" id="ot_secret_text"/>
@@ -947,7 +953,9 @@
     </action-widgets>
   </object>
   <object class="GtkTextBuffer" id="ro_secret_text"/>
-  <object class="GtkTextBuffer" id="rw_secret_text"/>
+  <object class="GtkTextBuffer" id="rw_secret_text">
+    <signal name="changed" handler="onSecretChanged" swapped="no"/>
+  </object>
   <object class="GtkDialog" id="scanqr">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>

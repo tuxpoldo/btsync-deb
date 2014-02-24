@@ -32,9 +32,9 @@ class BtSyncFolderRemove(BtBaseDialog):
 		BtBaseDialog.__init__(self, 'dialogs.glade', 'removefolder')
 
 class BtSyncFolderAdd(BtBaseDialog):
-	def __init__(self,btsyncapi):
+	def __init__(self,api):
 		BtBaseDialog.__init__(self, 'dialogs.glade', 'addfolder')
-		self.btsyncapi = btsyncapi
+		self.api = api
 		self.secret = ''
 		self.folder = ''
 
@@ -52,7 +52,7 @@ class BtSyncFolderAdd(BtBaseDialog):
 				self.secret = self.secret_w.get_text()
 				self.folder = self.folder_w.get_text()
 				# test if secret is OK
-				if self.btsyncapi.get_error_code(self.btsyncapi.get_secrets(self.secret)) > 0:
+				if self.api.get_error_code(self.api.get_secrets(self.secret)) > 0:
 					self.show_warning(
 						'This secret is invalid.\nPlease generate a new '\
 						'secret or enter your shared folder secret.'
@@ -72,7 +72,7 @@ class BtSyncFolderAdd(BtBaseDialog):
 					return response
 
 	def is_duplicate_folder(self,folder,secret):
-		folders = self.btsyncapi.get_folders()
+		folders = self.api.get_folders()
 		if folders is not None:
 			for index, value in enumerate(folders):
 				if value['dir'] == folder or value['secret'] == secret:
@@ -90,7 +90,7 @@ class BtSyncFolderAdd(BtBaseDialog):
 		dialog.destroy()
 
 	def onFolderAddGenerate(self,widget):
-		secrets = self.btsyncapi.get_secrets()
+		secrets = self.api.get_secrets()
 		self.secret_w.set_text(secrets['read_write'])
 		
 class BtSyncFolderScanQR(BtBaseDialog):
@@ -146,7 +146,7 @@ class BtSyncFolderScanQR(BtBaseDialog):
 
 
 class BtSyncFolderPrefs(BtBaseDialog):
-	def __init__(self,btsyncapi,secret):
+	def __init__(self,api):
 		BtBaseDialog.__init__(self,
 			'dialogs.glade',
 			'folderprefs', [
@@ -155,14 +155,19 @@ class BtSyncFolderPrefs(BtBaseDialog):
 				'ot_secret_text'
 			]
 		)
-		result = btsyncapi.get_secrets(secret)
-		self.rwsecret = result['read_write'] if result.has_key('read_write') else None
-		self.rosecret = result['read_only']
-		self.btsyncapi = btsyncapi
+		self.api = api
 		self.clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
 
-	def create(self):
+	def create(self,folder,secret):
 		BtBaseDialog.create(self)
+		# compute secrets
+		result = self.api.get_secrets(secret)
+		self.idfolder = folder
+		self.idsecret = secret
+		self.rwsecret = result['read_write'] if result.has_key('read_write') else None
+		self.rosecret = result['read_only']
+		# initialize OK button
+		self.fp_button_ok = self.builder.get_object('fp_button_ok')
 		# secrets page
 		self.rw_secret = self.builder.get_object('rw_secret')
 		self.rw_secret_text = self.builder.get_object('rw_secret_text')
@@ -175,27 +180,63 @@ class BtSyncFolderPrefs(BtBaseDialog):
 		self.ot_secret_text = self.builder.get_object('ot_secret_text')
 		self.ot_secret_copy = self.builder.get_object('ot_secret_copy')
 		self.ot_secret_new = self.builder.get_object('ot_secret_new')
-
+		# secrets page - values
 		if self.rwsecret is None:
 			self.rw_secret.set_sensitive(False)
 			self.rw_secret_new.set_sensitive(False)
 			self.rw_secret_copy.set_sensitive(False)
 		else:
 			self.rw_secret_text.set_text(str(self.rwsecret))
-
 		self.ro_secret_text.set_text(str(self.rosecret))
 		# prefs page
+		self.fp_use_relay = self.builder.get_object('fp_use_relay')
+		self.fp_use_tracker = self.builder.get_object('fp_use_tracker')
+		self.fp_search_lan = self.builder.get_object('fp_search_lan')
+		self.fp_use_dht = self.builder.get_object('fp_use_dht')
+		self.fp_use_syncarchive = self.builder.get_object('fp_use_syncarchive')
+		self.fp_use_predefined = self.builder.get_object('fp_use_predefined')
+		self.fp_predefined_tree = self.builder.get_object('fp_predefined_tree')
+		self.fp_predefined_add = self.builder.get_object('fp_predefined_add')
+		self.fp_predefined_remove = self.builder.get_object('fp_predefined_remove')
+		self.fp_predefined_label = self.builder.get_object('fp_predefined_label')
+		# prefs page - values
+		result = self.api.get_folder_prefs(self.idsecret)
+		self.fp_use_relay.set_active(self.api.get_safe_result(result,'use_relay_server',0) != 0)
+		self.fp_use_tracker.set_active(self.api.get_safe_result(result,'use_tracker',0) != 0)
+		self.fp_search_lan.set_active(self.api.get_safe_result(result,'search_lan',0) != 0)
+		self.fp_use_dht.set_active(self.api.get_safe_result(result,'use_dht',0) != 0)
+		self.fp_use_syncarchive.set_active(self.api.get_safe_result(result,'use_sync_trash',0) != 0)
+		self.fp_use_predefined.set_active(self.api.get_safe_result(result,'use_hosts',0) != 0)
+		self.fp_use_predefined.set_sensitive(False)
+		self.fp_predefined_tree.set_sensitive(False)
+		self.fp_predefined_add.set_sensitive(False)
+		self.fp_predefined_remove.set_sensitive(False)
+		self.fp_predefined_label.set_sensitive(False)
+		# nothing is changed now
+		self.fp_button_ok.set_sensitive(False)
+
+	def save_prefs(self):
+		prefs = {}
+		prefs['use_relay_server'] = 1 if self.fp_use_relay.get_active() else 0
+		prefs['use_tracker'] = 1 if self.fp_use_tracker.get_active() else 0
+		prefs['search_lan'] = 1 if self.fp_search_lan.get_active() else 0
+		prefs['use_dht'] = 1 if self.fp_use_dht.get_active() else 0
+		prefs['use_sync_trash'] = 1 if self.fp_use_syncarchive.get_active() else 0
+		result = self.api.set_folder_prefs(self.idsecret,prefs)
+		return self.api.get_error_code(result) == 0
 
 	def onRwSecretCopy(self,widget):
 		text = self.rw_secret_text.get_text(*self.rw_secret_text.get_bounds(),include_hidden_chars=False)
 		self.clipboard.set_text(text, -1)
 
 	def onRwSecretNew(self,widget):
-		result = self.btsyncapi.get_secrets()
-		self.rwsecret = result['read_write']
-		self.rosecret = result['read_only']
-		self.rw_secret_text.set_text(str(self.rwsecret))
-		self.ro_secret_text.set_text(str(self.rosecret))
+		result = self.api.get_secrets()
+		self.rw_secret_text.set_text(str(result['read_write']))
+		# everything is done by onCHangeSecret
+		# self.rwsecret = result['read_write']
+		# self.rosecret = result['read_only']
+		# self.rw_secret_text.set_text(str(self.rwsecret))
+		# self.ro_secret_text.set_text(str(self.rosecret))
 
 	def onRoSecretCopy(self,widget):
 		text = self.ro_secret_text.get_text(*self.ro_secret_text.get_bounds(),include_hidden_chars=False)
@@ -206,7 +247,51 @@ class BtSyncFolderPrefs(BtBaseDialog):
 		text = self.ot_secret_text.get_text(*self.ot_secret_text.get_bounds(),include_hidden_chars=False)
 		self.clipboard.set_text(text, -1)
 
-
 	def onOtSecretNew(self,widget):
-		print "."
+		# not implemented
+		pass
 
+	def onChanged(self,widget):
+		self.fp_button_ok.set_sensitive(True)
+
+	def onSecretChanged(self,textbuffer):
+		text = self.rw_secret_text.get_text(*self.rw_secret_text.get_bounds(),include_hidden_chars=False)
+		if len(text) == 33:
+			if text != self.rwsecret:
+				result = self.api.get_secrets(text,throw_exceptions=False)
+				if self.api.get_error_code(result) == 0:
+					self.ro_secret_text.set_text(str(result['read_only']))
+					self.onChanged(None)
+
+	def onOK(self,widget):
+		if self.rwsecret is not None:
+			text = self.rw_secret_text.get_text(*self.rw_secret_text.get_bounds(),include_hidden_chars=False)
+			if len(text) != 33:
+				self.show_error(
+					'Invalid secret specified.\n'\
+					'Secret must have a length of 33 characters'
+				)
+				self.dlg.response(0)
+				return False
+			elif not text.isalnum():
+				self.show_error(
+					'Invalid secret specified.\n'\
+					'Secret must contain only alphanumeric characters'
+				)
+				self.dlg.response(0)
+				return False
+			elif self.rwsecret != text:
+				# the only way I know to change the secret is
+				# to delete the folder and recreate it...
+				# As we say in Germany: "Augen zu und durch!"
+				# If we fail, we are f*****
+				result = self.api.remove_folder(self.rwsecret)
+				result = self.api.add_folder(self.idfolder,text)
+				self.idsecret = text
+				self.save_prefs()
+				return True
+
+		return self.save_prefs()
+
+
+			
