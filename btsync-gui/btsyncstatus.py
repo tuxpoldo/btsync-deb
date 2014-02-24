@@ -97,8 +97,8 @@ class BtSyncStatus(Gtk.StatusIcon):
 	def close_app(self,stillopen=True):
 		if isinstance(self.app, BtSyncApp):
 			if stillopen:
-				self.app.close()
-				self.app.destroy()
+				# self.app.window.close()
+				self.app.window.destroy()
 			del self.app
 			self.app = None
 
@@ -265,15 +265,20 @@ class BtSyncStatus(Gtk.StatusIcon):
 		self.set_status(BtSyncStatus.DISCONNECTED)
 		self.menustatus.set_label('Disconnected')
 		self.close_app();
-		logging.info('Could not connect to Bittorrent Sync')
-		GObject.timeout_add(5000, self.btsync_connect)
+		logging.info('BtSync API Connection Error')
+		if self.agent.is_auto() and not self.agent.is_running():
+			logging.warning('BitTorrent Sync seems to be crashed. Restarting...')
+			self.agent.startup()
+			GObject.timeout_add(1000, self.btsync_connect)
+		else:
+			GObject.timeout_add(5000, self.btsync_connect)
 		return False
 
 	def onCommunicationError(self):
 		self.set_status(BtSyncStatus.DISCONNECTED)
-		self.menustatus.set_label('Disconnected: Communication Error ' + str(self.btsyncapi.get_status_code()))
+		self.menustatus.set_label('Disconnected: Communication Error {0}'.format(self.btsyncapi.get_status_code()))
 		self.close_app();
-		logging.warning('Communication Error ' + str(self.btsyncapi.get_status_code()))
+		logging.warning('BtSync API HTTP error: {0}'.format(self.btsyncapi.get_status_code()))
 		GObject.timeout_add(5000, self.btsync_connect)
 		return False
 
