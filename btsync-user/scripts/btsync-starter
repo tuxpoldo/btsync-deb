@@ -163,6 +163,13 @@ start_agent() {
 			${AGENT} --config "${CFGFILE}"
 		fi
 	fi
+	# test if the start was successful
+	if pgrep -u $(id -u) -x btsync-agent > /dev/null; then
+		FPID=$(pgrep -u $(id -u) -x btsync-agent)
+		log_message "start_agent: process is running with pid ${FPID}"
+	else
+		log_message "start_agent: process is NOT running!!!! Something went wrong!"
+	fi
 	log_message "start_agent: end"
 }
 
