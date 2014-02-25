@@ -399,6 +399,15 @@ class BtSyncApi(object):
 		return self.response.status_code
 
 	@staticmethod
+	def fix_decode(text):
+		"""
+		Quick and dirty function that fixes the strange way special encoded
+		strings are returned
+		"""
+		return text.encode('latin-1').decode('utf-8')
+
+
+	@staticmethod
 	def get_safe_result(result,key,default=None):
 		"""
 		Returns the value from a result key if existing, otherwise the supplied default
