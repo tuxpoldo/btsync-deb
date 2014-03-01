@@ -28,7 +28,12 @@ import logging
 from btsyncutils import BtSingleton
 
 class BtSyncAgent:
+	# still hardcoded - this is the binary location of btsync when installing
+	# the package btsync-common
 	BINARY = '/usr/lib/btsync-common/btsync-core'
+	# BEWARE: the following API key is owned by tuxpoldo! If you write your own
+	#         application, do NOT take this, but request your own key by folling
+	#         out the form at http://www.bittorrent.com/sync/developers
 	APIKEY = '26U2OU3LNXN4I3QFNT7JAGG5DB676PCZIEL42FBOGYUM4OUMI5YTBNLD64ZXJCLSFWKC'\
 		'VOFNPU65UVO5RKSMYJ24A2KX3VPS4S7HICM3U7OI3FUHMXJPSLMBV4XNRKEMNOBDK4I'
 
@@ -42,6 +47,8 @@ class BtSyncAgent:
 		self.conffile = self.configpath + '/btsync-agent.conf'
 		self.lockfile = self.configpath + '/btsync-gui.pid'
 		self.lock = None
+		# TODO: the automatically started btsync engine, should get randomly
+		#       created credentials at each start
 		self.username = 'btsync-gui'
 		self.password = 'P455w0rD'
 		if self.is_auto():
