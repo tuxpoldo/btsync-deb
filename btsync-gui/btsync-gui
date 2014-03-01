@@ -63,6 +63,8 @@ if __name__ == "__main__":
 	if not isinstance(numeric_level, int):
 		raise ValueError('Invalid log level: %s' % args.log)
 	logging.basicConfig(level=numeric_level)
+	if not os.path.isdir(os.environ['HOME'] + '/.btsync'):
+		os.makedirs(os.environ['HOME'] + '/.btsync')
 	fh = logging.FileHandler(filename=os.environ['HOME'] + '/.btsync/btsync-gui.log')
 	ff = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 	fh.setFormatter(ff)
