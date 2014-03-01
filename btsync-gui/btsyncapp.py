@@ -19,11 +19,9 @@
 # <http://www.gnu.org/licenses/>
 #
 
-import os
-import requests
+import os,requests,md5
 
 from os.path import dirname,basename
-
 from gi.repository import Gtk, Gdk
 
 from btsyncapi import BtSyncApi
@@ -77,10 +75,13 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 			folders = self.btsyncapi.get_folders()
 			if folders is not None:
 				for index, value in enumerate(folders):
+					# see below the explanation why also an md5 digest is saved
+					m = md5.new(value['dir'].encode('latin-1'))
 					self.folders.append ([
-						value['dir'],
+						self.btsyncapi.fix_decode(value['dir']),
 						self.get_folder_info_string(value),
-						value['secret']
+						value['secret'],
+						m.hexdigest()
 					])
 			self.unlock()
 			self.refresh_folders_id = GObject.timeout_add(1000, self.refresh_folders_values)
@@ -93,7 +94,6 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 
 	def refresh_folders_values(self):
 		try:
-			print "refresh_folders_values"
 			self.lock()
 			folders = self.btsyncapi.get_folders()
 			# forward scan updates existing and adds new
@@ -101,10 +101,13 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 				for index, value in enumerate(folders):
 					if not self.update_folder_values(value):
 						# it must be new (probably added via web interface) - let's add it
+						# see below the explanation why also an md5 digest is saved
+						m = md5.new(value['dir'].encode('latin-1'))
 						self.folders.append ([
-							value['dir'],
+							self.btsyncapi.fix_decode(value['dir']),
 							self.get_folder_info_string(value),
-							value['secret']
+							value['secret'],
+							m.hexdigest()
 						])
 			# reverse scan deletes disappeared folders...
 			for row in self.folders:
@@ -128,7 +131,9 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 				# found - update information
 				row[1] = self.get_folder_info_string(value)
 				return True
-			elif value['dir'] == row[0]:
+			elif md5.new(value['dir'].encode('latin-1')).hexdigest() == row[3]:
+				# comparing the md5 digests avoids casting errors due to the
+				# insane encoding fix tecnique
 				# found - secret was changed
 				row[1] = self.get_folder_info_string(value)
 				row[2] = value['secret']
@@ -141,7 +146,9 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 			for index, value in enumerate(folders):
 				if value['secret'] == row[2]:
 					return True
-				elif value['dir'] == row[0]:
+				elif md5.new(value['dir'].encode('latin-1')).hexdigest() == row[3]:
+					# comparing the md5 digests avoids casting errors due to the
+					# insane encoding fix tecnique
 					return True
 		return False
 

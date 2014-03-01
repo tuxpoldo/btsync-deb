@@ -443,6 +443,8 @@
       <column type="gchararray"/>
       <!-- column-name Secret -->
       <column type="gchararray"/>
+      <!-- column-name FolderTag -->
+      <column type="gchararray"/>
     </columns>
   </object>
   <object class="GtkMenu" id="folders_menu">
