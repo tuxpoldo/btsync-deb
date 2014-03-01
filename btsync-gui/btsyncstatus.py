@@ -31,9 +31,7 @@ from trayindicator import *
 from btsyncapi import BtSyncApi
 from btsyncapp import *
 
-
-
-VERSION = '0.4'
+VERSION = '0.5'
 
 class BtSyncStatus:
 	DISCONNECTED	= 0
