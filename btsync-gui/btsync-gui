@@ -61,6 +61,11 @@ if __name__ == "__main__":
 	if not isinstance(numeric_level, int):
 		raise ValueError('Invalid log level: %s' % args.log)
 	logging.basicConfig(level=numeric_level)
+	fh = logging.FileHandler(filename=os.environ['HOME'] + '/.btsync/btsync-gui.log')
+	ff = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+	fh.setFormatter(ff)
+	logging.getLogger().addHandler(fh)
+	logging.getLogger().setLevel(numeric_level)
 
 	try:
 		# initialize agent
@@ -82,5 +87,6 @@ if __name__ == "__main__":
 		# good night!
 		ind.shutdown()
 		agent.shutdown()
+		logging.shutdown()
 		exit(0)
 
