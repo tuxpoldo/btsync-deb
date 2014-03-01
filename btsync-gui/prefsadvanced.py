@@ -8,15 +8,17 @@
 # last nudge needed to learn python and write my first linux gui
 # application. Thank you!
 #
-# This program is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranties of
-# MERCHANTABILITY, SATISFACTORY QUALITY or FITNESS FOR A PARTICULAR
-# PURPOSE.  See the applicable version of the GNU Lesser General Public
-# License for more details.
+# This file is part of btsync-gui. btsync-gui is free software: you can
+# redistribute it and/or modify it under the terms of the GNU General Public
+# License as published by the Free Software Foundation, version 2.
 #
-# You should have received a copy of the GNU Lesser General Public
-# License version 2 along with this program.  If not, see
-# <http://www.gnu.org/licenses/>
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+# details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>
 #
 
 import requests
