@@ -63,12 +63,15 @@ class BtSyncStatus:
 		self.frame = 0
 		self.rotating = False
 		self.transferring = False
+		self.animator_id = None
 
 		# application window
 		self.app = None
 
 		# other variables
 		self.connection = BtSyncStatus.DISCONNECTED
+		self.connect_id = None
+		self.status_id = None
 
 	def startup(self,agent):
 		self.agent = agent
@@ -80,9 +83,15 @@ class BtSyncStatus:
 		self.btsyncver = { 'version': '0.0.0' }
 		# status
 		self.set_status(BtSyncStatus.DISCONNECTED)
-		GObject.timeout_add(1000, self.btsync_connect)
+		self.connect_id = GObject.timeout_add(1000, self.btsync_connect)
 
 	def shutdown(self):
+		if self.animator_id is not None:
+			GObject.source_remove(self.animator_id)
+		if self.connect_id is not None:
+			GObject.source_remove(self.connect_id)
+		if self.status_id is not None:
+			GObject.source_remove(self.status_id)
 		del self.agent
 
 	def open_app(self):
@@ -114,12 +123,15 @@ class BtSyncStatus:
 				self.btsyncver = version
 				self.set_status(BtSyncStatus.CONNECTED)
 				self.menustatus.set_label('Idle')
-				GObject.timeout_add(1000, self.btsync_refresh_status)
+				self.status_id = GObject.timeout_add(1000, self.btsync_refresh_status)
+				self.connect_id = None
 				return False
 
 			except requests.exceptions.ConnectionError:
+				self.connect_id = None
 				return self.onConnectionError()
 			except requests.exceptions.HTTPError:
+				self.connect_id = None
 				return self.onCommunicationError()
 
 
@@ -154,8 +166,10 @@ class BtSyncStatus:
 			return True
 	
 		except requests.exceptions.ConnectionError:
+			self.status_id = None
 			return self.onConnectionError()
 		except requests.exceptions.HTTPError:
+			self.status_id = None
 			return self.onCommunicationError()
 
 	def set_status(self,connection,transferring=False):
@@ -195,7 +209,7 @@ class BtSyncStatus:
 					# initialize animation
 					self.transferring = True
 					self.frame = 0
-					GObject.timeout_add(200, self.onIconRotate)
+					self.animator_id = GObject.timeout_add(200, self.onIconRotate)
 			self.transferring = transferring
 			if not self.transferring:
 				self.ind.set_from_icon_name('btsync-gui-0')
@@ -246,6 +260,7 @@ class BtSyncStatus:
 			# immediate stop
 			self.frame = 0
 			self.rotating = False
+			self.animator_id = None
 			return False
 		elif not self.transferring and self.frame % 12 == 0:
 			# do not stop immediately - wait for the
@@ -253,6 +268,7 @@ class BtSyncStatus:
 			self.ind.set_from_icon_name('btsync-gui-0')
 			self.rotating = False
 			self.frame = 0
+			self.animator_id = None
 			return False
 		else:
 			self.ind.set_from_icon_name('btsync-gui-{0}'.format(self.frame % 12))
@@ -269,9 +285,9 @@ class BtSyncStatus:
 		if self.agent.is_auto() and not self.agent.is_running():
 			logging.warning('BitTorrent Sync seems to be crashed. Restarting...')
 			self.agent.startup()
-			GObject.timeout_add(1000, self.btsync_connect)
+			self.connect_id = GObject.timeout_add(1000, self.btsync_connect)
 		else:
-			GObject.timeout_add(5000, self.btsync_connect)
+			self.connect_id = GObject.timeout_add(5000, self.btsync_connect)
 		return False
 
 	def onCommunicationError(self):
@@ -279,7 +295,7 @@ class BtSyncStatus:
 		self.menustatus.set_label('Disconnected: Communication Error {0}'.format(self.btsyncapi.get_status_code()))
 		self.close_app();
 		logging.warning('BtSync API HTTP error: {0}'.format(self.btsyncapi.get_status_code()))
-		GObject.timeout_add(5000, self.btsync_connect)
+		self.connect_id = GObject.timeout_add(5000, self.btsync_connect)
 		return False
 
 #	def uptime(self):
