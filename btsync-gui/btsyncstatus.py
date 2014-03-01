@@ -109,6 +109,7 @@ class BtSyncStatus:
 	def close_app(self,stillopen=True):
 		if isinstance(self.app, BtSyncApp):
 			if stillopen:
+				self.app.stop()
 				# self.app.window.close()
 				self.app.window.destroy()
 			del self.app

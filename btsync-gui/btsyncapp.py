@@ -43,12 +43,20 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.window.show()
 
 		self.clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
+		self.refresh_folders_id = None
 
 		self.prefs = self.btsyncapi.get_prefs()
 		self.init_folders_controls()
 		self.init_folders_values()
 		self.init_preferences_controls()
 		self.init_preferences_values()
+
+		self.window.connect('delete-event',self.onDelete);
+
+	def close(self):
+		if self.refresh_folders_id is not None:
+			GObject.source_remove(self.refresh_folders_id)
+			self.refresh_folders_id = None
 
 	def connect_close_signal(self,handler):
 		return self.window.connect('delete-event', handler)
@@ -75,7 +83,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 						value['secret']
 					])
 			self.unlock()
-			GObject.timeout_add(1000, self.refresh_folders_values)
+			self.refresh_folders_id = GObject.timeout_add(1000, self.refresh_folders_values)
 		except requests.exceptions.ConnectionError:
 			self.unlock()
 			self.onConnectionError()
@@ -85,6 +93,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 
 	def refresh_folders_values(self):
 		try:
+			print "refresh_folders_values"
 			self.lock()
 			folders = self.btsyncapi.get_folders()
 			# forward scan updates existing and adds new
@@ -106,9 +115,11 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 			return True
 		except requests.exceptions.ConnectionError:
 			self.unlock()
+			self.refresh_folders_id = None
 			return self.onConnectionError()
 		except requests.exceptions.HTTPError:
 			self.unlock()
+			self.refresh_folders_id = None
 			return self.onCommunicationError()
 
 	def update_folder_values(self,value):
@@ -163,6 +174,9 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.limitdn.set_active(self.prefs['download_limit'] > 0)
 		self.limitup.set_active(self.prefs['upload_limit'] > 0)
 		self.unlock()
+
+	def onDelete(self, *args):
+		self.close()
 
 	def onSaveEntry(self,widget,valDesc,newValue):
 		try:
