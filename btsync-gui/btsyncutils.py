@@ -25,7 +25,6 @@ import os
 import exceptions
 
 from gi.repository import Gtk, GObject
-from os.path import dirname,isdir
 
 class BtValueDescriptor(GObject.GObject):
 
@@ -244,7 +243,7 @@ class BtBaseDialog(BtMessageHelper):
 	def create(self):
 		# create the dialog object from builder
 		self.builder = Gtk.Builder()
-		self.builder.add_objects_from_file(dirname(__file__) + '/' + self.gladefile, self.objects)
+		self.builder.add_objects_from_file(os.path.dirname(__file__) + '/' + self.gladefile, self.objects)
 		self.builder.connect_signals (self)
 		self.dlg = self.builder.get_object(self.objects[0])
 
