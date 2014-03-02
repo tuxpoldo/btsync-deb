@@ -446,14 +446,22 @@ class BtSyncApi(object):
 			if result.has_key('message'):
 				return result['message']
 			else:
-				return 'Unknown error {0}'.format(result.has_key('error'))
+				return BtSyncApi.get_error_text(result['error'])
 		elif result.has_key('result') and result['result'] > 0:
 			if result.has_key('message'):
 				return result['message']
 			else:
-				return 'Unknown error {0}'.format(result.has_key('result'))
+				return BtSyncApi.get_error_text(result['result'])
 		else:
 			return 'No error'
+
+	@staticmethod
+	def get_error_text(code):
+		return {
+			100 : 'Can\'t open the destination folder.',
+			101 : 'Don\'t have permission to write to the selected folder.'
+		}.get(code, 'Error {0}'.format(code))
+	
 
 	def _request(self,params,throw_exceptions):
 		"""

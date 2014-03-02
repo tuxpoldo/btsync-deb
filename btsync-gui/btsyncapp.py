@@ -21,37 +21,38 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 #
 
-import os,requests,md5
+import os
+import md5
+import requests
 
-from os.path import dirname,basename
-from gi.repository import Gtk, Gdk
+from gi.repository import Gtk, Gdk, GObject
 
 from btsyncapi import BtSyncApi
 from prefsadvanced import BtSyncPrefsAdvanced
-from btsyncutils import *
-from dialogs import *
+from btsyncutils import BtInputHelper,BtMessageHelper,BtValueDescriptor
+from dialogs import BtSyncFolderAdd,BtSyncFolderRemove,BtSyncFolderScanQR,BtSyncFolderPrefs
 
 class BtSyncApp(BtInputHelper,BtMessageHelper):
 
 	def __init__(self,btsyncapi):
 		self.btsyncapi = btsyncapi
 		self.builder = Gtk.Builder()
-		self.builder.add_from_file(dirname(__file__) + "/btsyncapp.glade")
+		self.builder.add_from_file(os.path.dirname(__file__) + "/btsyncapp.glade")
 		self.builder.connect_signals (self)
 
 		self.window = self.builder.get_object('btsyncapp')
+		self.window.connect('delete-event',self.onDelete);
 		self.window.show()
 
 		self.clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
 		self.refresh_folders_id = None
 
 		self.prefs = self.btsyncapi.get_prefs()
-		self.init_folders_controls()
-		self.init_folders_values()
-		self.init_preferences_controls()
-		self.init_preferences_values()
 
-		self.window.connect('delete-event',self.onDelete);
+		self.init_folders_controls()
+		self.init_preferences_controls()
+		self.init_folders_values()
+		self.init_preferences_values()
 
 	def close(self):
 		if self.refresh_folders_id is not None:
@@ -155,10 +156,13 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		return False
 
 	def get_folder_info_string(self,value):
-		if value['indexing'] == 0:
-			return '{0} in {1} files'.format(self.sizeof_fmt(value['size']), str(value['files']))
+		if value['error'] == 0:
+			if value['indexing'] == 0:
+				return '{0} in {1} files'.format(self.sizeof_fmt(value['size']), str(value['files']))
+			else:
+				return '{0} in {1} files (indexing...)'.format(self.sizeof_fmt(value['size']), str(value['files']))
 		else:
-			return '{0} in {1} files (indexing...)'.format(self.sizeof_fmt(value['size']), str(value['files']))
+			return self.btsyncapi.get_error_message(value)
 
 	def init_preferences_controls(self):
 		self.devname = self.builder.get_object('devname')
@@ -283,7 +287,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 				dlg = BtSyncFolderScanQR(
 					result['read_write'] if result.has_key('read_write') else None,
 					result['read_only'],
-					basename(model[tree_iter][0])
+					os.path.basename(model[tree_iter][0])
 				)
 				dlg.create()
 				result = dlg.run()
