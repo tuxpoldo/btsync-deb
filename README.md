@@ -20,11 +20,15 @@ The mere executables and documentation provided by BitTorrent&reg; Inc. are
 distributed in a package named __btsync-common__ - all other packages are
 dependent upon it.
 
-The package containing support for BitTorrent Sync as a single or multiple
-service with or without WebUI for server/NAS deployment is named __btsync__
-
 The package containing support for BitTorrent Sync as a WebUI and tray
 application for desktop users is named __btsync-user__
+
+The brand new package containing the full featured GUI for BitTorrent Sync for
+desktop users is named __btsync-gui__ - This package is going to replace
+__btsync-user__ on long term.
+
+The package containing support for BitTorrent Sync as a single or multiple
+service with or without WebUI for server/NAS deployment is named __btsync__
 
 
 Useful Links
@@ -37,5 +41,7 @@ Support Forum: http://forum.bittorrent.com/forum/107-bittorrent-sync/
 Server Package Thread: http://forum.bittorrent.com/topic/18974-debian-and-ubuntu-server-packages-for-bittorrent-sync/
 
 Desktop Package Thread: http://forum.bittorrent.com/topic/19560-debian-and-ubuntu-desktop-packages-for-bittorrent-sync/
+
+Desktop GUI Package Thread: http://forum.bittorrent.com/topic/28106-alpha-full-featured-gui-for-bittorrent-sync-on-debianubuntumint/
 
 [1]: http://www.bittorrent.com/sync
