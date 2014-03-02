@@ -52,6 +52,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 
 		self.init_folders_controls()
 		self.init_devices_controls()
+		self.init_transfers_controls()
 		self.init_preferences_controls()
 		self.init_folders_values()
 		self.init_preferences_values()
@@ -91,7 +92,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 					])
 					self.add_device_infos(value,digest)
 			self.unlock()
-			self.refresh_folders_id = GObject.timeout_add(1000, self.refresh_folders_values)
+			self.refresh_folders_id = GObject.timeout_add(1000, self.refresh_app_status)
 		except requests.exceptions.ConnectionError:
 			self.unlock()
 			self.onConnectionError()
@@ -103,11 +104,24 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.devices = self.builder.get_object('devices_list')
 		self.devices_treeview = self.builder.get_object('devices_tree_view')
 
-	def refresh_folders_values(self):
+	def init_transfers_controls(self):
+		self.transfers = self.builder.get_object('transfers_list')
+		self.transfers_treeview = self.builder.get_object('transfers_tree_view')
+		self.transfers_status = self.builder.get_object('transfers_status')
+		# TODO: remove placeholder as soon as the suitable API call permits
+		#       a working implementation...
+		self.transfers.append ([
+			'Cannot implement due to missing API',
+			'BitTorrent Inc.',
+			'',
+			''
+		])
+
+	def refresh_app_status(self):
 		try:
 			self.lock()
 			folders = self.btsyncapi.get_folders()
-			# forward scan updates existing and adds new
+			# forward scan updates existing folders and adds new ones
 			for index, value in enumerate(folders):
 				# see in update_folder_values the insane explanation why
 				# also an md5 digest has to be saved
@@ -126,6 +140,11 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 				if not self.folder_exists(folders,row):
 					self.folders.remove(row.iter)
 					self.remove_device_infos(row[2],row[3])
+			# update transfer status
+			speed = self.btsyncapi.get_speed()
+			self.transfers_status.set_label('{0:.1f} kB/s up, {1:.1f} kB/s down'.format(speed['upload'] / 1000, speed['download'] / 1000))
+			# TODO: fill file list...
+			#       but there is still no suitable API call...
 			self.unlock()
 
 			return True

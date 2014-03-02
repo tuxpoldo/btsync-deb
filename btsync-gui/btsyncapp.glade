@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkListStore" id="devices_list">
+    <columns>
+      <!-- column-name Device -->
+      <column type="gchararray"/>
+      <!-- column-name Folder -->
+      <column type="gchararray"/>
+      <!-- column-name Status -->
+      <column type="gchararray"/>
+      <!-- column-name Secret -->
+      <column type="gchararray"/>
+      <!-- column-name FolderTag -->
+      <column type="gchararray"/>
+      <!-- column-name DeviceTag -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="folders_list">
+    <columns>
+      <!-- column-name Folder -->
+      <column type="gchararray"/>
+      <!-- column-name Content -->
+      <column type="gchararray"/>
+      <!-- column-name Secret -->
+      <column type="gchararray"/>
+      <!-- column-name FolderTag -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkWindow" id="btsyncapp">
     <property name="can_focus">False</property>
     <property name="border_width">12</property>
@@ -205,10 +233,98 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="label10">
+          <object class="GtkBox" id="box2">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">label</property>
+            <property name="margin_left">6</property>
+            <property name="margin_right">6</property>
+            <property name="margin_top">6</property>
+            <property name="margin_bottom">6</property>
+            <property name="orientation">vertical</property>
+            <property name="spacing">6</property>
+            <child>
+              <object class="GtkScrolledWindow" id="scrolledwindow3">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="shadow_type">in</property>
+                <child>
+                  <object class="GtkTreeView" id="transfers_tree_view">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="model">transfers_list</property>
+                    <property name="headers_clickable">False</property>
+                    <child internal-child="selection">
+                      <object class="GtkTreeSelection" id="treeview-selection3"/>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn6">
+                        <property name="resizable">True</property>
+                        <property name="title" translatable="yes">File</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext6"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn7">
+                        <property name="resizable">True</property>
+                        <property name="title" translatable="yes">Device</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext7"/>
+                          <attributes>
+                            <attribute name="text">1</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn8">
+                        <property name="resizable">True</property>
+                        <property name="title" translatable="yes">Up</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext8"/>
+                          <attributes>
+                            <attribute name="text">2</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn9">
+                        <property name="resizable">True</property>
+                        <property name="title" translatable="yes">Down</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext9"/>
+                          <attributes>
+                            <attribute name="text">3</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="transfers_status">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">1</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="position">2</property>
@@ -489,34 +605,6 @@
       </object>
     </child>
   </object>
-  <object class="GtkListStore" id="devices_list">
-    <columns>
-      <!-- column-name Device -->
-      <column type="gchararray"/>
-      <!-- column-name Folder -->
-      <column type="gchararray"/>
-      <!-- column-name Status -->
-      <column type="gchararray"/>
-      <!-- column-name Secret -->
-      <column type="gchararray"/>
-      <!-- column-name FolderTag -->
-      <column type="gchararray"/>
-      <!-- column-name DeviceTag -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="folders_list">
-    <columns>
-      <!-- column-name Folder -->
-      <column type="gchararray"/>
-      <!-- column-name Content -->
-      <column type="gchararray"/>
-      <!-- column-name Secret -->
-      <column type="gchararray"/>
-      <!-- column-name FolderTag -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
   <object class="GtkMenu" id="folders_menu">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -560,5 +648,17 @@
         <signal name="activate" handler="onFoldersPreferences" swapped="no"/>
       </object>
     </child>
+  </object>
+  <object class="GtkListStore" id="transfers_list">
+    <columns>
+      <!-- column-name File -->
+      <column type="gchararray"/>
+      <!-- column-name Device -->
+      <column type="gchararray"/>
+      <!-- column-name Up -->
+      <column type="gchararray"/>
+      <!-- column-name Down -->
+      <column type="gchararray"/>
+    </columns>
   </object>
 </interface>
