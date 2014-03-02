@@ -21,17 +21,17 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 #
 
-from gi.repository import Gtk, GObject
-from os.path import dirname
-
+import os
 import logging
 import requests
 
-from trayindicator import *
-from btsyncapi import BtSyncApi
-from btsyncapp import *
+from gi.repository import Gtk, GObject
 
-VERSION = '0.5'
+from trayindicator import TrayIndicator
+from btsyncapi import BtSyncApi
+from btsyncapp import BtSyncApp
+
+VERSION = '0.6'
 
 class BtSyncStatus:
 	DISCONNECTED	= 0
@@ -41,7 +41,7 @@ class BtSyncStatus:
 
 	def __init__(self):
 		self.builder = Gtk.Builder()
-		self.builder.add_from_file(dirname(__file__) + "/btsyncstatus.glade")
+		self.builder.add_from_file(os.path.dirname(__file__) + "/btsyncstatus.glade")
 		self.builder.connect_signals (self)
 		self.menu = self.builder.get_object('btsyncmenu')
 		self.menustatus = self.builder.get_object('statusitem')

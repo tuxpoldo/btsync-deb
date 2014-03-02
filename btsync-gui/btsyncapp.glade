@@ -42,6 +42,7 @@
                     </child>
                     <child>
                       <object class="GtkTreeViewColumn" id="treeviewcolumn1">
+                        <property name="resizable">True</property>
                         <property name="title" translatable="yes">Path</property>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext1"/>
@@ -53,6 +54,7 @@
                     </child>
                     <child>
                       <object class="GtkTreeViewColumn" id="treeviewcolumn2">
+                        <property name="resizable">True</property>
                         <property name="title" translatable="yes">Size</property>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext2"/>
@@ -130,10 +132,58 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="label9">
+          <object class="GtkScrolledWindow" id="scrolledwindow2">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label" translatable="yes">label</property>
+            <property name="can_focus">True</property>
+            <property name="shadow_type">in</property>
+            <property name="min_content_height">199</property>
+            <child>
+              <object class="GtkTreeView" id="devices_tree_view">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="model">devices_list</property>
+                <property name="headers_clickable">False</property>
+                <child internal-child="selection">
+                  <object class="GtkTreeSelection" id="treeview-selection2"/>
+                </child>
+                <child>
+                  <object class="GtkTreeViewColumn" id="treeviewcolumn3">
+                    <property name="resizable">True</property>
+                    <property name="title" translatable="yes">Device</property>
+                    <child>
+                      <object class="GtkCellRendererText" id="cellrenderertext3"/>
+                      <attributes>
+                        <attribute name="text">0</attribute>
+                      </attributes>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkTreeViewColumn" id="treeviewcolumn4">
+                    <property name="resizable">True</property>
+                    <property name="title" translatable="yes">Folder</property>
+                    <child>
+                      <object class="GtkCellRendererText" id="cellrenderertext4"/>
+                      <attributes>
+                        <attribute name="text">1</attribute>
+                      </attributes>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkTreeViewColumn" id="treeviewcolumn5">
+                    <property name="resizable">True</property>
+                    <property name="title" translatable="yes">Status</property>
+                    <child>
+                      <object class="GtkCellRendererText" id="cellrenderertext5"/>
+                      <attributes>
+                        <attribute name="text">2</attribute>
+                      </attributes>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
           </object>
           <packing>
             <property name="position">1</property>
@@ -434,6 +484,22 @@
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkListStore" id="devices_list">
+    <columns>
+      <!-- column-name Device -->
+      <column type="gchararray"/>
+      <!-- column-name Folder -->
+      <column type="gchararray"/>
+      <!-- column-name Status -->
+      <column type="gchararray"/>
+      <!-- column-name Secret -->
+      <column type="gchararray"/>
+      <!-- column-name FolderTag -->
+      <column type="gchararray"/>
+      <!-- column-name DeviceTag -->
+      <column type="gchararray"/>
+    </columns>
   </object>
   <object class="GtkListStore" id="folders_list">
     <columns>

@@ -24,6 +24,7 @@
 import os
 import md5
 import requests
+import datetime
 
 from gi.repository import Gtk, Gdk, GObject
 
@@ -50,6 +51,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.prefs = self.btsyncapi.get_prefs()
 
 		self.init_folders_controls()
+		self.init_devices_controls()
 		self.init_preferences_controls()
 		self.init_folders_values()
 		self.init_preferences_values()
@@ -78,14 +80,16 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 			folders = self.btsyncapi.get_folders()
 			if folders is not None:
 				for index, value in enumerate(folders):
-					# see below the explanation why also an md5 digest is saved
-					m = md5.new(value['dir'].encode('latin-1'))
+					# see in update_folder_values the insane explanation why
+					# also an md5 digest has to be saved
+					digest = md5.new(value['dir'].encode('latin-1')).hexdigest()
 					self.folders.append ([
-						self.btsyncapi.fix_decode(value['dir']),
-						self.get_folder_info_string(value),
-						value['secret'],
-						m.hexdigest()
+						self.btsyncapi.fix_decode(value['dir']),	# 0:Folder
+						self.get_folder_info_string(value),			# 1:Content
+						value['secret'],							# 2:Secret
+						digest										# 3:FolderTag
 					])
+					self.add_device_infos(value,digest)
 			self.unlock()
 			self.refresh_folders_id = GObject.timeout_add(1000, self.refresh_folders_values)
 		except requests.exceptions.ConnectionError:
@@ -95,29 +99,35 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 			self.unlock()
 			self.onCommunicationError()
 
+	def init_devices_controls(self):
+		self.devices = self.builder.get_object('devices_list')
+		self.devices_treeview = self.builder.get_object('devices_tree_view')
+
 	def refresh_folders_values(self):
 		try:
 			self.lock()
 			folders = self.btsyncapi.get_folders()
 			# forward scan updates existing and adds new
-			if folders is not None:
-				for index, value in enumerate(folders):
-					if not self.update_folder_values(value):
-						# it must be new (probably added via web interface) - let's add it
-						# see below the explanation why also an md5 digest is saved
-						m = md5.new(value['dir'].encode('latin-1'))
-						self.folders.append ([
-							self.btsyncapi.fix_decode(value['dir']),
-							self.get_folder_info_string(value),
-							value['secret'],
-							m.hexdigest()
-						])
+			for index, value in enumerate(folders):
+				# see in update_folder_values the insane explanation why
+				# also an md5 digest has to be saved
+				digest = md5.new(value['dir'].encode('latin-1')).hexdigest()
+				if not self.update_folder_values(value):
+					# it must be new (probably added via web interface) - let's add it
+					self.folders.append ([
+						self.btsyncapi.fix_decode(value['dir']),	# 0:Folder
+						self.get_folder_info_string(value),			# 1:Content
+						value['secret'],							# 2:Secret
+						digest										# 3:FolderTag
+					])
+				self.update_device_infos(value,digest)
 			# reverse scan deletes disappeared folders...
 			for row in self.folders:
 				if not self.folder_exists(folders,row):
 					self.folders.remove(row.iter)
-
+					self.remove_device_infos(row[2],row[3])
 			self.unlock()
+
 			return True
 		except requests.exceptions.ConnectionError:
 			self.unlock()
@@ -155,14 +165,95 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 					return True
 		return False
 
-	def get_folder_info_string(self,value):
-		if value['error'] == 0:
-			if value['indexing'] == 0:
-				return '{0} in {1} files'.format(self.sizeof_fmt(value['size']), str(value['files']))
+	def add_device_infos(self,folder,digest):
+		foldername = self.btsyncapi.fix_decode(folder['dir'])
+		peers = self.btsyncapi.get_folder_peers(folder['secret'])
+		for index, value in enumerate(peers):
+			self.devices.append ([
+				self.btsyncapi.fix_decode(value['name']),	# 0:Device
+				foldername,									# 1:Folder
+				self.get_device_info_string(value),			# 2:Status
+				folder['secret'],							# 3:Secret
+				digest,										# 4:FolderTag
+				value['id']									# 5:DeviceTag
+			])
+
+	def update_device_infos(self,folder,digest):
+		foldername = self.btsyncapi.fix_decode(folder['dir'])
+		peers = self.btsyncapi.get_folder_peers(folder['secret'])
+		# forward scan updates existing and adds new
+		for index, value in enumerate(peers):
+			if not self.update_device_values(folder,value,digest):
+				# it must be new - let's add it
+					self.devices.append ([
+					self.btsyncapi.fix_decode(value['name']),	# 0:Device
+					foldername,									# 1:Folder
+					self.get_device_info_string(value),			# 2:Status
+					folder['secret'],							# 3:Secret
+					digest,										# 4:FolderTag
+					value['id']									# 5:DeviceTag
+				])
+		# reverse scan deletes disappeared folders...
+		for row in self.devices:
+			if row[3] == folder['secret'] or row[4] == digest:
+				# it's our folder
+				if not self.device_exists(peers,row):
+					self.devices.remove(row.iter)
+
+	def update_device_values(self,folder,peer,digest):
+		for row in self.devices:
+			if peer['id'] == row[5] and folder['secret'] == row[3]:
+				# found - update information
+				row[0] = self.btsyncapi.fix_decode(peer['name'])
+				row[2] = self.get_device_info_string(peer)
+				return True
+			elif peer['id'] == row[5] and digest == row[4]:
+				# found - secret probably changed...
+				row[0] = self.btsyncapi.fix_decode(peer['name'])
+				row[2] = self.get_device_info_string(peer)
+				row[3] = folder['secret']
+				return True
+		# not found
+		return False
+
+	def remove_device_infos(self,secret,digest=None):
+		for row in self.devices:
+			if secret == row[3]:
+				self.devices.remove(row.iter)
+			elif digest is not None and digest == row[4]:
+				self.devices.remove(row.iter)
+
+	def device_exists(self,peers,row):
+		for index, value in enumerate(peers):
+			if value['id'] == row[5]:
+				return True
+		return False
+
+	def get_folder_info_string(self,folder):
+		if folder['error'] == 0:
+			if folder['indexing'] == 0:
+				return '{0} in {1} files'.format(self.sizeof_fmt(folder['size']), str(folder['files']))
 			else:
-				return '{0} in {1} files (indexing...)'.format(self.sizeof_fmt(value['size']), str(value['files']))
+				return '{0} in {1} files (indexing...)'.format(self.sizeof_fmt(folder['size']), str(folder['files']))
 		else:
-			return self.btsyncapi.get_error_message(value)
+			return self.btsyncapi.get_error_message(folder)
+
+	def get_device_info_string(self,peer):
+		connection = {
+			'direct' : ' (Direct Connection)',
+			'relay'  : ' (Relayed Connection)'
+		}.get(peer['connection'], '')
+		if peer['synced'] != 0:
+			dt = datetime.datetime.fromtimestamp(peer['synced'])
+			return 'Synched on {0}'.format(dt.strftime("%x %X")) + connection
+		elif peer['download'] == 0 and peer['upload'] != 0:
+			return '⇧ {0}'.format(self.sizeof_fmt(peer['upload'])) + connection
+		elif peer['download'] != 0 and peer['upload'] == 0:
+			return '⇩ {0}'.format(self.sizeof_fmt(peer['download'])) + connection
+		elif peer['download'] != 0 and peer['upload'] != 0:
+			return '⇧ {0} - ⇩ {1}'.format(self.sizeof_fmt(peer['upload']), self.sizeof_fmt(peer['download'])) + connection
+		else:
+			return 'Idle...' + connection
 
 	def init_preferences_controls(self):
 		self.devname = self.builder.get_object('devname')
@@ -236,6 +327,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 					result = self.btsyncapi.remove_folder(secret)
 					if self.btsyncapi.get_error_code(result) == 0:
 						self.folders.remove(tree_iter)
+						self.remove_device_infos(secret)
 					else:
 						logging.error('Failed to remove folder ' + str(secret))
 				except requests.exceptions.ConnectionError:
