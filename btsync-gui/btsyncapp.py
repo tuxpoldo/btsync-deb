@@ -53,6 +53,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.init_folders_controls()
 		self.init_devices_controls()
 		self.init_transfers_controls()
+		self.init_history_controls()
 		self.init_preferences_controls()
 		self.init_folders_values()
 		self.init_preferences_values()
@@ -115,6 +116,16 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 			'BitTorrent Inc.',
 			'',
 			''
+		])
+
+	def init_history_controls(self):
+		self.history = self.builder.get_object('history_list')
+		self.history_treeview = self.builder.get_object('history_tree_view')
+		# TODO: remove placeholder as soon as the suitable API call permits
+		#       a working implementation...
+		self.history.append ([
+			'Now',
+			'Cannot implement due to missing API'
 		])
 
 	def refresh_app_status(self):
