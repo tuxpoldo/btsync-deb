@@ -72,6 +72,7 @@ class BtSyncStatus:
 		self.connection = BtSyncStatus.DISCONNECTED
 		self.connect_id = None
 		self.status_id = None
+		self.agent = None
 
 	def startup(self,agent):
 		self.agent = agent
@@ -92,7 +93,6 @@ class BtSyncStatus:
 			GObject.source_remove(self.connect_id)
 		if self.status_id is not None:
 			GObject.source_remove(self.status_id)
-		del self.agent
 
 	def open_app(self):
 		if isinstance(self.app, BtSyncApp):

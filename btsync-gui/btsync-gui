@@ -24,8 +24,10 @@
 
 import os
 import sys
-import argparse
+import dbus
+import signal
 import logging
+import argparse
 import subprocess
 
 sys.path.append('/usr/lib/btsync-gui')
@@ -33,6 +35,59 @@ sys.path.append('/usr/lib/btsync-gui')
 from gi.repository import Gtk
 from btsyncagent import *
 from btsyncstatus import *
+
+class GuiApp:
+
+	def __init__(self,args):
+		self.agent = None
+		self.indicator = None
+		# instantiate agent
+		try:
+			self.agent = BtSyncAgent(args)
+		except Exception:
+			logging.warning('Only one full btsync-gui can run at once.')
+			exit(-1)
+		# create graceful shutdown mechanisms
+		signal.signal(signal.SIGTERM, self.on_signal_term)
+#		signal.signal(signal.SIGKILL, self.on_signal_kill)
+		try:
+			self.bus = dbus.SessionBus()
+			self.bus.call_on_disconnection(self.on_session_disconnect)
+		except dbus.DBusException:
+			# basically we can ignore this...
+			logging.warning('Failed to connect to session bus.')
+			pass
+
+	def run(self):
+		try:
+			self.agent.startup()
+			# initialize indicator
+			self.indicator = BtSyncStatus()
+			self.indicator.startup(self.agent)
+			# giro giro tondo...
+			Gtk.main()
+		except Exception as e:
+			logging.critical('Unexpected exception caught: '+str(e))
+		finally:
+			# good night!
+			self.shutdown()
+
+	def shutdown(self,returncode=0):
+		logging.info('Shutting down application...')
+		if self.indicator is not None:
+			self.indicator.shutdown()
+		if self.agent is not None:
+			self.agent.shutdown()
+		logging.shutdown()
+		exit(returncode)
+
+	def on_session_disconnect(self, connection):
+		logging.info('Disconnected from session bus. Shutting down...')
+		self.shutdown()
+
+	def on_signal_term(self, signum, frame):
+		logging.warning('Signal {0} received. Shutting down...'.format(signum))
+		self.shutdown()
 
 
 if __name__ == "__main__":
@@ -71,26 +126,8 @@ if __name__ == "__main__":
 	logging.getLogger().addHandler(fh)
 	logging.getLogger().setLevel(numeric_level)
 
-	try:
-		# initialize agent
-		agent = BtSyncAgent(args)
-	except Exception:
-		logging.warning('Only one full btsync-gui can run at once.')
-		exit(-1)
 
-	try:
-		agent.startup()
-		# initialize indicator
-		ind = BtSyncStatus()
-		ind.startup(agent)
-		# giro giro tondo....
-		Gtk.main()
-	except Exception:
-		logging.error('This should never happen... ;-)')
-	finally:
-		# good night!
-		ind.shutdown()
-		agent.shutdown()
-		logging.shutdown()
-		exit(0)
+	# play the music
+	app = GuiApp(args)
+	app.run()
 

@@ -1,3 +1,10 @@
+btsync-gui (0.7-1) unstable; urgency=low
+
+  * Implemented shutdown handlers and provided more sonsistent
+    agent startup behaviour (Closes #78)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sun, 02 Mar 2014 15:33:21 +0100
+
 btsync-gui (0.6-1) unstable; urgency=low
 
   * Folder status now takes in account and shows folder errors

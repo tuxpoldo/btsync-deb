@@ -22,10 +22,11 @@
 #
 
 import os
-import argparse
+import time
 import signal
-import subprocess
 import logging
+import argparse
+import subprocess
 
 from btsyncutils import BtSingleton
 
@@ -103,6 +104,12 @@ class BtSyncAgent:
 					os.makedirs(self.configpath)
 				if not os.path.isdir(self.storagepath):
 					os.makedirs(self.storagepath)
+
+				while self.is_running():
+					logging.info ('Found running btsync agent. Stopping...')
+					os.kill (self.pid, signal.SIGTERM)
+					time.sleep(1)
+					
 				self.make_config_file()
 				if not self.is_running():
 					logging.info ('Starting btsync agent...')
