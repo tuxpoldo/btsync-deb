@@ -39,7 +39,7 @@ Commands:
  stop               stop the btsync system
  restart            restarts the btsync system
  pause              suspends the btsync system
- stop               resumes the btsync system
+ resume             resumes the btsync system
  status             output the btsync status
  debug|setdebug	    enables/configures/disables verbose logging
  nodebug            disables verbose logging
