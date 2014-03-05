@@ -23,6 +23,7 @@
 
 import os
 import time
+import stat
 import signal
 import logging
 import argparse
@@ -114,6 +115,10 @@ class BtSyncAgent:
 				if not self.is_running():
 					logging.info ('Starting btsync agent...')
 					subprocess.call([BtSyncAgent.BINARY, '--config', self.conffile])
+					time.sleep(0.5)
+					if self.is_running():
+						# no guarantee that it's already running...
+						self.kill_config_file()
 			except Exception:
 				logging.critical('Failure to start btsync agent - exiting...')
 				exit (-1)
@@ -122,12 +127,12 @@ class BtSyncAgent:
 		if self.is_primary() and self.is_running():
 			logging.info ('Stopping btsync agent...')
 			os.kill (self.pid, signal.SIGTERM)
-			if os.path.isfile(self.conffile):
-				os.remove(self.conffile)
+			self.kill_config_file()
 
 	def make_config_file(self):
 		try:
 			cfg = open (self.conffile, 'w')
+			os.chmod(self.conffile, stat.S_IRUSR | stat.S_IWUSR)
 			cfg.write('{\n')
 			cfg.write('\t"pid_file" : "{0}",\n'.format(self.pidfile))
 			cfg.write('\t"storage_path" : "{0}",\n'.format(self.storagepath))
@@ -143,6 +148,10 @@ class BtSyncAgent:
 		except Exception:
 			logging.critical('Cannot create {0} - exiting...'.format(self.configpath))
 			exit (-1)
+
+	def kill_config_file(self):
+		if os.path.isfile(self.conffile):
+			os.remove(self.conffile)
 
 	def read_pid(self):
 		try:
