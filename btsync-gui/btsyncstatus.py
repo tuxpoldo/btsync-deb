@@ -39,7 +39,7 @@ class BtSyncStatus:
 	CONNECTED	= 2
 	PAUSED		= 3
 
-	def __init__(self):
+	def __init__(self,agent):
 		self.builder = Gtk.Builder()
 		self.builder.add_from_file(os.path.dirname(__file__) + "/btsyncstatus.glade")
 		self.builder.connect_signals (self)
@@ -72,14 +72,13 @@ class BtSyncStatus:
 		self.connection = BtSyncStatus.DISCONNECTED
 		self.connect_id = None
 		self.status_id = None
-		self.agent = None
-
-	def startup(self,agent):
 		self.agent = agent
+
+	def startup(self):
 		# connection
 		self.btsyncapi = BtSyncApi(
-			host = agent.get_host(), port = agent.get_port(),
-			username = agent.get_username(), password = agent.get_password()
+			host = self.agent.get_host(), port = self.agent.get_port(),
+			username = self.agent.get_username(), password = self.agent.get_password()
 		)
 		self.btsyncver = { 'version': '0.0.0' }
 		# status
@@ -99,7 +98,7 @@ class BtSyncStatus:
 			self.app.window.present()
 		else:
 			try:
-				self.app = BtSyncApp(self.btsyncapi)
+				self.app = BtSyncApp(self.agent,self.btsyncapi)
 				self.app.connect_close_signal(self.onDeleteApp)
 			except requests.exceptions.ConnectionError:
 				return self.onConnectionError()

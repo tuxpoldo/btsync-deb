@@ -35,14 +35,19 @@ from dialogs import BtSyncFolderAdd,BtSyncFolderRemove,BtSyncFolderScanQR,BtSync
 
 class BtSyncApp(BtInputHelper,BtMessageHelper):
 
-	def __init__(self,btsyncapi):
+	def __init__(self,agent,btsyncapi):
+		self.agent = agent
 		self.btsyncapi = btsyncapi
+
 		self.builder = Gtk.Builder()
 		self.builder.add_from_file(os.path.dirname(__file__) + "/btsyncapp.glade")
 		self.builder.connect_signals (self)
 
+		width, height = self.agent.get_pref('windowsize', (602,328))
+
 		self.window = self.builder.get_object('btsyncapp')
-		self.window.connect('delete-event',self.onDelete);
+		self.window.set_default_size(width, height)
+		self.window.connect('delete-event',self.onDelete)
 		self.window.show()
 
 		self.clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
@@ -310,7 +315,8 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.unlock()
 
 	def onDelete(self, *args):
-		self.close()
+		width, height = self.window.get_size()
+		self.agent.set_pref('windowsize', (width, height))
 
 	def onSaveEntry(self,widget,valDesc,newValue):
 		try:

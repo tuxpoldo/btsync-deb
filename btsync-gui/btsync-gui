@@ -62,8 +62,8 @@ class GuiApp:
 		try:
 			self.agent.startup()
 			# initialize indicator
-			self.indicator = BtSyncStatus()
-			self.indicator.startup(self.agent)
+			self.indicator = BtSyncStatus(self.agent)
+			self.indicator.startup()
 			# giro giro tondo...
 			Gtk.main()
 		except Exception as e:

@@ -22,6 +22,7 @@
 #
 
 import os
+import json
 import time
 import stat
 import signal
@@ -49,17 +50,52 @@ class BtSyncAgent:
 		self.storagepath = os.environ['HOME'] + '/.btsync'
 		self.pidfile = self.configpath + '/btsync-agent.pid'
 		self.conffile = self.configpath + '/btsync-agent.conf'
+		self.preffile = self.configpath + '/btsync-gui.prefs'
 		self.lockfile = self.configpath + '/btsync-gui.pid'
 		self.lock = None
+		self.prefs = {}
 		# TODO: the automatically started btsync engine, should get randomly
 		#       created credentials at each start
 		self.username = 'btsync-gui'
 		self.password = 'P455w0rD'
 		if self.is_auto():
 			self.lock = BtSingleton(self.lockfile,'btsync-gui')
+		self.load_prefs()
 
 	def __del__(self):
 		self.shutdown()
+
+	def set_pref(self,key,value,flush=True):
+		self.prefs[key] = value
+		if flush:
+			self.save_prefs()
+
+	def get_pref(self,key,default):
+		return self.prefs.get(key,default)
+
+	def load_prefs(self):
+		try:
+			pref = open (self.preffile, 'r')
+			result = json.load(pref)
+			pref.close()
+			if isinstance(result,dict):
+				self.prefs = result
+			else:
+				print "Error: " +str(result)
+		except Exception as e:
+			logging.warning('Error while loading preferences: {0}'.format(e))
+			self.prefs = {}
+			pass
+
+	def save_prefs(self):
+		try:
+			pref = open (self.preffile, 'w')
+			json.dump(self.prefs,pref)
+			pref.close()
+			os.chmod(self.preffile, stat.S_IRUSR | stat.S_IWUSR)
+		except Exception as e:
+			logging.error('Error while saving preferences: {0}'.format(e))
+			pass
 
 	def is_auto(self):
 		return self.args.host == 'auto'
