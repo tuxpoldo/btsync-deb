@@ -4,6 +4,9 @@ btsync-gui (0.7-1) unstable; urgency=low
     agent startup behaviour (Closes #78)
   * Fixed security issue with agent configuration file (Closes #81)
   * Windows size is now persistent (Closes #77)
+  * Added the possibility to make the web UI of the local agent
+    accessible and to store default settings (Closes #83)
+  * Implemented random per session credentials (Closes #67)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Sun, 02 Mar 2014 15:33:21 +0100
 
