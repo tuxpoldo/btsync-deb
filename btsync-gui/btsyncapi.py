@@ -36,7 +36,7 @@ class BtSyncApi(object):
 	The docstrings of this class' methods were copied from the above site.
 	"""
 
-	def __init__(self, host='localhost', port='8888', username=None, password=None):
+	def __init__(self,host='localhost',port='8888',username=None,password=None):
 		"""
 		Parameters
 		----------
@@ -54,12 +54,15 @@ class BtSyncApi(object):
 		The host, port, username, and password must match the config.json file.
 
 		"""
+		self.set_connection_params(host,port,username,password)
+		self.response = None
+
+	def set_connection_params(self, host='localhost', port='8888', username=None, password=None):
 		if username is None or password is None:
 			self.auth = None
 		else:
 			self.auth = (username,password)
-		self.urlroot = 'http://'+host+':'+str(port)+'/api'
-		self.response = None
+		self.urlroot = 'http://{0}:{1}/api'.format(host,port)
 
 	def get_folders(self,secret=None,throw_exceptions=True):
 		"""
