@@ -28,7 +28,7 @@ from gi.repository import Gtk, GObject
 try:
 	from gi.repository import AppIndicator3 as AppIndicator
 except ImportError:
-	logging.warning('Module AppIndicator3 not available. Using Gtk.TrayIcon instead') 
+	logging.warning('Ignore the previous error: using Gtk.TrayIcon instead. Everything is fine!') 
 
 class TrayIndicator:
 	"""
