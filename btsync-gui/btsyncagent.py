@@ -25,6 +25,7 @@ import os
 import json
 import time
 import stat
+import base64
 import signal
 import logging
 import argparse
@@ -65,10 +66,16 @@ class BtSyncAgent:
 		self.prefs = {}
 		# load values from preferences
 		self.load_prefs()
-		# TODO: the automatically started btsync engine, should get randomly
-		#       created credentials at each start. See Issue #67
-		self.username = self.get_pref('username','btsync-gui')
-		self.password = self.get_pref('password','P455w0rD')
+		# generate random credentials
+		try:
+			username = base64.b64encode(os.urandom(16))[:-2]
+			password = base64.b64encode(os.urandom(32))[:-2]
+		except NotImplementedError:
+			logging.warning('No good random generator available. Using default credentials')
+			username = 'btsync-ui'
+			password = base64.b64encode('This is really not secure!')[:-2]
+		self.username = self.get_pref('username',username)
+		self.password = self.get_pref('password',password)
 		self.bindui = self.get_pref('bindui','127.0.0.1')
 		self.portui = self.get_pref('portui',self.uid + 8999)
 		# process command line arguments
@@ -245,7 +252,7 @@ class BtSyncAgent:
 			exit (-1)
 
 	def kill_config_file(self):
-		if os.path.isfile(self.conffile+'a'):
+		if os.path.isfile(self.conffile):
 			os.remove(self.conffile)
 
 	def read_pid(self):
