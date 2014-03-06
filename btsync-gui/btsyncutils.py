@@ -267,17 +267,24 @@ class BtBaseDialog(BtMessageHelper):
 		self.show_message(messagetext,Gtk.MessageType.ERROR)
 
 
+class BtSingleInstanceException(Exception):
+
+	def __init__(self,message):
+		self.message = message
+	def __str__(self):
+		return repr(self.message)
+
 class BtSingleton():
 
-	def __init__(self,lockfilename,procname):
+	def __init__(self,lockfilename,processname):
 		self.lockfilename = None
 		if os.path.isfile(lockfilename):
 			pid = self.readpid(lockfilename)
 			if pid is not None and os.path.isfile('/proc/{0}/cmdline'.format(pid)):
 				args = self.getcmdline(pid)
 				for arg in args:
-					if procname in arg:
-						raise Exception('Compatible process still running')
+					if processname in arg:
+						raise BtSingleInstanceException('Only one full btsync-gui can run at once')
 			# lock file must by a zombie...
 			os.remove(lockfilename)
 		self.writepid(lockfilename)

@@ -41,22 +41,26 @@ class GuiApp:
 	def __init__(self,args):
 		self.agent = None
 		self.indicator = None
-		# instantiate agent
 		try:
+			# instantiate agent
 			self.agent = BtSyncAgent(args)
-		except Exception:
-			logging.warning('Only one full btsync-gui can run at once.')
-			exit(-1)
-		# create graceful shutdown mechanisms
-		signal.signal(signal.SIGTERM, self.on_signal_term)
-#		signal.signal(signal.SIGKILL, self.on_signal_kill)
-		try:
+			# create graceful shutdown mechanisms
+			signal.signal(signal.SIGTERM, self.on_signal_term)
 			self.bus = dbus.SessionBus()
 			self.bus.call_on_disconnection(self.on_session_disconnect)
-		except dbus.DBusException:
+		except dbus.DBusException as e:
 			# basically we can ignore this...
-			logging.warning('Failed to connect to session bus.')
-			pass
+			logging.warning('Failed to connect to session bus: '+str(e))
+		except BtSingleInstanceException as e:
+			# we are running in auto mode and someone tries to start a
+			# second instance
+			logging.error(e.message)
+			# exit - we cannot tollerate this!
+			exit(-1)
+		except Exception as e:
+			# this should not really happen...
+			logging.critical('Unexpected exception caught: '+str(e))
+			exit(-1)
 
 	def run(self):
 		try:

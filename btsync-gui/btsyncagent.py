@@ -30,7 +30,7 @@ import logging
 import argparse
 import subprocess
 
-from btsyncutils import BtSingleton
+from btsyncutils import BtSingleton, BtSingleInstanceException
 
 class BtSyncAgent:
 	# still hardcoded - this is the binary location of btsync when installing
@@ -64,6 +64,46 @@ class BtSyncAgent:
 
 	def __del__(self):
 		self.shutdown()
+
+	def startup(self):
+		if self.args.host == 'auto':
+			# we have to handle everything
+			try:
+				if not os.path.isdir(self.configpath):
+					os.makedirs(self.configpath)
+				if not os.path.isdir(self.storagepath):
+					os.makedirs(self.storagepath)
+
+				while self.is_running():
+					logging.info ('Found running btsync agent. Stopping...')
+					os.kill (self.pid, signal.SIGTERM)
+					time.sleep(1)
+					
+				self.make_config_file()
+				if not self.is_running():
+					logging.info ('Starting btsync agent...')
+					subprocess.call([BtSyncAgent.BINARY, '--config', self.conffile])
+					time.sleep(0.5)
+					if self.is_running():
+						# no guarantee that it's already running...
+						self.kill_config_file()
+			except Exception:
+				logging.critical('Failure to start btsync agent - exiting...')
+				exit (-1)
+
+	def suspend(self):
+		if self.args.host == 'auto':
+			pass
+
+	def resume(self):
+		if self.args.host == 'auto':
+			pass
+
+	def shutdown(self):
+		if self.is_primary() and self.is_running():
+			logging.info ('Stopping btsync agent...')
+			os.kill (self.pid, signal.SIGTERM)
+			self.kill_config_file()
 
 	def set_pref(self,key,value,flush=True):
 		self.prefs[key] = value
@@ -132,38 +172,6 @@ class BtSyncAgent:
 				deb.close
 			else:
 				os.remove (self.storagepath + '/debug.txt')
-
-	def startup(self):
-		if self.args.host == 'auto':
-			# we have to handle everything
-			try:
-				if not os.path.isdir(self.configpath):
-					os.makedirs(self.configpath)
-				if not os.path.isdir(self.storagepath):
-					os.makedirs(self.storagepath)
-
-				while self.is_running():
-					logging.info ('Found running btsync agent. Stopping...')
-					os.kill (self.pid, signal.SIGTERM)
-					time.sleep(1)
-					
-				self.make_config_file()
-				if not self.is_running():
-					logging.info ('Starting btsync agent...')
-					subprocess.call([BtSyncAgent.BINARY, '--config', self.conffile])
-					time.sleep(0.5)
-					if self.is_running():
-						# no guarantee that it's already running...
-						self.kill_config_file()
-			except Exception:
-				logging.critical('Failure to start btsync agent - exiting...')
-				exit (-1)
-
-	def shutdown(self):
-		if self.is_primary() and self.is_running():
-			logging.info ('Stopping btsync agent...')
-			os.kill (self.pid, signal.SIGTERM)
-			self.kill_config_file()
 
 	def make_config_file(self):
 		try:
