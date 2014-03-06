@@ -33,7 +33,7 @@ import subprocess
 sys.path.append('/usr/lib/btsync-gui')
 
 from gi.repository import Gtk
-from btsyncagent import *
+from btsyncagent import BtSyncAgent, BtSyncAgentException, BtSingleInstanceException
 from btsyncstatus import *
 
 class GuiApp:
@@ -57,6 +57,14 @@ class GuiApp:
 			logging.error(e.message)
 			# exit - we cannot tollerate this!
 			exit(-1)
+		except BtSyncAgentException as e:
+			# the agent has already finished his work...
+			if e.retcode != 0:
+				logging.error(e.message)
+			else:
+				logging.info(e.message)
+				print e.message
+			exit (e.retcode)
 		except Exception as e:
 			# this should not really happen...
 			logging.critical('Unexpected exception caught: '+str(e))
@@ -99,21 +107,47 @@ if __name__ == "__main__":
 
 	parser.add_argument('--log', choices=['CRITICAL','ERROR','WARNING','INFO','DEBUG'],
 				default='WARNING',
-				help="Set logging level")
+				help='Sets the logging level. By default the logging level '\
+				'is WARNING')
 	parser.add_argument('--host',
 				default='auto',
-				help="Hostname for the connection to BitTorrent Sync")
+				help='Hostname for the connection to BitTorrent Sync. If not '\
+				'specified, a local BitTorrent Sync agent will be launched.')
 	parser.add_argument('--port', type=int,
-				default=8888,
-				help="Port number for the connection to BitTorrent Sync")
-
+				default=0,
+				help='Optional port number for the connection to BitTorrent '\
+				'Sync. If not specified, port 8888 is taken for a connection '\
+				'to a remote BitTorrent Sync agent or (8999 + uid) is taken '\
+				'when creating a locally lauched agent.')
 	parser.add_argument('--username',
 				default=None,
-				help="Optional user name for the connection to BitTorrent Sync")
-
+				help='Optional user name for connecting to a remote '\
+				'BitTorrent Sync agent or username to use when creating a '\
+				'locally launched agent.')
 	parser.add_argument('--password',
 				default=None,
-				help="Optional password for the connection to BitTorrent Sync")
+				help='Optional password for connecting to a remote '\
+				'BitTorrent Sync agent or username to use when creating a '\
+				'locally launched agent.')
+	parser.add_argument('--bindui',
+				default=None,
+				help='Optional bind address for the Web UI of a locally '\
+				'created BitTorrent Sync agent. By default the agent binds to '\
+				'127.0.0.1. If you want the Web UI of the agent to be '\
+				'reachable by other computers, specify one of the available '\
+				'IP addresses of this computer or "all" to bind to all '\
+				'available adapters.')
+	parser.add_argument('--savedefaults',
+				action='store_true',
+				help='If specified, the optionally supplied credentials, bind '\
+				'address and port will be stored as default in the application '\
+				'preferences and used when launching a local BitTorrent Sync '\
+				'agent.')
+	parser.add_argument('--cleardefaults',
+				action='store_true',
+				help='If specified, all internally stored credentials, bind '\
+				'address and port information will be cleared from the '\
+				'application preferences.')
 
 	args = parser.parse_args()
 

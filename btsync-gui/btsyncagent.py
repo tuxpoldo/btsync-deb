@@ -32,6 +32,15 @@ import subprocess
 
 from btsyncutils import BtSingleton, BtSingleInstanceException
 
+class BtSyncAgentException(Exception):
+	def __init__(self,retcode,message):
+		self.retcode = retcode
+		self.message = message
+	def __str__(self):
+		return repr(self.message)
+	def __int__(self):
+		return repr(self.retcode)
+
 class BtSyncAgent:
 	# still hardcoded - this is the binary location of btsync when installing
 	# the package btsync-common
@@ -54,13 +63,55 @@ class BtSyncAgent:
 		self.lockfile = self.configpath + '/btsync-gui.pid'
 		self.lock = None
 		self.prefs = {}
+		# load values from preferences
+		self.load_prefs()
 		# TODO: the automatically started btsync engine, should get randomly
-		#       created credentials at each start
-		self.username = 'btsync-gui'
-		self.password = 'P455w0rD'
+		#       created credentials at each start. See Issue #67
+		self.username = self.get_pref('username','btsync-gui')
+		self.password = self.get_pref('password','P455w0rD')
+		self.bindui = self.get_pref('bindui','127.0.0.1')
+		self.portui = self.get_pref('portui',self.uid + 8999)
+		# process command line arguments
+		if self.args.username is not None:
+			self.username = self.args.username
+		if self.args.password is not None:
+			self.password = self.args.password
+		if self.args.bindui is not None:
+			self.bindui = '0.0.0.0' if self.args.bindui == 'auto' else self.args.bindui
+		if self.args.port != 0:
+			self.portui = self.args.port
+		if self.args.cleardefaults:
+			# clear saved defaults
+			if 'username' in self.prefs:
+				del self.prefs['username']
+			if 'password' in self.prefs:
+				del self.prefs['password']
+			if 'bindui' in self.prefs:
+				del self.prefs['bindui']
+			if 'portui' in self.prefs:
+				del self.prefs['portui']
+			self.save_prefs()
+			raise BtSyncAgentException(0, 'Default settings cleared.')
+		if self.args.savedefaults:
+			# save new defaults
+			if self.args.username is None:
+				raise BtSyncAgentException(-1,
+					'Username must be specified when saving defaults')
+			if self.args.password is None:
+				raise BtSyncAgentException(-1,
+					'Username must be specified when saving defaults')
+			self.set_pref('username',self.username)
+			self.set_pref('password',self.password)
+			if self.args.bindui is not None:
+				# changed bind address for web ui
+				self.set_pref('bindui',self.bindui)
+			if self.args.port != 0:
+				# changed bind port for web ui
+				self.set_pref('portui',self.portui)
+			raise BtSyncAgentException(0, 'Default settings saved.')
+
 		if self.is_auto():
 			self.lock = BtSingleton(self.lockfile,'btsync-gui')
-		self.load_prefs()
 
 	def __del__(self):
 		self.shutdown()
@@ -130,9 +181,9 @@ class BtSyncAgent:
 	def save_prefs(self):
 		try:
 			pref = open (self.preffile, 'w')
+			os.chmod(self.preffile, stat.S_IRUSR | stat.S_IWUSR)
 			json.dump(self.prefs,pref)
 			pref.close()
-			os.chmod(self.preffile, stat.S_IRUSR | stat.S_IWUSR)
 		except Exception as e:
 			logging.error('Error while saving preferences: {0}'.format(e))
 			pass
@@ -147,10 +198,10 @@ class BtSyncAgent:
 		return os.environ['HOME'] + '/.config/btsync/btsync-gui.lock'
 
 	def get_host(self):
-		return 'localhost' if self.args.host == 'auto' else self.args.host
+		return 'localhost' if self.is_auto() else self.args.host
 
 	def get_port(self):
-		return self.uid + 8999 if self.args.host == 'auto' else self.args.port
+		return self.portui if self.is_auto() else self.args.port
 
 	def get_username(self):
 		return self.username if self.is_auto() else self.args.username
@@ -182,7 +233,7 @@ class BtSyncAgent:
 			cfg.write('\t"storage_path" : "{0}",\n'.format(self.storagepath))
 			# cfg.write('\t"use_gui" : false,\n')
 			cfg.write('\t"webui" : \n\t{\n')
-			cfg.write('\t\t"listen" : "127.0.0.1:{0}",\n'.format(self.uid + 8999))
+			cfg.write('\t\t"listen" : "{0}:{1}",\n'.format(self.bindui,self.portui))
 			cfg.write('\t\t"login" : "{0}",\n'.format(self.username))
 			cfg.write('\t\t"password" : "{0}",\n'.format(self.password))
 			cfg.write('\t\t"api_key" : "{}"\n'.format(BtSyncAgent.APIKEY))
@@ -194,7 +245,7 @@ class BtSyncAgent:
 			exit (-1)
 
 	def kill_config_file(self):
-		if os.path.isfile(self.conffile):
+		if os.path.isfile(self.conffile+'a'):
 			os.remove(self.conffile)
 
 	def read_pid(self):

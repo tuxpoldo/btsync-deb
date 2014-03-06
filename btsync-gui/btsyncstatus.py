@@ -35,9 +35,9 @@ VERSION = '0.6'
 
 class BtSyncStatus:
 	DISCONNECTED	= 0
-	CONNECTING	= 1
-	CONNECTED	= 2
-	PAUSED		= 3
+	CONNECTING		= 1
+	CONNECTED		= 2
+	PAUSED			= 3
 
 	def __init__(self,agent):
 		self.builder = Gtk.Builder()
