@@ -26,7 +26,7 @@ for SRCDIR in ${SOURCES}; do
 			rm -f ../*all.build
 			rm -f ../*all.changes
 		else
-			for destarch in i386 amd64 armel armhf powerpc; do
+			for destarch in i386 amd64 armel armhf powerpc kfreebsd-amd64 kfreebsd-i386; do
 				debuild clean
 				debuild -uc -us -b -a${destarch}
 				rm -f ../*${destarch}.build

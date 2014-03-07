@@ -3,14 +3,14 @@ Upstream-Name: btsync-common
 Source: http://www.bittorrent.com
 
 Files: *
-Copyright: 2013 BitTorrent, Inc.
+Copyright: 2013-2014 BitTorrent, Inc.
 License: BitTorrent Terms of Use
   By using this application, you agree to our Privacy Policy and Terms.
   http://www.bittorrent.com/legal/privacy
   http://www.bittorrent.com/legal/terms-of-use
 
 Files: debian/*
-Copyright: 2013 Leo Moll <leo.moll@yeasoft.com>
+Copyright: 2013-2014 Leo Moll <leo.moll@yeasoft.com>
 License: GPL-2+
  This package is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by

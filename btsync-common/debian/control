@@ -3,11 +3,11 @@ Section: net
 Priority: extra
 Maintainer: Leo Moll <leo.moll@yeasoft.com>
 Build-Depends: debhelper (>= 7.0.50)
-Standards-Version: 3.9.2
+Standards-Version: 3.9.4
 Homepage: http://www.bittorrent.com/sync
 
 Package: btsync-common
-Architecture: i386 amd64 armel armhf powerpc
+Architecture: i386 amd64 armel armhf powerpc kfreebsd-amd64 kfreebsd-i386
 Depends: libc6
 Description: Private network P2P file synchronisation daemon
  BitTorrent Sync is a simple tool that applies p2p protocol for

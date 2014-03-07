@@ -48,20 +48,25 @@ configure)
 	SAMPLECFG=/usr/share/doc/btsync-common/btsync.conf.sample
 	echo '//!/usr/lib/btsync-common/btsync-core --config' > ${SAMPLECFG}
 	echo '//' >> ${SAMPLECFG}
-	echo '// (c) 2013 BitTorrent Inc.' >> ${SAMPLECFG}
+	echo '// (c) 2013-2014 BitTorrent Inc.' >> ${SAMPLECFG}
 	echo '//' >> ${SAMPLECFG}
 	echo '// This btsync configuration file features the complete set of' >> ${SAMPLECFG}
 	echo '// commented configuration directives' >> ${SAMPLECFG}
 	echo '//' >> ${SAMPLECFG}
 	${DAEMON} --dump-sample-config >> ${SAMPLECFG}
 	touch -r ${DAEMON} ${SAMPLECFG}
+	# handle new btsync applications like btsync-gui if installed
+	if [ -f /var/run/btsync-common-updating ]; then
+		rm -f /var/run/btsync-common-updating
+		pkill --signal SIGHUP btsync-gui
+	fi
 	# handle btsync-user if installed
 	if [ -f /var/run/btsync-user-updating ]; then
 		rm -f /var/run/btsync-user-updating
 	fi
 	# handle btsync daemon if installed
 	if [ -x /etc/init.d/btsync ]; then
-		/etc/init.d/btsync restart
+		invoke-rc.d btsync restart
 	fi
 	set -e
 	;;

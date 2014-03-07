@@ -25,8 +25,9 @@ DEB_SOURCE_PACKAGE=$(shell dpkg-parsechangelog -l$(DEB_DEBIAN_DIR)/changelog \
 override_dh_auto_build:
 	dh_auto_build
 	case "$(DEB_HOST_ARCH)" in \
-	amd64|i386|powerpc)	cp -a $(DEB_HOST_ARCH)/btsync btsync-core; ;; \
-	arm|armel|armhf)	cp -a arm/btsync btsync-core; ;; \
+	amd64|i386|powerpc)             cp -a $(DEB_HOST_ARCH)/btsync btsync-core; ;; \
+	kfreebsd-amd64|kfreebsd-i386)   cp -a $(DEB_HOST_ARCH)/btsync btsync-core; ;; \
+	arm|armel|armhf)                cp -a arm/btsync btsync-core; ;; \
 	esac
 
 override_dh_clean:
@@ -45,7 +46,7 @@ get-orig-source:
 	if [ ! -f $(DEB_DEBIAN_DIR)../../$(DEB_SOURCE_PACKAGE)_$(DEB_UPSTREAM_VERSION).orig.tar.gz ]; then \
 		rm -rf temp-orig-source; \
 		mkdir -p temp-orig-source/$(DEB_SOURCE_PACKAGE); \
-		for arch in arm powerpc i386 x64; do \
+		for arch in arm powerpc i386 x64 freebsd_i386 freebsd_x64; do \
 			if ! wget -q -c http://syncapp.bittorrent.com/$(DEB_UPSTREAM_VERSION)/btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; then \
 				wget -q -c http://archive.yeasoft.net/btsync/$(DEB_UPSTREAM_VERSION)/btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; \
 			fi; \
@@ -54,6 +55,8 @@ get-orig-source:
 			rm -f btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; \
 		done; \
 		mv temp-orig-source/$(DEB_SOURCE_PACKAGE)/x64 temp-orig-source/$(DEB_SOURCE_PACKAGE)/amd64; \
+		mv temp-orig-source/$(DEB_SOURCE_PACKAGE)/freebsd_x64 temp-orig-source/$(DEB_SOURCE_PACKAGE)/kfreebsd-amd64; \
+		mv temp-orig-source/$(DEB_SOURCE_PACKAGE)/freebsd_i386 temp-orig-source/$(DEB_SOURCE_PACKAGE)/kfreebsd-i386; \
 		if ! wget -q -c http://btsync.s3-website-us-east-1.amazonaws.com/BitTorrentSyncUserGuide.pdf; then \
 			wget -q -c http://archive.yeasoft.net/btsync/$(DEB_UPSTREAM_VERSION)/BitTorrentSyncUserGuide.pdf; \
 		fi; \
