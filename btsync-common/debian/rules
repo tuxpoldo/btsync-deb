@@ -50,6 +50,8 @@ override_dh_auto_build:
 
 override_dh_clean:
 	rm -f btsync-core
+	rm -f btsync-core-i686
+	rm -f btsync-core-geode
 	dh_clean
 
 # this would not work in cross-platform builds and
