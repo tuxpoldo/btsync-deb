@@ -19,6 +19,11 @@ set -e
 
 case "$1" in
 remove|deconfigure)
+	# fix this insane i386/geode stuff...
+	if [ -f /usr/lib/btsync-common/btsync-core-i686 ]; then
+		# remove the symbolic link
+		rm -f /usr/lib/btsync-common/btsync-core
+	fi
 	rm -f /usr/share/doc/btsync-common/btsync.conf.sample
 	;;
 upgrade)

@@ -22,12 +22,30 @@ DEB_SOURCE_PACKAGE=$(shell dpkg-parsechangelog -l$(DEB_DEBIAN_DIR)/changelog \
 %:
 	dh $@ 
 
+override_dh_install:
+	dh_install
+	case "$(DEB_HOST_ARCH)" in \
+	i386)				dh_install btsync-core-i686  usr/lib/btsync-common; \
+						dh_install btsync-core-geode usr/lib/btsync-common; \
+						;; \
+	amd64)				dh_install btsync-core usr/lib/btsync-common; ;; \
+	powerpc)			dh_install btsync-core usr/lib/btsync-common; ;; \
+	arm|armel|armhf)	dh_install btsync-core usr/lib/btsync-common; ;; \
+	kfreebsd-i386)		dh_install btsync-core usr/lib/btsync-common; ;; \
+	kfreebsd-amd64)		dh_install btsync-core usr/lib/btsync-common; ;; \
+	esac
+
 override_dh_auto_build:
 	dh_auto_build
 	case "$(DEB_HOST_ARCH)" in \
-	amd64|i386|powerpc)             cp -a $(DEB_HOST_ARCH)/btsync btsync-core; ;; \
-	kfreebsd-amd64|kfreebsd-i386)   cp -a $(DEB_HOST_ARCH)/btsync btsync-core; ;; \
-	arm|armel|armhf)                cp -a arm/btsync btsync-core; ;; \
+	i386)				cp -a i386/btsync btsync-core-i686; \
+						cp geode/btsync btsync-core-geode; \
+						;; \
+	amd64)				cp -a $(DEB_HOST_ARCH)/btsync btsync-core; ;; \
+	powerpc)			cp -a $(DEB_HOST_ARCH)/btsync btsync-core; ;; \
+	arm|armel|armhf)	cp -a arm/btsync btsync-core; ;; \
+	kfreebsd-i386)		cp -a $(DEB_HOST_ARCH)/btsync btsync-core; ;; \
+	kfreebsd-amd64)		cp -a $(DEB_HOST_ARCH)/btsync btsync-core; ;; \
 	esac
 
 override_dh_clean:
@@ -46,7 +64,7 @@ get-orig-source:
 	if [ ! -f $(DEB_DEBIAN_DIR)../../$(DEB_SOURCE_PACKAGE)_$(DEB_UPSTREAM_VERSION).orig.tar.gz ]; then \
 		rm -rf temp-orig-source; \
 		mkdir -p temp-orig-source/$(DEB_SOURCE_PACKAGE); \
-		for arch in arm powerpc i386 x64 freebsd_i386 freebsd_x64; do \
+		for arch in arm powerpc geode i386 x64 freebsd_i386 freebsd_x64; do \
 			if ! wget -q -c http://syncapp.bittorrent.com/$(DEB_UPSTREAM_VERSION)/btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; then \
 				wget -q -c http://archive.yeasoft.net/btsync/$(DEB_UPSTREAM_VERSION)/btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; \
 			fi; \
