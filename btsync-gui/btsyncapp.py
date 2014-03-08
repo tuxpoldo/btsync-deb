@@ -28,16 +28,15 @@ import datetime
 
 from gi.repository import Gtk, Gdk, GObject
 
-from btsyncapi import BtSyncApi
+from btsyncagent import BtSyncAgent
 from prefsadvanced import BtSyncPrefsAdvanced
 from btsyncutils import BtInputHelper,BtMessageHelper,BtValueDescriptor
 from dialogs import BtSyncFolderAdd,BtSyncFolderRemove,BtSyncFolderScanQR,BtSyncFolderPrefs
 
 class BtSyncApp(BtInputHelper,BtMessageHelper):
 
-	def __init__(self,agent,btsyncapi):
+	def __init__(self,agent):
 		self.agent = agent
-		self.btsyncapi = btsyncapi
 
 		self.builder = Gtk.Builder()
 		self.builder.add_from_file(os.path.dirname(__file__) + "/btsyncapp.glade")
@@ -53,7 +52,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
 		self.refresh_folders_id = None
 
-		self.prefs = self.btsyncapi.get_prefs()
+		self.prefs = self.agent.get_prefs()
 
 		self.init_folders_controls()
 		self.init_devices_controls()
@@ -84,14 +83,14 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 	def init_folders_values(self):
 		try:
 			self.lock()
-			folders = self.btsyncapi.get_folders()
+			folders = self.agent.get_folders()
 			if folders is not None:
 				for index, value in enumerate(folders):
 					# see in update_folder_values the insane explanation why
 					# also an md5 digest has to be saved
 					digest = md5.new(value['dir'].encode('latin-1')).hexdigest()
 					self.folders.append ([
-						self.btsyncapi.fix_decode(value['dir']),	# 0:Folder
+						self.agent.fix_decode(value['dir']),	# 0:Folder
 						self.get_folder_info_string(value),			# 1:Content
 						value['secret'],							# 2:Secret
 						digest										# 3:FolderTag
@@ -136,7 +135,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 	def refresh_app_status(self):
 		try:
 			self.lock()
-			folders = self.btsyncapi.get_folders()
+			folders = self.agent.get_folders()
 			# forward scan updates existing folders and adds new ones
 			for index, value in enumerate(folders):
 				# see in update_folder_values the insane explanation why
@@ -145,7 +144,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 				if not self.update_folder_values(value):
 					# it must be new (probably added via web interface) - let's add it
 					self.folders.append ([
-						self.btsyncapi.fix_decode(value['dir']),	# 0:Folder
+						self.agent.fix_decode(value['dir']),	# 0:Folder
 						self.get_folder_info_string(value),			# 1:Content
 						value['secret'],							# 2:Secret
 						digest										# 3:FolderTag
@@ -157,7 +156,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 					self.folders.remove(row.iter)
 					self.remove_device_infos(row[2],row[3])
 			# update transfer status
-			speed = self.btsyncapi.get_speed()
+			speed = self.agent.get_speed()
 			self.transfers_status.set_label('{0:.1f} kB/s up, {1:.1f} kB/s down'.format(speed['upload'] / 1000, speed['download'] / 1000))
 			# TODO: fill file list...
 			#       but there is still no suitable API call...
@@ -201,11 +200,11 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		return False
 
 	def add_device_infos(self,folder,digest):
-		foldername = self.btsyncapi.fix_decode(folder['dir'])
-		peers = self.btsyncapi.get_folder_peers(folder['secret'])
+		foldername = self.agent.fix_decode(folder['dir'])
+		peers = self.agent.get_folder_peers(folder['secret'])
 		for index, value in enumerate(peers):
 			self.devices.append ([
-				self.btsyncapi.fix_decode(value['name']),	# 0:Device
+				self.agent.fix_decode(value['name']),	# 0:Device
 				foldername,									# 1:Folder
 				self.get_device_info_string(value),			# 2:Status
 				folder['secret'],							# 3:Secret
@@ -214,14 +213,14 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 			])
 
 	def update_device_infos(self,folder,digest):
-		foldername = self.btsyncapi.fix_decode(folder['dir'])
-		peers = self.btsyncapi.get_folder_peers(folder['secret'])
+		foldername = self.agent.fix_decode(folder['dir'])
+		peers = self.agent.get_folder_peers(folder['secret'])
 		# forward scan updates existing and adds new
 		for index, value in enumerate(peers):
 			if not self.update_device_values(folder,value,digest):
 				# it must be new - let's add it
 					self.devices.append ([
-					self.btsyncapi.fix_decode(value['name']),	# 0:Device
+					self.agent.fix_decode(value['name']),	# 0:Device
 					foldername,									# 1:Folder
 					self.get_device_info_string(value),			# 2:Status
 					folder['secret'],							# 3:Secret
@@ -239,12 +238,12 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		for row in self.devices:
 			if peer['id'] == row[5] and folder['secret'] == row[3]:
 				# found - update information
-				row[0] = self.btsyncapi.fix_decode(peer['name'])
+				row[0] = self.agent.fix_decode(peer['name'])
 				row[2] = self.get_device_info_string(peer)
 				return True
 			elif peer['id'] == row[5] and digest == row[4]:
 				# found - secret probably changed...
-				row[0] = self.btsyncapi.fix_decode(peer['name'])
+				row[0] = self.agent.fix_decode(peer['name'])
 				row[2] = self.get_device_info_string(peer)
 				row[3] = folder['secret']
 				return True
@@ -271,7 +270,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 			else:
 				return '{0} in {1} files (indexing...)'.format(self.sizeof_fmt(folder['size']), str(folder['files']))
 		else:
-			return self.btsyncapi.get_error_message(folder)
+			return self.agent.get_error_message(folder)
 
 	def get_device_info_string(self,peer):
 		connection = {
@@ -320,7 +319,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 
 	def onSaveEntry(self,widget,valDesc,newValue):
 		try:
-			self.btsyncapi.set_prefs({valDesc.Name : newValue})
+			self.agent.set_prefs({valDesc.Name : newValue})
 			self.prefs[valDesc.Name] = newValue
 		except requests.exceptions.ConnectionError:
 			return self.onConnectionError()
@@ -333,15 +332,15 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.folders_remove.set_sensitive(selection.count_selected_rows() > 0)
 
 	def onFoldersAdd(self,widget):
-		dlg = BtSyncFolderAdd(self.btsyncapi)
+		dlg = BtSyncFolderAdd(self.agent)
 		try:
 			dlg.create()
 			result = dlg.run()
 			if result == Gtk.ResponseType.OK:
 				# all checks have already been done. let's go!
-				result = self.btsyncapi.add_folder(dlg.folder,dlg.secret)
-				if self.btsyncapi.get_error_code(result) > 0:
-					self.show_warning(self.window,self.btsyncapi.get_error_message(result))
+				result = self.agent.add_folder(dlg.folder,dlg.secret)
+				if self.agent.get_error_code(result) > 0:
+					self.show_warning(self.window,self.agent.get_error_message(result))
 		except requests.exceptions.ConnectionError:
 			pass
 		except requests.exceptions.HTTPError:
@@ -360,8 +359,8 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 				# ok - let's delete it!
 				secret = model[tree_iter][2]
 				try:
-					result = self.btsyncapi.remove_folder(secret)
-					if self.btsyncapi.get_error_code(result) == 0:
+					result = self.agent.remove_folder(secret)
+					if self.agent.get_error_code(result) == 0:
 						self.folders.remove(tree_iter)
 						self.remove_device_infos(secret)
 					else:
@@ -410,8 +409,8 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 	def onFoldersConnectMobile(self,widget):
 		model, tree_iter = self.folders_selection.get_selected()
 		if tree_iter is not None:
-			result = self.btsyncapi.get_secrets(model[tree_iter][2], False)
-			if self.btsyncapi.get_error_code(result) == 0:
+			result = self.agent.get_secrets(model[tree_iter][2], False)
+			if self.agent.get_error_code(result) == 0:
 				dlg = BtSyncFolderScanQR(
 					result['read_write'] if result.has_key('read_write') else None,
 					result['read_only'],
@@ -431,7 +430,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 	def onFoldersPreferences(self,widget):
 		model, tree_iter = self.folders_selection.get_selected()
 		if tree_iter is not None:
-			dlg = BtSyncFolderPrefs(self.btsyncapi)
+			dlg = BtSyncFolderPrefs(self.agent)
 			try:
 				dlg.create(model[tree_iter][0],model[tree_iter][2])
 				dlg.run()
@@ -447,7 +446,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		if not self.is_locked():
 			rate = int(self.limitdnrate.get_text()) if widget.get_active() else 0
 			try:
-				self.btsyncapi.set_prefs({"download_limit" : rate})
+				self.agent.set_prefs({"download_limit" : rate})
 				self.prefs['download_limit'] = rate
 			except requests.exceptions.ConnectionError:
 				return self.onConnectionError()
@@ -460,7 +459,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		if not self.is_locked():
 			rate = int(self.limituprate.get_text()) if widget.get_active() else 0
 			try:
-				self.btsyncapi.set_prefs({"upload_limit" : rate})
+				self.agent.set_prefs({"upload_limit" : rate})
 				self.prefs['upload_limit'] = rate
 			except requests.exceptions.ConnectionError:
 				return self.onConnectionError()
@@ -469,7 +468,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 
 	def onPreferencesClickedAdvanced(self,widget):
 		try:
-			dlgPrefsAdvanced = BtSyncPrefsAdvanced(self.btsyncapi)
+			dlgPrefsAdvanced = BtSyncPrefsAdvanced(self.agent)
 			dlgPrefsAdvanced.run()
 			dlgPrefsAdvanced.destroy()
 		except requests.exceptions.ConnectionError:
@@ -483,7 +482,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		return False
 
 	def onCommunicationError(self):
-		logging.error('BtSync API HTTP error: {0}'.format(self.btsyncapi.get_status_code()))
+		logging.error('BtSync API HTTP error: {0}'.format(self.agent.get_status_code()))
 		self.window.destroy()
 		return False
 

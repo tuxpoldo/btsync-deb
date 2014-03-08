@@ -21,25 +21,24 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 #
 
+import os
 import requests
 
 from gi.repository import Gtk
-from btsyncapi import BtSyncApi
-from btsyncutils import *
-
-from os.path import dirname
+from btsyncagent import BtSyncAgent
+from btsyncutils import BtInputHelper,BtValueDescriptor
 
 class BtSyncPrefsAdvanced(BtInputHelper):
 
-	def __init__(self,btsyncapi):
-		self.btsyncapi = btsyncapi
-		self.prefs = self.btsyncapi.get_prefs()
+	def __init__(self,agent):
+		self.agent = agent
+		self.prefs = self.agent.get_prefs()
 		self.create()
 
 	def create(self):
 		# create the dialog object from builder
 		self.builder = Gtk.Builder()
-		self.builder.add_from_file(dirname(__file__) + "/prefsadvanced.glade")
+		self.builder.add_from_file(os.path.dirname(__file__) + "/prefsadvanced.glade")
 		self.builder.connect_signals (self)
 		self.dlg = self.builder.get_object('prefsadvanced')
 		# get the editing widgets
@@ -112,7 +111,7 @@ class BtSyncPrefsAdvanced(BtInputHelper):
 
 	def onSaveEntry(self,widget,valDesc,newValue):
 		try:
-			self.btsyncapi.set_prefs({valDesc.Name : newValue})
+			self.agent.set_prefs({valDesc.Name : newValue})
 			# GtkListStore has no search function. BAD!!! Maybe I'm too stupid?
 			for row in self.advancedprefs:
 				if row[0] == valDesc.Name:

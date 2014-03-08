@@ -28,7 +28,6 @@ import requests
 from gi.repository import Gtk, GObject
 
 from trayindicator import TrayIndicator
-from btsyncapi import BtSyncApi
 from btsyncapp import BtSyncApp
 
 VERSION = '0.6'
@@ -75,11 +74,6 @@ class BtSyncStatus:
 		self.agent = agent
 
 	def startup(self):
-		# connection
-		self.btsyncapi = BtSyncApi(
-			host = self.agent.get_host(), port = self.agent.get_port(),
-			username = self.agent.get_username(), password = self.agent.get_password()
-		)
 		self.btsyncver = { 'version': '0.0.0' }
 		# status
 		self.set_status(BtSyncStatus.DISCONNECTED)
@@ -98,7 +92,7 @@ class BtSyncStatus:
 			self.app.window.present()
 		else:
 			try:
-				self.app = BtSyncApp(self.agent,self.btsyncapi)
+				self.app = BtSyncApp(self.agent)
 				self.app.connect_close_signal(self.onDeleteApp)
 			except requests.exceptions.ConnectionError:
 				return self.onConnectionError()
@@ -119,7 +113,7 @@ class BtSyncStatus:
 			try:
 				self.set_status(BtSyncStatus.CONNECTING)
 				self.menustatus.set_label('Connecting...')
-				version = self.btsyncapi.get_version()
+				version = self.agent.get_version()
 				self.btsyncver = version
 				self.set_status(BtSyncStatus.CONNECTED)
 				self.menustatus.set_label('Idle')
@@ -144,15 +138,15 @@ class BtSyncStatus:
 		indexing = False
 		transferring = False
 		try:
-			folders = self.btsyncapi.get_folders()
+			folders = self.agent.get_folders()
 			for fIndex, fValue in enumerate(folders):
 				if fValue['indexing'] > 0:
 					indexing = True
-				peers = self.btsyncapi.get_folder_peers(fValue['secret'])
+				peers = self.agent.get_folder_peers(fValue['secret'])
 				for pIndex, pValue in enumerate(peers):
 					if long(pValue['upload']) + long(pValue['download']) > 0:
 						transferring = True
-			speed = self.btsyncapi.get_speed()
+			speed = self.agent.get_speed()
 			if transferring or speed['upload'] > 0 or speed['download'] > 0:
 				# there are active transfers...
 				self.set_status(BtSyncStatus.CONNECTED,True)
@@ -251,8 +245,6 @@ class BtSyncStatus:
 				self.agent.set_debug(False)
 
 	def onQuit(self,widget):
-		if self.agent.is_auto():
-			self.btsyncapi.shutdown(throw_exceptions=False)
 		Gtk.main_quit()
 
 	def onIconRotate(self):
@@ -292,9 +284,9 @@ class BtSyncStatus:
 
 	def onCommunicationError(self):
 		self.set_status(BtSyncStatus.DISCONNECTED)
-		self.menustatus.set_label('Disconnected: Communication Error {0}'.format(self.btsyncapi.get_status_code()))
+		self.menustatus.set_label('Disconnected: Communication Error {0}'.format(self.agent.get_status_code()))
 		self.close_app();
-		logging.warning('BtSync API HTTP error: {0}'.format(self.btsyncapi.get_status_code()))
+		logging.warning('BtSync API HTTP error: {0}'.format(self.agent.get_status_code()))
 		self.connect_id = GObject.timeout_add(5000, self.btsync_connect)
 		return False
 

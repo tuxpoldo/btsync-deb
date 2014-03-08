@@ -31,6 +31,7 @@ import logging
 import argparse
 import subprocess
 
+from btsyncapi import BtSyncApi
 from btsyncutils import BtSingleton, BtSingleInstanceException
 
 class BtSyncAgentException(Exception):
@@ -42,7 +43,7 @@ class BtSyncAgentException(Exception):
 	def __int__(self):
 		return repr(self.retcode)
 
-class BtSyncAgent:
+class BtSyncAgent(BtSyncApi):
 	# still hardcoded - this is the binary location of btsync when installing
 	# the package btsync-common
 	BINARY = '/usr/lib/btsync-common/btsync-core'
@@ -53,6 +54,7 @@ class BtSyncAgent:
 		'VOFNPU65UVO5RKSMYJ24A2KX3VPS4S7HICM3U7OI3FUHMXJPSLMBV4XNRKEMNOBDK4I'
 
 	def __init__(self,args):
+		BtSyncApi.__init__(self)
 		self.args = args
 		self.uid = int(os.getuid())
 		self.pid = None
@@ -116,7 +118,11 @@ class BtSyncAgent:
 				# changed bind port for web ui
 				self.set_pref('portui',self.portui)
 			raise BtSyncAgentException(0, 'Default settings saved.')
-
+		# initialize btsync api
+		self.set_connection_params(
+			host = self.get_host(), port = self.get_port(),
+			username = self.get_username(), password = self.get_password()
+		)
 		if self.is_auto():
 			self.lock = BtSingleton(self.lockfile,'btsync-gui')
 
@@ -160,7 +166,14 @@ class BtSyncAgent:
 	def shutdown(self):
 		if self.is_primary() and self.is_running():
 			logging.info ('Stopping btsync agent...')
-			os.kill (self.pid, signal.SIGTERM)
+			BtSyncApi.shutdown(self,throw_exceptions=False)
+			time.sleep(0.5)
+			if self.is_running():
+				try:
+					os.kill (self.pid, signal.SIGTERM)
+				except OSError:
+					# ok the process has stopped before we tried to kill it...
+					pass
 			self.kill_config_file()
 
 	def set_pref(self,key,value,flush=True):
@@ -208,7 +221,7 @@ class BtSyncAgent:
 		return 'localhost' if self.is_auto() else self.args.host
 
 	def get_port(self):
-		return self.portui if self.is_auto() else self.args.port
+		return self.portui if self.is_auto() else self.args.port if self.args.port != 0 else 8888
 
 	def get_username(self):
 		return self.username if self.is_auto() else self.args.username
