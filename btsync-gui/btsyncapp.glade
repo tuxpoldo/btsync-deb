@@ -53,6 +53,16 @@
       </object>
     </child>
     <child>
+      <object class="GtkMenuItem" id="folder_menu_openfolder">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Open Folder</property>
+        <property name="use_underline">True</property>
+        <signal name="activate" handler="onFoldersOpenFolder" swapped="no"/>
+      </object>
+    </child>
+    <child>
       <object class="GtkMenuItem" id="folder_menu_openarchive">
         <property name="use_action_appearance">False</property>
         <property name="visible">True</property>

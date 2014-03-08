@@ -7,6 +7,8 @@ btsync-gui (0.7-1) unstable; urgency=low
   * Added the possibility to make the web UI of the local agent
     accessible and to store default settings (Closes #83)
   * Implemented random per session credentials (Closes #67)
+  * Fixed broken open SyncArchive and Folder when folder name
+    contains spaces (Closes #85)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Sun, 02 Mar 2014 15:33:21 +0100
 

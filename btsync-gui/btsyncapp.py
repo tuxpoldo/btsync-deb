@@ -73,6 +73,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 	def init_folders_controls(self):
 		self.folders = self.builder.get_object('folders_list')
 		self.folders_menu = self.builder.get_object('folders_menu')
+		self.folders_menu_openfolder = self.builder.get_object('folder_menu_openfolder')
 		self.folders_menu_openarchive = self.builder.get_object('folder_menu_openarchive')
 		self.folders_selection = self.builder.get_object('folders_selection')
 		self.folders_treeview = self.builder.get_object('folders_tree_view')
@@ -384,7 +385,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 					model, tree_iter = self.folders_selection.get_selected()
 					if tree_iter is not None:
 						if os.path.isdir(model[tree_iter][0]):
-							os.system('xdg-open '+model[tree_iter][0])
+							os.system('xdg-open "{0}"'.format(model[tree_iter][0]))
 							return True
 			elif event.button == 3:
 				path, column, cellx, celly = pathinfo
@@ -392,10 +393,14 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 				widget.set_cursor(path,column,0)
 				model, tree_iter = self.folders_selection.get_selected()
 				if tree_iter is not None:
+					self.folders_menu_openfolder.set_sensitive(
+						os.path.isdir(model[tree_iter][0])
+					)
 					self.folders_menu_openarchive.set_sensitive(
 						os.path.isdir(model[tree_iter][0] + '/.SyncArchive')
 					)
 				else:
+					self.folders_menu_openfolder.set_sensitive(False)
 					self.folders_menu_openarchive.set_sensitive(False)
 
 				self.folders_menu.popup(None,None,None,None,event.button,time)
@@ -420,12 +425,18 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 				result = dlg.run()
 				dlg.destroy()
 
+	def onFoldersOpenFolder(self,widget):
+		model, tree_iter = self.folders_selection.get_selected()
+		if tree_iter is not None:
+			if os.path.isdir(model[tree_iter][0]):
+				os.system('xdg-open "{0}"'.format(model[tree_iter][0]))
+
 	def onFoldersOpenArchive(self,widget):
 		model, tree_iter = self.folders_selection.get_selected()
 		if tree_iter is not None:
 			syncarchive = model[tree_iter][0] + '/.SyncArchive'
 			if os.path.isdir(syncarchive):
-				os.system('xdg-open '+syncarchive)
+				os.system('xdg-open "{0}"'.format(syncarchive))
 
 	def onFoldersPreferences(self,widget):
 		model, tree_iter = self.folders_selection.get_selected()
