@@ -9,6 +9,7 @@ btsync-gui (0.7-1) unstable; urgency=low
   * Implemented random per session credentials (Closes #67)
   * Fixed broken open SyncArchive and Folder when folder name
     contains spaces (Closes #85)
+  * Added specific icons for paused and connecting state
 
  -- Leo Moll <leo.moll@yeasoft.com>  Sun, 02 Mar 2014 15:33:21 +0100
 
