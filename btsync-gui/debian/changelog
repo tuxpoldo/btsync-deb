@@ -1,6 +1,7 @@
 btsync-gui (0.7-1) unstable; urgency=low
 
-  * Implemented shutdown handlers and provided more sonsistent
+  * Added support for suspend and resume (Closes #82)
+  * Implemented shutdown handlers and provided more consistent
     agent startup behaviour (Closes #78)
   * Fixed security issue with agent configuration file (Closes #81)
   * Windows size is now persistent (Closes #77)

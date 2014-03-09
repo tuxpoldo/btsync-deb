@@ -58,6 +58,9 @@ class BtSyncPrefsAdvanced(BtInputHelper):
 			response = self.dlg.run()
 		return response
 
+	def response(self,response_id):
+		self.dlg.response(response_id)
+
 	def destroy(self):
 		self.dlg.destroy()
 		del self.builder

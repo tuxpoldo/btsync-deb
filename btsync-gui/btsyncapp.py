@@ -23,6 +23,7 @@
 
 import os
 import md5
+import logging
 import requests
 import datetime
 
@@ -51,6 +52,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 
 		self.clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
 		self.refresh_folders_id = None
+		self.dlg = None
 
 		self.prefs = self.agent.get_prefs()
 
@@ -66,6 +68,8 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		if self.refresh_folders_id is not None:
 			GObject.source_remove(self.refresh_folders_id)
 			self.refresh_folders_id = None
+		if self.dlg is not None:
+			self.dlg.response(Gtk.ResponseType.CANCEL)
 
 	def connect_close_signal(self,handler):
 		return self.window.connect('delete-event', handler)
@@ -333,13 +337,13 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.folders_remove.set_sensitive(selection.count_selected_rows() > 0)
 
 	def onFoldersAdd(self,widget):
-		dlg = BtSyncFolderAdd(self.agent)
+		self.dlg = BtSyncFolderAdd(self.agent)
 		try:
-			dlg.create()
-			result = dlg.run()
+			self.dlg.create()
+			result = self.dlg.run()
 			if result == Gtk.ResponseType.OK:
 				# all checks have already been done. let's go!
-				result = self.agent.add_folder(dlg.folder,dlg.secret)
+				result = self.agent.add_folder(self.dlg.folder,self.dlg.secret)
 				if self.agent.get_error_code(result) > 0:
 					self.show_warning(self.window,self.agent.get_error_message(result))
 		except requests.exceptions.ConnectionError:
@@ -347,13 +351,14 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		except requests.exceptions.HTTPError:
 			pass
 		finally:
-			dlg.destroy()
+			self.dlg.destroy()
+			self.dlg = None
 
 	def onFoldersRemove(self,widget):
-		dlg = BtSyncFolderRemove()
-		dlg.create()
-		result = dlg.run()
-		dlg.destroy()
+		self.dlg = BtSyncFolderRemove()
+		self.dlg.create()
+		result = self.dlg.run()
+		self.dlg.destroy()
 		if result == Gtk.ResponseType.OK:
 			model, tree_iter = self.folders_selection.get_selected()
 			if tree_iter is not None:
@@ -416,14 +421,15 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		if tree_iter is not None:
 			result = self.agent.get_secrets(model[tree_iter][2], False)
 			if self.agent.get_error_code(result) == 0:
-				dlg = BtSyncFolderScanQR(
+				self.dlg = BtSyncFolderScanQR(
 					result['read_write'] if result.has_key('read_write') else None,
 					result['read_only'],
 					os.path.basename(model[tree_iter][0])
 				)
-				dlg.create()
-				result = dlg.run()
-				dlg.destroy()
+				self.dlg.create()
+				result = self.dlg.run()
+				self.dlg.destroy()
+				self.dlg = None
 
 	def onFoldersOpenFolder(self,widget):
 		model, tree_iter = self.folders_selection.get_selected()
@@ -441,16 +447,17 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 	def onFoldersPreferences(self,widget):
 		model, tree_iter = self.folders_selection.get_selected()
 		if tree_iter is not None:
-			dlg = BtSyncFolderPrefs(self.agent)
+			self.dlg = BtSyncFolderPrefs(self.agent)
 			try:
-				dlg.create(model[tree_iter][0],model[tree_iter][2])
-				dlg.run()
+				self.dlg.create(model[tree_iter][0],model[tree_iter][2])
+				self.dlg.run()
 			except requests.exceptions.ConnectionError:
 				pass
 			except requests.exceptions.HTTPError:
 				pass
 			finally:
-				dlg.destroy()
+				self.dlg.destroy()
+				self.dlg = None
 
 	def onPreferencesToggledLimitDn(self,widget):
 		self.limitdnrate.set_sensitive(widget.get_active())
@@ -479,16 +486,18 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 
 	def onPreferencesClickedAdvanced(self,widget):
 		try:
-			dlgPrefsAdvanced = BtSyncPrefsAdvanced(self.agent)
-			dlgPrefsAdvanced.run()
-			dlgPrefsAdvanced.destroy()
+			self.dlg = BtSyncPrefsAdvanced(self.agent)
+			self.dlg.run()
 		except requests.exceptions.ConnectionError:
 			return self.onConnectionError()
 		except requests.exceptions.HTTPError:
 			return self.onCommunicationError()
+		finally:
+			self.dlg.destroy()
+			self.dlg = None
 
 	def onConnectionError(self):
-		logger.error('BtSync API Connection Error')
+		logging.error('BtSync API Connection Error')
 		self.window.destroy()
 		return False
 

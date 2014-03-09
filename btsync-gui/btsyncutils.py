@@ -214,18 +214,22 @@ class BtInputHelper(object):
 #		print "  Max:       " + str(valDesc.Max)
 
 class BtMessageHelper(object):
+	def __init__(self):
+		self.msgdlg = None
+
 	def show_message(self,parent,messagetext,messagetype=Gtk.MessageType.INFO):
-		dlg = Gtk.MessageDialog (
+		self.msgdlg = Gtk.MessageDialog (
 			parent,
 			Gtk.DialogFlags.DESTROY_WITH_PARENT,
 			messagetype,
 			Gtk.ButtonsType.CLOSE,
 			None
 		)
-		dlg.set_markup('<b>BitTorrent Sync</b>')
-		dlg.format_secondary_markup(messagetext)
-		dlg.run()
-		dlg.destroy()
+		self.msgdlg.set_markup('<b>BitTorrent Sync</b>')
+		self.msgdlg.format_secondary_markup(messagetext)
+		self.msgdlg.run()
+		self.msgdlg.destroy()
+		self.msgdlg = None
 
 	def show_warning(self,parent,messagetext):
 		self.show_message(parent,messagetext,Gtk.MessageType.WARNING)
@@ -236,9 +240,11 @@ class BtMessageHelper(object):
 class BtBaseDialog(BtMessageHelper):
 
 	def __init__(self,gladefile,dlgname,addobjects = []):
+		BtMessageHelper.__init__(self)
 		self.gladefile = gladefile
 		self.objects = [ dlgname ]
 		self.objects.extend(addobjects)
+		self.dlg = None
 
 	def create(self):
 		# create the dialog object from builder
@@ -253,8 +259,15 @@ class BtBaseDialog(BtMessageHelper):
 			response = self.dlg.run()
 		return response
 
+	def response(self,response_id):
+		if self.msgdlg is not None:
+			self.msgdlg.response(response_id)
+		if self.dlg is not None:
+			self.dlg.response(response_id)
+
 	def destroy(self):
 		self.dlg.destroy()
+		self.dlg = None
 		del self.builder
 
 	def show_message(self,messagetext,messagetype=Gtk.MessageType.INFO):

@@ -80,6 +80,7 @@ class BtSyncAgent(BtSyncApi):
 		self.password = self.get_pref('password',password)
 		self.bindui = self.get_pref('bindui','127.0.0.1')
 		self.portui = self.get_pref('portui',self.uid + 8999)
+		self.paused = self.get_pref('paused',False)
 		# process command line arguments
 		if self.args.username is not None:
 			self.username = self.args.username
@@ -143,38 +144,55 @@ class BtSyncAgent(BtSyncApi):
 					os.kill (self.pid, signal.SIGTERM)
 					time.sleep(1)
 					
-				self.make_config_file()
-				if not self.is_running():
+				if not self.is_paused():
 					logging.info ('Starting btsync agent...')
-					subprocess.call([BtSyncAgent.BINARY, '--config', self.conffile])
-					time.sleep(0.5)
-					if self.is_running():
-						# no guarantee that it's already running...
-						self.kill_config_file()
+					self.start_agent()
 			except Exception:
 				logging.critical('Failure to start btsync agent - exiting...')
 				exit (-1)
 
 	def suspend(self):
 		if self.args.host == 'auto':
-			pass
+			if not self.paused:
+				self.paused = True
+				self.set_pref('paused', True)
+				logging.info ('Suspending btsync agent...')
+				if self.is_running():
+					self.kill_agent()
 
 	def resume(self):
 		if self.args.host == 'auto':
-			pass
+			if self.paused:
+				self.paused = False
+				self.set_pref('paused', False)
+				logging.info ('Resuming btsync agent...')
+				if not self.is_running():
+					self.start_agent()
 
 	def shutdown(self):
 		if self.is_primary() and self.is_running():
 			logging.info ('Stopping btsync agent...')
-			BtSyncApi.shutdown(self,throw_exceptions=False)
+			self.kill_agent()
+			self.kill_config_file()
+
+	def start_agent(self):
+		if not self.is_running():
+			self.make_config_file()
+			subprocess.call([BtSyncAgent.BINARY, '--config', self.conffile])
 			time.sleep(0.5)
 			if self.is_running():
-				try:
-					os.kill (self.pid, signal.SIGTERM)
-				except OSError:
-					# ok the process has stopped before we tried to kill it...
-					pass
-			self.kill_config_file()
+				# no guarantee that it's already running...
+				self.kill_config_file()
+
+	def kill_agent(self):
+		BtSyncApi.shutdown(self,throw_exceptions=False)
+		time.sleep(0.5)
+		if self.is_running():
+			try:
+				os.kill (self.pid, signal.SIGTERM)
+			except OSError:
+				# ok the process has stopped before we tried to kill it...
+				pass
 
 	def set_pref(self,key,value,flush=True):
 		self.prefs[key] = value
@@ -213,6 +231,9 @@ class BtSyncAgent(BtSyncApi):
 
 	def is_primary(self):
 		return self.args.host == 'auto' and isinstance(self.lock,BtSingleton)
+
+	def is_paused(self):
+		return self.paused;
 
 	def get_lock_filename(self):
 		return os.environ['HOME'] + '/.config/btsync/btsync-gui.lock'

@@ -76,8 +76,14 @@ class BtSyncStatus:
 	def startup(self):
 		self.btsyncver = { 'version': '0.0.0' }
 		# status
-		self.set_status(BtSyncStatus.DISCONNECTED)
-		self.connect_id = GObject.timeout_add(1000, self.btsync_connect)
+		self.menupause.set_sensitive(self.agent.is_auto())
+		if self.agent.is_paused():
+			self.set_status(BtSyncStatus.PAUSED)
+			self.menupause.set_active(True)
+		else:
+			self.set_status(BtSyncStatus.CONNECTING)
+			self.menupause.set_active(False)
+			self.connect_id = GObject.timeout_add(1000, self.btsync_connect)
 
 	def shutdown(self):
 		if self.animator_id is not None:
@@ -102,14 +108,16 @@ class BtSyncStatus:
 	def close_app(self,stillopen=True):
 		if isinstance(self.app, BtSyncApp):
 			if stillopen:
-				self.app.stop()
+				self.app.close()
 				# self.app.window.close()
 				self.app.window.destroy()
 			del self.app
 			self.app = None
 
 	def btsync_connect(self):
-		if self.connection is BtSyncStatus.DISCONNECTED:
+		if self.connection is BtSyncStatus.DISCONNECTED or \
+			self.connection is BtSyncStatus.CONNECTING or \
+			self.connection is BtSyncStatus.PAUSED:
 			try:
 				self.set_status(BtSyncStatus.CONNECTING)
 				self.menustatus.set_label('Connecting...')
@@ -134,6 +142,10 @@ class BtSyncStatus:
 		
 
 	def btsync_refresh_status(self):
+		if self.connection is not BtSyncStatus.CONNECTED:
+			self.status_id = None
+			logging.info('Interrupting refresh sequence...')
+			return False
 		logging.info('Refresh status...')
 		indexing = False
 		transferring = False
@@ -171,7 +183,6 @@ class BtSyncStatus:
 			self.frame = -1
 			self.transferring = False
 			self.ind.set_from_icon_name('btsync-gui-disconnected')
-			self.menupause.set_sensitive(False)
 			self.menudebug.set_sensitive(False)
 			self.menudebug.set_active(self.agent.get_debug())
 			self.menuopen.set_sensitive(False)
@@ -179,7 +190,6 @@ class BtSyncStatus:
 			self.frame = -1
 			self.transferring = False
 			self.ind.set_from_icon_name('btsync-gui-connecting')
-			self.menupause.set_sensitive(False)
 			self.menudebug.set_sensitive(False)
 			self.menudebug.set_active(self.agent.get_debug())
 			self.menuopen.set_sensitive(False)
@@ -187,14 +197,10 @@ class BtSyncStatus:
 			self.frame = -1
 			self.transferring = False
 			self.ind.set_from_icon_name('btsync-gui-paused')
-#			self.menupause.set_sensitive(self.agent.is_auto())
-			self.menupause.set_sensitive(False)
 			self.menudebug.set_sensitive(self.agent.is_auto())
 			self.menudebug.set_active(self.agent.get_debug())
 			self.menuopen.set_sensitive(False)
 		else:
-#			self.menupause.set_sensitive(self.agent.is_auto())
-			self.menupause.set_sensitive(False)
 			self.menudebug.set_sensitive(self.agent.is_auto())
 			self.menudebug.set_active(self.agent.get_debug())
 			self.menuopen.set_sensitive(True)
@@ -216,8 +222,9 @@ class BtSyncStatus:
 		return self.connection is BtSyncStatus.CONNECTED
 
 	def onActivate(self,widget):
-		self.open_app()
-		self.menu.popup(None,None,Gtk.StatusIcon.position_menu,widget,3,0)
+#		self.menu.popup(None,None,Gtk.StatusIcon.position_menu,widget,3,0)
+		if self.is_connected():
+			self.open_app()
 
 	def onAbout(self,widget):
 		self.about.set_version('Version {0} ({0})'.format(self.btsyncver['version']))
@@ -226,14 +233,23 @@ class BtSyncStatus:
 		self.about.run()
 		self.about.hide()
 
-	def onTogglePause(self,widget):
-		print "onTogglePause"
-
 	def onOpenApp(self,widget):
 		self.open_app()
 
 	def onDeleteApp(self, *args):
 		self.close_app(False)
+
+	def onTogglePause(self,widget):
+		if widget.get_active() and not self.agent.is_paused():
+			logging.info('Suspending agent...')
+			self.close_app();
+			self.set_status(BtSyncStatus.PAUSED)
+			self.agent.suspend()
+		elif not widget.get_active() and self.agent.is_paused():
+			logging.info('Resuming agent...')
+			self.set_status(BtSyncStatus.CONNECTING)
+			self.agent.resume()
+			self.connect_id = GObject.timeout_add(1000, self.btsync_connect)
 
 	def onToggleLogging(self,widget):
 		if self.is_connected():
@@ -276,7 +292,7 @@ class BtSyncStatus:
 		logging.info('BtSync API Connection Error')
 		if self.agent.is_auto() and not self.agent.is_running():
 			logging.warning('BitTorrent Sync seems to be crashed. Restarting...')
-			self.agent.startup()
+			self.agent.start_agent()
 			self.connect_id = GObject.timeout_add(1000, self.btsync_connect)
 		else:
 			self.connect_id = GObject.timeout_add(5000, self.btsync_connect)
@@ -290,10 +306,4 @@ class BtSyncStatus:
 		self.connect_id = GObject.timeout_add(5000, self.btsync_connect)
 		return False
 
-#	def uptime(self):
-#		uptimef = open("/proc/uptime", "r")
-#		newupstr = uptimef.read()
-#		newuplst = newupstr.split()
-#		uptimef.close()
-#		return int(float(newuplst[0]) * 1000)
 

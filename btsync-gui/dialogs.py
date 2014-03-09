@@ -36,6 +36,7 @@ class BtSyncFolderRemove(BtBaseDialog):
 class BtSyncFolderAdd(BtBaseDialog):
 	def __init__(self,api):
 		BtBaseDialog.__init__(self, 'dialogs.glade', 'addfolder')
+		self.folderdlg = None
 		self.api = api
 		self.secret = ''
 		self.folder = ''
@@ -73,6 +74,11 @@ class BtSyncFolderAdd(BtBaseDialog):
 				else:
 					return response
 
+	def response(self,result_id):
+		if self.folderdlg is not None:
+			self.folderdlg.response(result_id)
+		BtBaseDialog.response(self,result_id)
+
 	def is_duplicate_folder(self,folder,secret):
 		folders = self.api.get_folders()
 		if folders is not None:
@@ -83,13 +89,14 @@ class BtSyncFolderAdd(BtBaseDialog):
 
 
 	def onFolderAddChoose(self,widget):
-		dialog = Gtk.FileChooserDialog ("Please select a folder to sync", self.dlg,
+		self.folderdlg = Gtk.FileChooserDialog ("Please select a folder to sync", self.dlg,
 			Gtk.FileChooserAction.SELECT_FOLDER,
 			(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_OPEN, Gtk.ResponseType.OK)
 		)
-		if dialog.run() == Gtk.ResponseType.OK:
-			self.folder_w.set_text(dialog.get_filename())
-		dialog.destroy()
+		if self.folderdlg.run() == Gtk.ResponseType.OK:
+			self.folder_w.set_text(self.folderdlg.get_filename())
+		self.folderdlg.destroy()
+		self.folderdlg = None
 
 	def onFolderAddGenerate(self,widget):
 		secrets = self.api.get_secrets()
@@ -295,5 +302,3 @@ class BtSyncFolderPrefs(BtBaseDialog):
 
 		return self.save_prefs()
 
-
-			
