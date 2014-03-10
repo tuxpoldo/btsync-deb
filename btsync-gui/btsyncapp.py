@@ -31,7 +31,7 @@ from gi.repository import Gtk, Gdk, GObject
 
 from btsyncagent import BtSyncAgent
 from prefsadvanced import BtSyncPrefsAdvanced
-from btsyncutils import BtInputHelper,BtMessageHelper,BtValueDescriptor
+from btsyncutils import BtInputHelper,BtMessageHelper,BtValueDescriptor,BtDynamicTimeout
 from dialogs import BtSyncFolderAdd,BtSyncFolderRemove,BtSyncFolderScanQR,BtSyncFolderPrefs
 
 class BtSyncApp(BtInputHelper,BtMessageHelper):
@@ -51,7 +51,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.window.show()
 
 		self.clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
-		self.refresh_folders_id = None
+		self.app_status_to = BtDynamicTimeout(1000,self.refresh_app_status)
 		self.dlg = None
 
 		self.prefs = self.agent.get_prefs()
@@ -65,9 +65,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.init_preferences_values()
 
 	def close(self):
-		if self.refresh_folders_id is not None:
-			GObject.source_remove(self.refresh_folders_id)
-			self.refresh_folders_id = None
+		self.app_status_to.stop()
 		if self.dlg is not None:
 			self.dlg.response(Gtk.ResponseType.CANCEL)
 
@@ -102,7 +100,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 					])
 					self.add_device_infos(value,digest)
 			self.unlock()
-			self.refresh_folders_id = GObject.timeout_add(1000, self.refresh_app_status)
+			self.app_status_to.start()
 		except requests.exceptions.ConnectionError:
 			self.unlock()
 			self.onConnectionError()
@@ -166,15 +164,12 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 			# TODO: fill file list...
 			#       but there is still no suitable API call...
 			self.unlock()
-
 			return True
 		except requests.exceptions.ConnectionError:
 			self.unlock()
-			self.refresh_folders_id = None
 			return self.onConnectionError()
 		except requests.exceptions.HTTPError:
 			self.unlock()
-			self.refresh_folders_id = None
 			return self.onCommunicationError()
 
 	def update_folder_values(self,value):
@@ -321,6 +316,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 	def onDelete(self, *args):
 		width, height = self.window.get_size()
 		self.agent.set_pref('windowsize', (width, height))
+		self.close()
 
 	def onSaveEntry(self,widget,valDesc,newValue):
 		try:

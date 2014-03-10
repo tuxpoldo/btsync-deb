@@ -22,6 +22,8 @@
 #
 
 import os
+import time
+import logging
 import exceptions
 
 from gi.repository import Gtk, GObject
@@ -335,4 +337,45 @@ class BtSingleton():
 			return args
 		except IOError:
 			return ['']
+
+
+class BtDynamicTimeout:
+
+	def __init__(self,interval,function):
+		self.mini = interval
+		self.last = interval
+		self.best = interval
+		self.func = function
+		self.toid = None
+
+	def start(self):
+		if self.toid is None:
+			self.toid = GObject.timeout_add(self.best, self._tofunc)
+
+	def stop(self):
+		if self.toid is not None:
+			GObject.source_remove(self.toid)
+			self.toid = None
+
+	def _tofunc(self):
+		start = time.time()
+		result = self.func()
+		if not result:
+			self.toid = None
+			return False
+		duration = int((time.time() - start) * 1000)
+		if duration < 50:
+			self.best = max(1000,self.mini)
+		elif duration < 100:
+			self.best = max(2000,self.mini)
+		elif duration < 500:
+			self.best = max(4000,self.mini)
+		else:
+			self.best = max(duration * 10,self.mini)
+		if self.best != self.last:
+			logging.info('Adaptive timeout changed to {0}'.format(self.best))
+			self.last = self.best
+			self.toid = GObject.timeout_add(self.best, self._tofunc)
+			return False
+		return True
 

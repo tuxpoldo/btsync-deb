@@ -29,6 +29,7 @@ from gi.repository import Gtk, GObject
 
 from trayindicator import TrayIndicator
 from btsyncapp import BtSyncApp
+from btsyncutils import BtDynamicTimeout
 
 VERSION = '0.6'
 
@@ -70,28 +71,33 @@ class BtSyncStatus:
 		# other variables
 		self.connection = BtSyncStatus.DISCONNECTED
 		self.connect_id = None
-		self.status_id = None
+		self.status_to = BtDynamicTimeout(1000,self.btsync_refresh_status)
 		self.agent = agent
 
 	def startup(self):
 		self.btsyncver = { 'version': '0.0.0' }
 		# status
-		self.menupause.set_sensitive(self.agent.is_auto())
-		if self.agent.is_paused():
-			self.set_status(BtSyncStatus.PAUSED)
-			self.menupause.set_active(True)
+		if self.agent.is_auto():
+			self.menupause.set_sensitive(self.agent.is_auto())
+			if self.agent.is_paused():
+				self.set_status(BtSyncStatus.PAUSED)
+				self.menupause.set_active(True)
+			else:
+				self.set_status(BtSyncStatus.CONNECTING)
+				self.menupause.set_active(False)
+				self.connect_id = GObject.timeout_add(1000, self.btsync_connect)
 		else:
 			self.set_status(BtSyncStatus.CONNECTING)
+			self.menupause.set_sensitive(False)
 			self.menupause.set_active(False)
 			self.connect_id = GObject.timeout_add(1000, self.btsync_connect)
-
+		
 	def shutdown(self):
 		if self.animator_id is not None:
 			GObject.source_remove(self.animator_id)
 		if self.connect_id is not None:
 			GObject.source_remove(self.connect_id)
-		if self.status_id is not None:
-			GObject.source_remove(self.status_id)
+		self.status_to.stop()
 
 	def open_app(self):
 		if isinstance(self.app, BtSyncApp):
@@ -125,7 +131,7 @@ class BtSyncStatus:
 				self.btsyncver = version
 				self.set_status(BtSyncStatus.CONNECTED)
 				self.menustatus.set_label('Idle')
-				self.status_id = GObject.timeout_add(1000, self.btsync_refresh_status)
+				self.status_to.start()
 				self.connect_id = None
 				return False
 
@@ -143,7 +149,6 @@ class BtSyncStatus:
 
 	def btsync_refresh_status(self):
 		if self.connection is not BtSyncStatus.CONNECTED:
-			self.status_id = None
 			logging.info('Interrupting refresh sequence...')
 			return False
 		logging.info('Refresh status...')
@@ -154,10 +159,12 @@ class BtSyncStatus:
 			for fIndex, fValue in enumerate(folders):
 				if fValue['indexing'] > 0:
 					indexing = True
-				peers = self.agent.get_folder_peers(fValue['secret'])
-				for pIndex, pValue in enumerate(peers):
-					if long(pValue['upload']) + long(pValue['download']) > 0:
-						transferring = True
+# this takes too much resources...
+#				peers = self.agent.get_folder_peers(fValue['secret'])
+#				for pIndex, pValue in enumerate(peers):
+#					if long(pValue['upload']) + long(pValue['download']) > 0:
+#						transferring = True
+#####
 			speed = self.agent.get_speed()
 			if transferring or speed['upload'] > 0 or speed['download'] > 0:
 				# there are active transfers...
@@ -172,10 +179,8 @@ class BtSyncStatus:
 			return True
 	
 		except requests.exceptions.ConnectionError:
-			self.status_id = None
 			return self.onConnectionError()
 		except requests.exceptions.HTTPError:
-			self.status_id = None
 			return self.onCommunicationError()
 
 	def set_status(self,connection,transferring=False):
@@ -283,7 +288,6 @@ class BtSyncStatus:
 			self.rotating = True
 			self.frame += 1
 			return True
-
 
 	def onConnectionError(self):
 		self.set_status(BtSyncStatus.DISCONNECTED)
