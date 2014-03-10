@@ -14,6 +14,11 @@ btsync-gui (0.7-1) unstable; urgency=low
   * Cyclic status updates are now dynamically adapted to the
     system and conncetion performance avoiding API flooding
     (Closes #88)
+  * Finalized remote support (Closes #79)
+    - Added connection information to status and window
+    - Disabled browse button on remote connections
+    - Disabled local file system checks on remote connections
+    - Disabled folder open functions on remote connections
 
  -- Leo Moll <leo.moll@yeasoft.com>  Sun, 02 Mar 2014 15:33:21 +0100
 

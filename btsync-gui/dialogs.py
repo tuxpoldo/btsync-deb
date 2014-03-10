@@ -26,7 +26,7 @@ import qrencode
 
 from gi.repository import Gtk, Gdk, GdkPixbuf
 from cStringIO import StringIO
-from btsyncapi import BtSyncApi
+from btsyncagent import BtSyncAgent
 from btsyncutils import BtBaseDialog
 
 class BtSyncFolderRemove(BtBaseDialog):
@@ -34,10 +34,10 @@ class BtSyncFolderRemove(BtBaseDialog):
 		BtBaseDialog.__init__(self, 'dialogs.glade', 'removefolder')
 
 class BtSyncFolderAdd(BtBaseDialog):
-	def __init__(self,api):
+	def __init__(self,agent):
 		BtBaseDialog.__init__(self, 'dialogs.glade', 'addfolder')
 		self.folderdlg = None
-		self.api = api
+		self.agent = agent
 		self.secret = ''
 		self.folder = ''
 
@@ -45,6 +45,8 @@ class BtSyncFolderAdd(BtBaseDialog):
 		BtBaseDialog.create(self)
 		self.secret_w = self.builder.get_object('addfolder_secret')
 		self.folder_w = self.builder.get_object('addfolder_folder')
+		self.choose_b = self.builder.get_object('addfolder_choose')
+		self.choose_b.set_sensitive(self.agent.is_local())
 
 	def run(self):
 		while True:
@@ -55,7 +57,7 @@ class BtSyncFolderAdd(BtBaseDialog):
 				self.secret = self.secret_w.get_text()
 				self.folder = self.folder_w.get_text()
 				# test if secret is OK
-				if self.api.get_error_code(self.api.get_secrets(self.secret)) > 0:
+				if self.agent.get_error_code(self.agent.get_secrets(self.secret)) > 0:
 					self.show_warning(
 						'This secret is invalid.\nPlease generate a new '\
 						'secret or enter your shared folder secret.'
@@ -63,14 +65,18 @@ class BtSyncFolderAdd(BtBaseDialog):
 				# test if string is an absolute path and a directory
 				elif len(self.folder) == 0 or self.folder[0] != '/' or not os.path.isdir(self.folder):
 					self.show_warning('Can\'t open the destination folder.')
-				# test if the specified directory is readable and writable
-				elif not os.access(self.folder,os.W_OK) or not os.access(self.folder,os.R_OK):
-					self.show_warning(
-						'Don\'t have permissions to write to the selected folder.'
-					)
 				# test if the specified data is unique
 				elif self.is_duplicate_folder(self.folder,self.secret):
 					self.show_warning('Selected folder is already added to BitTorrent Sync.')
+				# if btsync agent is local perform more tests
+				elif self.agent.is_local():
+					# test if the specified directory is readable and writable
+					if not os.access(self.folder,os.W_OK) or not os.access(self.folder,os.R_OK):
+						self.show_warning(
+							'Don\'t have permissions to write to the selected folder.'
+						)
+					else:
+						return response
 				else:
 					return response
 
@@ -80,7 +86,7 @@ class BtSyncFolderAdd(BtBaseDialog):
 		BtBaseDialog.response(self,result_id)
 
 	def is_duplicate_folder(self,folder,secret):
-		folders = self.api.get_folders()
+		folders = self.agent.get_folders()
 		if folders is not None:
 			for index, value in enumerate(folders):
 				if value['dir'] == folder or value['secret'] == secret:
@@ -99,7 +105,7 @@ class BtSyncFolderAdd(BtBaseDialog):
 		self.folderdlg = None
 
 	def onFolderAddGenerate(self,widget):
-		secrets = self.api.get_secrets()
+		secrets = self.agent.get_secrets()
 		self.secret_w.set_text(secrets['read_write'])
 		
 class BtSyncFolderScanQR(BtBaseDialog):

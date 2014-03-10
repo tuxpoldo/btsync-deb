@@ -235,6 +235,11 @@ class BtSyncAgent(BtSyncApi):
 	def is_paused(self):
 		return self.paused;
 
+	def is_local(self):
+		return self.args.host == 'auto' or \
+			self.args.host == 'localhost' or \
+			self.args.host == '127.0.0.1'
+
 	def get_lock_filename(self):
 		return os.environ['HOME'] + '/.config/btsync/btsync-gui.lock'
 

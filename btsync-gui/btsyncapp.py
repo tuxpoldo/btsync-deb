@@ -48,6 +48,13 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.window = self.builder.get_object('btsyncapp')
 		self.window.set_default_size(width, height)
 		self.window.connect('delete-event',self.onDelete)
+		if not self.agent.is_auto():
+			title = self.window.get_title()
+			self.window.set_title('{0} - ({1}:{2})'.format(
+				title,
+				agent.get_host(),
+				agent.get_port()
+			))
 		self.window.show()
 
 		self.clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
@@ -393,7 +400,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 				widget.grab_focus()
 				widget.set_cursor(path,column,0)
 				model, tree_iter = self.folders_selection.get_selected()
-				if tree_iter is not None:
+				if self.agent.is_local() and tree_iter is not None:
 					self.folders_menu_openfolder.set_sensitive(
 						os.path.isdir(model[tree_iter][0])
 					)

@@ -44,18 +44,26 @@ class BtSyncStatus:
 		self.builder.add_from_file(os.path.dirname(__file__) + "/btsyncstatus.glade")
 		self.builder.connect_signals (self)
 		self.menu = self.builder.get_object('btsyncmenu')
+		self.menuconnection = self.builder.get_object('connectionitem')
 		self.menustatus = self.builder.get_object('statusitem')
 		self.menupause = self.builder.get_object('pausesyncing')
 		self.menudebug = self.builder.get_object('setdebug')
 		self.menuopen = self.builder.get_object('openapp')
 		self.about = self.builder.get_object('aboutdialog')
 
+
 		self.ind = TrayIndicator (
 			'btsync',
 			'btsync-gui-disconnected'
 		)
-		self.ind.set_title('BitTorrent Sync')
-		self.ind.set_tooltip_text('BitTorrent Sync Status Indicator')
+		if agent.is_auto():
+			self.menuconnection.set_visible(False)
+			self.ind.set_title('BitTorrent Sync')
+			self.ind.set_tooltip_text('BitTorrent Sync Status Indicator')
+		else:
+			self.menuconnection.set_label('{0}:{1}'.format(agent.get_host(),agent.get_port()))
+			self.ind.set_title('BitTorrent Sync {0}:{1}'.format(agent.get_host(),agent.get_port()))
+			self.ind.set_tooltip_text('BitTorrent Sync {0}:{1}'.format(agent.get_host(),agent.get_port()))
 		self.ind.set_menu(self.menu)
 		self.ind.set_default_action(self.onActivate)
 
@@ -202,11 +210,11 @@ class BtSyncStatus:
 			self.frame = -1
 			self.transferring = False
 			self.ind.set_from_icon_name('btsync-gui-paused')
-			self.menudebug.set_sensitive(self.agent.is_auto())
+			self.menudebug.set_sensitive(self.agent.is_local())
 			self.menudebug.set_active(self.agent.get_debug())
 			self.menuopen.set_sensitive(False)
 		else:
-			self.menudebug.set_sensitive(self.agent.is_auto())
+			self.menudebug.set_sensitive(self.agent.is_local())
 			self.menudebug.set_active(self.agent.get_debug())
 			self.menuopen.set_sensitive(True)
 			if transferring and not self.transferring:
