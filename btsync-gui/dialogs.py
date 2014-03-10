@@ -23,11 +23,12 @@
 
 import os
 import qrencode
+import requests
 
 from gi.repository import Gtk, Gdk, GdkPixbuf
 from cStringIO import StringIO
 from btsyncagent import BtSyncAgent
-from btsyncutils import BtBaseDialog
+from btsyncutils import BtBaseDialog,BtInputHelper,BtValueDescriptor
 
 class BtSyncFolderRemove(BtBaseDialog):
 	def __init__(self):
@@ -307,4 +308,110 @@ class BtSyncFolderPrefs(BtBaseDialog):
 				return True
 
 		return self.save_prefs()
+
+class BtSyncPrefsAdvanced(BtBaseDialog,BtInputHelper):
+
+	def __init__(self,agent):
+		BtBaseDialog.__init__(self,
+			'dialogs.glade',
+			'prefsadvanced', [
+				'advancedprefs'
+			]
+		)
+		BtInputHelper.__init__(self)
+		self.agent = agent
+		self.prefs = self.agent.get_prefs()
+		self.create()
+
+	def create(self):
+		BtBaseDialog.create(self)
+		# get the editing widgets
+		self.advancedprefs = self.builder.get_object('advancedprefs')
+		self.ap_tree_prefs = self.builder.get_object('ap_tree_prefs')
+		self.ap_label_value = self.builder.get_object('ap_label_value')
+		self.ap_switch_value = self.builder.get_object('ap_switch_value')
+		self.ap_entry_value = self.builder.get_object('ap_entry_value')
+		self.ap_reset_value = self.builder.get_object('ap_reset_value')
+		# initialize content
+		self.init_editor()
+		self.init_values()
+
+	def init_values(self):
+		self.lock()
+		# fill with current values and specifications
+		self.advancedprefs.clear()
+		for key, value in self.prefs.items():
+			valDesc = BtValueDescriptor.new_from(key,value)
+			if valDesc.Advanced:
+				self.advancedprefs.append([
+					str(key), str(value),
+					400 if valDesc.is_default(value) else 900,
+					valDesc
+				]);
+		self.unlock()
+
+	def init_editor(self,valDesc=None):
+		self.lock()
+		if valDesc == None:
+			self.detach(self.ap_entry_value)
+			self.detach(self.ap_switch_value)
+			self.ap_label_value.hide()
+			self.ap_switch_value.hide()
+			self.ap_entry_value.hide()
+			self.ap_reset_value.hide()
+		else:
+			if valDesc.Type == 'b':
+				self.attach(self.ap_switch_value,valDesc)
+				self.ap_label_value.show()
+				self.ap_switch_value.show()
+				self.ap_entry_value.hide()
+				self.ap_reset_value.show()
+			elif valDesc.Type == 'n' or valDesc.Type == 's':
+				self.attach(self.ap_entry_value,valDesc)
+				self.ap_label_value.show()
+				self.ap_switch_value.hide()
+				self.ap_entry_value.show()
+				self.ap_reset_value.show()
+			else:
+				self.ap_label_value.hide()
+				self.ap_switch_value.hide()
+				self.ap_entry_value.hide()
+				self.ap_reset_value.hide()
+		self.unlock()
+
+	def onSelectionChanged(self,selection):
+		model, tree_iter = selection.get_selected()
+		self.init_editor(None if tree_iter is None else model[tree_iter][3])
+
+	def onSaveEntry(self,widget,valDesc,newValue):
+		try:
+			self.agent.set_prefs({valDesc.Name : newValue})
+			# GtkListStore has no search function. BAD!!! Maybe I'm too stupid?
+			for row in self.advancedprefs:
+				if row[0] == valDesc.Name:
+					row[1] = str(newValue)
+					row[2] = valDesc.get_display_width(newValue)
+			return True
+		except requests.exceptions.ConnectionError:
+			return self.onConnectionError()
+		except requests.exceptions.HTTPError:
+			return self.onCommunicationError()
+
+	def onPrefsAdvancedResetValue(self,widget):
+		selection = self.ap_tree_prefs.get_selection()
+		model, tree_iter = selection.get_selected()
+		if tree_iter is not None:
+			# reset to default
+			valDesc = model[tree_iter][3]
+			self.onSaveEntry(widget,valDesc,valDesc.Default)
+			valDesc.set_default()
+			self.init_editor(valDesc)
+
+	def onConnectionError(self):
+		self.response(Gtk.ResponseType.CANCEL)
+		self.dlg.destroy()
+
+	def onCommunicationError(self):
+		self.response(Gtk.ResponseType.CANCEL)
+		self.dlg.destroy()
 

@@ -119,13 +119,13 @@ class BtValueDescriptor(GObject.GObject):
 		except exceptions.ValueError:
 			return default
 
-class BtInputHelper(object):
+class BtInputHelper:
 	assoc	= dict()
 	locked	= False
 
 	def __init__(self):
 		self.assoc = dict()
-		unlock()
+		self.unlock()
 
 	def lock(self):
 		self.locked = True

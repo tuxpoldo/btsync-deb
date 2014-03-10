@@ -30,9 +30,8 @@ import datetime
 from gi.repository import Gtk, Gdk, GObject
 
 from btsyncagent import BtSyncAgent
-from prefsadvanced import BtSyncPrefsAdvanced
 from btsyncutils import BtInputHelper,BtMessageHelper,BtValueDescriptor,BtDynamicTimeout
-from dialogs import BtSyncFolderAdd,BtSyncFolderRemove,BtSyncFolderScanQR,BtSyncFolderPrefs
+from dialogs import BtSyncFolderAdd,BtSyncFolderRemove,BtSyncFolderScanQR,BtSyncFolderPrefs,BtSyncPrefsAdvanced
 
 class BtSyncApp(BtInputHelper,BtMessageHelper):
 
@@ -492,11 +491,15 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 			self.dlg = BtSyncPrefsAdvanced(self.agent)
 			self.dlg.run()
 		except requests.exceptions.ConnectionError:
-			return self.onConnectionError()
+			logging.error('BtSync API Connection Error')
 		except requests.exceptions.HTTPError:
-			return self.onCommunicationError()
+			logging.error('BtSync API HTTP error: {0}'.format(self.agent.get_status_code()))
+		except Exception as e:
+			# this should not really happen...
+			logging.error('onPreferencesClickedAdvanced: Unexpected exception caught: '+str(e))
 		finally:
-			self.dlg.destroy()
+			if isinstance(self.dlg, BtSyncPrefsAdvanced):
+				self.dlg.destroy()
 			self.dlg = None
 
 	def onConnectionError(self):
