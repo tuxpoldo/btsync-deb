@@ -81,6 +81,7 @@ class BtSyncAgent(BtSyncApi):
 		self.bindui = self.get_pref('bindui','127.0.0.1')
 		self.portui = self.get_pref('portui',self.uid + 8999)
 		self.paused = self.get_pref('paused',False)
+		self.webui = self.get_pref('webui',False)
 		# process command line arguments
 		if self.args.username is not None:
 			self.username = self.args.username
@@ -90,6 +91,8 @@ class BtSyncAgent(BtSyncApi):
 			self.bindui = '0.0.0.0' if self.args.bindui == 'auto' else self.args.bindui
 		if self.args.port != 0:
 			self.portui = self.args.port
+		if self.args.webui:
+			self.webui = self.args.webui
 		if self.args.cleardefaults:
 			# clear saved defaults
 			if 'username' in self.prefs:
@@ -118,6 +121,8 @@ class BtSyncAgent(BtSyncApi):
 			if self.args.port != 0:
 				# changed bind port for web ui
 				self.set_pref('portui',self.portui)
+			if self.args.webui:
+				self.set-Pref('webui',self.args.webui)
 			raise BtSyncAgentException(0, 'Default settings saved.')
 		# initialize btsync api
 		self.set_connection_params(
@@ -239,6 +244,9 @@ class BtSyncAgent(BtSyncApi):
 		return self.args.host == 'auto' or \
 			self.args.host == 'localhost' or \
 			self.args.host == '127.0.0.1'
+
+	def is_webui(self):
+		return self.webui;
 
 	def get_lock_filename(self):
 		return os.environ['HOME'] + '/.config/btsync/btsync-gui.lock'
