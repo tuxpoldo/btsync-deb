@@ -54,6 +54,8 @@ class BtSyncFolderAdd(BtBaseDialog):
 			response = BtBaseDialog.run(self)
 			if response == Gtk.ResponseType.CANCEL:
 				return response
+			elif response == Gtk.ResponseType.DELETE_EVENT:
+				return response
 			elif response == Gtk.ResponseType.OK:
 				self.secret = self.secret_w.get_text()
 				self.folder = self.folder_w.get_text()
@@ -162,22 +164,24 @@ class BtSyncFolderScanQR(BtBaseDialog):
 
 
 class BtSyncFolderPrefs(BtBaseDialog):
-	def __init__(self,api):
+	def __init__(self,agent):
 		BtBaseDialog.__init__(self,
 			'dialogs.glade',
 			'folderprefs', [
+				'fp_predefined_hosts',
 				'rw_secret_text',
 				'ro_secret_text',
 				'ot_secret_text'
 			]
 		)
-		self.api = api
+		self.agent = agent
+		self.hostdlg = None
 		self.clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
 
 	def create(self,folder,secret):
 		BtBaseDialog.create(self)
 		# compute secrets
-		result = self.api.get_secrets(secret)
+		result = self.agent.get_secrets(secret)
 		self.idfolder = folder
 		self.idsecret = secret
 		self.rwsecret = result['read_write'] if result.has_key('read_write') else None
@@ -212,41 +216,69 @@ class BtSyncFolderPrefs(BtBaseDialog):
 		self.fp_use_syncarchive = self.builder.get_object('fp_use_syncarchive')
 		self.fp_use_predefined = self.builder.get_object('fp_use_predefined')
 		self.fp_predefined_tree = self.builder.get_object('fp_predefined_tree')
+		self.fp_predefined_hosts = self.builder.get_object('fp_predefined_hosts')
+		self.fp_predefined_selection = self.builder.get_object('fp_predefined_selection')
 		self.fp_predefined_add = self.builder.get_object('fp_predefined_add')
 		self.fp_predefined_remove = self.builder.get_object('fp_predefined_remove')
 		self.fp_predefined_label = self.builder.get_object('fp_predefined_label')
 		# prefs page - values
-		result = self.api.get_folder_prefs(self.idsecret)
-		self.fp_use_relay.set_active(self.api.get_safe_result(result,'use_relay_server',0) != 0)
-		self.fp_use_tracker.set_active(self.api.get_safe_result(result,'use_tracker',0) != 0)
-		self.fp_search_lan.set_active(self.api.get_safe_result(result,'search_lan',0) != 0)
-		self.fp_use_dht.set_active(self.api.get_safe_result(result,'use_dht',0) != 0)
-		self.fp_use_syncarchive.set_active(self.api.get_safe_result(result,'use_sync_trash',0) != 0)
-		self.fp_use_predefined.set_active(self.api.get_safe_result(result,'use_hosts',0) != 0)
-		self.fp_use_predefined.set_sensitive(False)
+		self.disable_hosts()
+		result = self.agent.get_folder_prefs(self.idsecret)
+		self.fp_use_relay.set_active(self.agent.get_safe_result(result,'use_relay_server',0) != 0)
+		self.fp_use_tracker.set_active(self.agent.get_safe_result(result,'use_tracker',0) != 0)
+		self.fp_search_lan.set_active(self.agent.get_safe_result(result,'search_lan',0) != 0)
+		self.fp_use_dht.set_active(self.agent.get_safe_result(result,'use_dht',0) != 0)
+		self.fp_use_syncarchive.set_active(self.agent.get_safe_result(result,'use_sync_trash',0) != 0)
+		self.fp_use_predefined.set_active(self.agent.get_safe_result(result,'use_hosts',0) != 0)
+		# fill the list of predefined hosts...
+		result = self.agent.get_folder_hosts(self.idsecret)
+		if self.agent.get_error_code(result) == 0:
+			hosts = result.get('hosts', [])
+			for index, value in enumerate(hosts):
+				self.fp_predefined_hosts.append ([ value ])
+
+		# nothing is changed now
+		self.fp_button_ok.set_sensitive(False)
+
+	def response(self,result_id):
+		if self.hostdlg is not None:
+			self.hostdlg.response(result_id)
+		BtBaseDialog.response(self,result_id)
+
+	def disable_hosts(self):
 		self.fp_predefined_tree.set_sensitive(False)
 		self.fp_predefined_add.set_sensitive(False)
 		self.fp_predefined_remove.set_sensitive(False)
 		self.fp_predefined_label.set_sensitive(False)
-		# nothing is changed now
-		self.fp_button_ok.set_sensitive(False)
+
+	def enable_hosts(self):
+		self.fp_predefined_tree.set_sensitive(True)
+		self.fp_predefined_add.set_sensitive(True)
+		self.fp_predefined_remove.set_sensitive(self.fp_predefined_selection.count_selected_rows() > 0)
+		self.fp_predefined_label.set_sensitive(True)
+
 
 	def save_prefs(self):
+		hosts_list = []
+		for row in self.fp_predefined_hosts:
+			hosts_list.append(row[0])
+		self.agent.set_folder_hosts(self.idsecret,hosts_list)
 		prefs = {}
 		prefs['use_relay_server'] = 1 if self.fp_use_relay.get_active() else 0
 		prefs['use_tracker'] = 1 if self.fp_use_tracker.get_active() else 0
 		prefs['search_lan'] = 1 if self.fp_search_lan.get_active() else 0
 		prefs['use_dht'] = 1 if self.fp_use_dht.get_active() else 0
 		prefs['use_sync_trash'] = 1 if self.fp_use_syncarchive.get_active() else 0
-		result = self.api.set_folder_prefs(self.idsecret,prefs)
-		return self.api.get_error_code(result) == 0
+		prefs['use_hosts'] = 1 if self.fp_use_predefined.get_active() and len(hosts_list) > 0 else 0
+		result = self.agent.set_folder_prefs(self.idsecret,prefs)
+		return self.agent.get_error_code(result) == 0
 
 	def onRwSecretCopy(self,widget):
 		text = self.rw_secret_text.get_text(*self.rw_secret_text.get_bounds(),include_hidden_chars=False)
 		self.clipboard.set_text(text, -1)
 
 	def onRwSecretNew(self,widget):
-		result = self.api.get_secrets()
+		result = self.agent.get_secrets()
 		self.rw_secret_text.set_text(str(result['read_write']))
 		# everything is done by onCHangeSecret
 		# self.rwsecret = result['read_write']
@@ -274,10 +306,38 @@ class BtSyncFolderPrefs(BtBaseDialog):
 		text = self.rw_secret_text.get_text(*self.rw_secret_text.get_bounds(),include_hidden_chars=False)
 		if len(text) == 33:
 			if text != self.rwsecret:
-				result = self.api.get_secrets(text,throw_exceptions=False)
-				if self.api.get_error_code(result) == 0:
+				result = self.agent.get_secrets(text,throw_exceptions=False)
+				if self.agent.get_error_code(result) == 0:
 					self.ro_secret_text.set_text(str(result['read_only']))
 					self.onChanged(None)
+
+	def onPredefinedToggle(self,widget):
+		self.onChanged(None)
+		if widget.get_active():
+			self.enable_hosts()
+		else:
+			self.disable_hosts()
+
+	def onPredefinedSelectionChanged(self,selection):
+		self.fp_predefined_remove.set_sensitive(selection.count_selected_rows() > 0)
+
+	def onPredefinedAdd(self,widget):
+		self.hostdlg = BtSyncHostAdd()
+		self.hostdlg.create()
+		if self.hostdlg.run() == Gtk.ResponseType.OK:
+			self.fp_predefined_hosts.append ([ '{0}:{1}'.format(
+				self.hostdlg.addr,
+				self.hostdlg.port
+			) ])
+			self.onChanged(None)
+		self.hostdlg.destroy()
+		self.hostdlg = None
+
+	def onPredefinedRemove(self,widget):
+		model, tree_iter = self.fp_predefined_selection.get_selected()
+		if tree_iter is not None:
+			model.remove(tree_iter)
+			self.onChanged(None)
 
 	def onOK(self,widget):
 		if self.rwsecret is not None:
@@ -301,13 +361,52 @@ class BtSyncFolderPrefs(BtBaseDialog):
 				# to delete the folder and recreate it...
 				# As we say in Germany: "Augen zu und durch!"
 				# If we fail, we are f*****
-				result = self.api.remove_folder(self.rwsecret)
-				result = self.api.add_folder(self.idfolder,text)
+				result = self.agent.remove_folder(self.rwsecret)
+				result = self.agent.add_folder(self.idfolder,text)
 				self.idsecret = text
 				self.save_prefs()
 				return True
 
 		return self.save_prefs()
+
+class BtSyncHostAdd(BtBaseDialog):
+	def __init__(self):
+		BtBaseDialog.__init__(self, 'dialogs.glade', 'newhost')
+		self.addr = ''
+		self.port = ''
+
+	def create(self):
+		BtBaseDialog.create(self)
+		self.dlg.add_buttons(
+			Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+			Gtk.STOCK_OK, Gtk.ResponseType.OK
+		)
+		self.addr_w = self.builder.get_object('ph_addr')
+		self.port_w = self.builder.get_object('ph_port')
+
+	def run(self):
+		self.dlg.set_default_response(Gtk.ResponseType.OK)
+		while True:
+			response = BtBaseDialog.run(self)
+			if response == Gtk.ResponseType.CANCEL:
+				return response
+			elif response == Gtk.ResponseType.DELETE_EVENT:
+				return response
+			elif response == Gtk.ResponseType.OK:
+				self.addr = self.addr_w.get_text()
+				self.port = self.port_w.get_text()
+				# test if a hostname is specified
+				if len(self.addr) == 0:
+					self.show_warning(
+						'A hostname or IP address must be specified'
+					)
+				# test if port is OK
+				elif len(self.port) == 0 or int(self.port) < 1 or int(self.port) > 65534:
+					self.show_warning(
+						'The specified port must be a number between 1 and 65534'
+					)
+				else:
+					return response
 
 class BtSyncPrefsAdvanced(BtBaseDialog,BtInputHelper):
 
@@ -414,4 +513,5 @@ class BtSyncPrefsAdvanced(BtBaseDialog,BtInputHelper):
 	def onCommunicationError(self):
 		self.response(Gtk.ResponseType.CANCEL)
 		self.dlg.destroy()
+
 

@@ -22,6 +22,7 @@ btsync-gui (0.7-1) unstable; urgency=low
   * Added Web UI menu entry for advanced users (Closes #89)
   * Added forum link menu entry (Closes #90)
   * Added documentation menu entry (Closes #91)
+  * Implemented management of predefined hosts (Closes #74)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Sun, 02 Mar 2014 15:33:21 +0100
 

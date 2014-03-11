@@ -728,6 +728,7 @@
                     <property name="use_action_appearance">False</property>
                     <property name="xalign">0</property>
                     <property name="draw_indicator">True</property>
+                    <signal name="toggled" handler="onPredefinedToggle" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -744,9 +745,26 @@
                       <object class="GtkTreeView" id="fp_predefined_tree">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="model">fp_predefined_hosts</property>
+                        <property name="headers_visible">False</property>
+                        <property name="headers_clickable">False</property>
                         <property name="fixed_height_mode">True</property>
                         <child internal-child="selection">
-                          <object class="GtkTreeSelection" id="treeview-selection1"/>
+                          <object class="GtkTreeSelection" id="fp_predefined_selection">
+                            <signal name="changed" handler="onPredefinedSelectionChanged" swapped="no"/>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeviewcolumn3">
+                            <property name="sizing">fixed</property>
+                            <property name="title" translatable="yes">Hosts</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext3"/>
+                              <attributes>
+                                <attribute name="text">0</attribute>
+                              </attributes>
+                            </child>
+                          </object>
                         </child>
                       </object>
                     </child>
@@ -770,6 +788,7 @@
                         <property name="receives_default">True</property>
                         <property name="use_action_appearance">False</property>
                         <property name="use_stock">True</property>
+                        <signal name="clicked" handler="onPredefinedAdd" swapped="no"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -786,6 +805,7 @@
                         <property name="receives_default">True</property>
                         <property name="use_action_appearance">False</property>
                         <property name="use_stock">True</property>
+                        <signal name="clicked" handler="onPredefinedRemove" swapped="no"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -850,7 +870,108 @@
       <action-widget response="-5">fp_button_ok</action-widget>
     </action-widgets>
   </object>
+  <object class="GtkListStore" id="fp_predefined_hosts">
+    <columns>
+      <!-- column-name Host -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkTextBuffer" id="ot_secret_text"/>
+  <object class="GtkDialog" id="newhost">
+    <property name="can_focus">False</property>
+    <property name="border_width">5</property>
+    <property name="title" translatable="yes">New Predefined Host</property>
+    <property name="modal">True</property>
+    <property name="destroy_with_parent">True</property>
+    <property name="icon_name">btsync-gui</property>
+    <property name="type_hint">dialog</property>
+    <property name="skip_taskbar_hint">True</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="dialog-vbox7">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="dialog-action_area7">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="box7">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkLabel" id="label7">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">New known host address:</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="ph_addr">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="invisible_char">●</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label8">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">:</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="ph_port">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="max_length">5</property>
+                <property name="invisible_char">●</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">3</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkDialog" id="prefsadvanced">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
