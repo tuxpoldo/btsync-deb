@@ -118,17 +118,20 @@ if __name__ == "__main__":
 				help='Optional port number for the connection to BitTorrent '\
 				'Sync. If not specified, port 8888 is taken for a connection '\
 				'to a remote BitTorrent Sync agent or (8999 + uid) is taken '\
-				'when creating a locally lauched agent.')
+				'when creating a locally lauched agent. This option can be '\
+				'made persistent for local agents with --savedefaults')
 	parser.add_argument('--username',
 				default=None,
 				help='Optional user name for connecting to a remote '\
 				'BitTorrent Sync agent or username to use when creating a '\
-				'locally launched agent.')
+				'locally launched agent. This option can be made persistent '\
+				'for local agents with --savedefaults')
 	parser.add_argument('--password',
 				default=None,
 				help='Optional password for connecting to a remote '\
 				'BitTorrent Sync agent or username to use when creating a '\
-				'locally launched agent.')
+				'locally launched agent. This option can be made persistent '\
+				'for local agents with --savedefaults')
 	parser.add_argument('--bindui',
 				default=None,
 				help='Optional bind address for the Web UI of a locally '\
@@ -136,7 +139,12 @@ if __name__ == "__main__":
 				'127.0.0.1. If you want the Web UI of the agent to be '\
 				'reachable by other computers, specify one of the available '\
 				'IP addresses of this computer or "all" to bind to all '\
-				'available adapters.')
+				'available adapters. This option can be made persistent for '\
+				'local agents with --savedefaults')
+	parser.add_argument('--webui',
+				action='store_false',
+				help='Include the Web UI in the menu. This option can be made '\
+				'persistent with --savedefaults')
 	parser.add_argument('--savedefaults',
 				action='store_true',
 				help='If specified, the optionally supplied credentials, bind '\

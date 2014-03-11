@@ -100,6 +100,16 @@ YeaSoft International</property>
       </object>
     </child>
     <child>
+      <object class="GtkMenuItem" id="openweb">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Open Web UI</property>
+        <property name="use_underline">True</property>
+        <signal name="activate" handler="onOpenWeb" swapped="no"/>
+      </object>
+    </child>
+    <child>
       <object class="GtkMenuItem" id="openapp">
         <property name="use_action_appearance">False</property>
         <property name="visible">True</property>

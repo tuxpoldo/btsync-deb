@@ -24,6 +24,7 @@
 import os
 import logging
 import requests
+import webbrowser
 
 from gi.repository import Gtk, GObject
 
@@ -48,7 +49,8 @@ class BtSyncStatus:
 		self.menustatus = self.builder.get_object('statusitem')
 		self.menupause = self.builder.get_object('pausesyncing')
 		self.menudebug = self.builder.get_object('setdebug')
-		self.menuopen = self.builder.get_object('openapp')
+		self.menuopenweb = self.builder.get_object('openweb')
+		self.menuopenapp = self.builder.get_object('openapp')
 		self.about = self.builder.get_object('aboutdialog')
 
 
@@ -64,6 +66,7 @@ class BtSyncStatus:
 			self.menuconnection.set_label('{0}:{1}'.format(agent.get_host(),agent.get_port()))
 			self.ind.set_title('BitTorrent Sync {0}:{1}'.format(agent.get_host(),agent.get_port()))
 			self.ind.set_tooltip_text('BitTorrent Sync {0}:{1}'.format(agent.get_host(),agent.get_port()))
+		self.menuconnection.set_visible(agent.is_webui())
 		self.ind.set_menu(self.menu)
 		self.ind.set_default_action(self.onActivate)
 
@@ -198,25 +201,29 @@ class BtSyncStatus:
 			self.ind.set_from_icon_name('btsync-gui-disconnected')
 			self.menudebug.set_sensitive(False)
 			self.menudebug.set_active(self.agent.get_debug())
-			self.menuopen.set_sensitive(False)
+			self.menuopenapp.set_sensitive(False)
+			self.menuopenweb.set_sensitive(False)
 		elif connection is BtSyncStatus.CONNECTING:
 			self.frame = -1
 			self.transferring = False
 			self.ind.set_from_icon_name('btsync-gui-connecting')
 			self.menudebug.set_sensitive(False)
 			self.menudebug.set_active(self.agent.get_debug())
-			self.menuopen.set_sensitive(False)
+			self.menuopenapp.set_sensitive(False)
+			self.menuopenweb.set_sensitive(False)
 		elif connection is BtSyncStatus.PAUSED:
 			self.frame = -1
 			self.transferring = False
 			self.ind.set_from_icon_name('btsync-gui-paused')
 			self.menudebug.set_sensitive(self.agent.is_local())
 			self.menudebug.set_active(self.agent.get_debug())
-			self.menuopen.set_sensitive(False)
+			self.menuopenapp.set_sensitive(False)
+			self.menuopenweb.set_sensitive(False)
 		else:
 			self.menudebug.set_sensitive(self.agent.is_local())
 			self.menudebug.set_active(self.agent.get_debug())
-			self.menuopen.set_sensitive(True)
+			self.menuopenapp.set_sensitive(True)
+			self.menuopenweb.set_sensitive(True)
 			if transferring and not self.transferring:
 				if not self.rotating:
 					# initialize animation
@@ -248,6 +255,14 @@ class BtSyncStatus:
 
 	def onOpenApp(self,widget):
 		self.open_app()
+
+	def onOpenWeb(self,widget):
+		webbrowser.open('http://{0}:{1}@{2}:{3}'.format(
+			self.agent.get_username(),
+			self.agent.get_password(),
+			self.agent.get_host(),
+			self.agent.get_port()
+		), 2)
 
 	def onDeleteApp(self, *args):
 		self.close_app(False)
