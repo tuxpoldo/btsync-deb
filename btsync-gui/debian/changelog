@@ -24,7 +24,7 @@ btsync-gui (0.7-1) unstable; urgency=low
   * Added documentation menu entry (Closes #91)
   * Implemented management of predefined hosts (Closes #74)
 
- -- Leo Moll <leo.moll@yeasoft.com>  Sun, 02 Mar 2014 15:33:21 +0100
+ -- Leo Moll <leo.moll@yeasoft.com>  Tue, 11 Mar 2014 13:48:01 +0100
 
 btsync-gui (0.6-1) unstable; urgency=low
 
