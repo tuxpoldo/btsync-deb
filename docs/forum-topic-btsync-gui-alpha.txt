@@ -1,0 +1,101 @@
+Ladies and Gentlemen!
+ 
+I'm pleased to announce, that the waiting is over! The alpha test of [font='courier new', courier, monospace][b]btsync-gui[/b][/font] starts today. I will not spend many words. I prefer to let speak the images:
+ 
+[i][img=http://s6.postimg.org/855mfvgtt/btsync_gui_1.png][/i]
+[i]Figure 1: The indicator part[/i]
+ 
+[i][img=http://s6.postimg.org/azzvkeacx/btsync_gui_2.png][/i]
+[i]Figure 2: Adding a shared folder[/i]
+ 
+[i][img=http://s6.postimg.org/faejfzfg1/btsync_gui_3.png][/i]
+[i]Figure 3: Connect mobile device[/i]
+ 
+[i][img=http://s6.postimg.org/63w8spa7l/btsync_gui_4.png][/i]
+[i]Figure 4: Manage folder preferences[/i]
+ 
+[i][img=http://s6.postimg.org/yut2irg1d/btsync_gui_5.png][/i]
+[i]Figure 5: Manage application preferences[/i]
+ 
+[img=http://s6.postimg.org/a4ckwffg1/btsync_gui_6.png]
+[i]Figure 6: Show connected devices status[/i]
+ 
+[b]OBLIGATORY DISCLAIMER:[/b]
+ 
+[color=#ff0000][b]THIS APPLICATION IS UNOFFICIAL AND NOT THE WORK OF BITTORRENT® INC. PLEASE DO NOT CONTACT THE BITTORRENT® INC. SUPPORT WITH QUESTIONS OR PROBLEMS RELATED TO THE USE OF THE APPLICATION. YOU WILL FIND COMPETENT HELP AND SUPPORT IN THIS THREAD[/b][/color]
+ 
+[b]AUDIENCE:[/b]
+ 
+Since the software has never been tested by anyone but me, only experienced linux user should participate in this alpha test during the first weeks...
+ 
+[b]COMPATIBILITY:[/b]
+ 
+Currently the application has been tested by me on the following distributions:
+[LIST]
+[*]Debian Wheezy with Gnome Desktop[/*]
+[*]Ubuntu Raring 13.04 with Unity Desktop[/*]
+[*]Linux Mint Petra with Cinnamon Desktop[/*]
+[/LIST]
+Other users have reported successful installations on:
+[LIST]
+[*]Xubuntu 13.10 with OpenBox+Tint2[/*]
+[*]Debian Jessie with KDE[/*]
+[*]Ubuntu 14.04 with Cinnamon[/*]
+[/LIST]
+Now it's up to you to test it and give me lots of feedback in order to extend this list.
+ 
+[b]FEATURES:[/b]
+ 
+The application aims to be a clone of the GUI on Windows and Mac OSX and to replace on long term the package [font='courier new', courier, monospace][b]btsync-user[/b][/font]. This alpha release offers the minimum feature set needed to work with BitTorrent Sync. The following features are still [b]not implemented[/b]:
+[LIST=1]
+[*]Editing of predefined hosts[/*]
+[*]Creation of one time secrets (I still have no idea how to implement it...)[/*]
+[*]GUI is still only available in English[/*]
+[*][s]The whole "Devices" tab[/s][/*]
+[*]The whole "Transfers" tab[/*]
+[*]The whole "History" tab[/*]
+[/LIST]
+[b]All the other features should work.[/b]
+ 
+[b]HOW TO INSTALL:[/b]
+ 
+If you have already added one of the Debian/Ubuntu repositories [url=http://forum.bittorrent.com/topic/19560-debian-and-ubuntu-desktop-unofficial-packages-for-bittorrent-sync/][b]following the instructions in this post[/b][/url], you have only to add the following additional lines to the source definition file:
+ 
+
+
+[code=auto:0]deb http://debian.yeasoft.net/btsync experimental main
+deb-src http://debian.yeasoft.net/btsync experimental main
+[/code]
+ 
+Then you should update your package index:
+ 
+[code=auto:0]sudo apt-get update
+[/code]
+ 
+After updating the package index, you can install btsync-gui with:
+ 
+[code=auto:0]sudo apt-get install btsync-gui
+[/code]
+ 
+or
+ 
+[code=auto:0]sudo apt-get install btsync-gui-gtk
+[/code]
+ 
+if you do not want to use [font='courier new', courier, monospace][b]libappindicator[/b][/font] - but you can do this only if you are using a GTK based desktop like Gnome on Debian. [b]THIS WILL DEFINITIVELY NOT WORK WITH DESKTOPS LIKE UNITY[/b]! If you are in doubt, install [font='courier new', courier, monospace][b]btsync-gui[/b][/font] - this will work for sure!
+ 
+The application will replace [b]btsync-user[/b] (if installed) without losing the already configured folder shares.
+ 
+[b]WANTED:[/b]
+ 
+Maintainers for other Linux distributions able to write a suitable packaging for their favourite distribution:
+[LIST]
+[*]Centos/RHEL (rpm)[/*]
+[*]Fedora (rpm)[/*]
+[*]SLES(rpm)[/*]
+[*]Arch Linux[/*]
+[*]Gentoo[/*]
+[/LIST]
+[b]SOURCES:[/b]
+ 
+The sources of the project are [url=https://github.com/tuxpoldo/btsync-deb][b]hosted on GitHub[/b][/url].
