@@ -1,3 +1,9 @@
+btsync-common (1.2.92-2) unstable; urgency=low
+
+  * Fixed syntax error in calling pkill on certain systems (Closes #92)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Fri, 11 Mar 2014 18:53:27 +0100
+
 btsync-common (1.2.92-1) unstable; urgency=low
 
   * New upstream release
