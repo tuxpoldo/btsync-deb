@@ -66,7 +66,7 @@ class BtSyncStatus:
 			self.menuconnection.set_label('{0}:{1}'.format(agent.get_host(),agent.get_port()))
 			self.ind.set_title('BitTorrent Sync {0}:{1}'.format(agent.get_host(),agent.get_port()))
 			self.ind.set_tooltip_text('BitTorrent Sync {0}:{1}'.format(agent.get_host(),agent.get_port()))
-		self.menuconnection.set_visible(agent.is_webui())
+		self.menuopenweb.set_visible(agent.is_webui())
 		self.ind.set_menu(self.menu)
 		self.ind.set_default_action(self.onActivate)
 

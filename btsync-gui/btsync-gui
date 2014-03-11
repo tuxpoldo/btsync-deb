@@ -142,7 +142,8 @@ if __name__ == "__main__":
 				'available adapters. This option can be made persistent for '\
 				'local agents with --savedefaults')
 	parser.add_argument('--webui',
-				action='store_false',
+				default=False,
+				action='store_true',
 				help='Include the Web UI in the menu. This option can be made '\
 				'persistent with --savedefaults')
 	parser.add_argument('--savedefaults',
