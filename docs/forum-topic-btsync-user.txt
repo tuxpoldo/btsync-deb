@@ -1,23 +1,25 @@
+[color=#ff0000][b]*** BREAKING NEWS ***[/b][/color]
+ 
+The beta test of the new full featured BitTorrent Sync GUI for Linux has started! If you want to participate, [b][url=http://forum.bittorrent.com/topic/28106-debian-and-ubuntu-desktop-gui-unofficial-packages-for-bittorrent-sync/]you may take a look at this posting[/url].[/b] In future [font='courier new', courier, monospace][b]btsync-user[/b][/font] may be replaced by the new packages.
+ 
 [color=#4b0082][b]BTSYNC PACKAGES FOR DEBIAN, UBUNTU AND OTHER DERIVED DISTRIBUTIONS[/b][/color]
 
 If you are using Ubuntu, Debian, Raspian or other derived distributions based on Debian and you are searching for an easy way to deploy BitTorrent Sync on your systems, this topic is definitively for you. Here you will find information about a family of easy to install deb-packages that offers both a solution for the need of typical server/cloud operators as for interactive users.
+
 [center]
-[img=http://s6.postimg.org/935hs88vl/btsync_user_1.jpg]
-[/center]
+[img=http://s6.postimg.org/935hs88vl/btsync_user_1.jpg][/center]
 
 The [b]desktop user packages[/b] are explicitly intended for [b]desktop usage[/b] and provide a user experience similar to BitTorrent Sync on Windows or Mac OSX by still giving the user the possibility to customise his installation if he has special needs.
 
 The [b]server packages[/b] offer full debconf-support for the automated creation and maintenance of an optional default configuration as well as the possibility to manually configure single or multiple BitTorrent Sync instances with highly customised configurations.
 
-This topic covers only the [b]desktop user packages[/b]. If you are searching for the [b]server packages,[/b]  [url="http://forum.bittorrent.com/topic/18974-debian-and-ubuntu-server-packages-for-bittorrent-sync/"][b]please look here[/b][/url].
+This topic covers only the [b]desktop user packages[/b]. If you are searching for the [b]server packages,[/b] [url=http://forum.bittorrent.com/topic/18974-debian-and-ubuntu-server-packages-for-bittorrent-sync/][b]please look here[/b][/url].
 [center]
-[img=http://s6.postimg.org/7qnsqcbg1/btsync_user_3.jpg]
-[/center]
+[img=http://s6.postimg.org/7qnsqcbg1/btsync_user_3.jpg][/center]
 
 [color=#ff0000][b]THESE PACKAGES ARE UNOFFICIAL AND NOT THE WORK OF BITTORRENT® INC. PLEASE DO NOT CONTACT THE BITTORRENT® INC. SUPPORT WITH QUESTIONS OR PROBLEMS RELATED TO THE USE OF THE PACKAGES. YOU WILL FIND COMPETENT HELP AND SUPPORT IN THIS THREAD[/b][/color]
 
 The deb-packages are available for the same architectures as released by BitTorrent Inc.:
-
 [LIST]
 [*][b]i386[/b] Intel/AMD 32 Bit[/*]
 [*][b]amd64[/b] Intel/AMD 64 Bit[/*]
@@ -25,17 +27,16 @@ The deb-packages are available for the same architectures as released by BitTorr
 [*][b]armhf[/b] ARM hard float[/*]
 [*][b]powerpc[/b] PowerPC[/*]
 [/LIST]
-
 Since the packages still have [b]not been tested[/b] with KDE, LXDE, Cinnamon and Linux Mint, any related feedback is highly appreciated.
 
 
 [color=#FF8C00][b]BUG REPORTS, CONTRIBUTION AND SOURCES[/b][/color]
 
-If you want to contribute to the development of the packages or if you are curious how this all works, you may find the current sources of the deployment scripts and packaging on GitHub under the following URL: [b]https://github.com/tuxpoldo/btsync-deb[/b]
+If you want to contribute to the development of the packages or if you are curious how this all works, you may find the current sources of the deployment scripts and packaging on GitHub under the following URL: [b][url=https://github.com/tuxpoldo/btsync-deb]https://github.com/tuxpoldo/btsync-deb[/url][/b]
 
-The full source of the great indicator applet written by [url=http://forum.bittorrent.com/user/33710-marxjohnson/]Mark Johnson[/url], is also hosted on GitHub and can be found under the following URL: [b]https://github.com/marxjohnson/btsyncindicator[/b]
+The full source of the great indicator applet written by [url=http://forum.bittorrent.com/user/33710-marxjohnson/]Mark Johnson[/url], is also hosted on GitHub and can be found under the following URL: [b][url=https://github.com/marxjohnson/btsyncindicator]https://github.com/marxjohnson/btsyncindicator[/url][/b]
 
-If you have experienced a reproducible issue that [b]is related to the packaging and not to BitTorrent Sync itself[/b] you are strongly encouraged to [url="https://github.com/tuxpoldo/btsync-deb/issues"]open an issue on the project's GitHub Page[/url]. Issues [b]related to the indicator[/b] should be [url="https://github.com/marxjohnson/btsyncindicator/issues"]reported on the indicator's GitHub page[/url]. Issues related to the native functionality of BitTorrent Sync should rather by creating a new topic or partecipating to an already existing topic in the [url="http://forum.bittorrent.com/forum/56-bittorrent-sync/"]BitTorrent Sync Forum[/url].
+If you have experienced a reproducible issue that [b]is related to the packaging and not to BitTorrent Sync itself[/b] you are strongly encouraged to [url=https://github.com/tuxpoldo/btsync-deb/issues]open an issue on the project's GitHub Page[/url]. Issues [b]related to the indicator[/b] should be [url=https://github.com/marxjohnson/btsyncindicator/issues]reported on the indicator's GitHub page[/url]. Issues related to the native functionality of BitTorrent Sync should rather by creating a new topic or partecipating to an already existing topic in the [url=http://forum.bittorrent.com/forum/56-bittorrent-sync/]BitTorrent Sync Forum[/url].
 
 [color=#008000][b]ADDING THE REPOSITORIES[/b][/color]
 
@@ -44,73 +45,56 @@ Debian and Debian based distributions (Linspire, Xandros, Ubuntu, and Mepis to n
 Your distribution comes with some default repositories that are already setup, but these contain only the software officially distributed by the creator of your distribution. In order to install the btsync packages, you have to add the specific repositories where btsync is hosted.
 
 [b]If you are using Ubuntu[/b], you may also use the Launchpad PPA instead of the default repositories. Although it is easier to install, there are some disadvantages:
-
 [LIST=1]
 [*]The PPA only supports Ubuntu versions that are supported (currently lucid, precise, quantal, raring and saucy)[/*]
 [*]The PPA only supports the [b]i386[/b] and [b]amd64[/b] architectures[/*]
 [*]Sometimes it takes some hours for the packages to be published[/*]
 [/LIST]
-
 If you are OK with this, you can add the Launchpad PPA by issuing the following commands:
-[code]
-`which sudo` add-apt-repository ppa:tuxpoldo/btsync
+[code=auto:0]`which sudo` add-apt-repository ppa:tuxpoldo/btsync
 `which sudo` apt-get update
-[/CODE]
-
+[/code]
 After this, you can directly proceed with the installation.
 
 [b]If you are not using Ubuntu or you are using an unsupported version or architecture or by any other reason you prefer the default repositories, continue here.[/b]
 
 The btsync packages are all signed with a key in order to guarantee their authenticity. Before using the repository, you should add the key to the package manager. To do that, run the following command:
-[code]
-`which sudo` apt-key adv --keyserver keys.gnupg.net --recv-keys 6BF18B15
+[code=auto:0]`which sudo` apt-key adv --keyserver keys.gnupg.net --recv-keys 6BF18B15
 [/code]
-
 On success you should see an output like this:
-[code]
-gpg: requesting key 6BF18B15 from hkp server keys.gnupg.net
+[code=auto:0]gpg: requesting key 6BF18B15 from hkp server keys.gnupg.net
 gpg: key 6BF18B15: public key "Leo Moll <leo.moll@yeasoft.com>" imported
 gpg: no ultimately trusted keys found
 gpg: Total number processed: 1
 gpg:               imported: 1
 [/code]
-
 Now you can easily add the package sources, by executing the following commands:
-[code]
-CODENAME=$(lsb_release -cs | sed -n '/lucid\|precise\|quantal\|raring\|saucy\|trusty\|squeeze\|wheezy\|jessie\|sid/p')
+[code=auto:0]CODENAME=$(lsb_release -cs | sed -n '/lucid\|precise\|quantal\|raring\|saucy\|trusty\|squeeze\|wheezy\|jessie\|sid/p')
 echo deb http://debian.yeasoft.net/btsync ${CODENAME:-sid} main > ~/btsync.list
 echo deb-src http://debian.yeasoft.net/btsync ${CODENAME:-sid} main >> ~/btsync.list
 unset CODENAME
 `which sudo` mv ~/btsync.list /etc/apt/sources.list.d/btsync.list
 `which sudo` chown root:root /etc/apt/sources.list.d/btsync.list
 [/code]
-
 Remember to update the local cache:
-[code]
-`which sudo` apt-get update
+[code=auto:0]`which sudo` apt-get update
 [/code]
-
 After that you can proceed with the installation.
 
 
 [color=#008000][b]INSTALLATION OF BTSYNC DESKTOP VERSION[/b][/color]
 
 The installation of btsync-user is really easy:
-[code]
-`which sudo` apt-get install btsync-user
+[code=auto:0]`which sudo` apt-get install btsync-user
 [/code]
-
 After the successful installation, you have to initially start BitTorrent Sync. You have different possibilities to do this:
 [LIST]
 [*]Log out and login again. Since BitTorrent Sync is started on logon, it will start automatically.[/*]
 [*]Select [i]BitTorrent Sync[/i] from the menu or Unity-Launcher[/*]
 [*]Start it from the console by issuing the command:[/*]
 [/LIST]
-
-[code]
-btsync start
+[code=auto:0]btsync start
 [/code]
-
 More details can be found in the usages notes:
 
 [color=#800080][b]USAGE NOTES[/b][/color]
@@ -124,26 +108,18 @@ A user specific desktop shortcut to the web UI is installed into the system. Sin
 In order to give more freedom to the advanced user, there is also a possibility to launch BitTorrent Sync with a custom configuration file instead of the automatically created file: the startup routine of BitTorrent Sync checks, if there is a file named [b][font='courier new', courier, monospace]btsync-user.conf[/font][/b] in the configuration directory [font='courier new', courier, monospace][b]~/.config/btsync[/b][/font] of the user. If this file is found, then it is used as configuration file. If not, BitTorrent Sync uses the automatically created default configuration file [b][font='courier new', courier, monospace]~/.config/btsync/btsync-auto.conf[/font][/b] that will be recreated on every restart.
 
 The simplest way to create a custom configuration file, is to create a copy of the default configuration file and then to edit it according to your needs:
-
-[code]
-cp ~/.config/btsync/btsync-auto.conf ~/.config/btsync/btsync-user.conf
+[code=auto:0]cp ~/.config/btsync/btsync-auto.conf ~/.config/btsync/btsync-user.conf
 [/code]
-
 When you are ready with your modifications, you can restart BitTorrent Sync by executing:
-
-[code]
-btsync restart
+ 
+[code=auto:0]btsync restart
 [/code]
  
 on the command line.
 
 In addition to the desktop shortcuts and menu functions in the indicator applet, BitTorrent Sync can also be controlled from the command line using the tool [font=courier, monospace][b]btsync[/b][/font]. The tool provides usage instructions by issuing the command:
-[code]
-btsync -h
+[code=auto:0]btsync -h
 [/code]
-
 More comprehensive help can be found on the corresponding manpage:
-[code]
-man btsync
+[code=auto:0]man btsync
 [/code]
-
