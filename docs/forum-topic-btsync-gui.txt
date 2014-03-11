@@ -105,17 +105,20 @@ After that you can proceed with the installation.
 [color=#008000][b]INSTALLATION OF BTSYNC DESKTOP GUI VERSION[/b][/color]
 
 The installation of [font=courier new,courier,monospace][b]btsync-gui[/b][/font] is really easy:
-[code=auto:0]`which sudo` apt-get install btsync-gui
+
+[code]
+`which sudo` apt-get install btsync-gui
 [/code]
-On some systems, [font=courier new,courier,monospace][b]libappindicator[/b][/font] is not available or maybe you do not want to use it. In this case, you may install instead the GTK only version the BitTorrent Sync GUI version:
+
+On some systems, [font=courier new,courier,monospace][b]libappindicator[/b][/font] is not available or maybe you do not want to use it. In this case, you may install instead the GTK only version of the BitTorrent Sync GUI:
  
 [code]
 `which sudo` apt-get install btsync-gui-gtk
 [/code]
  
 but you can do this only if you are using a GTK based desktop like Gnome on Debian. [color=#b22222][b]THIS WILL DEFINITIVELY NOT WORK WITH DESKTOPS LIKE UNITY![/b][/color] If you are in doubt, install [b][font=courier new,courier,monospace]btsync-gui[/font][/b] - this will work for sure!
- 
-After the successful installation, you have to initially start BitTorrent Sync. You have different possibilities to do this:
+
+After the successful installation, you have to initially start BitTorrent Sync. You have various possibilities to do this:
 [LIST]
 [*]Log out and login again. Since BitTorrent Sync is started on logon, it will start automatically.[/*]
 [*]Select [i]BitTorrent Sync[/i] from the menu or Unity-Launcher[/*]
@@ -134,7 +137,7 @@ The GUI provides two modes of operation:
 
 The behaviour of the GUI can be influenced by specifying options on the command line. There is also a way to make some options persistent across restarts making it superfluous to specify the options each time you start the GUI.
 
-Following an overview of the available options:
+An overview of the available options:
  
 [code]
 usage: btsync-gui [-h] [--log {CRITICAL,ERROR,WARNING,INFO,DEBUG}]

@@ -138,8 +138,8 @@ The installation of `btsync-gui` is really easy:
 ```
 
 On some systems, `libappindicator` is not available or maybe you do not want to
-use it. In this case, you may install instead the GTK only version the
-BitTorrent Sync GUI version:
+use it. In this case, you may install instead the GTK only version of the
+BitTorrent Sync GUI:
 
 ```bash
 `which sudo` apt-get install btsync-gui-gtk
@@ -150,7 +150,7 @@ Debian. __THIS WILL DEFINITIVELY NOT WORK WITH DESKTOPS LIKE UNITY!__ If you
 are in doubt, install `btsync-gui` - this will work for sure!
 
 After the successful installation, you have to initially start BitTorrent Sync.
-You have different possibilities to do this:
+You have various possibilities to do this:
 
 - Log out and login again. Since BitTorrent Sync is started on logon, it will
 start automatically.
@@ -184,7 +184,7 @@ The behaviour of the GUI can be influenced by specifying options on the command
 line. There is also a way to make some options persistent across restarts making
 it superfluous to specify the options each time you start the GUI.
 
-Following an overview of the available options:
+An overview of the available options:
 
 ```
 usage: btsync-gui [-h] [--log {CRITICAL,ERROR,WARNING,INFO,DEBUG}]
