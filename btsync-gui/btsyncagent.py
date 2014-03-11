@@ -47,11 +47,6 @@ class BtSyncAgent(BtSyncApi):
 	# still hardcoded - this is the binary location of btsync when installing
 	# the package btsync-common
 	BINARY = '/usr/lib/btsync-common/btsync-core'
-	# BEWARE: the following API key is owned by tuxpoldo! If you write your own
-	#         application, do NOT take this, but request your own key by folling
-	#         out the form at http://www.bittorrent.com/sync/developers
-	APIKEY = '26U2OU3LNXN4I3QFNT7JAGG5DB676PCZIEL42FBOGYUM4OUMI5YTBNLD64ZXJCLSFWKC'\
-		'VOFNPU65UVO5RKSMYJ24A2KX3VPS4S7HICM3U7OI3FUHMXJPSLMBV4XNRKEMNOBDK4I'
 
 	def __init__(self,args):
 		BtSyncApi.__init__(self)
@@ -290,7 +285,7 @@ class BtSyncAgent(BtSyncApi):
 			cfg.write('\t\t"listen" : "{0}:{1}",\n'.format(self.bindui,self.portui))
 			cfg.write('\t\t"login" : "{0}",\n'.format(self.username))
 			cfg.write('\t\t"password" : "{0}",\n'.format(self.password))
-			cfg.write('\t\t"api_key" : "{}"\n'.format(BtSyncAgent.APIKEY))
+			cfg.write('\t\t"api_key" : "{}"\n'.format(self.get_api_key()))
 			cfg.write('\t}\n')
 			cfg.write('}\n')
 			cfg.close()
@@ -329,4 +324,15 @@ class BtSyncAgent(BtSyncApi):
 			return False
 		except Exception:
 			return False
+
+	@staticmethod
+	def get_api_key():
+		try:
+			akf = open('/usr/lib/btsync-gui/btsync-gui.key','r')
+			key = akf.readline()
+			akf.close()
+			return key.rstrip('\n\r')
+		except IOError:
+			logging.critical('API Key not found. Stopping application.')
+			exit (-1)
 
