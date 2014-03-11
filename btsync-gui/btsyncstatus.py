@@ -267,6 +267,12 @@ class BtSyncStatus:
 	def onDeleteApp(self, *args):
 		self.close_app(False)
 
+	def onSendFeedback(self,widget):
+		webbrowser.open(
+			'http://forum.bittorrent.com/topic/28106-alpha-full-featured-linux-gui-for-bittorrent-sync-packages-available-for-debian-ubuntu-mint',
+			2
+		)
+
 	def onTogglePause(self,widget):
 		if widget.get_active() and not self.agent.is_paused():
 			logging.info('Suspending agent...')

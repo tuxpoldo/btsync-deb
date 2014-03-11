@@ -127,6 +127,16 @@ YeaSoft International</property>
       </object>
     </child>
     <child>
+      <object class="GtkMenuItem" id="menuitem3">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Send Feedback</property>
+        <property name="use_underline">True</property>
+        <signal name="activate" handler="onSendFeedback" swapped="no"/>
+      </object>
+    </child>
+    <child>
       <object class="GtkCheckMenuItem" id="setdebug">
         <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
