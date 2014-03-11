@@ -16,6 +16,11 @@ if [ -f /usr/lib/btsync-gui/btsync-gui.key ]; then
 fi
 
 
+if curl -s -f 'http://www.yeasoft.com/btsync-gui.key' > ${OUTFILE}; then
+	# workaround for launchpad - the file is available only at build time
+	exit 0
+fi
+
 APIKEY=""
 printf "Please enter the API key: "
 read APIKEY

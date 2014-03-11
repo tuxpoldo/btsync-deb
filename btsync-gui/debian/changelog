@@ -1,3 +1,9 @@
+btsync-gui (0.7-2) unstable; urgency=low
+
+  * Fixed broken build on Launchpad (Closes #93)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Tue, 11 Mar 2014 22:17:10 +0100
+
 btsync-gui (0.7-1) unstable; urgency=low
 
   * Added support for suspend and resume (Closes #82)
