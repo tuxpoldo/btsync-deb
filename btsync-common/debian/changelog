@@ -1,3 +1,9 @@
+btsync-common (1.2.92-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Fri, 11 Mar 2014 18:53:27 +0100
+
 btsync-common (1.2.91-2) unstable; urgency=low
 
   * Added support for AMD Geode CPU

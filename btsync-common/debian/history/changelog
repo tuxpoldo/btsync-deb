@@ -1,3 +1,7 @@
+1.2.92 (March 11, 2014)
+ - fixed issue with subscribing to multicast address (linux i386 and x64 only)
+
+
 1.2.91 (March 4, 2014)
  - Upcoming 1.3 compatibility
  - Fixed issue with permissions transfer on Linux and Mac during initial scan
