@@ -273,6 +273,9 @@ class BtSyncStatus:
 			2
 		)
 
+	def onOpenManual(self,widget):
+		os.system('xdg-open "/usr/share/doc/btsync-common/BitTorrentSyncUserGuide.pdf.gz"')
+
 	def onTogglePause(self,widget):
 		if widget.get_active() and not self.agent.is_paused():
 			logging.info('Suspending agent...')

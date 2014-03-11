@@ -137,6 +137,16 @@ YeaSoft International</property>
       </object>
     </child>
     <child>
+      <object class="GtkMenuItem" id="menuitem4">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Open Manual</property>
+        <property name="use_underline">True</property>
+        <signal name="activate" handler="onOpenManual" swapped="no"/>
+      </object>
+    </child>
+    <child>
       <object class="GtkCheckMenuItem" id="setdebug">
         <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
