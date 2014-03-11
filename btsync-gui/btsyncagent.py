@@ -203,6 +203,9 @@ class BtSyncAgent(BtSyncApi):
 		return self.prefs.get(key,default)
 
 	def load_prefs(self):
+		if not os.path.isfile(self.preffile):
+			self.prefs = {}
+			return
 		try:
 			pref = open (self.preffile, 'r')
 			result = json.load(pref)
@@ -214,7 +217,6 @@ class BtSyncAgent(BtSyncApi):
 		except Exception as e:
 			logging.warning('Error while loading preferences: {0}'.format(e))
 			self.prefs = {}
-			pass
 
 	def save_prefs(self):
 		try:
@@ -224,7 +226,6 @@ class BtSyncAgent(BtSyncApi):
 			pref.close()
 		except Exception as e:
 			logging.error('Error while saving preferences: {0}'.format(e))
-			pass
 
 	def is_auto(self):
 		return self.args.host == 'auto'
