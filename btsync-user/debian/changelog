@@ -1,3 +1,13 @@
+btsync-user (1.14.3-1) unstable; urgency=low
+
+  * New forked release 0.14.2 of btsyncindicator
+    - Fixed TypeError on Debian Wheezy
+      (Would close #btsyncindicator/45)
+  * Fix handling of brutaly killed processes
+    (Closes #60) and (Closes #94)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Wed, 12 Mar 2014 18:54:22 +0100
+
 btsync-user (1.14.2-1) unstable; urgency=low
 
   * New upstream release 0.14.1 of btsyncindicator

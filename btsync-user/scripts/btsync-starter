@@ -109,13 +109,13 @@ adjust_arm_alignment() {
 
 start_frontend() {
 	log_message "start_frontend: begin"
-	if ! pgrep -u $(id -u) -f btsyncindicator.py > /dev/null; then
+	if [ $(pgrep -c -u $(id -u) -f btsyncindicator.py) -eq 0 ]; then
 		if [ -n "$1" ]; then
 			log_message "start_frontend: waiting $1 seconds"
 			sleep $1
 		fi
 	fi
-	if ! pgrep -u $(id -u) -f btsyncindicator.py > /dev/null; then
+	if [ $(pgrep -c -u $(id -u) -f btsyncindicator.py) -eq 0 ]; then
 		if [ -f "${LOKFILE}" ]; then
 			log_message "start_frontend: frontend not running but LOCKFILE detected! Strange! btsyncindicator should handle it"
 			FPID=$(cat "${LOKFILE}")
@@ -134,11 +134,11 @@ start_frontend() {
 		fi
 	fi
 	# test if the start was successful
-	if pgrep -u $(id -u) -f btsyncindicator.py > /dev/null; then
+	if [ $(pgrep -c -u $(id -u) -f btsyncindicator.py) -gt 0 ]; then
 		FPID=$(pgrep -u $(id -u) -f btsyncindicator.py)
 		log_message "start_frontend: process is running with pid ${FPID}"
 	else
-		log_message "start_frontend: process is NOT running!!!! Something went wrong!"
+		log_message "start_frontend: process is NOT running!!!! Something went terribly wrong!"
 	fi
 
 	log_message "start_frontend: end"
@@ -153,7 +153,7 @@ stop_frontend() {
 
 start_agent() {
 	log_message "start_agent: begin"
-	if ! pgrep -u $(id -u) -x btsync-agent > /dev/null; then
+	if [ $(pgrep -c -u $(id -u) -x btsync-agent) -eq 0 ]; then
 		adjust_arm_alignment
 		if [ -f "${USRFILE}" ]; then
 			log_message "start_agent: starting agent with user specific config file ${USRFILE}"
@@ -164,7 +164,7 @@ start_agent() {
 		fi
 	fi
 	# test if the start was successful
-	if pgrep -u $(id -u) -x btsync-agent > /dev/null; then
+	if [ $(pgrep -c -u $(id -u) -x btsync-agent) -gt 0 ]; then
 		FPID=$(pgrep -u $(id -u) -x btsync-agent)
 		log_message "start_agent: process is running with pid ${FPID}"
 	else
@@ -181,7 +181,7 @@ stop_agent() {
 	pkill -u $(id -u) -x btsync-agent
 	pkill -u $(id -u) -f btsyncindicator.py
 	log_message "stop_agent: end - exiting..."
-	exit
+	exit 0
 }
 
 
@@ -213,7 +213,7 @@ agent_runner() {
 			# give the agent some time to fork
 			sleep 1
 			# wait for process to finish
-			while pgrep -u $(id -u) -x btsync-agent > /dev/null; do
+			while [ $(pgrep -c -u $(id -u) -x btsync-agent) -gt 0 ]; do
 				sleep 1
 			done
 			log_message "agent_runner: agent terminated..."
@@ -246,14 +246,14 @@ update_configuration
 # make sure the frontend is running
 start_frontend
 
-if pgrep -u $(id -u) -x btsync-agent > /dev/null; then
+if [ $(pgrep -c -u $(id -u) -f btsync-agent) -gt 0 ]; then
 	log_message "btsync-starter: btsync-agent already running - nothing to do"
 	echo "btsync-agent already running - nothing to do"
 	exit 0
 elif [ -f "${RUNNING_STATEFILE}" ]; then
 	log_message "btsync-starter: running statefile detected"
-	if [ $(pgrep -u $(id -u) -f btsync-starter | wc -l) -gt 1 ]; then
-		# the agent is not running, but there is an agent runner
+	if [ $(pgrep -c -u $(id -u) -f btsync-starter) -gt 1 ]; then
+		# the agent is not running, but there is another agent runner
 		# that means that the agent is paused
 		log_message "btsync-starter: btsync-agent paused - forked runner present - use indicator or commandline to unpause it"
 		log_message "btsync-starter: end"
