@@ -52,7 +52,7 @@ import logging
 import subprocess
 from contextlib import contextmanager
 
-VERSION = '0.14.1'
+VERSION = '0.14.2'
 TIMEOUT = 2 # seconds
 
 @contextmanager
@@ -649,6 +649,8 @@ class BtSyncIndicator:
 	try:
 	    response_json = response.json()
 	except AttributeError:
+	    response_json = json.loads(self.get_response_text(response))
+	except TypeError:
 	    response_json = json.loads(self.get_response_text(response))
 	return response_json
 
