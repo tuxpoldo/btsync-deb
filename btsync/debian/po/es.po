@@ -17,7 +17,7 @@ msgstr "¿Quiere definir un usuario predeterminado de BitTorrent Sync?"
 #. Description
 #: ../btsync.templates:1001
 msgid "BitTorrent Sync can run one or more daemons based on configuration files located in /etc/btsync. You can choose to create a default instance running under root credentials that can be also reconfigured via dpkg-reconfigure or manage the whole configuration manually. In both cases you can manually manage additional instances with their own configuration files."
-msgstr "BitTorrent Sync puede ejecutar uno o más procesos basados en los archivos de configuración encontrados en /etc/btsync. Puede escoger entre crear una configuración predeterminada que se ejecute con credenciales «root», la cual puede ser reconfigurada vía dpkg-reconfigure, o gestionar toda la configuración manualmente. En los dos casos puede gestionar manualmente otras configuraciones mediante sus archivos correspondientes. "
+msgstr "BitTorrent Sync puede ejecutar uno o más servicios basados en los archivos de configuración encontrados en /etc/btsync. Puede escoger entre crear una configuración predeterminada que se ejecute con credenciales «root», la cual puede ser reconfigurada vía dpkg-reconfigure, o gestionar toda la configuración manualmente. En los dos casos puede gestionar manualmente otras configuraciones mediante sus archivos correspondientes. "
 
 #. Type: string
 #. Description
@@ -351,4 +351,16 @@ msgstr "Grupo del servicio de BitTorrent Sync:"
 #: ../btsync.templates:26001
 msgid "You can choose, if you want BitTorrent Sync to run under a different group as the selected user credential. WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
 msgstr "Puede elegir si lo desea que BitTorrent Sync se ejecute bajo un grupo distinto del usuario seleccionado. ADVERTENCIA: si cambia este parámetro en una instancia en ejecución, deberá encargarse de cambiar la propiedad de todos los archivos de la carpetas compartidas gestionadas para asegurarse de que BitTorrent Sync sigue siendo capaz de acceder a las mismas y modificarlas."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:27001
+msgid "Niceness of the BitTorrent Sync Daemon:"
+msgstr "Amabilidad del servicio de BitTorrent Sync:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:27001
+msgid "You can specify the niceness level of the BitTorrent Sync Daemon, which affects process scheduling. Nicenesses range from -20 (most favorable scheduling) to 19 (least favorable). Specify 0 to let BitTorrent Sync run with the default niceness value."
+msgstr "Puede especificar el nivel de amabilidad («niceness») del servicio de BitTorrent Sync, lo que afecta a la planificación de procesos. La amabilidad va de -20 (la planificación más favorable) a 19 (la menos favorable). Indique 0 para dejar que BitTorrent Sync se ejecute con el valor de amabilidad predeterminado."
 
