@@ -4,7 +4,7 @@ btsync-user (1.14.3-1) unstable; urgency=low
     - Fixed TypeError on Debian Wheezy
       (Would close #btsyncindicator/45)
   * Fix handling of brutaly killed processes
-    (Closes #60) and (Closes #94)
+    (Closes #60) and (Closes #87)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Wed, 12 Mar 2014 18:54:22 +0100
 
