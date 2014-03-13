@@ -104,14 +104,16 @@ class BtSyncAgent(BtSyncApi):
 			raise BtSyncAgentException(0, 'Default settings cleared.')
 		if self.args.savedefaults:
 			# save new defaults
-			if self.args.username is None:
-				raise BtSyncAgentException(-1,
-					'Username must be specified when saving defaults')
-			if self.args.password is None:
-				raise BtSyncAgentException(-1,
-					'Username must be specified when saving defaults')
-			self.set_pref('username',self.username)
-			self.set_pref('password',self.password)
+			if self.args.username is not None:
+				self.set_pref('username',self.username)
+#			else:
+#				raise BtSyncAgentException(-1,
+#					'Username must be specified when saving defaults')
+			if self.args.password is not None:
+				self.set_pref('password',self.password)
+#			else:
+#				raise BtSyncAgentException(-1,
+#					'Password must be specified when saving defaults')
 			if self.args.bindui is not None:
 				# changed bind address for web ui
 				self.set_pref('bindui',self.bindui)
