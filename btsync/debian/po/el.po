@@ -324,8 +324,9 @@ msgstr "Διαπιστευτήρια για το BitTorrent Sync Daemon:"
 #. Type: select
 #. Description
 #: ../btsync.templates:24001
-msgid "You can choose, if you want BitTorrent Sync to run as root (not reccomended) or under it's own unprivileged credentials (user: btsync, group: btsync). WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
-msgstr "Μπορείτε να επιλέξετε, αν επιθυμείτε το BitTorrent Sync να τρέχει ως διαχειριστής "
+#, fuzzy
+msgid "You can choose, if you want BitTorrent Sync to run as root (not recommended), under it's own unprivileged credentials (user: btsync, group: btsync) or under an arbitrary user of your choice. WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
+msgstr "Μπορείτε να επιλέξετε, αν επιθυμείτε το BitTorrent Sync να τρέχει ως υπερχρήστης (δεν προτείνεται) ή κάτω από τα δικά του περιορισμενα δικαιώματα (όνομα χρήστη: btsync, ομάδα: btsync). ΠΡΟΣΟΧΗ: Αν αλλάξετε αυτή την  ρύθμιση  σε ένα τρέχον στιγμιότυπο, θα πρέπει να αλλάξετε και την κυριότητα όλων των αρχείων του φακέλου διαχείρισης ώστε να εξασφαλίσετε ότι το BitTorrent Sync θα μπορεί να έχει πρόσβαση σε αυτα και να τα τροποποιεί."
 
 #. Type: note
 #. Description
@@ -337,5 +338,17 @@ msgstr "Τα διαπιστευτήρια για το BitTorrent Sync Daemon έ�
 #. Description
 #: ../btsync.templates:25001
 msgid "Please make sure, that BitTorrent Sync will still be able to access and write to files and directories in your configured shared folders."
-msgstr "Παρακαλώ βεβαιωθείτε ότι το BitTorrent Sync θα μπορεί να έχει πρόσβαση και να γράφει σε αρχεία και φακέλους στους κοινόχρηστους φακέλους."
+msgstr "Παρακαλώ βεβαιωθείτε ότι το BitTorrent Sync θα μπορεί να έχει πρόσβαση και να γράφει σε αρχεία και καταλόγους στους κοινόχρηστους φακέλους."
+
+#. Type: select
+#. Description
+#: ../btsync.templates:26001
+msgid "BitTorrent Sync Daemon Group:"
+msgstr "Ομάδα BitTorrent Sync Daemon:"
+
+#. Type: select
+#. Description
+#: ../btsync.templates:26001
+msgid "You can choose, if you want BitTorrent Sync to run under a different group as the selected user credential. WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
+msgstr "Μπορείτε να επιλέξετε ώστε το BitTorrent Sync να τρέχει κάτω από διαφορετική ομάδα από τον επιλεγμένο χρήστη. ΠΡΟΣΟΧΗ: Αν αλλάξετε αυτή τη ρύθμιση σε ένα τρέχον στιγμιότυπο, θα πρέπει να αλλάξετε και την κυριότητα όλων των αρχείων του φακέλου διαχείρισης ώστε να εξασφαλίσετε ότι το BitTorrent Sync θα μπορεί να έχει πρόσβαση σε αυτά και να τα τροποποιεί."
 
