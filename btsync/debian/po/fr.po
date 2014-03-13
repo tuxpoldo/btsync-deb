@@ -351,3 +351,15 @@ msgstr "Groupe du démon BitTorrent Sync :"
 msgid "You can choose, if you want BitTorrent Sync to run under a different group as the selected user credential. WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
 msgstr "Vous pouvez choisir, si vous voulez que BitTorrent Sync soit executé sous un autre groupe que les identifiants de l'utilisateur selectionné. ATTENTION : Si vous changez ce paramètre dans une instance déjà en cours d'execution, vous devez prendre soin de changer la propriété de tous les fichiers dans les répertoires partagés afin que BitTorrent Sync soit toujours en mesure d'y accéder et de les modifier."
 
+#. Type: string
+#. Description
+#: ../btsync.templates:27001
+msgid "Niceness of the BitTorrent Sync Daemon:"
+msgstr "Agressivité du démon BitTorrent Sync :"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:27001
+msgid "You can specify the niceness level of the BitTorrent Sync Daemon, which affects process scheduling. Nicenesses range from -20 (most favorable scheduling) to 19 (least favorable). Specify 0 to let BitTorrent Sync run with the default niceness value."
+msgstr "Vous pouvez indiquer le niveau d'agressivité du démon BitTorrent Sync, qui agit sur la planification du processus. L'agressivité va de -20 (planification la plus favorable) à 19 (la moins favorable). Indiquer 0 pour que BitTorrent Sync fonctionne au niveau d'agressivité par défaut."
+
