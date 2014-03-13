@@ -133,7 +133,7 @@ config_from_conffile () {
 	DMASK=$(grep 'DAEMON_DEBUG[ \t]*=' ${CONFIG_DIR}/$1 | cut -d= -f 2 | sed -e "s/ //g" -e "s/\t//g")
 	DMASK=$(expr match "${DMASK}" '\([0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f]\)' | tr "[a-f]" "[A-F]")
 	# nice level encoded in comments in the config file
-	NICE_LEVEL=$(grep 'DAEMON_NICE_LEVEL[ \t]*=' ${CONFIG_DIR}/$1 | cut -d= -f 2 | sed -e "s/ //g" -e "s/\t//g")
+	NICE_LEVEL=$(grep 'DAEMON_NICE[ \t]*=' ${CONFIG_DIR}/$1 | cut -d= -f 2 | sed -e "s/ //g" -e "s/\t//g")
 	NICE_LEVEL=$(expr match "${NICE_LEVEL}" '\(-\{0,1\}+\{0,1\}[0-9]\{1,2\}\)')
 	NICE_LEVEL=${NICE_LEVEL:-0}
 	# storage_path as saved in config file. This parameter is mandatory

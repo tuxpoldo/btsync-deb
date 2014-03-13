@@ -120,7 +120,7 @@ EOF
 		echo "// DAEMON_UMASK=${UMASK}" >> ${CONFFILE}
 	fi
 	if [ "${NICE_LEVEL}" != "" -o "${NICE_LEVEL}" != "0" ]; then
-		echo "// DAEMON_NICE_LEVEL=${NICE_LEVEL}" >> ${CONFFILE}
+		echo "// DAEMON_NICE=${NICE_LEVEL}" >> ${CONFFILE}
 	fi
 	(
 	cat <<EOF

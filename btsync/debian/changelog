@@ -1,4 +1,4 @@
-btsync (1.2.3-0) unstable; urgency=low
+btsync (1.2.3-1) unstable; urgency=low
 
   * Cleanup startup and shutdown messages
   * Refreshed all debconf template translations
@@ -7,7 +7,7 @@ btsync (1.2.3-0) unstable; urgency=low
   * Added full support (including debconf) for specifying niceness
     in the config file (Closes #96)
 
- -- Leo Moll <leo.moll@yeasoft.com>  Thu, 13 Mar 2014 16:12:42 +0100
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 13 Mar 2014 21:54:42 +0100
 
 btsync (1.2.2-3) unstable; urgency=low
 

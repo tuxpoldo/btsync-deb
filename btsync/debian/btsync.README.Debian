@@ -39,6 +39,12 @@ DAEMON_DEBUG:    The debug mask (4 hex digits) for the btsync
                  will be deleted. Full detail is set by
                  specifying FFFF
 
+DAEMON_NICE:     The niceness level of the btsync daemon, which
+                 affects process scheduling. Nicenesses range from
+                 -20 (most favorable scheduling) to 19 (least
+                 favorable).
+
+
 The parameter definition must use an equal sign ("="):
 
 //
@@ -96,4 +102,5 @@ It can assume the values
 The variable DAEMON_ARGS allows one to specify additional commandline
 parameters passed to the daemon.
 
- -- Leo Moll <leo.moll@yeasoft.com>  Sat, 29 Jun 2013 16:42:10 +0200
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 13 Mar 2014 21:54:21 +0100
+
