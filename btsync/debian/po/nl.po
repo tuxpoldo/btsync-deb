@@ -324,6 +324,7 @@ msgstr "BitTorrent Sync Daemon referenties:"
 #. Type: select
 #. Description
 #: ../btsync.templates:24001
+#, fuzzy
 msgid "You can choose, if you want BitTorrent Sync to run as root (not recommended), under it's own unprivileged credentials (user: btsync, group: btsync) or under an arbitrary user of your choice. WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
 msgstr "Je kunt kiezen, of je BitTorrent Sync uit wil voeren als root (niet aanbevolen) of onder zijn eigen referenties (gebruiker: btsync, groep: btsync) of onder een gebruiker van je eigen keuze. WAARSCHUWING: Als u deze instelling wijzigt in een reeds gestarte instantie, moet u zorgen voor het veranderen van de eigendom van alle bestanden in de mappen beheerd door BitTorrent Sync om ervoor te zorgen dat BitTorrent Sync nog steeds in staat is om toegang te krijgen tot de bestanden en ze te wijzigen."
 
