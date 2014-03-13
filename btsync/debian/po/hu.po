@@ -324,7 +324,6 @@ msgstr "BitTorrent Sync Démon jogosultságai:"
 #. Type: select
 #. Description
 #: ../btsync.templates:24001
-#, fuzzy
 msgid "You can choose, if you want BitTorrent Sync to run as root (not recommended), under it's own unprivileged credentials (user: btsync, group: btsync) or under an arbitrary user of your choice. WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
 msgstr "Beállítható hogy a BitTorrent Sync rendszergazdai (nem ajánlott) vagy a saját felhasználói  (felhasznlónév: btsync, csoport: btsync)  jogkörökkel fusson. FIGYELEM: Ha úgy változtatjuk ezt a beállítást, hogy a BitTorrent Sync már futott korábban, akkor gondoskodnunk kell a megosztott könyváraknak és fájloknak a megfelelő jogosultsági beállításairól, hogy a BitTorrent Sync továbrra  is írhassa és olvashassa azokat."
 
@@ -351,4 +350,16 @@ msgstr "BitTorrent Sync démon felhasználói csoportja:"
 #: ../btsync.templates:26001
 msgid "You can choose, if you want BitTorrent Sync to run under a different group as the selected user credential. WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
 msgstr "Beállítható, hogy a BitTorrent Sync milyen felhasználói csoportként fusson. FIGYELEM: Ha megváltoztatja ezt a beállítást egy már futó példány alatt, gondoskodnia kell a fájlok tulajdonosainak átállításáról is az összes megosztott könyvtárban, hogy a BitTorrent Sync továbbra is írni és olvasni tudja őket."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:27001
+msgid "Niceness of the BitTorrent Sync Daemon:"
+msgstr "A BitTorrent Sync démon prioritási szintje:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:27001
+msgid "You can specify the niceness level of the BitTorrent Sync Daemon, which affects process scheduling. Nicenesses range from -20 (most favorable scheduling) to 19 (least favorable). Specify 0 to let BitTorrent Sync run with the default niceness value."
+msgstr "Az folyamat ütemező számára neállítható a BitTorrent Sync Démon prioritási szintje -20-tól (legkisebb prioritás) 19-ig (legnagyobb prioritás). Alapértelmezetten 0 értékre állítva a többi folyamattal egyenértékű ütemezést (prioritást) eredményez."
 
