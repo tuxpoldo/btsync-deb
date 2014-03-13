@@ -303,3 +303,51 @@ msgstr "Durée de vie maximale des versions archivées :"
 msgid "Sets the number of days after reaching which files will be automatically deleted from the .SyncArchive folder. If leaved empty, the default value applies."
 msgstr "Définit le nombre de jours maximal au-delà duquel des fichiers seront automatiquement supprimés du dossier .SyncArchive. Si laissé vide, la valeur par défaut s'applique."
 
+#. Type: string
+#. Description
+#: ../btsync.templates:23001
+msgid "BitTorrent Sync API Key:"
+msgstr "Clé de l'API BitTorrent Sync :"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:23001
+msgid "To enable the BitTorrent Sync API, an API key supplied by BitTorrent must be specified into the configuration file. If leaved empty, the API of BitTorrent Sync is disabled (default). API Keys can be requested on the BitTorrent Web Site."
+msgstr "Pour activer l'API BitTorrent Sync, une clé API fournie par BitTorrent doit être spécifiée dans le fichier de configuration. Si laissé vide, l'API BitTorrent Sync est désactivée (Par défaut). Les clés API peuvent être demandées sur le site internet BitTorrent."
+
+#. Type: select
+#. Description
+#: ../btsync.templates:24001
+msgid "BitTorrent Sync Daemon Credentials:"
+msgstr "Identifiants du démon BitTorrent Sync :"
+
+#. Type: select
+#. Description
+#: ../btsync.templates:24001
+msgid "You can choose, if you want BitTorrent Sync to run as root (not recommended), under it's own unprivileged credentials (user: btsync, group: btsync) or under an arbitrary user of your choice. WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
+msgstr "Vous pouvez choisir, si vous voulez que BitTorrent Sync soit executé en tant que root (non recommandé), sous un identifiant non priviliégié (utilisateur : btsync, groupe : btsync) ou sous un autre utilisateur de votre choix. ATTENTION : Si vous changez ce paramètre dans une instance déjà en cours d'execution, vous devez prendre soin de changer la propriété de tous les fichiers dans les répertoires partagés afin que BitTorrent Sync soit toujours en mesure d'y accéder et de les modifier."
+
+#. Type: note
+#. Description
+#: ../btsync.templates:25001
+msgid "BitTorrent Sync Daemon Credentials have been changed!"
+msgstr "Les identifiants du démon BitTorrent Sync ont été changée !"
+
+#. Type: note
+#. Description
+#: ../btsync.templates:25001
+msgid "Please make sure, that BitTorrent Sync will still be able to access and write to files and directories in your configured shared folders."
+msgstr "Veuillez vous assurer que BitTorrent Sync pourra toujours accéder et écrire les fichiers et les répertoires dans vos répertoires partagés configurés"
+
+#. Type: select
+#. Description
+#: ../btsync.templates:26001
+msgid "BitTorrent Sync Daemon Group:"
+msgstr "Groupe du démon BitTorrent Sync :"
+
+#. Type: select
+#. Description
+#: ../btsync.templates:26001
+msgid "You can choose, if you want BitTorrent Sync to run under a different group as the selected user credential. WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
+msgstr "Vous pouvez choisir, si vous voulez que BitTorrent Sync soit executé sous un autre groupe que les identifiants de l'utilisateur selectionné. ATTENTION : Si vous changez ce paramètre dans une instance déjà en cours d'execution, vous devez prendre soin de changer la propriété de tous les fichiers dans les répertoires partagés afin que BitTorrent Sync soit toujours en mesure d'y accéder et de les modifier."
+
