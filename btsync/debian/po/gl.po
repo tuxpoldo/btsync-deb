@@ -352,3 +352,15 @@ msgstr "Grupo do servizo do BitTorrent Sync:"
 msgid "You can choose, if you want BitTorrent Sync to run under a different group as the selected user credential. WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
 msgstr "Pode escoller se quere que o BitTorrent Sync se execute desde un grupo diferente ao da credencial do usuario seleccionado. AVISO: Se cambia esta configuración nunha instancia en execución, ten que ter a precaución de cambiar a titularidade (propietario) de todos os ficheiros na administración de cartafoles compartidos a fin de asegurar que o BitTorrent Sync aínda poderá acceder a eles e modificalos."
 
+#. Type: string
+#. Description
+#: ../btsync.templates:27001
+msgid "Niceness of the BitTorrent Sync Daemon:"
+msgstr "Prioridade do servizo do BitTorrent Sync:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:27001
+msgid "You can specify the niceness level of the BitTorrent Sync Daemon, which affects process scheduling. Nicenesses range from -20 (most favorable scheduling) to 19 (least favorable). Specify 0 to let BitTorrent Sync run with the default niceness value."
+msgstr "Pode especificar o nivel de prioridade do servizo do BitTorrent Sync, que afecta á planificación de procesos. A prioridade oscila entre -20 (programación máis favorábel) a 19 (menos favorábel). Especifique 0 para deixar que o BitTorrent Sync funcione co valor de prioridade predeterminado."
+
