@@ -221,3 +221,13 @@ _Description: BitTorrent Sync Daemon Group:
  instance, you must take care of changing the ownership of all files in the
  managed folder shares in order to make sure that BitTorrent Sync will still
  be able to access and modify them.
+
+Template: btsync/nice-level
+Type: string
+Default: 0
+_Description: Niceness of the BitTorrent Sync Daemon:
+ You can specify the niceness level of the BitTorrent Sync Daemon, which
+ affects process scheduling. Nicenesses range from -20 (most favorable
+ scheduling) to 19 (least favorable). Specify 0 to let BitTorrent Sync run
+ with the default niceness value.
+

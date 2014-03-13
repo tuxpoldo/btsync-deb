@@ -94,6 +94,7 @@ config_debug () {
 		log_info_msg "Storage Path: '$STORAGE_PATH'"
 		log_info_msg "PID File: '$PID_FILE'"
 		log_info_msg "Debug flags: '$DMASK'"
+		log_info_msg "Nice level: '$NICE_LEVEL'"
 	fi
 }
 
@@ -131,6 +132,10 @@ config_from_conffile () {
 	# debug mask encoded in comments in the config file
 	DMASK=$(grep 'DAEMON_DEBUG[ \t]*=' ${CONFIG_DIR}/$1 | cut -d= -f 2 | sed -e "s/ //g" -e "s/\t//g")
 	DMASK=$(expr match "${DMASK}" '\([0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f]\)' | tr "[a-f]" "[A-F]")
+	# nice level encoded in comments in the config file
+	NICE_LEVEL=$(grep 'DAEMON_NICE_LEVEL[ \t]*=' ${CONFIG_DIR}/$1 | cut -d= -f 2 | sed -e "s/ //g" -e "s/\t//g")
+	NICE_LEVEL=$(expr match "${NICE_LEVEL}" '\(-\{0,1\}+\{0,1\}[0-9]\{1,2\}\)')
+	NICE_LEVEL=${NICE_LEVEL:-0}
 	# storage_path as saved in config file. This parameter is mandatory
 	STORAGE_PATH=$(grep '^[[:space:]]*"storage_path"' ${CONFIG_DIR}/$1  | cut -d":" -f 2 | cut -d"," -f 1)
 	STORAGE_PATH=$(expr match "${STORAGE_PATH}" '^[[:space:]]*"\(.*\)".*')
@@ -268,6 +273,7 @@ start_btsync () {
 	adjust_debug_flags
 	STATUS=0
 	start-stop-daemon --start --quiet --oknodo \
+		--nicelevel $NICE_LEVEL \
 		--pidfile /var/run/$NAME.$BASENAME.pid \
 		--make-pidfile ${CREDENTIALS:+--chuid ${CREDENTIALS}} \
 		--background ${UMASK:+--umask ${UMASK}} \

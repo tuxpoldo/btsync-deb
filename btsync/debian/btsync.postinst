@@ -40,6 +40,9 @@ create_default_instance() {
 	BTUSER=${RET}
 	db_get btsync/runasgroup || RET="default"
 	BTGROUP=${RET}
+	db_get btsync/nice-level || RET="0"
+	NICE_LEVEL=$(expr match "${RET}" '[ +0]*\(-*[0-9]*\)')
+	NICE_LEVEL=${NICE_LEVEL:-0}
 	db_get btsync/device-name || RET="$(hostname) - Default Instance"
 	DEVICE_NAME="${RET:-$(hostname) - Default Instance}"
 	db_get btsync/bind-port || RET=0
@@ -115,6 +118,9 @@ EOF
 	fi
 	if [ "${UMASK}" != "" ]; then
 		echo "// DAEMON_UMASK=${UMASK}" >> ${CONFFILE}
+	fi
+	if [ "${NICE_LEVEL}" != "" -o "${NICE_LEVEL}" != "0" ]; then
+		echo "// DAEMON_NICE_LEVEL=${NICE_LEVEL}" >> ${CONFFILE}
 	fi
 	(
 	cat <<EOF
