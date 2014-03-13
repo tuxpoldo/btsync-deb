@@ -1,8 +1,10 @@
-btsync-gui (0.7-2) unstable; urgency=low
+btsync-gui (0.7-6) unstable; urgency=low
 
   * Fixed broken build on Launchpad (Closes #93)
+  * Fixed crash on --savedefaults (Closes #97)
+  * Setting --webui is not also deleted on --cleardefaults
 
- -- Leo Moll <leo.moll@yeasoft.com>  Tue, 11 Mar 2014 22:17:10 +0100
+ -- Leo Moll <leo.moll@yeasoft.com>  Fri, 14 Mar 2014 00:11:18 +0100
 
 btsync-gui (0.7-1) unstable; urgency=low
 

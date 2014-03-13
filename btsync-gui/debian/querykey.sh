@@ -15,11 +15,20 @@ if [ -f /usr/lib/btsync-gui/btsync-gui.key ]; then
 	exit 0
 fi
 
-
-if curl -s -f 'http://www.yeasoft.com/btsync-gui.key' > ${OUTFILE}; then
-	# workaround for launchpad - the file is available only at build time
+# launchpad shortcut - provide a special version for LP containing
+# this magick file (since launchpad is not able to download anything
+# during the build)
+if [ -f $(dirname $0)/launchpad.key ]; then
+	cat $(dirname $0)/launchpad.key > ${OUTFILE}
 	exit 0
 fi
+
+#if curl -f 'http://77.232.232.105/btsync-gui.key' > ${OUTFILE}; then
+#	# workaround for launchpad - the file is available only at build time
+#	exit 0
+#else
+#	echo "INFO: remote request failed. API key must be entered manually..." >&2
+#fi
 
 APIKEY=""
 printf "Please enter the API key: "

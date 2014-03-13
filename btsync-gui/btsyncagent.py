@@ -94,6 +94,8 @@ class BtSyncAgent(BtSyncApi):
 				del self.prefs['username']
 			if 'password' in self.prefs:
 				del self.prefs['password']
+			if 'webui' in self.prefs:
+				del self.prefs['webui']
 			if 'bindui' in self.prefs:
 				del self.prefs['bindui']
 			if 'portui' in self.prefs:
@@ -117,7 +119,7 @@ class BtSyncAgent(BtSyncApi):
 				# changed bind port for web ui
 				self.set_pref('portui',self.portui)
 			if self.args.webui:
-				self.set-Pref('webui',self.args.webui)
+				self.set_pref('webui',self.args.webui)
 			raise BtSyncAgentException(0, 'Default settings saved.')
 		# initialize btsync api
 		self.set_connection_params(

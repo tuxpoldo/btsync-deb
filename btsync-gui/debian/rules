@@ -19,7 +19,7 @@ DEB_SOURCE_PACKAGE=$(shell dpkg-parsechangelog -l$(DEB_DEBIAN_DIR)/changelog \
 
 override_dh_install:
 	dh_install
-	$(DEB_DEBIAN_DIR)/querykey.sh $(CURDIR)/$(DEB_DEBIAN_DIR)btsync-gui-gtk/usr/lib/btsync-gui/btsync-gui.key
+	$(DEB_DEBIAN_DIR)querykey.sh $(CURDIR)/$(DEB_DEBIAN_DIR)btsync-gui-gtk/usr/lib/btsync-gui/btsync-gui.key
 
 override_dh_auto_build:
 	dh_auto_build
