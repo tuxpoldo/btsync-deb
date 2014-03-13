@@ -1,0 +1,354 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: btsync-deb\n"
+"Language: pl\n"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:1001
+msgid "Do you want to define a default BitTorrent Sync instance?"
+msgstr "Czy chcesz ustawić domyślną instancję BitTorrent Sync?"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:1001
+msgid "BitTorrent Sync can run one or more daemons based on configuration files located in /etc/btsync. You can choose to create a default instance running under root credentials that can be also reconfigured via dpkg-reconfigure or manage the whole configuration manually. In both cases you can manually manage additional instances with their own configuration files."
+msgstr "BitTorrent Sync może pracować jako jeden lub więcej demonów, bazując na konfiguracji w /etc/btsync. Możesz wybrać czy utworzyć domyślną instalację działającą na prawach roota, którą można konfigurować poprzez dpkg-reconfigure czy zarządzać całą konfiguracją manualnie. W obydwu przypadkach możesz konfigurować dodatkowe instancje poprzez ich własne pliki konfiguracyjne."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:2001
+msgid "BitTorrent Sync Listen Port:"
+msgstr "Port nasłuchiwania dla BitTorrent Sync:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:2001
+msgid "Specify here the port BitTorrent Sync will listen on for the file synchronisation protocol."
+msgstr "Ustaw port dla BitTorrent Sync, na którym będzie nasłuchiwał protokołu synchronizacji plików."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:2001
+msgid "Specify 0 to let btsync take a random port number each time it starts. Valid range is 1000-65534"
+msgstr "Ustaw 0 dla losowego portu przy każdym uruchomieniu btsync.\n"
+"Prawidłowy zakres: 1000-65534"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:3001
+msgid "Do you want BitTorrent Sync to request port mapping via UPNP?"
+msgstr "Czy BitTorrent Sync ma ustawić automatycznie port przy użyciu UPNP?"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:3001
+msgid "Specify here if you want BitTorrent Sync to request a port mapping from the default router using the Universal Plug and Play protocol."
+msgstr "Ustaw jeśli BitTorrent Sync ma automatycznie ustawić port, pytając domyslny ruter za pomocą protokołu UPNP."
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:3001
+msgid "This technique is useful only if BitTorrent Sync is running behind a NAT SOHO router supporting UPNP."
+msgstr "Ta funkcja jest użyteczna tylko jeśli BitTorrent Sync działa za NATem rutera SOHO, który wspiera UPNP."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:4001
+msgid "Download Bandwith Limit:"
+msgstr "Limit szybkości pobierania:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:4001
+msgid "Specify here a download rate limit expressed in KB/Second"
+msgstr "Ustaw limit szybkości pobierania w KB/Sekundę"
+
+#. Type: string
+#. Description
+#. Type: string
+#. Description
+#: ../btsync.templates:4001 ../btsync.templates:5001
+msgid "If 0 is specified, no limit is applied."
+msgstr "0 oznacza brak limitu."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:5001
+msgid "Upload Bandwith Limit:"
+msgstr "Limit szybkości wysyłania:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:5001
+msgid "Specify here an upload rate limit expressed in KB/Second"
+msgstr "Ustaw limit szybkości wysyłania w KB/Sekundę"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:6001
+msgid "Web Interface Bind IP Address:"
+msgstr "Adres IP interfejsu Web:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:6001
+msgid "BitTorrent Sync's web interface can listen on a specific IP address or on all addresses configured on this machine."
+msgstr "Interfejs Web BitTorrent Sync może nasłuchiwać na konkretnym IP lub na wszystkich skonfigurowanych adresach tego komputera."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:6001
+msgid "If you want BitTorrent Sync to listen on all interfaces and addresses, leave this value to 0.0.0.0"
+msgstr "Jeśli BitTorrent Sync ma nasłuchiwać na wszystkich interfejsach i adresach tego komputera, pozostaw wartość 0.0.0.0"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:6001
+msgid "If you want BitTorrent Sync to listen on a specific IP address, specify it now."
+msgstr "Jeśli BitTorrent Sync ma nasłuchiwać na konkretnym adresie IP, ustaw go teraz."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:7001
+msgid "Web Interface Listen Port:"
+msgstr "Port dla interfejsu Web:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:7001
+msgid "Specify here the port BitTorrent Sync will listen on for the web interfce. This port number in the range from 80 to 65534 shall not conflict with any other services running on this machine."
+msgstr "Ustaw tutaj port, na którym BitTorrent Sync będzie nasłuchiwał interfejsu Web. Numer tego portu ustawiony w przedziale od 80 do 65534 nie powinien kolidować z innymi usługami działającymi na tym komputerze."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:8001
+msgid "The username for accessing the web interface:"
+msgstr "Nazwa użytkownika dla interfejsu Web:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:8001
+msgid "Specify here a username for accessing the web interface. If left empty, no user authorisation is required to access the web interface."
+msgstr "Ustaw tutaj nazwę użytkownika dla dostępu do interfejsu Web. Jeśli pozostawisz pole puste nie będzie wymagana żadna autoryzacja."
+
+#. Type: password
+#. Description
+#: ../btsync.templates:9001
+msgid "The password for accessing the web interface:"
+msgstr "Hasło dostępu do interfejsu Web:"
+
+#. Type: password
+#. Description
+#: ../btsync.templates:9001
+msgid "Specify here a password for accessing the web interface."
+msgstr "Ustaw tutaj hasło dostępu dla logowania do interfejsu Web."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:10001
+msgid "The visible device name of this instance:"
+msgstr "Widoczna nazwa urządzenia dla tej instancji:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:10001
+msgid "Specify here the visible device name for this instance. If left empty, a default device name based on the host name will be created."
+msgstr "Ustaw tutaj nazwę urządzenia, widoczną dla tej instancji. Jeśli pozostawisz puste pole domyślna nazwa będzie utworzona na podstawie nazwy hosta."
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:11001
+msgid "Should BitTorrent Sync perform disk operations with low priority?"
+msgstr "Czy BitTorrent Sync powinien pracować z dyskiem z niskim priorytetem?"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:11001
+msgid "Sets priority for the file operations on disc. If set to false, Sync will perform read and write file operations with the highest speed and priority which can result in degradation of performance for other applications."
+msgstr "Ustaw priorytet dla operacji na plikach na dysku. Jeśli ustawiono \"false\", Sync będzie wykonywał operację odczytu i zapisu plików z najwyższą prędkością i priorytetem, który nie będzie powodował problemów w działaniu innych aplikacji na tym urządzeniu."
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:12001
+msgid "Should BitTorrent Sync encrypt data on the local network?"
+msgstr "Czy BitTorrent Sync ma stosować szyfrowanie w obrębie sieci lokalnej?"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:12001
+msgid "If set to true, will use encryption in the local network."
+msgstr "Jeśli ustawione na \"true\" , dane w sieci lokalnej będą szyfrowane."
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:13001
+msgid "Should BitTorrent Sync use TCP on the local network?"
+msgstr "Czy BitTorrent Sync ma używać TCP w sieci lokalnej?"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:13001
+msgid "If set to true, Sync will use TCP instead of UDP in local network."
+msgstr "Jeśli ustawione na \"true\" , Sync będzie używał TCP zamiast UDP w sieci lokalnej."
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:14001
+msgid "Should BitTorrent Sync apply speed limits also in local networks?"
+msgstr "Czy BitTorrent Sync ma stosować limity prędkości w sieci lokalnej?"
+
+#. Type: boolean
+#. Description
+#: ../btsync.templates:14001
+msgid "Applies speed limits to the peers in local network. By default the limits are not applied in LAN."
+msgstr "Włącza stosownie limitów prędkości w sieci lokalnej. Domyślnie prędkość synchronizacji nie jest limitowana w sieci LAN."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:15001
+msgid "Fall back folder rescan interval in seconds:"
+msgstr "Rezerwowe skanowanie folderu w sekundach:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:15001
+msgid "Syncing happens in real time. In addition, as a fall back, BitTorrent Sync also rescans files/folders every 10 minutes by default. This interval can be modified here."
+msgstr "Synchronizacja przebiega w czasie rzeczywistym. Dodatkowo, rezerwowo BitTorrent Sync skanuje domyślne pliki/foldery co 10 minut. Tutaj można zmodyfikować ten czas."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:16001
+msgid "Umask value to set for the daemon:"
+msgstr "Wartość maski (Umask) dla demona:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:16001
+msgid "Applies the supplied umask to the BitTorrent Sync daemon. If leaved empty, the default umask value applies."
+msgstr "Stosuje ustawioną maskę dla demona BitTorrent Sync. Jeśli puste, będzie stosowana domyślna maska."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:17001
+msgid "Maximum file size difference for patching:"
+msgstr "Maksymalna różnica rozmiaru pliku dla łatania:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:17001
+msgid "Determines a size difference in MB between versions of one file for patching. When it is reached or exceeded, the file will be updated by downloading missing chunks of information (patches). Updates for a file with a smaller size difference will be downloaded as separate files. If leaved empty, the default value applies."
+msgstr "Określa różnicę rozmiaru w MB pomiędzy wersjami jednego pliku dla wersjonowania. Kiedy osiągnie lub przekroczy limit, plik zostanie zaktualizowany o brakujące części (patches). Aktualizacje dla pliku z małą różnicą będą ściągnięte jako osobne pliki. Jeśli puste, zostaną przyjęte wartości domyślne."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:18001
+msgid "Maximum file size for versioning:"
+msgstr "Maksymalny rozmiar pliku dla wersjonowania:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:18001
+msgid "Determines maximum file size in MB for creating file versions. When this size is exceeded, versions will not be created to save space on disk. If leaved empty, the default value applies."
+msgstr "Określa maksymalny rozmiar pliku w MB dla wersjonowania. Jeśli ten limit zostanie przekroczony, wersje nie będą tworzone dla oszczędzania miejsca na dysku. Jeśli puste zostaną przyjęte wartości domyślne."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:19001
+msgid "Send Buffer Size:"
+msgstr "Wielkość bufora wysyłania:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:19001
+msgid "This is the amount of real memory in MB that will be used for cached send operations. This value can be set in the range from 1 to 100 MB. If leaved empty, the default value applies."
+msgstr "To jest ilość rzeczywistej pamięci w MB, która będzie używana dla pamięci podręcznej wysyłania. Ta wartość może zawierać się w przedziale od 1 do 100 MB. Jeśli puste zostaną przyjęte wartości domyślne."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:20001
+msgid "Receive buffer size:"
+msgstr "Wielkość bufora odbierania:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:20001
+msgid "This is the amount of real memory in MB that will be used for cached receive operations. This value can be set in the range from 1 to 100 MB. If leaved empty, the default value applies."
+msgstr "To jest ilość rzeczywistej pamięci w MB, która będzie używana dla pamięci podręcznej odbierania. Ta wartość może zawierać się w przedziale od 1 do 100 MB. Jeśli puste zostaną przyjęte wartości domyślne."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:21001
+msgid "Maximum time difference between devices:"
+msgstr "Maksymalna różnica czasu pomiędzy urządzeniami:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:21001
+msgid "Maximum allowed time difference in seconds between devices. If the difference exceeds this limit, the devices will not be synced as it may result in incorrect tracing of file changes. If leaved empty, the default value applies."
+msgstr "Maksymalna dozwolona różnica czasu (w sekundach) pomiędzy urządzeniami. Jeśli różnica ta przekroczy ustawiony limit, urządzenie nie zostanie zsynchronizowane, co może skutkować nieprawidłowym śledzenie zmian plików. Jeśli puste zostaną przyjęte wartości domyślne."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:22001
+msgid "Maximum time to live for versioned copies:"
+msgstr "Maksymalny czas przechowywania kopi dla wersjonowania:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:22001
+msgid "Sets the number of days after reaching which files will be automatically deleted from the .SyncArchive folder. If leaved empty, the default value applies."
+msgstr "Określa liczbę dni, po osiągnięciu której pliki w folderze .SyncArchive zostaną usunięte. Jeśli puste zostaną przyjęte wartości domyślne."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:23001
+msgid "BitTorrent Sync API Key:"
+msgstr "Klucz API dla BitTorrent Sync:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:23001
+msgid "To enable the BitTorrent Sync API, an API key supplied by BitTorrent must be specified into the configuration file. If leaved empty, the API of BitTorrent Sync is disabled (default). API Keys can be requested on the BitTorrent Web Site."
+msgstr "Aby aktywować interfejs API BitTorrent Sync, klucz API, dostarczany przez BitTorrent musi być wprowadzony do konfiguracji. Jeśli puste interfejs API BitTorrent Sync jest wyłączony (domyślnie). O klucze API można prosić na stronie internetowej BitTorrent Sync."
+
+#. Type: select
+#. Description
+#: ../btsync.templates:24001
+msgid "BitTorrent Sync Daemon Credentials:"
+msgstr "Uprawnienia demona BitTorrent Sync:"
+
+#. Type: select
+#. Description
+#: ../btsync.templates:24001
+msgid "You can choose, if you want BitTorrent Sync to run as root (not recommended), under it's own unprivileged credentials (user: btsync, group: btsync) or under an arbitrary user of your choice. WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
+msgstr "Możesz wybrać, jeśli chcesz aby BitTorrent Sync działał na prawach roota (nie zalecane), zamiast pod własnymi uprawnieniami (użytkownik:btsync grupa:btsync) lub dowolnego innego użytkownika, którego wybierzesz. UWAGA: Jeśli zmienisz tą opcję podczas działania demona, musisz sam zadbać o zmianę właściciela wszystkich plików w używanych folderach by zapewnić BitTorrent Sync prawo dostępu i modyfikowania ich."
+
+#. Type: note
+#. Description
+#: ../btsync.templates:25001
+msgid "BitTorrent Sync Daemon Credentials have been changed!"
+msgstr "Zmieniono uprawnienia demona BitTorrent Sync!"
+
+#. Type: note
+#. Description
+#: ../btsync.templates:25001
+msgid "Please make sure, that BitTorrent Sync will still be able to access and write to files and directories in your configured shared folders."
+msgstr "Proszę, upewnij się, że BitTorrent Sync dalej ma prawo dostępu i modyfikowania plików i folderów w używanych folderach."
+
+#. Type: select
+#. Description
+#: ../btsync.templates:26001
+msgid "BitTorrent Sync Daemon Group:"
+msgstr "Grupa dla demona BitTorrent Sync:"
+
+#. Type: select
+#. Description
+#: ../btsync.templates:26001
+msgid "You can choose, if you want BitTorrent Sync to run under a different group as the selected user credential. WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
+msgstr "Możesz wybrać, jeśli chcesz aby BitTorrent Sync działał w innej grupie niż grupa wybranego użytkownika. UWAGA: Jeśli zmienisz tą opcję podczas działania demona, musisz sam zadbać o zmianę właściciela wszystkich plików w używanych folderach by zapewnić BitTorrent Sync prawo dostępu i modyfikowania ich."
+
