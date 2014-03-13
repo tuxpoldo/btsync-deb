@@ -352,3 +352,15 @@ msgstr "Ομάδα BitTorrent Sync Daemon:"
 msgid "You can choose, if you want BitTorrent Sync to run under a different group as the selected user credential. WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
 msgstr "Μπορείτε να επιλέξετε ώστε το BitTorrent Sync να τρέχει κάτω από διαφορετική ομάδα από τον επιλεγμένο χρήστη. ΠΡΟΣΟΧΗ: Αν αλλάξετε αυτή τη ρύθμιση σε ένα τρέχον στιγμιότυπο, θα πρέπει να αλλάξετε και την κυριότητα όλων των αρχείων του φακέλου διαχείρισης ώστε να εξασφαλίσετε ότι το BitTorrent Sync θα μπορεί να έχει πρόσβαση σε αυτά και να τα τροποποιεί."
 
+#. Type: string
+#. Description
+#: ../btsync.templates:27001
+msgid "Niceness of the BitTorrent Sync Daemon:"
+msgstr "Λεπτότητα του BitTorrent Sync Daemon:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:27001
+msgid "You can specify the niceness level of the BitTorrent Sync Daemon, which affects process scheduling. Nicenesses range from -20 (most favorable scheduling) to 19 (least favorable). Specify 0 to let BitTorrent Sync run with the default niceness value."
+msgstr "Μπορείτε να ορίσετε το επίπεδο λεπτότητας του BitTorrent Sync Daemon, το οποίο επηρρεάζει τον προγραμματισμό των διεργασιών. Η λεπτότητα κυμαίνεται από -20 (περισσότερο ευνοϊκός προγραμματισμός) έως 19 (λιγότερο ευνοϊκός). Όρίστε την τιμή 0 ώστε το BitTorrent Sync να τρέχει με την προεπιλεγμένη τιμή λεπτότητας."
+
