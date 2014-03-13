@@ -1,3 +1,9 @@
+btsync (1.2.3-1) unstable; urgency=low
+
+  * Cleanup startup and shutdown messages
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 13 Mar 2014 16:12:42 +0100
+
 btsync (1.2.2-3) unstable; urgency=low
 
   * Removed debugging log file forgotten during previous development

@@ -72,7 +72,7 @@ log_error () {
 	log_message "err" "$@"
 }
 
-log_display_msg () {
+log_info_msg () {
 	echo "$@"
 	log_message "info" "$@"
 }
@@ -84,16 +84,16 @@ log_error_msg () {
 
 config_debug () {
 	if [ $DAEMON_INIT_DEBUG ]; then
-		log_display_msg "== ${1} ==========================="
-		log_display_msg "File Name: '$CONFFILE'"
-		log_display_msg "Name Part: '$BASENAME'"
-		log_display_msg "Credential Part: '$CREDENTIALS'"
-		log_display_msg "Run As User: '$CRED_UID'"
-		log_display_msg "Run As Group: '$CRED_GID'"
-		log_display_msg "Run with umask: '$UMASK'"
-		log_display_msg "Storage Path: '$STORAGE_PATH'"
-		log_display_msg "PID File: '$PID_FILE'"
-		log_display_msg "Debug flags: '$DMASK'"
+		log_info_msg "== ${1} ==========================="
+		log_info_msg "File Name: '$CONFFILE'"
+		log_info_msg "Name Part: '$BASENAME'"
+		log_info_msg "Credential Part: '$CREDENTIALS'"
+		log_info_msg "Run As User: '$CRED_UID'"
+		log_info_msg "Run As Group: '$CRED_GID'"
+		log_info_msg "Run with umask: '$UMASK'"
+		log_info_msg "Storage Path: '$STORAGE_PATH'"
+		log_info_msg "PID File: '$PID_FILE'"
+		log_info_msg "Debug flags: '$DMASK'"
 	fi
 }
 
@@ -262,6 +262,7 @@ adjust_debug_flags () {
 
 start_btsync () {
 	config_debug "START"
+	log_daemon_msg "${1:-Starting btsync instance '${BASENAME}'}"
 	adjust_arm_alignment
 	adjust_storage_path
 	adjust_debug_flags
@@ -293,11 +294,13 @@ start_btsync () {
 		WAITCNT=$(($WAITCNT + 1))
 	done
 	log_info "$NAME instance $BASENAME started successfully"
+	log_end_msg $STATUS
 	STATUS=0
 }
 
 stop_btsync () {
 	config_debug "STOP"
+	log_daemon_msg "${1:-Stopping btsync instance '${BASENAME}'}"
 	adjust_arm_alignment
 	STATUS=0
 	start-stop-daemon --stop --quiet \
@@ -305,17 +308,16 @@ stop_btsync () {
 		--exec $DAEMON --pidfile /var/run/$NAME.$BASENAME.pid  || STATUS=1
 	rm /var/run/$NAME.$BASENAME.pid
 	if [ $STATUS -gt 0 ]; then
-		log_error "Failed to stop $NAME instance $BASENAME"
+		log_error_msg "Failed to stop $NAME instance $BASENAME"
 	else
-		log_info "$NAME instance $BASENAME started successfully"
+		log_info "$NAME instance $BASENAME stopped successfully"
+		log_end_msg $STATUS
 	fi
 }
 
 
 case "$1" in
 start)
-	log_action_begin_msg "Starting $DESC"
-
 	# autostart btsync instances
 	if [ -z "$2" ]; then
 		# check if automatic startup is disabled by AUTOSTART=none
@@ -324,28 +326,34 @@ start)
 			exit 0
 		fi
 		if [ -z "$AUTOSTART" -o "x$AUTOSTART" = "xall" ]; then
+			ANYSTARTED=0
 			# all btsync instances shall be started automatically
 			for CONFFILE in `cd $CONFIG_DIR; ls *.${CONFIG_EXT} 2> /dev/null`; do
 				config_from_conffile "${CONFFILE}"
 				test_valid_config
-				log_daemon_msg "Autostarting btsync instance '$BASENAME'"
-				start_btsync
-				log_end_msg $STATUS
+				start_btsync "Autostarting btsync instance '$BASENAME'"
+				ANYSTARTED=1
 			done
+			if [ $ANYSTARTED -eq 0 ]; then
+				log_warning_msg "No config files found in $CONFIG_DIR - Nothing to start"
+			fi
 		else
+			ANYSTARTED=0
 			# start only specified btsync instances
 			for BASENAME in $AUTOSTART ; do
 				config_from_name "${BASENAME}"
 				if [ -f $CONFIG_DIR/$CONFFILE ]; then
 					test_valid_config
-					log_daemon_msg "Autostarting btsync instance '$BASENAME'"
-					start_btsync
-					log_end_msg $STATUS
+					start_btsync "Autostarting btsync instance '$BASENAME'"
+					ANYSTARTED=1
 				else
-					log_error_msg "Autostarting btsync instance '$BASENAME': missing $CONFIG_DIR/$CONFFILE file !"
+					log_error_msg "Autostarting btsync instance '$BASENAME': missing $CONFIG_DIR/${BASENAME}.conf file !"
 					STATUS=1
 				fi
 			done
+			if [ $ANYSTARTED -eq 0 ]; then
+				log_warning_msg "Config file ${BASENAME}.conf found in $CONFIG_DIR - Nothing to start"
+			fi
 		fi
 	else
 		# start btsync instances from command line
@@ -357,11 +365,9 @@ start)
 				STATUS=1
 			elif [ -f $CONFIG_DIR/$CONFFILE ]; then
 				test_valid_config
-				log_daemon_msg "Autostarting btsync instance '$BASENAME'"
 				start_btsync
-				log_end_msg $STATUS
 			else
-				log_error_msg "Autostarting btsync instance '$BASENAME': missing $CONFIG_DIR/$CONFFILE file !"
+				log_error_msg "Starting btsync instance '$BASENAME': missing $CONFIG_DIR/$CONFFILE file !"
 				STATUS=1
 			fi
 		done
@@ -369,14 +375,11 @@ start)
 	# exit ${STATUS:-0}
 	;;
 stop)
-	log_action_begin_msg "Stopping $DESC"
 	if [ -z "$2" ]; then
 		PIDFILE=
 		for PIDFILE in `ls /var/run/$NAME.*.pid 2> /dev/null`; do
 			config_from_pidfile $PIDFILE
-			log_daemon_msg "Stopping btsync instance '$BASENAME'"
 			stop_btsync
-			log_end_msg $STATUS
 		done
 		if test -z "$PIDFILE" ; then
 			log_warning_msg "No btsync instance is running."
@@ -387,9 +390,7 @@ stop)
 			if [ -f /var/run/$NAME.$1.pid ]; then
 				PIDFILE=`ls /var/run/$NAME.$1.pid 2> /dev/null`
 				config_from_pidfile $PIDFILE
-				log_daemon_msg "Stopping btsync instance '$1'"
 				stop_btsync
-				log_end_msg $STATUS
 			else
 				log_error_msg "Stopping btsync instance '$1': No such btsync instance is running."
 			fi
