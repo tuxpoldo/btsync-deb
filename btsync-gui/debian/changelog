@@ -1,6 +1,7 @@
 btsync-gui (0.7.2-1) unstable; urgency=low
 
   * Added iconic display of peer connection status
+  * Updated documentation and man pages
  
  -- Leo Moll <leo.moll@yeasoft.com>  Fri, 14 Mar 2014 02:20:11 +0100
 

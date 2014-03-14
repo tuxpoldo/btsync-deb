@@ -11,15 +11,33 @@ btsync-gui - Private network P2P file synchronisation tool
 
 .SH DESCRIPTION
 .B BitTorrent Sync UI
-is a simple tool that applies p2p protocol for
-direct live folder sync with maximum security, network speed and
-storage capacity. It has native versions for Mac, Windows and
-Linux, as well as native NAS integration.
+is a simple tool that applies p2p protocol for direct live folder sync with
+maximum security, network speed and storage capacity. It has native versions
+for Mac, Windows and Linux, as well as native NAS integration.
 
-If launched without any options, the UI starts a local BitTorrent
-Sync agent and connects to it. If a hostname is specified, the UI
-will connect to the specified host without launching a local
-BitTorrent Sync agent.
+If launched without any options, the UI starts a local BitTorrent Sync agent
+in the context of the user and connects to it (standalone mode). The GUI is
+diveded into two main sections:
+
+The
+.B status indicator
+is the central acess point to BitTorrent Sync and shows information about the
+current status via its icon. The context menu allows to perorm some operations
+and to open the application window.
+
+The
+.B application window
+allows to manage the shared folders, view the connected peers, manage the
+standard and advanced preferences and connect mobile devices via QR-codes
+with the connection information.
+
+The GUI can be also be started from the command line with parameters specifying
+a connection to a remote BitTorrent Sync system. In this case, the GUI does not
+start a local BitTorrent Sync agent, but connects to an already running agent
+at a remote location.
+.B This will work only, if the remote agent has activated API access by
+.B specifying a valid API key in the configuration file.
+(See examples below)
 
 .SH OPTIONS
 .TP
@@ -28,25 +46,60 @@ Shows the help for the command
 
 .TP
 .B --log {CRITICAL,ERROR,WARNING,INFO,DEBUG}
-Sets the logging level of the BitTorrent Sync UI
+Sets the logging level. By default the logging level is
+.B WARNING
 
 .TP
 .B --host HOST
-Hostname for the connection to BitTorrent Sync. If specified, the UI connects to the
-BitTorrent Sync agent running on the specified host instead of launching a local
-user specific agent.
+Hostname for the connection to BitTorrent Sync. If not specified, a local
+BitTorrent Sync agent will be launched.
 
 .TP
 .B --port PORT
-Port number for the connection to BitTorrent Sync when used as remote UI
+Optional port number for the connection to BitTorrent Sync. If not specified,
+port 8888 is taken for a connection to a remote BitTorrent Sync agent or (8999
++ uid) is taken when creating a locally lauched agent. This option can be made
+persistent for local agents with
+.B --savedefaults
 
 .TP
 .B --username USERNAME
-Optional user name for the connection to BitTorrent Sync when used as remote UI
+Optional user name for connecting to a remote BitTorrent Sync agent or username
+to use when creating a locally launched agent. This option can be made
+persistent for local agents with
+.B --savedefaults
 
 .TP
 .B --password PASSWORD
-Optional password for the connection to BitTorrent Sync when used as remote UI
+Optional password for connecting to a remote
+BitTorrent Sync agent or username to use when creating a locally launched agent.
+This option can be made persistent for local agents with
+.B --savedefaults
+
+.TP
+.B --bindui BINDUI
+Optional bind address for the Web UI of a locally created BitTorrent Sync agent.
+By default the agent binds to 127.0.0.1. If you want the Web UI of the agent to
+be reachable by other computers, specify one of the available IP addresses of
+this computer or "all" to bind to all available adapters. This option can be
+made persistent for local agents with
+.B --savedefaults
+
+.TP
+.B --webui
+Include the Web UI in the menu. This option can be made persistent with
+.B --savedefaults
+
+.TP
+.B --savedefaults
+If specified, the optionally supplied credentials, bind address and port will be
+stored as default in the application preferences and used when launching a local
+BitTorrent Sync agent.
+
+.TP
+.B --cleardefaults
+If specified, all internally stored credentials, bind address and port
+information will be cleared from the application preferences.
 
 
 .SH FILES
@@ -57,11 +110,22 @@ User specific log file of the locally started BitTorrent Sync agent
 
 .TP
 .I ~/.config/btsync/btsync-gui.conf
-Automatically created user specific configuration file for the BitTorrent Sync agent
+Automatically created user specific configuration file for the BitTorrent Sync
+agent. This file exists only for the fraction of a second and will be deleted
+immediately after the process has been launched.
+
+.TP
+.I ~/.config/btsync/btsync-gui.prefs
+User specific configuration file for the persistent configuration data of the
+BitTorrent Sync GUI
+
+.TP
+.I ~/.config/btsync/btsync-gui.pid
+User specific PID file of the BitTorrent Sync GUI
 
 .TP
 .I ~/.config/btsync/btsync-agent.pid
-User specific btsync PID file
+User specific PID file of the BitTorrent Sync agent
 
 .SH DIRECTORIES
 
@@ -72,6 +136,102 @@ User specific storage path of the BitTorrent Sync agent
 .TP
 .I ~/.config/btsync
 User specific configuration file path for the BitTorrent Sync agent
+
+.SH EXAMPLES FOR STANDALONE MODE
+
+By default there is no way to access the Web UI provided by the BitTorrent Sync
+agent, since the agent itself defines at each start random credentials to
+protect the system. If you still want to access the Web UI, you can activate an
+extended menu option by specifying
+.B --webui
+on the command line. You will then have an additional menu item, that invokes a
+browser and connects you to the Web UI.
+
+If you want to make this setting persistent, you can invoke the following
+command from the console:
+
+.B btsync-gui --webui --savedefaults
+
+This makes the setting persistent, and you will not need to specify it again at
+each start.
+
+Sometimes it may happen, that you want to access your running BitTorrent Sync
+agent from another computer via the Web UI or a btsync-gui in Client Mode.
+By default this is not possible, because of two reasons:
+
+.RS
+The BitTorrent Sync agent binds the administration interface only to the
+loopback adapter making it possible to connect only from the same machine
+(This is a security feature).
+
+The BitTorrent Sync agent is started at every time with randomly generated
+credentials. Without knowing them, it is impossible to access the administration
+interface of the agent (This is also a security feature).
+.RE
+
+For users that want to access their system from another computer, there is still
+a possibility to configure the GUI in a way that makes the agent accessible also
+from other computers. In order to do so, the following parameters must be
+changed:
+
+.RS
+The BitTorrent Sync agent must bind his administrative interface to all
+adapters of the system or an adapter reachable from outside.
+
+The BitTorrent Sync agent must bind his administrative interface to a well
+known port. By default the port is the sum of 8999 and the uid of the user.
+
+The credentials must be set to something known.
+.RE
+
+The GUI can be launched in such a mode, by specifying the following parameters:
+
+.B btsync-gui --bindui 0.0.0.0 --port 10888 --username Leopoldo --password SuperSecret
+
+This configures the BitTorrent Sync agent to bind on all interfaces on port
+10888 and to be accessinble with the user name "Leopoldo" and the password
+"SuperSecret".
+
+Also these settings can be made persistent by adding the option
+.B --savedefaults
+
+.B WARNING:
+as every comfort function, you pay the comfort by lowering the security.
+Remember: the product of comfort and security is a constant. You cannot
+increase both.
+
+
+.SH EXAMPLES FOR CLIENT MODE
+
+In client mode, the GUI can be used to access a remotely running BitTorrent Sync
+agent. The only prerequisites are that the remote BitTorrent Sync agent is
+reachable from your computer, you know the credentials and the API access is
+enabled on the remote agent. You can also use the GUI to connect to another
+machine where a BitTorrent Sync GUI is running in standalone mode, if you have
+configured access possibilities like shown in the example above.
+
+The connection to a remote BitTorrent Sync agent is done by entering the
+following command:
+
+.B btsync-gui --host myserver.example.com --port 8888 --username Leopoldo --password SuperSecret 
+
+If you are able to access the Web UI of a remote BitTorrent Sync system, you
+should know everything you need to also launch successfully the GUI.
+
+Since the connection to remote systems is slower, you will notice the following
+limitations:
+
+.RS
+The refresh rate is slower. It adapts dynamically to the overall performance.
+
+During the status refreshes, the GUI may be a bit unresponsive.
+
+There are no local file system checks, when you add a new folder. You must be
+sure, that you enter a valid path on the remote machine.
+
+Some features are disabled (Pause/resume, Enable/Disable Debug) since they are
+not feasible on remote systems.
+.RE
 
 .SH AUTHORS
 
