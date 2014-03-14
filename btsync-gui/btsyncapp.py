@@ -210,12 +210,13 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		peers = self.agent.get_folder_peers(folder['secret'])
 		for index, value in enumerate(peers):
 			self.devices.append ([
-				self.agent.fix_decode(value['name']),	# 0:Device
+				self.agent.fix_decode(value['name']),		# 0:Device
 				foldername,									# 1:Folder
 				self.get_device_info_string(value),			# 2:Status
 				folder['secret'],							# 3:Secret
 				digest,										# 4:FolderTag
-				value['id']									# 5:DeviceTag
+				value['id'],								# 5:DeviceTag
+				self.get_device_info_icon_name(value)		# 6:ConnectionIconName
 			])
 
 	def update_device_infos(self,folder,digest):
@@ -226,12 +227,13 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 			if not self.update_device_values(folder,value,digest):
 				# it must be new - let's add it
 					self.devices.append ([
-					self.agent.fix_decode(value['name']),	# 0:Device
+					self.agent.fix_decode(value['name']),		# 0:Device
 					foldername,									# 1:Folder
 					self.get_device_info_string(value),			# 2:Status
 					folder['secret'],							# 3:Secret
 					digest,										# 4:FolderTag
-					value['id']									# 5:DeviceTag
+					value['id'],								# 5:DeviceTag
+					self.get_device_info_icon_name(value)		# 6:ConnectionIconName
 				])
 		# reverse scan deletes disappeared folders...
 		for row in self.devices:
@@ -246,12 +248,14 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 				# found - update information
 				row[0] = self.agent.fix_decode(peer['name'])
 				row[2] = self.get_device_info_string(peer)
+				row[6] = self.get_device_info_icon_name(peer)
 				return True
 			elif peer['id'] == row[5] and digest == row[4]:
 				# found - secret probably changed...
 				row[0] = self.agent.fix_decode(peer['name'])
 				row[2] = self.get_device_info_string(peer)
 				row[3] = folder['secret']
+				row[6] = self.get_device_info_icon_name(peer)
 				return True
 		# not found
 		return False
@@ -278,22 +282,24 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		else:
 			return self.agent.get_error_message(folder)
 
+	def get_device_info_icon_name(self,peer):
+		return {
+			'direct' : 'btsync-gui-direct',
+			'relay'  : 'btsync-gui-cloud'
+		}.get(peer['connection'], 'btsync-gui-unknown')
+
 	def get_device_info_string(self,peer):
-		connection = {
-			'direct' : ' (Direct Connection)',
-			'relay'  : ' (Relayed Connection)'
-		}.get(peer['connection'], '')
 		if peer['synced'] != 0:
 			dt = datetime.datetime.fromtimestamp(peer['synced'])
-			return 'Synched on {0}'.format(dt.strftime("%x %X")) + connection
+			return 'Synched on {0}'.format(dt.strftime("%x %X"))
 		elif peer['download'] == 0 and peer['upload'] != 0:
-			return '⇧ {0}'.format(self.sizeof_fmt(peer['upload'])) + connection
+			return '⇧ {0}'.format(self.sizeof_fmt(peer['upload']))
 		elif peer['download'] != 0 and peer['upload'] == 0:
-			return '⇩ {0}'.format(self.sizeof_fmt(peer['download'])) + connection
+			return '⇩ {0}'.format(self.sizeof_fmt(peer['download']))
 		elif peer['download'] != 0 and peer['upload'] != 0:
-			return '⇧ {0} - ⇩ {1}'.format(self.sizeof_fmt(peer['upload']), self.sizeof_fmt(peer['download'])) + connection
+			return '⇧ {0} - ⇩ {1}'.format(self.sizeof_fmt(peer['upload']), self.sizeof_fmt(peer['download']))
 		else:
-			return 'Idle...' + connection
+			return 'Idle...'
 
 	def init_preferences_controls(self):
 		self.devname = self.builder.get_object('devname')

@@ -1,3 +1,9 @@
+btsync-gui (0.7.2-1) unstable; urgency=low
+
+  * Added iconic display of peer connection status
+ 
+ -- Leo Moll <leo.moll@yeasoft.com>  Fri, 14 Mar 2014 02:20:11 +0100
+
 btsync-gui (0.7.1-1) unstable; urgency=low
 
   * Fixed broken build on Launchpad (Closes #93)
