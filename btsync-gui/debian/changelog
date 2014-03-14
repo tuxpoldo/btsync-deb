@@ -4,7 +4,7 @@ btsync-gui (0.7.2-1) unstable; urgency=low
   * Updated documentation and man pages
   * Probably fixed icon scaling issue on high definition displays
  
- -- Leo Moll <leo.moll@yeasoft.com>  Fri, 14 Mar 2014 02:20:11 +0100
+ -- Leo Moll <leo.moll@yeasoft.com>  Fri, 14 Mar 2014 17:36:20 +0100
 
 btsync-gui (0.7.1-1) unstable; urgency=low
 
