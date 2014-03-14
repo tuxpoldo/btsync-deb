@@ -1,6 +1,6 @@
-[color=#008000][b]BTSYNC DESKTOP GUI PACKAGES FOR DEBIAN, UBUNTU AND OTHER DERIVED DISTRIBUTIONS[/b][/color]
+[color=#008000][b]BTSYNC DESKTOP GUI FOR ARCH, DEBIAN, UBUNTU AND OTHER DERIVED DISTRIBUTIONS[/b][/color]
 
-If you are using Ubuntu, Debian, Raspian or other derived distributions based on Debian and you are searching for an easy way to deploy BitTorrent Sync on your systems, this topic is definitively for you. Here you will find information about a family of easy to install deb-packages that offers both a solution for the need of typical server/cloud operators as for interactive users.
+If you are using Arch Linux, Ubuntu, Debian, Raspian or other derived distributions based on Debian and you are searching for an easy way to deploy BitTorrent Sync on your systems, this topic is definitively for you. Here you will find information about a family of easy to install packages that offer both a solution for the need of typical server/cloud operators as for interactive users.
 
 [url=http://postimage.org/image/o3ec60b1p/][img=http://s6.postimage.org/o3ec60b1p/btsync_gui_1.png][/url] [url=http://postimage.org/image/hdoynnf8t/][img=http://s6.postimage.org/hdoynnf8t/btsync_gui_2.png][/url] [url=http://postimage.org/image/62maza8dp/][img=http://s6.postimage.org/62maza8dp/btsync_gui_3.png][/url]
 [url=http://postimage.org/image/7ixthfbal/][img=http://s6.postimage.org/7ixthfbal/btsync_gui_4.png][/url] [url=http://postimage.org/image/4dd7r7sod/][img=http://s6.postimage.org/4dd7r7sod/btsync_gui_5.png][/url] [url=http://postimage.org/image/5v7uu9c6l/][img=http://s6.postimage.org/5v7uu9c6l/btsync_gui_6.png][/url]
@@ -37,7 +37,7 @@ Other users have reported successful installations on:
 [*][b]Arch Linux[/b] with [b]MATE[/b][/*]
 [/LIST]
 
-The GUI has also been released for other Linux distributions:
+The GUI package has also been released for other Linux distributions:
 [LIST]
 [*][b]Arch Linux[/b]: Packages can be found in the [url=https://aur.archlinux.org/packages/btsync-gui/]AUR[/url][/*]
 [/LIST]
@@ -60,6 +60,16 @@ Now it's up to you to test it and give me lots of feedback in order to extend th
 If you want to contribute to the development of the packages or if you are curious how this all works, you may find the current sources, the deployment scripts and packaging [url=https://github.com/tuxpoldo/btsync-deb][b]on GitHub[/b][/url].
 
 If you have experienced a reproducible issue that [b]is related to the gui or the packaging and not to BitTorrent Sync itself[/b] you are strongly encouraged to [url=https://github.com/tuxpoldo/btsync-deb/issues]open an issue on the project's GitHub Page[/url]. Issues related to the native functionality of BitTorrent Sync should instead be discussed by creating a new topic or partecipating to an already existing topic in the [url=http://forum.bittorrent.com/forum/56-bittorrent-sync/]BitTorrent Sync Forum[/url].
+
+
+[color=#008000][b]INSTALLATION ON ARCH LINUX[/b][/color]
+
+The Arch Linux Package in the AUR is maintained by Mark Wimpress (@flexiondotorg). The package is named [font=courier new,courier,monospace][b]btsync-gui[/b][/font] and can be installed from the AUR using your favourite package manager. e.g.: if you are using [url=https://wiki.archlinux.org/index.php/yaourt]yaourt[/url]:
+[code]
+sudo yaourt -S btsync-gui
+[/code]
+
+When you have finished installing, you can skip the next sections below and move directly to the [b]usage notes[/b].
 
 
 [color=#008000][b]ADDING THE REPOSITORIES[/b][/color]

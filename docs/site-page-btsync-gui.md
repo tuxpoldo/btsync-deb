@@ -1,12 +1,12 @@
 BitTorrent Sync Desktop GUI Packages
 ------------------------------------
 
-If you are using Ubuntu, Debian, Raspian or other derived distributions
-based on Debian and you are searching for an easy way to deploy
+If you are using Arch Linux, Ubuntu, Debian, Raspian or other derived
+distributions based on Debian and you are searching for an easy way to deploy
 BitTorrent Sync on your systems, this topic is definitively for you.
-Here you will find information about a family of easy to install
-deb-packages that offers both a solution for the need of typical
-server/cloud operators as for interactive users.
+Here you will find information about a family of easy to install packages that
+offer both a solution for the need of typical server/cloud operators as for
+interactive users.
 
 ![BitTorrent Sync Desktop](http://s6.postimg.org/855mfvgtt/btsync_gui_1.png)
 
@@ -42,7 +42,7 @@ Other users have reported successful installations on:
 - __Ubuntu Trusty__ 14.04 with __Cinnamon__, __MATE__ and __OpenBox__
 - __Arch Linux__ with __MATE__
 
-The GUI has also been released for other Linux distributions:
+The GUI package has also been released for other Linux distributions:
 - __Arch Linux__: Packages can be found in the [AUR](https://aur.archlinux.org/packages/btsync-gui/)
 
 ###### WANTED ######
@@ -69,6 +69,20 @@ encouraged to [open an issue on the project's GitHub Page](https://github.com/tu
 Issues related to the native functionality of BitTorrent Sync should instead be
 discussed by creating a new topic or partecipating to an already existing topic
 in the [BitTorrent Sync Forum](http://forum.bittorrent.com/forum/56-sync-general-discussion/).
+
+#### Installation on Arch Linux ####
+
+The Arch Linux Package in the AUR is maintained by Mark Wimpress
+(@flexiondotorg). The package is named `btsync-gui` and can be installed from
+the AUR using your favourite package manager. e.g.: if you are using
+[yaourt](https://wiki.archlinux.org/index.php/yaourt):
+
+```
+sudo yaourt -S btsync-gui
+```
+
+When you have finished installing, you can skip the next sections below and
+move directly to the __usage notes__.
 
 #### Adding the Repositories ####
 
