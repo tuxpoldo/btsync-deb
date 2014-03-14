@@ -21,6 +21,7 @@ The GUI packages are available for the same architectures as released by BitTorr
 [*][b]armhf[/b] - ARM hard float[/*]
 [*][b]powerpc[/b] - PowerPC[/*]
 [/LIST]
+
 The GUI packages have been tested on the following distributions:
 [LIST]
 [*][b]Debian Wheezy[/b] with [b]Gnome[/b] Desktop[/*]
@@ -32,8 +33,25 @@ Other users have reported successful installations on:
 [LIST]
 [*][b]Xubuntu Saucy[/b] 13.10 with [b]OpenBox+Tint2[/b][/*]
 [*][b]Debian Jessie[/b] with [b]KDE[/b][/*]
-[*][b]Ubuntu Trusty[/b] 14.04 with [b]Cinnamon[/b][/*]
+[*][b]Ubuntu Trusty[/b] 14.04 with [b]Cinnamon[/b], [b]MATE[/b] and [b]OpenBox[/b][/*]
+[*][b]Arch Linux[/b] with [b]MATE[/b][/*]
 [/LIST]
+
+The GUI has also been released for other Linux distributions:
+[LIST]
+[*][b]Arch Linux[/b]: Packages can be found in the [url=https://aur.archlinux.org/packages/btsync-gui/]AUR[/url][/*]
+[/LIST]
+
+[color=#ff8c00][b]WANTED[/b][/color]
+ 
+Maintainers for other Linux distributions able to write a suitable packaging for their favourite distribution:
+[LIST]
+[*]Centos/RHEL (rpm)[/*]
+[*]Fedora (rpm)[/*]
+[*]SLES(rpm)[/*]
+[*]Gentoo[/*]
+[/LIST]
+
 
 Now it's up to you to test it and give me lots of feedback in order to extend this list. Any related feedback is highly appreciated.
 
@@ -52,7 +70,7 @@ Your distribution comes with some default repositories that are already setup, b
 
 [b]If you are using Ubuntu[/b], you may also use the Launchpad PPA instead of the default repositories. Although it is easier to install, there are some disadvantages:
 [LIST=1]
-[*]The PPA only supports Ubuntu versions that are supported (currently lucid, precise, quantal, raring and saucy)[/*]
+[*]The PPA only supports Ubuntu versions that are supported (currently lucid, precise, quantal, saucy and trusty)[/*]
 [*]The PPA only supports the [b]i386[/b] and [b]amd64[/b] architectures[/*]
 [*]Sometimes it takes some hours for the packages to be published[/*]
 [/LIST]

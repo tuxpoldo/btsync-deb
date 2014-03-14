@@ -39,7 +39,20 @@ The gui packages have been tested on the following distributions:
 Other users have reported successful installations on:
 - __Xubuntu Saucy__ 13.10 with __OpenBox+Tint2__
 - __Debian Jessie__ with __KDE__
-- __Ubuntu Trusty__ 14.04 with __Cinnamon__
+- __Ubuntu Trusty__ 14.04 with __Cinnamon__, __MATE__ and __OpenBox__
+- __Arch Linux__ with __MATE__
+
+The GUI has also been released for other Linux distributions:
+- __Arch Linux__: Packages can be found in the [AUR](https://aur.archlinux.org/packages/btsync-gui/)
+
+###### WANTED ######
+ 
+Maintainers for other Linux distributions able to write a suitable packaging
+for their favourite distribution:
+- __Centos/RHEL__ (rpm)
+- __Fedora__ (rpm)
+- __SLES__ (rpm)
+- __Gentoo__
  
 Now it's up to you to test it and give me lots of feedback in order to extend
 this list. Any related feedback is highly appreciated.
