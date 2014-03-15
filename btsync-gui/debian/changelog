@@ -2,6 +2,7 @@ btsync-gui (0.7.3-1) unstable; urgency=low
 
   * Added function for editing the .SyncIgnore file (Closes #98)
   * "Open Manual" renamed to the more correct "Open Original Manual"
+  * Fixed occasional malfunction in "Open Web UI" (Closes #100)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Fri, 14 Mar 2014 17:37:20 +0100
 

@@ -22,6 +22,7 @@
 #
 
 import os
+import urllib
 import logging
 import requests
 import webbrowser
@@ -258,8 +259,8 @@ class BtSyncStatus:
 
 	def onOpenWeb(self,widget):
 		webbrowser.open('http://{0}:{1}@{2}:{3}'.format(
-			self.agent.get_username(),
-			self.agent.get_password(),
+			urllib.quote(self.agent.get_username(),''),
+			urllib.quote(self.agent.get_password(),''),
 			self.agent.get_host(),
 			self.agent.get_port()
 		), 2)
@@ -269,7 +270,7 @@ class BtSyncStatus:
 
 	def onSendFeedback(self,widget):
 		webbrowser.open(
-			'http://forum.bittorrent.com/topic/28106-alpha-full-featured-linux-gui-for-bittorrent-sync-packages-available-for-debian-ubuntu-mint',
+			'http://forum.bittorrent.com/topic/28106-linux-desktop-gui-unofficial-packages-for-bittorrent-sync/',
 			2
 		)
 
