@@ -64,7 +64,7 @@ If you have experienced a reproducible issue that [b]is related to the gui or th
 
 [color=#008000][b]INSTALLATION ON ARCH LINUX[/b][/color]
 
-The Arch Linux Package in the AUR is maintained by Mark Wimpress (@flexiondotorg). The package is named [font=courier new,courier,monospace][b]btsync-gui[/b][/font] and can be installed from the AUR using your favourite package manager. e.g.: if you are using [url=https://wiki.archlinux.org/index.php/yaourt]yaourt[/url]:
+The Arch Linux Package in the AUR is maintained by Martin Wimpress (@flexiondotorg). The package is named [font=courier new,courier,monospace][b]btsync-gui[/b][/font] and can be installed from the AUR using your favourite package manager. e.g.: if you are using [url=https://wiki.archlinux.org/index.php/yaourt]yaourt[/url]:
 [code]
 sudo yaourt -S btsync-gui
 [/code]

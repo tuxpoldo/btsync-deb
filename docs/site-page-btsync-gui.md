@@ -72,7 +72,7 @@ in the [BitTorrent Sync Forum](http://forum.bittorrent.com/forum/56-sync-general
 
 #### Installation on Arch Linux ####
 
-The Arch Linux Package in the AUR is maintained by Mark Wimpress
+The Arch Linux Package in the AUR is maintained by Martin Wimpress
 (@flexiondotorg). The package is named `btsync-gui` and can be installed from
 the AUR using your favourite package manager. e.g.: if you are using
 [yaourt](https://wiki.archlinux.org/index.php/yaourt):
