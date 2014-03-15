@@ -33,7 +33,7 @@ from trayindicator import TrayIndicator
 from btsyncapp import BtSyncApp
 from btsyncutils import BtDynamicTimeout
 
-VERSION = '0.7.2'
+VERSION = '0.7.3'
 
 class BtSyncStatus:
 	DISCONNECTED	= 0

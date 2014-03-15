@@ -6,7 +6,7 @@ btsync-gui (0.7.3-1) unstable; urgency=low
   * Added menu item in folders context menu for editing the
     .SyncIgnore file (Closes #98)
 
- -- Leo Moll <leo.moll@yeasoft.com>  Fri, 14 Mar 2014 17:37:20 +0100
+ -- Leo Moll <leo.moll@yeasoft.com>  Sat, 15 Mar 2014 18:04:23 +0100
 
 btsync-gui (0.7.2-1) unstable; urgency=low
 
