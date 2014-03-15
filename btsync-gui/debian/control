@@ -10,7 +10,8 @@ Homepage: http://www.yeasoft.com/site/projects:btsync-deb:btsync-user
 
 Package: btsync-gui-gtk
 Architecture: all
-Depends: debconf | debconf-2.0, libc6, ${python:Depends},
+Depends: debconf | debconf-2.0, ${shlibs:Depends},
+ ${misc:Depends}, ${python:Depends},
  python-requests, python-gtk2, btsync-common, python-qrencode
 Provides: btsync-user-application
 Replaces: btsync-user
@@ -32,7 +33,8 @@ Description: Private network P2P file synchronisation daemon(s)
 
 Package: btsync-gui
 Architecture: all
-Depends: libc6, ${python:Depends}, btsync-gui-gtk,
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends},
+ btsync-gui-gtk,
  gir1.2-appindicator3-0.1
 Description: Private network P2P file synchronisation daemon(s)
  BitTorrent Sync is a simple tool that applies p2p protocol for
