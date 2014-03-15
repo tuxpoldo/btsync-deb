@@ -29,3 +29,8 @@ The following People contributed in translating `btsync-gui`:
 
 * (still no one since there is currently no localization ;)
 
+
+### Maintainers ###
+
+* Martin Wimpress <martin@flexion.org> for maintaining the Arch Linux package
+in the AUR
