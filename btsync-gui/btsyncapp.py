@@ -83,6 +83,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.folders_menu = self.builder.get_object('folders_menu')
 		self.folders_menu_openfolder = self.builder.get_object('folder_menu_openfolder')
 		self.folders_menu_openarchive = self.builder.get_object('folder_menu_openarchive')
+		self.folders_menu_editsyncignore = self.builder.get_object('folder_menu_editsyncignore')
 		self.folders_selection = self.builder.get_object('folders_selection')
 		self.folders_treeview = self.builder.get_object('folders_tree_view')
 		self.folders_add = self.builder.get_object('folders_add')
@@ -412,9 +413,13 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 					self.folders_menu_openarchive.set_sensitive(
 						os.path.isdir(model[tree_iter][0] + '/.SyncArchive')
 					)
+					self.folders_menu_editsyncignore.set_sensitive(
+						os.path.isfile(model[tree_iter][0] + '/.SyncIgnore')
+					)
 				else:
 					self.folders_menu_openfolder.set_sensitive(False)
 					self.folders_menu_openarchive.set_sensitive(False)
+					self.folders_menu_editsyncignore.set_sensitive(False)
 
 				self.folders_menu.popup(None,None,None,None,event.button,time)
 				return True
@@ -451,6 +456,13 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 			syncarchive = model[tree_iter][0] + '/.SyncArchive'
 			if os.path.isdir(syncarchive):
 				os.system('xdg-open "{0}"'.format(syncarchive))
+
+	def onFoldersEditSyncIgnore(self,widget):
+		model, tree_iter = self.folders_selection.get_selected()
+		if tree_iter is not None:
+			syncignore = model[tree_iter][0] + '/.SyncIgnore'
+			if os.path.isfile(syncignore):
+				os.system('xdg-open "{0}"'.format(syncignore))
 
 	def onFoldersPreferences(self,widget):
 		model, tree_iter = self.folders_selection.get_selected()

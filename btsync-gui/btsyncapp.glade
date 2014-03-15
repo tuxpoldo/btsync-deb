@@ -660,6 +660,7 @@
         <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="tooltip_text" translatable="yes">Copies the sharing secret to the clipboard</property>
         <property name="label" translatable="yes">Copy secret</property>
         <property name="use_underline">True</property>
         <signal name="activate" handler="onFoldersCopySecret" swapped="no"/>
@@ -670,6 +671,7 @@
         <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="tooltip_text" translatable="yes">Displays a QR-code that permits easy connection of a mobile device to this folder</property>
         <property name="label" translatable="yes">Connect mobile device</property>
         <property name="use_underline">True</property>
         <signal name="activate" handler="onFoldersConnectMobile" swapped="no"/>
@@ -680,6 +682,7 @@
         <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="tooltip_text" translatable="yes">Opens the folder in the file manager</property>
         <property name="label" translatable="yes">Open Folder</property>
         <property name="use_underline">True</property>
         <signal name="activate" handler="onFoldersOpenFolder" swapped="no"/>
@@ -690,9 +693,21 @@
         <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="tooltip_text" translatable="yes">Opens the sync archive holding previous or deleted versions of files</property>
         <property name="label" translatable="yes">Open SyncArchive</property>
         <property name="use_underline">True</property>
         <signal name="activate" handler="onFoldersOpenArchive" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="folder_menu_editsyncignore">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="tooltip_text" translatable="yes">Edit the file containing the list or filename patterns for file not beeing synched</property>
+        <property name="label" translatable="yes">Edit .SyncIgnore</property>
+        <property name="use_underline">True</property>
+        <signal name="activate" handler="onFoldersEditSyncIgnore" swapped="no"/>
       </object>
     </child>
     <child>
@@ -700,6 +715,7 @@
         <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="tooltip_text" translatable="yes">Opens the preferences dialog for the shared folder</property>
         <property name="label" translatable="yes">Show folder preferences</property>
         <property name="use_underline">True</property>
         <signal name="activate" handler="onFoldersPreferences" swapped="no"/>
