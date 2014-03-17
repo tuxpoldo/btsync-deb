@@ -156,14 +156,15 @@ class GuiApp:
 		parser.add_argument('--savedefaults',
 					action='store_true',
 					help=_('If specified, the optionally supplied '\
-					'credentials, bind address and port will be stored as '\
-					'default in the application preferences and used when '\
-					'launching a local BitTorrent Sync agent.'))
+					'credentials, bind address, port information and storable '\
+					'settings will be stored as default in the application '\
+					'preferences and used when launching a local BitTorrent '\
+					'Sync agent.'))
 		parser.add_argument('--cleardefaults',
 					action='store_true',
 					help=_('If specified, all internally stored credentials, '\
-					'bind address and port information will be cleared from '\
-					'the application preferences.'))
+					'bind address, port information and storable settings '\
+					'will be cleared from the application preferences.'))
 
 		self.args = parser.parse_args()
 
