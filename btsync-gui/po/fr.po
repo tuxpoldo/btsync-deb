@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-17 19:18+0100\n"
+"POT-Creation-Date: 2014-03-17 23:34+0100\n"
 "PO-Revision-Date: 2014-03-17 15:56+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -265,7 +265,7 @@ msgstr ""
 
 #: ../btsyncapp.glade.h:13
 msgid ""
-"Edit the file containing the list or filename patterns for file not beeing "
+"Edit the file containing the list or filename patterns for file not being "
 "synched"
 msgstr ""
 

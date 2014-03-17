@@ -1,8 +1,9 @@
 btsync-gui (0.8.0-1) unstable; urgency=low
 
-  * Added localisation support (Closes #102)
+  * Added I18N support (Closes #102)
   * Added German translation (Closes #103)
   * Added Dutch translation by Jasper (Closes #108)
+  * Added Italian translation by Leo & Andrea (Closes #104)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Mon, 17 Mar 2014 17:19:36 +0100
 
