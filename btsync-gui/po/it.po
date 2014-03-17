@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-17 15:56+0100\n"
+"POT-Creation-Date: 2014-03-17 19:18+0100\n"
 "PO-Revision-Date: 2014-03-17 15:56+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -118,15 +118,17 @@ msgstr ""
 
 #: ../btsyncguiapp.py:158
 msgid ""
-"If specified, the optionally supplied credentials, bind address and port "
-"will be stored as default in the application preferences and used when "
-"launching a local BitTorrent Sync agent."
+"If specified, the optionally supplied credentials, bind address, port "
+"information and storable settings will be stored as default in the "
+"application preferences and used when launching a local BitTorrent Sync "
+"agent."
 msgstr ""
 
-#: ../btsyncguiapp.py:164
+#: ../btsyncguiapp.py:165
 msgid ""
-"If specified, all internally stored credentials, bind address and port "
-"information will be cleared from the application preferences."
+"If specified, all internally stored credentials, bind address, port "
+"information and storable settings will be cleared from the application "
+"preferences."
 msgstr ""
 
 #: ../btsyncstatus.py:67 ../btsyncapp.glade.h:2
