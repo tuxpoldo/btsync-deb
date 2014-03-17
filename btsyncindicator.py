@@ -368,14 +368,18 @@ class BtSyncIndicator:
         self.active
         """
         isactive = False
+        active_folder_names = set()
         for folder in folders:
             for peer in folder['peers']:
                 if peer['status'].find('<div') != -1:
                     logging.info('Sync activity detected')
                     isactive = True
+                    active_folder_names.add(folder['name'])
                     break
 
         self.active = isactive
+        self.active_folder_names = active_folder_names
+
         if self.active:
             if self.animate == None:
                 logging.info('Starting animation loop')
@@ -387,9 +391,9 @@ class BtSyncIndicator:
         Substitues HTML tags with appropriate unicode characters and 
         returns name followed by status.
         """
-	name = peer['name']
-	status = peer['status'].replace("<div class='uparrow' />", "⇧")
-	status = status.replace("<div class='downarrow' />", "⇩")
+        name = peer['name']
+        status = peer['status'].replace("<div class='uparrow' />", "⇧")
+        status = status.replace("<div class='downarrow' />", "⇩")
         return name+': '+status
 
     def build_folder_menu(self, folder):
@@ -467,8 +471,19 @@ class BtSyncIndicator:
         
         folderitem = self.folderitems[folder['name']]
         folderitem['sizeitem'].set_label(folder['size'])
+
+        menuitem = folderitem['menuitem']
+
+        # we build up this set during check_activity
+        # it contains the names of any folders with active peers
+        # we display these in the menu with a different icon so that users
+        # can see at a glance which of the peers is responsible for a busy icon
+        if folder['name'] in self.active_folder_names:
+            menuitem.set_label('⇅\t' + folder['name'])
+        else:
+            menuitem.set_label('o\t' + folder['name'])
         
-        menu = folderitem['menuitem'].get_submenu()
+        menu = menuitem.get_submenu()
 
         curfolder = [ f for f in self.status['folders'] if folder['name'] == f['name'] ].pop()
         curpeernames = [ peer['name'] for peer in curfolder['peers'] ]
