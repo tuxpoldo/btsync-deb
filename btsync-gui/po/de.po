@@ -17,7 +17,7 @@ msgstr "Standardeinstellungen gesichert."
 
 #: ../btsyncapp.py:132 ../btsyncapp.py:145
 msgid "Cannot implement due to missing API"
-msgstr ""
+msgstr "Kann auf Grund fehlender API nicht implementiert werden"
 
 #: ../btsyncapp.py:133
 msgid "BitTorrent Inc."
@@ -29,7 +29,7 @@ msgstr "Jetzt"
 
 #: ../btsyncapp.py:173 ../btsyncstatus.py:187
 msgid "{0:.1f} kB/s up, {1:.1f} kB/s down"
-msgstr ""
+msgstr "{0:.1f} kB/s Upload, {1:.1f} kB/s Download"
 
 #: ../btsyncapp.py:283
 msgid "{0} in {1} files"
@@ -57,7 +57,7 @@ msgstr ""
 
 #: ../btsyncapp.py:306
 msgid "Idle..."
-msgstr ""
+msgstr "Inaktiv..."
 
 #: ../btsyncguiapp.py:115
 msgid "Sets the logging level. By default the logging level is WARNING"
@@ -121,11 +121,11 @@ msgstr "Indiziere..."
 
 #: ../btsyncstatus.py:254
 msgid "Version {0} ({0})"
-msgstr ""
+msgstr "Version {0} ({0})"
 
 #: ../btsyncstatus.py:255
 msgid "Linux UI Version {0}"
-msgstr ""
+msgstr "Linux UI Version {0}"
 
 #: ../btsyncstatus.py:330
 msgid "Disconnected"
@@ -137,12 +137,13 @@ msgstr "Nicht verbunden: Kommunikationsfehler {0}"
 
 #: ../btsyncutils.py:305
 msgid "Only one full btsync-gui can run at once"
-msgstr ""
+msgstr "Es kann nur ein BitTorrent Sync gestartet werden"
 
 #: ../dialogs.py:68
 msgid "This secret is invalid.\n"
 "Please generate a new secret or enter your shared folder secret."
-msgstr ""
+msgstr "Dieser Geheimschlüssel ist ungültig.\n"
+"Bitte generieren Sie einen neuen Geheimschlüssel oder geben Sie einen Geheimschlüssel zu einen geteilten Ordner ein."
 
 #: ../dialogs.py:73
 msgid "Can't open the destination folder."
@@ -150,11 +151,11 @@ msgstr "Der Zielordner kann nicht geöffnet werden."
 
 #: ../dialogs.py:77
 msgid "Selected folder is already added to BitTorrent Sync."
-msgstr ""
+msgstr "Der angegebene Zielordner ist bereits durch BitTorrent Sync geteilt."
 
 #: ../dialogs.py:84
 msgid "Don't have permissions to write to the selected folder."
-msgstr ""
+msgstr "Nicht ausreichende Zugriffsrechte auf den angegebenen Ordner."
 
 #: ../dialogs.py:107
 msgid "Please select a folder to sync"
@@ -163,24 +164,26 @@ msgstr "Zu synchronisierenden Ordner hinzufügen"
 #: ../dialogs.py:358
 msgid "Invalid secret specified.\n"
 "Secret must have a length of 33 characters"
-msgstr ""
+msgstr "Ungültiger Geheimschlüssel angegeben.\n"
+"Ein Geheimschlüssel muss 32 Zeichen lang sein."
 
 #: ../dialogs.py:365
 msgid "Invalid secret specified.\n"
 "Secret must contain only alphanumeric characters"
-msgstr ""
+msgstr "Ungültiger Geheimschlüssel angegeben.\n"
+"Ein Geheimschlüssel darf nur aus Buchstaben und Zahlen bestehen."
 
 #: ../dialogs.py:412
 msgid "A hostname or IP address must be specified"
-msgstr ""
+msgstr "Ein Hostname oder eine IP Adresse müssen angegeben werden"
 
 #: ../dialogs.py:417
 msgid "The specified port must be a number between 1 and 65534"
-msgstr ""
+msgstr "Die angegebene Port Nummer muss zwischen 1 und 65534 sein"
 
 #: ../btsyncapp.glade.h:1
 msgid "Advanced..."
-msgstr ""
+msgstr "Erweitert..."
 
 #: ../btsyncapp.glade.h:3
 msgid "Connect mobile device"
@@ -188,7 +191,7 @@ msgstr "Mobilgerät verbinden"
 
 #: ../btsyncapp.glade.h:4
 msgid "Copies the sharing secret to the clipboard"
-msgstr ""
+msgstr "Kopiert den Geheimschlüssel in die Zwischenablage"
 
 #: ../btsyncapp.glade.h:5
 msgid "Copy secret"
@@ -196,11 +199,11 @@ msgstr "Geheimschlüssel kopieren"
 
 #: ../btsyncapp.glade.h:6
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: ../btsyncapp.glade.h:7
 msgid "Device"
-msgstr ""
+msgstr "Gerät"
 
 #: ../btsyncapp.glade.h:8
 msgid "Device name:"
@@ -212,11 +215,11 @@ msgstr "Geräte"
 
 #: ../btsyncapp.glade.h:10
 msgid "Displays a QR-code that permits easy connection of a mobile device to this folder"
-msgstr ""
+msgstr "Zeigt einen QR-Code an, der es erlaubt ein Mobilgerät mittels der BitTorrent Sync App zu verbinden"
 
 #: ../btsyncapp.glade.h:11
 msgid "Down"
-msgstr ""
+msgstr "Download"
 
 #: ../btsyncapp.glade.h:12
 msgid "Edit .SyncIgnore"
@@ -224,19 +227,19 @@ msgstr ".SyncIgnore Datei editieren"
 
 #: ../btsyncapp.glade.h:13
 msgid "Edit the file containing the list or filename patterns for file not beeing synched"
-msgstr ""
+msgstr "Liste der Dateienamen und Namensmuster die von der Synchronisation ausgeschlossen werden sollen editieren"
 
 #: ../btsyncapp.glade.h:14
 msgid "Event"
-msgstr ""
+msgstr "Ereignis"
 
 #: ../btsyncapp.glade.h:15
 msgid "File"
-msgstr ""
+msgstr "Datei"
 
 #: ../btsyncapp.glade.h:16
 msgid "Folder"
-msgstr ""
+msgstr "Ordner"
 
 #: ../btsyncapp.glade.h:17
 msgid "Folders"
@@ -268,15 +271,15 @@ msgstr "SyncArchive öffnen"
 
 #: ../btsyncapp.glade.h:24
 msgid "Opens the folder in the file manager"
-msgstr ""
+msgstr "Öffnet den Ordner im Datei.Manager"
 
 #: ../btsyncapp.glade.h:25
 msgid "Opens the preferences dialog for the shared folder"
-msgstr ""
+msgstr "Öffnet die Einstellungen für den geteilten Ordner"
 
 #: ../btsyncapp.glade.h:26
 msgid "Opens the sync archive holding previous or deleted versions of files"
-msgstr ""
+msgstr "Öffnet das Verzeichnis der alten Dateiversionen oder gelöschter Dateien"
 
 #: ../btsyncapp.glade.h:27
 msgid "Path"
@@ -300,7 +303,7 @@ msgstr "BitTorrent Sync zusammen mit Linux starten"
 
 #: ../btsyncapp.glade.h:32
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../btsyncapp.glade.h:33
 msgid "This name will be shown on other devices linked to your shared folders"
@@ -312,7 +315,7 @@ msgstr "Übertragungen"
 
 #: ../btsyncapp.glade.h:35
 msgid "Up"
-msgstr ""
+msgstr "Upload"
 
 #: ../btsyncapp.glade.h:36
 msgid "Use NAT UPnP port mapping"
@@ -324,17 +327,18 @@ msgstr "Info zu BitTorrent Sync"
 
 #: ../btsyncstatus.glade.h:2
 msgid "BitTorrent Status"
-msgstr ""
+msgstr "BitTorrent Status"
 
 #: ../btsyncstatus.glade.h:3
 msgid "By using this application, you agree to our Privacy Policy and Terms.\n"
 "http://www.bittorrent.com/legal/privacy\n"
 "http://www.bittorrent.com/legal/terms-of-use"
-msgstr ""
+msgstr "Die Benutzung dieser Applikation setzt Ihr Einverständnis zu unseren Datenschutzbestimmungen und Geschäftsbedingungen voraus:\n"
+"http://www.bittorrent.com/legal/privacy http://www.bittorrent.com/legal/terms-of-use"
 
 #: ../btsyncstatus.glade.h:6
 msgid "Copyright © 2013, BitTorrent Inc."
-msgstr ""
+msgstr "Copyright © 2013, BitTorrent Inc."
 
 #: ../btsyncstatus.glade.h:7
 msgid "Enable Debug Logging"
@@ -342,7 +346,7 @@ msgstr "Debug-Protokollierung aktivieren"
 
 #: ../btsyncstatus.glade.h:8
 msgid "Linux UI Version 0.0"
-msgstr ""
+msgstr "Linux UI Version 0.0"
 
 #: ../btsyncstatus.glade.h:9
 msgid "Open BitTorrent Sync..."
@@ -370,15 +374,15 @@ msgstr "Feedback einreichen"
 
 #: ../btsyncstatus.glade.h:15
 msgid "localhost:8888"
-msgstr ""
+msgstr "localhost:8888"
 
 #: ../dialogs.glade.h:1
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #: ../dialogs.glade.h:2
 msgid "Add folder to sync"
-msgstr ""
+msgstr "Zu synchronisierender Ordner hinzufügen"
 
 #: ../dialogs.glade.h:3
 msgid "Add ip:port or host:port of known clients"
@@ -386,7 +390,7 @@ msgstr "ip:port oder host:port hinzufügen"
 
 #: ../dialogs.glade.h:4
 msgid "Advanced Preferences"
-msgstr ""
+msgstr "Erweiterte Voreinstellungen"
 
 #: ../dialogs.glade.h:5
 msgid "Choose"
@@ -406,7 +410,7 @@ msgstr "Vollzugriff"
 
 #: ../dialogs.glade.h:9
 msgid "Full access secret"
-msgstr ""
+msgstr "Geheimschlüssel für Vollzugriff"
 
 #: ../dialogs.glade.h:10
 msgid "Generate"
@@ -414,15 +418,16 @@ msgstr "Generieren"
 
 #: ../dialogs.glade.h:11
 msgid "Generate a new secret or enter shared folder secret"
-msgstr "Generieren Sie einen neuen Geheimschlüssel oder geben Sie einen Geheimschlüssel für einen geteilten Ordner ein."
+msgstr "Generieren Sie einen neuen Geheimschlüssel oder geben Sie einen\n"
+"Geheimschlüssel für einen geteilten Ordner ein."
 
 #: ../dialogs.glade.h:12
 msgid "Hosts"
-msgstr ""
+msgstr "Hosts"
 
 #: ../dialogs.glade.h:13
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: ../dialogs.glade.h:14
 msgid "New Predefined Host"
@@ -454,11 +459,11 @@ msgstr "Nur-Lesen-Geheimschlüssel"
 
 #: ../dialogs.glade.h:22
 msgid "Remove Shared Folder"
-msgstr ""
+msgstr "Synchronisierten Ordner Entfernen"
 
 #: ../dialogs.glade.h:23
 msgid "Reset"
-msgstr ""
+msgstr "Zurücksetzen"
 
 #: ../dialogs.glade.h:24
 msgid "Scan QR"
@@ -480,15 +485,15 @@ msgstr "Lokalnetzwerk durchsuchen"
 
 #: ../dialogs.glade.h:29
 msgid "Secret Keys"
-msgstr ""
+msgstr "Geheimschlüssel"
 
 #: ../dialogs.glade.h:30
 msgid "Shared Folder Properties"
-msgstr ""
+msgstr "Einstellungen des synchronisierten Ordners"
 
 #: ../dialogs.glade.h:31
 msgid "Shared secret:"
-msgstr ""
+msgstr "Geteilter Geheimschlüssel"
 
 #: ../dialogs.glade.h:32
 msgid "Store deleted files in SyncArchive"
