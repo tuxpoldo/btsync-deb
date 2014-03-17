@@ -4,6 +4,7 @@ btsyncagent.py					usr/lib/btsync-gui
 btsyncapi.py					usr/lib/btsync-gui
 btsyncapp.glade					usr/lib/btsync-gui
 btsyncapp.py					usr/lib/btsync-gui
+btsyncguiapp.py					usr/lib/btsync-gui
 btsyncstatus.glade				usr/lib/btsync-gui
 btsyncstatus.py					usr/lib/btsync-gui
 btsyncutils.py					usr/lib/btsync-gui
