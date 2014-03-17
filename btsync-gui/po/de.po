@@ -45,15 +45,15 @@ msgstr "Synchronisiert am {0}"
 
 #: ../btsyncapp.py:300
 msgid "⇧ {0}"
-msgstr ""
+msgstr "⇧ {0}"
 
 #: ../btsyncapp.py:302
 msgid "⇩ {0}"
-msgstr ""
+msgstr "⇩ {0}"
 
 #: ../btsyncapp.py:304
 msgid "⇧ {0} - ⇩ {1}"
-msgstr ""
+msgstr "⇧ {0} - ⇩ {1}"
 
 #: ../btsyncapp.py:306
 msgid "Idle..."
@@ -61,39 +61,39 @@ msgstr "Inaktiv..."
 
 #: ../btsyncguiapp.py:115
 msgid "Sets the logging level. By default the logging level is WARNING"
-msgstr ""
+msgstr "Legt die Protokollierungsstufe fest. Die Standard-Protokollierungsstufe ist WARNING"
 
 #: ../btsyncguiapp.py:119
 msgid "Hostname for the connection to BitTorrent Sync. If not specified, a local BitTorrent Sync agent will be launched."
-msgstr ""
+msgstr "Hostname der Verbindung zu BitTorrent Sync. Falls nicht angegeben, wird ein lokaler BitTorrent Sync Agent gestartet."
 
 #: ../btsyncguiapp.py:124
 msgid "Optional port number for the connection to BitTorrent Sync. If not specified, port 8888 is taken for a connection to a remote BitTorrent Sync agent or (8999 + uid) is taken when creating a locally lauched agent. This option can be made persistent for local agents with --savedefaults"
-msgstr ""
+msgstr "Optionale Port-Nummer für die Verbindung zum BitTorrent Sync Agenten. Falls nicht angegeben, wird 8888 für die Verbindung zu einen externen BitTorrent Sync Agenten angenommen oder (8999 + uid) wenn ein lokaler BitTorrent Sync Agent gestartet wird. Diese Einstellung kann für lokale Agenten durch Angabe von --savedefaults als Voreinstellung gespeichert werden."
 
 #: ../btsyncguiapp.py:132
 msgid "Optional user name for connecting to a remote BitTorrent Sync agent or username to use when creating a locally launched agent. This option can be made persistent for local agents with --savedefaults"
-msgstr ""
+msgstr "Optionaler Benutzername für die Verbindung zu einem externen BitTorrent Sync Agenten oder Benutzername für den Zugang zu einem lokal gestarteten BitTorrent Sync Agenten. Diese Einstellung kann für lokale Agenten durch Angabe von --savedefaults als Voreinstellung gespeichert werden."
 
 #: ../btsyncguiapp.py:138
 msgid "Optional password for connecting to a remote BitTorrent Sync agent or username to use when creating a locally launched agent. This option can be made persistent for local agents with --savedefaults"
-msgstr ""
+msgstr "Optionales Passwort für die Verbindung zu einem externen BitTorrent Sync Agenten oder Passwort für den Zugang zu einem lokal gestarteten BitTorrent Sync Agenten. Diese Einstellung kann für lokale Agenten durch Angabe von --savedefaults als Voreinstellung gespeichert werden."
 
 #: ../btsyncguiapp.py:144
 msgid "Optional bind address for the Web UI of a locally created BitTorrent Sync agent. By default the agent binds to 127.0.0.1. If you want the Web UI of the agent to be reachable by other computers, specify one of the available IP addresses of this computer or \"all\" to bind to all available adapters. This option can be made persistent for local agents with --savedefaults"
-msgstr ""
+msgstr "Optionale Netzwerkadapter-Adresse an die die Web UI eines lokal gestarteten BitTorrent Sync Agenten gebunden werden soll. Stadnardmäßig bindet der Agent an 127.0.0.1. Wenn Sie die Web UI von anderen Rechnern erreichen wollen, geben Sie eine der IP Adressen des Rechners an oder \"all\", um an alle verfügbaren Netzwerkadapter zu binden. Diese Einstellung kann für lokale Agenten durch Angabe von --savedefaults als Voreinstellung gespeichert werden."
 
 #: ../btsyncguiapp.py:154
 msgid "Include the Web UI in the menu. This option can be made persistent with --savedefaults"
-msgstr ""
+msgstr "Anzeige der Web UI im Statusmenü aktivieren. Diese Einstellung kann durch Angabe von --savedefaults als Voreinstellung gespeichert werden."
 
 #: ../btsyncguiapp.py:158
-msgid "If specified, the optionally supplied credentials, bind address and port will be stored as default in the application preferences and used when launching a local BitTorrent Sync agent."
-msgstr ""
+msgid "If specified, the optionally supplied credentials, bind address, port information and storable settings will be stored as default in the application preferences and used when launching a local BitTorrent Sync agent."
+msgstr "Wenn angegeben, werden alle festgelegten Anmeldedaten, Adapterzuweisungen, Port Nummern und speicherbare Einstellungen als Voreinstellung für lokal gestartete Agenten verwendet."
 
-#: ../btsyncguiapp.py:164
-msgid "If specified, all internally stored credentials, bind address and port information will be cleared from the application preferences."
-msgstr ""
+#: ../btsyncguiapp.py:165
+msgid "If specified, all internally stored credentials, bind address, port information and storable settings will be cleared from the application preferences."
+msgstr "Wenn angegeben, werden alle gespeicherten Anmeldedaten, Adapterzuweisungen, Port Nummern und speicherbare Einstellungen zurückgesetzt."
 
 #: ../btsyncstatus.py:67 ../btsyncapp.glade.h:2
 msgid "BitTorrent Sync"
