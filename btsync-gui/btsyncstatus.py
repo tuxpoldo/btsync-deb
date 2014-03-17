@@ -23,17 +23,19 @@
 
 import os
 import urllib
+import gettext
 import logging
 import requests
 import webbrowser
 
+from gettext import gettext as _
 from gi.repository import Gtk, GObject
 
 from trayindicator import TrayIndicator
 from btsyncapp import BtSyncApp
 from btsyncutils import BtDynamicTimeout
 
-VERSION = '0.7.3'
+VERSION = '0.7.4'
 
 class BtSyncStatus:
 	DISCONNECTED	= 0
@@ -43,6 +45,7 @@ class BtSyncStatus:
 
 	def __init__(self,agent):
 		self.builder = Gtk.Builder()
+		self.builder.set_translation_domain('btsync-gui')
 		self.builder.add_from_file(os.path.dirname(__file__) + "/btsyncstatus.glade")
 		self.builder.connect_signals (self)
 		self.menu = self.builder.get_object('btsyncmenu')
@@ -61,12 +64,12 @@ class BtSyncStatus:
 		)
 		if agent.is_auto():
 			self.menuconnection.set_visible(False)
-			self.ind.set_title('BitTorrent Sync')
-			self.ind.set_tooltip_text('BitTorrent Sync Status Indicator')
+			self.ind.set_title(_('BitTorrent Sync'))
+			self.ind.set_tooltip_text(_('BitTorrent Sync Status Indicator'))
 		else:
 			self.menuconnection.set_label('{0}:{1}'.format(agent.get_host(),agent.get_port()))
-			self.ind.set_title('BitTorrent Sync {0}:{1}'.format(agent.get_host(),agent.get_port()))
-			self.ind.set_tooltip_text('BitTorrent Sync {0}:{1}'.format(agent.get_host(),agent.get_port()))
+			self.ind.set_title(_('BitTorrent Sync {0}:{1}').format(agent.get_host(),agent.get_port()))
+			self.ind.set_tooltip_text(_('BitTorrent Sync {0}:{1}').format(agent.get_host(),agent.get_port()))
 		self.menuopenweb.set_visible(agent.is_webui())
 		self.ind.set_menu(self.menu)
 		self.ind.set_default_action(self.onActivate)
@@ -138,11 +141,11 @@ class BtSyncStatus:
 			self.connection is BtSyncStatus.PAUSED:
 			try:
 				self.set_status(BtSyncStatus.CONNECTING)
-				self.menustatus.set_label('Connecting...')
+				self.menustatus.set_label(_('Connecting...'))
 				version = self.agent.get_version()
 				self.btsyncver = version
 				self.set_status(BtSyncStatus.CONNECTED)
-				self.menustatus.set_label('Idle')
+				self.menustatus.set_label(_('Idle'))
 				self.status_to.start()
 				self.connect_id = None
 				return False
@@ -181,13 +184,13 @@ class BtSyncStatus:
 			if transferring or speed['upload'] > 0 or speed['download'] > 0:
 				# there are active transfers...
 				self.set_status(BtSyncStatus.CONNECTED,True)
-				self.menustatus.set_label('{0:.1f} kB/s up, {1:.1f} kB/s down'.format(speed['upload'] / 1000, speed['download'] / 1000))
+				self.menustatus.set_label(_('{0:.1f} kB/s up, {1:.1f} kB/s down').format(speed['upload'] / 1000, speed['download'] / 1000))
 			elif indexing:
 				self.set_status(BtSyncStatus.CONNECTED)
-				self.menustatus.set_label('Indexing...')
+				self.menustatus.set_label(_('Indexing...'))
 			else:
 				self.set_status(BtSyncStatus.CONNECTED)
-				self.menustatus.set_label('Idle')
+				self.menustatus.set_label(_('Idle'))
 			return True
 	
 		except requests.exceptions.ConnectionError:
@@ -248,8 +251,8 @@ class BtSyncStatus:
 			self.open_app()
 
 	def onAbout(self,widget):
-		self.about.set_version('Version {0} ({0})'.format(self.btsyncver['version']))
-		self.about.set_comments('Linux UI Version {0}'.format(VERSION))
+		self.about.set_version(_('Version {0} ({0})').format(self.btsyncver['version']))
+		self.about.set_comments(_('Linux UI Version {0}').format(VERSION))
 		self.about.show()
 		self.about.run()
 		self.about.hide()
@@ -324,7 +327,7 @@ class BtSyncStatus:
 
 	def onConnectionError(self):
 		self.set_status(BtSyncStatus.DISCONNECTED)
-		self.menustatus.set_label('Disconnected')
+		self.menustatus.set_label(_('Disconnected'))
 		self.close_app();
 		logging.info('BtSync API Connection Error')
 		if self.agent.is_auto() and not self.agent.is_running():
@@ -337,7 +340,7 @@ class BtSyncStatus:
 
 	def onCommunicationError(self):
 		self.set_status(BtSyncStatus.DISCONNECTED)
-		self.menustatus.set_label('Disconnected: Communication Error {0}'.format(self.agent.get_status_code()))
+		self.menustatus.set_label(_('Disconnected: Communication Error {0}').format(self.agent.get_status_code()))
 		self.close_app();
 		logging.warning('BtSync API HTTP error: {0}'.format(self.agent.get_status_code()))
 		self.connect_id = GObject.timeout_add(5000, self.btsync_connect)

@@ -11,6 +11,14 @@ DEB_UPSTREAM_VERSION=$(shell dpkg-parsechangelog -l$(DEB_DEBIAN_DIR)/changelog \
 DEB_SOURCE_PACKAGE=$(shell dpkg-parsechangelog -l$(DEB_DEBIAN_DIR)/changelog \
 				| sed -rne 's,^Source: (.*),\1,p')
 
+MSGSRC=$(wildcard po/*.po)
+MSGOBJ=$(MSGSRC:.po=.mo)
+
+po/%.mo: po/%.po
+	msgfmt -c $< -o $@
+	mkdir -p locale/$*/LC_MESSAGES
+	cp $@ locale/$*/LC_MESSAGES/btsync-gui.mo
+
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
@@ -21,11 +29,13 @@ override_dh_install:
 	dh_install
 	$(DEB_DEBIAN_DIR)querykey.sh $(CURDIR)/$(DEB_DEBIAN_DIR)btsync-gui-gtk/usr/lib/btsync-gui/btsync-gui.key
 
-override_dh_auto_build:
+override_dh_auto_build: $(MSGOBJ)
 	dh_auto_build
 
 override_dh_clean:
 	rm -f *.pyc
+	rm -f po/*.mo
+	rm -rf locale
 	dh_clean
 
 get-orig-source: make-orig-source

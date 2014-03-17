@@ -28,8 +28,11 @@ import stat
 import base64
 import signal
 import logging
+import gettext
 import argparse
 import subprocess
+
+from gettext import gettext as _
 
 from btsyncapi import BtSyncApi
 from btsyncutils import BtSingleton, BtSingleInstanceException
@@ -101,7 +104,7 @@ class BtSyncAgent(BtSyncApi):
 			if 'portui' in self.prefs:
 				del self.prefs['portui']
 			self.save_prefs()
-			raise BtSyncAgentException(0, 'Default settings cleared.')
+			raise BtSyncAgentException(0, _('Default settings cleared.'))
 		if self.args.savedefaults:
 			# save new defaults
 			if self.args.username is not None:
@@ -122,7 +125,7 @@ class BtSyncAgent(BtSyncApi):
 				self.set_pref('portui',self.portui)
 			if self.args.webui:
 				self.set_pref('webui',self.args.webui)
-			raise BtSyncAgentException(0, 'Default settings saved.')
+			raise BtSyncAgentException(0, _('Default settings saved.'))
 		# initialize btsync api
 		self.set_connection_params(
 			host = self.get_host(), port = self.get_port(),

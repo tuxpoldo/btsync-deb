@@ -23,10 +23,12 @@
 
 import os
 import md5
+import gettext
 import logging
 import requests
 import datetime
 
+from gettext import gettext as _
 from gi.repository import Gtk, Gdk, GObject
 
 from btsyncagent import BtSyncAgent
@@ -39,6 +41,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.agent = agent
 
 		self.builder = Gtk.Builder()
+		self.builder.set_translation_domain('btsync-gui')
 		self.builder.add_from_file(os.path.dirname(__file__) + "/btsyncapp.glade")
 		self.builder.connect_signals (self)
 
@@ -100,7 +103,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 					# also an md5 digest has to be saved
 					digest = md5.new(value['dir'].encode('latin-1')).hexdigest()
 					self.folders.append ([
-						self.agent.fix_decode(value['dir']),	# 0:Folder
+						self.agent.fix_decode(value['dir']),		# 0:Folder
 						self.get_folder_info_string(value),			# 1:Content
 						value['secret'],							# 2:Secret
 						digest										# 3:FolderTag
@@ -126,8 +129,8 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		# TODO: remove placeholder as soon as the suitable API call permits
 		#       a working implementation...
 		self.transfers.append ([
-			'Cannot implement due to missing API',
-			'BitTorrent Inc.',
+			_('Cannot implement due to missing API'),
+			_('BitTorrent Inc.'),
 			'',
 			''
 		])
@@ -138,8 +141,8 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		# TODO: remove placeholder as soon as the suitable API call permits
 		#       a working implementation...
 		self.history.append ([
-			'Now',
-			'Cannot implement due to missing API'
+			_('Now'),
+			_('Cannot implement due to missing API'),
 		])
 
 	def refresh_app_status(self):
@@ -167,7 +170,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 					self.remove_device_infos(row[2],row[3])
 			# update transfer status
 			speed = self.agent.get_speed()
-			self.transfers_status.set_label('{0:.1f} kB/s up, {1:.1f} kB/s down'.format(speed['upload'] / 1000, speed['download'] / 1000))
+			self.transfers_status.set_label(_('{0:.1f} kB/s up, {1:.1f} kB/s down').format(speed['upload'] / 1000, speed['download'] / 1000))
 			# TODO: fill file list...
 			#       but there is still no suitable API call...
 			self.unlock()
@@ -277,9 +280,9 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 	def get_folder_info_string(self,folder):
 		if folder['error'] == 0:
 			if folder['indexing'] == 0:
-				return '{0} in {1} files'.format(self.sizeof_fmt(folder['size']), str(folder['files']))
+				return _('{0} in {1} files').format(self.sizeof_fmt(folder['size']), str(folder['files']))
 			else:
-				return '{0} in {1} files (indexing...)'.format(self.sizeof_fmt(folder['size']), str(folder['files']))
+				return _('{0} in {1} files (indexing...)').format(self.sizeof_fmt(folder['size']), str(folder['files']))
 		else:
 			return self.agent.get_error_message(folder)
 
@@ -292,15 +295,15 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 	def get_device_info_string(self,peer):
 		if peer['synced'] != 0:
 			dt = datetime.datetime.fromtimestamp(peer['synced'])
-			return 'Synched on {0}'.format(dt.strftime("%x %X"))
+			return _('Synched on {0}').format(dt.strftime("%x %X"))
 		elif peer['download'] == 0 and peer['upload'] != 0:
-			return '⇧ {0}'.format(self.sizeof_fmt(peer['upload']))
+			return _('⇧ {0}').format(self.sizeof_fmt(peer['upload']))
 		elif peer['download'] != 0 and peer['upload'] == 0:
-			return '⇩ {0}'.format(self.sizeof_fmt(peer['download']))
+			return _('⇩ {0}').format(self.sizeof_fmt(peer['download']))
 		elif peer['download'] != 0 and peer['upload'] != 0:
-			return '⇧ {0} - ⇩ {1}'.format(self.sizeof_fmt(peer['upload']), self.sizeof_fmt(peer['download']))
+			return _('⇧ {0} - ⇩ {1}').format(self.sizeof_fmt(peer['upload']), self.sizeof_fmt(peer['download']))
 		else:
-			return 'Idle...'
+			return _('Idle...')
 
 	def init_preferences_controls(self):
 		self.devname = self.builder.get_object('devname')

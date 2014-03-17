@@ -22,11 +22,14 @@
 #
 
 import os
+import gettext
 import qrencode
 import requests
 
+from gettext import gettext as _
 from gi.repository import Gtk, Gdk, GdkPixbuf
 from cStringIO import StringIO
+
 from btsyncagent import BtSyncAgent
 from btsyncutils import BtBaseDialog,BtInputHelper,BtValueDescriptor
 
@@ -61,23 +64,25 @@ class BtSyncFolderAdd(BtBaseDialog):
 				self.folder = self.folder_w.get_text()
 				# test if secret is OK
 				if self.agent.get_error_code(self.agent.get_secrets(self.secret)) > 0:
-					self.show_warning(
+					self.show_warning(_(
 						'This secret is invalid.\nPlease generate a new '\
 						'secret or enter your shared folder secret.'
-					)
+					))
 				# test if string is an absolute path and a directory
 				elif len(self.folder) == 0 or self.folder[0] != '/' or not os.path.isdir(self.folder):
-					self.show_warning('Can\'t open the destination folder.')
+					self.show_warning(_('Can\'t open the destination folder.'))
 				# test if the specified data is unique
 				elif self.is_duplicate_folder(self.folder,self.secret):
-					self.show_warning('Selected folder is already added to BitTorrent Sync.')
+					self.show_warning(_(
+						'Selected folder is already added to BitTorrent Sync.'
+					))
 				# if btsync agent is local perform more tests
 				elif self.agent.is_local():
 					# test if the specified directory is readable and writable
 					if not os.access(self.folder,os.W_OK) or not os.access(self.folder,os.R_OK):
-						self.show_warning(
+						self.show_warning(_(
 							'Don\'t have permissions to write to the selected folder.'
-						)
+						))
 					else:
 						return response
 				else:
@@ -98,9 +103,15 @@ class BtSyncFolderAdd(BtBaseDialog):
 
 
 	def onFolderAddChoose(self,widget):
-		self.folderdlg = Gtk.FileChooserDialog ("Please select a folder to sync", self.dlg,
-			Gtk.FileChooserAction.SELECT_FOLDER,
-			(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_OPEN, Gtk.ResponseType.OK)
+		self.folderdlg = Gtk.FileChooserDialog (
+			_('Please select a folder to sync'),
+			self.dlg,
+			Gtk.FileChooserAction.SELECT_FOLDER, (
+				Gtk.STOCK_CANCEL,
+				Gtk.ResponseType.CANCEL,
+				Gtk.STOCK_OPEN,
+				Gtk.ResponseType.OK
+			)
 		)
 		if self.folderdlg.run() == Gtk.ResponseType.OK:
 			self.folder_w.set_text(self.folderdlg.get_filename())
@@ -343,17 +354,17 @@ class BtSyncFolderPrefs(BtBaseDialog):
 		if self.rwsecret is not None:
 			text = self.rw_secret_text.get_text(*self.rw_secret_text.get_bounds(),include_hidden_chars=False)
 			if len(text) != 33:
-				self.show_error(
+				self.show_error(_(
 					'Invalid secret specified.\n'\
 					'Secret must have a length of 33 characters'
-				)
+				))
 				self.dlg.response(0)
 				return False
 			elif not text.isalnum():
-				self.show_error(
+				self.show_error(_(
 					'Invalid secret specified.\n'\
 					'Secret must contain only alphanumeric characters'
-				)
+				))
 				self.dlg.response(0)
 				return False
 			elif self.rwsecret != text:
@@ -397,14 +408,14 @@ class BtSyncHostAdd(BtBaseDialog):
 				self.port = self.port_w.get_text()
 				# test if a hostname is specified
 				if len(self.addr) == 0:
-					self.show_warning(
+					self.show_warning(_(
 						'A hostname or IP address must be specified'
-					)
+					))
 				# test if port is OK
 				elif len(self.port) == 0 or int(self.port) < 1 or int(self.port) > 65534:
-					self.show_warning(
+					self.show_warning(_(
 						'The specified port must be a number between 1 and 65534'
-					)
+					))
 				else:
 					return response
 

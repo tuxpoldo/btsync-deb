@@ -23,9 +23,11 @@
 
 import os
 import time
+import gettext
 import logging
 import exceptions
 
+from gettext import gettext as _
 from gi.repository import Gtk, GObject
 
 class BtValueDescriptor(GObject.GObject):
@@ -93,23 +95,23 @@ class BtValueDescriptor(GObject.GObject):
 		suitable BtValueDescriptor
 		"""
 		return {
-		'device_name'				: BtValueDescriptor (Name, 's', Value, Advanced = False), 
-		'disk_low_priority'			: BtValueDescriptor (Name, 'b', Value, 1),
-		'download_limit'			: BtValueDescriptor (Name, 'n', Value, 0, 0, 1000000, Advanced = False),
-		'folder_rescan_interval'		: BtValueDescriptor (Name, 'n', Value, 600, 10, 999999),
-		'lan_encrypt_data'			: BtValueDescriptor (Name, 'b', Value, 1),
-		'lan_use_tcp'				: BtValueDescriptor (Name, 'b', Value, 0),
-		'lang'					: BtValueDescriptor (Name, 'e', Value, 28261, Advanced = False),
-		'listening_port'			: BtValueDescriptor (Name, 'n', Value, 0, 1025, 65534, Advanced = False),
+		'device_name'						: BtValueDescriptor (Name, 's', Value, Advanced = False), 
+		'disk_low_priority'					: BtValueDescriptor (Name, 'b', Value, 1),
+		'download_limit'					: BtValueDescriptor (Name, 'n', Value, 0, 0, 1000000, Advanced = False),
+		'folder_rescan_interval'			: BtValueDescriptor (Name, 'n', Value, 600, 10, 999999),
+		'lan_encrypt_data'					: BtValueDescriptor (Name, 'b', Value, 1),
+		'lan_use_tcp'						: BtValueDescriptor (Name, 'b', Value, 0),
+		'lang'								: BtValueDescriptor (Name, 'e', Value, 28261, Advanced = False),
+		'listening_port'					: BtValueDescriptor (Name, 'n', Value, 0, 1025, 65534, Advanced = False),
 		'max_file_size_diff_for_patching'	: BtValueDescriptor (Name, 'n', Value, 1000, 10, 999999),
 		'max_file_size_for_versioning'		: BtValueDescriptor (Name, 'n', Value, 1000, 10, 999999),
-		'rate_limit_local_peers'		: BtValueDescriptor (Name, 'b', Value, 0),
-		'recv_buf_size'				: BtValueDescriptor (Name, 'n', Value, 5, 1, 100),
-		'send_buf_size'				: BtValueDescriptor (Name, 'n', Value, 5, 1, 100),
-		'sync_max_time_diff'			: BtValueDescriptor (Name, 'n', Value, 600, 0, 999999),
-		'sync_trash_ttl'			: BtValueDescriptor (Name, 'n', Value, 30, 0, 999999),
-		'upload_limit'				: BtValueDescriptor (Name, 'n', Value, 0, 0, 1000000, Advanced = False),
-		'use_upnp'				: BtValueDescriptor (Name, 'b', Value, 1, Advanced = False),
+		'rate_limit_local_peers'			: BtValueDescriptor (Name, 'b', Value, 0),
+		'recv_buf_size'						: BtValueDescriptor (Name, 'n', Value, 5, 1, 100),
+		'send_buf_size'						: BtValueDescriptor (Name, 'n', Value, 5, 1, 100),
+		'sync_max_time_diff'				: BtValueDescriptor (Name, 'n', Value, 600, 0, 999999),
+		'sync_trash_ttl'					: BtValueDescriptor (Name, 'n', Value, 30, 0, 999999),
+		'upload_limit'						: BtValueDescriptor (Name, 'n', Value, 0, 0, 1000000, Advanced = False),
+		'use_upnp'							: BtValueDescriptor (Name, 'b', Value, 1, Advanced = False),
 		}.get(Name,BtValueDescriptor (Name, 'u', Value))
 
 	@staticmethod
@@ -251,6 +253,7 @@ class BtBaseDialog(BtMessageHelper):
 	def create(self):
 		# create the dialog object from builder
 		self.builder = Gtk.Builder()
+		self.builder.set_translation_domain('btsync-gui')
 		self.builder.add_objects_from_file(os.path.dirname(__file__) + '/' + self.gladefile, self.objects)
 		self.builder.connect_signals (self)
 		self.dlg = self.builder.get_object(self.objects[0])
@@ -299,7 +302,7 @@ class BtSingleton():
 				args = self.getcmdline(pid)
 				for arg in args:
 					if processname in arg:
-						raise BtSingleInstanceException('Only one full btsync-gui can run at once')
+						raise BtSingleInstanceException(_('Only one full btsync-gui can run at once'))
 			# lock file must by a zombie...
 			os.remove(lockfilename)
 		self.writepid(lockfilename)

@@ -1,0 +1,12 @@
+[encoding: UTF-8]
+btsyncagent.py
+btsyncapi.py
+btsyncapp.py
+btsyncguiapp.py
+btsyncstatus.py
+btsyncutils.py
+dialogs.py
+trayindicator.py
+btsyncapp.glade
+btsyncstatus.glade
+dialogs.glade
