@@ -1,6 +1,8 @@
 btsync-gui credits
 ==================
 
+The BitTorrent Sync GUI was written by Leo Moll <leo.moll@yeasoft.com>
+
 ### Main Inspiration ###
 
 I would like to thank Mark Johnson <mark@barrenfrozenwasteland.com> for writing
@@ -32,6 +34,8 @@ The following People contributed in translating `btsync-gui`:
 * Marek Lukas (Czech)
 * Thanos Papaoikonomou (Greek)
 * xearonet (Polish)
+* Andrea Pennelli (Italian)
+* Leo Moll (German & Italian)
 
 
 ### Maintainers ###
