@@ -1,6 +1,7 @@
 btsync-gui (0.8.0-1) unstable; urgency=low
 
   * Added localisation support (Closes #102)
+  * Added German translation (Closes #103)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Mon, 17 Mar 2014 17:19:36 +0100
 
