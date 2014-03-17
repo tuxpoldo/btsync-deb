@@ -1,6 +1,12 @@
 [Desktop Entry]
 Name=BitTorrent Sync
-Comment=Synchronize your folders with maximum security, network speed and storage capacity
+Comment=Secure, unlimited file-syncing. No cloud required.
+Comment[de]=Sichere und unbegrenzte Synchronisation von Dateien. Völlig ohne Cloud.
+Comment[it]=Sincronizzazione di file sicura. Senza limiti. Senza cloud.
+Comment[fr]=Synchronisation de fichiers sécurisée et illimitée. Pas besoin du nuage.
+Comment[es]=Sincronización de archivos segura y sin límites. Sin acceder a la nube.
+Comment[ru]=Полная безопасность и синхронизация файлов без ограничений. Данные не хранятся на облачных серверах.
+Comment[nl]=Veilig, onbeperkt bestanden synchroniseren. Geen cloud vereist.
 Exec=btsync-gui
 Icon=btsync-gui
 Terminal=false
