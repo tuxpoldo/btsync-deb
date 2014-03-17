@@ -1,13 +1,11 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: btsync-gui\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-17 19:18+0100\n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
+"Project-Id-Version: btsync-gui\n"
+"Language: de\n"
 
 #: ../btsyncagent.py:107
 msgid "Default settings cleared."
@@ -66,64 +64,6 @@ msgid "Sets the logging level. By default the logging level is WARNING"
 msgstr "Legt die Protokollierungsstufe fest. Die Standard-Protokollierungsstufe ist WARNING"
 
 #: ../btsyncguiapp.py:119
-<<<<<<< HEAD
-msgid ""
-"Hostname for the connection to BitTorrent Sync. If not specified, a local "
-"BitTorrent Sync agent will be launched."
-msgstr ""
-
-#: ../btsyncguiapp.py:124
-msgid ""
-"Optional port number for the connection to BitTorrent Sync. If not "
-"specified, port 8888 is taken for a connection to a remote BitTorrent Sync "
-"agent or (8999 + uid) is taken when creating a locally lauched agent. This "
-"option can be made persistent for local agents with --savedefaults"
-msgstr ""
-
-#: ../btsyncguiapp.py:132
-msgid ""
-"Optional user name for connecting to a remote BitTorrent Sync agent or "
-"username to use when creating a locally launched agent. This option can be "
-"made persistent for local agents with --savedefaults"
-msgstr ""
-
-#: ../btsyncguiapp.py:138
-msgid ""
-"Optional password for connecting to a remote BitTorrent Sync agent or "
-"username to use when creating a locally launched agent. This option can be "
-"made persistent for local agents with --savedefaults"
-msgstr ""
-
-#: ../btsyncguiapp.py:144
-msgid ""
-"Optional bind address for the Web UI of a locally created BitTorrent Sync "
-"agent. By default the agent binds to 127.0.0.1. If you want the Web UI of "
-"the agent to be reachable by other computers, specify one of the available "
-"IP addresses of this computer or \"all\" to bind to all available adapters. "
-"This option can be made persistent for local agents with --savedefaults"
-msgstr ""
-
-#: ../btsyncguiapp.py:154
-msgid ""
-"Include the Web UI in the menu. This option can be made persistent with --"
-"savedefaults"
-msgstr ""
-
-#: ../btsyncguiapp.py:158
-msgid ""
-"If specified, the optionally supplied credentials, bind address, port "
-"information and storable settings will be stored as default in the "
-"application preferences and used when launching a local BitTorrent Sync "
-"agent."
-msgstr ""
-
-#: ../btsyncguiapp.py:165
-msgid ""
-"If specified, all internally stored credentials, bind address, port "
-"information and storable settings will be cleared from the application "
-"preferences."
-msgstr ""
-=======
 msgid "Hostname for the connection to BitTorrent Sync. If not specified, a local BitTorrent Sync agent will be launched."
 msgstr "Hostname der Verbindung zu BitTorrent Sync. Falls nicht angegeben, wird ein lokaler BitTorrent Sync Agent gestartet."
 
@@ -200,13 +140,10 @@ msgid "Only one full btsync-gui can run at once"
 msgstr "Es kann nur ein BitTorrent Sync gestartet werden"
 
 #: ../dialogs.py:68
-msgid ""
-"This secret is invalid.\n"
+msgid "This secret is invalid.\n"
 "Please generate a new secret or enter your shared folder secret."
-msgstr ""
-"Dieser Geheimschlüssel ist ungültig.\n"
-"Bitte generieren Sie einen neuen Geheimschlüssel oder geben Sie einen "
-"Geheimschlüssel zu einen geteilten Ordner ein."
+msgstr "Dieser Geheimschlüssel ist ungültig.\n"
+"Bitte generieren Sie einen neuen Geheimschlüssel oder geben Sie einen Geheimschlüssel zu einen geteilten Ordner ein."
 
 #: ../dialogs.py:73
 msgid "Can't open the destination folder."
@@ -225,19 +162,15 @@ msgid "Please select a folder to sync"
 msgstr "Zu synchronisierenden Ordner hinzufügen"
 
 #: ../dialogs.py:358
-msgid ""
-"Invalid secret specified.\n"
+msgid "Invalid secret specified.\n"
 "Secret must have a length of 33 characters"
-msgstr ""
-"Ungültiger Geheimschlüssel angegeben.\n"
+msgstr "Ungültiger Geheimschlüssel angegeben.\n"
 "Ein Geheimschlüssel muss 32 Zeichen lang sein."
 
 #: ../dialogs.py:365
-msgid ""
-"Invalid secret specified.\n"
+msgid "Invalid secret specified.\n"
 "Secret must contain only alphanumeric characters"
-msgstr ""
-"Ungültiger Geheimschlüssel angegeben.\n"
+msgstr "Ungültiger Geheimschlüssel angegeben.\n"
 "Ein Geheimschlüssel darf nur aus Buchstaben und Zahlen bestehen."
 
 #: ../dialogs.py:412
@@ -281,12 +214,8 @@ msgid "Devices"
 msgstr "Geräte"
 
 #: ../btsyncapp.glade.h:10
-msgid ""
-"Displays a QR-code that permits easy connection of a mobile device to this "
-"folder"
-msgstr ""
-"Zeigt einen QR-Code an, der es erlaubt ein Mobilgerät mittels der BitTorrent "
-"Sync App zu verbinden"
+msgid "Displays a QR-code that permits easy connection of a mobile device to this folder"
+msgstr "Zeigt einen QR-Code an, der es erlaubt ein Mobilgerät mittels der BitTorrent Sync App zu verbinden"
 
 #: ../btsyncapp.glade.h:11
 msgid "Down"
@@ -297,12 +226,8 @@ msgid "Edit .SyncIgnore"
 msgstr ".SyncIgnore Datei editieren"
 
 #: ../btsyncapp.glade.h:13
-msgid ""
-"Edit the file containing the list or filename patterns for file not beeing "
-"synched"
-msgstr ""
-"Liste der Dateienamen und Namensmuster die von der Synchronisation "
-"ausgeschlossen werden sollen editieren"
+msgid "Edit the file containing the list or filename patterns for file not beeing synched"
+msgstr "Liste der Dateienamen und Namensmuster die von der Synchronisation ausgeschlossen werden sollen editieren"
 
 #: ../btsyncapp.glade.h:14
 msgid "Event"
@@ -354,8 +279,7 @@ msgstr "Öffnet die Einstellungen für den geteilten Ordner"
 
 #: ../btsyncapp.glade.h:26
 msgid "Opens the sync archive holding previous or deleted versions of files"
-msgstr ""
-"Öffnet das Verzeichnis der alten Dateiversionen oder gelöschter Dateien"
+msgstr "Öffnet das Verzeichnis der alten Dateiversionen oder gelöschter Dateien"
 
 #: ../btsyncapp.glade.h:27
 msgid "Path"
@@ -406,15 +330,11 @@ msgid "BitTorrent Status"
 msgstr "BitTorrent Status"
 
 #: ../btsyncstatus.glade.h:3
-msgid ""
-"By using this application, you agree to our Privacy Policy and Terms.\n"
+msgid "By using this application, you agree to our Privacy Policy and Terms.\n"
 "http://www.bittorrent.com/legal/privacy\n"
 "http://www.bittorrent.com/legal/terms-of-use"
-msgstr ""
-"Die Benutzung dieser Applikation setzt Ihr Einverständnis zu unseren "
-"Datenschutzbestimmungen und Geschäftsbedingungen voraus:\n"
-"http://www.bittorrent.com/legal/privacy http://www.bittorrent.com/legal/"
-"terms-of-use"
+msgstr "Die Benutzung dieser Applikation setzt Ihr Einverständnis zu unseren Datenschutzbestimmungen und Geschäftsbedingungen voraus:\n"
+"http://www.bittorrent.com/legal/privacy http://www.bittorrent.com/legal/terms-of-use"
 
 #: ../btsyncstatus.glade.h:6
 msgid "Copyright © 2013, BitTorrent Inc."
@@ -498,8 +418,7 @@ msgstr "Generieren"
 
 #: ../dialogs.glade.h:11
 msgid "Generate a new secret or enter shared folder secret"
-msgstr ""
-"Generieren Sie einen neuen Geheimschlüssel oder geben Sie einen\n"
+msgstr "Generieren Sie einen neuen Geheimschlüssel oder geben Sie einen\n"
 "Geheimschlüssel für einen geteilten Ordner ein."
 
 #: ../dialogs.glade.h:12
@@ -551,11 +470,9 @@ msgid "Scan QR"
 msgstr "QR scannen"
 
 #: ../dialogs.glade.h:25
-msgid ""
-"Scan this QR code with your mobile\n"
+msgid "Scan this QR code with your mobile\n"
 "device to connect sync folders"
-msgstr ""
-"Diesen QR-Code mit Ihrem Mobilgerät scannen,\n"
+msgstr "Diesen QR-Code mit Ihrem Mobilgerät scannen,\n"
 "um Synchronisationsordner zu verbinden."
 
 #: ../dialogs.glade.h:27
@@ -583,12 +500,8 @@ msgid "Store deleted files in SyncArchive"
 msgstr "Gelöschte Dateien in SyncArchive anzeigen"
 
 #: ../dialogs.glade.h:33
-msgid ""
-"This folder will be removed from BitTorrent Sync and no longer synced with "
-"other devices"
-msgstr ""
-"Dieser Ordner wird aus BitTorrent Sync entfernt und nicht mehr mit anderen "
-"Geräten Synchronisiert."
+msgid "This folder will be removed from BitTorrent Sync and no longer synced with other devices"
+msgstr "Dieser Ordner wird aus BitTorrent Sync entfernt und nicht mehr mit anderen Geräten Synchronisiert."
 
 #: ../dialogs.glade.h:34
 msgid "Use predefined hosts"
@@ -609,3 +522,4 @@ msgstr "Wert"
 #: ../dialogs.glade.h:38
 msgid "Value:"
 msgstr "Wert:"
+
