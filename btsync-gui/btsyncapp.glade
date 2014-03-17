@@ -704,7 +704,7 @@
         <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="tooltip_text" translatable="yes">Edit the file containing the list or filename patterns for file not beeing synched</property>
+        <property name="tooltip_text" translatable="yes">Edit the file containing the list or filename patterns for file not being synched</property>
         <property name="label" translatable="yes">Edit .SyncIgnore</property>
         <property name="use_underline">True</property>
         <signal name="activate" handler="onFoldersEditSyncIgnore" swapped="no"/>
