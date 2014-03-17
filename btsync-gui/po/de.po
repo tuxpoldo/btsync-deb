@@ -113,7 +113,7 @@ msgstr "Verbinde..."
 
 #: ../btsyncstatus.py:148 ../btsyncstatus.py:193
 msgid "Idle"
-msgstr ""
+msgstr "Inaktiv"
 
 #: ../btsyncstatus.py:190
 msgid "Indexing..."
@@ -208,7 +208,7 @@ msgstr "Gerätename:"
 
 #: ../btsyncapp.glade.h:9
 msgid "Devices"
-msgstr ""
+msgstr "Geräte"
 
 #: ../btsyncapp.glade.h:10
 msgid "Displays a QR-code that permits easy connection of a mobile device to this folder"
@@ -240,11 +240,11 @@ msgstr ""
 
 #: ../btsyncapp.glade.h:17
 msgid "Folders"
-msgstr ""
+msgstr "Ordner"
 
 #: ../btsyncapp.glade.h:18
 msgid "History"
-msgstr ""
+msgstr "Chronik"
 
 #: ../btsyncapp.glade.h:19
 msgid "Limit download rate to (kB/s):"
@@ -308,7 +308,7 @@ msgstr "Dieser Name erscheint auf verknüpften Geräten"
 
 #: ../btsyncapp.glade.h:34
 msgid "Transfers"
-msgstr ""
+msgstr "Übertragungen"
 
 #: ../btsyncapp.glade.h:35
 msgid "Up"
