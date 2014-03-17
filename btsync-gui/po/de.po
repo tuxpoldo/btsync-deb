@@ -81,7 +81,7 @@ msgstr "Optionales Passwort für die Verbindung zu einem externen BitTorrent Syn
 
 #: ../btsyncguiapp.py:144
 msgid "Optional bind address for the Web UI of a locally created BitTorrent Sync agent. By default the agent binds to 127.0.0.1. If you want the Web UI of the agent to be reachable by other computers, specify one of the available IP addresses of this computer or \"all\" to bind to all available adapters. This option can be made persistent for local agents with --savedefaults"
-msgstr "Optionale Netzwerkadapter-Adresse an die die Web UI eines lokal gestarteten BitTorrent Sync Agenten gebunden werden soll. Stadnardmäßig bindet der Agent an 127.0.0.1. Wenn Sie die Web UI von anderen Rechnern erreichen wollen, geben Sie eine der IP Adressen des Rechners an oder \"all\", um an alle verfügbaren Netzwerkadapter zu binden. Diese Einstellung kann für lokale Agenten durch Angabe von --savedefaults als Voreinstellung gespeichert werden."
+msgstr "Optionale Netzwerkadapter-Adresse an die die Web UI eines lokal gestarteten BitTorrent Sync Agenten gebunden werden soll. Standardmäßig bindet der Agent an 127.0.0.1. Wenn Sie die Web UI von anderen Rechnern erreichen wollen, geben Sie eine der IP Adressen des Rechners an oder \"all\", um an alle verfügbaren Netzwerkadapter zu binden. Diese Einstellung kann für lokale Agenten durch Angabe von --savedefaults als Voreinstellung gespeichert werden."
 
 #: ../btsyncguiapp.py:154
 msgid "Include the Web UI in the menu. This option can be made persistent with --savedefaults"
@@ -226,7 +226,7 @@ msgid "Edit .SyncIgnore"
 msgstr ".SyncIgnore Datei editieren"
 
 #: ../btsyncapp.glade.h:13
-msgid "Edit the file containing the list or filename patterns for file not beeing synched"
+msgid "Edit the file containing the list or filename patterns for file not being synched"
 msgstr "Liste der Dateienamen und Namensmuster die von der Synchronisation ausgeschlossen werden sollen editieren"
 
 #: ../btsyncapp.glade.h:14
@@ -333,7 +333,8 @@ msgstr "BitTorrent Status"
 msgid "By using this application, you agree to our Privacy Policy and Terms.\n"
 "http://www.bittorrent.com/legal/privacy\n"
 "http://www.bittorrent.com/legal/terms-of-use"
-msgstr "Die Benutzung dieser Applikation setzt Ihr Einverständnis zu unseren Datenschutzbestimmungen und Geschäftsbedingungen voraus:\n"
+msgstr "Die Benutzung dieser Applikation setzt Ihr Einverständnis zu unseren\n"
+"Datenschutzbestimmungen und Geschäftsbedingungen voraus:\n"
 "http://www.bittorrent.com/legal/privacy http://www.bittorrent.com/legal/terms-of-use"
 
 #: ../btsyncstatus.glade.h:6
