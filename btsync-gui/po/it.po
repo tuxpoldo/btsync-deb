@@ -81,7 +81,7 @@ msgstr "Password facoltativa per la connessione ad un agente remoto BitTorrent S
 
 #: ../btsyncguiapp.py:144
 msgid "Optional bind address for the Web UI of a locally created BitTorrent Sync agent. By default the agent binds to 127.0.0.1. If you want the Web UI of the agent to be reachable by other computers, specify one of the available IP addresses of this computer or \"all\" to bind to all available adapters. This option can be made persistent for local agents with --savedefaults"
-msgstr "Indirizzo facoltativo dell'adattatore di rete al quale l'agente BitTorrent Sync si collega all'interfaccia Web. Il valore standard a cui si collega è 127.0.0.1. Se si desidera che l'interfaccia Web sia raggiungibile da altri computer, specificare un indirizzo valido per l'adattatore di rete o *all* per specificare tutti i possibili adattatori. Quest'opzione può essere resa persistente mediante --savedefaults"
+msgstr "Indirizzo facoltativo dell'adattatore di rete al quale l'agente BitTorrent Sync si collega con l'interfaccia Web. Il valore standard a cui si collega è 127.0.0.1. Se si desidera che l'interfaccia Web sia raggiungibile da altri computer, specificare un indirizzo valido per l'adattatore di rete o *all* per specificare tutti i possibili adattatori. Quest'opzione può essere resa persistente mediante --savedefaults"
 
 #: ../btsyncguiapp.py:154
 msgid "Include the Web UI in the menu. This option can be made persistent with --savedefaults"
