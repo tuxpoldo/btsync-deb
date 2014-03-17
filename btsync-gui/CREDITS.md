@@ -27,7 +27,11 @@ inspired me to implement my own abstraction class
 
 The following People contributed in translating `btsync-gui`:
 
-* (still no one since there is currently no localization ;)
+* Miguel Anxo Bouzada (Galician)
+* Jasper (Dutch)
+* Marek Lukas (Czech)
+* Thanos Papaoikonomou (Greek)
+* xearonet (Polish)
 
 
 ### Maintainers ###
