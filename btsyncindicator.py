@@ -460,12 +460,14 @@ class BtSyncIndicator:
 	return menu
     
     def update_folder_menu(self, folder):
-	"""
-	Updates the submenu for the given folder with the current size
-	and updates each peer.
-	"""
-	folderitem = self.folderitems[folder['name']]
-	folderitem['sizeitem'].set_label(folder['size'])
+        """
+        Updates the submenu for the given folder with the current size
+        and updates each peer.
+        """
+        
+        folderitem = self.folderitems[folder['name']]
+        folderitem['sizeitem'].set_label(folder['size'])
+        
         menu = folderitem['menuitem'].get_submenu()
 
         curfolder = [ f for f in self.status['folders'] if folder['name'] == f['name'] ].pop()
@@ -497,7 +499,7 @@ class BtSyncIndicator:
             menu.insert(peeritem, pos)
 
         for peer in updatepeers:
-	    buf = self.format_status(peer)
+            buf = self.format_status(peer)
             folderitem['peeritems'][peer['name']].set_label(buf)
 
         for peer in oldpeers:
