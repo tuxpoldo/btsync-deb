@@ -36,7 +36,7 @@ The following People contributed in translating `btsync-gui`:
 * xearonet (Polish)
 * Andrea Pennelli (Italian)
 * Leo Moll (German & Italian)
-
+* Jose Luis Tirado (Spanish)
 
 ### Maintainers ###
 
