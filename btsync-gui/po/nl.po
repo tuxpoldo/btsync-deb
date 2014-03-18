@@ -76,8 +76,8 @@ msgid "Optional user name for connecting to a remote BitTorrent Sync agent or us
 msgstr "Optionele gebruikersnaam voor de verbinding met een externe BitTorrent Sync agent of gebruikersnaam te gebruiken bij het ​​maken van een lokaal proces. Deze optie kan blijvend worden gemaakt voor een lokaal proces met - savedefaults"
 
 #: ../btsyncguiapp.py:138
-msgid "Optional password for connecting to a remote BitTorrent Sync agent or username to use when creating a locally launched agent. This option can be made persistent for local agents with --savedefaults"
-msgstr "Optioneel wachtwoord voor de verbinding met een externe BitTorrent Sync proces of gebruikersnaam te gebruiken bij het maken van een lokaal proces. Deze optie kan blijvend worden gemaakt voor een lokaal proces met - savedefaults"
+msgid "Optional password for connecting to a remote BitTorrent Sync agent or password to use when creating a locally launched agent. This option can be made persistent for local agents with --savedefaults"
+msgstr "Optioneel wachtwoord voor de verbinding met een externe BitTorrent Sync proces of wachtwoord te gebruiken bij het maken van een lokaal proces. Deze optie kan blijvend worden gemaakt voor een lokaal proces met - savedefaults"
 
 #: ../btsyncguiapp.py:144
 msgid "Optional bind address for the Web UI of a locally created BitTorrent Sync agent. By default the agent binds to 127.0.0.1. If you want the Web UI of the agent to be reachable by other computers, specify one of the available IP addresses of this computer or \"all\" to bind to all available adapters. This option can be made persistent for local agents with --savedefaults"
