@@ -1,3 +1,9 @@
+btsync (1.2.3-2) unstable; urgency=low
+
+  * Localisation update
+  
+ -- Leo Moll <leo.moll@yeasoft.com>  Tue, 18 Mar 2014 23:08:45 +0100
+
 btsync (1.2.3-1) unstable; urgency=low
 
   * Cleanup startup and shutdown messages
