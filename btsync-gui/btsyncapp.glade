@@ -52,6 +52,7 @@
                     <property name="can_focus">True</property>
                     <property name="model">folders_list</property>
                     <property name="headers_clickable">False</property>
+                    <property name="fixed_height_mode">True</property>
                     <signal name="button-press-event" handler="onFoldersMouseClick" swapped="no"/>
                     <child internal-child="selection">
                       <object class="GtkTreeSelection" id="folders_selection">
@@ -165,6 +166,7 @@
                 <property name="can_focus">True</property>
                 <property name="model">devices_list</property>
                 <property name="headers_clickable">False</property>
+                <property name="fixed_height_mode">True</property>
                 <child internal-child="selection">
                   <object class="GtkTreeSelection" id="treeview-selection2"/>
                 </child>
@@ -250,6 +252,7 @@
                     <property name="can_focus">True</property>
                     <property name="model">transfers_list</property>
                     <property name="headers_clickable">False</property>
+                    <property name="fixed_height_mode">True</property>
                     <child internal-child="selection">
                       <object class="GtkTreeSelection" id="treeview-selection3"/>
                     </child>
@@ -352,6 +355,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="model">history_list</property>
+                <property name="fixed_height_mode">True</property>
                 <child internal-child="selection">
                   <object class="GtkTreeSelection" id="treeview-selection4"/>
                 </child>
