@@ -76,7 +76,7 @@ msgid "Optional user name for connecting to a remote BitTorrent Sync agent or us
 msgstr "Nome utente facoltativo per la connessione ad un agente remoto BitTorrent Sync o nome utente da configurare per un agente locale. Quest'opzione può essere rese persistente mediante --savedefaults"
 
 #: ../btsyncguiapp.py:138
-msgid "Optional password for connecting to a remote BitTorrent Sync agent or username to use when creating a locally launched agent. This option can be made persistent for local agents with --savedefaults"
+msgid "Optional password for connecting to a remote BitTorrent Sync agent or password to use when creating a locally launched agent. This option can be made persistent for local agents with --savedefaults"
 msgstr "Password facoltativa per la connessione ad un agente remoto BitTorrent Sync o password da configurare per un agente locale. Quest'opzione può essere rese persistente mediante --savedefaults"
 
 #: ../btsyncguiapp.py:144
