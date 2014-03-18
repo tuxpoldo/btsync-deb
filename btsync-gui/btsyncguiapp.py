@@ -136,7 +136,7 @@ class GuiApp:
 		parser.add_argument('--password',
 					default=None,
 					help=_('Optional password for connecting to a remote '\
-					'BitTorrent Sync agent or username to use when creating a '\
+					'BitTorrent Sync agent or password to use when creating a '\
 					'locally launched agent. This option can be made '\
 					'persistent for local agents with --savedefaults'))
 		parser.add_argument('--bindui',

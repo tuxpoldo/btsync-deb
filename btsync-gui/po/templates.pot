@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-18 01:17+0100\n"
+"POT-Creation-Date: 2014-03-18 22:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,47 +25,47 @@ msgstr ""
 msgid "Default settings saved."
 msgstr ""
 
-#: ../btsyncapp.py:132 ../btsyncapp.py:145
+#: ../btsyncapp.py:138 ../btsyncapp.py:151
 msgid "Cannot implement due to missing API"
 msgstr ""
 
-#: ../btsyncapp.py:133
+#: ../btsyncapp.py:139
 msgid "BitTorrent Inc."
 msgstr ""
 
-#: ../btsyncapp.py:144
+#: ../btsyncapp.py:150
 msgid "Now"
 msgstr ""
 
-#: ../btsyncapp.py:173 ../btsyncstatus.py:187
+#: ../btsyncapp.py:179 ../btsyncstatus.py:187
 msgid "{0:.1f} kB/s up, {1:.1f} kB/s down"
 msgstr ""
 
-#: ../btsyncapp.py:283
+#: ../btsyncapp.py:289
 msgid "{0} in {1} files"
 msgstr ""
 
-#: ../btsyncapp.py:285
+#: ../btsyncapp.py:291
 msgid "{0} in {1} files (indexing...)"
 msgstr ""
 
-#: ../btsyncapp.py:298
+#: ../btsyncapp.py:304
 msgid "Synched on {0}"
 msgstr ""
 
-#: ../btsyncapp.py:300
+#: ../btsyncapp.py:306
 msgid "⇧ {0}"
 msgstr ""
 
-#: ../btsyncapp.py:302
+#: ../btsyncapp.py:308
 msgid "⇩ {0}"
 msgstr ""
 
-#: ../btsyncapp.py:304
+#: ../btsyncapp.py:310
 msgid "⇧ {0} - ⇩ {1}"
 msgstr ""
 
-#: ../btsyncapp.py:306
+#: ../btsyncapp.py:312
 msgid "Idle..."
 msgstr ""
 
@@ -97,7 +97,7 @@ msgstr ""
 #: ../btsyncguiapp.py:138
 msgid ""
 "Optional password for connecting to a remote BitTorrent Sync agent or "
-"username to use when creating a locally launched agent. This option can be "
+"password to use when creating a locally launched agent. This option can be "
 "made persistent for local agents with --savedefaults"
 msgstr ""
 
