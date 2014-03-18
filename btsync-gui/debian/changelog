@@ -1,10 +1,13 @@
 btsync-gui (0.8.0-1) unstable; urgency=low
 
+  * Remember column sizes (Closes #101)
   * Added I18N support (Closes #102)
   * Added German translation by Leo (Closes #103)
-  * Added Dutch translation by Jasper (Closes #108)
   * Added Italian translation by Leo & Andrea (Closes #104)
+  * Added French translation by Loïc Fournet (Closes #105)
   * Added Spanish translation by Jose Luis Tirado (Closes #106)
+  * Added Dutch translation by Jasper Sierink (Closes #108)
+  * Added Galician translation by Miguel Anxo Bouzada (Closes #109)
   * Added Russian translation by Alex Novo (Closes #112)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Mon, 17 Mar 2014 17:19:36 +0100

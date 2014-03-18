@@ -92,6 +92,9 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.folders_add = self.builder.get_object('folders_add')
 		self.folders_remove = self.builder.get_object('folders_remove')
 		self.folders_remove.set_sensitive(False)
+		self.set_treeview_column_widths(
+			self.folders_treeview,self.agent.get_pref('folders_columns',[])
+		) 
 
 	def init_folders_values(self):
 		try:
@@ -121,6 +124,9 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 	def init_devices_controls(self):
 		self.devices = self.builder.get_object('devices_list')
 		self.devices_treeview = self.builder.get_object('devices_tree_view')
+		self.set_treeview_column_widths(
+			self.devices_treeview,self.agent.get_pref('devices_columns',[])
+		) 
 
 	def init_transfers_controls(self):
 		self.transfers = self.builder.get_object('transfers_list')
@@ -329,9 +335,25 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.limitup.set_active(self.prefs['upload_limit'] > 0)
 		self.unlock()
 
+	def get_treeview_column_widths(self,treewidget):
+		columns = treewidget.get_columns()
+		widths = []
+		for index, value in enumerate(columns):
+			widths.append(value.get_width())
+		return widths
+
+	def set_treeview_column_widths(self,treewidget,widths):
+		columns = treewidget.get_columns()
+		for index, value in enumerate(columns):
+			if index < len(widths):
+				value.set_sizing(Gtk.TreeViewColumnSizing.FIXED)
+				value.set_fixed_width(widths[index])
+
 	def onDelete(self, *args):
 		width, height = self.window.get_size()
 		self.agent.set_pref('windowsize', (width, height))
+		self.agent.set_pref('folders_columns', self.get_treeview_column_widths(self.folders_treeview))
+		self.agent.set_pref('devices_columns', self.get_treeview_column_widths(self.devices_treeview))
 		self.close()
 
 	def onSaveEntry(self,widget,valDesc,newValue):
