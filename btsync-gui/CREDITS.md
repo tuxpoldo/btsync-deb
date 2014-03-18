@@ -29,16 +29,16 @@ inspired me to implement my own abstraction class
 
 The following People contributed in translating `btsync-gui`:
 
-* Miguel Anxo Bouzada (Galician)
-* Jasper Sierink _"knireis"_ (Dutch)
-* Marek Lukas (Czech)
-* Thanos Papaoikonomou (Greek)
-* Damian _"xearonet"_ (Polish)
+* Alex Novo (Russian)
 * Andrea Pennelli (Italian)
-* Leo Moll (German & Italian)
+* Damian _"xearonet"_ (Polish)
+* Jasper Sierink _"knireis"_ (Dutch)
 * Jose Luis Tirado (Spanish)
-* Thanos Papaoikonomou (Greek)
+* Leo Moll (German & Italian)
 * Loïc Fournet _"AnthorNet"_ (French)
+* Marek Lukas (Czech)
+* Miguel Anxo Bouzada (Galician)
+* Thanos Papaoikonomou (Greek)
 
 ### Maintainers ###
 
