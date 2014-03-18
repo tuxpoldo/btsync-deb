@@ -11,7 +11,7 @@ msgstr ""
 #. Description
 #: ../btsync.templates:1001
 msgid "Do you want to define a default BitTorrent Sync instance?"
-msgstr "Указать настройки по умолчанию для демона BitTorrent Sync?"
+msgstr "Хотите ли вы указать настройки по умолчанию для демона BitTorrent Sync?"
 
 #. Type: boolean
 #. Description
@@ -41,25 +41,25 @@ msgstr "Укажите 0 и при каждом запуске btsync будет
 #. Description
 #: ../btsync.templates:3001
 msgid "Do you want BitTorrent Sync to request port mapping via UPNP?"
-msgstr "Запрашивать переадресацию портов через UPNP?"
+msgstr "Хотите ли вы, чтобы BttTorrent Sync запрашивал переадресацию портов через UPNP?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:3001
 msgid "Specify here if you want BitTorrent Sync to request a port mapping from the default router using the Universal Plug and Play protocol."
-msgstr "Укажите, нужно ли BitTorrent Sync (используя протокол Universal Plug and Play) запрашивать переадресацию портов у роутера по-умолчанию."
+msgstr "Укажите, нужно ли BitTorrent Sync (используя протокол Universal Plug and Play) запрашивать переадресацию портов у роутера по умолчанию."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:3001
 msgid "This technique is useful only if BitTorrent Sync is running behind a NAT SOHO router supporting UPNP."
-msgstr "Это полезно только если BitTorrent Sync работает за NAT SOHO роутером, поддерживающим UPNP."
+msgstr "Это полезно только если BitTorrent Sync работает за NAT SOHO маршрутизатором, поддерживающим UPNP."
 
 #. Type: string
 #. Description
 #: ../btsync.templates:4001
 msgid "Download Bandwith Limit:"
-msgstr "Ширина канала загрузки:"
+msgstr "Предел скорости загрузки:"
 
 #. Type: string
 #. Description
@@ -79,7 +79,7 @@ msgstr "Если указать 0, скорость не ограничивае�
 #. Description
 #: ../btsync.templates:5001
 msgid "Upload Bandwith Limit:"
-msgstr "Ширина канала выгрузки:"
+msgstr "Предел скорости отсылки:"
 
 #. Type: string
 #. Description
@@ -350,4 +350,16 @@ msgstr "Группа демона BitTorrent Sync:"
 #: ../btsync.templates:26001
 msgid "You can choose, if you want BitTorrent Sync to run under a different group as the selected user credential. WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
 msgstr "Можно указать, должен ли BitTorrent Sync работать под группой, отличной от группы выбранного пользователя. ВНИМАНИЕ: при изменении этого параметра для уже работающего BitTorrent Sync необходимо изменить параметры доступа для всех файлов используемых BitTorrent Sync, так что бы к ним был доступ."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:27001
+msgid "Niceness of the BitTorrent Sync Daemon:"
+msgstr "Приоритет демона BitTorrent Sync:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:27001
+msgid "You can specify the niceness level of the BitTorrent Sync Daemon, which affects process scheduling. Nicenesses range from -20 (most favorable scheduling) to 19 (least favorable). Specify 0 to let BitTorrent Sync run with the default niceness value."
+msgstr "Можно указать уровень приоритета демона BitTorrent Sync, который влияет на обработку процесса планировщиком задач. Диапазон приоритета от -20 (наивысший) до 19 (наименьший). Укажите  0 для запуска BitTorrent Sync с приоритетом по умолчанию."
 
