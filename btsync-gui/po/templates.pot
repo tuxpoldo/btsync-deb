@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-17 23:34+0100\n"
+"POT-Creation-Date: 2014-03-18 01:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -169,6 +169,26 @@ msgstr ""
 
 #: ../btsyncstatus.py:343
 msgid "Disconnected: Communication Error {0}"
+msgstr ""
+
+#: ../btsyncutils.py:163
+msgid "bytes"
+msgstr ""
+
+#: ../btsyncutils.py:163
+msgid "KB"
+msgstr ""
+
+#: ../btsyncutils.py:163
+msgid "MB"
+msgstr ""
+
+#: ../btsyncutils.py:163
+msgid "GB"
+msgstr ""
+
+#: ../btsyncutils.py:167
+msgid "TB"
 msgstr ""
 
 #: ../btsyncutils.py:305

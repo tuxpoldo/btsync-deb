@@ -34,12 +34,12 @@ class BtValueDescriptor(GObject.GObject):
 
 	def __init__(self, Name, Type, Value, Default='', Min=None, Max=None, Allowed=None, Forbidden=None, Advanced=True):
 		GObject.GObject.__init__(self)
-		self.Name	= Name
-		self.Type	= Type
-		self.Value	= Value
+		self.Name		= Name
+		self.Type		= Type
+		self.Value		= Value
 		self.Default	= Default
-		self.Min	= Min
-		self.Max	= Max
+		self.Min		= Min
+		self.Max		= Max
 		self.Allowed	= Allowed
 		self.Forbidden	= Forbidden
 		self.Advanced	= Advanced
@@ -160,11 +160,11 @@ class BtInputHelper:
 			del self.assoc[widget]
 
 	def sizeof_fmt(self,num):
-		for x in ['bytes','KB','MB','GB']:
+		for x in [_('bytes'),_('KB'),_('MB'),_('GB')]:
 			if num < 1024.0:
 				return "%3.1f %s" % (num, x)
 			num /= 1024.0
-		return "%3.1f%s" % (num, ' TB')
+		return "%3.1f %s" % (num, _('TB'))
 
 	def onChangedGtkSwitch(self,widget,unknown,valDesc):
 		return
