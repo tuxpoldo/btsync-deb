@@ -9,11 +9,11 @@ msgstr ""
 
 #: ../btsyncagent.py:107
 msgid "Default settings cleared."
-msgstr ""
+msgstr "Paramètres par défaut effacés"
 
 #: ../btsyncagent.py:128
 msgid "Default settings saved."
-msgstr ""
+msgstr "Paramètres par défaut sauvegardés"
 
 #: ../btsyncapp.py:132 ../btsyncapp.py:145
 msgid "Cannot implement due to missing API"
@@ -76,7 +76,7 @@ msgid "Optional user name for connecting to a remote BitTorrent Sync agent or us
 msgstr ""
 
 #: ../btsyncguiapp.py:138
-msgid "Optional password for connecting to a remote BitTorrent Sync agent or username to use when creating a locally launched agent. This option can be made persistent for local agents with --savedefaults"
+msgid "Optional password for connecting to a remote BitTorrent Sync agent or password to use when creating a locally launched agent. This option can be made persistent for local agents with --savedefaults"
 msgstr ""
 
 #: ../btsyncguiapp.py:144
@@ -101,7 +101,7 @@ msgstr "BitTorrent Sync"
 
 #: ../btsyncstatus.py:68
 msgid "BitTorrent Sync Status Indicator"
-msgstr ""
+msgstr "Indicateur de statut BitTorrent Sync"
 
 #: ../btsyncstatus.py:71 ../btsyncstatus.py:72
 msgid "BitTorrent Sync {0}:{1}"
@@ -129,11 +129,11 @@ msgstr ""
 
 #: ../btsyncstatus.py:330
 msgid "Disconnected"
-msgstr ""
+msgstr "Déconnecté"
 
 #: ../btsyncstatus.py:343
 msgid "Disconnected: Communication Error {0}"
-msgstr ""
+msgstr "Déconnecté : Erreur de communication {0}"
 
 #: ../btsyncutils.py:305
 msgid "Only one full btsync-gui can run at once"
@@ -142,41 +142,44 @@ msgstr ""
 #: ../dialogs.py:68
 msgid "This secret is invalid.\n"
 "Please generate a new secret or enter your shared folder secret."
-msgstr ""
+msgstr "Cette clé secrète est invalide.\n"
+"Générez une nouvelle clé secrète ou entrez la clé secrète du répertoire partagé."
 
 #: ../dialogs.py:73
 msgid "Can't open the destination folder."
-msgstr ""
+msgstr "Le répertoire de destination ne peux pas être ouvert."
 
 #: ../dialogs.py:77
 msgid "Selected folder is already added to BitTorrent Sync."
-msgstr ""
+msgstr "Le répertoire sélectionné a déjà été ajouté à BitTorrent Sync."
 
 #: ../dialogs.py:84
 msgid "Don't have permissions to write to the selected folder."
-msgstr ""
+msgstr "Vous n'avez pas la permission d'écrire dans le répertoire sélectionné."
 
 #: ../dialogs.py:107
 msgid "Please select a folder to sync"
-msgstr ""
+msgstr "Veuillez sélectionner un répertoire à synchroniser"
 
 #: ../dialogs.py:358
 msgid "Invalid secret specified.\n"
 "Secret must have a length of 33 characters"
-msgstr ""
+msgstr "La clé secrète spécifiée est invalide.\n"
+"La clé secrète doit avoir une longueur de 33 caractères."
 
 #: ../dialogs.py:365
 msgid "Invalid secret specified.\n"
 "Secret must contain only alphanumeric characters"
-msgstr ""
+msgstr "La clé secrète spécifiée est invalide.\n"
+"La clé secrète doit contenir uniquement des caractères alphanumériques."
 
 #: ../dialogs.py:412
 msgid "A hostname or IP address must be specified"
-msgstr ""
+msgstr "Un nom d'hôte ou une adresse IP doit être spécifié"
 
 #: ../dialogs.py:417
 msgid "The specified port must be a number between 1 and 65534"
-msgstr ""
+msgstr "Le port spécifié doit être un nombre compris entre 1 et 65534"
 
 #: ../btsyncapp.glade.h:1
 msgid "Advanced..."
@@ -196,7 +199,7 @@ msgstr "Copier la clé secrète"
 
 #: ../btsyncapp.glade.h:6
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 #: ../btsyncapp.glade.h:7
 msgid "Device"
@@ -220,7 +223,7 @@ msgstr "Téléchargement"
 
 #: ../btsyncapp.glade.h:12
 msgid "Edit .SyncIgnore"
-msgstr ""
+msgstr "Éditer .SyncIgnore"
 
 #: ../btsyncapp.glade.h:13
 msgid "Edit the file containing the list or filename patterns for file not being synched"
@@ -268,7 +271,7 @@ msgstr "Ouvrir SyncArchive"
 
 #: ../btsyncapp.glade.h:24
 msgid "Opens the folder in the file manager"
-msgstr ""
+msgstr "Ouvrir les répertoire dans le gestionnaire de fichiers"
 
 #: ../btsyncapp.glade.h:25
 msgid "Opens the preferences dialog for the shared folder"
@@ -321,11 +324,11 @@ msgstr "Utiliser le mappage de ports NAT UPnP"
 
 #: ../btsyncstatus.glade.h:1
 msgid "About BitTorrent Sync"
-msgstr "À prepos de BitTorrent Sync"
+msgstr "À propos de BitTorrent Sync"
 
 #: ../btsyncstatus.glade.h:2
 msgid "BitTorrent Status"
-msgstr ""
+msgstr "Statut BitTorrent"
 
 #: ../btsyncstatus.glade.h:3
 msgid "By using this application, you agree to our Privacy Policy and Terms.\n"
@@ -335,7 +338,7 @@ msgstr ""
 
 #: ../btsyncstatus.glade.h:6
 msgid "Copyright © 2013, BitTorrent Inc."
-msgstr ""
+msgstr "Copyright © 2013, BitTorrent Inc."
 
 #: ../btsyncstatus.glade.h:7
 msgid "Enable Debug Logging"
@@ -351,11 +354,11 @@ msgstr "Ouvrir BitTorrent Sync..."
 
 #: ../btsyncstatus.glade.h:10
 msgid "Open Original Manual"
-msgstr ""
+msgstr "Ouvrir le manuel original"
 
 #: ../btsyncstatus.glade.h:11
 msgid "Open Web UI"
-msgstr ""
+msgstr "Ouvrir l'interface Web"
 
 #: ../btsyncstatus.glade.h:12
 msgid "Pause Syncing"
@@ -373,9 +376,10 @@ msgstr "Envoyer des commentaires"
 msgid "localhost:8888"
 msgstr "localhost:8888"
 
+#. Peut-être remettre un espace avant les ":" ?
 #: ../dialogs.glade.h:1
 msgid ":"
-msgstr ":"
+msgstr " :"
 
 #: ../dialogs.glade.h:2
 msgid "Add folder to sync"
@@ -428,7 +432,7 @@ msgstr "Nom"
 
 #: ../dialogs.glade.h:14
 msgid "New Predefined Host"
-msgstr ""
+msgstr "Nouvel hôte prédéfini"
 
 #: ../dialogs.glade.h:15
 msgid "New known host address:"
@@ -457,7 +461,7 @@ msgstr "Clé secrète de lecture seule"
 
 #: ../dialogs.glade.h:22
 msgid "Remove Shared Folder"
-msgstr ""
+msgstr "Supprimer le répertoire partagé"
 
 #: ../dialogs.glade.h:23
 msgid "Reset"
