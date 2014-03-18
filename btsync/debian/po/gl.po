@@ -295,8 +295,7 @@ msgstr "Diferenza de tempo máximo permitido, en segundos, entre dispositivos. S
 #. Description
 #: ../btsync.templates:22001
 msgid "Maximum time to live for versioned copies:"
-msgstr "Tempo máximo de vida para as copias versionadas:\n"
-""
+msgstr "Tempo máximo de vida para as copias versionadas:"
 
 #. Type: string
 #. Description
