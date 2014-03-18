@@ -1,6 +1,8 @@
 btsync (1.2.3-2) unstable; urgency=low
 
   * Localisation update
+  * Fixed missing chinese localisation (filename was wrong)
+  * Adjusted library dependencies
   
  -- Leo Moll <leo.moll@yeasoft.com>  Tue, 18 Mar 2014 23:08:45 +0100
 
