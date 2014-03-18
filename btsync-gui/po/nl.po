@@ -520,3 +520,23 @@ msgstr "Waarde"
 msgid "Value:"
 msgstr "Waarde:"
 
+#: ../btsyncutils.py:163
+msgid "bytes"
+msgstr "bytes"
+
+#: ../btsyncutils.py:163
+msgid "KB"
+msgstr "KB"
+
+#: ../btsyncutils.py:163
+msgid "MB"
+msgstr "MB"
+
+#: ../btsyncutils.py:163
+msgid "GB"
+msgstr "GB"
+
+#: ../btsyncutils.py:167
+msgid "TB"
+msgstr "TB"
+
