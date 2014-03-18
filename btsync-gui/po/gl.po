@@ -61,7 +61,7 @@ msgstr "En repouso..."
 
 #: ../btsyncguiapp.py:115
 msgid "Sets the logging level. By default the logging level is WARNING"
-msgstr "Estabelece o nivel do rexistro. O nivel predeterminado é WARNING"
+msgstr "Estabelece o nivel do rexistro. O nivel predeterminado é ADVERTENCIA"
 
 #: ../btsyncguiapp.py:119
 msgid "Hostname for the connection to BitTorrent Sync. If not specified, a local BitTorrent Sync agent will be launched."
@@ -76,12 +76,12 @@ msgid "Optional user name for connecting to a remote BitTorrent Sync agent or us
 msgstr "Nome de usuario opcional para conectar cun axente remoto do BitTorrent Sync ou nome de usuario para utilizar ao crear un axente iniciado localmente. Esta opción pode facerse persistente para os axentes locais con --savedefaults"
 
 #: ../btsyncguiapp.py:138
-msgid "Optional password for connecting to a remote BitTorrent Sync agent or username to use when creating a locally launched agent. This option can be made persistent for local agents with --savedefaults"
-msgstr "Contrasinal opcional para conectar cun axente remoto do BitTorrent Sync ou nome de usuario para utilizar ao crear un axente iniciado localmente. Esta opción pode facerse persistente para os axentes locais con --savedefaults"
+msgid "Optional password for connecting to a remote BitTorrent Sync agent or password to use when creating a locally launched agent. This option can be made persistent for local agents with --savedefaults"
+msgstr "Contrasinal opcional para conectar cun axente remoto do BitTorrent Sync ou contrasinal para utilizar ao crear un axente iniciado localmente. Esta opción pode facerse persistente para os axentes locais con --savedefaults"
 
 #: ../btsyncguiapp.py:144
 msgid "Optional bind address for the Web UI of a locally created BitTorrent Sync agent. By default the agent binds to 127.0.0.1. If you want the Web UI of the agent to be reachable by other computers, specify one of the available IP addresses of this computer or \"all\" to bind to all available adapters. This option can be made persistent for local agents with --savedefaults"
-msgstr ""
+msgstr "Enderezo opcional para ligar a interface web de usuario dun axente do BitTorrent Sync creada localmente. De xeito predeterminado, o axente liga con 127.0.0.1. Se quere que a interface web de usuario do axente sexa accesíbel para outros equipos, especifique un dos enderezos IP dispoñíbeis deste equipo ou  de «todos» para ligar a todos os adaptadores dispoñíbeis. Esta opción pode facerse persistente para os axentes locais con --savedefaults"
 
 #: ../btsyncguiapp.py:154
 msgid "Include the Web UI in the menu. This option can be made persistent with --savedefaults"
@@ -89,11 +89,11 @@ msgstr "Incluír a interface web de usuario no menú. Esta opción pode facerse 
 
 #: ../btsyncguiapp.py:158
 msgid "If specified, the optionally supplied credentials, bind address, port information and storable settings will be stored as default in the application preferences and used when launching a local BitTorrent Sync agent."
-msgstr ""
+msgstr "De especificarse, as credenciais fornecidas opcionalmente, o enderezo de ligazón, a información dos portos e os axustes almacenábeis gárdanse de xeito predeterminado nas preferencias do aplicativo e utilizaranse no inicio dun axente local do BitTorrent Sync."
 
 #: ../btsyncguiapp.py:165
 msgid "If specified, all internally stored credentials, bind address, port information and storable settings will be cleared from the application preferences."
-msgstr ""
+msgstr "De especificarse, todas as credenciais almacenadas no interior, o enderezo de ligazón,a información dos portos e os axustes almacenábeis borraranse das preferencias do aplicativo."
 
 #: ../btsyncstatus.py:67 ../btsyncapp.glade.h:2
 msgid "BitTorrent Sync"
@@ -419,8 +419,7 @@ msgstr "Xerar"
 
 #: ../dialogs.glade.h:11
 msgid "Generate a new secret or enter shared folder secret"
-msgstr "Xere un novo código secreto ou introduza o\n"
-"código secreto do seu cartafol compartido"
+msgstr "Xere un novo código secreto ou introduza o código secreto do seu cartafol compartido"
 
 #: ../dialogs.glade.h:12
 msgid "Hosts"
@@ -444,7 +443,7 @@ msgstr "Código dun só uso"
 
 #: ../dialogs.glade.h:17
 msgid "One-time secret should be used within 24 hours"
-msgstr "O código dun só uso debe usarse antes de 24 horas"
+msgstr "O código secreto dun só uso debe usarse antes de 24 horas"
 
 #: ../dialogs.glade.h:19
 msgid "Read Only"
@@ -486,7 +485,7 @@ msgstr "Buscar na rede LAN"
 
 #: ../dialogs.glade.h:29
 msgid "Secret Keys"
-msgstr ""
+msgstr "Claves secretas"
 
 #: ../dialogs.glade.h:30
 msgid "Shared Folder Properties"
@@ -494,7 +493,7 @@ msgstr "Propiedades do cartafol compartido"
 
 #: ../dialogs.glade.h:31
 msgid "Shared secret:"
-msgstr ""
+msgstr "Código compartido:"
 
 #: ../dialogs.glade.h:32
 msgid "Store deleted files in SyncArchive"
@@ -526,21 +525,21 @@ msgstr "Valor:"
 
 #: ../btsyncutils.py:163
 msgid "bytes"
-msgstr ""
+msgstr "bytes"
 
 #: ../btsyncutils.py:163
 msgid "KB"
-msgstr ""
+msgstr "KB"
 
 #: ../btsyncutils.py:163
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 #: ../btsyncutils.py:163
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
 #: ../btsyncutils.py:167
 msgid "TB"
-msgstr ""
+msgstr "TB"
 
