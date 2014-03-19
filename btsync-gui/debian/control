@@ -16,7 +16,7 @@ Depends: ${python:Depends}, ${misc:Depends}, python,
 Provides: btsync-user-application
 Replaces: btsync-user
 Breaks: btsync-user
-Description: Private network P2P file synchronisation daemon(s)
+Description: Full GTK based Linux GUI for BitTorrent Sync
  BitTorrent Sync is a simple tool that applies p2p protocol for
  direct live folder sync with maximum security, network speed
  and storage capacity. It has native versions for Mac, Windows
@@ -34,7 +34,7 @@ Description: Private network P2P file synchronisation daemon(s)
 Package: btsync-gui
 Architecture: all
 Depends: btsync-gui-gtk, gir1.2-appindicator3-0.1
-Description: Private network P2P file synchronisation daemon(s)
+Description: Full GTK based Linux GUI for BitTorrent Sync
  BitTorrent Sync is a simple tool that applies p2p protocol for
  direct live folder sync with maximum security, network speed
  and storage capacity. It has native versions for Mac, Windows
@@ -46,6 +46,7 @@ Description: Private network P2P file synchronisation daemon(s)
  WILL FIND COMPETENT HELP AND SUPPORT IN THE RELATED DISCUSSION
  THREAD IN THE SUPPORT FORUM (http://goo.gl/Bljx0b)
  .
- This package installs BitTorrent Sync as a full featured GUI
- application based on GTK using the appindicator library for
- desktops not supporting GTK.TrayIcon (like Unity)
+ This dependency package installs BitTorrent Sync as a full
+ featured GUI application based on GTK using the appindicator
+ library for desktops not supporting GTK.TrayIcon (like Unity)
+
