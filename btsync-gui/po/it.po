@@ -68,7 +68,7 @@ msgid "Hostname for the connection to BitTorrent Sync. If not specified, a local
 msgstr "Hostname per la connessione ad un agente BitTorrent Sync. Se non specificato, un agente BitTorrent Sync locale verrà lanciato."
 
 #: ../btsyncguiapp.py:124
-msgid "Optional port number for the connection to BitTorrent Sync. If not specified, port 8888 is taken for a connection to a remote BitTorrent Sync agent or (8999 + uid) is taken when creating a locally lauched agent. This option can be made persistent for local agents with --savedefaults"
+msgid "Optional port number for the connection to BitTorrent Sync. If not specified, port 8888 is taken for a connection to a remote BitTorrent Sync agent or (8999 + uid) is taken when creating a locally launched agent. This option can be made persistent for local agents with --savedefaults"
 msgstr "Numero di porta facoltativo per la connessione a BitTorrent Sync. Se non specificata, verrà assunto 8888 per connessioni verso un agente remoto o (8999 + uid) in caso un agente locale sia lanciato. Quest'opzione può essere rese persistente mediante --savedefaults"
 
 #: ../btsyncguiapp.py:132
