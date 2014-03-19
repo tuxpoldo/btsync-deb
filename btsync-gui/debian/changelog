@@ -8,9 +8,8 @@ btsync-gui (0.8.0-1) unstable; urgency=low
   * Added Spanish translation by Jose Luis Tirado (Closes #106)
   * Added Dutch translation by Jasper Sierink (Closes #108)
   * Added Galician translation by Miguel Anxo Bouzada (Closes #109)
-  * Added Russian translation by Alex Novo (Closes #112)
 
- -- Leo Moll <leo.moll@yeasoft.com>  Mon, 17 Mar 2014 17:19:36 +0100
+ -- Leo Moll <leo.moll@yeasoft.com>  Wed, 19 Mar 2014 14:09:36 +0100
 
 btsync-gui (0.7.3-1) unstable; urgency=low
 
