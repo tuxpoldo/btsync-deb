@@ -11,8 +11,9 @@ Homepage: http://www.yeasoft.com/site/projects:btsync-deb:btsync-user
 Package: btsync-gui-gtk
 Architecture: all
 Depends: ${python:Depends}, ${misc:Depends}, python,
- python-gi, gir1.2-gtk-3.0, python-dbus, python-requests,
- python-qrencode, btsync-common
+ python-gi, gir1.2-gtk-3.0, gir1.2-pango-1.0,
+ python-dbus, python-requests, python-qrencode,
+ btsync-common
 Provides: btsync-user-application
 Replaces: btsync-user
 Breaks: btsync-user

@@ -1,24 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkListStore" id="devices_list">
-    <columns>
-      <!-- column-name Device -->
-      <column type="gchararray"/>
-      <!-- column-name Folder -->
-      <column type="gchararray"/>
-      <!-- column-name Status -->
-      <column type="gchararray"/>
-      <!-- column-name Secret -->
-      <column type="gchararray"/>
-      <!-- column-name FolderTag -->
-      <column type="gchararray"/>
-      <!-- column-name DeviceTag -->
-      <column type="gchararray"/>
-      <!-- column-name ConnectionIconName -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
   <object class="GtkWindow" id="btsyncapp">
     <property name="can_focus">False</property>
     <property name="border_width">12</property>
@@ -52,7 +34,6 @@
                     <property name="can_focus">True</property>
                     <property name="model">folders_list</property>
                     <property name="headers_clickable">False</property>
-                    <property name="fixed_height_mode">True</property>
                     <signal name="button-press-event" handler="onFoldersMouseClick" swapped="no"/>
                     <child internal-child="selection">
                       <object class="GtkTreeSelection" id="folders_selection">
@@ -66,6 +47,7 @@
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext1"/>
                           <attributes>
+                            <attribute name="ellipsize">4</attribute>
                             <attribute name="text">0</attribute>
                           </attributes>
                         </child>
@@ -78,6 +60,7 @@
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext2"/>
                           <attributes>
+                            <attribute name="ellipsize">4</attribute>
                             <attribute name="text">1</attribute>
                           </attributes>
                         </child>
@@ -166,7 +149,6 @@
                 <property name="can_focus">True</property>
                 <property name="model">devices_list</property>
                 <property name="headers_clickable">False</property>
-                <property name="fixed_height_mode">True</property>
                 <child internal-child="selection">
                   <object class="GtkTreeSelection" id="treeview-selection2"/>
                 </child>
@@ -184,6 +166,7 @@
                     <child>
                       <object class="GtkCellRendererText" id="cellrenderertext3"/>
                       <attributes>
+                        <attribute name="ellipsize">7</attribute>
                         <attribute name="text">0</attribute>
                       </attributes>
                     </child>
@@ -196,6 +179,7 @@
                     <child>
                       <object class="GtkCellRendererText" id="cellrenderertext4"/>
                       <attributes>
+                        <attribute name="ellipsize">7</attribute>
                         <attribute name="text">1</attribute>
                       </attributes>
                     </child>
@@ -208,6 +192,7 @@
                     <child>
                       <object class="GtkCellRendererText" id="cellrenderertext5"/>
                       <attributes>
+                        <attribute name="ellipsize">7</attribute>
                         <attribute name="text">2</attribute>
                       </attributes>
                     </child>
@@ -252,7 +237,6 @@
                     <property name="can_focus">True</property>
                     <property name="model">transfers_list</property>
                     <property name="headers_clickable">False</property>
-                    <property name="fixed_height_mode">True</property>
                     <child internal-child="selection">
                       <object class="GtkTreeSelection" id="treeview-selection3"/>
                     </child>
@@ -263,6 +247,7 @@
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext6"/>
                           <attributes>
+                            <attribute name="ellipsize">4</attribute>
                             <attribute name="text">0</attribute>
                           </attributes>
                         </child>
@@ -275,6 +260,7 @@
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext7"/>
                           <attributes>
+                            <attribute name="ellipsize">4</attribute>
                             <attribute name="text">1</attribute>
                           </attributes>
                         </child>
@@ -287,6 +273,7 @@
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext8"/>
                           <attributes>
+                            <attribute name="ellipsize">4</attribute>
                             <attribute name="text">2</attribute>
                           </attributes>
                         </child>
@@ -299,6 +286,7 @@
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext9"/>
                           <attributes>
+                            <attribute name="ellipsize">4</attribute>
                             <attribute name="text">3</attribute>
                           </attributes>
                         </child>
@@ -355,7 +343,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="model">history_list</property>
-                <property name="fixed_height_mode">True</property>
                 <child internal-child="selection">
                   <object class="GtkTreeSelection" id="treeview-selection4"/>
                 </child>
@@ -366,6 +353,7 @@
                     <child>
                       <object class="GtkCellRendererText" id="cellrenderertext10"/>
                       <attributes>
+                        <attribute name="ellipsize">2</attribute>
                         <attribute name="text">0</attribute>
                       </attributes>
                     </child>
@@ -378,6 +366,7 @@
                     <child>
                       <object class="GtkCellRendererText" id="cellrenderertext11"/>
                       <attributes>
+                        <attribute name="ellipsize">2</attribute>
                         <attribute name="text">1</attribute>
                       </attributes>
                     </child>
@@ -644,6 +633,26 @@
       </object>
     </child>
   </object>
+  <object class="GtkListStore" id="devices_list">
+    <columns>
+      <!-- column-name Device -->
+      <column type="gchararray"/>
+      <!-- column-name Folder -->
+      <column type="gchararray"/>
+      <!-- column-name Status -->
+      <column type="gchararray"/>
+      <!-- column-name Secret -->
+      <column type="gchararray"/>
+      <!-- column-name FolderTag -->
+      <column type="gchararray"/>
+      <!-- column-name DeviceTag -->
+      <column type="gchararray"/>
+      <!-- column-name ConnectionIconName -->
+      <column type="gchararray"/>
+      <!-- column-name EllipsizeMode -->
+      <column type="gint"/>
+    </columns>
+  </object>
   <object class="GtkListStore" id="folders_list">
     <columns>
       <!-- column-name Folder -->
@@ -654,6 +663,8 @@
       <column type="gchararray"/>
       <!-- column-name FolderTag -->
       <column type="gchararray"/>
+      <!-- column-name EllipsizeMode -->
+      <column type="gint"/>
     </columns>
   </object>
   <object class="GtkMenu" id="folders_menu">
@@ -732,6 +743,8 @@
       <column type="gchararray"/>
       <!-- column-name Event -->
       <column type="gchararray"/>
+      <!-- column-name EllipsizeMode -->
+      <column type="gint"/>
     </columns>
   </object>
   <object class="GtkListStore" id="transfers_list">
@@ -744,6 +757,8 @@
       <column type="gchararray"/>
       <!-- column-name Down -->
       <column type="gchararray"/>
+      <!-- column-name EllipsizeMode -->
+      <column type="gint"/>
     </columns>
   </object>
 </interface>

@@ -29,7 +29,7 @@ import requests
 import datetime
 
 from gettext import gettext as _
-from gi.repository import Gtk, Gdk, GObject
+from gi.repository import Gtk, Gdk, GObject, Pango
 
 from btsyncagent import BtSyncAgent
 from btsyncutils import BtInputHelper,BtMessageHelper,BtValueDescriptor,BtDynamicTimeout
@@ -93,7 +93,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.folders_remove = self.builder.get_object('folders_remove')
 		self.folders_remove.set_sensitive(False)
 		self.set_treeview_column_widths(
-			self.folders_treeview,self.agent.get_pref('folders_columns',[])
+			self.folders_treeview,self.agent.get_pref('folders_columns',[300])
 		) 
 
 	def init_folders_values(self):
@@ -109,7 +109,8 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 						self.agent.fix_decode(value['dir']),		# 0:Folder
 						self.get_folder_info_string(value),			# 1:Content
 						value['secret'],							# 2:Secret
-						digest										# 3:FolderTag
+						digest,										# 3:FolderTag
+						Pango.EllipsizeMode.END						# 4:EllipsizeMode
 					])
 					self.add_device_infos(value,digest)
 			self.unlock()
@@ -125,7 +126,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.devices = self.builder.get_object('devices_list')
 		self.devices_treeview = self.builder.get_object('devices_tree_view')
 		self.set_treeview_column_widths(
-			self.devices_treeview,self.agent.get_pref('devices_columns',[])
+			self.devices_treeview,self.agent.get_pref('devices_columns',[150,300])
 		) 
 
 	def init_transfers_controls(self):
@@ -135,11 +136,15 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		# TODO: remove placeholder as soon as the suitable API call permits
 		#       a working implementation...
 		self.transfers.append ([
-			_('Cannot implement due to missing API'),
-			_('BitTorrent Inc.'),
-			'',
-			''
+			_('Cannot implement due to missing API'),	# 0:
+			_('BitTorrent Inc.'),						# 1:
+			'',											# 2:
+			'',											# 3:
+			Pango.EllipsizeMode.END						# 4:EllipsizeMode
 		])
+		self.set_treeview_column_widths(
+			self.transfers_treeview,self.agent.get_pref('transfers_columns',[300,150,80])
+		) 
 
 	def init_history_controls(self):
 		self.history = self.builder.get_object('history_list')
@@ -147,9 +152,13 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		# TODO: remove placeholder as soon as the suitable API call permits
 		#       a working implementation...
 		self.history.append ([
-			_('Now'),
-			_('Cannot implement due to missing API'),
+			_('Now'),									# 0:
+			_('Cannot implement due to missing API'),	# 1:
+			Pango.EllipsizeMode.END						# 4:EllipsizeMode
 		])
+		self.set_treeview_column_widths(
+			self.history_treeview,self.agent.get_pref('history_columns',[150])
+		) 
 
 	def refresh_app_status(self):
 		try:
@@ -166,7 +175,8 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 						self.agent.fix_decode(value['dir']),	# 0:Folder
 						self.get_folder_info_string(value),			# 1:Content
 						value['secret'],							# 2:Secret
-						digest										# 3:FolderTag
+						digest,										# 3:FolderTag
+						Pango.EllipsizeMode.END						# 4:EllipsizeMode
 					])
 				self.update_device_infos(value,digest)
 			# reverse scan deletes disappeared folders...
@@ -226,7 +236,8 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 				folder['secret'],							# 3:Secret
 				digest,										# 4:FolderTag
 				value['id'],								# 5:DeviceTag
-				self.get_device_info_icon_name(value)		# 6:ConnectionIconName
+				self.get_device_info_icon_name(value),		# 6:ConnectionIconName
+				Pango.EllipsizeMode.END						# 7:EllipsizeMode
 			])
 
 	def update_device_infos(self,folder,digest):
@@ -243,7 +254,8 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 					folder['secret'],							# 3:Secret
 					digest,										# 4:FolderTag
 					value['id'],								# 5:DeviceTag
-					self.get_device_info_icon_name(value)		# 6:ConnectionIconName
+					self.get_device_info_icon_name(value),		# 6:ConnectionIconName
+					Pango.EllipsizeMode.END						# 7:EllipsizeMode
 				])
 		# reverse scan deletes disappeared folders...
 		for row in self.devices:
@@ -347,13 +359,15 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		for index, value in enumerate(columns):
 			if index < len(widths):
 				value.set_sizing(Gtk.TreeViewColumnSizing.FIXED)
-				value.set_fixed_width(widths[index])
+				value.set_fixed_width(max(widths[index],32))
 
 	def onDelete(self, *args):
 		width, height = self.window.get_size()
 		self.agent.set_pref('windowsize', (width, height))
 		self.agent.set_pref('folders_columns', self.get_treeview_column_widths(self.folders_treeview))
 		self.agent.set_pref('devices_columns', self.get_treeview_column_widths(self.devices_treeview))
+		self.agent.set_pref('transfers_columns', self.get_treeview_column_widths(self.transfers_treeview))
+		self.agent.set_pref('history_columns', self.get_treeview_column_widths(self.history_treeview))
 		self.close()
 
 	def onSaveEntry(self,widget,valDesc,newValue):
