@@ -17,7 +17,7 @@ msgstr "Paramètres par défaut sauvegardés"
 
 #: ../btsyncapp.py:132 ../btsyncapp.py:145
 msgid "Cannot implement due to missing API"
-msgstr ""
+msgstr "Ne peut pas être implémenter en raison d'une API manquante"
 
 #: ../btsyncapp.py:133
 msgid "BitTorrent Inc."
@@ -61,14 +61,15 @@ msgstr "Inactif..."
 
 #: ../btsyncguiapp.py:115
 msgid "Sets the logging level. By default the logging level is WARNING"
-msgstr ""
+msgstr "Définit le niveau d'archivage. Par défaut, le niveau d'archivage est \"WARNING\""
 
 #: ../btsyncguiapp.py:119
 msgid "Hostname for the connection to BitTorrent Sync. If not specified, a local BitTorrent Sync agent will be launched."
-msgstr ""
+msgstr "Nom d'hôte pour la connexion à BitTorrent Sync. Si non spécifié, un agent local de BitTorrent Sync sera lancé."
 
+#. There's a mistake here, lauched instead of launched
 #: ../btsyncguiapp.py:124
-msgid "Optional port number for the connection to BitTorrent Sync. If not specified, port 8888 is taken for a connection to a remote BitTorrent Sync agent or (8999 + uid) is taken when creating a locally lauched agent. This option can be made persistent for local agents with --savedefaults"
+msgid "Optional port number for the connection to BitTorrent Sync. If not specified, port 8888 is taken for a connection to a remote BitTorrent Sync agent or (8999 + uid) is taken when creating a locally launched agent. This option can be made persistent for local agents with --savedefaults"
 msgstr ""
 
 #: ../btsyncguiapp.py:132
@@ -85,7 +86,7 @@ msgstr ""
 
 #: ../btsyncguiapp.py:154
 msgid "Include the Web UI in the menu. This option can be made persistent with --savedefaults"
-msgstr ""
+msgstr "Inclure l'interface Web dans le menu. Cette option peut-être rendue persistante avec --savedefaults"
 
 #: ../btsyncguiapp.py:158
 msgid "If specified, the optionally supplied credentials, bind address, port information and storable settings will be stored as default in the application preferences and used when launching a local BitTorrent Sync agent."
@@ -123,9 +124,11 @@ msgstr "Indexation..."
 msgid "Version {0} ({0})"
 msgstr "Version {0} ({0})"
 
+#. I'm not sure we can translate UI in french... 
+#. So I put it complete, but may be it should stay like UI
 #: ../btsyncstatus.py:255
 msgid "Linux UI Version {0}"
-msgstr ""
+msgstr "Version de l'interface utilisateur Linux {0}"
 
 #: ../btsyncstatus.py:330
 msgid "Disconnected"
@@ -135,9 +138,11 @@ msgstr "Déconnecté"
 msgid "Disconnected: Communication Error {0}"
 msgstr "Déconnecté : Erreur de communication {0}"
 
+#. I'm not sure what you mean by "full" here ?
+#. You're talking about instance ?
 #: ../btsyncutils.py:305
 msgid "Only one full btsync-gui can run at once"
-msgstr ""
+msgstr "Seulement un btsync-gui peut fonctionner à la fois"
 
 #: ../dialogs.py:68
 msgid "This secret is invalid.\n"
@@ -191,7 +196,7 @@ msgstr "Connecter un appareil mobile"
 
 #: ../btsyncapp.glade.h:4
 msgid "Copies the sharing secret to the clipboard"
-msgstr ""
+msgstr "Copie la clé secrète partagée dans le presse-papier"
 
 #: ../btsyncapp.glade.h:5
 msgid "Copy secret"
@@ -215,7 +220,7 @@ msgstr "Appareils"
 
 #: ../btsyncapp.glade.h:10
 msgid "Displays a QR-code that permits easy connection of a mobile device to this folder"
-msgstr ""
+msgstr "Affiche un QR-code qui permet une connexion facile avec un appareil mobile à ce répertoire"
 
 #: ../btsyncapp.glade.h:11
 msgid "Down"
@@ -227,7 +232,7 @@ msgstr "Éditer .SyncIgnore"
 
 #: ../btsyncapp.glade.h:13
 msgid "Edit the file containing the list or filename patterns for file not being synched"
-msgstr ""
+msgstr "Éditer le fichier contentant la liste ou les modèles de noms de fichiers pour les fichiers qui ne sont pas synchronisés"
 
 #: ../btsyncapp.glade.h:14
 msgid "Event"
@@ -275,11 +280,11 @@ msgstr "Ouvrir les répertoire dans le gestionnaire de fichiers"
 
 #: ../btsyncapp.glade.h:25
 msgid "Opens the preferences dialog for the shared folder"
-msgstr ""
+msgstr "Ouvre la boîte de dialogue des préférences pour le dossier partagé"
 
 #: ../btsyncapp.glade.h:26
 msgid "Opens the sync archive holding previous or deleted versions of files"
-msgstr ""
+msgstr "Ouvre l'archive de synchronisation qui contient les versions précédentes ou supprimées des fichiers"
 
 #: ../btsyncapp.glade.h:27
 msgid "Path"
@@ -348,7 +353,7 @@ msgstr "Activer l'archivage de débogage"
 
 #: ../btsyncstatus.glade.h:8
 msgid "Linux UI Version 0.0"
-msgstr ""
+msgstr "Version de l'interface utilisateur Linux 0.0"
 
 #: ../btsyncstatus.glade.h:9
 msgid "Open BitTorrent Sync..."
