@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-18 22:42+0100\n"
+"POT-Creation-Date: 2014-03-19 17:54+0100\n"
 "PO-Revision-Date: 2014-03-18 01:17+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -26,47 +26,49 @@ msgstr ""
 msgid "Default settings saved."
 msgstr ""
 
-#: ../btsyncapp.py:138 ../btsyncapp.py:151
+#. 0:
+#: ../btsyncapp.py:139 ../btsyncapp.py:156
 msgid "Cannot implement due to missing API"
 msgstr ""
 
-#: ../btsyncapp.py:139
+#. 0:
+#: ../btsyncapp.py:140
 msgid "BitTorrent Inc."
 msgstr ""
 
-#: ../btsyncapp.py:150
+#: ../btsyncapp.py:155
 msgid "Now"
 msgstr ""
 
-#: ../btsyncapp.py:179 ../btsyncstatus.py:187
+#: ../btsyncapp.py:189 ../btsyncstatus.py:187
 msgid "{0:.1f} kB/s up, {1:.1f} kB/s down"
 msgstr ""
 
-#: ../btsyncapp.py:289
+#: ../btsyncapp.py:301
 msgid "{0} in {1} files"
 msgstr ""
 
-#: ../btsyncapp.py:291
+#: ../btsyncapp.py:303
 msgid "{0} in {1} files (indexing...)"
 msgstr ""
 
-#: ../btsyncapp.py:304
+#: ../btsyncapp.py:316
 msgid "Synched on {0}"
 msgstr ""
 
-#: ../btsyncapp.py:306
+#: ../btsyncapp.py:318
 msgid "⇧ {0}"
 msgstr ""
 
-#: ../btsyncapp.py:308
+#: ../btsyncapp.py:320
 msgid "⇩ {0}"
 msgstr ""
 
-#: ../btsyncapp.py:310
+#: ../btsyncapp.py:322
 msgid "⇧ {0} - ⇩ {1}"
 msgstr ""
 
-#: ../btsyncapp.py:312
+#: ../btsyncapp.py:324
 msgid "Idle..."
 msgstr ""
 
@@ -84,7 +86,7 @@ msgstr ""
 msgid ""
 "Optional port number for the connection to BitTorrent Sync. If not "
 "specified, port 8888 is taken for a connection to a remote BitTorrent Sync "
-"agent or (8999 + uid) is taken when creating a locally lauched agent. This "
+"agent or (8999 + uid) is taken when creating a locally launched agent. This "
 "option can be made persistent for local agents with --savedefaults"
 msgstr ""
 

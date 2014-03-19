@@ -124,7 +124,7 @@ class GuiApp:
 					help=_('Optional port number for the connection to '\
 					'BitTorrent Sync. If not specified, port 8888 is taken '\
 					'for a connection to a remote BitTorrent Sync agent or '\
-					'(8999 + uid) is taken when creating a locally lauched '\
+					'(8999 + uid) is taken when creating a locally launched '\
 					'agent. This option can be made persistent for local '\
 					'agents with --savedefaults'))
 		parser.add_argument('--username',
