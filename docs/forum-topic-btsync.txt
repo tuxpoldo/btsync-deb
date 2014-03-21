@@ -10,89 +10,22 @@ This topic covers only the [b]server packages[/b]. If you are searching for the 
 
 [color=#ff0000][b]THESE PACKAGES ARE UNOFFICIAL AND NOT THE WORK OF BITTORRENT® INC. PLEASE DO NOT CONTACT THE BITTORRENT® INC. SUPPORT WITH QUESTIONS OR PROBLEMS RELATED TO THE USE OF THE PACKAGES. YOU WILL FIND COMPETENT HELP AND SUPPORT IN THIS THREAD[/b][/color]
 
-The deb-packages are available for the same architectures as released by BitTorrent Inc.:
+[color=#008000][b]INSTALLATION ON DEBIAN, UBUNTU, LINUX MINT, RASPBIAN OR OTHER DEBIAN DERIVATES[/b][/color]
 
-[LIST]
-[*][b]i386[/b] Intel/AMD 32 Bit[/*]
-[*][b]amd64[/b] Intel/AMD 64 Bit[/*]
-[*][b]armel[/b] ARM EABI[/*]
-[*][b]armhf[/b] ARM hard float[/*]
-[*][b]powerpc[/b] PowerPC[/*]
-[/LIST]
-
-Since the packages still have not been tested on every platform, any related feedback is highly appreciated.
-
-
-[color=#FF8C00][b]BUG REPORTS, CONTRIBUTION AND SOURCES[/b][/color]
-
-If you want to contribute to the development of the packages or if you are curious how this all works, you may find the current sources of the deployment scripts and packaging on GitHub under the following URL: [b]https://github.com/tuxpoldo/btsync-deb[/b]
-If you have experienced a reproducible issue that [b]is related to the packaging and not to BitTorrent Sync itself[/b] you are strongly encouraged to [url="https://github.com/tuxpoldo/btsync-deb/issues"]open an issue on the project's GitHub Page[/url]. Issues related to the native functionality of BitTorrent Sync should rather by creating a new topic or partecipating to an already existing topic in the [url="http://forum.bittorrent.com/forum/56-bittorrent-sync/"]BitTorrent Sync Forum[/url].
-
-
-[color=#008000][b]ADDING THE REPOSITORIES[/b][/color]
-
-Debian and Debian based distributions (Linspire, Xandros, Ubuntu, and Mepis to name a few) use a tool called APT (Advanced Packaging Tool) to manage all software on the system. The term "package" refers to an individual file with a .deb extension that contains either all or part of an application.
-
-Your distribution comes with some default repositories that are already setup, but these contain only the software officially distributed by the creator of your distribution. In order to install the btsync packages, you have to add the specific repositories where btsync is hosted.
-
-[b]If you are using Ubuntu[/b], you may also use the Launchpad PPA instead of the default repositories. Although it is easier to install, there are some disadvantages:
-
-[LIST=1]
-[*]The PPA only supports Ubuntu versions that are supported (currently lucid, precise, quantal, raring and saucy)[/*]
-[*]The PPA only supports the [b]i386[/b] and [b]amd64[/b] architectures[/*]
-[*]Sometimes it takes some hours for the packages to be published[/*]
-[/LIST]
-
-If you are OK with this, you can add the Launchpad PPA by issuing the following commands:
+The most easy and fast way to install the repository is to paste that at a terminal prompt:
 [code]
-`which sudo` add-apt-repository ppa:tuxpoldo/btsync
-`which sudo` apt-get update
-[/CODE]
-
-After this, you can directly proceed with the installation.
-
-[b]If you are not using Ubuntu or you are using an unsupported version or architecture or by any other reason you prefer the default repositories, continue here.[/b]
-
-The btsync packages are all signed with a key in order to guarantee their authenticity. Before using the repository, you should add the key to the package manager. To do that, run the following command:
-[code]
-`which sudo` apt-key adv --keyserver keys.gnupg.net --recv-keys 6BF18B15
+sh -c "$(curl -fsSL http://debian.yeasoft.net/add-btsync-repository.sh)"
 [/code]
+ 
+The script explains what it will do and then pauses before it does it asking for your permission. If you encounter any problems or prefer to do it manually, please [b][url=http://www.yeasoft.com/site/projects:btsync-deb:btsync-repo]look here[/url][/b].
 
-On success you should see an output like this:
-[code]
-gpg: requesting key 6BF18B15 from hkp server keys.gnupg.net
-gpg: key 6BF18B15: public key "Leo Moll <leo.moll@yeasoft.com>" imported
-gpg: no ultimately trusted keys found
-gpg: Total number processed: 1
-gpg:               imported: 1
-[/code]
-
-Now you can easily add the package sources, by executing the following commands:
-[code]
-CODENAME=$(lsb_release -cs | sed -n '/lucid\|precise\|quantal\|raring\|saucy\|trusty\|squeeze\|wheezy\|jessie\|sid/p')
-echo deb http://debian.yeasoft.net/btsync ${CODENAME:-sid} main > ~/btsync.list
-echo deb-src http://debian.yeasoft.net/btsync ${CODENAME:-sid} main >> ~/btsync.list
-unset CODENAME
-`which sudo` mv ~/btsync.list /etc/apt/sources.list.d/btsync.list
-`which sudo` chown root:root /etc/apt/sources.list.d/btsync.list
-[/code]
-
-Remember to update the local cache:
+Now update the package index and install [font=courier new,courier,monospace][b]btsync[/b][/font] by pasting that at a terminal prompt:
 [code]
 `which sudo` apt-get update
-[/code]
-
-After that you can proceed with the installation.
-
-
-[color=#008000][b]INSTALLATION OF BTSYNC[/b][/color]
-
-The installation of btsync is really easy:
-[code]
 `which sudo` apt-get install btsync
 [/code]
 
-After downloading the packages, the installation begins. The package manager will ask you, if you want a default instance of btsync to be created. If you say [b]yes[/b], you will be guided through the installation and at the end you will have a fully operational btsync daemon maintained by debconf. The configuration can be modified and fine tuned at any time by performing the following command:
+After downloading the packages, the installation begins. The package manager will ask you, if you want a default instance of BitTorrent Sync to be created. If you say [b]yes[/b], you will be guided through the installation and at the end you will have a fully operational BitTorrent Sync daemon maintained by [font=courier new,courier,monospace][b]debconf[/b][/font]. The configuration can be modified and fine tuned at any time by performing the following command:
 [code]
 `which sudo` dpkg-reconfigure btsync
 [/code]
@@ -100,8 +33,6 @@ After downloading the packages, the installation begins. The package manager wil
 Here you can select also delete the default instance, by answering [b]no[/b] to the question if you want a default instance to be created.
 
 Beside the presence of a default instance of btsync, the advanced administrator will be able, to create many instances of btsync, by creating configuration files in the directory [b][font=courier new', courier, monospace]/etc/btsync[/font][/b]
-
-More details can be found in the usages notes:
 
 
 [color=#800080][b]USAGE NOTES[/b][/color]
@@ -123,6 +54,7 @@ The following parameters are supported:
 [*][b]DAEMON_GID[/b]: A gid for specifying the group under which the btsync daemon should run. If omitted the daemon will run under the primary group of the user[/*]
 [*][b]DAEMON_UMASK[/b]: The umask (up to 4 octal digits) for the btsync daemon. If omitted the default umask is used.[/*]
 [*][b]DAEMON_DEBUG[/b]: The debug mask (4 hex digits) for the btsync daemon. If omitted the init script will not touch potential settings defined manually. If set to [b]0000[/b], a potential settings file will be deleted. Full detail is set by specifying [b]FFFF[/b][/*]
+[*][b]DAEMON_NICE[/b]: The niceness level of the btsync daemon, which affects process scheduling. Nicenesses range from -20 (most favorable scheduling) to 19 (least favorable).[/*]
 [/LIST]
 The parameter definition must use an equal sign ("="):
 [code]
@@ -195,4 +127,24 @@ DAEMON_ARGS=""
 [color=#ff0000][b]SOME ADDITIONAL WORDS ABOUT AUTOUPDATE[/b][/color]
 
 The daemon scripts require that autoupdate is disabled in the configuration script, otherwise the instance will not be started. The reason for that is, that updates are handled by the Debian/Ubuntu package handling utility itself.
+
+[color=#ff8c00][b]COMPATIBILITY[/b][/color]
+
+The server packages are available for the same architectures as released by BitTorrent Inc.:
+
+[LIST]
+[*][b]i386[/b] Intel/AMD 32 Bit[/*]
+[*][b]amd64[/b] Intel/AMD 64 Bit[/*]
+[*][b]armel[/b] ARM EABI[/*]
+[*][b]armhf[/b] ARM hard float[/*]
+[*][b]powerpc[/b] PowerPC[/*]
+[/LIST]
+
+Since the packages still have not been tested on every platform, any related feedback is highly appreciated.
+
+
+[color=#FF8C00][b]BUG REPORTS, CONTRIBUTION AND SOURCES[/b][/color]
+
+If you want to contribute to the development of the packages or if you are curious how this all works, you may find the current sources of the deployment scripts and packaging on GitHub under the following URL: [b]https://github.com/tuxpoldo/btsync-deb[/b]
+If you have experienced a reproducible issue that [b]is related to the packaging and not to BitTorrent Sync itself[/b] you are strongly encouraged to [url="https://github.com/tuxpoldo/btsync-deb/issues"]open an issue on the project's GitHub Page[/url]. Issues related to the native functionality of BitTorrent Sync should rather by creating a new topic or partecipating to an already existing topic in the [url="http://forum.bittorrent.com/forum/56-bittorrent-sync/"]BitTorrent Sync Forum[/url].
 
