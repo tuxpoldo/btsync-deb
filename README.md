@@ -43,12 +43,12 @@ Project Home Page: http://www.yeasoft.com/site/projects:btsync-deb
 
 BitTorrent Sync Home Page: http://www.bittorrent.com/sync
 
-Support Forum: http://forum.bittorrent.com/forum/107-bittorrent-sync/
-
-Desktop GUI Package Support Thread: http://forum.bittorrent.com/topic/28106-linux-desktop-gui-unofficial-packages-for-bittorrent-sync/
-
-Server Package Thread: http://forum.bittorrent.com/topic/18974-debian-and-ubuntu-server-packages-for-bittorrent-sync/
-
-Legacy Desktop Package Thread: http://forum.bittorrent.com/topic/19560-debian-and-ubuntu-legacy-desktop-unofficial-packages-for-bittorrent-sync/
+BitTorrent Sync Support Forum: http://forum.bittorrent.com/forum/107-bittorrent-sync/
+- [Desktop GUI Package Support Thread][2]
+- [Server Package Thread][3]
+- [Legacy Desktop Package Thread][4]
 
 [1]: http://www.bittorrent.com/sync
+[2]: http://forum.bittorrent.com/topic/28106-linux-desktop-gui-unofficial-packages-for-bittorrent-sync/
+[3]: http://forum.bittorrent.com/topic/18974-debian-and-ubuntu-server-packages-for-bittorrent-sync/
+[4]: http://forum.bittorrent.com/topic/19560-debian-and-ubuntu-legacy-desktop-unofficial-packages-for-bittorrent-sync/
