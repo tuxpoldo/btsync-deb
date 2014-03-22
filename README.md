@@ -39,16 +39,16 @@ application for desktop users is named __btsync-user__
 Useful Links
 -------------
 
-Project Home Page: http://www.yeasoft.com/site/projects:btsync-deb
-
-BitTorrent Sync Home Page: http://www.bittorrent.com/sync
-
-BitTorrent Sync Support Forum: http://forum.bittorrent.com/forum/107-bittorrent-sync/
-- [Desktop GUI Package Support Thread][2]
-- [Server Package Thread][3]
-- [Legacy Desktop Package Thread][4]
+- [Project Home Page][2]
+- [BitTorrent Sync Home Page][1]
+- [BitTorrent Sync Support Forum][3]
+  - [Desktop GUI Package Support Thread][4]
+  - [Server Package Thread][5]
+  - [Legacy Desktop Package Thread][6]
 
 [1]: http://www.bittorrent.com/sync
-[2]: http://forum.bittorrent.com/topic/28106-linux-desktop-gui-unofficial-packages-for-bittorrent-sync/
-[3]: http://forum.bittorrent.com/topic/18974-debian-and-ubuntu-server-packages-for-bittorrent-sync/
-[4]: http://forum.bittorrent.com/topic/19560-debian-and-ubuntu-legacy-desktop-unofficial-packages-for-bittorrent-sync/
+[2]: http://www.yeasoft.com/site/projects:btsync-deb
+[3]: http://forum.bittorrent.com/forum/107-bittorrent-sync/
+[4]: http://forum.bittorrent.com/topic/28106-linux-desktop-gui-unofficial-packages-for-bittorrent-sync/
+[5]: http://forum.bittorrent.com/topic/18974-debian-and-ubuntu-server-packages-for-bittorrent-sync/
+[6]: http://forum.bittorrent.com/topic/19560-debian-and-ubuntu-legacy-desktop-unofficial-packages-for-bittorrent-sync/
