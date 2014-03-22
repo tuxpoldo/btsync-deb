@@ -12,8 +12,8 @@ reliable startup and shutdown logic and to manage a configuration file. Also a
 dedicated GUI, as provided for Windows and Mac OSX is missing.
 
 The scope of this project is to provide a __Linux GUI__ with all features as in
-Windows and Mac OSX and easy to install packages both for servers and desktop
-systems.
+Windows and Mac OSX and __easy to install packages__ both for servers and
+desktop systems.
 
 **THESE SOFTWARE IS UNOFFICIAL AND NOT THE WORK OF BITTORRENT&reg; INC.
 PLEASE DO NOT CONTACT THE BITTORRENT&reg; INC. SUPPORT WITH QUESTIONS OR
