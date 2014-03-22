@@ -14,7 +14,7 @@ specific repositories where btsync is hosted.
 ### Install the Repository ###
 
 The most easy and fast way to install the repository is to paste that at a
-Terminal prompt:
+terminal prompt:
 
 ```bash
 sh -c "$(curl -fsSL http://debian.yeasoft.net/add-btsync-repository.sh)"
