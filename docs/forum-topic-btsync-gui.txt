@@ -5,11 +5,11 @@ If you are using Arch Linux, Ubuntu, Debian, Raspian or other derived distributi
 [url=http://postimage.org/image/o3ec60b1p/][img=http://s6.postimage.org/o3ec60b1p/btsync_gui_1.png][/url] [url=http://postimage.org/image/hdoynnf8t/][img=http://s6.postimage.org/hdoynnf8t/btsync_gui_2.png][/url] [url=http://postimage.org/image/62maza8dp/][img=http://s6.postimage.org/62maza8dp/btsync_gui_3.png][/url]
 [url=http://postimage.org/image/7ixthfbal/][img=http://s6.postimage.org/7ixthfbal/btsync_gui_4.png][/url] [url=http://postimage.org/image/4dd7r7sod/][img=http://s6.postimage.org/4dd7r7sod/btsync_gui_5.png][/url] [url=http://postimage.org/image/5v7uu9c6l/][img=http://s6.postimage.org/5v7uu9c6l/btsync_gui_6.png][/url]
 
-The [b]desktop gui packages[/b] are explicitly intended for [b]desktop usage[/b] and provide a user experience similar to BitTorrent Sync on Windows or Mac OSX by still giving the user the possibility to customise his installation if he has special needs.
+The [b]desktop gui package[/b] is explicitly intended for [b]desktop usage[/b] and provide a user experience similar to BitTorrent Sync on Windows or Mac OSX by still giving the user the possibility to customise his installation if he has special needs.
 
-This topic covers only the [b]desktop user packages[/b]. If you are searching for the [b]server packages,[/b] [url=http://forum.bittorrent.com/topic/18974-debian-and-ubuntu-server-packages-for-bittorrent-sync/][b]please look here[/b][/url].
+This topic covers only the [b]desktop user package[/b]. If you are searching for the [b]server package,[/b] [url=http://forum.bittorrent.com/topic/18974-debian-and-ubuntu-server-packages-for-bittorrent-sync/][b]please look here[/b][/url].
 
-[color=#ff0000][b]THESE PACKAGES ARE UNOFFICIAL AND NOT THE WORK OF BITTORRENT® INC. PLEASE DO NOT CONTACT THE BITTORRENT® INC. SUPPORT WITH QUESTIONS OR PROBLEMS RELATED TO THE USE OF THE PACKAGES. YOU WILL FIND COMPETENT HELP AND SUPPORT IN THE SUPPORT FORUM[/b][/color]
+[color=#ff0000][b]THE SOFTWARE AND THE PACKAGES ARE UNOFFICIAL AND NOT THE WORK OF BITTORRENT® INC. PLEASE DO NOT CONTACT THE BITTORRENT® INC. SUPPORT WITH QUESTIONS OR PROBLEMS RELATED TO THE USE OF THE PACKAGES. YOU WILL FIND COMPETENT HELP AND SUPPORT IN THIS FORUM THREAD[/b][/color]
 
 
 [color=#008000][b]INSTALLATION ON ARCH LINUX[/b][/color]
@@ -42,13 +42,13 @@ On some systems the [font=courier new,courier,monospace][b]AppIndicator library[
 `which sudo` apt-get update
 `which sudo` apt-get install btsync-gui-gtk
 [/code]
- 
-but you can do this only if you are using a GTK based desktop like Gnome on Debian. [color=#b22222][b]THIS WILL DEFINITIVELY NOT WORK WITH DESKTOPS LIKE UNITY![/b][/color] If you are in doubt, install [b][font=courier new,courier,monospace]btsync-gui[/font][/b] - this will work for sure!
+
+Please keep in mind, that [b]this will work only on GTK based desktops[/b]. If you install it on other desktops like Unity, [font=courier new,courier,monospace][b]btsync-gui-gtk[/b][/font] will start but [b]you will see nothing and you have no control over the application![/b] Install [font=courier new,courier,monospace][b]btsync-gui-gtk[/b][/font] only if you know exactly what you are doing!!! If this happened, you can fix it by installing [font=courier new,courier,monospace][b]btsync-gui[/b][/font] and rebooting your system.
 
 After the successful installation, you have to initially start BitTorrent Sync. You have various possibilities to do this:
 [LIST]
-[*]Log out and login again. Since BitTorrent Sync is started on logon, it will start automatically.[/*]
-[*]Select [i]BitTorrent Sync[/i] from the menu or Unity-Launcher[/*]
+[*]Log out and login again. Since BitTorrent Sync GUI is registred in the autostart group, it will start as soon as you log in.[/*]
+[*]Select [i]BitTorrent Sync[/i] from the menu or the default application launcher of your desktop.[/*]
 [/LIST]
 
 [color=#800080][b]USAGE NOTES[/b][/color]
