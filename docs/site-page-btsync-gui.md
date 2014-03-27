@@ -59,7 +59,7 @@ happened, you can fix it by installing `btsync-gui` and rebooting your system.
 After the successful installation, you have to initially start BitTorrent Sync.
 You have various possibilities to do this:
 
-- Log out and login again. Since BitTorrent Sync GUI is registred in the
+- Log out and log in again. Since BitTorrent Sync GUI is registered in the
   autostart group, it will start as soon as you log in.
 - Select _BitTorrent Sync_ from the menu or the default application launcher of
   your desktop.
@@ -96,7 +96,7 @@ into two main sections:
 
 - The __status indicator__ is the central access point to BitTorrent Sync and
   shows information about the current status via its icon. The context menu
-  allows to perorm some operations and to open the application window.
+  allows to perform some operations and to open the application window.
 - The __application window__ allows to manage the shared folders, view the
   connected peers, manage the standard and advanced preferences and connect
   mobile devices via QR-codes with the connection information.
@@ -115,14 +115,14 @@ The GUI provides two modes of operation:
 The behaviour of the GUI can be influenced by specifying various options on the
 command line. There is also a way to make some options persistent across
 restarts making it superfluous to specify the options each time you start the
-GUI. You can get detailed help about the commandline options by invoking the
+GUI. You can get detailed help about the command line options by invoking the
 man page:
 
 ```bash
 man btsync-gui
 ```
 
-Here an overview of the available options:
+Here you find an overview of the available options:
 
 ```
 usage: btsync-gui [-h] [--log {CRITICAL,ERROR,WARNING,INFO,DEBUG}]
@@ -189,8 +189,7 @@ command from the console:
 btsync-gui --webui --savedefaults
 ```
 
-This makes the setting persistent, and you will not need to specify it again at
-each start.
+From now you will not need to specify it again at each start.
 
 Sometimes it may happen, that you want to access your running BitTorrent Sync
 agent from another computer via the Web UI or a `btsync-gui` in Client Mode.
@@ -208,10 +207,11 @@ still a possibility to configure the GUI in a way that makes the agent
 accessible also from other computers. In order to do so, the following
 parameters must be changed:
 
-- The BitTorrent Sync agent must bind his administrative interface to all
+- The BitTorrent Sync agent must bind its administrative interface to all
   adapters of the system or an adapter reachable from outside.
-- The BitTorrent Sync agent must bind his administrative interface to a well
-  known port. By default the port is the sum of 8999 and the uid of the user.
+- The BitTorrent Sync agent must bind its administrative interface to a
+  well-known port. By default the port is the sum of 8999 and the uid of the
+  user.
 - The credentials must be set to something known.
 
 The GUI can be launched in such a mode, by specifying the following parameters:
@@ -271,7 +271,7 @@ BitTorrent Inc.:
 - __armhf__ - ARM hard float
 - __powerpc__ - PowerPC
 
-The GUI packages has been tested on the following distributions:
+The GUI packages have been tested on the following distributions:
 - __Debian Wheezy__ with __Gnome__ Desktop
 - __Ubuntu Raring__ 13.04 with __Unity__ Desktop
 - __Linux Mint Petra__ with __Cinnamon__ Desktop
@@ -287,8 +287,8 @@ The GUI package has also been released for other Linux distributions:
 
 ###### WANTED ######
  
-Maintainers for other Linux distributions able to write a suitable packaging
-for their favourite distribution:
+Maintainers for other Linux distributions beeing able to write a suitable
+packaging for their favourite distribution:
 - __Centos/RHEL__ (rpm)
 - __Fedora__ (rpm)
 - __SLES__ (rpm)

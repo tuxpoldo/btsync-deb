@@ -47,7 +47,7 @@ Please keep in mind, that [b]this will work only on GTK based desktops[/b]. If y
 
 After the successful installation, you have to initially start BitTorrent Sync. You have various possibilities to do this:
 [LIST]
-[*]Log out and login again. Since BitTorrent Sync GUI is registred in the autostart group, it will start as soon as you log in.[/*]
+[*]Log out and log in again. Since BitTorrent Sync GUI is registered in the autostart group, it will start as soon as you log in.[/*]
 [*]Select [i]BitTorrent Sync[/i] from the menu or the default application launcher of your desktop.[/*]
 [/LIST]
 
@@ -61,12 +61,12 @@ The GUI provides two modes of operation:
 [*][b]Client Mode[/b]: The GUI can be started from the command line with parameters specifying a connection to a remote BitTorrent Sync system. In this case, the GUI does not start a local BitTorrent Sync agent, but connects to an already running agent at a remote location. [b]This will work only, if the remote agent has activated API access by specifying a valid API key in the configuration file.[/b][/*]
 [/LIST]
 
-The behaviour of the GUI can be influenced by specifying various options on the command line. There is also a way to make some options persistent across restarts making it superfluous to specify the options each time you start the GUI. You can get detailed help about the commandline options by invoking the man page:
+The behaviour of the GUI can be influenced by specifying various options on the command line. There is also a way to make some options persistent across restarts making it superfluous to specify the options each time you start the GUI. You can get detailed help about the command line options by invoking the man page:
 [code]
 man btsync-gui
 [/code]
 
-Here an overview of the available options:
+Here you find an overview of the available options:
 [code]
 usage: btsync-gui [-h] [--log {CRITICAL,ERROR,WARNING,INFO,DEBUG}]
                   [--host HOST] [--port PORT] [--username USERNAME]
@@ -127,7 +127,7 @@ If you want to make this setting persistent, you can invoke the following comman
 btsync-gui --webui --savedefaults
 [/code]
 
-This makes the setting persistent, and you will not need to specify it again at each start.
+From now you will not need to specify it again at each start.
 
 Sometimes it may happen, that you want to access your running BitTorrent Sync agent from another computer via the Web UI or a [font=courier new,courier,monospace][b]btsync-gui[/b][/font] in Client Mode. By default this is not possible, because of two reasons:
 [LIST]
@@ -137,8 +137,8 @@ Sometimes it may happen, that you want to access your running BitTorrent Sync ag
 
 For users that want to access their system from another computer, there is still a possibility to configure the GUI in a way that makes the agent accessible also from other computers. In order to do so, the following parameters must be changed:
 [LIST]
-[*]The BitTorrent Sync agent must bind his administrative interface to all adapters of the system or an adapter reachable from outside.[/*]
-[*]The BitTorrent Sync agent must bind his administrative interface to a well known port. By default the port is the sum of 8999 and the [font=courier new,courier,monospace][b]uid[/b][/font] of the user.[/*]
+[*]The BitTorrent Sync agent must bind its administrative interface to all adapters of the system or an adapter reachable from outside.[/*]
+[*]The BitTorrent Sync agent must bind its administrative interface to a well-known port. By default the port is the sum of 8999 and the [font=courier new,courier,monospace][b]uid[/b][/font] of the user.[/*]
 [*]The credentials must be set to something known.[/*]
 [/LIST]
 
@@ -207,7 +207,7 @@ The GUI package has also been released for other Linux distributions:
 
 [color=#ff8c00][b]WANTED[/b][/color]
  
-Maintainers for other Linux distributions able to write a suitable packaging for their favourite distribution:
+Maintainers for other Linux distributions beeing able to write a suitable packaging for their favourite distribution:
 [LIST]
 [*]Centos/RHEL (rpm)[/*]
 [*]Fedora (rpm)[/*]
