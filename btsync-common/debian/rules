@@ -61,6 +61,17 @@ override_dh_shlibdeps:
 # leave the original binaries untouched
 override_dh_strip:
 
+# clean the existent sources
+clean-orig-source:
+	rm -rf $(DEB_DEBIAN_DIR)../amd64
+	rm -rf $(DEB_DEBIAN_DIR)../arm
+	rm -rf $(DEB_DEBIAN_DIR)../geode
+	rm -rf $(DEB_DEBIAN_DIR)../i386
+	rm -rf $(DEB_DEBIAN_DIR)../kfreebsd-amd64
+	rm -rf $(DEB_DEBIAN_DIR)../kfreebsd-i386
+	rm -rf $(DEB_DEBIAN_DIR)../powerpc
+	rm -rf $(DEB_DEBIAN_DIR)../BitTorrentSyncUserGuide.pdf
+
 # create an original source archive out of the original distribution, if not present
 get-orig-source:
 	if [ ! -f $(DEB_DEBIAN_DIR)../../$(DEB_SOURCE_PACKAGE)_$(DEB_UPSTREAM_VERSION).orig.tar.gz ]; then \
