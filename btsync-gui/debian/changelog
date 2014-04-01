@@ -8,7 +8,7 @@ btsync-gui (0.8.1-1) unstable; urgency=low
   * Added Czech translation by Marek Lucas (Closes #111)
   * Added Russian translation by Sergey Shlyapugin (Closes #112)
 
- -- Leo Moll <leo.moll@yeasoft.com>  Mon, 01 Apr 2014 14:09:36 +0100
+ -- Leo Moll <leo.moll@yeasoft.com>  Mon, 01 Apr 2014 19:31:29 +0100
 
 btsync-gui (0.8.0-1) unstable; urgency=low
 
