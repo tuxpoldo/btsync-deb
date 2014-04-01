@@ -70,6 +70,9 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.init_transfers_controls()
 		self.init_history_controls()
 		self.init_preferences_controls()
+
+		self.init_transfer_status()
+
 		self.init_folders_values()
 		self.init_preferences_values()
 
@@ -89,6 +92,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.folders_menu_editsyncignore = self.builder.get_object('folder_menu_editsyncignore')
 		self.folders_selection = self.builder.get_object('folders_selection')
 		self.folders_treeview = self.builder.get_object('folders_tree_view')
+		self.folders_activity_label = self.builder.get_object('folders_activity_label')
 		self.folders_add = self.builder.get_object('folders_add')
 		self.folders_remove = self.builder.get_object('folders_remove')
 		self.folders_remove.set_sensitive(False)
@@ -125,6 +129,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 	def init_devices_controls(self):
 		self.devices = self.builder.get_object('devices_list')
 		self.devices_treeview = self.builder.get_object('devices_tree_view')
+		self.devices_activity_label = self.builder.get_object('devices_activity_label')
 		self.set_treeview_column_widths(
 			self.devices_treeview,self.agent.get_pref('devices_columns',[150,300])
 		) 
@@ -132,7 +137,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 	def init_transfers_controls(self):
 		self.transfers = self.builder.get_object('transfers_list')
 		self.transfers_treeview = self.builder.get_object('transfers_tree_view')
-		self.transfers_status = self.builder.get_object('transfers_status')
+		self.transfers_activity_label = self.builder.get_object('transfers_activity_label')
 		# TODO: remove placeholder as soon as the suitable API call permits
 		#       a working implementation...
 		self.transfers.append ([
@@ -149,6 +154,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 	def init_history_controls(self):
 		self.history = self.builder.get_object('history_list')
 		self.history_treeview = self.builder.get_object('history_tree_view')
+		self.history_activity_label = self.builder.get_object('history_activity_label')
 		# TODO: remove placeholder as soon as the suitable API call permits
 		#       a working implementation...
 		self.history.append ([
@@ -185,8 +191,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 					self.folders.remove(row.iter)
 					self.remove_device_infos(row[2],row[3])
 			# update transfer status
-			speed = self.agent.get_speed()
-			self.transfers_status.set_label(_('{0:.1f} kB/s up, {1:.1f} kB/s down').format(speed['upload'] / 1000, speed['download'] / 1000))
+			self.update_transfer_status(self.agent.get_speed())
 			# TODO: fill file list...
 			#       but there is still no suitable API call...
 			self.unlock()
@@ -197,6 +202,16 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		except requests.exceptions.HTTPError:
 			self.unlock()
 			return self.onCommunicationError()
+
+	def init_transfer_status(self):
+		self.update_transfer_status({'upload':0,'download':0})
+
+	def update_transfer_status(self,speed):
+		activity = _('{0:.1f} kB/s up, {1:.1f} kB/s down').format(speed['upload'] / 1000, speed['download'] / 1000)
+		self.folders_activity_label.set_label(activity)
+		self.devices_activity_label.set_label(activity)
+		self.transfers_activity_label.set_label(activity)
+		self.history_activity_label.set_label(activity)
 
 	def update_folder_values(self,value):
 		for row in self.folders:
