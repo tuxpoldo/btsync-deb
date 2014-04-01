@@ -3,6 +3,8 @@ btsync-gui (0.8.1-1) unstable; urgency=low
   * Added transfer status indicator to all tabs of the main
     window except for the preferences pane (1.3 UI)
   * Added detailed API timing info to logging
+  * Added default support for new advanced preferences of
+    version 1.3 (Closes #119)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Mon, 01 Apr 2014 14:09:36 +0100
 
