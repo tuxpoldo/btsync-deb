@@ -376,9 +376,10 @@ class BtDynamicTimeout:
 		else:
 			self.best = max(duration * 10,self.mini)
 		if self.best != self.last:
-			logging.info('Adaptive timeout changed to {0}'.format(self.best))
+			logging.debug('Last cycle duration was {0} msec - Adaptive timeout changed to {1} msec to avoid API flooding'.format(duration,self.best))
 			self.last = self.best
 			self.toid = GObject.timeout_add(self.best, self._tofunc)
 			return False
+		logging.debug('Last cycle duration was {0} msec'.format(duration))
 		return True
 
