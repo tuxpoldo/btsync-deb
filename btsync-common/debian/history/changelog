@@ -1,3 +1,12 @@
+1.3.80 (April 2, 2014)
+
+ - Fixed crashes (Windows, Linux platforms)
+ - Added full path column
+ - Fixed issue with QR codes on Mac
+ - Improved installer
+ - Fixed issue with speed calculation for many small files
+
+
 1.3.77 (March 31, 2014)
 
  - Fixed crashes on all platforms
