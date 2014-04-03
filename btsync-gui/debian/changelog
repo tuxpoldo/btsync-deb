@@ -1,3 +1,9 @@
+btsync-gui (0.8.1-2) unstable; urgency=low
+
+  * Added Bulgarian translation by Atanas Kovachki (Closes #121)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Fri, 04 Apr 2014 12:00:00 +0100
+
 btsync-gui (0.8.1-1) unstable; urgency=low
 
   * Added transfer status indicator to all tabs of the main
