@@ -121,7 +121,7 @@ msgstr "Port webového rozhraní:"
 #. Description
 #: ../btsync.templates:7001
 msgid "Specify here the port BitTorrent Sync will listen on for the web interfce. This port number in the range from 80 to 65534 shall not conflict with any other services running on this machine."
-msgstr "Určete zde port BItTorrent Syncu , kterému bude naslouchat pro webové rozhraní.Číslo tohoto portu v rozmezí 80 až 65534 by nemělo  nijak ovlivnit jakékoli jiné služby na tomto stroji."
+msgstr "Určete zde port BItTorrent Syncu , kterému bude naslouchat pro webové rozhraní. Číslo tohoto portu v rozmezí 80 až 65534 by nemělo  nijak ovlivnit jakékoli jiné služby na tomto stroji."
 
 #. Type: string
 #. Description
@@ -356,11 +356,35 @@ msgstr "Chcete-li, můžete rozhodnout zda služba BitTorrent Sync bude spoušt�
 #. Description
 #: ../btsync.templates:27001
 msgid "Niceness of the BitTorrent Sync Daemon:"
-msgstr ""
+msgstr "Niceness of the BitTorrent Sync Daemon:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:27001
 msgid "You can specify the niceness level of the BitTorrent Sync Daemon, which affects process scheduling. Nicenesses range from -20 (most favorable scheduling) to 19 (least favorable). Specify 0 to let BitTorrent Sync run with the default niceness value."
-msgstr ""
+msgstr "You can specify the niceness level of the BitTorrent Sync Daemon, which affects process scheduling. Nicenesses range from -20 (most favorable scheduling) to 19 (least favorable). Specify 0 to let BitTorrent Sync run with the default niceness value."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:27002
+msgid "External port number reported to the tracker:"
+msgstr "Vnější číslo portu"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:27002
+msgid "Set external port number that Sync will report to the tracker. This port will be used for incoming TCP connections. Specify 0 to let BitTorrent Sync choose the port number."
+msgstr "Nastavte číslo vnějšího portu, kterou Sync sdělí trackeru. Tento port bude použit pro příchozí TCP spojení. Pokud zadáte 0, BitTorrent Sync si sám zvolí nejvhodnější port."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:28001
+msgid "Debug logfile size in MB:"
+msgstr "Velikost souboru s logy v MB:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:28001
+msgid "Sets the size for the debug sync.log file. When the log file reaches this size, it is renamed to sync.log.old and a new sync.log file is created. Note: only 2 files (sync.log and sync.log.old) are kept on the hard disk at the same time if debug logging is enabled."
+msgstr "Nastaví velikost pro debugovací soubor sync.log. Pokud soubor s logy tuto velikost překročí, bude přejmenován na sync.log.old a bude vytvořen nový soubor sync.log. POZNÁMKA: Pokud je logování chyb zapnuté, jsou na disku ponechány POUZE 2 soubory (sync.log a sync.log.old) najednou."
 
