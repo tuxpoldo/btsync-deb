@@ -364,3 +364,27 @@ msgstr "Nice-Wert für den BitTorrent Sync Prozess:"
 msgid "You can specify the niceness level of the BitTorrent Sync Daemon, which affects process scheduling. Nicenesses range from -20 (most favorable scheduling) to 19 (least favorable). Specify 0 to let BitTorrent Sync run with the default niceness value."
 msgstr "Durch Festlegen eines Nice-Werts kann das Prioritätsscheduling für den BitTorrent Sync Prozess beeinflusst werden. Gültige Nice-Werte liegen zwischen -20 (höchste Scheduling Priorität) und 19 (niedrigste Priorität). Der Standardwert ist 0."
 
+#. Type: string
+#. Description
+#: ../btsync.templates:27002
+msgid "External port number reported to the tracker:"
+msgstr "Externe Port-Nummer für den Tracker:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:27002
+msgid "Set external port number that Sync will report to the tracker. This port will be used for incoming TCP connections. Specify 0 to let BitTorrent Sync choose the port number."
+msgstr "Legt die externe Port-Nummer fest, die BitTorrent Sync dem Tracker melden wird. Dieser Port wird für eingehende TCP Verbindungen verwendet. Durch Angabe der 0 wird BitTorrent Sync die Port-Nummer wählen."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:28001
+msgid "Debug logfile size in MB:"
+msgstr "Größe der Debug-Logdatei in MB:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:28001
+msgid "Sets the size for the debug sync.log file. When the log file reaches this size, it is renamed to sync.log.old and a new sync.log file is created. Note: only 2 files (sync.log and sync.log.old) are kept on the hard disk at the same time if debug logging is enabled."
+msgstr "Legt die Größe für die Debug-Logdatei sync.log fest. Erreicht sie diese größe, wird sie in sync.log.old umbenannt und es wird eine neue sync.log Datei erzeugt. Achtung: es werden lediglich 2 Dateien (sync.log und sync.log.old) auf der Festplatte geschrieben, wenn Debug-Logging aktiviert ist."
+
