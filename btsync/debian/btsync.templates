@@ -231,3 +231,20 @@ _Description: Niceness of the BitTorrent Sync Daemon:
  scheduling) to 19 (least favorable). Specify 0 to let BitTorrent Sync run
  with the default niceness value.
 
+Template: btsync/external_port
+Type: string
+Default: 0
+_Description: External port number reported to the tracker:
+ Set external port number that Sync will report to the tracker. This port
+ will be used for incoming TCP connections. Specify 0 to let BitTorrent Sync
+ choose the port number.
+
+Template: btsync/log_size
+Type: string
+Default: 10
+_Description: Debug logfile size in MB:
+ Sets the size for the debug sync.log file. When the log file reaches this
+ size, it is renamed to sync.log.old and a new sync.log file is created.
+ Note: only 2 files (sync.log and sync.log.old) are kept on the hard disk at
+ the same time if debug logging is enabled.
+

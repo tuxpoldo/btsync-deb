@@ -10,9 +10,9 @@ Homepage: http://www.yeasoft.com/site/projects:btsync-deb:btsync-server
 
 Package: btsync
 Architecture: all
-Pre-Depends: debconf | debconf-2.0
+Pre-Depends: debconf | debconf-2.0, adduser
 Depends: ${shlibs:Depends}, ${misc:Depends},
- btsync-common (>= 1.2.73-1)
+ btsync-common (>= 1.3.67-1)
 Provides: btsync-server-daemon
 Description: Private network P2P file synchronisation daemon(s)
  BitTorrent Sync is a simple tool that applies p2p protocol for

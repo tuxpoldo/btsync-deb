@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: btsync\n"
 "Report-Msgid-Bugs-To: btsync@packages.debian.org\n"
-"POT-Creation-Date: 2014-03-13 18:37+0100\n"
+"POT-Creation-Date: 2014-04-03 13:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -449,4 +449,35 @@ msgid ""
 "affects process scheduling. Nicenesses range from -20 (most favorable "
 "scheduling) to 19 (least favorable). Specify 0 to let BitTorrent Sync run "
 "with the default niceness value."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:27002
+msgid "External port number reported to the tracker:"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:27002
+msgid ""
+"Set external port number that Sync will report to the tracker. This port "
+"will be used for incoming TCP connections. Specify 0 to let BitTorrent Sync "
+"choose the port number."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:28001
+msgid "Debug logfile size:"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:28001
+msgid ""
+"Sets the size for the debug sync.log file. When the log file reaches this "
+"size, it is renamed to sync.log.old and a new sync.log file is created. "
+"Note: only 2 files (sync.log and sync.log.old) are kept on the hard disk at "
+"the same time if debug logging is enabled."
 msgstr ""

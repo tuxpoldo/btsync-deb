@@ -48,6 +48,9 @@ create_default_instance() {
 	db_get btsync/bind-port || RET=0
 	LISTENING_PORT=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
 	LISTENING_PORT=${LISTENING_PORT:-0}
+	db_get btsync/external_port || RET=0
+	EXTERNAL_PORT=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
+	EXTERNAL_PORT=${EXTERNAL_PORT:-0}
 	db_get btsync/use-upnp || RET=false
 	USE_UPNP=${RET}
 	db_get btsync/limit-download || RET=0
@@ -91,6 +94,9 @@ create_default_instance() {
 	MAX_TIME_DIFF=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
 	db_get btsync/sync_trash_ttl || RET=""
 	TRASH_TTL=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
+	db_get btsync/log_size || RET=10
+	LOG_SIZE=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
+	LOG_SIZE=${LOG_SIZE:-10}
 	set -e
 	(
 	cat <<EOF
@@ -119,7 +125,7 @@ EOF
 	if [ "${UMASK}" != "" ]; then
 		echo "// DAEMON_UMASK=${UMASK}" >> ${CONFFILE}
 	fi
-	if [ "${NICE_LEVEL}" != "" -o "${NICE_LEVEL}" != "0" ]; then
+	if [ "${NICE_LEVEL}" != "" -a "${NICE_LEVEL}" != "0" ]; then
 		echo "// DAEMON_NICE=${NICE_LEVEL}" >> ${CONFFILE}
 	fi
 	(
@@ -139,23 +145,29 @@ EOF
 	"folder_rescan_interval" : ${FOLDER_RESCAN_INTERVAL},
 EOF
 	) >> ${CONFFILE}
-	if [ -n "$MAX_FILE_DIFF_PATCH" ]; then
+	if [ -n "${MAX_FILE_DIFF_PATCH}" ]; then
 		echo "	\"max_file_size_diff_for_patching\" : ${MAX_FILE_DIFF_PATCH}," >> ${CONFFILE}
 	fi
-	if [ -n "$MAX_FILE_VERSIONING" ]; then
+	if [ -n "${MAX_FILE_VERSIONING}" ]; then
 		echo "	\"max_file_size_for_versioning\" : ${MAX_FILE_VERSIONING}," >> ${CONFFILE}
 	fi
-	if [ -n "$SEND_BUF_SIZE" ]; then
+	if [ -n "${SEND_BUF_SIZE}" ]; then
 		echo "	\"send_buf_size\" : ${SEND_BUF_SIZE}," >> ${CONFFILE}
 	fi
-	if [ -n "$RECV_BUF_SIZE" ]; then
+	if [ -n "${RECV_BUF_SIZE}" ]; then
 		echo "	\"recv_buf_size\" : ${RECV_BUF_SIZE}," >> ${CONFFILE}
 	fi
-	if [ -n "$MAX_TIME_DIFF" ]; then
+	if [ -n "${MAX_TIME_DIFF}" ]; then
 		echo "	\"sync_max_time_diff\" : ${MAX_TIME_DIFF}," >> ${CONFFILE}
 	fi
-	if [ -n "$TRASH_TTL" ]; then
+	if [ -n "${TRASH_TTL}" ]; then
 		echo "	\"sync_trash_ttl\" : ${TRASH_TTL}," >> ${CONFFILE}
+	fi
+	if [ -n "${EXTERNAL_PORT}" -a "${EXTERNAL_PORT}" != "0" ]; then
+		echo "	\"external_port\" : ${EXTERNAL_PORT}," >> ${CONFFILE}
+	fi
+	if [ -n "${LOG_SIZE}" -a "${LOG_SIZE}" != "10" ]; then
+		echo "	\"log_size\" : ${LOG_SIZE}," >> ${CONFFILE}
 	fi
 	(
 	cat <<EOF
