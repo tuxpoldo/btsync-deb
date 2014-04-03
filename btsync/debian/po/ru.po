@@ -367,23 +367,23 @@ msgstr "Можно указать уровень приоритета демон
 #. Description
 #: ../btsync.templates:27002
 msgid "External port number reported to the tracker:"
-msgstr ""
+msgstr "Номер внешнего порта для связи с трекером:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:27002
 msgid "Set external port number that Sync will report to the tracker. This port will be used for incoming TCP connections. Specify 0 to let BitTorrent Sync choose the port number."
-msgstr ""
+msgstr "Определяет номер внешнего порта, который BitTorrent Sync будет отправлять на трекер. Этот порт будет использоваться для входящих TCP соединений. Укажите 0, чтобы разрешить  BitTorrent Sync выбрать номер порта."
 
 #. Type: string
 #. Description
 #: ../btsync.templates:28001
 msgid "Debug logfile size in MB:"
-msgstr ""
+msgstr "Размер файла отладки в МБ:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:28001
 msgid "Sets the size for the debug sync.log file. When the log file reaches this size, it is renamed to sync.log.old and a new sync.log file is created. Note: only 2 files (sync.log and sync.log.old) are kept on the hard disk at the same time if debug logging is enabled."
-msgstr ""
+msgstr "Укажите максимальный размер файла отладки sync.log. Когда файл достигнет этого размера, он будет переименован в sync.log.old, а новый файл sync.log будет создан. Примечание: только 2 файла (sync.log и sync.log.old) хранятся на жестком диске одновременно, если ведение отладки включено."
 
