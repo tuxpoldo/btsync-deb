@@ -1,1 +1,545 @@
-# placeholder
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: btsync-gui\n"
+"Language: bg\n"
+
+#: ../btsyncagent.py:107
+msgid "Default settings cleared."
+msgstr "Стандартните настройки са изчистени."
+
+#: ../btsyncagent.py:128
+msgid "Default settings saved."
+msgstr "Стандартните настройки са съхранени."
+
+#: ../btsyncapp.py:132 ../btsyncapp.py:145
+msgid "Cannot implement due to missing API"
+msgstr "Не е реализирано поради липсващо API"
+
+#: ../btsyncapp.py:133
+msgid "BitTorrent Inc."
+msgstr "BitTorrent Inc."
+
+#: ../btsyncapp.py:144
+msgid "Now"
+msgstr "Сега"
+
+#: ../btsyncapp.py:173 ../btsyncstatus.py:187
+msgid "{0:.1f} kB/s up, {1:.1f} kB/s down"
+msgstr "{0:.1f} кБ/с качване, {1:1f} кБ/с сваляне"
+
+#: ../btsyncapp.py:283
+msgid "{0} in {1} files"
+msgstr "{0} в {1} файла"
+
+#: ../btsyncapp.py:285
+msgid "{0} in {1} files (indexing...)"
+msgstr "{0} в {1} файла (индексиране...)"
+
+#: ../btsyncapp.py:298
+msgid "Synched on {0}"
+msgstr "Синхронизирано {0}"
+
+#: ../btsyncapp.py:300
+msgid "⇧ {0}"
+msgstr "⇧ {0}"
+
+#: ../btsyncapp.py:302
+msgid "⇩ {0}"
+msgstr "⇩ {0}"
+
+#: ../btsyncapp.py:304
+msgid "⇧ {0} - ⇩ {1}"
+msgstr "⇧ {0} - ⇩ {1}"
+
+#: ../btsyncapp.py:306
+msgid "Idle..."
+msgstr "Спиране..."
+
+#: ../btsyncguiapp.py:115
+msgid "Sets the logging level. By default the logging level is WARNING"
+msgstr "Задава ниво за водене на дневника. Стандартното ново е WARNING"
+
+#: ../btsyncguiapp.py:119
+msgid "Hostname for the connection to BitTorrent Sync. If not specified, a local BitTorrent Sync agent will be launched."
+msgstr "Име на хоста за свързване към BitTorrent Sync. Ако не е определено, ще се стартира локален BitTorrent Sync агент."
+
+#: ../btsyncguiapp.py:124
+msgid "Optional port number for the connection to BitTorrent Sync. If not specified, port 8888 is taken for a connection to a remote BitTorrent Sync agent or (8999 + uid) is taken when creating a locally launched agent. This option can be made persistent for local agents with --savedefaults"
+msgstr "Допълнителен номер на порта за свързване към BitTorrent Sync. Ако не е указан, порта 8888 ще се използва за свързване към отдалечен BitTorrent Sync агент или порта (8999 + uid) ще се използва при създаването на локално стартирания агент. Тази опция може да се направи персистираща за локалните агенти с --savedefaults."
+
+#: ../btsyncguiapp.py:132
+msgid "Optional user name for connecting to a remote BitTorrent Sync agent or username to use when creating a locally launched agent. This option can be made persistent for local agents with --savedefaults"
+msgstr "Допълнително потребителско име за свързване към отдалечения BitTorrent Sync агент или потребителското име, което ще се използва при създаването на локално стартирания агент. Тази опция може да се направи персистираща за локалните агенти с --savedefaults."
+
+#: ../btsyncguiapp.py:138
+msgid "Optional password for connecting to a remote BitTorrent Sync agent or password to use when creating a locally launched agent. This option can be made persistent for local agents with --savedefaults"
+msgstr "Допълнителна парола за свързване към отдалечения BitTorrent Sync агент или парола, която ще се използва при създаването на локално стартирания агент. Тази опция може да се направи персистираща за локалните агенти с --savedefaults."
+
+#: ../btsyncguiapp.py:144
+msgid "Optional bind address for the Web UI of a locally created BitTorrent Sync agent. By default the agent binds to 127.0.0.1. If you want the Web UI of the agent to be reachable by other computers, specify one of the available IP addresses of this computer or \"all\" to bind to all available adapters. This option can be made persistent for local agents with --savedefaults"
+msgstr "Допълнителен адрес за свързване на уеб интерфейса за локално създадения BitTorrent Sync агент. Стандартно агента е свързан към 127.0.0.1. Ако искате уеб интерфейса на агента да е достъпен и на други компютри, укажете един от IP адресите на този компютър или всичките за всичките достъпни. Тази опция може да се направи персистираща за локалните агенти с --savedefaults."
+
+#: ../btsyncguiapp.py:154
+msgid "Include the Web UI in the menu. This option can be made persistent with --savedefaults"
+msgstr "Включи уеб интерфейса в менюто. Тази опция може да се направи персистираща с --savedefaults."
+
+#: ../btsyncguiapp.py:158
+msgid "If specified, the optionally supplied credentials, bind address, port information and storable settings will be stored as default in the application preferences and used when launching a local BitTorrent Sync agent."
+msgstr "Ако е посочено, то предоставените идентификационни данни, свързаните адреси, информацията за портовете и настройките ще се съхранят в настройките на приложението и ще се използват стандартно при стартирането на локалния BitTorrent Sync агент."
+
+#: ../btsyncguiapp.py:165
+msgid "If specified, all internally stored credentials, bind address, port information and storable settings will be cleared from the application preferences."
+msgstr "Ако е избрано, всички вътрешно съхранени идентификационни данни, свързани адреси, информация за портовете и съхранените настройки, ще бъдат изтрити от настройките на приложението."
+
+#: ../btsyncstatus.py:67 ../btsyncapp.glade.h:2
+msgid "BitTorrent Sync"
+msgstr "BitTorrent Sync"
+
+#: ../btsyncstatus.py:68
+msgid "BitTorrent Sync Status Indicator"
+msgstr "Индикатор за състоянието BitTorrent Sync"
+
+#: ../btsyncstatus.py:71 ../btsyncstatus.py:72
+msgid "BitTorrent Sync {0}:{1}"
+msgstr "BitTorrent Sync {0}:{1}"
+
+#: ../btsyncstatus.py:144
+msgid "Connecting..."
+msgstr "Свързване..."
+
+#: ../btsyncstatus.py:148 ../btsyncstatus.py:193
+msgid "Idle"
+msgstr "Спиране"
+
+#: ../btsyncstatus.py:190
+msgid "Indexing..."
+msgstr "Индексиране..."
+
+#: ../btsyncstatus.py:254
+msgid "Version {0} ({0})"
+msgstr "Версия {0} ({0})"
+
+#: ../btsyncstatus.py:255
+msgid "Linux UI Version {0}"
+msgstr "Линукс версия на потребителския интерфейс  {0}"
+
+#: ../btsyncstatus.py:330
+msgid "Disconnected"
+msgstr "Разкачен"
+
+#: ../btsyncstatus.py:343
+msgid "Disconnected: Communication Error {0}"
+msgstr "Разкачен: грешка при свързването {0}"
+
+#: ../btsyncutils.py:305
+msgid "Only one full btsync-gui can run at once"
+msgstr "Може да се работи само един btsync-gui."
+
+#: ../dialogs.py:68
+msgid "This secret is invalid.\n"
+"Please generate a new secret or enter your shared folder secret."
+msgstr "Тази секретен ключ е невалиден.\n"
+"Моля, генерирайте нов или въведете съществуващ."
+
+#: ../dialogs.py:73
+msgid "Can't open the destination folder."
+msgstr "Неуспешно отваряне на целевата папка."
+
+#: ../dialogs.py:77
+msgid "Selected folder is already added to BitTorrent Sync."
+msgstr "Избраната папка вече е добавена в BitTorrent Sync."
+
+#: ../dialogs.py:84
+msgid "Don't have permissions to write to the selected folder."
+msgstr "Нямате права за запис в избраната папка."
+
+#: ../dialogs.py:107
+msgid "Please select a folder to sync"
+msgstr "Моля, изберете папка за синхронизиране"
+
+#: ../dialogs.py:358
+msgid "Invalid secret specified.\n"
+"Secret must have a length of 33 characters"
+msgstr "Невалидно зададен секретен ключ.\n"
+"Трябва да е поне от 33 символа."
+
+#: ../dialogs.py:365
+msgid "Invalid secret specified.\n"
+"Secret must contain only alphanumeric characters"
+msgstr "Невалидно зададен секретен ключ.\n"
+"Трябва да съдържа само букви и цифри."
+
+#: ../dialogs.py:412
+msgid "A hostname or IP address must be specified"
+msgstr "Трябва да бъде указано името на хоста или IP адреса"
+
+#: ../dialogs.py:417
+msgid "The specified port must be a number between 1 and 65534"
+msgstr "Указаният порт трябва да е число между 1 и 65534"
+
+#: ../btsyncapp.glade.h:1
+msgid "Advanced..."
+msgstr "Допълнително..."
+
+#: ../btsyncapp.glade.h:3
+msgid "Connect mobile device"
+msgstr "Свържи мобилно устройство"
+
+#: ../btsyncapp.glade.h:4
+msgid "Copies the sharing secret to the clipboard"
+msgstr "Копира споделения секретен ключ в клипборда"
+
+#: ../btsyncapp.glade.h:5
+msgid "Copy secret"
+msgstr "Копирай секретния ключ"
+
+#: ../btsyncapp.glade.h:6
+msgid "Date"
+msgstr "Дата"
+
+#: ../btsyncapp.glade.h:7
+msgid "Device"
+msgstr "Устройство"
+
+#: ../btsyncapp.glade.h:8
+msgid "Device name:"
+msgstr "Име на устройството:"
+
+#: ../btsyncapp.glade.h:9
+msgid "Devices"
+msgstr "Устройства"
+
+#: ../btsyncapp.glade.h:10
+msgid "Displays a QR-code that permits easy connection of a mobile device to this folder"
+msgstr "Показва QR код, позволяващ лесното свързване на мобилно устройство към тази папка"
+
+#: ../btsyncapp.glade.h:11
+msgid "Down"
+msgstr "Свалено"
+
+#: ../btsyncapp.glade.h:12
+msgid "Edit .SyncIgnore"
+msgstr "Редактирай .SyncIgnore"
+
+#: ../btsyncapp.glade.h:13
+msgid "Edit the file containing the list or filename patterns for file not being synched"
+msgstr "Редактиране на файла, съдържащ списък с имената или шаблоните на файловете, който не трябва да бъдат синхронизирани"
+
+#: ../btsyncapp.glade.h:14
+msgid "Event"
+msgstr "Събитие"
+
+#: ../btsyncapp.glade.h:15
+msgid "File"
+msgstr "Файл"
+
+#: ../btsyncapp.glade.h:16
+msgid "Folder"
+msgstr "Папка"
+
+#: ../btsyncapp.glade.h:17
+msgid "Folders"
+msgstr "Папки"
+
+#: ../btsyncapp.glade.h:18
+msgid "History"
+msgstr "История"
+
+#: ../btsyncapp.glade.h:19
+msgid "Limit download rate to (kB/s):"
+msgstr "Ограничи скоростта за изтегляне до (кБ/с):"
+
+#: ../btsyncapp.glade.h:20
+msgid "Limit upload rate to (kB/s):"
+msgstr "Ограничи скоростта за качване до (кБ/с):"
+
+#: ../btsyncapp.glade.h:21
+msgid "Listening port:"
+msgstr "Порт за слушане:"
+
+#: ../btsyncapp.glade.h:22
+msgid "Open Folder"
+msgstr "Отвори папка"
+
+#: ../btsyncapp.glade.h:23
+msgid "Open SyncArchive"
+msgstr "Отвори SyncArchive"
+
+#: ../btsyncapp.glade.h:24
+msgid "Opens the folder in the file manager"
+msgstr "Отваря папка във файловия мениджър"
+
+#: ../btsyncapp.glade.h:25
+msgid "Opens the preferences dialog for the shared folder"
+msgstr "Отваря диалоговия прозорец с предпочитанията за споделена папка"
+
+#: ../btsyncapp.glade.h:26
+msgid "Opens the sync archive holding previous or deleted versions of files"
+msgstr "Отваря архива за синхронизациите, съхраняващ предишните или изтрити версии на файловете"
+
+#: ../btsyncapp.glade.h:27
+msgid "Path"
+msgstr "Път"
+
+#: ../btsyncapp.glade.h:28 ../dialogs.glade.h:18
+msgid "Preferences"
+msgstr "Предпочитания"
+
+#: ../btsyncapp.glade.h:29
+msgid "Show folder preferences"
+msgstr "Покажи предпочитанията на папката"
+
+#: ../btsyncapp.glade.h:30
+msgid "Size"
+msgstr "Размер"
+
+#: ../btsyncapp.glade.h:31
+msgid "Start BitTorrent Sync when Linux starts"
+msgstr "Пускай BitTorrent Sync при стартирането на Линукс"
+
+#: ../btsyncapp.glade.h:32
+msgid "Status"
+msgstr "Статус"
+
+#: ../btsyncapp.glade.h:33
+msgid "This name will be shown on other devices linked to your shared folders"
+msgstr "Това име ще се показва на другите устройства, свързани с вашите споделени папки"
+
+#: ../btsyncapp.glade.h:34
+msgid "Transfers"
+msgstr "Прехвърляния"
+
+#: ../btsyncapp.glade.h:35
+msgid "Up"
+msgstr "Качено"
+
+#: ../btsyncapp.glade.h:36
+msgid "Use NAT UPnP port mapping"
+msgstr "Използвай NAT UPnP порт картографиране"
+
+#: ../btsyncstatus.glade.h:1
+msgid "About BitTorrent Sync"
+msgstr "Относно BitTorrent Sync"
+
+#: ../btsyncstatus.glade.h:2
+msgid "BitTorrent Status"
+msgstr "BitTorrent статус"
+
+#: ../btsyncstatus.glade.h:3
+msgid "By using this application, you agree to our Privacy Policy and Terms.\n"
+"http://www.bittorrent.com/legal/privacy\n"
+"http://www.bittorrent.com/legal/terms-of-use"
+msgstr "Използвайки това приложение, Вие се съгласявате с нашата\n"
+"декларация за поверителност и условия за ползване.\n"
+" http://www.bittorrent.com/legal/privacy\n"
+"http://www.bittorrent.com/legal/terms-of-use"
+
+#: ../btsyncstatus.glade.h:6
+msgid "Copyright © 2013, BitTorrent Inc."
+msgstr "Авторски права © 2013, BitTorrent Inc."
+
+#: ../btsyncstatus.glade.h:7
+msgid "Enable Debug Logging"
+msgstr "Включи дебъг дневника"
+
+#: ../btsyncstatus.glade.h:8
+msgid "Linux UI Version 0.0"
+msgstr "Линукс версия на потребителския интерфейс 0.0"
+
+#: ../btsyncstatus.glade.h:9
+msgid "Open BitTorrent Sync..."
+msgstr "Отвори BitTorrent Sync..."
+
+#: ../btsyncstatus.glade.h:10
+msgid "Open Original Manual"
+msgstr "Отвори ръководството"
+
+#: ../btsyncstatus.glade.h:11
+msgid "Open Web UI"
+msgstr "Отвори уеб интерфейса"
+
+#: ../btsyncstatus.glade.h:12
+msgid "Pause Syncing"
+msgstr "Пауза на синхронизирането"
+
+#: ../btsyncstatus.glade.h:13
+msgid "Quit BitTorrent Sync"
+msgstr "Спри BitTorrent Sync"
+
+#: ../btsyncstatus.glade.h:14
+msgid "Send Feedback"
+msgstr "Напиши на разработчиците"
+
+#: ../btsyncstatus.glade.h:15
+msgid "localhost:8888"
+msgstr "localhost:8888"
+
+#: ../dialogs.glade.h:1
+msgid ":"
+msgstr ":"
+
+#: ../dialogs.glade.h:2
+msgid "Add folder to sync"
+msgstr "Добави папка за синхронизиране"
+
+#: ../dialogs.glade.h:3
+msgid "Add ip:port or host:port of known clients"
+msgstr "Добави ip:порт или хост:порт за известните клиенти"
+
+#: ../dialogs.glade.h:4
+msgid "Advanced Preferences"
+msgstr "Разширени настройки"
+
+#: ../dialogs.glade.h:5
+msgid "Choose"
+msgstr "Избери"
+
+#: ../dialogs.glade.h:6
+msgid "Folder to sync:"
+msgstr "Папка за синхронизиране:"
+
+#: ../dialogs.glade.h:7
+msgid "Full Access"
+msgstr "Пълен достъп"
+
+#: ../dialogs.glade.h:8
+msgid "Full access"
+msgstr "Пълен достъп"
+
+#: ../dialogs.glade.h:9
+msgid "Full access secret"
+msgstr "Пълен достъп до секрета"
+
+#: ../dialogs.glade.h:10
+msgid "Generate"
+msgstr "Генерирай"
+
+#: ../dialogs.glade.h:11
+msgid "Generate a new secret or enter shared folder secret"
+msgstr "Генерирайте нов секрет или въведете вече съществуващ"
+
+#: ../dialogs.glade.h:12
+msgid "Hosts"
+msgstr "Хостове"
+
+#: ../dialogs.glade.h:13
+msgid "Name"
+msgstr "Име"
+
+#: ../dialogs.glade.h:14
+msgid "New Predefined Host"
+msgstr "Нов предварително определен хост"
+
+#: ../dialogs.glade.h:15
+msgid "New known host address:"
+msgstr "Нов известен адрес на хоста:"
+
+#: ../dialogs.glade.h:16
+msgid "One-time secret"
+msgstr "Еднократен секрет"
+
+#: ../dialogs.glade.h:17
+msgid "One-time secret should be used within 24 hours"
+msgstr "Използвайте еднократния секрет в продължение на 24 часа"
+
+#: ../dialogs.glade.h:19
+msgid "Read Only"
+msgstr "Само за четене"
+
+#: ../dialogs.glade.h:20
+msgid "Read only"
+msgstr "Само за четене"
+
+#: ../dialogs.glade.h:21
+msgid "Read only secret"
+msgstr "Секрет само за четене"
+
+#: ../dialogs.glade.h:22
+msgid "Remove Shared Folder"
+msgstr "Премахни споделената папка"
+
+#: ../dialogs.glade.h:23
+msgid "Reset"
+msgstr "Нулирай"
+
+#: ../dialogs.glade.h:24
+msgid "Scan QR"
+msgstr "Сканирай QR кода"
+
+#: ../dialogs.glade.h:25
+msgid "Scan this QR code with your mobile\n"
+"device to connect sync folders"
+msgstr "Сканирайте този QR код с вашето мобилно устройство, за да свържете синхронизираните папки"
+
+#: ../dialogs.glade.h:27
+msgid "Search DHT network"
+msgstr "Търсене по DHT"
+
+#: ../dialogs.glade.h:28
+msgid "Search LAN"
+msgstr "Търсене в локалната мрежа"
+
+#: ../dialogs.glade.h:29
+msgid "Secret Keys"
+msgstr "Секретни ключове"
+
+#: ../dialogs.glade.h:30
+msgid "Shared Folder Properties"
+msgstr "Свойства на споделената папка"
+
+#: ../dialogs.glade.h:31
+msgid "Shared secret:"
+msgstr "Споделен секрет:"
+
+#: ../dialogs.glade.h:32
+msgid "Store deleted files in SyncArchive"
+msgstr "Съхранявай изтритите файлове в SyncArchive"
+
+#: ../dialogs.glade.h:33
+msgid "This folder will be removed from BitTorrent Sync and no longer synced with other devices"
+msgstr "Тази папка ще бъде премахната от BitTorrent Sync и вече няма да се синхронизира с други устройства"
+
+#: ../dialogs.glade.h:34
+msgid "Use predefined hosts"
+msgstr "Използвай предварително определени хостове"
+
+#: ../dialogs.glade.h:35
+msgid "Use relay server when required"
+msgstr "Използвай релей сървър, когато се изисква"
+
+#: ../dialogs.glade.h:36
+msgid "Use tracker server"
+msgstr "Използвай тракер сървър"
+
+#: ../dialogs.glade.h:37
+msgid "Value"
+msgstr "Значение"
+
+#: ../dialogs.glade.h:38
+msgid "Value:"
+msgstr "Значение:"
+
+#: ../btsyncutils.py:163
+msgid "bytes"
+msgstr "байта"
+
+#: ../btsyncutils.py:163
+msgid "KB"
+msgstr "кБ"
+
+#: ../btsyncutils.py:163
+msgid "MB"
+msgstr "МБ"
+
+#: ../btsyncutils.py:163
+msgid "GB"
+msgstr "ГБ"
+
+#: ../btsyncutils.py:167
+msgid "TB"
+msgstr "ТБ"
+
