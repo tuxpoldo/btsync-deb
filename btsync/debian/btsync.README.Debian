@@ -13,17 +13,19 @@ of the default instance can be changed by executing the command:
 `which sudo` dpkg-reconfigure btsync
 
 When creating configuration files manually, there are some possibilities
-to specify additional configuration parameters.
+to specify additional configuration parameters that affect the way the
+daemon is started and runs.
 
-Configuration parameters not parsed by btsync but by the daemon
-init script can be supplied as comments in the configuration file.
+These Configuration parameters are not parsed by btsync itself but by the
+daemon init script and therefore must be supplied as comments in the
+configuration file.
 
 The following parameters are supported:
 
-DAEMON_UID:      A uid for supplying the user under which
+DAEMON_UID:      A uid for specifying the user under which
                  the btsync daemon should run
 
-DAEMON_GID:      A gid for supplying the group under which
+DAEMON_GID:      A gid for specifying the group under which
                  the btsync daemon should run. If omitted
                  the daemon will run under the primary group
                  of the user
@@ -55,19 +57,9 @@ The parameter definition must use an equal sign ("="):
 This example will launch the instance running under the credentials
 of the user "jdoe" using 0002 as umask
 
-
-The old mechanism using the encoding in the configuration file
-name following the naming scheme
-
-  <damon name>[.<user>[.<group>]].conf
-
-is still supported but is superseded by data supplied in the configuration
-file itself. Support WILL be dismissed in future releases. PLEASE DO NOT USE
-THIS METHOD ANY MORE AND UPGRADE YOUR EXISTING CONFIGURATIONS!
-
-By specifying <user> and <group> it is possible to specify under which
-credentials the daemon runs. In this case it MUST be assured that the
-daemon is able to read and write all files he has to access:
+By specifying <DAEMON_UID> and <DAEMON_GID> it is possible to specify
+under which credentials the daemon runs. In this case it MUST be assured
+that the daemon is able to read and write all files he has to access:
 
 1. The daemon must be able to read his own configuration file. Since the
    configuration file may contain sensitive data (the userame and password
@@ -102,5 +94,5 @@ It can assume the values
 The variable DAEMON_ARGS allows one to specify additional commandline
 parameters passed to the daemon.
 
- -- Leo Moll <leo.moll@yeasoft.com>  Thu, 13 Mar 2014 21:54:21 +0100
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 03 Apr 2014 14:55:12 +0200
 
