@@ -1,5 +1,5 @@
-BitTorrent Sync Debianoid Packaging
-===================================
+BitTorrent Sync Packaging Project
+=================================
 
 [BitTorrent&reg; Sync][1] from BitTorrent&reg; Inc. is a simple tool that
 applies p2p protocol for direct live folder sync with maximum security, network
