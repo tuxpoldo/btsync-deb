@@ -1,0 +1,8 @@
+bind-shim for Debian
+--------------------
+
+Since this is a real small library, there is no official source
+archive. The one and only souce file can be downloaded under
+http://www.ryde.net/code/bind.c.txt and contains all needed
+documentation in the source itself...
+

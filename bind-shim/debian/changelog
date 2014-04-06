@@ -1,0 +1,5 @@
+bind-shim (1.0-1) unstable; urgency=low
+
+  * Initial release (Closes: #94)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sun, 06 Apr 2014 15:10:57 +0200

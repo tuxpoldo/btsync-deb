@@ -20,6 +20,9 @@
 /btsync-common/powerpc
 /btsync-common/BitTorrentSyncUserGuide.pdf
 
+# bind shim source and intermediate files
+/bind-shim_*
+
 # maintainers helpers
 /publishall.sh
 /conf

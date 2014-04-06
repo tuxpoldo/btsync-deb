@@ -1,0 +1,27 @@
+bind-shim for Debian
+--------------------
+
+   LD_PRELOAD library to make bind and connect to use a virtual
+   IP address as localaddress. Specified via the enviroment
+   variable BIND_ADDR.
+
+   Example in bash to make inetd only listen to the localhost
+   lo interface, thus disabling remote connections and only
+   enable to/from localhost:
+
+   BIND_ADDR="127.0.0.1" LD_PRELOAD=/usr/lib/bind.so /sbin/inetd
+
+
+   Example in bash to use your virtual IP as your outgoing
+   sourceaddress for ircII:
+
+   BIND_ADDR="your-virt-ip" LD_PRELOAD=/usr/lib/bind.so ircII
+
+   Note that you have to set up your servers virtual IP first.
+
+
+   This program was made by Daniel Ryde
+   email: daniel@ryde.net
+   web:   http://www.ryde.net/
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sun, 06 Apr 2014 15:10:57 +0200

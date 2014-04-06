@@ -1,0 +1,49 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# make it work without cddb since cdbs assumes that the makefile
+# will be executed from the project directory but we need this vars
+# in target get-orig-source that MUST work from every directory
+
+DEB_DEBIAN_DIR=$(dir $(firstword $(MAKEFILE_LIST)))
+DEB_UPSTREAM_VERSION=$(shell dpkg-parsechangelog -l$(DEB_DEBIAN_DIR)/changelog \
+				| sed -rne 's,^Version: ([^-]+).*,\1,p')
+DEB_SOURCE_PACKAGE=$(shell dpkg-parsechangelog -l$(DEB_DEBIAN_DIR)/changelog \
+				| sed -rne 's,^Source: (.*),\1,p')
+
+
+%:
+	dh $@ 
+
+override_dh_auto_build:
+	dh_auto_build
+	gcc -nostartfiles -fpic -shared bind.c -o bind.so -ldl -D_GNU_SOURCE
+
+override_dh_install:
+	dh_install
+	dh_install bind.so usr/lib
+
+override_dh_clean:
+	dh_clean
+	rm -f bind.so
+
+get-orig-source: make-orig-source
+	echo get-orig-source
+
+make-orig-source:
+	if [ ! -f $(DEB_DEBIAN_DIR)../../$(DEB_SOURCE_PACKAGE)_$(DEB_UPSTREAM_VERSION).orig.tar.gz ]; then \
+		rm -rf /tmp/$(DEB_SOURCE_PACKAGE); \
+		mkdir -p /tmp/$(DEB_SOURCE_PACKAGE); \
+		cp -a $(DEB_DEBIAN_DIR)../ /tmp/$(DEB_SOURCE_PACKAGE)/; \
+		tar -C /tmp --exclude debian --exclude '.git*' -czf $(DEB_DEBIAN_DIR)../../$(DEB_SOURCE_PACKAGE)_$(DEB_UPSTREAM_VERSION).orig.tar.gz $(DEB_SOURCE_PACKAGE); \
+		rm -rf /tmp/$(DEB_SOURCE_PACKAGE); \
+	fi
+

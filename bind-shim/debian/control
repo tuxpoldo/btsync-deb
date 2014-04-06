@@ -1,0 +1,15 @@
+Source: bind-shim
+Section: net
+Priority: extra
+Maintainer: Leo Moll <leo.moll@yeasoft.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.2
+Homepage: http://www.ryde.net/code/
+
+Package: bind-shim
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Force binding on a specific IP and/or port
+ LD_PRELOAD library to make bind and connect to use a virtual
+ IP address as localaddress. Specified via the enviroment
+ variable BIND_ADDR.
