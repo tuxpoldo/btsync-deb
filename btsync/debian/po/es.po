@@ -368,23 +368,23 @@ msgstr "Puede especificar el nivel de amabilidad («niceness») del servicio de 
 #. Description
 #: ../btsync.templates:27002
 msgid "External port number reported to the tracker:"
-msgstr ""
+msgstr "Número de puerto externo para reportar al seguidor:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:27002
 msgid "Set external port number that Sync will report to the tracker. This port will be used for incoming TCP connections. Specify 0 to let BitTorrent Sync choose the port number."
-msgstr ""
+msgstr "Establece el puerto externo que Sync reportará al seguidor. Este puerto se usará para las conexiones TCP entrantes. Indique 0 para permitir a BitTorrent Sync que elija el número de puerto"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:28001
 msgid "Debug logfile size in MB:"
-msgstr ""
+msgstr "Tamaño del archivo de trazas de depuración en MB:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:28001
 msgid "Sets the size for the debug sync.log file. When the log file reaches this size, it is renamed to sync.log.old and a new sync.log file is created. Note: only 2 files (sync.log and sync.log.old) are kept on the hard disk at the same time if debug logging is enabled."
-msgstr ""
+msgstr "Establece el tamaño para el archivo sync.log de depuración. Cuando el archivo llega a este tamaño se renombre a sync.log.old y se crea un nuevo archivo sync.log. Nota: solo se mantienen 2 archivos (sync.log y sync.log.old) en el disco duro a la vez, si el registro de depuración está activado."
 
