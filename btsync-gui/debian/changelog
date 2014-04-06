@@ -1,6 +1,7 @@
 btsync-gui (0.8.1-2) unstable; urgency=low
 
   * Added Bulgarian translation by Atanas Kovachki (Closes #121)
+  * Added Polish translation by Damian Szymański (Closes #123)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Fri, 04 Apr 2014 12:00:00 +0100
 
