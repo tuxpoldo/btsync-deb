@@ -237,6 +237,20 @@ adjust_storage_path () {
 	if [ -n "${CREDENTIALS}" ]; then
 		chown -R ${CREDENTIALS} "${STORAGE_PATH}"
 	fi
+	# and adapt the storage path permissions (Closes #122)
+	chmod 700 "${STORAGE_PATH}"
+	adjust_storage_path_file "${STORAGE_PATH}/settings.dat"
+	adjust_storage_path_file "${STORAGE_PATH}/settings.dat.old"
+	adjust_storage_path_file "${STORAGE_PATH}/sync.dat"
+	adjust_storage_path_file "${STORAGE_PATH}/sync.dat.old"
+	adjust_storage_path_file "${STORAGE_PATH}/sync.log"
+	adjust_storage_path_file "${STORAGE_PATH}/sync.log.old"
+}
+
+adjust_storage_path_file () {
+	if [ -f $1 ]; then
+		chmod 600 $1
+	fi
 }
 
 adjust_debug_flags () {
@@ -299,6 +313,7 @@ start_btsync () {
 		sleep 1
 		WAITCNT=$(($WAITCNT + 1))
 	done
+	adjust_storage_path
 	log_info "$NAME instance $BASENAME started successfully"
 	log_end_msg $STATUS
 	STATUS=0
@@ -313,6 +328,7 @@ stop_btsync () {
 		--retry=TERM/30/KILL/5 \
 		--exec $DAEMON --pidfile /var/run/$NAME.$BASENAME.pid  || STATUS=1
 	rm /var/run/$NAME.$BASENAME.pid
+	adjust_storage_path
 	if [ $STATUS -gt 0 ]; then
 		log_error_msg "Failed to stop $NAME instance $BASENAME"
 	else
