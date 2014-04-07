@@ -269,6 +269,7 @@ fix_permissions() {
 				;;
 			esac
 		fi
+		chmod 700 /var/lib/btsync
 	fi
 }
 
@@ -284,11 +285,24 @@ configure)
 	fi
 	;;
 
+triggered)
+	case "$2" in
+	btsync-common-changed)
+		invoke-rc.d btsync restart
+		;;
+	bind-shim-changed)
+		invoke-rc.d btsync restart
+		;;
+	*)
+		echo "Unknown trigger '$2' received" >&2 
+		;;
+	;;
+
 abort-upgrade|abort-remove|abort-deconfigure)
 	;;
 
 *)
-	echo "postinst called with unknown argument \`$1'" >&2
+	echo "postinst called with unknown argument '$1'" >&2
 	exit 1
 	;;
 esac
