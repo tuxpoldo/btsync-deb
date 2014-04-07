@@ -19,7 +19,11 @@ With about 100.000 topic views and over 23 pages, I can only say:
 __THANK YOU ALL!!! THANK YOU FOR YOUR GOOD IDEAS, YOUR SUPPORT AND YOUR
 ENCOURAGEMENT!__
 
+Many thanks also to Daniel Ryde <daniel@ryde.net> for [bind.so][2] that makes it
+possible to bind BitTorrent Sync to a specific interface.
+
 [1]: http://forum.bittorrent.com/topic/18974-debian-and-ubuntu-server-unofficial-packages-for-bittorrent-sync/
+[2]: http://www.ryde.net/code/bind.c.txt
 
 ### Localization ###
 

@@ -96,12 +96,13 @@ is:
 <instance_name>.conf
 ```
 
-where `instance_name` should be a string consisting of alphanumeric characters.
+where `<instance_name>` should be a string consisting of alphanumeric
+characters.
 
 The default instance maintained by _debconf_ has also a configuration file that
 is named `debconf-default.conf`. This name __shall never be used__ by manually
 created configuration files, since it may be deleted or overwritten by
-_debconf_. This file __shall never be edited manually__ since it is often
+_debconf_. This file __shall also never be edited manually__ since it is often
 rewritten and/or created/deleted by _debconf_. If you want to manage the default
 instance, you must always use the command:
 
@@ -111,7 +112,7 @@ instance, you must always use the command:
 
 Each configuration file in `/etc/btsync` defines a separate running BitTorrent
 Sync _instance_ (that means: a process). When defining more than one instance
-on a system, there are some rules that have to be followed:
+on a system, there are some rules that must be considered:
 
 1. The listening ports (parameter `listening_port`) must be unique for each
    BitTorrent Sync instance
@@ -232,7 +233,7 @@ bound to a specific address.
 In order to limit the operation of BitTorrent Sync to a specific interface in a
 multihomed environment, a so called [preload shim](https://en.wikipedia.org/wiki/Shim_(computing))
 can be used. The BitTorrent Sync repository contains a precompiled version of
-[Daniel Ryde's bins.so shim](http://www.ryde.net/code/) that must be installed
+[Daniel Ryde's bind.so shim](http://www.ryde.net/code/) that must be installed
 with:
 
 ```bash
