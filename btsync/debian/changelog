@@ -3,6 +3,7 @@ btsync (1.3.1-1) unstable; urgency=low
   * Fixed access to several files in the storage path (Closes #122)
   * Updated spanish translation
   * Added support for post-installation triggers
+  * Added support for bind-shim (Closes #94)
   
  -- Leo Moll <leo.moll@yeasoft.com>  Thu, 03 Apr 2014 14:14:58 +0200
 
