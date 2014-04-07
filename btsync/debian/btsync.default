@@ -2,7 +2,7 @@
 #
 # Start only these btsync instances automatically via
 # init script.
-# Allowed values are "all", "none" or space separated list of
+# Allowed values are "all", "none" or a space separated list of
 # names of the instances. If empty, "all" is assumed.
 #
 # The instance name refers to the btsync configuration file name.
@@ -13,9 +13,16 @@
 #AUTOSTART="general special"
 #
 # Optional arguments to btsync's command line. Be careful!
-# You should only add thngs here if you know EXACTLY what
+# You should only add things here if you know EXACTLY what
 # you are doing!
 DAEMON_ARGS=""
+#
+# Optional bind address for all daemons. This setting can
+# be overridden for each instance by specifying the
+# parameter as a comment in the configuration file.
+# NOTICE: this will work only, if bind-shim is installed
+#DAEMON_BIND=10.20.30.40
+#
 #
 # Enable this to see more output during the init script
 # execution

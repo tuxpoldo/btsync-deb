@@ -13,6 +13,7 @@ Architecture: all
 Pre-Depends: debconf | debconf-2.0, adduser
 Depends: ${shlibs:Depends}, ${misc:Depends},
  btsync-common (>= 1.3.67-1)
+Suggests: bind-shim
 Provides: btsync-server-daemon
 Description: Private network P2P file synchronisation daemon(s)
  BitTorrent Sync is a simple tool that applies p2p protocol for
@@ -28,3 +29,4 @@ Description: Private network P2P file synchronisation daemon(s)
  .
  This package installs BitTorrent Sync as a single or multiple
  service with or without WebUI for server/NAS deployment.
+ 

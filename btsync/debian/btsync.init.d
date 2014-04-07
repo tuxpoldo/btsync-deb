@@ -84,7 +84,7 @@ log_error_msg () {
 
 config_debug () {
 	if [ $DAEMON_INIT_DEBUG ]; then
-		log_info_msg "== ${1} ==========================="
+		log_info_msg "== COMMAND: ${1} ==========================="
 		log_info_msg "File Name: '$CONFFILE'"
 		log_info_msg "Name Part: '$BASENAME'"
 		log_info_msg "Credential Part: '$CREDENTIALS'"
@@ -95,6 +95,11 @@ config_debug () {
 		log_info_msg "PID File: '$PID_FILE'"
 		log_info_msg "Debug flags: '$DMASK'"
 		log_info_msg "Nice level: '$NICE_LEVEL'"
+	    if [ "${DAEMON_ADDR}" != "0.0.0.0" ]; then
+			log_info_msg "Bind address: '$DAEMON_ADDR'"
+		elif [ -n "${DAEMON_BIND}" ]; then
+			log_info_msg "Bind address: '$DAEMON_BIND'"
+		fi
 	fi
 }
 
@@ -136,6 +141,10 @@ config_from_conffile () {
 	NICE_LEVEL=$(grep 'DAEMON_NICE[ \t]*=' ${CONFIG_DIR}/$1 | cut -d= -f 2 | sed -e "s/ //g" -e "s/\t//g")
 	NICE_LEVEL=$(expr match "${NICE_LEVEL}" '\(-\{0,1\}+\{0,1\}[0-9]\{1,2\}\)')
 	NICE_LEVEL=${NICE_LEVEL:-0}
+	# bind address of the daemon
+	DAEMON_ADDR=$(grep 'DAEMON_BIND[ \t]*=' ${CONFIG_DIR}/$1 | cut -d= -f 2 | sed -e "s/ //g" -e "s/\t//g")
+	DAEMON_ADDR=$(expr match "${DAEMON_ADDR}" '\([0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\)')
+	DAEMON_ADDR=${DAEMON_ADDR:-0.0.0.0}
 	# storage_path as saved in config file. This parameter is mandatory
 	STORAGE_PATH=$(grep '^[[:space:]]*"storage_path"' ${CONFIG_DIR}/$1  | cut -d":" -f 2 | cut -d"," -f 1)
 	STORAGE_PATH=$(expr match "${STORAGE_PATH}" '^[[:space:]]*"\(.*\)".*')
@@ -279,7 +288,43 @@ adjust_debug_flags () {
 	# ignore mask specification file if DAEMON_DEBUG is not specified
 }
 
+shim_begin () {
+	# save original values
+	OLD_LD_PRELOAD=${LD_PRELOAD}
+	OLD_BIND_ADDR=${BIND_ADDR}
+	# from /etc/default/btsync
+	TRY_ADDR=${DAEMON_BIND}
+	if [ "${DAEMON_ADDR}" != "0.0.0.0" ]; then
+		# override from config file
+		TRY_ADDR=${DAEMON_ADDR}
+	fi
+	if [ -z ${TRY_ADDR} ]; then
+		# nothing to do
+		return
+	fi
+	# check if the shim library is installed
+	if [ ! -f /usr/lib/bind.so ]; then
+		log_warning_msg "Address bind via shim requested but no shim installed. Install bind-shim first."
+		return
+	fi
+	export LD_PRELOAD=${LD_PRELOAD}:/usr/lib/bind.so
+	export BIND_ADDR=${TRY_ADDR}
+	return
+}
+
+shim_end () {
+	LD_PRELOAD=${OLD_LD_PRELOAD}
+	BIND_ADDR=${OLD_BIND_ADDR}
+	if [ -z ${LD_PRELOAD} ]; then
+		unset LD_PRELOAD
+	fi
+	if [ -z ${BIND_ADDR} ]; then
+		unset BIND_ADDR
+	fi
+}
+
 start_btsync () {
+	shim_begin
 	config_debug "START"
 	log_daemon_msg "${1:-Starting btsync instance '${BASENAME}'}"
 	adjust_arm_alignment
@@ -297,6 +342,7 @@ start_btsync () {
 	if [ $STATUS -gt 0 ]; then
 		# start-stop-daemon failed. Let's exit immediately
 		log_error_msg "Failed to start $NAME instance $BASENAME - please check the configuration file $CONFIG_DIR/$CONFFILE"
+		shim_end
 		return 1
 	fi
 	# since btsync does not return an acceptable error
@@ -307,6 +353,7 @@ start_btsync () {
 		# and wait for the process to come up
 		if [ $WAITCNT -ge $TIMEOUT ]; then
 			log_error_msg "Failed to start $NAME instance $BASENAME - please check the configuration file $CONFIG_DIR/$CONFFILE"
+			shim_end
 			STATUS=1
 			return 1
 		fi
@@ -314,6 +361,7 @@ start_btsync () {
 		WAITCNT=$(($WAITCNT + 1))
 	done
 	adjust_storage_path
+	shim_end
 	log_info "$NAME instance $BASENAME started successfully"
 	log_end_msg $STATUS
 	STATUS=0
