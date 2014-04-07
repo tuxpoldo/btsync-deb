@@ -1,3 +1,9 @@
+bind-shim (1.0-2) unstable; urgency=low
+
+  * Added support for dpkg triggers
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Mon, 07 Apr 2014 22:08:10 +0200
+
 bind-shim (1.0-1) unstable; urgency=low
 
   * Initial release (Closes: #94)
