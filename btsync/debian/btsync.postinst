@@ -296,6 +296,7 @@ triggered)
 	*)
 		echo "Unknown trigger '$2' received" >&2 
 		;;
+	esac
 	;;
 
 abort-upgrade|abort-remove|abort-deconfigure)
