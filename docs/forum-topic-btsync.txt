@@ -1,14 +1,26 @@
 [color=#4b0082][b]BTSYNC PACKAGES FOR DEBIAN, UBUNTU AND OTHER DERIVED DISTRIBUTIONS[/b][/color]
 
-If you are using Ubuntu, Debian, Raspian or other derived distributions based on Debian and you are searching for an easy way to deploy BitTorrent Sync on your systems, this topic is definitively for you. Here you will find information about a family of easy to install deb-packages that offers both a solution for the need of typical server/cloud operators as for interactive users.
+BitTorrent® Inc. delivers for Linux users only a raw binary file without any deployment concept or setup system. It's up to the user to create a reliable startup and shutdown logic, manage configuration files, internal storage directories and everything else related to file and directory permissions, application update and various other aspects.
 
-The [b]server packages[/b] offer full debconf-support for the automated creation and maintenance of an optional default configuration as well as the possibility to manually configure single or multiple BitTorrent Sync instances with highly customised configurations.
+The BitTorrent Sync Server Package ([font=courier new,courier,monospace][b]btsync[/b][/font]) is the ideal solution for all users that want to deploy BitTorrent Sync on Linux servers running Debian or other derived distributions like Ubuntu, Raspbian, Linux Mint or similar.
 
-The [b]desktop user packages[/b] are explicitly intended for [b]desktop usage[/b] and provide a user experience similar to BitTorrent Sync on Windows or Mac OSX by still giving the user the possibility to customise his installation if he has special needs.
+[color=#ff0000][b]THIS SERVER PACKAGE IS UNOFFICIAL AND NOT THE WORK OF BITTORRENT® INC. PLEASE DO NOT CONTACT THE BITTORRENT® INC. SUPPORT WITH QUESTIONS OR PROBLEMS RELATED TO THE USE OF THE PACKAGE. YOU WILL FIND COMPETENT HELP AND SUPPORT IN THIS THREAD[/b][/color]
 
-This topic covers only the [b]server packages[/b]. If you are searching for the [b]desktop user packages,[/b]  [url="http://forum.bittorrent.com/topic/19560-debian-and-ubuntu-desktop-packages-for-bittorrent-sync/"][b]please look here[/b][/url].
 
-[color=#ff0000][b]THESE PACKAGES ARE UNOFFICIAL AND NOT THE WORK OF BITTORRENT® INC. PLEASE DO NOT CONTACT THE BITTORRENT® INC. SUPPORT WITH QUESTIONS OR PROBLEMS RELATED TO THE USE OF THE PACKAGES. YOU WILL FIND COMPETENT HELP AND SUPPORT IN THIS THREAD[/b][/color]
+[color=#a52a2a][b]TYPICAL USE CASES[/b][/color]
+
+The BitTorrent Sync Server Package is designed to run one or more BitTorrent Sync background processes (called "[i]instances[/i]") on servers where no specific user is usually logged on. Since the server package does not provide any GUI (except for the optional Web UI provided by BitTorrent Sync itself), it can be also installed on headless servers (without any desktop environment).
+
+The server version is particularly suitable for the following use cases:
+[LIST]
+[*]BitTorrent Sync is used as a background service, to keep directories in sync between all servers of a distributed infrastructure like a PXE boot system and groups of shared configuration files.[/*]
+[*]Always-on instances of BitTorrent Sync for providing an always available external copy and source of replicated data for other BitTorrent Sync clients.[/*]
+[*]A content distribution network based on shared folders.[/*]
+[*]Customized services built upon the functionality of BitTorrent Sync.[/*]
+[/LIST]
+
+This topic covers only the [b]server package[/b]. If you are searching for the [b]desktop user package,[/b] [url="http://forum.bittorrent.com/topic/19560-debian-and-ubuntu-desktop-packages-for-bittorrent-sync/"][b]please look here[/b][/url].
+
 
 [color=#008000][b]INSTALLATION ON DEBIAN, UBUNTU, LINUX MINT, RASPBIAN OR OTHER DEBIAN DERIVATES[/b][/color]
 
@@ -25,38 +37,55 @@ Now update the package index and install [font=courier new,courier,monospace][b]
 `which sudo` apt-get install btsync
 [/code]
 
-After downloading the packages, the installation begins. The package manager will ask you, if you want a default instance of BitTorrent Sync to be created. If you say [b]yes[/b], you will be guided through the installation and at the end you will have a fully operational BitTorrent Sync daemon maintained by [font=courier new,courier,monospace][b]debconf[/b][/font]. The configuration can be modified and fine tuned at any time by performing the following command:
+After downloading the packages, the installation begins. The package manager will ask you, if you want a default instance of BitTorrent Sync to be created. If you answer [b]yes[/b], you will be guided through the installation and when finished you will have a fully operational BitTorrent Sync instance maintained by [i]debconf[/i]. The configuration can be modified and fine tuned at any time by performing the following command:
 [code]
 `which sudo` dpkg-reconfigure btsync
 [/code]
 
-Here you can select also delete the default instance, by answering [b]no[/b] to the question if you want a default instance to be created.
-
-Beside the presence of a default instance of btsync, the advanced administrator will be able, to create many instances of btsync, by creating configuration files in the directory [b][font=courier new', courier, monospace]/etc/btsync[/font][/b]
+Here you can also choose to delete the default instance by answering [b]no[/b] to the initial question.
 
 
-[color=#800080][b]USAGE NOTES[/b][/color]
+[color=#008000][b]USAGE NOTES[/b][/color]
 
-This version of BitTorrent Sync is mainly intended for server usage. It allows to start one or more BitTorrent Sync daemons based on configuration files located in [font=courier new', courier, monospace][b]/etc/btsync[/b][/font]
+The BitTorrent Sync Server Package mainly consists of an init-style startup script that manages every operational aspect of running BitTorrent Sync instances.
 
-The package installation offers a possibility to create a default instance of BitTorrent Sync. All relevant parameters can be specified interactively during the installation. At any time, the configuration of the default instance can be changed by executing the command:
+
+[color=#006400][b]Instance Configuration Files[/b][/color]
+
+All operational parameters for BitTorrent Sync instances are configured in configuration files located in the directory [font=courier new,courier,monospace][b]/etc/btsync[/b][/font]. These configuration files basically are [url=http://en.wikipedia.org/wiki/JSON][b]JSON Files[/b][/url] and follow a very strict syntax. In addition to the JSON specification, comments are also supported. The support of commented lines permits to specify additional parameters that are not directly parsed by the BitTorrent Sync executable itself but by the init-script.
+
+The naming convention for configuration files defining BitTorrent Sync instances is:
+[code]
+<instance_name>.conf
+[/code]
+where [font=courier new,courier,monospace][b]<instance_name>[/b][/font] should be a string consisting of alphanumeric characters.
+
+The default instance maintained by [i]debconf[/i] has also a configuration file that is named [font=courier new,courier,monospace][b]debconf-default.conf[/b][/font]. This name [b]shall never be used[/b] by manually created configuration files, since it may be deleted or overwritten by [i]debconf[/i]. This file [b]shall also never be edited manually[/b] since it is often rewritten and/or created/deleted by debconf. If you want to manage the default instance, you must always use the command:
 [code]
 `which sudo` dpkg-reconfigure btsync
 [/code]
-
-When creating configuration files manually, there are some possibilities to specify additional configuration parameters.
-
-Configuration parameters not parsed by BitTorrent Sync but by the daemon init script can be supplied as comments in the configuration file.
-
-The following parameters are supported:
+Each configuration file in [font=courier new,courier,monospace][b]/etc/btsync[/b][/font] defines a separate running BitTorrent Sync [i]instance[/i] (that means: a process). When defining more than one instance on a system, there are some rules that must be considered:
 [LIST]
-[*][b]DAEMON_UID[/b]: A uid for specifying the user under which the btsync daemon should run[/*]
-[*][b]DAEMON_GID[/b]: A gid for specifying the group under which the btsync daemon should run. If omitted the daemon will run under the primary group of the user[/*]
-[*][b]DAEMON_UMASK[/b]: The umask (up to 4 octal digits) for the btsync daemon. If omitted the default umask is used.[/*]
-[*][b]DAEMON_DEBUG[/b]: The debug mask (4 hex digits) for the btsync daemon. If omitted the init script will not touch potential settings defined manually. If set to [b]0000[/b], a potential settings file will be deleted. Full detail is set by specifying [b]FFFF[/b][/*]
-[*][b]DAEMON_NICE[/b]: The niceness level of the btsync daemon, which affects process scheduling. Nicenesses range from -20 (most favorable scheduling) to 19 (least favorable).[/*]
+[*]The listening ports (parameter [font=courier new,courier,monospace][b]listening_port[/b][/font]) must be unique for each BitTorrent Sync instance[/*]
+[*]The internal database path (parameter [font=courier new,courier,monospace][b]storage_path[/b][/font]) must be unique for each BitTorrent Sync instance[/*]
+[*]If the Web UI is enabled, the Web UI bind address and listening port (parameter [font=courier new,courier,monospace][b]listen[/b][/font]) must be unique for each BitTorrent Sync instance[/*]
 [/LIST]
-The parameter definition must use an equal sign ("="):
+The syntax and configuration parameters of a BitTorrent Sync configuration file are partially documented in the example file [font=courier new,courier,monospace][b]/etc/btsync/samples/complex.conf[/b][/font] and in the [url=http://btsync.s3-website-us-east-1.amazonaws.com/BitTorrentSyncUserGuide.pdf]official BitTorrent Sync manual[/url] which can be also found in[font=courier new,courier,monospace][b] /usr/share/doc/btsync-common/BitTorrentSyncUserGuide.pdf.gz[/b][/font].
+
+There are additional parameters that are parsed by the init script upon startup and affect many important aspects. These parameters are not parsed directly by BitTorrent Sync and therefore have to be placed in comment lines. In order to improve the readability of configuration files, they should be grouped together and placed at the beginning of the configuration file. The generic syntax of such parameters is:
+[code]
+// PARAMETER_NAME=<parameter value>
+The following parameters are supported:
+[/code]
+[LIST]
+[*][b]DAEMON_UID[/b]: A uid (user id) for specifying the user under which the BitTorrent Sync instance should run[/*]
+[*][b]DAEMON_GID[/b]: A gid (group id) for specifying the group under which the BitTorrent Sync instance should run[/*]
+[*][b]DAEMON_UMASK[/b]: The umask (up to 4 octal digits) for the BitTorrent Sync instance. If omitted the default umask is used.[/*]
+[*][b]DAEMON_DEBUG[/b]: The debug mask (4 hex digits) for the BitTorrent Sync instance. If omitted the init script will not touch potential settings defined manually. If set to [font=courier new,courier,monospace][b]0000[/b][/font], a potential settings file will be deleted. Full detail is set by specifying [font=courier new,courier,monospace][b]FFFF[/b][/font]. The log file can be found in the directory specified by [font=courier new,courier,monospace][b]storage_path[/b][/font] and is named [font=courier new,courier,monospace][b]sync.log[/b][/font][/*]
+[*][b]DAEMON_NICE[/b]: The niceness level of the BitTorrent Sync instance, which affects the process scheduling. Nicenesses range from -20 (most favorable scheduling) to 19 (least favorable).[/*]
+[*][b]DAEMON_BIND[/b]: This parameter works only in conjunction with the package [font=courier new,courier,monospace][b]bind-shim[/b][/font]. Please see the specific section below covering the specific interface binding topic.
+[/*]
+[/LIST]
 [code]
 //
 // DAEMON_UID=jdoe
@@ -66,62 +95,48 @@ The parameter definition must use an equal sign ("="):
 
 This example will launch the instance running under the credentials of the user "[b]jdoe[/b]" using [b]0002[/b] as umask.
 
-The old mechanism using the encoding in the configuration file name following the naming scheme
-
-[b][font=courier new', courier, monospace]<damon name>[.<user>[.<group>]].conf[/font][/b]
-
-is still supported but is superseded by data supplied in the configuration file itself. Support [b]WILL[/b] be dismissed in future releases. [b]PLEASE DO NOT USE THIS METHOD ANY MORE AND UPGRADE YOUR EXISTING CONFIGURATIONS![/b]
-
-By specifying [font=courier new', courier, monospace][b]<user>[/b][/font] and [font=courier new', courier, monospace][b]<group>[/b][/font] it is possible to specify under which credentials the daemon runs. In this case it [b]MUST[/b] be assured that the daemon is able to read and write all files he has to access:
-
+By specifying [b]DAEMON_UID[/b] and [b]DAEMON_GID[/b] it is possible to specify under which credentials the instance runs. In this case it [b]must[/b] be assured that the instance is able to read and write all files it must access:
 [LIST=1]
-[*]The daemon must be able to read his own configuration file. Since the configuration file may contain sensitive data (the userame and password for the web interface), it is usually [b]owned by the user[/b] under which the daemon runs and has the mode [font=courier new', courier, monospace][b]400 (-r--------)[/b][/font] in order to limit the access to the specific user.[/*]
-[*]The daemon must be able to read and write in his [font=courier new', courier, monospace][b]storage_path[/b][/font], since all internal control and status files (and the database of file hashes) are kept there. The ideal solution is to keep the storage_path somewhere in the home directory of the user under which the daemon will run.[/*]
-[*]Obviously the daemon must be able to read and write into the directories that will be synchronized.[/*]
+[*]The instance must be able to read its own configuration file. Since the configuration file may contain sensitive data (the userame and password for the web interface), it is usually [b]owned by the user[/b] under which the instance runs and has the mode [font=courier new,courier,monospace][b]400 (-r--------)[/b][/font] in order to limit the access to the specific user. Usually the init script takes care of adjusting the file permissions.[/*]
+[*]The instance must be able to read and write in its [font=courier new,courier,monospace][b]storage_path[/b][/font], since all internal control and status files (and the database of file hashes) are kept there. The ideal solution is to keep the [font=courier new,courier,monospace][b]storage_path[/b][/font] somewhere in the home directory of the user under which the instance will run. Usually the init script takes care of adjusting the file permissions.[/*]
+[*]Obviously the instance must be able to read and write the files and directories that will be synchronized.[/*]
 [/LIST]
+Some example configuration files are provided under [font=courier new,courier,monospace][b]/etc/btsync/samples[/b][/font]
 
-Some example configuration files are provided under
 
-[font=courier new', courier, monospace][b]/etc/btsync/samples[/b][/font]
+[color=#006400][b]Default Startup Parameters[/b][/color]
 
-The file [font=courier new', courier, monospace][b]/etc/default/btsync[/b][/font] allows to configure the way the daemon starts:
+The additional configuration file [font=courier new,courier,monospace][b]/etc/default/btsync[/b][/font] permits to specify some default startup parameters that may affect every configured instance of BitTorrent Sync.
 
-The variable [b]AUTOSTART[/b] defines which daemons are started automatically.
-It can assume the values:
+The variable [b]AUTOSTART[/b] defines which instances are started automatically. It can take the following values:
 [LIST]
-[*][font=courier new', courier, monospace][b]none [/b][/font]No daemon is started automatically[/*]
-[*][font=courier new', courier, monospace][b]all [/b][/font](default) All daemons are started automatically[/*]
-[*][font=courier new', courier, monospace][b]<list> [/b][/font]Only the specified daemons are started automatically[/*]
+[*][font=courier new,courier,monospace][b]none[/b][/font] No instance is started automatically[/*]
+[*][font=courier new,courier,monospace][b]all[/b][/font] (default) All instances are started automatically[/*]
+[*][font=courier new,courier,monospace][b]<list>[/b][/font] Only the specified instances are started automatically[/*]
 [/LIST]
-The variable [b]DAEMON_ARGS[/b] allows to specify additional command line parameters passed to the daemon.
-
-Please look also at the sample configuration files installed in [font=courier new', courier, monospace][b]/etc/btsync/samples[/b][/font].
-
-The additional configuration file [font=courier new', courier, monospace][b]/etc/default/btsync[/b][/font] permits to specify which btsync instances should be started automatically and to specify some additional parameters to pass to the btsync daemon. The default setting is to start all instances. Additional documentation can be found in the file:
+Instances not started automatically upon system startup can be managed manually from the command line:
 [code]
-# This is the configuration file for /etc/init.d/btsync
-#
-# Start only these btsync instances automatically via
-# init script.
-# Allowed values are "all", "none" or space separated list of
-# names of the instances. If empty, "all" is assumed.
-#
-# The instance name refers to the btsync configuration file name.
-# i.e. "general" would be /etc/btsync/general.conf
-#
-#AUTOSTART="all"
-#AUTOSTART="none"
-#AUTOSTART="general special"
-#
-# Optional arguments to btsync's command line. Be careful!
-# You should only add thngs here if you know EXACTLY what
-# you are doing!
-DAEMON_ARGS=""
-#
-# Enable this to see more output during the init script
-# execution
-#DAEMON_INIT_DEBUG=1
+# start a specific instance
+service btsync start <instance_name>
+# stop a specific instance
+service btsync stop <instance_name>
 [/code]
+The advanced variable[b] DAEMON_ARGS[/b] allows to specify additional command line parameters passed to the daemon. [color=#b22222][b]WARNING[/b][/color]: Be careful! You should only add things here if you know [b]EXACTLY[/b] what you are doing!
+
+The variable[b] DAEMON_BIND[/b] has the same purpose as the same parameter in the instance configuration files, but in this scope it will be applied by default to all instances. Please see the specific section below covering the specific interface binding topic.
+
+The variable [b]DAEMON_INIT_DEBUG[/b] permits to enable extended debug output of the init-script.
+
+
+[color=#000080][b]BINDING BITTORRENT SYNC TO A SPECIFIC INTERFACE[/b][/color]
+
+Unfortunately BitTorrent Sync currently does not support to bind the main service routine to a specific network interface. Currently only the internal web server providing the Web UI and the BitTorrent Sync API can be specifically bound to a specific address.
+
+In order to limit the operation of BitTorrent Sync to a specific interface in a multihomed environment, a so called [url=https://en.wikipedia.org/wiki/Shim_(computing)]preload shim[/url]) can be used. The BitTorrent Sync repository contains a precompiled version of[url=http://www.ryde.net/code/] Daniel Ryde's bind.so shim[/url] that must be installed with:
+[code=auto:0]`which sudo` apt-get install bind-shim[/code]
+The BitTorrent Sync init script does detect the presence of the library and enables support for the additional parameter[b] DAEMON_BIND[/b] that can be specified either in[font=courier new,courier,monospace][b] /etc/default/btsync[/b][/font] or in instance configuration files.
+
+By specifying a valid TCP/IP address assigned to one of the interfaces of the system, the BitTorrent Sync instance will bind only to that specific address. This will affect also the Web UI, if [font=courier new,courier,monospace][b]0.0.0.0[/b][/font] is specified as the bind address.
 
 
 [color=#ff0000][b]SOME ADDITIONAL WORDS ABOUT AUTOUPDATE[/b][/color]

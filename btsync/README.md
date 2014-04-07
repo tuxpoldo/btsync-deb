@@ -11,7 +11,7 @@ The BitTorrent Sync Server Package (`btsync`) is the ideal solution for all
 users that want to deploy BitTorrent Sync on Linux servers running Debian or
 other derived distributions like Ubuntu, Raspbian, Linux Mint or similar.
 
-__THESE SERVER PACKAGE IS UNOFFICIAL AND NOT THE WORK OF BITTORRENT® INC.
+__THIS SERVER PACKAGE IS UNOFFICIAL AND NOT THE WORK OF BITTORRENT® INC.
 PLEASE DO NOT CONTACT THE BITTORRENT® INC. SUPPORT WITH QUESTIONS OR
 PROBLEMS RELATED TO THE USE OF THE PACKAGE. YOU WILL FIND COMPETENT
 HELP AND SUPPORT IN THE [SUPPORT FORUM](http://forum.bittorrent.com/topic/18974-debian-and-ubuntu-server-unofficial-packages-for-bittorrent-sync/)__
@@ -32,8 +32,8 @@ The server version is particularly suitable for the following use cases:
   groups of shared configuration files.
 - Always-on instances of BitTorrent Sync for providing an always available
   external copy and source of replicated data for other BitTorrent Sync clients.
-- A content distribution network based on shared folders
-- Customized services built upon the functionality of BitTorrent Sync
+- A content distribution network based on shared folders.
+- Customized services built upon the functionality of BitTorrent Sync.
 
 
 ### Installation  ###
@@ -179,7 +179,7 @@ instance is able to read and write all files it must access:
   permissions.
 - The instance must be able to read and write in its `storage_path`, since all
   internal control and status files (and the database of file hashes) are kept
-  there. The ideal solution is to keep the storage_path somewhere in the home
+  there. The ideal solution is to keep the `storage_path` somewhere in the home
   directory of the user under which the instance will run. Usually the init 
   script takes care of adjusting the file permissions.
 - Obviously the instance must be able to read and write the files and
@@ -197,9 +197,9 @@ BitTorrent Sync.
 The variable **AUTOSTART** defines which instances are started automatically.
 It can take the following values:
 
-- `none` No daemon is started automatically
-- `all` (default) All daemons are started automatically
-- `<list>` Only the specified daemons are started automatically
+- `none` No instance is started automatically
+- `all` (default) All instances are started automatically
+- `<list>` Only the specified instances are started automatically
 
 Instances not started automatically upon system startup can be managed manually
 from the command line:
@@ -223,7 +223,7 @@ interface binding topic.
 The variable **DAEMON_INIT_DEBUG** permits to enable extended debug output of
 the init-script.
 
-#### Binding BitTorrent Sync to a specific interface ####
+### Binding BitTorrent Sync to a specific interface ###
 
 Unfortunately BitTorrent Sync currently does not support to bind the main
 service routine to a specific network interface. Currently only the internal
@@ -231,8 +231,8 @@ web server providing the Web UI and the BitTorrent Sync API can be specifically
 bound to a specific address.
 
 In order to limit the operation of BitTorrent Sync to a specific interface in a
-multihomed environment, a so called [preload shim](https://en.wikipedia.org/wiki/Shim_(computing))
-can be used. The BitTorrent Sync repository contains a precompiled version of
+multihomed environment, a so called [preload shim][1] can be used. The
+BitTorrent Sync repository contains a precompiled version of
 [Daniel Ryde's bind.so shim](http://www.ryde.net/code/) that must be installed
 with:
 
@@ -248,6 +248,7 @@ By specifying a valid TCP/IP address assigned to one of the interfaces of the
 system, the BitTorrent Sync instance will bind only to that specific address.
 This will affect also the Web UI, if `0.0.0.0` is specified as the bind address.
 
+[1]: https://en.wikipedia.org/wiki/Shim_(computing)
 
 ### Some Remarks about Autoupdate ###
 
