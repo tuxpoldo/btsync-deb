@@ -34,10 +34,6 @@ upgrade)
 	# handle btsync-user if installed
 	touch /var/run/btsync-user-updating
 	pkill btsync-agent
-	# handle btsync daemon if installed
-	if [ -x /etc/init.d/btsync ]; then
-		service btsync stop
-	fi
 	set -e
 	;;
 failed-upgrade)
@@ -50,10 +46,6 @@ failed-upgrade)
 	# handle btsync-user if installed
 	if [ -f /var/run/btsync-user-updating ]; then
 		rm -f /var/run/btsync-user-updating
-	fi
-	# handle btsync daemon if installed
-	if [ -x /etc/init.d/btsync ]; then
-		invoke-rc.d btsync start
 	fi
 	set -e
 	;;

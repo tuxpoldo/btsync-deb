@@ -73,10 +73,6 @@ configure)
 	if [ -f /var/run/btsync-user-updating ]; then
 		rm -f /var/run/btsync-user-updating
 	fi
-	# handle btsync daemon if installed
-	if [ -x /etc/init.d/btsync ]; then
-		invoke-rc.d btsync restart
-	fi
 	set -e
 	;;
 abort-upgrade|abort-remove|abort-deconfigure)

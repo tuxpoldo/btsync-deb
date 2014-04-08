@@ -1,8 +1,15 @@
+btsync-common (1.3.86-1) unstable; urgency=low
+
+  * New upstream release
+  * Added support for dpkg triggers
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Tue, 08 Apr 2014 17:17:11 +0200
+
 btsync-common (1.3.80-1) unstable; urgency=low
 
   * New upstream release
 
- -- Leo Moll <leo.moll@yeasoft.com>  Wed, 02 Apr 2014 22:11:31 +0100
+ -- Leo Moll <leo.moll@yeasoft.com>  Wed, 02 Apr 2014 22:11:31 +0200
 
 btsync-common (1.3.77-1) unstable; urgency=low
 
