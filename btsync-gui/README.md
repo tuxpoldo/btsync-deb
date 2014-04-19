@@ -5,7 +5,13 @@ BitTorrent® Sync is an excellent product, but as Linux user, you will miss the
 easy installation and integrated GUI provided to Windows and Mac OSX users. But
 now the dark age is over! Here comes the solution:
 
-![BitTorrent Sync Desktop](http://www.yeasoft.com/assets/images/articles/btsync-gui-1.png)
+![BitTorrent Sync Desktop](http://www.yeasoft.com/assets/images/articles/btsync-gui-1-thumb.png)
+![BitTorrent Sync Desktop](http://www.yeasoft.com/assets/images/articles/btsync-gui-2-thumb.png)
+![BitTorrent Sync Desktop](http://www.yeasoft.com/assets/images/articles/btsync-gui-3-thumb.png)
+
+![BitTorrent Sync Desktop](http://www.yeasoft.com/assets/images/articles/btsync-gui-4-thumb.png)
+![BitTorrent Sync Desktop](http://www.yeasoft.com/assets/images/articles/btsync-gui-5-thumb.png)
+![BitTorrent Sync Desktop](http://www.yeasoft.com/assets/images/articles/btsync-gui-6-thumb.png)
 
 BitTorrent Sync GUI for Linux (`btsync-gui`) is the _missing link_ for all Linux
 desktop users that aims to provide the same user experience as the original
