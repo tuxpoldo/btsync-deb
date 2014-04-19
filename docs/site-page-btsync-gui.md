@@ -303,6 +303,10 @@ If you want to contribute to the development of the packages or if you are
 curious how this all works, you may find the current sources, the deployment
 scripts and packaging on GitHub (https://github.com/tuxpoldo/btsync-deb)
 
+If you want to contribute to the localisation by translating changed strings or
+by adding support for your favourite language, you may
+[join the localisation team on POEditor.com](https://poeditor.com/join/project?hash=447194402f4913165d4ae5f2fc60ffca).
+
 If you have experienced a reproducible issue that __is related to the
 gui or the packaging and not to BitTorrent Sync itself__ you are strongly
 encouraged to [open an issue on the project's GitHub Page](https://github.com/tuxpoldo/btsync-deb/issues).

@@ -222,5 +222,7 @@ Now it's up to you to test it and give me lots of feedback in order to extend th
 
 If you want to contribute to the development of the packages or if you are curious how this all works, you may find the current sources, the deployment scripts and packaging [url=https://github.com/tuxpoldo/btsync-deb][b]on GitHub[/b][/url].
 
+If you want to contribute to the localisation by translating changed strings or by adding support for your favourite language, you may [url=https://poeditor.com/join/project?hash=447194402f4913165d4ae5f2fc60ffca]join the localisation team on POEditor.com[/url].
+
 If you have experienced a reproducible issue that [b]is related to the gui or the packaging and not to BitTorrent Sync itself[/b] you are strongly encouraged to [url=https://github.com/tuxpoldo/btsync-deb/issues]open an issue on the project's GitHub Page[/url]. Issues related to the native functionality of BitTorrent Sync should instead be discussed by creating a new topic or partecipating to an already existing topic in the [url=http://forum.bittorrent.com/forum/56-bittorrent-sync/]BitTorrent Sync Forum[/url].
 

@@ -24,6 +24,7 @@ inspired me to implement my own abstraction class
 [1]: https://github.com/marxjohnson/btsyncindicator
 [2]: https://github.com/BrandonIngalls/BTSyncAPI
 [3]: https://github.com/marxjohnson/btsyncindicator/pull/42
+[4]: https://poeditor.com/join/project?hash=447194402f4913165d4ae5f2fc60ffca
 
 ### Localization ###
 
@@ -38,6 +39,9 @@ The following People contributed in translating `btsync-gui`:
 * Marek Lukas (Czech)
 * Miguel Anxo Bouzada (Galician)
 * Sergey Shlyapugin (Russian)
+
+If you want to help in translating changed strings or add you favourite
+language, you may [join the localisation team][4] on [POEditor.com][4].
 
 ### Maintainers ###
 
