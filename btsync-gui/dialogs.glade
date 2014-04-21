@@ -201,6 +201,12 @@
       <column type="GObject"/>
     </columns>
   </object>
+  <object class="GtkListStore" id="fp_predefined_hosts">
+    <columns>
+      <!-- column-name Host -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkDialog" id="folderprefs">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
@@ -276,7 +282,7 @@
                 <property name="row_spacing">6</property>
                 <property name="column_spacing">6</property>
                 <child>
-                  <object class="GtkLabel" id="label21">
+                  <object class="GtkLabel" id="rw_secret_label">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="xalign">0</property>
@@ -285,7 +291,7 @@
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
-                    <property name="top_attach">0</property>
+                    <property name="top_attach">2</property>
                     <property name="width">2</property>
                     <property name="height">1</property>
                   </packing>
@@ -300,7 +306,7 @@
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
-                    <property name="top_attach">2</property>
+                    <property name="top_attach">4</property>
                     <property name="width">2</property>
                     <property name="height">1</property>
                   </packing>
@@ -352,7 +358,7 @@
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
-                    <property name="top_attach">4</property>
+                    <property name="top_attach">6</property>
                     <property name="width">1</property>
                     <property name="height">1</property>
                   </packing>
@@ -368,7 +374,7 @@
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
-                    <property name="top_attach">4</property>
+                    <property name="top_attach">6</property>
                     <property name="width">1</property>
                     <property name="height">1</property>
                   </packing>
@@ -382,13 +388,13 @@
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
-                    <property name="top_attach">6</property>
+                    <property name="top_attach">8</property>
                     <property name="width">3</property>
                     <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkScrolledWindow" id="scrolledwindow1">
+                  <object class="GtkScrolledWindow" id="rw_secret_scroll">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="shadow_type">in</property>
@@ -404,7 +410,7 @@
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
-                    <property name="top_attach">1</property>
+                    <property name="top_attach">3</property>
                     <property name="width">2</property>
                     <property name="height">1</property>
                   </packing>
@@ -427,7 +433,7 @@
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
-                    <property name="top_attach">3</property>
+                    <property name="top_attach">5</property>
                     <property name="width">2</property>
                     <property name="height">1</property>
                   </packing>
@@ -476,7 +482,7 @@
                   </object>
                   <packing>
                     <property name="left_attach">2</property>
-                    <property name="top_attach">1</property>
+                    <property name="top_attach">3</property>
                     <property name="width">1</property>
                     <property name="height">1</property>
                   </packing>
@@ -519,7 +525,7 @@
                   </object>
                   <packing>
                     <property name="left_attach">2</property>
-                    <property name="top_attach">3</property>
+                    <property name="top_attach">5</property>
                     <property name="width">1</property>
                     <property name="height">1</property>
                   </packing>
@@ -569,7 +575,7 @@
                   </object>
                   <packing>
                     <property name="left_attach">2</property>
-                    <property name="top_attach">5</property>
+                    <property name="top_attach">7</property>
                     <property name="width">1</property>
                     <property name="height">1</property>
                   </packing>
@@ -592,8 +598,46 @@
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
-                    <property name="top_attach">5</property>
+                    <property name="top_attach">7</property>
                     <property name="width">2</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkCheckButton" id="ro_restore">
+                    <property name="label" translatable="yes">Restore modified files to original version</property>
+                    <property name="use_action_appearance">False</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">False</property>
+                    <property name="use_action_appearance">False</property>
+                    <property name="xalign">0</property>
+                    <property name="draw_indicator">True</property>
+                    <signal name="toggled" handler="onChanged" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">1</property>
+                    <property name="width">3</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="ro_restore_label">
+                    <property name="visible">True</property>
+                    <property name="sensitive">False</property>
+                    <property name="can_focus">False</property>
+                    <property name="xalign">0</property>
+                    <property name="yalign">0</property>
+                    <property name="label" translatable="yes">This is a folder with read-only permissions.
+Modification made to this folder will not be displayed
+on other devices.</property>
+                    <property name="justify">center</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">0</property>
+                    <property name="width">3</property>
                     <property name="height">1</property>
                   </packing>
                 </child>
@@ -870,13 +914,6 @@
       <action-widget response="-5">fp_button_ok</action-widget>
     </action-widgets>
   </object>
-  <object class="GtkListStore" id="fp_predefined_hosts">
-    <columns>
-      <!-- column-name Host -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkTextBuffer" id="ot_secret_text"/>
   <object class="GtkDialog" id="newhost">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
@@ -972,6 +1009,7 @@
       </object>
     </child>
   </object>
+  <object class="GtkTextBuffer" id="ot_secret_text"/>
   <object class="GtkDialog" id="prefsadvanced">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>

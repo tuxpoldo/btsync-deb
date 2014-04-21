@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-19 17:54+0100\n"
+"POT-Creation-Date: 2014-04-21 17:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,48 +26,48 @@ msgid "Default settings saved."
 msgstr ""
 
 #. 0:
-#: ../btsyncapp.py:139 ../btsyncapp.py:156
+#: ../btsyncapp.py:161 ../btsyncapp.py:179
 msgid "Cannot implement due to missing API"
 msgstr ""
 
 #. 0:
-#: ../btsyncapp.py:140
+#: ../btsyncapp.py:162
 msgid "BitTorrent Inc."
 msgstr ""
 
-#: ../btsyncapp.py:155
+#: ../btsyncapp.py:178
 msgid "Now"
 msgstr ""
 
-#: ../btsyncapp.py:189 ../btsyncstatus.py:187
+#: ../btsyncapp.py:227 ../btsyncstatus.py:187
 msgid "{0:.1f} kB/s up, {1:.1f} kB/s down"
 msgstr ""
 
-#: ../btsyncapp.py:301
+#: ../btsyncapp.py:333
 msgid "{0} in {1} files"
 msgstr ""
 
-#: ../btsyncapp.py:303
+#: ../btsyncapp.py:335
 msgid "{0} in {1} files (indexing...)"
 msgstr ""
 
-#: ../btsyncapp.py:316
+#: ../btsyncapp.py:348
 msgid "Synched on {0}"
 msgstr ""
 
-#: ../btsyncapp.py:318
+#: ../btsyncapp.py:350
 msgid "⇧ {0}"
 msgstr ""
 
-#: ../btsyncapp.py:320
+#: ../btsyncapp.py:352
 msgid "⇩ {0}"
 msgstr ""
 
-#: ../btsyncapp.py:322
+#: ../btsyncapp.py:354
 msgid "⇧ {0} - ⇩ {1}"
 msgstr ""
 
-#: ../btsyncapp.py:324
+#: ../btsyncapp.py:356
 msgid "Idle..."
 msgstr ""
 
@@ -173,27 +173,27 @@ msgstr ""
 msgid "Disconnected: Communication Error {0}"
 msgstr ""
 
-#: ../btsyncutils.py:163
+#: ../btsyncutils.py:165
 msgid "bytes"
 msgstr ""
 
-#: ../btsyncutils.py:163
+#: ../btsyncutils.py:165
 msgid "KB"
 msgstr ""
 
-#: ../btsyncutils.py:163
+#: ../btsyncutils.py:165
 msgid "MB"
 msgstr ""
 
-#: ../btsyncutils.py:163
+#: ../btsyncutils.py:165
 msgid "GB"
 msgstr ""
 
-#: ../btsyncutils.py:167
+#: ../btsyncutils.py:169
 msgid "TB"
 msgstr ""
 
-#: ../btsyncutils.py:305
+#: ../btsyncutils.py:307
 msgid "Only one full btsync-gui can run at once"
 msgstr ""
 
@@ -219,23 +219,23 @@ msgstr ""
 msgid "Please select a folder to sync"
 msgstr ""
 
-#: ../dialogs.py:358
+#: ../dialogs.py:370
 msgid ""
 "Invalid secret specified.\n"
 "Secret must have a length of 33 characters"
 msgstr ""
 
-#: ../dialogs.py:365
+#: ../dialogs.py:377
 msgid ""
 "Invalid secret specified.\n"
 "Secret must contain only alphanumeric characters"
 msgstr ""
 
-#: ../dialogs.py:412
+#: ../dialogs.py:424
 msgid "A hostname or IP address must be specified"
 msgstr ""
 
-#: ../dialogs.py:417
+#: ../dialogs.py:429
 msgid "The specified port must be a number between 1 and 65534"
 msgstr ""
 
@@ -527,61 +527,72 @@ msgid "Reset"
 msgstr ""
 
 #: ../dialogs.glade.h:24
-msgid "Scan QR"
+msgid "Restore modified files to original version"
 msgstr ""
 
 #: ../dialogs.glade.h:25
+msgid "Scan QR"
+msgstr ""
+
+#: ../dialogs.glade.h:26
 msgid ""
 "Scan this QR code with your mobile\n"
 "device to connect sync folders"
 msgstr ""
 
-#: ../dialogs.glade.h:27
+#: ../dialogs.glade.h:28
 msgid "Search DHT network"
 msgstr ""
 
-#: ../dialogs.glade.h:28
+#: ../dialogs.glade.h:29
 msgid "Search LAN"
 msgstr ""
 
-#: ../dialogs.glade.h:29
+#: ../dialogs.glade.h:30
 msgid "Secret Keys"
 msgstr ""
 
-#: ../dialogs.glade.h:30
+#: ../dialogs.glade.h:31
 msgid "Shared Folder Properties"
 msgstr ""
 
-#: ../dialogs.glade.h:31
+#: ../dialogs.glade.h:32
 msgid "Shared secret:"
 msgstr ""
 
-#: ../dialogs.glade.h:32
+#: ../dialogs.glade.h:33
 msgid "Store deleted files in SyncArchive"
 msgstr ""
 
-#: ../dialogs.glade.h:33
+#: ../dialogs.glade.h:34
 msgid ""
 "This folder will be removed from BitTorrent Sync and no longer synced with "
 "other devices"
 msgstr ""
 
-#: ../dialogs.glade.h:34
-msgid "Use predefined hosts"
-msgstr ""
-
 #: ../dialogs.glade.h:35
-msgid "Use relay server when required"
-msgstr ""
-
-#: ../dialogs.glade.h:36
-msgid "Use tracker server"
-msgstr ""
-
-#: ../dialogs.glade.h:37
-msgid "Value"
+msgid ""
+"This is a folder with read-only permissions.\n"
+"Modification made to this folder will not be displayed\n"
+"on other devices."
 msgstr ""
 
 #: ../dialogs.glade.h:38
+msgid "Use predefined hosts"
+msgstr ""
+
+#: ../dialogs.glade.h:39
+msgid "Use relay server when required"
+msgstr ""
+
+#: ../dialogs.glade.h:40
+msgid "Use tracker server"
+msgstr ""
+
+#: ../dialogs.glade.h:41
+msgid "Value"
+msgstr ""
+
+#: ../dialogs.glade.h:42
 msgid "Value:"
 msgstr ""

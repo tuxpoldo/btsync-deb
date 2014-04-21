@@ -197,6 +197,8 @@ class BtSyncFolderPrefs(BtBaseDialog):
 		self.idsecret = secret
 		self.rwsecret = result['read_write'] if result.has_key('read_write') else None
 		self.rosecret = result['read_only']
+		# load values
+		result = self.agent.get_folder_prefs(self.idsecret)
 		# initialize OK button
 		self.fp_button_ok = self.builder.get_object('fp_button_ok')
 		# secrets page
@@ -204,6 +206,8 @@ class BtSyncFolderPrefs(BtBaseDialog):
 		self.rw_secret_text = self.builder.get_object('rw_secret_text')
 		self.rw_secret_copy = self.builder.get_object('rw_secret_copy')
 		self.rw_secret_new  = self.builder.get_object('rw_secret_new')
+		self.rw_secret_label	= self.builder.get_object('rw_secret_label')
+		self.rw_secret_scroll	= self.builder.get_object('rw_secret_scroll')
 		self.ro_secret = self.builder.get_object('ro_secret')
 		self.ro_secret_text = self.builder.get_object('ro_secret_text')
 		self.ro_secret_copy = self.builder.get_object('ro_secret_copy')
@@ -211,13 +215,22 @@ class BtSyncFolderPrefs(BtBaseDialog):
 		self.ot_secret_text = self.builder.get_object('ot_secret_text')
 		self.ot_secret_copy = self.builder.get_object('ot_secret_copy')
 		self.ot_secret_new = self.builder.get_object('ot_secret_new')
+		self.ro_restore	= self.builder.get_object('ro_restore')
+		self.ro_restore_label	= self.builder.get_object('ro_restore_label')
 		# secrets page - values
+		self.ro_restore.set_active(self.agent.get_safe_result(result,'overwrite_changes',0) != 0)
 		if self.rwsecret is None:
 			self.rw_secret.set_sensitive(False)
 			self.rw_secret_new.set_sensitive(False)
 			self.rw_secret_copy.set_sensitive(False)
+			self.rw_secret_label.hide()
+			self.rw_secret_scroll.hide()
+			self.rw_secret_new.hide()
+			self.rw_secret_copy.hide()
 		else:
 			self.rw_secret_text.set_text(str(self.rwsecret))
+			self.ro_restore.hide()
+			self.ro_restore_label.hide()
 		self.ro_secret_text.set_text(str(self.rosecret))
 		# prefs page
 		self.fp_use_relay = self.builder.get_object('fp_use_relay')
@@ -234,7 +247,6 @@ class BtSyncFolderPrefs(BtBaseDialog):
 		self.fp_predefined_label = self.builder.get_object('fp_predefined_label')
 		# prefs page - values
 		self.disable_hosts()
-		result = self.agent.get_folder_prefs(self.idsecret)
 		self.fp_use_relay.set_active(self.agent.get_safe_result(result,'use_relay_server',0) != 0)
 		self.fp_use_tracker.set_active(self.agent.get_safe_result(result,'use_tracker',0) != 0)
 		self.fp_search_lan.set_active(self.agent.get_safe_result(result,'search_lan',0) != 0)
@@ -268,13 +280,13 @@ class BtSyncFolderPrefs(BtBaseDialog):
 		self.fp_predefined_remove.set_sensitive(self.fp_predefined_selection.count_selected_rows() > 0)
 		self.fp_predefined_label.set_sensitive(True)
 
-
 	def save_prefs(self):
 		hosts_list = []
 		for row in self.fp_predefined_hosts:
 			hosts_list.append(row[0])
 		self.agent.set_folder_hosts(self.idsecret,hosts_list)
 		prefs = {}
+		prefs['overwrite_changes'] = 1 if self.ro_restore.get_active() else 0
 		prefs['use_relay_server'] = 1 if self.fp_use_relay.get_active() else 0
 		prefs['use_tracker'] = 1 if self.fp_use_tracker.get_active() else 0
 		prefs['search_lan'] = 1 if self.fp_search_lan.get_active() else 0
