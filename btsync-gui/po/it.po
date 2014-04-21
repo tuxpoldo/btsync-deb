@@ -15,47 +15,47 @@ msgstr "Impostazioni standard ripristinate."
 msgid "Default settings saved."
 msgstr "Impostazioni standard salvate."
 
-#: ../btsyncapp.py:132 ../btsyncapp.py:145
+#: ../btsyncapp.py:161 ../btsyncapp.py:179
 msgid "Cannot implement due to missing API"
 msgstr "Non implementato a causa di API mancante"
 
-#: ../btsyncapp.py:133
+#: ../btsyncapp.py:162
 msgid "BitTorrent Inc."
 msgstr "BitTorrent Inc."
 
-#: ../btsyncapp.py:144
+#: ../btsyncapp.py:178
 msgid "Now"
 msgstr "Adesso"
 
-#: ../btsyncapp.py:173 ../btsyncstatus.py:187
+#: ../btsyncapp.py:227 ../btsyncstatus.py:187
 msgid "{0:.1f} kB/s up, {1:.1f} kB/s down"
 msgstr "{0:.1f} kB/s upload, {1:.1f} kB/s download"
 
-#: ../btsyncapp.py:283
+#: ../btsyncapp.py:333
 msgid "{0} in {1} files"
 msgstr "{0} in {1} file"
 
-#: ../btsyncapp.py:285
+#: ../btsyncapp.py:335
 msgid "{0} in {1} files (indexing...)"
 msgstr "{0} in {1} files (indicizzando...)"
 
-#: ../btsyncapp.py:298
+#: ../btsyncapp.py:348
 msgid "Synched on {0}"
 msgstr "Sincronizzato il {0}"
 
-#: ../btsyncapp.py:300
+#: ../btsyncapp.py:350
 msgid "⇧ {0}"
 msgstr "⇧ {0}"
 
-#: ../btsyncapp.py:302
+#: ../btsyncapp.py:352
 msgid "⇩ {0}"
 msgstr "⇩ {0}"
 
-#: ../btsyncapp.py:304
+#: ../btsyncapp.py:354
 msgid "⇧ {0} - ⇩ {1}"
 msgstr "⇧ {0} - ⇩ {1}"
 
-#: ../btsyncapp.py:306
+#: ../btsyncapp.py:356
 msgid "Idle..."
 msgstr "Inattivo..."
 
@@ -135,7 +135,7 @@ msgstr "Disconnesso"
 msgid "Disconnected: Communication Error {0}"
 msgstr "Disconnesso: Errore di comunicatzione {0}"
 
-#: ../btsyncutils.py:305
+#: ../btsyncutils.py:307
 msgid "Only one full btsync-gui can run at once"
 msgstr "BitTorrent Sync può essere eseguito una volta sola"
 
@@ -161,23 +161,23 @@ msgstr "Diritti di accesso insufficienti alla cartella specificata."
 msgid "Please select a folder to sync"
 msgstr "Aggiungi cartella da sincronizzare"
 
-#: ../dialogs.py:358
+#: ../dialogs.py:370
 msgid "Invalid secret specified.\n"
 "Secret must have a length of 33 characters"
 msgstr "Chiave segreta non valida.\n"
 "Una chiave segreta deve avere una lunghezza di 33 caratteri."
 
-#: ../dialogs.py:365
+#: ../dialogs.py:377
 msgid "Invalid secret specified.\n"
 "Secret must contain only alphanumeric characters"
 msgstr "Chiave segreta non valida.\n"
 "Una chiave segreta può contenere soltanto numeri e caratteri."
 
-#: ../dialogs.py:412
+#: ../dialogs.py:424
 msgid "A hostname or IP address must be specified"
 msgstr "Almeno un nome host o un indirizzo IP deve essere specificato"
 
-#: ../dialogs.py:417
+#: ../dialogs.py:429
 msgid "The specified port must be a number between 1 and 65534"
 msgstr "La porta specificata deve essere un numero compreso fra 1 e 65534"
 
@@ -465,81 +465,93 @@ msgstr "Rimuovi cartella condivisa"
 msgid "Reset"
 msgstr "Ripristina"
 
-#: ../dialogs.glade.h:24
+#: ../dialogs.glade.h:25
 msgid "Scan QR"
 msgstr "Esegui scansione QR"
 
-#: ../dialogs.glade.h:25
+#: ../dialogs.glade.h:26
 msgid "Scan this QR code with your mobile\n"
 "device to connect sync folders"
 msgstr "Esegui la scansione di questo codice QR con il\n"
 "dispositivo mobile per connettere."
 
-#: ../dialogs.glade.h:27
+#: ../dialogs.glade.h:28
 msgid "Search DHT network"
 msgstr "Cerca rete DHT"
 
-#: ../dialogs.glade.h:28
+#: ../dialogs.glade.h:29
 msgid "Search LAN"
 msgstr "Cerca LAN"
 
-#: ../dialogs.glade.h:29
+#: ../dialogs.glade.h:30
 msgid "Secret Keys"
 msgstr "Chiavi segrete"
 
-#: ../dialogs.glade.h:30
+#: ../dialogs.glade.h:31
 msgid "Shared Folder Properties"
 msgstr "Impostazioni della cartella condivisa"
 
-#: ../dialogs.glade.h:31
+#: ../dialogs.glade.h:32
 msgid "Shared secret:"
 msgstr "Chiave segreta condivisa:"
 
-#: ../dialogs.glade.h:32
+#: ../dialogs.glade.h:33
 msgid "Store deleted files in SyncArchive"
 msgstr "Memorizza i file eliminati in SyncArchive"
 
-#: ../dialogs.glade.h:33
+#: ../dialogs.glade.h:34
 msgid "This folder will be removed from BitTorrent Sync and no longer synced with other devices"
 msgstr "Questa cartella verrà rimossa da BitTorrent Sync e non sarà più sincronizzata con gli altri dispositivi"
 
-#: ../dialogs.glade.h:34
+#: ../dialogs.glade.h:38
 msgid "Use predefined hosts"
 msgstr "Usa host predefiniti"
 
-#: ../dialogs.glade.h:35
+#: ../dialogs.glade.h:39
 msgid "Use relay server when required"
 msgstr "Usa server di inoltro quando necessario"
 
-#: ../dialogs.glade.h:36
+#: ../dialogs.glade.h:40
 msgid "Use tracker server"
 msgstr "Usa server del tracker"
 
-#: ../dialogs.glade.h:37
+#: ../dialogs.glade.h:41
 msgid "Value"
 msgstr "Valore"
 
-#: ../dialogs.glade.h:38
+#: ../dialogs.glade.h:42
 msgid "Value:"
 msgstr "Valore:"
 
-#: ../btsyncutils.py:163
+#: ../btsyncutils.py:165
 msgid "bytes"
 msgstr "bytes"
 
-#: ../btsyncutils.py:163
+#: ../btsyncutils.py:165
 msgid "KB"
 msgstr "KB"
 
-#: ../btsyncutils.py:163
+#: ../btsyncutils.py:165
 msgid "MB"
 msgstr "MB"
 
-#: ../btsyncutils.py:163
+#: ../btsyncutils.py:165
 msgid "GB"
 msgstr "GB"
 
-#: ../btsyncutils.py:167
+#: ../btsyncutils.py:169
 msgid "TB"
 msgstr "TB"
+
+#: ../dialogs.glade.h:24
+msgid "Restore modified files to original version"
+msgstr "Riporta i file modificati alla versione originale"
+
+#: ../dialogs.glade.h:35
+msgid "This is a folder with read-only permissions.\n"
+"Modification made to this folder will not be displayed\n"
+"on other devices."
+msgstr "Questa è una cartella con autorizzazioni di sola lettura.\n"
+"Le modifiche apportate a questa cartella non\n"
+"compariranno sugli altri dispositivi."
 
