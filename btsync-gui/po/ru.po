@@ -15,47 +15,47 @@ msgstr "Настройки по умолчанию очищены."
 msgid "Default settings saved."
 msgstr "Настройки по умолчанию сохранены."
 
-#: ../btsyncapp.py:132 ../btsyncapp.py:145
+#: ../btsyncapp.py:161 ../btsyncapp.py:179
 msgid "Cannot implement due to missing API"
 msgstr "Не реализовано из-за недоработанного API"
 
-#: ../btsyncapp.py:133
+#: ../btsyncapp.py:162
 msgid "BitTorrent Inc."
 msgstr "BitTorrent Inc."
 
-#: ../btsyncapp.py:144
+#: ../btsyncapp.py:178
 msgid "Now"
 msgstr "Сейчас"
 
-#: ../btsyncapp.py:173 ../btsyncstatus.py:187
+#: ../btsyncapp.py:227 ../btsyncstatus.py:187
 msgid "{0:.1f} kB/s up, {1:.1f} kB/s down"
 msgstr "{0:.1f} Кб/с отдача, {1:1f} Кб/с загрузка"
 
-#: ../btsyncapp.py:283
+#: ../btsyncapp.py:333
 msgid "{0} in {1} files"
 msgstr "{0} в {1} файлах"
 
-#: ../btsyncapp.py:285
+#: ../btsyncapp.py:335
 msgid "{0} in {1} files (indexing...)"
 msgstr "{0} в {1} файлах (индексация...)"
 
-#: ../btsyncapp.py:298
+#: ../btsyncapp.py:348
 msgid "Synched on {0}"
 msgstr "Синхронизировано {0}"
 
-#: ../btsyncapp.py:300
+#: ../btsyncapp.py:350
 msgid "⇧ {0}"
 msgstr "⇧ {0}"
 
-#: ../btsyncapp.py:302
+#: ../btsyncapp.py:352
 msgid "⇩ {0}"
 msgstr "⇩ {0}"
 
-#: ../btsyncapp.py:304
+#: ../btsyncapp.py:354
 msgid "⇧ {0} - ⇩ {1}"
 msgstr "⇧ {0} - ⇩ {1}"
 
-#: ../btsyncapp.py:306
+#: ../btsyncapp.py:356
 msgid "Idle..."
 msgstr "Простаивание..."
 
@@ -126,7 +126,7 @@ msgstr "Версия {0} ({0})"
 
 #: ../btsyncstatus.py:255
 msgid "Linux UI Version {0}"
-msgstr "Версия интерфейса для Линукса {0}"
+msgstr "Версия пользовательского интерфейса для Линукса: {0}"
 
 #: ../btsyncstatus.py:330
 msgid "Disconnected"
@@ -136,7 +136,7 @@ msgstr "Разъдинено"
 msgid "Disconnected: Communication Error {0}"
 msgstr "Разъдинено: ошибка связи {0}"
 
-#: ../btsyncutils.py:305
+#: ../btsyncutils.py:307
 msgid "Only one full btsync-gui can run at once"
 msgstr "Может быть запущен только один btsync-gui."
 
@@ -162,23 +162,23 @@ msgstr "Нет прав на запись в выбранной папке."
 msgid "Please select a folder to sync"
 msgstr "Выберите папку для синхронизации"
 
-#: ../dialogs.py:358
+#: ../dialogs.py:370
 msgid "Invalid secret specified.\n"
 "Secret must have a length of 33 characters"
 msgstr "Секрет указан неверно.\n"
 "Должно быть 33 символа"
 
-#: ../dialogs.py:365
+#: ../dialogs.py:377
 msgid "Invalid secret specified.\n"
 "Secret must contain only alphanumeric characters"
 msgstr "Секрет указан неверно.\n"
 "Могут содержаться только буквы и цифры"
 
-#: ../dialogs.py:412
+#: ../dialogs.py:424
 msgid "A hostname or IP address must be specified"
 msgstr "Необходимо указать имя узла или IP-адрес"
 
-#: ../dialogs.py:417
+#: ../dialogs.py:429
 msgid "The specified port must be a number between 1 and 65534"
 msgstr "Указанный порт должен быть числом от 1 до 65534"
 
@@ -216,7 +216,7 @@ msgstr "Устройства"
 
 #: ../btsyncapp.glade.h:10
 msgid "Displays a QR-code that permits easy connection of a mobile device to this folder"
-msgstr "Отобразить QR-код, который позволяет легко подключить мобильное устройство к этой папке"
+msgstr "Отобразить QR-код, который позволит легко подключить мобильное устройство к этой папке"
 
 #: ../btsyncapp.glade.h:11
 msgid "Down"
@@ -224,11 +224,11 @@ msgstr "Загрузка"
 
 #: ../btsyncapp.glade.h:12
 msgid "Edit .SyncIgnore"
-msgstr "Редактировать .SyncIgnore"
+msgstr "Редактировать список исключений"
 
 #: ../btsyncapp.glade.h:13
 msgid "Edit the file containing the list or filename patterns for file not being synched"
-msgstr "Редактировать файл, содержащий список имен или шаблоны файлов, которые не должны синхронизироваться"
+msgstr "Редактировать файл .SyncIgnore со списком имен и шаблонами файлов, которые не должны синхронизироваться"
 
 #: ../btsyncapp.glade.h:14
 msgid "Event"
@@ -268,7 +268,7 @@ msgstr "Открыть папку"
 
 #: ../btsyncapp.glade.h:23
 msgid "Open SyncArchive"
-msgstr "Открыть SyncArchive"
+msgstr "Открыть архив синхронизации"
 
 #: ../btsyncapp.glade.h:24
 msgid "Opens the folder in the file manager"
@@ -280,7 +280,7 @@ msgstr "Открыть окно свойств папки"
 
 #: ../btsyncapp.glade.h:26
 msgid "Opens the sync archive holding previous or deleted versions of files"
-msgstr "Открыть архив синхронизации, хранящий предыдущие или удаленные версии файлов"
+msgstr "Открыть архив синхронизации, который хранит предыдущие и удаленные версии файлов"
 
 #: ../btsyncapp.glade.h:27
 msgid "Path"
@@ -292,7 +292,7 @@ msgstr "Настройка"
 
 #: ../btsyncapp.glade.h:29
 msgid "Show folder preferences"
-msgstr "Открыть окно свойств папки"
+msgstr "Свойства папки"
 
 #: ../btsyncapp.glade.h:30
 msgid "Size"
@@ -344,11 +344,11 @@ msgstr "Копирайт © 2013, BitTorrent Inc."
 
 #: ../btsyncstatus.glade.h:7
 msgid "Enable Debug Logging"
-msgstr "Включить ведение журнала отладки"
+msgstr "Вести журнал отладки"
 
 #: ../btsyncstatus.glade.h:8
 msgid "Linux UI Version 0.0"
-msgstr "Версия интерфейса для Линукса 0.0"
+msgstr "Версия пользовательского интерфейса для Линукса: 0.0"
 
 #: ../btsyncstatus.glade.h:9
 msgid "Open BitTorrent Sync..."
@@ -466,80 +466,93 @@ msgstr "Удалить папку"
 msgid "Reset"
 msgstr "Сбросить"
 
-#: ../dialogs.glade.h:24
-msgid "Scan QR"
-msgstr "Чтение QR-кода"
-
 #: ../dialogs.glade.h:25
+msgid "Scan QR"
+msgstr "Подключение мобильного устройства"
+
+#: ../dialogs.glade.h:26
 msgid "Scan this QR code with your mobile\n"
 "device to connect sync folders"
-msgstr "Прочтите этот QR-код с помощью мобильного устройство для подключения синхронизации папок"
+msgstr "Прочтите этот QR-код с помощью мобильного\n"
+"устройства для подключения синхронизации папок"
 
-#: ../dialogs.glade.h:27
+#: ../dialogs.glade.h:28
 msgid "Search DHT network"
 msgstr "Поиск по DHT"
 
-#: ../dialogs.glade.h:28
+#: ../dialogs.glade.h:29
 msgid "Search LAN"
 msgstr "Поиск в локальной сети"
 
-#: ../dialogs.glade.h:29
+#: ../dialogs.glade.h:30
 msgid "Secret Keys"
 msgstr "Секретные ключи"
 
-#: ../dialogs.glade.h:30
+#: ../dialogs.glade.h:31
 msgid "Shared Folder Properties"
 msgstr "Свойства папки"
 
-#: ../dialogs.glade.h:31
+#: ../dialogs.glade.h:32
 msgid "Shared secret:"
 msgstr "Секрет:"
 
-#: ../dialogs.glade.h:32
-msgid "Store deleted files in SyncArchive"
-msgstr "Хранить удаленные файлы в SyncArchive"
-
 #: ../dialogs.glade.h:33
+msgid "Store deleted files in SyncArchive"
+msgstr "Хранить удаленные файлы в архиве"
+
+#: ../dialogs.glade.h:34
 msgid "This folder will be removed from BitTorrent Sync and no longer synced with other devices"
 msgstr "Эта папка будет удалена из BitTorrent Sync и больше не будет синхронизироваться с другими устройствами"
 
-#: ../dialogs.glade.h:34
+#: ../dialogs.glade.h:38
 msgid "Use predefined hosts"
-msgstr "Использовать предопределенные узлы"
+msgstr "Использовать предопределенные узлы:"
 
-#: ../dialogs.glade.h:35
+#: ../dialogs.glade.h:39
 msgid "Use relay server when required"
 msgstr "Использовать релей-сервер"
 
-#: ../dialogs.glade.h:36
+#: ../dialogs.glade.h:40
 msgid "Use tracker server"
 msgstr "Использовать трекер"
 
-#: ../dialogs.glade.h:37
+#: ../dialogs.glade.h:41
 msgid "Value"
 msgstr "Значение"
 
-#: ../dialogs.glade.h:38
+#: ../dialogs.glade.h:42
 msgid "Value:"
 msgstr "Значение:"
 
-#: ../btsyncutils.py:163
+#: ../btsyncutils.py:165
 msgid "bytes"
 msgstr "байт"
 
-#: ../btsyncutils.py:163
+#: ../btsyncutils.py:165
 msgid "KB"
-msgstr "КБ"
+msgstr "Кб"
 
-#: ../btsyncutils.py:163
+#: ../btsyncutils.py:165
 msgid "MB"
 msgstr "МБ"
 
-#: ../btsyncutils.py:163
+#: ../btsyncutils.py:165
 msgid "GB"
 msgstr "ГБ"
 
-#: ../btsyncutils.py:167
+#: ../btsyncutils.py:169
 msgid "TB"
 msgstr "ТБ"
+
+#: ../dialogs.glade.h:24
+msgid "Restore modified files to original version"
+msgstr "Не сохранять изменения файлов"
+
+#: ../dialogs.glade.h:35
+msgid "This is a folder with read-only permissions.\n"
+"Modification made to this folder will not be displayed\n"
+"on other devices."
+msgstr "Эта папка доступна только для чтения. Изменения.\n"
+"сделанные в этой папке. не будут синхронизированы\n"
+"с другими устройствами."
 
