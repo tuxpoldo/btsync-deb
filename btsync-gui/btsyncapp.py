@@ -71,6 +71,14 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.init_history_controls()
 		self.init_preferences_controls()
 
+		# TODO: Hide pages not supported by API
+		notebook = self.builder.get_object('notebook1')
+		transfers = notebook.get_nth_page(2)
+		history = notebook.get_nth_page(3)
+		transfers.hide()
+		history.hide()
+		# TODO: End
+
 		self.init_transfer_status()
 
 		self.init_folders_values()
