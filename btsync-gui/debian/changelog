@@ -1,3 +1,9 @@
+btsync-gui (0.8.3-1) unstable; urgency=low
+
+  * Made columns in "Folders" and "Devices" pane persistently sortable
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sun, 06 Apr 2014 18:28:06 +0200
+
 btsync-gui (0.8.2-1) unstable; urgency=low
 
   * Added Bulgarian translation by Atanas Kovachki (Closes #121)

@@ -21,6 +21,100 @@
       <column type="gint"/>
     </columns>
   </object>
+  <object class="GtkListStore" id="folders_list">
+    <columns>
+      <!-- column-name Folder -->
+      <column type="gchararray"/>
+      <!-- column-name Content -->
+      <column type="gchararray"/>
+      <!-- column-name Secret -->
+      <column type="gchararray"/>
+      <!-- column-name FolderTag -->
+      <column type="gchararray"/>
+      <!-- column-name EllipsizeMode -->
+      <column type="gint"/>
+    </columns>
+  </object>
+  <object class="GtkMenu" id="folders_menu">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkMenuItem" id="folder_menu_copy">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="tooltip_text" translatable="yes">Copies the sharing secret to the clipboard</property>
+        <property name="label" translatable="yes">Copy secret</property>
+        <property name="use_underline">True</property>
+        <signal name="activate" handler="onFoldersCopySecret" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="folder_menu_connect">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="tooltip_text" translatable="yes">Displays a QR-code that permits easy connection of a mobile device to this folder</property>
+        <property name="label" translatable="yes">Connect mobile device</property>
+        <property name="use_underline">True</property>
+        <signal name="activate" handler="onFoldersConnectMobile" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="folder_menu_openfolder">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="tooltip_text" translatable="yes">Opens the folder in the file manager</property>
+        <property name="label" translatable="yes">Open Folder</property>
+        <property name="use_underline">True</property>
+        <signal name="activate" handler="onFoldersOpenFolder" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="folder_menu_openarchive">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="tooltip_text" translatable="yes">Opens the sync archive holding previous or deleted versions of files</property>
+        <property name="label" translatable="yes">Open SyncArchive</property>
+        <property name="use_underline">True</property>
+        <signal name="activate" handler="onFoldersOpenArchive" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="folder_menu_editsyncignore">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="tooltip_text" translatable="yes">Edit the file containing the list or filename patterns for file not being synched</property>
+        <property name="label" translatable="yes">Edit .SyncIgnore</property>
+        <property name="use_underline">True</property>
+        <signal name="activate" handler="onFoldersEditSyncIgnore" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="folder_menu_prefs">
+        <property name="use_action_appearance">False</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="tooltip_text" translatable="yes">Opens the preferences dialog for the shared folder</property>
+        <property name="label" translatable="yes">Show folder preferences</property>
+        <property name="use_underline">True</property>
+        <signal name="activate" handler="onFoldersPreferences" swapped="no"/>
+      </object>
+    </child>
+  </object>
+  <object class="GtkListStore" id="history_list">
+    <columns>
+      <!-- column-name Date -->
+      <column type="gchararray"/>
+      <!-- column-name Event -->
+      <column type="gchararray"/>
+      <!-- column-name EllipsizeMode -->
+      <column type="gint"/>
+    </columns>
+  </object>
   <object class="GtkWindow" id="btsyncapp">
     <property name="can_focus">False</property>
     <property name="border_width">12</property>
@@ -28,7 +122,7 @@
     <property name="window_position">center</property>
     <property name="icon_name">btsync-gui</property>
     <child>
-      <object class="GtkNotebook" id="notebook2">
+      <object class="GtkNotebook" id="notebook1">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <child>
@@ -53,7 +147,6 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="model">folders_list</property>
-                    <property name="headers_clickable">False</property>
                     <signal name="button-press-event" handler="onFoldersMouseClick" swapped="no"/>
                     <child internal-child="selection">
                       <object class="GtkTreeSelection" id="folders_selection">
@@ -64,6 +157,8 @@
                       <object class="GtkTreeViewColumn" id="treeviewcolumn1">
                         <property name="resizable">True</property>
                         <property name="title" translatable="yes">Path</property>
+                        <property name="sort_indicator">True</property>
+                        <property name="sort_column_id">0</property>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext1"/>
                           <attributes>
@@ -77,6 +172,7 @@
                       <object class="GtkTreeViewColumn" id="treeviewcolumn2">
                         <property name="resizable">True</property>
                         <property name="title" translatable="yes">Size</property>
+                        <property name="sort_column_id">1</property>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext2"/>
                           <attributes>
@@ -165,7 +261,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="box3">
+          <object class="GtkBox" id="box2">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="margin_left">6</property>
@@ -185,7 +281,6 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="model">devices_list</property>
-                    <property name="headers_clickable">False</property>
                     <child internal-child="selection">
                       <object class="GtkTreeSelection" id="treeview-selection2"/>
                     </child>
@@ -194,6 +289,7 @@
                         <property name="resizable">True</property>
                         <property name="spacing">1</property>
                         <property name="title" translatable="yes">Device</property>
+                        <property name="sort_column_id">0</property>
                         <child>
                           <object class="GtkCellRendererPixbuf" id="cellrendererpixbuf1"/>
                           <attributes>
@@ -213,6 +309,7 @@
                       <object class="GtkTreeViewColumn" id="treeviewcolumn4">
                         <property name="resizable">True</property>
                         <property name="title" translatable="yes">Folder</property>
+                        <property name="sort_column_id">1</property>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext4"/>
                           <attributes>
@@ -226,6 +323,7 @@
                       <object class="GtkTreeViewColumn" id="treeviewcolumn5">
                         <property name="resizable">True</property>
                         <property name="title" translatable="yes">Status</property>
+                        <property name="sort_column_id">1</property>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext5"/>
                           <attributes>
@@ -272,7 +370,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="box2">
+          <object class="GtkBox" id="box3">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="margin_left">6</property>
@@ -710,100 +808,6 @@
         </child>
       </object>
     </child>
-  </object>
-  <object class="GtkListStore" id="folders_list">
-    <columns>
-      <!-- column-name Folder -->
-      <column type="gchararray"/>
-      <!-- column-name Content -->
-      <column type="gchararray"/>
-      <!-- column-name Secret -->
-      <column type="gchararray"/>
-      <!-- column-name FolderTag -->
-      <column type="gchararray"/>
-      <!-- column-name EllipsizeMode -->
-      <column type="gint"/>
-    </columns>
-  </object>
-  <object class="GtkMenu" id="folders_menu">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <child>
-      <object class="GtkMenuItem" id="folder_menu_copy">
-        <property name="use_action_appearance">False</property>
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="tooltip_text" translatable="yes">Copies the sharing secret to the clipboard</property>
-        <property name="label" translatable="yes">Copy secret</property>
-        <property name="use_underline">True</property>
-        <signal name="activate" handler="onFoldersCopySecret" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkMenuItem" id="folder_menu_connect">
-        <property name="use_action_appearance">False</property>
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="tooltip_text" translatable="yes">Displays a QR-code that permits easy connection of a mobile device to this folder</property>
-        <property name="label" translatable="yes">Connect mobile device</property>
-        <property name="use_underline">True</property>
-        <signal name="activate" handler="onFoldersConnectMobile" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkMenuItem" id="folder_menu_openfolder">
-        <property name="use_action_appearance">False</property>
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="tooltip_text" translatable="yes">Opens the folder in the file manager</property>
-        <property name="label" translatable="yes">Open Folder</property>
-        <property name="use_underline">True</property>
-        <signal name="activate" handler="onFoldersOpenFolder" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkMenuItem" id="folder_menu_openarchive">
-        <property name="use_action_appearance">False</property>
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="tooltip_text" translatable="yes">Opens the sync archive holding previous or deleted versions of files</property>
-        <property name="label" translatable="yes">Open SyncArchive</property>
-        <property name="use_underline">True</property>
-        <signal name="activate" handler="onFoldersOpenArchive" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkMenuItem" id="folder_menu_editsyncignore">
-        <property name="use_action_appearance">False</property>
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="tooltip_text" translatable="yes">Edit the file containing the list or filename patterns for file not being synched</property>
-        <property name="label" translatable="yes">Edit .SyncIgnore</property>
-        <property name="use_underline">True</property>
-        <signal name="activate" handler="onFoldersEditSyncIgnore" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkMenuItem" id="folder_menu_prefs">
-        <property name="use_action_appearance">False</property>
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="tooltip_text" translatable="yes">Opens the preferences dialog for the shared folder</property>
-        <property name="label" translatable="yes">Show folder preferences</property>
-        <property name="use_underline">True</property>
-        <signal name="activate" handler="onFoldersPreferences" swapped="no"/>
-      </object>
-    </child>
-  </object>
-  <object class="GtkListStore" id="history_list">
-    <columns>
-      <!-- column-name Date -->
-      <column type="gchararray"/>
-      <!-- column-name Event -->
-      <column type="gchararray"/>
-      <!-- column-name EllipsizeMode -->
-      <column type="gint"/>
-    </columns>
   </object>
   <object class="GtkListStore" id="transfers_list">
     <columns>

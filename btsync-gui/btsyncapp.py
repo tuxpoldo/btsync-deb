@@ -97,8 +97,13 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.folders_remove = self.builder.get_object('folders_remove')
 		self.folders_remove.set_sensitive(False)
 		self.set_treeview_column_widths(
-			self.folders_treeview,self.agent.get_pref('folders_columns',[300])
-		) 
+			self.folders_treeview,
+			self.agent.get_pref('folders_columns',[300])
+		)
+		self.set_treeview_sort_info(
+			self.folders_treeview,
+			self.agent.get_pref('folders_sortinfo', [0, Gtk.SortType.ASCENDING])
+		)
 
 	def init_folders_values(self):
 		try:
@@ -133,6 +138,10 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.set_treeview_column_widths(
 			self.devices_treeview,self.agent.get_pref('devices_columns',[150,300])
 		) 
+		self.set_treeview_sort_info(
+			self.devices_treeview,
+			self.agent.get_pref('devices_sortinfo', [0, Gtk.SortType.ASCENDING])
+		)
 
 	def init_transfers_controls(self):
 		self.transfers = self.builder.get_object('transfers_list')
@@ -376,6 +385,22 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 				value.set_sizing(Gtk.TreeViewColumnSizing.FIXED)
 				value.set_fixed_width(max(widths[index],32))
 
+	def get_treeview_sort_info(self,treewidget):
+		treemodel = treewidget.get_model()
+		column_id, sort_order = treemodel.get_sort_column_id()
+		return [column_id, int(sort_order)]
+
+	def set_treeview_sort_info(self,treewidget,sortinfo):
+		if sortinfo[0] is not None:
+			treemodel = treewidget.get_model()
+			treemodel.set_sort_column_id(sortinfo[0],sortinfo[1])
+			columns = treewidget.get_columns()
+			for index, value in enumerate(columns):
+				if value.get_sort_column_id() == sortinfo[0]:
+					value.set_sort_order(sortinfo[1])
+					value.set_sort_indicator(True)
+					return
+
 	def onDelete(self, *args):
 		width, height = self.window.get_size()
 		self.agent.set_pref('windowsize', (width, height))
@@ -383,6 +408,8 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.agent.set_pref('devices_columns', self.get_treeview_column_widths(self.devices_treeview))
 		self.agent.set_pref('transfers_columns', self.get_treeview_column_widths(self.transfers_treeview))
 		self.agent.set_pref('history_columns', self.get_treeview_column_widths(self.history_treeview))
+		self.agent.set_pref('folders_sortinfo', self.get_treeview_sort_info (self.folders_treeview))
+		self.agent.set_pref('devices_sortinfo', self.get_treeview_sort_info (self.devices_treeview))
 		self.close()
 
 	def onSaveEntry(self,widget,valDesc,newValue):
