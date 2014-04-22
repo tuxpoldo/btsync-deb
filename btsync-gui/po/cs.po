@@ -543,15 +543,15 @@ msgstr "TB"
 
 #: ../dialogs.glade.h:25
 msgid "Restore modified files to original version"
-msgstr ""
+msgstr "Navrátit změněné soubory do počátečního stavu"
 
 #: ../dialogs.glade.h:36
 msgid "This is a folder with read-only permissions.\n"
 "Modification made to this folder will not be displayed\n"
 "on other devices."
-msgstr ""
+msgstr "Toto je složka s přístupem jen ke čtení. Změny provedené v této složce se neprojeví na ostatních zařízeních."
 
 #: ../dialogs.glade.h:6
 msgid "Encryption secret (read-only)"
-msgstr ""
+msgstr "Šifrovací tajemství (jen pro čtení)"
 
