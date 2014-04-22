@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-21 17:15+0200\n"
+"POT-Creation-Date: 2014-04-22 18:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -219,23 +219,23 @@ msgstr ""
 msgid "Please select a folder to sync"
 msgstr ""
 
-#: ../dialogs.py:370
+#: ../dialogs.py:423
 msgid ""
 "Invalid secret specified.\n"
 "Secret must have a length of 33 characters"
 msgstr ""
 
-#: ../dialogs.py:377
+#: ../dialogs.py:430
 msgid ""
 "Invalid secret specified.\n"
 "Secret must contain only alphanumeric characters"
 msgstr ""
 
-#: ../dialogs.py:424
+#: ../dialogs.py:477
 msgid "A hostname or IP address must be specified"
 msgstr ""
 
-#: ../dialogs.py:429
+#: ../dialogs.py:482
 msgid "The specified port must be a number between 1 and 65534"
 msgstr ""
 
@@ -347,7 +347,7 @@ msgstr ""
 msgid "Path"
 msgstr ""
 
-#: ../btsyncapp.glade.h:28 ../dialogs.glade.h:18
+#: ../btsyncapp.glade.h:28 ../dialogs.glade.h:19
 msgid "Preferences"
 msgstr ""
 
@@ -459,140 +459,144 @@ msgid "Choose"
 msgstr ""
 
 #: ../dialogs.glade.h:6
-msgid "Folder to sync:"
+msgid "Encryption secret (read-only)"
 msgstr ""
 
 #: ../dialogs.glade.h:7
-msgid "Full Access"
+msgid "Folder to sync:"
 msgstr ""
 
 #: ../dialogs.glade.h:8
-msgid "Full access"
+msgid "Full Access"
 msgstr ""
 
 #: ../dialogs.glade.h:9
-msgid "Full access secret"
+msgid "Full access"
 msgstr ""
 
 #: ../dialogs.glade.h:10
-msgid "Generate"
+msgid "Full access secret"
 msgstr ""
 
 #: ../dialogs.glade.h:11
-msgid "Generate a new secret or enter shared folder secret"
+msgid "Generate"
 msgstr ""
 
 #: ../dialogs.glade.h:12
-msgid "Hosts"
+msgid "Generate a new secret or enter shared folder secret"
 msgstr ""
 
 #: ../dialogs.glade.h:13
-msgid "Name"
+msgid "Hosts"
 msgstr ""
 
 #: ../dialogs.glade.h:14
-msgid "New Predefined Host"
+msgid "Name"
 msgstr ""
 
 #: ../dialogs.glade.h:15
-msgid "New known host address:"
+msgid "New Predefined Host"
 msgstr ""
 
 #: ../dialogs.glade.h:16
-msgid "One-time secret"
+msgid "New known host address:"
 msgstr ""
 
 #: ../dialogs.glade.h:17
+msgid "One-time secret"
+msgstr ""
+
+#: ../dialogs.glade.h:18
 msgid "One-time secret should be used within 24 hours"
 msgstr ""
 
-#: ../dialogs.glade.h:19
+#: ../dialogs.glade.h:20
 msgid "Read Only"
 msgstr ""
 
-#: ../dialogs.glade.h:20
+#: ../dialogs.glade.h:21
 msgid "Read only"
 msgstr ""
 
-#: ../dialogs.glade.h:21
+#: ../dialogs.glade.h:22
 msgid "Read only secret"
 msgstr ""
 
-#: ../dialogs.glade.h:22
+#: ../dialogs.glade.h:23
 msgid "Remove Shared Folder"
 msgstr ""
 
-#: ../dialogs.glade.h:23
+#: ../dialogs.glade.h:24
 msgid "Reset"
 msgstr ""
 
-#: ../dialogs.glade.h:24
+#: ../dialogs.glade.h:25
 msgid "Restore modified files to original version"
 msgstr ""
 
-#: ../dialogs.glade.h:25
+#: ../dialogs.glade.h:26
 msgid "Scan QR"
 msgstr ""
 
-#: ../dialogs.glade.h:26
+#: ../dialogs.glade.h:27
 msgid ""
 "Scan this QR code with your mobile\n"
 "device to connect sync folders"
 msgstr ""
 
-#: ../dialogs.glade.h:28
+#: ../dialogs.glade.h:29
 msgid "Search DHT network"
 msgstr ""
 
-#: ../dialogs.glade.h:29
+#: ../dialogs.glade.h:30
 msgid "Search LAN"
 msgstr ""
 
-#: ../dialogs.glade.h:30
+#: ../dialogs.glade.h:31
 msgid "Secret Keys"
 msgstr ""
 
-#: ../dialogs.glade.h:31
+#: ../dialogs.glade.h:32
 msgid "Shared Folder Properties"
 msgstr ""
 
-#: ../dialogs.glade.h:32
+#: ../dialogs.glade.h:33
 msgid "Shared secret:"
 msgstr ""
 
-#: ../dialogs.glade.h:33
+#: ../dialogs.glade.h:34
 msgid "Store deleted files in SyncArchive"
 msgstr ""
 
-#: ../dialogs.glade.h:34
+#: ../dialogs.glade.h:35
 msgid ""
 "This folder will be removed from BitTorrent Sync and no longer synced with "
 "other devices"
 msgstr ""
 
-#: ../dialogs.glade.h:35
+#: ../dialogs.glade.h:36
 msgid ""
 "This is a folder with read-only permissions.\n"
 "Modification made to this folder will not be displayed\n"
 "on other devices."
 msgstr ""
 
-#: ../dialogs.glade.h:38
+#: ../dialogs.glade.h:39
 msgid "Use predefined hosts"
 msgstr ""
 
-#: ../dialogs.glade.h:39
+#: ../dialogs.glade.h:40
 msgid "Use relay server when required"
 msgstr ""
 
-#: ../dialogs.glade.h:40
+#: ../dialogs.glade.h:41
 msgid "Use tracker server"
 msgstr ""
 
-#: ../dialogs.glade.h:41
+#: ../dialogs.glade.h:42
 msgid "Value"
 msgstr ""
 
-#: ../dialogs.glade.h:42
+#: ../dialogs.glade.h:43
 msgid "Value:"
 msgstr ""

@@ -182,6 +182,7 @@ class BtSyncFolderPrefs(BtBaseDialog):
 				'fp_predefined_hosts',
 				'rw_secret_text',
 				'ro_secret_text',
+				'en_secret_text',
 				'ot_secret_text'
 			]
 		)
@@ -196,42 +197,52 @@ class BtSyncFolderPrefs(BtBaseDialog):
 		self.idfolder = folder
 		self.idsecret = secret
 		self.rwsecret = result['read_write'] if result.has_key('read_write') else None
-		self.rosecret = result['read_only']
+		self.rosecret = result['read_only'] if result.has_key('read_only') else None
+		self.ensecret = result['encryption'] if result.has_key('encryption') else None
 		# load values
 		result = self.agent.get_folder_prefs(self.idsecret)
 		# initialize OK button
 		self.fp_button_ok = self.builder.get_object('fp_button_ok')
 		# secrets page
 		self.rw_secret = self.builder.get_object('rw_secret')
-		self.rw_secret_text = self.builder.get_object('rw_secret_text')
-		self.rw_secret_copy = self.builder.get_object('rw_secret_copy')
-		self.rw_secret_new  = self.builder.get_object('rw_secret_new')
-		self.rw_secret_label	= self.builder.get_object('rw_secret_label')
-		self.rw_secret_scroll	= self.builder.get_object('rw_secret_scroll')
+		self.rw_secret_text	= self.builder.get_object('rw_secret_text')
+		self.rw_secret_copy	= self.builder.get_object('rw_secret_copy')
+		self.rw_secret_new	= self.builder.get_object('rw_secret_new')
+
 		self.ro_secret = self.builder.get_object('ro_secret')
 		self.ro_secret_text = self.builder.get_object('ro_secret_text')
 		self.ro_secret_copy = self.builder.get_object('ro_secret_copy')
-		self.ot_secret = self.builder.get_object('ro_secret')
-		self.ot_secret_text = self.builder.get_object('ot_secret_text')
-		self.ot_secret_copy = self.builder.get_object('ot_secret_copy')
-		self.ot_secret_new = self.builder.get_object('ot_secret_new')
 		self.ro_restore	= self.builder.get_object('ro_restore')
 		self.ro_restore_label	= self.builder.get_object('ro_restore_label')
+
+		self.en_secret = self.builder.get_object('en_secret')
+		self.en_secret_text = self.builder.get_object('en_secret_text')
+		self.en_secret_copy = self.builder.get_object('en_secret_copy')
+
+		self.ot_secret = self.builder.get_object('ot_secret')
+		self.ot_secret_text = self.builder.get_object('ot_secret_text')
+		self.ot_secret_copy = self.builder.get_object('ot_secret_copy')
+		self.ot_secret_new	= self.builder.get_object('ot_secret_new')
+
 		# secrets page - values
 		self.ro_restore.set_active(self.agent.get_safe_result(result,'overwrite_changes',0) != 0)
-		if self.rwsecret is None:
-			self.rw_secret.set_sensitive(False)
+		if self.ensecret is None:
+			self.hide_en_secret()
+		else:
+			self.en_secret_text.set_text(str(self.ensecret))
 			self.rw_secret_new.set_sensitive(False)
-			self.rw_secret_copy.set_sensitive(False)
-			self.rw_secret_label.hide()
-			self.rw_secret_scroll.hide()
-			self.rw_secret_new.hide()
-			self.rw_secret_copy.hide()
+		if self.rosecret is None:
+			self.hide_ro_secret()
+			self.hide_ot_secret()
+			self.ro_restore.hide()
+		else:
+			self.ro_secret_text.set_text(str(self.rosecret))
+		if self.rwsecret is None:
+			self.hide_rw_secret()
 		else:
 			self.rw_secret_text.set_text(str(self.rwsecret))
 			self.ro_restore.hide()
 			self.ro_restore_label.hide()
-		self.ro_secret_text.set_text(str(self.rosecret))
 		# prefs page
 		self.fp_use_relay = self.builder.get_object('fp_use_relay')
 		self.fp_use_tracker = self.builder.get_object('fp_use_tracker')
@@ -267,6 +278,45 @@ class BtSyncFolderPrefs(BtBaseDialog):
 		if self.hostdlg is not None:
 			self.hostdlg.response(result_id)
 		BtBaseDialog.response(self,result_id)
+
+	def hide_rw_secret(self):
+		self.rw_secret.set_sensitive(False)
+		self.rw_secret_new.set_sensitive(False)
+		self.rw_secret_copy.set_sensitive(False)
+		self.builder.get_object('rw_secret_label').hide()
+		self.builder.get_object('rw_secret_scroll').hide()
+		self.builder.get_object('rw_secret_box').hide()
+
+	def hide_ro_secret(self):
+		self.ro_secret.set_sensitive(False)
+		self.ro_secret_copy.set_sensitive(False)
+		self.builder.get_object('ro_secret_label').hide()
+		self.builder.get_object('ro_secret_scroll').hide()
+		self.builder.get_object('ro_secret_box').hide()
+
+	def hide_en_secret(self):
+		self.en_secret.set_sensitive(False)
+		self.en_secret_copy.set_sensitive(False)
+		self.builder.get_object('en_secret_label').hide()
+		self.builder.get_object('en_secret_scroll').hide()
+		self.builder.get_object('en_secret_box').hide()
+
+	def show_en_secret(self):
+		self.en_secret.set_sensitive(True)
+		self.en_secret_copy.set_sensitive(True)
+		self.builder.get_object('en_secret_label').show()
+		self.builder.get_object('en_secret_scroll').show()
+		self.builder.get_object('en_secret_box').show()
+
+	def hide_ot_secret(self):
+		self.ot_secret.set_sensitive(False)
+		self.ot_secret_new.set_sensitive(False)
+		self.ot_secret_copy.set_sensitive(False)
+		self.builder.get_object('ot_secret_label').hide()
+		self.builder.get_object('ot_secret_scroll').hide()
+		self.builder.get_object('ot_secret_box').hide()
+		self.builder.get_object('ot_secret_buttonbox').hide()
+		self.builder.get_object('ot_secret_info').hide()
 
 	def disable_hosts(self):
 		self.fp_predefined_tree.set_sensitive(False)
@@ -313,6 +363,9 @@ class BtSyncFolderPrefs(BtBaseDialog):
 		text = self.ro_secret_text.get_text(*self.ro_secret_text.get_bounds(),include_hidden_chars=False)
 		self.clipboard.set_text(text, -1)
 
+	def onEnSecretCopy(self,widget):
+		text = self.en_secret_text.get_text(*self.en_secret_text.get_bounds(),include_hidden_chars=False)
+		self.clipboard.set_text(text, -1)
 
 	def onOtSecretCopy(self,widget):
 		text = self.ot_secret_text.get_text(*self.ot_secret_text.get_bounds(),include_hidden_chars=False)
