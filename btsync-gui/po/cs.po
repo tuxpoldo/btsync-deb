@@ -161,23 +161,23 @@ msgstr "Nemáte oprávnění zapisovat do zvolené složky."
 msgid "Please select a folder to sync"
 msgstr "Prosím, zvolte složky, kterou chcete synchronizovat"
 
-#: ../dialogs.py:370
+#: ../dialogs.py:423
 msgid "Invalid secret specified.\n"
 "Secret must have a length of 33 characters"
 msgstr "Bylo zadáno neplatné tajemství.\n"
 "Tajemství musí být dlouhé 33 znaků."
 
-#: ../dialogs.py:377
+#: ../dialogs.py:430
 msgid "Invalid secret specified.\n"
 "Secret must contain only alphanumeric characters"
 msgstr "Bylo zadáno neplatné tajemství.\n"
 "Tajemství musí obsahovat pouze alfanumerické znaky."
 
-#: ../dialogs.py:424
+#: ../dialogs.py:477
 msgid "A hostname or IP address must be specified"
 msgstr "Musí být zadáno jméno nebo IP adresa hostícího počítače"
 
-#: ../dialogs.py:429
+#: ../dialogs.py:482
 msgid "The specified port must be a number between 1 and 65534"
 msgstr "Zadaný port musí být číslo mezi 1 až 65534"
 
@@ -285,7 +285,7 @@ msgstr "Otevře archiv synchronizace obsahující minulé či odstraněné verze
 msgid "Path"
 msgstr "Cesta"
 
-#: ../btsyncapp.glade.h:28 ../dialogs.glade.h:18
+#: ../btsyncapp.glade.h:28 ../dialogs.glade.h:19
 msgid "Preferences"
 msgstr "Možnosti"
 
@@ -396,128 +396,128 @@ msgstr "Rozšířené možnosti"
 msgid "Choose"
 msgstr "Vybrat"
 
-#: ../dialogs.glade.h:6
+#: ../dialogs.glade.h:7
 msgid "Folder to sync:"
 msgstr "Složka k synchronizaci:"
 
-#: ../dialogs.glade.h:7
+#: ../dialogs.glade.h:8
 msgid "Full Access"
 msgstr "Plný přístup"
 
-#: ../dialogs.glade.h:8
+#: ../dialogs.glade.h:9
 msgid "Full access"
 msgstr "Plný přístup"
 
-#: ../dialogs.glade.h:9
+#: ../dialogs.glade.h:10
 msgid "Full access secret"
 msgstr "Tajemství k plnému přístupu"
 
-#: ../dialogs.glade.h:10
+#: ../dialogs.glade.h:11
 msgid "Generate"
 msgstr "Vygenerovat"
 
-#: ../dialogs.glade.h:11
+#: ../dialogs.glade.h:12
 msgid "Generate a new secret or enter shared folder secret"
 msgstr "Vygenerujte nové tajemství nebo vložte tajemství ke sdílené složce"
 
-#: ../dialogs.glade.h:12
+#: ../dialogs.glade.h:13
 msgid "Hosts"
 msgstr "Hostitelé"
 
-#: ../dialogs.glade.h:13
+#: ../dialogs.glade.h:14
 msgid "Name"
 msgstr "Jméno"
 
-#: ../dialogs.glade.h:14
+#: ../dialogs.glade.h:15
 msgid "New Predefined Host"
 msgstr "Nový přednastavený hostitel"
 
-#: ../dialogs.glade.h:15
+#: ../dialogs.glade.h:16
 msgid "New known host address:"
 msgstr "Adresa nově poznaného hostitele:"
 
-#: ../dialogs.glade.h:16
+#: ../dialogs.glade.h:17
 msgid "One-time secret"
 msgstr "Tajemství na jedno použití"
 
-#: ../dialogs.glade.h:17
+#: ../dialogs.glade.h:18
 msgid "One-time secret should be used within 24 hours"
 msgstr "Tajemství na jedno použití by mělo být použito do 24 hodin"
 
-#: ../dialogs.glade.h:19
+#: ../dialogs.glade.h:20
 msgid "Read Only"
 msgstr "Jen pro čtení"
 
-#: ../dialogs.glade.h:20
+#: ../dialogs.glade.h:21
 msgid "Read only"
 msgstr "Jen pro čtení"
 
-#: ../dialogs.glade.h:21
+#: ../dialogs.glade.h:22
 msgid "Read only secret"
 msgstr "\"Jen pro čtení\" Tajemství"
 
-#: ../dialogs.glade.h:22
+#: ../dialogs.glade.h:23
 msgid "Remove Shared Folder"
 msgstr "Odebrat sdílenou složku"
 
-#: ../dialogs.glade.h:23
+#: ../dialogs.glade.h:24
 msgid "Reset"
 msgstr "Resetovat"
 
-#: ../dialogs.glade.h:25
+#: ../dialogs.glade.h:26
 msgid "Scan QR"
 msgstr "Skenovat QR"
 
-#: ../dialogs.glade.h:26
+#: ../dialogs.glade.h:27
 msgid "Scan this QR code with your mobile\n"
 "device to connect sync folders"
 msgstr "Naskenujte tento QR kód pomocí svého mobilního zařízení pro připojení ke sdíleným složkám"
 
-#: ../dialogs.glade.h:28
+#: ../dialogs.glade.h:29
 msgid "Search DHT network"
 msgstr "Prohledat síť DHT"
 
-#: ../dialogs.glade.h:29
+#: ../dialogs.glade.h:30
 msgid "Search LAN"
 msgstr "Prohledat LAN"
 
-#: ../dialogs.glade.h:30
+#: ../dialogs.glade.h:31
 msgid "Secret Keys"
 msgstr "Tajné klíče"
 
-#: ../dialogs.glade.h:31
+#: ../dialogs.glade.h:32
 msgid "Shared Folder Properties"
 msgstr "Vlastnosti sdílené složky"
 
-#: ../dialogs.glade.h:32
+#: ../dialogs.glade.h:33
 msgid "Shared secret:"
 msgstr "Sdílené tajemství:"
 
-#: ../dialogs.glade.h:33
+#: ../dialogs.glade.h:34
 msgid "Store deleted files in SyncArchive"
 msgstr "Ukládat soubory do SyncArchive"
 
-#: ../dialogs.glade.h:34
+#: ../dialogs.glade.h:35
 msgid "This folder will be removed from BitTorrent Sync and no longer synced with other devices"
 msgstr "Tato složka bude odebrána ze služby BitTorrent Sync a již nebude synchronizována s ostatními zařízeními"
 
-#: ../dialogs.glade.h:38
+#: ../dialogs.glade.h:39
 msgid "Use predefined hosts"
 msgstr "Použít přednastavené hostitele"
 
-#: ../dialogs.glade.h:39
+#: ../dialogs.glade.h:40
 msgid "Use relay server when required"
 msgstr "Je-li třeba použít relay server"
 
-#: ../dialogs.glade.h:40
+#: ../dialogs.glade.h:41
 msgid "Use tracker server"
 msgstr "Použít tracker server"
 
-#: ../dialogs.glade.h:41
+#: ../dialogs.glade.h:42
 msgid "Value"
 msgstr "Hodnota"
 
-#: ../dialogs.glade.h:42
+#: ../dialogs.glade.h:43
 msgid "Value:"
 msgstr "Hodnota:"
 
@@ -541,13 +541,17 @@ msgstr "GB"
 msgid "TB"
 msgstr "TB"
 
-#: ../dialogs.glade.h:24
+#: ../dialogs.glade.h:25
 msgid "Restore modified files to original version"
 msgstr ""
 
-#: ../dialogs.glade.h:35
+#: ../dialogs.glade.h:36
 msgid "This is a folder with read-only permissions.\n"
 "Modification made to this folder will not be displayed\n"
 "on other devices."
+msgstr ""
+
+#: ../dialogs.glade.h:6
+msgid "Encryption secret (read-only)"
 msgstr ""
 
