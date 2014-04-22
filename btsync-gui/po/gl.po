@@ -545,15 +545,15 @@ msgstr "TB"
 
 #: ../dialogs.glade.h:25
 msgid "Restore modified files to original version"
-msgstr ""
+msgstr "Restaurar os ficheiro modificados á versión orixinal"
 
 #: ../dialogs.glade.h:36
 msgid "This is a folder with read-only permissions.\n"
 "Modification made to this folder will not be displayed\n"
 "on other devices."
-msgstr ""
+msgstr "Tratase dun cartafol con permisos de só lectura. A modificación feita a este cartafol non se amosará noutros dispositivos."
 
 #: ../dialogs.glade.h:6
 msgid "Encryption secret (read-only)"
-msgstr ""
+msgstr "Código secreto cifrado (só lectura)"
 
