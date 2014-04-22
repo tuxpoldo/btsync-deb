@@ -545,15 +545,15 @@ msgstr "TB"
 
 #: ../dialogs.glade.h:25
 msgid "Restore modified files to original version"
-msgstr ""
+msgstr "Przywróć pliki do domyślnej konfiguracji"
 
 #: ../dialogs.glade.h:36
 msgid "This is a folder with read-only permissions.\n"
 "Modification made to this folder will not be displayed\n"
 "on other devices."
-msgstr ""
+msgstr "To jest folder z uprawnieniami tylko-do-odczytu. Modyfikacje tego folderu, nie wyświetlą się na innych urządzeniach."
 
 #: ../dialogs.glade.h:6
 msgid "Encryption secret (read-only)"
-msgstr ""
+msgstr "Klucz szyfrowania (tylko-do-odczytu)"
 
