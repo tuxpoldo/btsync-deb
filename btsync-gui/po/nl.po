@@ -542,15 +542,15 @@ msgstr "TB"
 
 #: ../dialogs.glade.h:25
 msgid "Restore modified files to original version"
-msgstr ""
+msgstr "Herstel gewijzigde bestanden naar de oorspronkelijke versie"
 
 #: ../dialogs.glade.h:36
 msgid "This is a folder with read-only permissions.\n"
 "Modification made to this folder will not be displayed\n"
 "on other devices."
-msgstr ""
+msgstr "Dit is een map met alleen-lezen rechten. Wijzigingen gemaakt aan de inhoud van deze map worden niet aan andere apparaten doorgegeven."
 
 #: ../dialogs.glade.h:6
 msgid "Encryption secret (read-only)"
-msgstr ""
+msgstr "Encryptie secret (alleen-lezen)"
 
