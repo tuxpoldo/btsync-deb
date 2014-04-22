@@ -162,23 +162,23 @@ msgstr "Nie masz uprawnień do zapisu w wybranym folderze."
 msgid "Please select a folder to sync"
 msgstr "Proszę wybrać folder do synchronizacji"
 
-#: ../dialogs.py:370
+#: ../dialogs.py:423
 msgid "Invalid secret specified.\n"
 "Secret must have a length of 33 characters"
 msgstr "Określono nieprawidłowy sekret. \n"
 "Sekret powinien się składać z 33 znaków"
 
-#: ../dialogs.py:377
+#: ../dialogs.py:430
 msgid "Invalid secret specified.\n"
 "Secret must contain only alphanumeric characters"
 msgstr "Określono nieprawidłowy sekret.\n"
 "Sekret powinien zawierać jedynie znaki alfanumeryczne"
 
-#: ../dialogs.py:424
+#: ../dialogs.py:477
 msgid "A hostname or IP address must be specified"
 msgstr "Nazwa hosta lub adres IP muszę być określone"
 
-#: ../dialogs.py:429
+#: ../dialogs.py:482
 msgid "The specified port must be a number between 1 and 65534"
 msgstr "Określenie portu musi być liczbą pomiędzy 1 a 65534"
 
@@ -286,7 +286,7 @@ msgstr "Otwiera archiwum synchronizacji zawierającego poprzednie lub usunięcie
 msgid "Path"
 msgstr "Ścieżka"
 
-#: ../btsyncapp.glade.h:28 ../dialogs.glade.h:18
+#: ../btsyncapp.glade.h:28 ../dialogs.glade.h:19
 msgid "Preferences"
 msgstr "Preferencje"
 
@@ -398,128 +398,128 @@ msgstr "Zaawansowane preferencje"
 msgid "Choose"
 msgstr "Wybór"
 
-#: ../dialogs.glade.h:6
+#: ../dialogs.glade.h:7
 msgid "Folder to sync:"
 msgstr "Folder do synchronizacji:"
 
-#: ../dialogs.glade.h:7
+#: ../dialogs.glade.h:8
 msgid "Full Access"
 msgstr "Pełen dostęp"
 
-#: ../dialogs.glade.h:8
+#: ../dialogs.glade.h:9
 msgid "Full access"
 msgstr "Pełen dostęp"
 
-#: ../dialogs.glade.h:9
+#: ../dialogs.glade.h:10
 msgid "Full access secret"
 msgstr "Pełen dostęp sekretów"
 
-#: ../dialogs.glade.h:10
+#: ../dialogs.glade.h:11
 msgid "Generate"
 msgstr "Generuj"
 
-#: ../dialogs.glade.h:11
+#: ../dialogs.glade.h:12
 msgid "Generate a new secret or enter shared folder secret"
 msgstr "Generuj nowy sekret lub wprowadź udostępniany sekretny folder"
 
-#: ../dialogs.glade.h:12
+#: ../dialogs.glade.h:13
 msgid "Hosts"
 msgstr "Hosty"
 
-#: ../dialogs.glade.h:13
+#: ../dialogs.glade.h:14
 msgid "Name"
 msgstr "Nazwa"
 
-#: ../dialogs.glade.h:14
+#: ../dialogs.glade.h:15
 msgid "New Predefined Host"
 msgstr "Nowy zdefiniowany host"
 
-#: ../dialogs.glade.h:15
+#: ../dialogs.glade.h:16
 msgid "New known host address:"
 msgstr "Nowy znany adres hosta:"
 
-#: ../dialogs.glade.h:16
+#: ../dialogs.glade.h:17
 msgid "One-time secret"
 msgstr "Jednorazowy sekret"
 
-#: ../dialogs.glade.h:17
+#: ../dialogs.glade.h:18
 msgid "One-time secret should be used within 24 hours"
 msgstr "Jednorazowy sekret powinien być wykorzystany w przeciągu 24 godzin"
 
-#: ../dialogs.glade.h:19
+#: ../dialogs.glade.h:20
 msgid "Read Only"
 msgstr "Wyłączenie odczyt"
 
-#: ../dialogs.glade.h:20
+#: ../dialogs.glade.h:21
 msgid "Read only"
 msgstr "Wyłącznie odczyt"
 
-#: ../dialogs.glade.h:21
+#: ../dialogs.glade.h:22
 msgid "Read only secret"
 msgstr "Wyłącznie odczyt sekretu"
 
-#: ../dialogs.glade.h:22
+#: ../dialogs.glade.h:23
 msgid "Remove Shared Folder"
 msgstr "Usuń udostępniany folder"
 
-#: ../dialogs.glade.h:23
+#: ../dialogs.glade.h:24
 msgid "Reset"
 msgstr "Resetuj"
 
-#: ../dialogs.glade.h:25
+#: ../dialogs.glade.h:26
 msgid "Scan QR"
 msgstr "Skanuj QR"
 
-#: ../dialogs.glade.h:26
+#: ../dialogs.glade.h:27
 msgid "Scan this QR code with your mobile\n"
 "device to connect sync folders"
 msgstr "Skanuj ten kod QR swoim urządzeniem przenośnym aby połączyć się z synchronizowanymi folderami"
 
-#: ../dialogs.glade.h:28
+#: ../dialogs.glade.h:29
 msgid "Search DHT network"
 msgstr "Wyszukaj sieci DHT"
 
-#: ../dialogs.glade.h:29
+#: ../dialogs.glade.h:30
 msgid "Search LAN"
 msgstr "Wyszukaj LAN"
 
-#: ../dialogs.glade.h:30
+#: ../dialogs.glade.h:31
 msgid "Secret Keys"
 msgstr "Sekretne klucze"
 
-#: ../dialogs.glade.h:31
+#: ../dialogs.glade.h:32
 msgid "Shared Folder Properties"
 msgstr "Właściwości udostępnianych folderów"
 
-#: ../dialogs.glade.h:32
+#: ../dialogs.glade.h:33
 msgid "Shared secret:"
 msgstr "Udostępniane sekrety:"
 
-#: ../dialogs.glade.h:33
+#: ../dialogs.glade.h:34
 msgid "Store deleted files in SyncArchive"
 msgstr "Przechowywanie usuniętych plików w archiwum synchronizacji"
 
-#: ../dialogs.glade.h:34
+#: ../dialogs.glade.h:35
 msgid "This folder will be removed from BitTorrent Sync and no longer synced with other devices"
 msgstr "Ten folder będzie usunięty z BitTorrent Sync i nie będzie więcej synchronizowany z innymi urządzeniami"
 
-#: ../dialogs.glade.h:38
+#: ../dialogs.glade.h:39
 msgid "Use predefined hosts"
 msgstr "Użyć zdefiniowanych hostów"
 
-#: ../dialogs.glade.h:39
+#: ../dialogs.glade.h:40
 msgid "Use relay server when required"
 msgstr "Użyć przekaźnika serwera kiedy jest to wymagane"
 
-#: ../dialogs.glade.h:40
+#: ../dialogs.glade.h:41
 msgid "Use tracker server"
 msgstr "Użyć trackera serwera"
 
-#: ../dialogs.glade.h:41
+#: ../dialogs.glade.h:42
 msgid "Value"
 msgstr "Wartość"
 
-#: ../dialogs.glade.h:42
+#: ../dialogs.glade.h:43
 msgid "Value:"
 msgstr "Wartość"
 
@@ -543,13 +543,17 @@ msgstr "GB"
 msgid "TB"
 msgstr "TB"
 
-#: ../dialogs.glade.h:24
+#: ../dialogs.glade.h:25
 msgid "Restore modified files to original version"
 msgstr ""
 
-#: ../dialogs.glade.h:35
+#: ../dialogs.glade.h:36
 msgid "This is a folder with read-only permissions.\n"
 "Modification made to this folder will not be displayed\n"
 "on other devices."
+msgstr ""
+
+#: ../dialogs.glade.h:6
+msgid "Encryption secret (read-only)"
 msgstr ""
 
