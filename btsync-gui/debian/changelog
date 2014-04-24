@@ -5,6 +5,7 @@ btsync-gui (0.8.3-1) unstable; urgency=low
   * Implemented support for restore modified files in read-only folder
     settings (Closes #127)
   * Added passive support for encrypted secrets (Closes #129)
+  * Improved input field handling (Closes #130)
   * Localisation improvements
 
  -- Leo Moll <leo.moll@yeasoft.com>  Sun, 06 Apr 2014 18:28:06 +0200

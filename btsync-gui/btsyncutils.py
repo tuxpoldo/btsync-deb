@@ -66,7 +66,32 @@ class BtValueDescriptor(GObject.GObject):
 	def get_display_width(self,value):
 		return 400 if self.is_default(value) else 900
 
-	def filter_value (self,value):
+	def test_value(self,value):
+		# boundary checks
+		if self.Type == 'n' or self.Type == 'i':
+			# default is always OK
+			if self.Default is not None and self._to_num(self.Default) == self._to_num(value):
+				return True
+			# test minimum value
+			if self.Min is not None and self._to_num(value) < self._to_num(self.Min):
+				return False
+			# test maximum value
+			if self.Max is not None and self._to_num(value) > self._to_num(self.Max):
+				return False
+			return True
+		elif self.Type == 's':
+			# default is always OK
+			if self.Default is not None and str(self.Default) == str(value):
+				return True
+			# test minimum length
+			if self.Min is not None and len(newValue) < self._to_num(self.Min):
+				return False
+			# test maximum length
+			if self.Max is not None and len(newValue) > self._to_num(self.Max):
+				return False
+		return True
+
+	def filter_value(self,value):
 		newValue = value
 		# eliminate non allowed characters
 		if self.Forbidden is not None:
@@ -74,18 +99,6 @@ class BtValueDescriptor(GObject.GObject):
 		if self.Allowed is not None:
 			stripMask = newValue.strip(self.Allowed)
 			newValue = newValue.strip(stripMask)
-		# boundary check
-		if self.Type == 'n' or self.Type == 'i':
-			# force boundaries on numerical types
-			if self.Min is not None and self._to_num(newValue) < self._to_num(self.Min):
-				newValue = self.Min
-
-			if self.Max is not None and self._to_num(newValue) > self._to_num(self.Max):
-				newValue = self.Max
-		elif self.Type == 's':
-			# limit length on string types
-			if self.Max is not None and len(newValue) > self._to_num(self.Max):
-				newValue = newValue[0:self._to_num(self.Max)]
 		return newValue
 
 	@staticmethod
@@ -190,12 +203,18 @@ class BtInputHelper:
 				value = widget.get_text()
 			else:
 				return # unknown type - will not save
-			if self.onSaveEntry(widget,valDesc,value):
-				valDesc.Value = value
-				widget.set_icon_from_stock(Gtk.EntryIconPosition.SECONDARY, None)
+			if valDesc.test_value(value):
+				if self.onSaveEntry(widget,valDesc,value):
+					valDesc.Value = value
+					widget.set_icon_from_stock(Gtk.EntryIconPosition.SECONDARY, None)
+			else:
+				self.onInvalidEntry(widget,valDesc,value)
 
 	def onSaveEntry(self,widget,valDesc,value):
 		return False
+
+	def onInvalidEntry(self,widget,valDesc,value):
+		pass
 
 	def filterEntryContent (self,widget,valDesc):
 		value = widget.get_text()
@@ -205,7 +224,10 @@ class BtInputHelper:
 
 	def handleEntryChanged(self,widget,valDesc):
 		if valDesc is not None and str(valDesc.Value) != widget.get_text():
-			widget.set_icon_from_stock(Gtk.EntryIconPosition.SECONDARY, 'gtk-save')
+			if valDesc.test_value(widget.get_text()):
+				widget.set_icon_from_stock(Gtk.EntryIconPosition.SECONDARY, 'gtk-save')
+			else:
+				widget.set_icon_from_stock(Gtk.EntryIconPosition.SECONDARY, 'gtk-dialog-error')
 		else:
 			widget.set_icon_from_stock(Gtk.EntryIconPosition.SECONDARY, None)
 
