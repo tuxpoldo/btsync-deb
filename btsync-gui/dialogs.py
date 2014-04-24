@@ -230,7 +230,6 @@ class BtSyncFolderPrefs(BtBaseDialog):
 			self.hide_en_secret()
 		else:
 			self.en_secret_text.set_text(str(self.ensecret))
-			self.rw_secret_new.set_sensitive(False)
 		if self.rosecret is None:
 			self.hide_ro_secret()
 			self.hide_ot_secret()
@@ -353,7 +352,7 @@ class BtSyncFolderPrefs(BtBaseDialog):
 	def onRwSecretNew(self,widget):
 		result = self.agent.get_secrets()
 		self.rw_secret_text.set_text(str(result['read_write']))
-		# everything is done by onCHangeSecret
+		# everything is now done by onSecretChanged
 		# self.rwsecret = result['read_write']
 		# self.rosecret = result['read_only']
 		# self.rw_secret_text.set_text(str(self.rwsecret))
@@ -380,12 +379,20 @@ class BtSyncFolderPrefs(BtBaseDialog):
 
 	def onSecretChanged(self,textbuffer):
 		text = self.rw_secret_text.get_text(*self.rw_secret_text.get_bounds(),include_hidden_chars=False)
-		if len(text) == 33:
-			if text != self.rwsecret:
-				result = self.agent.get_secrets(text,throw_exceptions=False)
-				if self.agent.get_error_code(result) == 0:
+		if text != self.rwsecret:
+			result = self.agent.get_secrets(text,throw_exceptions=False)
+			if self.agent.get_error_code(result) == 0:
+				if result.has_key('read_only'):
 					self.ro_secret_text.set_text(str(result['read_only']))
-					self.onChanged(None)
+				else:
+					self.ro_secret_text.set_text('')
+				if result.has_key('encryption'):
+					self.show_en_secret()
+					self.en_secret_text.set_text(str(result['encryption']))
+				else:
+					self.hide_en_secret()
+					self.en_secret_text.set_text('')
+				self.onChanged(None)
 
 	def onPredefinedToggle(self,widget):
 		self.onChanged(None)
@@ -418,14 +425,15 @@ class BtSyncFolderPrefs(BtBaseDialog):
 	def onOK(self,widget):
 		if self.rwsecret is not None:
 			text = self.rw_secret_text.get_text(*self.rw_secret_text.get_bounds(),include_hidden_chars=False)
-			if len(text) != 33:
+			if len(text) != 33 and len(text) < 40:
 				self.show_error(_(
 					'Invalid secret specified.\n'\
 					'Secret must have a length of 33 characters'
 				))
 				self.dlg.response(0)
 				return False
-			elif not text.isalnum():
+			result = self.agent.get_secrets(text,throw_exceptions=False)
+			if self.agent.get_error_code(result) != 0:
 				self.show_error(_(
 					'Invalid secret specified.\n'\
 					'Secret must contain only alphanumeric characters'

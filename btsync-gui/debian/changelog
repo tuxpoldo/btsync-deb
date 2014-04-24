@@ -2,6 +2,7 @@ btsync-gui (0.8.3-1) unstable; urgency=low
 
   * Made columns in "Folders" and "Devices" pane persistently sortable
   * Hide unimplemented panes "Transfers" and "History"
+  * Added support for custom secrets (Closes #113)
   * Implemented support for restore modified files in read-only folder
     settings (Closes #127)
   * Added passive support for encrypted secrets (Closes #129)
