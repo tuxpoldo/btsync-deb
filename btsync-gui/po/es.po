@@ -544,16 +544,18 @@ msgstr "GB"
 msgid "TB"
 msgstr "TB"
 
+#. I have changed "ver." into "versión". Unless there is a problem with the length of the string the second one should be preferred.
 #: ../dialogs.glade.h:25
 msgid "Restore modified files to original version"
-msgstr "Restaurar ver. original de archivos modiﬁcados"
+msgstr "Restaurar versión original de archivos modiﬁcados"
 
+#. For consistency with the rest of sentences I used the verb for the formal "Ud." (haga) tense instead of the more coloquial "tú" (hagas).
 #: ../dialogs.glade.h:36
 msgid "This is a folder with read-only permissions.\n"
 "Modification made to this folder will not be displayed\n"
 "on other devices."
 msgstr "Esta carpeta tiene permisos de solo lectura. Los cambios\n"
-"que hagas en ella no se mostrarán en otros dispositivos\n"
+"que haga en ella no se mostrarán en otros dispositivos\n"
 "sincronizados."
 
 #: ../dialogs.glade.h:6
