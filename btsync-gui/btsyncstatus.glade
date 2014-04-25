@@ -17,6 +17,17 @@ BitTorrent Inc.
 
 Linux UI written by Leo Moll
 YeaSoft International</property>
+    <property name="translator_credits">Andrea Pennelli (Italian)
+Antoine Lorence (French)
+Atanas Kovachki (Bulgarian, Russian)
+Damian Szymański (Polish)
+Jasper Sierink "knireis" (Dutch)
+Jose Luis Tirado (Spanish)
+Leo Moll (German, Italian)
+Loïc Fournet "AnthorNet" (French)
+Marek Lukas (Czech)
+Miguel Anxo Bouzada (Galician)
+Sergey Shlyapugin (Russian)</property>
     <property name="logo_icon_name">btsync-gui</property>
     <property name="license_type">custom</property>
     <child internal-child="vbox">

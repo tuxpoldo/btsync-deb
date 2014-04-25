@@ -15,10 +15,13 @@ first linux GUI application. Thank you!
 The following people have contributed with code and/or good ideas:
 
 1. Brandon Ingalls <blingall@mtu.edu> for his [BtSyncAPI][2] Python bindings
-which inspired me in writing my own binding class
+which inspired me in writing my own binding class.
 
 2. Harvey Mittens for his [Pull Request #42][3] to Mark's indicator which
-inspired me to implement my own abstraction class
+inspired me to implement my own abstraction class.
+
+3. Sean (_"shizeon"_) for pushing me in implementing the support for encrypted
+nodes and supplying some useful patches.
 
 
 [1]: https://github.com/marxjohnson/btsyncindicator
@@ -31,6 +34,8 @@ inspired me to implement my own abstraction class
 The following People contributed in translating `btsync-gui`:
 
 * Andrea Pennelli (Italian)
+* Antoine Lorence (French)
+* Atanas Kovachki (Bulgarian, Russian)
 * Damian Szymański (Polish)
 * Jasper Sierink _"knireis"_ (Dutch)
 * Jose Luis Tirado (Spanish)
