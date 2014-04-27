@@ -612,7 +612,7 @@ class BtSyncIndicator:
     def open_fm(self, widget, path):
         logging.info('Opening File manager to '+path)
 	if os.path.isdir(path):
-	    os.system('xdg-open '+path)
+	    subprocess.call(['xdg-open', path])
 
     def toggle_debugging(self, widget):
         """
