@@ -481,7 +481,7 @@ class BtSyncIndicator:
         if folder['name'] in self.active_folder_names:
             menuitem.set_label('⇅\t' + folder['name'])
         else:
-            menuitem.set_label('o\t' + folder['name'])
+            menuitem.set_label('―\t' + folder['name'])
         
         menu = menuitem.get_submenu()
 
