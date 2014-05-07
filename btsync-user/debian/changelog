@@ -1,3 +1,14 @@
+btsync-user (1.15.0-1) unstable; urgency=low
+
+  * New upstream release 0.15 on btsyncindicator
+    - Fixed TypeError on Debian Wheezy (Closes #btsyncindicator/45)
+    - Added per folder activity feedback (Closes #btsyncindicator/47)
+    - Fixed 'Open in File Browser' for directories containing
+      spaces (Closes #btsyncindicator/48)
+  * Added support for btsync-common-changed trigger
+ 
+ -- Leo Moll <leo.moll@yeasoft.com>  Wed, 07 May 2014 15:48:45 +0100
+
 btsync-user (1.14.3-1) unstable; urgency=low
 
   * New forked release 0.14.2 of btsyncindicator
