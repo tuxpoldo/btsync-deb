@@ -43,6 +43,7 @@ DEVNAME="$(hostname) - $(whoami)"
 
 RUNNING_STATEFILE="${DATADIR}/running"
 PAUSED_STATEFILE="${DATADIR}/paused"
+RESTART_STATEFILE="${DATADIR}/restarting"
 UPDATING_STATEFILE="/var/run/btsync-user-updating"
 
 AGENT=/usr/lib/btsync-user/btsync-agent
@@ -175,19 +176,28 @@ start_agent() {
 
 stop_agent() {
 	log_message "stop_agent: begin"
-	trap - INT QUIT TERM EXIT
+	trap - INT QUIT TERM EXIT HUP USR1 USR2
 	rm -f "${RUNNING_STATEFILE}"
 	rm -f "${PAUSED_STATEFILE}"
+	rm -f "${RESTART_STATEFILE}"
 	pkill -u $(id -u) -x btsync-agent
 	pkill -u $(id -u) -f btsyncindicator.py
 	log_message "stop_agent: end - exiting..."
 	exit 0
 }
 
+restart_agent() {
+	log_message "restart_agent: begin"
+	touch "${RESTART_STATEFILE}"
+	pkill -u $(id -u) -x btsync-agent
+	pkill -u $(id -u) -f btsyncindicator.py
+	log_message "restart_agent: end"
+}
 
 agent_runner() {
 	log_message "agent_runner: begin"
 	trap stop_agent INT QUIT TERM EXIT
+	trap restart_agent HUP USR1 USR2
 	touch "${RUNNING_STATEFILE}"
 	while [ -f "${RUNNING_STATEFILE}" ]; do
 		if [ -f "${UPDATING_STATEFILE}" ]; then
@@ -203,6 +213,7 @@ agent_runner() {
 		else
 			log_message "agent_runner: starting up components..."
 			cd ~
+			rm -f "${RESTART_STATEFILE}"
 			# Normal situation. Regenerate user files and
 			# startup normally
 			make_userfiles
@@ -217,7 +228,7 @@ agent_runner() {
 				sleep 1
 			done
 			log_message "agent_runner: agent terminated..."
-			if [ -f "${UPDATING_STATEFILE}" ]; then
+			if [ -f "${UPDATING_STATEFILE}" -o -f "${RESTART_STATEFILE}" ]; then
 				# we should stop the frontend since it could
 				# also be updated
 				log_message "agent_runner: stop frontend during update"
@@ -229,7 +240,7 @@ agent_runner() {
 			fi
 		fi
 	done
-	trap - INT QUIT TERM EXIT
+	trap - INT QUIT TERM EXIT HUP USR1 USR2
 	log_message "agent_runner: end"
 	log_message "btsync-starter: end"
 }

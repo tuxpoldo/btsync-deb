@@ -294,7 +294,7 @@ triggered)
 		invoke-rc.d btsync restart
 		;;
 	*)
-		echo "Unknown trigger '$2' received" >&2 
+		echo "Unhandled trigger '$2' received" >&2 
 		;;
 	esac
 	;;

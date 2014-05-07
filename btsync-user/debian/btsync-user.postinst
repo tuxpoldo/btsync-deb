@@ -35,6 +35,7 @@ configure)
 		mkdir /etc/xdg/autostart
 		ln -sf /usr/share/applications/btsync-agent.desktop /etc/xdg/autostart/btsync-agent.desktop
 	fi
+	rm -f /var/run/btsync-user-updating
 	set -e
 	;;
 
@@ -43,11 +44,7 @@ triggered)
 	btsync-common-changed)
 		set +e
 		# handle btsync-user if installed
-		touch /var/run/btsync-user-updating
-		pkill btsync-agent
-		sleep 1
-		rm -f /var/run/btsync-user-updating
-		set -e
+		pkill -SIGHUP -f btsync-starter
 		;;
 	*)
 		echo "Unhandled trigger '$2' received" >&2 
