@@ -37,6 +37,7 @@ The following People contributed in translating `btsync-gui`:
 * Antoine Lorence (French)
 * Atanas Kovachki (Bulgarian, Russian)
 * Damian Szymański (Polish)
+* Dávid Szilágyi (Hungarian)
 * Jasper Sierink _"knireis"_ (Dutch)
 * Jose Luis Tirado (Spanish)
 * Leo Moll (German & Italian)
