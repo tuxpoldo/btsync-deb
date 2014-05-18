@@ -1,5 +1,5 @@
 BitTorrent Sync Server Package
-------------------------------
+==============================
 
 BitTorrent® Inc. delivers for Linux users only a raw binary file without any
 deployment concept or setup system. It's up to the user to create a reliable
@@ -17,7 +17,8 @@ PROBLEMS RELATED TO THE USE OF THE PACKAGE. YOU WILL FIND COMPETENT
 HELP AND SUPPORT IN THE [SUPPORT FORUM](http://forum.bittorrent.com/topic/18974-debian-and-ubuntu-server-unofficial-packages-for-bittorrent-sync/)__
 
 
-### Typical Use Cases ###
+Typical Use Cases
+-----------------
 
 The BitTorrent Sync Server Package is designed to run one or more BitTorrent
 Sync background processes (called _"instances"_) on servers where no specific
@@ -36,7 +37,8 @@ The server version is particularly suitable for the following use cases:
 - Customized services built upon the functionality of BitTorrent Sync.
 
 
-### Installation  ###
+Installation
+------------
 
 The most easy and fast way to install the repository is to paste that at a
 terminal prompt:
@@ -72,14 +74,15 @@ Here you can also choose to delete the default instance by answering __no__ to
 the initial question.
 
 
-### Usage Notes ###
+Usage Notes
+-----------
 
 The BitTorrent Sync Server Package mainly consists of an init-style startup
 script that manages every operational aspect of running BitTorrent Sync
 instances.
 
 
-#### Instance Configuration Files ####
+### Instance Configuration Files ###
 
 All operational parameters for BitTorrent Sync instances are configured in
 configuration files located in the directory `/etc/btsync`. These configuration
@@ -188,7 +191,7 @@ instance is able to read and write all files it must access:
 Some example configuration files are provided under `/etc/btsync/samples`
 
 
-#### Default Startup Parameters ####
+### Default Startup Parameters ###
 
 The additional configuration file `/etc/default/btsync` permits to specify
 some default startup parameters that may affect every configured instance of
@@ -223,7 +226,8 @@ interface binding topic.
 The variable **DAEMON_INIT_DEBUG** permits to enable extended debug output of
 the init-script.
 
-### Binding BitTorrent Sync to a specific interface ###
+Binding BitTorrent Sync to a specific interface
+-----------------------------------------------
 
 Unfortunately BitTorrent Sync currently does not support to bind the main
 service routine to a specific network interface. Currently only the internal
@@ -250,15 +254,16 @@ This will affect also the Web UI, if `0.0.0.0` is specified as the bind address.
 
 [1]: https://en.wikipedia.org/wiki/Shim_(computing)
 
-### Some Remarks about Autoupdate ###
+Some Remarks about Autoupdate
+-----------------------------
 
 The daemon scripts require that autoupdate is disabled in the configuration
 script, otherwise the instance will not be started. The reason for that is,
 that updates are handled by the Debian/Ubuntu package handling utility itself.
 
 
-
-### Compatibility ###
+Compatibility
+-------------
 
 The deb-packages are available for the same architectures as released by
 BitTorrent Inc.:
@@ -272,7 +277,8 @@ BitTorrent Inc.:
 Since the packages still have not been tested on every platform, any
 related feedback is highly appreciated.
 
-#### Bug Report, Contribution and Sources ####
+Bug Reports, Contribution and Sources
+-------------------------------------
 
 If you want to contribute to the development of the packages or if you are
 curious how this all works, you may find the current sources of the deployment
