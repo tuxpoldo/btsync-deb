@@ -1,5 +1,5 @@
 BitTorrent Sync Desktop GUI Package
------------------------------------
+===================================
 
 BitTorrent® Sync is an excellent product, but as Linux user, you will miss the
 easy installation and integrated GUI provided to Windows and Mac OSX users. But
@@ -26,7 +26,7 @@ INC. PLEASE DO NOT CONTACT THE BITTORRENT® INC. SUPPORT WITH QUESTIONS OR
 PROBLEMS RELATED TO THE USE OF THE PACKAGES. YOU WILL FIND COMPETENT
 HELP AND SUPPORT IN THE [SUPPORT FORUM](http://forum.bittorrent.com/topic/28106-linux-desktop-gui-unofficial-packages-for-bittorrent-sync/)__
 
-#### Installation on Debian and Derivates (Ubuntu, Mint, Raspian, etc) ####
+### Installation on Debian and Derivates (Ubuntu, Mint, Raspian, etc) ###
 
 The most easy and fast way to install the repository is to paste that at a
 terminal prompt:
@@ -71,7 +71,7 @@ You have various possibilities to do this:
   your desktop.
 
 
-#### Installation on Arch Linux ####
+### Installation on Arch Linux ###
 
 Arch Linux users will find a `btsync-gui` package in the [AUR](https://aur.archlinux.org/packages/btsync-gui/)
 The package is maintained by Martin Wimpress (@flexiondotorg) and can be
@@ -83,14 +83,15 @@ sudo yaourt -S btsync-gui
 ```
 
 
-#### Upgrading from btsync-user ####
+### Upgrading from btsync-user ###
 
 `btsync-gui` is a drop-in replacement for `btsync-user`. By installing
 `btsync-gui` (or `btsync-gui-gtk`), your existing installation of `btsync-user`
 will be automatically replaced by `btsync-gui` without losing any data.
 
 
-### Usage Notes ###
+Usage Notes
+-----------
 
 The BitTorrent Sync GUI aims to be a clone of the original BitTorrent Sync
 application on Windows and Mac OSX and to replace on long term the legacy
@@ -179,7 +180,7 @@ optional arguments:
 
 The usage of the command line options will be explained by some examples below.
 
-#### Standalone Mode ####
+### Standalone Mode ###
 
 By default there is __no way to access the Web UI__ provided by the BitTorrent
 Sync agent, since the agent itself defines at each start random credentials to
@@ -237,7 +238,7 @@ security. Remember: the product of comfort and security is a constant. You
 cannot increase both.
 
 
-#### Client Mode ####
+### Client Mode ###
 
 In client mode, the GUI can be used to access a remotely running BitTorrent
 Sync agent. The only prerequisites are that the remote BitTorrent Sync agent is
@@ -266,7 +267,8 @@ limitations:
 - Some features are disabled (Pause/resume, Enable/Disable Debug) since they
   are not feasible on remote systems.
 
-### Compatibility ###
+Compatibility
+-------------
 
 The GUI package is available for the same architectures as released by
 BitTorrent Inc.:
@@ -303,7 +305,8 @@ packaging for their favourite distribution:
 Now it's up to you to test it and give me lots of feedback in order to extend
 this list. Any related feedback is highly appreciated.
 
-#### Bug Reports, Contribution and Sources ####
+Bug Reports, Contribution and Sources
+-------------------------------------
 
 If you want to contribute to the development of the packages or if you are
 curious how this all works, you may find the current sources, the deployment
