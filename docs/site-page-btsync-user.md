@@ -1,5 +1,5 @@
 BitTorrent Sync Desktop Packages
---------------------------------
+================================
 
 If you are using Ubuntu, Debian, Raspian or other derived distributions
 based on Debian and you are searching for an easy way to deploy
@@ -35,7 +35,8 @@ BitTorrent Inc.:
 Since the packages still have __not been tested__ with KDE, LXDE, Cinnamon and
 Linux Mint, any related feedback is highly appreciated.
 
-#### Bug Report, Contribution and Sources ####
+Bug Reports, Contribution and Sources
+-------------------------------------
 
 If you want to contribute to the development of the packages or if you are
 curious how this all works, you may find the current sources of the deployment
@@ -52,7 +53,7 @@ Issues related to the native functionality of BitTorrent Sync should instead be
 discussed by creating a new topic or partecipating to an already existing topic
 in the [BitTorrent Sync Forum](http://forum.bittorrent.com/forum/56-sync-general-discussion/).
 
-#### Adding the Repositories ####
+### Adding the Repositories ###
 
 Debian and Debian based distributions (Linspire, Xandros, Ubuntu, and Mepis to
 name a few) use a tool called APT (Advanced Packaging Tool) to manage all
@@ -124,7 +125,7 @@ Remember to update the local cache:
 
 After that you can proceed with the installation.
 
-#### Installation of the BitTorrent Sync Desktop Version####
+### Installation of the BitTorrent Sync Desktop Version ###
 
 The installation of btsync-user is really easy:
 
@@ -146,7 +147,8 @@ btsync start
 
 More details can be found in the usages notes:
 
-### Usage Notes ###
+Usage Notes
+-----------
 
 This package of BitTorrent Sync is explicitly intended for generic desktop
 usage and provide a user experience similar to BitTorrent Sync on Windows or
