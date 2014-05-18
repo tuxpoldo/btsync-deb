@@ -1,5 +1,5 @@
 Adding the BitTorrent Sync Repositories
----------------------------------------
+=======================================
 
 Debian and Debian based distributions (Linux Min, Ubuntu, Linspire, Xandros and
 Mepis to name a few) use a tool called APT (Advanced Packaging Tool) to manage
@@ -11,7 +11,8 @@ but these contain only the software officially distributed by the creator of
 your distribution. In order to install the btsync packages, you have to add the
 specific repositories where btsync is hosted.
 
-### Install the Repository ###
+Install the Repository
+----------------------
 
 The most easy and fast way to install the repository is to paste that at a
 terminal prompt:
@@ -26,7 +27,7 @@ for your permission.
 After this, you can directly proceed to the installation.
 
 
-#### Alternative Manual Installation ####
+### Alternative Manual Installation ###
 
 If you prefer to perform all the steps manually because you really want to
 understand what the script is doing, you can also install the repository
@@ -64,7 +65,7 @@ unset CODENAME
 
 After this, you can directly proceed to the installation.
 
-#### Alternative for Ubuntu ####
+### Alternative for Ubuntu ###
 
 __If you are using Ubuntu__, you may also use the Launchpad PPA instead of the
 default repositories but this has __some relevant disadvantages:__
