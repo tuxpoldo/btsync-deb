@@ -28,9 +28,6 @@ remove|deconfigure)
 	;;
 upgrade)
 	set +e
-	# handle new btsync applications like btsync-gui if installed
-	touch /var/run/btsync-common-updating
-	pkill -SIGHUP btsync-gui
 	# handle btsync-user if installed
 	touch /var/run/btsync-user-updating
 	pkill btsync-agent
@@ -38,11 +35,6 @@ upgrade)
 	;;
 failed-upgrade)
 	set +e
-	# handle new btsync applications like btsync-gui if installed
-	if [ -f /var/run/btsync-common-updating ]; then
-		rm -f /var/run/btsync-common-updating
-		pkill -SIGHUP btsync-gui
-	fi
 	# handle btsync-user if installed
 	if [ -f /var/run/btsync-user-updating ]; then
 		rm -f /var/run/btsync-user-updating
