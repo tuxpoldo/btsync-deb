@@ -409,7 +409,7 @@ class BtSyncIndicator:
 	menu = gtk.Menu()
 
 	folderitem = self.folderitems[folder['name']]
-	folderitem['sizeitem'] = gtk.MenuItem(folder['size'])
+	folderitem['sizeitem'] = gtk.MenuItem(folder['status'])
 	folderitem['sizeitem'].set_sensitive(False)
 	folderitem['sizeitem'].show()
 	openfolder = gtk.MenuItem('Open in File Browser')
@@ -470,7 +470,7 @@ class BtSyncIndicator:
         """
         
         folderitem = self.folderitems[folder['name']]
-        folderitem['sizeitem'].set_label(folder['size'])
+        folderitem['sizeitem'].set_label(folder['status'])
 
         menuitem = folderitem['menuitem']
 
