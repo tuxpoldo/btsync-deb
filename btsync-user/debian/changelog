@@ -1,3 +1,11 @@
+btsync-user (1.16.0-1) unstable; urgency=low
+
+  * New upstream release 0.16 on btsyncindicator
+    - Made compatible with new Web UI of BitTorrent Sync
+      version 1.3.105 (Closes #btsyncindicator/50)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Mon, 02 Jun 2014 23:59:52 +0100
+
 btsync-user (1.15.0-1) unstable; urgency=low
 
   * New upstream release 0.15 on btsyncindicator
