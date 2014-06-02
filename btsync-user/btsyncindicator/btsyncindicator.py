@@ -52,7 +52,7 @@ import logging
 import subprocess
 from contextlib import contextmanager
 
-VERSION = '0.15'
+VERSION = '0.16'
 TIMEOUT = 2 # seconds
 
 @contextmanager
@@ -311,11 +311,6 @@ class BtSyncIndicator:
 
             status = self.get_response_json(response)
 
-            for folder in status['folders']:
-               folder['name'] = self.fix_encoding(folder['name'])
-               for peer in folder['peers']:
-                   peer['status'] = self.fix_encoding(peer['status'])
-
             self.check_activity(status['folders'])
 
             curfoldernames = [ folder['name'] for folder in self.status['folders'] ]
@@ -409,7 +404,7 @@ class BtSyncIndicator:
 	menu = gtk.Menu()
 
 	folderitem = self.folderitems[folder['name']]
-	folderitem['sizeitem'] = gtk.MenuItem(folder['size'])
+	folderitem['sizeitem'] = gtk.MenuItem(folder['status'])
 	folderitem['sizeitem'].set_sensitive(False)
 	folderitem['sizeitem'].show()
 	openfolder = gtk.MenuItem('Open in File Browser')
@@ -470,7 +465,7 @@ class BtSyncIndicator:
         """
         
         folderitem = self.folderitems[folder['name']]
-        folderitem['sizeitem'].set_label(folder['size'])
+        folderitem['sizeitem'].set_label(folder['status'])
 
         menuitem = folderitem['menuitem']
 
@@ -670,9 +665,6 @@ class BtSyncIndicator:
 	except TypeError:
 	    response_json = json.loads(self.get_response_text(response))
 	return response_json
-
-    def fix_encoding(self, text):
-        return text.encode('latin-1').decode('utf-8')
 
     def main(self):
         gtk.timeout_add(TIMEOUT * 1000, self.setup_session)
