@@ -52,7 +52,7 @@ import logging
 import subprocess
 from contextlib import contextmanager
 
-VERSION = '0.15'
+VERSION = '0.16'
 TIMEOUT = 2 # seconds
 
 @contextmanager
