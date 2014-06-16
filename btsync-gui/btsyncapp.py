@@ -345,7 +345,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 	def get_device_info_string(self,peer):
 		if peer['synced'] != 0:
 			dt = datetime.datetime.fromtimestamp(peer['synced'])
-			return _('Synched on {0}').format(dt.strftime("%x %X"))
+			return _('Synced on {0}').format(dt.strftime("%x %X"))
 		elif peer['download'] == 0 and peer['upload'] != 0:
 			return _('⇧ {0}').format(self.sizeof_fmt(peer['upload']))
 		elif peer['download'] != 0 and peer['upload'] == 0:
