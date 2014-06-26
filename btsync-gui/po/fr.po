@@ -220,7 +220,7 @@ msgstr "Appareils"
 
 #: ../btsyncapp.glade.h:10
 msgid "Displays a QR-code that permits easy connection of a mobile device to this folder"
-msgstr "Affiche un QR-code qui permet une connexion facile avec un appareil mobile à ce répertoire"
+msgstr "Affiche un code QR qui permet une connexion facile d'un appareil mobile à ce répertoire"
 
 #: ../btsyncapp.glade.h:11
 msgid "Down"
@@ -232,7 +232,7 @@ msgstr "Éditer .SyncIgnore"
 
 #: ../btsyncapp.glade.h:13
 msgid "Edit the file containing the list or filename patterns for file not being synced"
-msgstr "Éditer le fichier contentant la liste ou les modèles de noms de fichiers pour les fichiers qui ne sont pas synchronisés"
+msgstr "Édite le fichier contentant la liste ou les modèles de noms de fichiers pour les fichiers qui ne sont pas synchronisés"
 
 #: ../btsyncapp.glade.h:14
 msgid "Event"
@@ -268,7 +268,7 @@ msgstr "Écoute du port :"
 
 #: ../btsyncapp.glade.h:22
 msgid "Open Folder"
-msgstr "Ouvrir dossier"
+msgstr "Ouvrir le dossier"
 
 #: ../btsyncapp.glade.h:23
 msgid "Open SyncArchive"
@@ -276,7 +276,7 @@ msgstr "Ouvrir SyncArchive"
 
 #: ../btsyncapp.glade.h:24
 msgid "Opens the folder in the file manager"
-msgstr "Ouvrir les répertoire dans le gestionnaire de fichiers"
+msgstr "Ouvrir le répertoire dans le gestionnaire de fichiers"
 
 #: ../btsyncapp.glade.h:25
 msgid "Opens the preferences dialog for the shared folder"
@@ -426,7 +426,7 @@ msgstr "Générer"
 
 #: ../dialogs.glade.h:12
 msgid "Generate a new secret or enter shared folder secret"
-msgstr "Générez une nouvelle clé secrète ou saisizzes\n"
+msgstr "Générez une nouvelle clé secrète ou saisissez\n"
 "la clé secrète du dossier partagè."
 
 #: ../dialogs.glade.h:13
@@ -494,7 +494,7 @@ msgstr "Rechercher sur le LAN"
 
 #: ../dialogs.glade.h:31
 msgid "Secret Keys"
-msgstr "Clé secrète"
+msgstr "Clés secrètes"
 
 #: ../dialogs.glade.h:32
 msgid "Shared Folder Properties"
@@ -562,7 +562,7 @@ msgid "This is a folder with read-only permissions.\n"
 "on other devices."
 msgstr "Ce dossier n'a que des autorisations en lecture seule.\n"
 "Les modifications apportées à ce dossier ne\n"
-"s'afficeront pas sur les autres appareils."
+"s'afficheront pas sur les autres appareils."
 
 #: ../dialogs.glade.h:6
 msgid "Encryption secret (read-only)"
