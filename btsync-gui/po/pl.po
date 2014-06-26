@@ -324,7 +324,7 @@ msgstr "Użyj NAT UPnP port mapping"
 
 #: ../btsyncstatus.glade.h:1
 msgid "About BitTorrent Sync"
-msgstr "O BitTtorrent Sync"
+msgstr "O BitTorrent Sync"
 
 #: ../btsyncstatus.glade.h:2
 msgid "BitTorrent Status"
@@ -533,7 +533,7 @@ msgstr "KB"
 
 #: ../btsyncutils.py:165
 msgid "MB"
-msgstr "MV"
+msgstr "MB"
 
 #: ../btsyncutils.py:165
 msgid "GB"
