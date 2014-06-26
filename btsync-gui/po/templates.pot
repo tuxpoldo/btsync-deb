@@ -52,7 +52,7 @@ msgid "{0} in {1} files (indexing...)"
 msgstr ""
 
 #: ../btsyncapp.py:348
-msgid "Synched on {0}"
+msgid "Synced on {0}"
 msgstr ""
 
 #: ../btsyncapp.py:350
@@ -288,7 +288,7 @@ msgstr ""
 #: ../btsyncapp.glade.h:13
 msgid ""
 "Edit the file containing the list or filename patterns for file not being "
-"synched"
+"synced"
 msgstr ""
 
 #: ../btsyncapp.glade.h:14

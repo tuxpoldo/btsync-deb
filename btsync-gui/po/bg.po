@@ -40,7 +40,7 @@ msgid "{0} in {1} files (indexing...)"
 msgstr "{0} в {1} файла (индексиране...)"
 
 #: ../btsyncapp.py:348
-msgid "Synched on {0}"
+msgid "Synced on {0}"
 msgstr "Синхронизирано {0}"
 
 #: ../btsyncapp.py:350
@@ -226,7 +226,7 @@ msgid "Edit .SyncIgnore"
 msgstr "Редактирай .SyncIgnore"
 
 #: ../btsyncapp.glade.h:13
-msgid "Edit the file containing the list or filename patterns for file not being synched"
+msgid "Edit the file containing the list or filename patterns for file not being synced"
 msgstr "Редактиране на файла, съдържащ списък с имената или шаблоните на файловете, който не трябва да бъдат синхронизирани"
 
 #: ../btsyncapp.glade.h:14

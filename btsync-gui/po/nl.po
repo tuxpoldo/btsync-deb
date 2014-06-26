@@ -40,7 +40,7 @@ msgid "{0} in {1} files (indexing...)"
 msgstr "{0} in {1} files (indexeren...)"
 
 #: ../btsyncapp.py:348
-msgid "Synched on {0}"
+msgid "Synced on {0}"
 msgstr "Gesynchroniseerd op {0}"
 
 #: ../btsyncapp.py:350
@@ -225,7 +225,7 @@ msgid "Edit .SyncIgnore"
 msgstr "Wijzig .SyncIgnore"
 
 #: ../btsyncapp.glade.h:13
-msgid "Edit the file containing the list or filename patterns for file not being synched"
+msgid "Edit the file containing the list or filename patterns for file not being synced"
 msgstr "Wijzig het bestand met de lijst van bestandsnaam-patronen welke niet gesynchroniseerd zullen worden"
 
 #: ../btsyncapp.glade.h:14

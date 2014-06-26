@@ -40,7 +40,7 @@ msgid "{0} in {1} files (indexing...)"
 msgstr "{0} v {1} souborech (indexuji...)"
 
 #: ../btsyncapp.py:348
-msgid "Synched on {0}"
+msgid "Synced on {0}"
 msgstr "Synchronizováno {0}"
 
 #: ../btsyncapp.py:350
@@ -226,7 +226,7 @@ msgid "Edit .SyncIgnore"
 msgstr "Upravit .SyncIgnore"
 
 #: ../btsyncapp.glade.h:13
-msgid "Edit the file containing the list or filename patterns for file not being synched"
+msgid "Edit the file containing the list or filename patterns for file not being synced"
 msgstr "Upravit soubor obsahující seznam pravidel pro soubory, které nejsou synchronizovány"
 
 #: ../btsyncapp.glade.h:14
