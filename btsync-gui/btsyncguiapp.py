@@ -165,6 +165,11 @@ class GuiApp:
 					help=_('If specified, all internally stored credentials, '\
 					'bind address, port information and storable settings '\
 					'will be cleared from the application preferences.'))
+		parser.add_argument('--dark',
+					action='store_true',
+					help=_('If specified, the dark indicator icon set will '\
+					'be used. This option can be made persistent with '\
+					'--savedefaults'))
 
 		self.args = parser.parse_args()
 

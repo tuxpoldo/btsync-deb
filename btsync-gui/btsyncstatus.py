@@ -56,11 +56,23 @@ class BtSyncStatus:
 		self.menuopenweb = self.builder.get_object('openweb')
 		self.menuopenapp = self.builder.get_object('openapp')
 		self.about = self.builder.get_object('aboutdialog')
+		if agent.dark:
+			self.icn_disconnected = 'btsync-gui-disconnected-dark'
+			self.icn_connecting = 'btsync-gui-connecting-dark'
+			self.icn_paused = 'btsync-gui-paused-dark'
+			self.icn_idle = 'btsync-gui-0-dark'
+			self.icn_activity = 'btsync-gui-{0}-dark'
+		else:
+			self.icn_disconnected = 'btsync-gui-disconnected'
+			self.icn_connecting = 'btsync-gui-connecting'
+			self.icn_paused = 'btsync-gui-paused'
+			self.icn_idle = 'btsync-gui-0'
+			self.icn_activity = 'btsync-gui-{0}'
 
 
 		self.ind = TrayIndicator (
 			'btsync',
-			'btsync-gui-disconnected'
+			self.icn_disconnected
 		)
 		if agent.is_auto():
 			self.menuconnection.set_visible(False)
@@ -202,7 +214,7 @@ class BtSyncStatus:
 		if connection is BtSyncStatus.DISCONNECTED:
 			self.frame = -1
 			self.transferring = False
-			self.ind.set_from_icon_name('btsync-gui-disconnected')
+			self.ind.set_from_icon_name(self.icn_disconnected)
 			self.menudebug.set_sensitive(False)
 			self.menudebug.set_active(self.agent.get_debug())
 			self.menuopenapp.set_sensitive(False)
@@ -210,7 +222,7 @@ class BtSyncStatus:
 		elif connection is BtSyncStatus.CONNECTING:
 			self.frame = -1
 			self.transferring = False
-			self.ind.set_from_icon_name('btsync-gui-connecting')
+			self.ind.set_from_icon_name(self.icn_connecting)
 			self.menudebug.set_sensitive(False)
 			self.menudebug.set_active(self.agent.get_debug())
 			self.menuopenapp.set_sensitive(False)
@@ -218,7 +230,7 @@ class BtSyncStatus:
 		elif connection is BtSyncStatus.PAUSED:
 			self.frame = -1
 			self.transferring = False
-			self.ind.set_from_icon_name('btsync-gui-paused')
+			self.ind.set_from_icon_name(self.icn_paused)
 			self.menudebug.set_sensitive(self.agent.is_local())
 			self.menudebug.set_active(self.agent.get_debug())
 			self.menuopenapp.set_sensitive(False)
@@ -236,7 +248,7 @@ class BtSyncStatus:
 					self.animator_id = GObject.timeout_add(200, self.onIconRotate)
 			self.transferring = transferring
 			if not self.transferring:
-				self.ind.set_from_icon_name('btsync-gui-0')
+				self.ind.set_from_icon_name(self.icn_idle)
 		self.connection = connection
 
 	def show_status(self,statustext):
@@ -314,13 +326,13 @@ class BtSyncStatus:
 		elif not self.transferring and self.frame % 12 == 0:
 			# do not stop immediately - wait for the
 			# cycle to finish.
-			self.ind.set_from_icon_name('btsync-gui-0')
+			self.ind.set_from_icon_name(self.icn_idle)
 			self.rotating = False
 			self.frame = 0
 			self.animator_id = None
 			return False
 		else:
-			self.ind.set_from_icon_name('btsync-gui-{0}'.format(self.frame % 12))
+			self.ind.set_from_icon_name(self.icn_activity.format(self.frame % 12))
 			self.rotating = True
 			self.frame += 1
 			return True

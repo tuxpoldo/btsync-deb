@@ -42,6 +42,22 @@ icons/22x22/status/btsync-gui-9.png		usr/share/icons/hicolor/22x22/status
 icons/22x22/status/btsync-gui-10.png		usr/share/icons/hicolor/22x22/status
 icons/22x22/status/btsync-gui-11.png		usr/share/icons/hicolor/22x22/status
 
+icons/22x22/status/btsync-gui-disconnected-dark.png	usr/share/icons/hicolor/22x22/status
+icons/22x22/status/btsync-gui-connecting-dark.png	usr/share/icons/hicolor/22x22/status
+icons/22x22/status/btsync-gui-paused-dark.png		usr/share/icons/hicolor/22x22/status
+icons/22x22/status/btsync-gui-0-dark.png		usr/share/icons/hicolor/22x22/status
+icons/22x22/status/btsync-gui-1-dark.png		usr/share/icons/hicolor/22x22/status
+icons/22x22/status/btsync-gui-2-dark.png		usr/share/icons/hicolor/22x22/status
+icons/22x22/status/btsync-gui-3-dark.png		usr/share/icons/hicolor/22x22/status
+icons/22x22/status/btsync-gui-4-dark.png		usr/share/icons/hicolor/22x22/status
+icons/22x22/status/btsync-gui-5-dark.png		usr/share/icons/hicolor/22x22/status
+icons/22x22/status/btsync-gui-6-dark.png		usr/share/icons/hicolor/22x22/status
+icons/22x22/status/btsync-gui-7-dark.png		usr/share/icons/hicolor/22x22/status
+icons/22x22/status/btsync-gui-8-dark.png		usr/share/icons/hicolor/22x22/status
+icons/22x22/status/btsync-gui-9-dark.png		usr/share/icons/hicolor/22x22/status
+icons/22x22/status/btsync-gui-10-dark.png		usr/share/icons/hicolor/22x22/status
+icons/22x22/status/btsync-gui-11-dark.png		usr/share/icons/hicolor/22x22/status
+
 icons/44x44/status/btsync-gui-disconnected.png	usr/share/icons/hicolor/44x44/status
 icons/44x44/status/btsync-gui-connecting.png	usr/share/icons/hicolor/44x44/status
 icons/44x44/status/btsync-gui-paused.png	usr/share/icons/hicolor/44x44/status
@@ -57,3 +73,19 @@ icons/44x44/status/btsync-gui-8.png		usr/share/icons/hicolor/44x44/status
 icons/44x44/status/btsync-gui-9.png		usr/share/icons/hicolor/44x44/status
 icons/44x44/status/btsync-gui-10.png		usr/share/icons/hicolor/44x44/status
 icons/44x44/status/btsync-gui-11.png		usr/share/icons/hicolor/44x44/status
+
+icons/44x44/status/btsync-gui-disconnected-dark.png	usr/share/icons/hicolor/44x44/status
+icons/44x44/status/btsync-gui-connecting-dark.png	usr/share/icons/hicolor/44x44/status
+icons/44x44/status/btsync-gui-paused-dark.png		usr/share/icons/hicolor/44x44/status
+icons/44x44/status/btsync-gui-0-dark.png		usr/share/icons/hicolor/44x44/status
+icons/44x44/status/btsync-gui-1-dark.png		usr/share/icons/hicolor/44x44/status
+icons/44x44/status/btsync-gui-2-dark.png		usr/share/icons/hicolor/44x44/status
+icons/44x44/status/btsync-gui-3-dark.png		usr/share/icons/hicolor/44x44/status
+icons/44x44/status/btsync-gui-4-dark.png		usr/share/icons/hicolor/44x44/status
+icons/44x44/status/btsync-gui-5-dark.png		usr/share/icons/hicolor/44x44/status
+icons/44x44/status/btsync-gui-6-dark.png		usr/share/icons/hicolor/44x44/status
+icons/44x44/status/btsync-gui-7-dark.png		usr/share/icons/hicolor/44x44/status
+icons/44x44/status/btsync-gui-8-dark.png		usr/share/icons/hicolor/44x44/status
+icons/44x44/status/btsync-gui-9-dark.png		usr/share/icons/hicolor/44x44/status
+icons/44x44/status/btsync-gui-10-dark.png		usr/share/icons/hicolor/44x44/status
+icons/44x44/status/btsync-gui-11-dark.png		usr/share/icons/hicolor/44x44/status

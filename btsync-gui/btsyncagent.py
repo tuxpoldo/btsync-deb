@@ -80,6 +80,7 @@ class BtSyncAgent(BtSyncApi):
 		self.portui = self.get_pref('portui',self.uid + 8999)
 		self.paused = self.get_pref('paused',False)
 		self.webui = self.get_pref('webui',False)
+		self.dark = self.get_pref('dark',False)
 		# process command line arguments
 		if self.args.username is not None:
 			self.username = self.args.username
@@ -91,6 +92,8 @@ class BtSyncAgent(BtSyncApi):
 			self.portui = self.args.port
 		if self.args.webui:
 			self.webui = self.args.webui
+		if self.args.dark:
+			self.dark = self.args.dark
 		if self.args.cleardefaults:
 			# clear saved defaults
 			if 'username' in self.prefs:
@@ -103,6 +106,8 @@ class BtSyncAgent(BtSyncApi):
 				del self.prefs['bindui']
 			if 'portui' in self.prefs:
 				del self.prefs['portui']
+			if 'dark' in self.prefs:
+				del self.prefs['dark']
 			self.save_prefs()
 			raise BtSyncAgentException(0, _('Default settings cleared.'))
 		if self.args.savedefaults:
@@ -125,6 +130,8 @@ class BtSyncAgent(BtSyncApi):
 				self.set_pref('portui',self.portui)
 			if self.args.webui:
 				self.set_pref('webui',self.args.webui)
+			if self.args.dark:
+				self.set_pref('dark',self.args.dark)
 			raise BtSyncAgentException(0, _('Default settings saved.'))
 		# initialize btsync api
 		self.set_connection_params(
