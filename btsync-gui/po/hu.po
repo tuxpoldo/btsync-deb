@@ -125,8 +125,7 @@ msgstr "Verzió: {0} ({0})"
 
 #: ../btsyncstatus.py:255
 msgid "Linux UI Version {0}"
-msgstr "Linux UI Verzió: {0}\t\n"
-""
+msgstr "Linux UI Verzió: {0}"
 
 #: ../btsyncstatus.py:330
 msgid "Disconnected"
