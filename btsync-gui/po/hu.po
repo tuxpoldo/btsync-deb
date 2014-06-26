@@ -1,0 +1,560 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: btsync-gui\n"
+"Language: hu\n"
+
+#: ../btsyncagent.py:107
+msgid "Default settings cleared."
+msgstr "Alapértelmezett beállítások visszaállítva."
+
+#: ../btsyncagent.py:128
+msgid "Default settings saved."
+msgstr "Alapértelmezett beállítások elmentve."
+
+#: ../btsyncapp.py:161 ../btsyncapp.py:179
+msgid "Cannot implement due to missing API"
+msgstr "Jelenleg még nem elérhető hiányzó API miatt."
+
+#: ../btsyncapp.py:162
+msgid "BitTorrent Inc."
+msgstr "BitTorrent Inc."
+
+#: ../btsyncapp.py:178
+msgid "Now"
+msgstr "Most"
+
+#: ../btsyncapp.py:227 ../btsyncstatus.py:187
+msgid "{0:.1f} kB/s up, {1:.1f} kB/s down"
+msgstr "{0:.1f} kB/s fel, {1:.1f} kB/s le"
+
+#: ../btsyncapp.py:333
+msgid "{0} in {1} files"
+msgstr "{0} fájl (összesen {1})"
+
+#: ../btsyncapp.py:335
+msgid "{0} in {1} files (indexing...)"
+msgstr "{0} fájl (összesen {1}) (összeszámolás...)"
+
+#: ../btsyncapp.py:348
+msgid "Synced on {0}"
+msgstr "Szinkronizálva: {0}"
+
+#: ../btsyncapp.py:350
+msgid "⇧ {0}"
+msgstr "⇧ {0}"
+
+#: ../btsyncapp.py:352
+msgid "⇩ {0}"
+msgstr "⇩ {0}"
+
+#: ../btsyncapp.py:354
+msgid "⇧ {0} - ⇩ {1}"
+msgstr "⇧ {0} - ⇩ {1}"
+
+#: ../btsyncapp.py:356
+msgid "Idle..."
+msgstr "Tétlen..."
+
+#: ../btsyncguiapp.py:115
+msgid "Sets the logging level. By default the logging level is WARNING"
+msgstr "Beállítja a naplózási szintet. Alapértelmezett: FIGYELMEZTETÉSEK naplózása"
+
+#: ../btsyncguiapp.py:119
+msgid "Hostname for the connection to BitTorrent Sync. If not specified, a local BitTorrent Sync agent will be launched."
+msgstr "A BitTorrent Sync ügynök-program netes címe vagy host neve. Ha nincs megadva, akkor a helyi ügynököt használjuk."
+
+#: ../btsyncguiapp.py:124
+msgid "Optional port number for the connection to BitTorrent Sync. If not specified, port 8888 is taken for a connection to a remote BitTorrent Sync agent or (8999 + uid) is taken when creating a locally launched agent. This option can be made persistent for local agents with --savedefaults"
+msgstr "A BitTorrent Sync csatlakozási port-ja (opcionális). Ha nincs megadva, akkor a távoli ügynök-programhoz a 8888-as porton csatlakozik, vagy a helyi ügynökhöz a (8999 + uid) port-on. A helyi ügynökökhöz ez a beállítás elmenthető a --savedefaults opcióval."
+
+#: ../btsyncguiapp.py:132
+msgid "Optional user name for connecting to a remote BitTorrent Sync agent or username to use when creating a locally launched agent. This option can be made persistent for local agents with --savedefaults"
+msgstr "A felhasználónév (opcionális), amivel a BitTorrent Sync a távoli ügynök-programhoz csatlakozik, vagy a helyi ügynök felhasználóneve. A helyi ügynökökhöz ez a beállítás elmenthető a --savedefaults opcióval."
+
+#: ../btsyncguiapp.py:138
+msgid "Optional password for connecting to a remote BitTorrent Sync agent or password to use when creating a locally launched agent. This option can be made persistent for local agents with --savedefaults"
+msgstr "A jelszó (opcionális), amivel a BitTorrent Sync a távoli ügynök-programhoz csatlakozik, vagy a helyi ügynök jelszava. A helyi ügynökökhöz ez a beállítás elmenthető a --savedefaults opcióval."
+
+#: ../btsyncguiapp.py:144
+msgid "Optional bind address for the Web UI of a locally created BitTorrent Sync agent. By default the agent binds to 127.0.0.1. If you want the Web UI of the agent to be reachable by other computers, specify one of the available IP addresses of this computer or \"all\" to bind to all available adapters. This option can be made persistent for local agents with --savedefaults"
+msgstr "A helyi BitTorrent Sync ügynök webes felületének netes címe (opcionális). Alapértelmezésként 127.0.0.1. Ha azt szeretnéd, hogy a webes felület más számtógépekről is elérhető legyen, akkor add meg ennek a gépnek a nyilvános IP címét vagy az \"all\" szót, ha minden hálózati adapteren elérhetővé szeretnéd tenni. Ez a beállítás elmenthető a --savedefaults opcióval."
+
+#: ../btsyncguiapp.py:154
+msgid "Include the Web UI in the menu. This option can be made persistent with --savedefaults"
+msgstr "A webes felület elérését biztosító menüpont mutatása. Ez a beállítás elmenthető a --savedefaults opcióval."
+
+#: ../btsyncguiapp.py:158
+msgid "If specified, the optionally supplied credentials, bind address, port information and storable settings will be stored as default in the application preferences and used when launching a local BitTorrent Sync agent."
+msgstr "Ha meg van adva, akkor a beírt felhasználói azonosítók, hálózati cím, port információk és más beállítások elmentésre kerülnek a helyi program beállításainál és automatikusan betöltődnek a helyi BitTorrent Sync futtatásakor."
+
+#: ../btsyncguiapp.py:165
+msgid "If specified, all internally stored credentials, bind address, port information and storable settings will be cleared from the application preferences."
+msgstr "Ha meg van adva, akkor a beírt felhasználói azonosítók, hálózati cím, port információk és más beállítások törlésre kerülnek a helyi program beállításaiból."
+
+#: ../btsyncstatus.py:67 ../btsyncapp.glade.h:2
+msgid "BitTorrent Sync"
+msgstr "BitTorrent Sync"
+
+#: ../btsyncstatus.py:68
+msgid "BitTorrent Sync Status Indicator"
+msgstr "BitTorrent Sync státusz ikon"
+
+#: ../btsyncstatus.py:71 ../btsyncstatus.py:72
+msgid "BitTorrent Sync {0}:{1}"
+msgstr "BitTorrent Sync {0}:{1}"
+
+#: ../btsyncstatus.py:144
+msgid "Connecting..."
+msgstr "Kapcsolódás..."
+
+#: ../btsyncstatus.py:148 ../btsyncstatus.py:193
+msgid "Idle"
+msgstr "Tétlen"
+
+#: ../btsyncstatus.py:190
+msgid "Indexing..."
+msgstr "Összeszámolás..."
+
+#: ../btsyncstatus.py:254
+msgid "Version {0} ({0})"
+msgstr "Verzió: {0} ({0})"
+
+#: ../btsyncstatus.py:255
+msgid "Linux UI Version {0}"
+msgstr "Linux UI Verzió: {0}\t\n"
+""
+
+#: ../btsyncstatus.py:330
+msgid "Disconnected"
+msgstr "Nincs kapcsolat"
+
+#: ../btsyncstatus.py:343
+msgid "Disconnected: Communication Error {0}"
+msgstr "Nincs kapcsolat: Kommunikációs Hiba {0}"
+
+#: ../btsyncutils.py:307
+msgid "Only one full btsync-gui can run at once"
+msgstr "A btsync-gui egyszerre csak egy példányban futhat"
+
+#: ../dialogs.py:68
+msgid "This secret is invalid.\n"
+"Please generate a new secret or enter your shared folder secret."
+msgstr "A titkos kód érvénytelen.\n"
+"Kérjük, generáljon egy új titkos kódot vagy adja meg a helyes titkos kódot."
+
+#: ../dialogs.py:73
+msgid "Can't open the destination folder."
+msgstr "Nem sikerült megnyitni a célmappát."
+
+#: ../dialogs.py:77
+msgid "Selected folder is already added to BitTorrent Sync."
+msgstr "A kiválasztott mappa már egy korábban hozzáadott BitTorrent Sync mappa."
+
+#: ../dialogs.py:84
+msgid "Don't have permissions to write to the selected folder."
+msgstr "Nincs megfelelő jogosultság a kiválasztott mappába íráshoz."
+
+#: ../dialogs.py:107
+msgid "Please select a folder to sync"
+msgstr "Kérjük, válassza ki a szinkronizálandó mappát"
+
+#: ../dialogs.py:423
+msgid "Invalid secret specified.\n"
+"Secret must have a length of 33 characters"
+msgstr "A megadott titkos kód érvénytelen.\n"
+"A titkos kód pontosan 33 karakteres lehet"
+
+#: ../dialogs.py:430
+msgid "Invalid secret specified.\n"
+"Secret must contain only alphanumeric characters"
+msgstr "A megadott titkos kód érvénytelen.\n"
+"A titkos kód csak betűket és számokat tartalmazhat"
+
+#: ../dialogs.py:477
+msgid "A hostname or IP address must be specified"
+msgstr "Érvényes netes nevet vagy IP címet kell megadni"
+
+#: ../dialogs.py:482
+msgid "The specified port must be a number between 1 and 65534"
+msgstr "A megadott portnak 1 és 65534 között kell lennie"
+
+#: ../btsyncapp.glade.h:1
+msgid "Advanced..."
+msgstr "Haladó..."
+
+#: ../btsyncapp.glade.h:3
+msgid "Connect mobile device"
+msgstr "Mobil eszköz csatlakoztatása"
+
+#: ../btsyncapp.glade.h:4
+msgid "Copies the sharing secret to the clipboard"
+msgstr "A megosztáshoz használható titkos kódot a vágólapra másolja"
+
+#: ../btsyncapp.glade.h:5
+msgid "Copy secret"
+msgstr "Titkos kód másolása"
+
+#: ../btsyncapp.glade.h:6
+msgid "Date"
+msgstr "Dátum"
+
+#: ../btsyncapp.glade.h:7
+msgid "Device"
+msgstr "Eszköz"
+
+#: ../btsyncapp.glade.h:8
+msgid "Device name:"
+msgstr "Eszköz neve:"
+
+#: ../btsyncapp.glade.h:9
+msgid "Devices"
+msgstr "Eszközök"
+
+#: ../btsyncapp.glade.h:10
+msgid "Displays a QR-code that permits easy connection of a mobile device to this folder"
+msgstr "Megjelenít egy QR kódot, amivel a mobil eszköz egyszerűen csatlakoztatható ehhez a mappához"
+
+#: ../btsyncapp.glade.h:11
+msgid "Down"
+msgstr "Le"
+
+#: ../btsyncapp.glade.h:12
+msgid "Edit .SyncIgnore"
+msgstr ".SyncIgnore szerkesztése"
+
+#: ../btsyncapp.glade.h:13
+msgid "Edit the file containing the list or filename patterns for file not being synced"
+msgstr "A nem-szinkronizálandó fájlok listájának szerkesztése"
+
+#: ../btsyncapp.glade.h:14
+msgid "Event"
+msgstr "Esemény"
+
+#: ../btsyncapp.glade.h:15
+msgid "File"
+msgstr "Fájl"
+
+#: ../btsyncapp.glade.h:16
+msgid "Folder"
+msgstr "Mappa"
+
+#: ../btsyncapp.glade.h:17
+msgid "Folders"
+msgstr "Mappák"
+
+#: ../btsyncapp.glade.h:18
+msgid "History"
+msgstr "Előzmények"
+
+#: ../btsyncapp.glade.h:19
+msgid "Limit download rate to (kB/s):"
+msgstr "Letöltési sebesség korlátozása (kB/s):"
+
+#: ../btsyncapp.glade.h:20
+msgid "Limit upload rate to (kB/s):"
+msgstr "Feltöltési sebesség korlátozása (kB/s):"
+
+#: ../btsyncapp.glade.h:21
+msgid "Listening port:"
+msgstr "Figyelt port:"
+
+#: ../btsyncapp.glade.h:22
+msgid "Open Folder"
+msgstr "Mappa megnyitása"
+
+#: ../btsyncapp.glade.h:23
+msgid "Open SyncArchive"
+msgstr "SyncArchive megnyitása"
+
+#: ../btsyncapp.glade.h:24
+msgid "Opens the folder in the file manager"
+msgstr "Mappa megnyitása a fájlkezelővel"
+
+#: ../btsyncapp.glade.h:25
+msgid "Opens the preferences dialog for the shared folder"
+msgstr "A megosztott mappa tulajdonságainak megnyitása"
+
+#: ../btsyncapp.glade.h:26
+msgid "Opens the sync archive holding previous or deleted versions of files"
+msgstr "A szinkronizálási archívum megnyitása, mely a törölt fájlokat és a fájlok korábbi verzióit tartalmazza"
+
+#: ../btsyncapp.glade.h:27
+msgid "Path"
+msgstr "Útvonal"
+
+#: ../btsyncapp.glade.h:28 ../dialogs.glade.h:19
+msgid "Preferences"
+msgstr "Tulajdonságok"
+
+#: ../btsyncapp.glade.h:29
+msgid "Show folder preferences"
+msgstr "Mappa tulajdonságok megmutatása"
+
+#: ../btsyncapp.glade.h:30
+msgid "Size"
+msgstr "Méret"
+
+#: ../btsyncapp.glade.h:31
+msgid "Start BitTorrent Sync when Linux starts"
+msgstr "BitTorrent Sync indítása a számítógép bekapcsolásakor"
+
+#: ../btsyncapp.glade.h:32
+msgid "Status"
+msgstr "Státusz"
+
+#: ../btsyncapp.glade.h:33
+msgid "This name will be shown on other devices linked to your shared folders"
+msgstr "A mappához kapcsolódó többi eszközön ez a név fog látszódni"
+
+#: ../btsyncapp.glade.h:34
+msgid "Transfers"
+msgstr "Átvitelek"
+
+#: ../btsyncapp.glade.h:35
+msgid "Up"
+msgstr "Fel"
+
+#: ../btsyncapp.glade.h:36
+msgid "Use NAT UPnP port mapping"
+msgstr "NAT UPnP port továbbítás használata"
+
+#: ../btsyncstatus.glade.h:1
+msgid "About BitTorrent Sync"
+msgstr "BitTorrent Sync névjegye"
+
+#: ../btsyncstatus.glade.h:2
+msgid "BitTorrent Status"
+msgstr "BitTorrent státusz"
+
+#: ../btsyncstatus.glade.h:3
+msgid "By using this application, you agree to our Privacy Policy and Terms.\n"
+"http://www.bittorrent.com/legal/privacy\n"
+"http://www.bittorrent.com/legal/terms-of-use"
+msgstr "E program használatával elfogadja az adatkezelési szabályzatot és a feltételeket:\n"
+"http://www.bittorrent.com/legal/privacy\n"
+"http://www.bittorrent.com/legal/terms-of-use"
+
+#: ../btsyncstatus.glade.h:6
+msgid "Copyright © 2013, BitTorrent Inc."
+msgstr "Copyright © 2013, BitTorrent Inc."
+
+#: ../btsyncstatus.glade.h:7
+msgid "Enable Debug Logging"
+msgstr "Hibakereső naplózás bekapcsolása"
+
+#: ../btsyncstatus.glade.h:8
+msgid "Linux UI Version 0.0"
+msgstr "Linux UI Verzió: 0.0"
+
+#: ../btsyncstatus.glade.h:9
+msgid "Open BitTorrent Sync..."
+msgstr "BitTorrent Sync megnyitása..."
+
+#: ../btsyncstatus.glade.h:10
+msgid "Open Original Manual"
+msgstr "Eredeti használati útmutató megnyitása..."
+
+#: ../btsyncstatus.glade.h:11
+msgid "Open Web UI"
+msgstr "Webes felület megnyitása..."
+
+#: ../btsyncstatus.glade.h:12
+msgid "Pause Syncing"
+msgstr "Szinkronizálás szüneteltetése"
+
+#: ../btsyncstatus.glade.h:13
+msgid "Quit BitTorrent Sync"
+msgstr "Kilépés a BitTorrent Sync-ből"
+
+#: ../btsyncstatus.glade.h:14
+msgid "Send Feedback"
+msgstr "Visszajelzés küldése"
+
+#: ../btsyncstatus.glade.h:15
+msgid "localhost:8888"
+msgstr "localhost:8888"
+
+#: ../dialogs.glade.h:1
+msgid ":"
+msgstr ":"
+
+#: ../dialogs.glade.h:2
+msgid "Add folder to sync"
+msgstr "Szinkronizálandó mappa hozzáadása"
+
+#: ../dialogs.glade.h:3
+msgid "Add ip:port or host:port of known clients"
+msgstr "Ismert eszközök ip:port vagy hosztnév:port címének hozzáadása"
+
+#: ../dialogs.glade.h:4
+msgid "Advanced Preferences"
+msgstr "Haladó beállítások"
+
+#: ../dialogs.glade.h:5
+msgid "Choose"
+msgstr "Választás"
+
+#: ../dialogs.glade.h:7
+msgid "Folder to sync:"
+msgstr "Szinkronizálandó mappa:"
+
+#: ../dialogs.glade.h:8
+msgid "Full Access"
+msgstr "Teljes hozzáférés"
+
+#: ../dialogs.glade.h:9
+msgid "Full access"
+msgstr "Teljes hozzáférés"
+
+#: ../dialogs.glade.h:10
+msgid "Full access secret"
+msgstr "Teljes hozzáférés titkos kódja"
+
+#: ../dialogs.glade.h:11
+msgid "Generate"
+msgstr "Generál"
+
+#: ../dialogs.glade.h:12
+msgid "Generate a new secret or enter shared folder secret"
+msgstr "Generáljon őj titkos kódot vagy írja be a mappa titkos kódját"
+
+#: ../dialogs.glade.h:13
+msgid "Hosts"
+msgstr "Hálózati nevek"
+
+#: ../dialogs.glade.h:14
+msgid "Name"
+msgstr "Név"
+
+#: ../dialogs.glade.h:15
+msgid "New Predefined Host"
+msgstr "Új előre beállított hálózati név"
+
+#: ../dialogs.glade.h:16
+msgid "New known host address:"
+msgstr "Új hálózati cím:"
+
+#: ../dialogs.glade.h:17
+msgid "One-time secret"
+msgstr "Egyszeri titkos kód"
+
+#: ../dialogs.glade.h:18
+msgid "One-time secret should be used within 24 hours"
+msgstr "Az egyszer használható titkos kódot 24 órán belül lehet felhasználni"
+
+#: ../dialogs.glade.h:20
+msgid "Read Only"
+msgstr "Csak olvasható"
+
+#: ../dialogs.glade.h:21
+msgid "Read only"
+msgstr "Csak olvasható"
+
+#: ../dialogs.glade.h:22
+msgid "Read only secret"
+msgstr "Csak olvasható titkos kód"
+
+#: ../dialogs.glade.h:23
+msgid "Remove Shared Folder"
+msgstr "Mappa megosztásának törlése"
+
+#: ../dialogs.glade.h:24
+msgid "Reset"
+msgstr "Visszaállít"
+
+#: ../dialogs.glade.h:26
+msgid "Scan QR"
+msgstr "QR kód beolvasása"
+
+#: ../dialogs.glade.h:27
+msgid "Scan this QR code with your mobile\n"
+"device to connect sync folders"
+msgstr "A mobil eszközzel történő szinkronizáláshoz olvassa be ezt a QR kódot"
+
+#: ../dialogs.glade.h:29
+msgid "Search DHT network"
+msgstr "DHT hálózat keresése"
+
+#: ../dialogs.glade.h:30
+msgid "Search LAN"
+msgstr "LAN hálózat keresése"
+
+#: ../dialogs.glade.h:31
+msgid "Secret Keys"
+msgstr "Titkos kulcsok"
+
+#: ../dialogs.glade.h:32
+msgid "Shared Folder Properties"
+msgstr "Megosztott mappa tulajdonságai"
+
+#: ../dialogs.glade.h:33
+msgid "Shared secret:"
+msgstr "Megosztási titkos kód:"
+
+#: ../dialogs.glade.h:34
+msgid "Store deleted files in SyncArchive"
+msgstr "A törölt fájlok megőrzése a SyncArchive archívumban"
+
+#: ../dialogs.glade.h:35
+msgid "This folder will be removed from BitTorrent Sync and no longer synced with other devices"
+msgstr "A mappa eltávolításra kerül a BitTorrent Sync-ből, ezáltal nem lesz többé szinkronizálva a többi eszközzel"
+
+#: ../dialogs.glade.h:39
+msgid "Use predefined hosts"
+msgstr "Előre megadott hálózati címek használata"
+
+#: ../dialogs.glade.h:40
+msgid "Use relay server when required"
+msgstr "Közvetítő (relay) szerver használata, ha szükséges"
+
+#: ../dialogs.glade.h:41
+msgid "Use tracker server"
+msgstr "Nyilvántartó (tracker) szerver használata"
+
+#: ../dialogs.glade.h:42
+msgid "Value"
+msgstr "Érték"
+
+#: ../dialogs.glade.h:43
+msgid "Value:"
+msgstr "Érték:"
+
+#: ../btsyncutils.py:165
+msgid "bytes"
+msgstr "byte"
+
+#: ../btsyncutils.py:165
+msgid "KB"
+msgstr "KB"
+
+#: ../btsyncutils.py:165
+msgid "MB"
+msgstr "MB"
+
+#: ../btsyncutils.py:165
+msgid "GB"
+msgstr "GB"
+
+#: ../btsyncutils.py:169
+msgid "TB"
+msgstr "TB"
+
+#: ../dialogs.glade.h:25
+msgid "Restore modified files to original version"
+msgstr "Visszaállítja a módosított fájlokat az eredeti verzióra"
+
+#: ../dialogs.glade.h:36
+msgid "This is a folder with read-only permissions.\n"
+"Modification made to this folder will not be displayed\n"
+"on other devices."
+msgstr "Ennek a mappának csak olvasási jogosultságai vannak.\n"
+"A mappán végzett helyi módosítások nem jelennek meg más eszközökön."
+
+#: ../dialogs.glade.h:6
+msgid "Encryption secret (read-only)"
+msgstr "Kódolt titkos kulcs (csak-olvasható)"
+
