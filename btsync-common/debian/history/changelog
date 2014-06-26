@@ -1,3 +1,17 @@
+1.3.106 (June 16, 2014)
+
+ - Fixed issue with inability to type in path manually in WebUI
+ - Indexing is shown in WebUI when BTSync indexes files
+ - Overwrite checkbox brought back for RO secrets in WebUI
+ - Fixed issue with "#" symbol in the folder picker in WebUI
+ - Fixed issue with encrypted secret not displayed in WebUI
+ - Fixed issue with short / long path shown in WebUI
+ - Fixed LAN discovery issue when many folders and files are
+   added to sync dirs
+ - Fixed continual indexing issue in certain cases
+ - Minor cosmetic fixes
+
+
 1.3.105 (May 19, 2014)
 
  - WebUI redesigned
