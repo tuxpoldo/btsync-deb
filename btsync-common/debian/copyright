@@ -5,9 +5,11 @@ Source: http://www.bittorrent.com
 Files: *
 Copyright: 2013-2014 BitTorrent, Inc.
 License: BitTorrent Terms of Use
-  By using this application, you agree to our Privacy Policy and Terms.
+ By using this application, you agree to our Privacy Policy, Terms of Use and
+ End User License Agreement.
   http://www.bittorrent.com/legal/privacy
   http://www.bittorrent.com/legal/terms-of-use
+  http://www.bittorrent.com/legal/eula
 
 Files: debian/*
 Copyright: 2013-2014 Leo Moll <leo.moll@yeasoft.com>

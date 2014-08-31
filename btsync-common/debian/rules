@@ -25,9 +25,10 @@ DEB_SOURCE_PACKAGE=$(shell dpkg-parsechangelog -l$(DEB_DEBIAN_DIR)/changelog \
 override_dh_install:
 	dh_install
 	case "$(DEB_HOST_ARCH)" in \
-	i386)				dh_install btsync-core-i686  usr/lib/btsync-common; \
-						dh_install btsync-core-geode usr/lib/btsync-common; \
-						;; \
+#	i386)				dh_install btsync-core-i686  usr/lib/btsync-common; \
+#						dh_install btsync-core-geode usr/lib/btsync-common; \
+#						;; \
+	i386)				dh_install btsync-core usr/lib/btsync-common; ;; \
 	amd64)				dh_install btsync-core usr/lib/btsync-common; ;; \
 	powerpc)			dh_install btsync-core usr/lib/btsync-common; ;; \
 	arm|armel|armhf)	dh_install btsync-core usr/lib/btsync-common; ;; \
@@ -38,9 +39,10 @@ override_dh_install:
 override_dh_auto_build:
 	dh_auto_build
 	case "$(DEB_HOST_ARCH)" in \
-	i386)				cp -a i386/btsync btsync-core-i686; \
-						cp geode/btsync btsync-core-geode; \
-						;; \
+#	i386)				cp -a i386/btsync btsync-core-i686; \
+#						cp geode/btsync btsync-core-geode; \
+#						;; \
+	i386)				cp -a $(DEB_HOST_ARCH)/btsync btsync-core; ;; \
 	amd64)				cp -a $(DEB_HOST_ARCH)/btsync btsync-core; ;; \
 	powerpc)			cp -a $(DEB_HOST_ARCH)/btsync btsync-core; ;; \
 	arm|armel|armhf)	cp -a arm/btsync btsync-core; ;; \
@@ -50,8 +52,8 @@ override_dh_auto_build:
 
 override_dh_clean:
 	rm -f btsync-core
-	rm -f btsync-core-i686
-	rm -f btsync-core-geode
+#	rm -f btsync-core-i686
+#	rm -f btsync-core-geode
 	dh_clean
 
 # this would not work in cross-platform builds and
@@ -65,7 +67,7 @@ override_dh_strip:
 clean-orig-source:
 	rm -rf $(DEB_DEBIAN_DIR)../amd64
 	rm -rf $(DEB_DEBIAN_DIR)../arm
-	rm -rf $(DEB_DEBIAN_DIR)../geode
+#	rm -rf $(DEB_DEBIAN_DIR)../geode
 	rm -rf $(DEB_DEBIAN_DIR)../i386
 	rm -rf $(DEB_DEBIAN_DIR)../kfreebsd-amd64
 	rm -rf $(DEB_DEBIAN_DIR)../kfreebsd-i386
@@ -77,7 +79,8 @@ get-orig-source:
 	if [ ! -f $(DEB_DEBIAN_DIR)../../$(DEB_SOURCE_PACKAGE)_$(DEB_UPSTREAM_VERSION).orig.tar.gz ]; then \
 		rm -rf temp-orig-source; \
 		mkdir -p temp-orig-source/$(DEB_SOURCE_PACKAGE); \
-		for arch in arm powerpc geode i386 x64 freebsd_i386 freebsd_x64; do \
+#		for arch in arm powerpc geode i386 x64 freebsd_i386 freebsd_x64; do \
+		for arch in arm powerpc i386 x64 freebsd_i386 freebsd_x64; do \
 			if ! wget -q -c http://syncapp.bittorrent.com/$(DEB_UPSTREAM_VERSION)/btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; then \
 				wget -q -c http://archive.yeasoft.net/btsync/$(DEB_UPSTREAM_VERSION)/btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; \
 			fi; \
