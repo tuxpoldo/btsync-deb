@@ -132,7 +132,7 @@ EOF
 	cat <<EOF
 {
 	"device_name": "${DEVICE_NAME}",
-	"storage_path" : "/var/lib/btsync",
+	"storage_path" : "/var/lib/btsync/",
 	"listening_port" : $LISTENING_PORT,
 	"check_for_updates" : false,
 	"use_upnp" : $USE_UPNP,

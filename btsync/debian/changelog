@@ -1,3 +1,9 @@
+btsync (1.4.0-1) unstable; urgency=low
+
+  * Fixed storage_path in order to allow sybolic linking (Closes #140)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Mon, 01 Sep 2014 12:00:00 +0200
+
 btsync (1.3.1-1) unstable; urgency=low
 
   * Fixed access to several files in the storage path (Closes #122)
