@@ -7,11 +7,11 @@ msgstr ""
 "Project-Id-Version: btsync-gui\n"
 "Language: bg\n"
 
-#: ../btsyncagent.py:107
+#: ../btsyncagent.py:112
 msgid "Default settings cleared."
 msgstr "Стандартните настройки са изчистени."
 
-#: ../btsyncagent.py:128
+#: ../btsyncagent.py:135
 msgid "Default settings saved."
 msgstr "Стандартните настройки са съхранени."
 
@@ -27,7 +27,7 @@ msgstr "BitTorrent Inc."
 msgid "Now"
 msgstr "Сега"
 
-#: ../btsyncapp.py:227 ../btsyncstatus.py:187
+#: ../btsyncapp.py:227 ../btsyncstatus.py:199
 msgid "{0:.1f} kB/s up, {1:.1f} kB/s down"
 msgstr "{0:.1f} кБ/с качване, {1:1f} кБ/с сваляне"
 
@@ -87,55 +87,55 @@ msgstr "Допълнителен адрес за свързване на уеб 
 msgid "Include the Web UI in the menu. This option can be made persistent with --savedefaults"
 msgstr "Включи уеб интерфейса в менюто. Тази опция може да се направи персистираща с --savedefaults."
 
-#: ../btsyncguiapp.py:158
+#: ../btsyncguiapp.py:164
 msgid "If specified, the optionally supplied credentials, bind address, port information and storable settings will be stored as default in the application preferences and used when launching a local BitTorrent Sync agent."
 msgstr "Ако е посочено, то предоставените идентификационни данни, свързаните адреси, информацията за портовете и настройките ще се съхранят в настройките на приложението и ще се използват стандартно при стартирането на локалния BitTorrent Sync агент."
 
-#: ../btsyncguiapp.py:165
+#: ../btsyncguiapp.py:171
 msgid "If specified, all internally stored credentials, bind address, port information and storable settings will be cleared from the application preferences."
 msgstr "Ако е избрано, всички вътрешно съхранени идентификационни данни, свързани адреси, информация за портовете и съхранените настройки, ще бъдат изтрити от настройките на приложението."
 
-#: ../btsyncstatus.py:67 ../btsyncapp.glade.h:2
+#: ../btsyncstatus.py:79 ../btsyncapp.glade.h:2
 msgid "BitTorrent Sync"
 msgstr "BitTorrent Sync"
 
-#: ../btsyncstatus.py:68
+#: ../btsyncstatus.py:80
 msgid "BitTorrent Sync Status Indicator"
 msgstr "Индикатор за състоянието BitTorrent Sync"
 
-#: ../btsyncstatus.py:71 ../btsyncstatus.py:72
+#: ../btsyncstatus.py:83 ../btsyncstatus.py:84
 msgid "BitTorrent Sync {0}:{1}"
 msgstr "BitTorrent Sync {0}:{1}"
 
-#: ../btsyncstatus.py:144
+#: ../btsyncstatus.py:156
 msgid "Connecting..."
 msgstr "Свързване..."
 
-#: ../btsyncstatus.py:148 ../btsyncstatus.py:193
+#: ../btsyncstatus.py:160 ../btsyncstatus.py:205
 msgid "Idle"
 msgstr "Спиране"
 
-#: ../btsyncstatus.py:190
+#: ../btsyncstatus.py:202
 msgid "Indexing..."
 msgstr "Индексиране..."
 
-#: ../btsyncstatus.py:254
+#: ../btsyncstatus.py:266
 msgid "Version {0} ({0})"
 msgstr "Версия {0} ({0})"
 
-#: ../btsyncstatus.py:255
+#: ../btsyncstatus.py:267
 msgid "Linux UI Version {0}"
 msgstr "Линукс версия на потребителския интерфейс  {0}"
 
-#: ../btsyncstatus.py:330
+#: ../btsyncstatus.py:342
 msgid "Disconnected"
 msgstr "Разкачен"
 
-#: ../btsyncstatus.py:343
+#: ../btsyncstatus.py:355
 msgid "Disconnected: Communication Error {0}"
 msgstr "Разкачен: грешка при свързването {0}"
 
-#: ../btsyncutils.py:307
+#: ../btsyncutils.py:339
 msgid "Only one full btsync-gui can run at once"
 msgstr "Може да се работи само един btsync-gui."
 
@@ -161,23 +161,23 @@ msgstr "Нямате права за запис в избраната папка
 msgid "Please select a folder to sync"
 msgstr "Моля, изберете папка за синхронизиране"
 
-#: ../dialogs.py:423
+#: ../dialogs.py:430
 msgid "Invalid secret specified.\n"
 "Secret must have a length of 33 characters"
 msgstr "Невалидно зададен секретен ключ.\n"
 "Трябва да е поне от 33 символа."
 
-#: ../dialogs.py:430
+#: ../dialogs.py:438
 msgid "Invalid secret specified.\n"
 "Secret must contain only alphanumeric characters"
 msgstr "Невалидно зададен секретен ключ.\n"
 "Трябва да съдържа само букви и цифри."
 
-#: ../dialogs.py:477
+#: ../dialogs.py:485
 msgid "A hostname or IP address must be specified"
 msgstr "Трябва да бъде указано името на хоста или IP адреса"
 
-#: ../dialogs.py:482
+#: ../dialogs.py:490
 msgid "The specified port must be a number between 1 and 65534"
 msgstr "Указаният порт трябва да е число между 1 и 65534"
 
@@ -339,8 +339,8 @@ msgstr "Използвайки това приложение, Вие се съг
 "http://www.bittorrent.com/legal/terms-of-use"
 
 #: ../btsyncstatus.glade.h:6
-msgid "Copyright © 2013, BitTorrent Inc."
-msgstr "Авторски права © 2013, BitTorrent Inc."
+msgid "Copyright © 2014, BitTorrent Inc."
+msgstr "Авторски права © 2014, BitTorrent Inc."
 
 #: ../btsyncstatus.glade.h:7
 msgid "Enable Debug Logging"
@@ -523,23 +523,23 @@ msgstr "Значение"
 msgid "Value:"
 msgstr "Значение:"
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "bytes"
 msgstr "байта"
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "KB"
 msgstr "кБ"
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "MB"
 msgstr "МБ"
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "GB"
 msgstr "ГБ"
 
-#: ../btsyncutils.py:169
+#: ../btsyncutils.py:192
 msgid "TB"
 msgstr "ТБ"
 
@@ -551,9 +551,13 @@ msgstr ""
 msgid "This is a folder with read-only permissions.\n"
 "Modification made to this folder will not be displayed\n"
 "on other devices."
-msgstr ""
+msgstr "Тази папка е само за четене. Промените, направени в нея няма да бъдат показани на другите устройства."
 
 #: ../dialogs.glade.h:6
 msgid "Encryption secret (read-only)"
+msgstr ""
+
+#: ../btsyncguiapp.py:159
+msgid "If specified, the dark indicator icon set will be used. This option can be made persistent with --savedefaults"
 msgstr ""
 
