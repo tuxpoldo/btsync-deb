@@ -360,11 +360,11 @@ msgstr ""
 #. Description
 #: ../btsync.templates:29001
 msgid "Do you want to configure advanced parameters?"
-msgstr ""
+msgstr "Vuoi configurare le impostazioni avanzate?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:29001
 msgid "There are several advanced parameters that can be configured in BitTorrent Sync."
-msgstr ""
+msgstr "BitTorrent Sync permette di configurare vari parameteri di funzionamento avanzati."
 
