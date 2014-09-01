@@ -366,5 +366,5 @@ msgstr "Möchten Sie fortgeschrittene Einstelllungen konfigurieren?"
 #. Description
 #: ../btsync.templates:29001
 msgid "There are several advanced parameters that can be configured in BitTorrent Sync."
-msgstr "BitTorrent Sync erlaubt das festlegen verschiedener fortgeschrittener Einstellungensparameter."
+msgstr "BitTorrent Sync erlaubt verschiedene fortgeschrittene Einstellungensparameter festzulegen."
 
