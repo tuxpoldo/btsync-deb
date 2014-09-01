@@ -7,11 +7,11 @@ msgstr ""
 "Project-Id-Version: btsync-gui\n"
 "Language: fr\n"
 
-#: ../btsyncagent.py:107
+#: ../btsyncagent.py:112
 msgid "Default settings cleared."
 msgstr "Paramètres par défaut effacés"
 
-#: ../btsyncagent.py:128
+#: ../btsyncagent.py:135
 msgid "Default settings saved."
 msgstr "Paramètres par défaut sauvegardés"
 
@@ -27,7 +27,7 @@ msgstr "BitTorrent Inc."
 msgid "Now"
 msgstr "Maintenant"
 
-#: ../btsyncapp.py:227 ../btsyncstatus.py:187
+#: ../btsyncapp.py:227 ../btsyncstatus.py:199
 msgid "{0:.1f} kB/s up, {1:.1f} kB/s down"
 msgstr "{0:.1f} Ko/s en chargement, {1:.1f} Ko/s en téléchargement"
 
@@ -88,59 +88,59 @@ msgstr "Adresse web optionnelle attachée à l'interface web d'un client BitTorr
 msgid "Include the Web UI in the menu. This option can be made persistent with --savedefaults"
 msgstr "Inclure l'interface Web dans le menu. Cette option peut être rendue persistante avec --savedefaults"
 
-#: ../btsyncguiapp.py:158
+#: ../btsyncguiapp.py:164
 msgid "If specified, the optionally supplied credentials, bind address, port information and storable settings will be stored as default in the application preferences and used when launching a local BitTorrent Sync agent."
 msgstr "Si spécifiés, le nom d'utilisateur, le mot de passe, l'adresse web, le numéro de port et les réglages qui le peuvent seront sauvegardés comme valeurs par défault dans les préférences de l'application et utilisés au lancement d'un client BitTorrent Sync local."
 
-#: ../btsyncguiapp.py:165
+#: ../btsyncguiapp.py:171
 msgid "If specified, all internally stored credentials, bind address, port information and storable settings will be cleared from the application preferences."
 msgstr "Si spécifiés, le nom d'utilisateur, le mot de passe, l'adresse web, le numéro de port et les réglages qui sont sauvegardés seront supprimés des préférences de l'application."
 
-#: ../btsyncstatus.py:67 ../btsyncapp.glade.h:2
+#: ../btsyncstatus.py:79 ../btsyncapp.glade.h:2
 msgid "BitTorrent Sync"
 msgstr "BitTorrent Sync"
 
-#: ../btsyncstatus.py:68
+#: ../btsyncstatus.py:80
 msgid "BitTorrent Sync Status Indicator"
 msgstr "Indicateur de statut BitTorrent Sync"
 
-#: ../btsyncstatus.py:71 ../btsyncstatus.py:72
+#: ../btsyncstatus.py:83 ../btsyncstatus.py:84
 msgid "BitTorrent Sync {0}:{1}"
 msgstr "BitTorrent Sync {0}:{1}"
 
-#: ../btsyncstatus.py:144
+#: ../btsyncstatus.py:156
 msgid "Connecting..."
 msgstr "Connexion..."
 
-#: ../btsyncstatus.py:148 ../btsyncstatus.py:193
+#: ../btsyncstatus.py:160 ../btsyncstatus.py:205
 msgid "Idle"
 msgstr "Inactif"
 
-#: ../btsyncstatus.py:190
+#: ../btsyncstatus.py:202
 msgid "Indexing..."
 msgstr "Indexation..."
 
-#: ../btsyncstatus.py:254
+#: ../btsyncstatus.py:266
 msgid "Version {0} ({0})"
 msgstr "Version {0} ({0})"
 
 #. I'm not sure we can translate UI in french... 
 #. So I put it complete, but may be it should stay like UI
-#: ../btsyncstatus.py:255
+#: ../btsyncstatus.py:267
 msgid "Linux UI Version {0}"
 msgstr "Version de l'interface utilisateur Linux {0}"
 
-#: ../btsyncstatus.py:330
+#: ../btsyncstatus.py:342
 msgid "Disconnected"
 msgstr "Déconnecté"
 
-#: ../btsyncstatus.py:343
+#: ../btsyncstatus.py:355
 msgid "Disconnected: Communication Error {0}"
 msgstr "Déconnecté : Erreur de communication {0}"
 
 #. I'm not sure what you mean by "full" here ?
 #. You're talking about instance ?
-#: ../btsyncutils.py:307
+#: ../btsyncutils.py:339
 msgid "Only one full btsync-gui can run at once"
 msgstr "Seulement un btsync-gui peut fonctionner à la fois"
 
@@ -166,23 +166,23 @@ msgstr "Vous n'avez pas la permission d'écrire dans le répertoire sélectionn�
 msgid "Please select a folder to sync"
 msgstr "Veuillez sélectionner un répertoire à synchroniser"
 
-#: ../dialogs.py:423
+#: ../dialogs.py:430
 msgid "Invalid secret specified.\n"
 "Secret must have a length of 33 characters"
 msgstr "La clé secrète spécifiée est invalide.\n"
 "La clé secrète doit avoir une longueur de 33 caractères."
 
-#: ../dialogs.py:430
+#: ../dialogs.py:438
 msgid "Invalid secret specified.\n"
 "Secret must contain only alphanumeric characters"
 msgstr "La clé secrète spécifiée est invalide.\n"
 "La clé secrète doit contenir uniquement des caractères alphanumériques."
 
-#: ../dialogs.py:477
+#: ../dialogs.py:485
 msgid "A hostname or IP address must be specified"
 msgstr "Un nom d'hôte ou une adresse IP doit être spécifié"
 
-#: ../dialogs.py:482
+#: ../dialogs.py:490
 msgid "The specified port must be a number between 1 and 65534"
 msgstr "Le port spécifié doit être un nombre compris entre 1 et 65534"
 
@@ -344,8 +344,8 @@ msgstr "En utilisant cette application, vous acceptez notre politique de confide
 "http://www.bittorrent.com/legal/terms-of-use"
 
 #: ../btsyncstatus.glade.h:6
-msgid "Copyright © 2013, BitTorrent Inc."
-msgstr "Copyright © 2013, BitTorrent Inc."
+msgid "Copyright © 2014, BitTorrent Inc."
+msgstr "Copyright © 2014, BitTorrent Inc."
 
 #: ../btsyncstatus.glade.h:7
 msgid "Enable Debug Logging"
@@ -532,23 +532,23 @@ msgstr "Valeur"
 msgid "Value:"
 msgstr "Valeur :"
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "bytes"
 msgstr "octet(s)"
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "KB"
 msgstr "Ko"
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "MB"
 msgstr "Mo"
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "GB"
 msgstr "Go"
 
-#: ../btsyncutils.py:169
+#: ../btsyncutils.py:192
 msgid "TB"
 msgstr "To"
 
@@ -567,4 +567,8 @@ msgstr "Ce dossier n'a que des autorisations en lecture seule.\n"
 #: ../dialogs.glade.h:6
 msgid "Encryption secret (read-only)"
 msgstr "Clé secrète de chiffrement (lecture seule)"
+
+#: ../btsyncguiapp.py:159
+msgid "If specified, the dark indicator icon set will be used. This option can be made persistent with --savedefaults"
+msgstr ""
 
