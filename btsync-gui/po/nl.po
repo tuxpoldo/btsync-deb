@@ -7,11 +7,11 @@ msgstr ""
 "Project-Id-Version: btsync-gui\n"
 "Language: nl\n"
 
-#: ../btsyncagent.py:107
+#: ../btsyncagent.py:112
 msgid "Default settings cleared."
 msgstr "Standaard instellingen gewist."
 
-#: ../btsyncagent.py:128
+#: ../btsyncagent.py:135
 msgid "Default settings saved."
 msgstr "Standaard instellingen opgeslagen."
 
@@ -27,7 +27,7 @@ msgstr "BitTorrent Inc."
 msgid "Now"
 msgstr "Nu"
 
-#: ../btsyncapp.py:227 ../btsyncstatus.py:187
+#: ../btsyncapp.py:227 ../btsyncstatus.py:199
 msgid "{0:.1f} kB/s up, {1:.1f} kB/s down"
 msgstr "{0:.1f} kB/s up, {1:.1f} kB/s down"
 
@@ -87,55 +87,55 @@ msgstr "Optionele bind adres voor de Web UI van een lokaal BitTorrent Sync proce
 msgid "Include the Web UI in the menu. This option can be made persistent with --savedefaults"
 msgstr "Neem de Web UI mee in het menu. Deze optie kan blijvend worden gemaakt voor een lokaal proces met - savedefaults"
 
-#: ../btsyncguiapp.py:158
+#: ../btsyncguiapp.py:164
 msgid "If specified, the optionally supplied credentials, bind address, port information and storable settings will be stored as default in the application preferences and used when launching a local BitTorrent Sync agent."
 msgstr "Indien gespecificeerd, zullen het optionele bind adres, de poort en opgeslagen instellingen worden opgeslagen als standaard in de applicatie voorkeuren en gebruikt bij het opstarten van een lokaal BitTorrent Sync proces."
 
-#: ../btsyncguiapp.py:165
+#: ../btsyncguiapp.py:171
 msgid "If specified, all internally stored credentials, bind address, port information and storable settings will be cleared from the application preferences."
 msgstr "Indien gespecificeerd, zullen alle intern opgeslagen referenties, bind adres, de poort en opgeslagen instellingen worden gewist uit de applicatie voorkeuren."
 
-#: ../btsyncstatus.py:67 ../btsyncapp.glade.h:2
+#: ../btsyncstatus.py:79 ../btsyncapp.glade.h:2
 msgid "BitTorrent Sync"
 msgstr "BitTorrent Sync"
 
-#: ../btsyncstatus.py:68
+#: ../btsyncstatus.py:80
 msgid "BitTorrent Sync Status Indicator"
 msgstr "BitTorrent Sync Status Indicator"
 
-#: ../btsyncstatus.py:71 ../btsyncstatus.py:72
+#: ../btsyncstatus.py:83 ../btsyncstatus.py:84
 msgid "BitTorrent Sync {0}:{1}"
 msgstr "BitTorrent Sync {0}:{1}"
 
-#: ../btsyncstatus.py:144
+#: ../btsyncstatus.py:156
 msgid "Connecting..."
 msgstr "Connecting..."
 
-#: ../btsyncstatus.py:148 ../btsyncstatus.py:193
+#: ../btsyncstatus.py:160 ../btsyncstatus.py:205
 msgid "Idle"
 msgstr "Idle"
 
-#: ../btsyncstatus.py:190
+#: ../btsyncstatus.py:202
 msgid "Indexing..."
 msgstr "Indexing..."
 
-#: ../btsyncstatus.py:254
+#: ../btsyncstatus.py:266
 msgid "Version {0} ({0})"
 msgstr "Version {0} ({0})"
 
-#: ../btsyncstatus.py:255
+#: ../btsyncstatus.py:267
 msgid "Linux UI Version {0}"
 msgstr "Linux UI Version {0}"
 
-#: ../btsyncstatus.py:330
+#: ../btsyncstatus.py:342
 msgid "Disconnected"
 msgstr "Disconnected"
 
-#: ../btsyncstatus.py:343
+#: ../btsyncstatus.py:355
 msgid "Disconnected: Communication Error {0}"
 msgstr "Disconnected: Communicatie fout {0}"
 
-#: ../btsyncutils.py:307
+#: ../btsyncutils.py:339
 msgid "Only one full btsync-gui can run at once"
 msgstr "Er kan slechts één volledige btsync-gui actief zijn"
 
@@ -160,23 +160,23 @@ msgstr "Heeft geen machtigingen om te schrijven naar de geselecteerde map."
 msgid "Please select a folder to sync"
 msgstr "Selecteer een map om te synchroniseren"
 
-#: ../dialogs.py:423
+#: ../dialogs.py:430
 msgid "Invalid secret specified.\n"
 "Secret must have a length of 33 characters"
 msgstr "Ongeldige secret gespecificeerd. \n"
 "Secret moet een lengte van 33 tekens hebben"
 
-#: ../dialogs.py:430
+#: ../dialogs.py:438
 msgid "Invalid secret specified.\n"
 "Secret must contain only alphanumeric characters"
 msgstr "Ongeldige secret gespecificeerd. \n"
 "Secret mag alleen alfanumerieke tekens bevatten"
 
-#: ../dialogs.py:477
+#: ../dialogs.py:485
 msgid "A hostname or IP address must be specified"
 msgstr "Een hostnaam of IP-adres moet worden opgegeven"
 
-#: ../dialogs.py:482
+#: ../dialogs.py:490
 msgid "The specified port must be a number between 1 and 65534"
 msgstr "De opgegeven poort moet een getal zijn tussen 1 en 65534"
 
@@ -336,8 +336,8 @@ msgstr "Door deze toepassing te gebruiken, gaat u akkoord met ons privacy beleid
 "http://www.bittorrent.com/legal/privacy http://www.bittorrent.com/legal/terms-of-use"
 
 #: ../btsyncstatus.glade.h:6
-msgid "Copyright © 2013, BitTorrent Inc."
-msgstr "Copyright © 2013, BitTorrent Inc."
+msgid "Copyright © 2014, BitTorrent Inc."
+msgstr "Copyright © 2014, BitTorrent Inc."
 
 #: ../btsyncstatus.glade.h:7
 msgid "Enable Debug Logging"
@@ -520,23 +520,23 @@ msgstr "Waarde"
 msgid "Value:"
 msgstr "Waarde:"
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "bytes"
 msgstr "bytes"
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "KB"
 msgstr "KB"
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "MB"
 msgstr "MB"
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "GB"
 msgstr "GB"
 
-#: ../btsyncutils.py:169
+#: ../btsyncutils.py:192
 msgid "TB"
 msgstr "TB"
 
@@ -553,4 +553,8 @@ msgstr "Dit is een map met alleen-lezen rechten. Wijzigingen gemaakt aan de inho
 #: ../dialogs.glade.h:6
 msgid "Encryption secret (read-only)"
 msgstr "Encryptie secret (alleen-lezen)"
+
+#: ../btsyncguiapp.py:159
+msgid "If specified, the dark indicator icon set will be used. This option can be made persistent with --savedefaults"
+msgstr ""
 
