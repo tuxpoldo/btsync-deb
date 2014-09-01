@@ -276,49 +276,49 @@ msgstr "Establece el tamaño para el archivo sync.log de depuración. Cuando el 
 #. Description
 #: ../btsync.templates:22001
 msgid "Should BitTorrent Sync allow only SSL connections to the Web UI?"
-msgstr ""
+msgstr "¿Debería BitTorrent Sync permitir únicamente conexiones SSL al IU Web?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:22001
 msgid "If enabled, only SSL (http) connections will be allowed to the Web UI."
-msgstr ""
+msgstr "Si se activa, solo se permitirán conexions SSL (http) al IU Web."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:23001
 msgid "Do you want to configure folder defaults?"
-msgstr ""
+msgstr "¿Desea configurar los valores por defecto de las carpetas?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:23001
 msgid "BitTorrent Sync allows to configure default values for shared folders. If you specify default values, all newly created folders will be initially configured with the specified default values."
-msgstr ""
+msgstr "BitTorrent Sync le permite configurar valores por defecto para las carpetas compartidas. Si lo hace, todas las nuevas carpetas que se creen se configurarán inicialmente con los valores especificados."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:24001
 msgid "Should old version of files be preserved by default?"
-msgstr ""
+msgstr "¿Deberían por defecto mantenerse las versiones antiguas de los ficheros?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:24001
 msgid "If enabled, new shared folders will save old versions by default in the .SyncArchive folder located in the shared directory."
-msgstr ""
+msgstr "Si se activa, las nuevas carpetas compartidas guardarán las versiones antiguas por defecto en la carpeta .SyncArchive ubicada en el directorio compartido."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:25001
 msgid "Should BitTorrent Sync use DHT by default?"
-msgstr ""
+msgstr "¿Debería BitTorrent Sync usar por defecto DHT?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:25001
 msgid "If enabled, new shared folders will be configured to use the DHT (Distributed Hash Table) by default."
-msgstr ""
+msgstr "Si se activa, las nuevas carpetas compartidas se configurarán para usar la DHT («Distributed Hash Table») por defecto"
 
 #. Type: boolean
 #. Description
@@ -360,11 +360,11 @@ msgstr ""
 #. Description
 #: ../btsync.templates:29001
 msgid "Do you want to configure advanced parameters?"
-msgstr ""
+msgstr "¿Desea configurar los parámetros avanzados?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:29001
 msgid "There are several advanced parameters that can be configured in BitTorrent Sync."
-msgstr ""
+msgstr "Hay varios parámetros avanzados que se pueden configurar en BitTorrent Sync."
 
