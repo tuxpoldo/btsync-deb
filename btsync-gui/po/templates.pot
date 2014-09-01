@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-22 18:06+0200\n"
+"POT-Creation-Date: 2014-09-01 19:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../btsyncagent.py:107
+#: ../btsyncagent.py:112
 msgid "Default settings cleared."
 msgstr ""
 
-#: ../btsyncagent.py:128
+#: ../btsyncagent.py:135
 msgid "Default settings saved."
 msgstr ""
 
@@ -39,7 +39,7 @@ msgstr ""
 msgid "Now"
 msgstr ""
 
-#: ../btsyncapp.py:227 ../btsyncstatus.py:187
+#: ../btsyncapp.py:227 ../btsyncstatus.py:199
 msgid "{0:.1f} kB/s up, {1:.1f} kB/s down"
 msgstr ""
 
@@ -118,7 +118,13 @@ msgid ""
 "savedefaults"
 msgstr ""
 
-#: ../btsyncguiapp.py:158
+#: ../btsyncguiapp.py:159
+msgid ""
+"If specified, the dark indicator icon set will be used. This option can be "
+"made persistent with --savedefaults"
+msgstr ""
+
+#: ../btsyncguiapp.py:164
 msgid ""
 "If specified, the optionally supplied credentials, bind address, port "
 "information and storable settings will be stored as default in the "
@@ -126,74 +132,74 @@ msgid ""
 "agent."
 msgstr ""
 
-#: ../btsyncguiapp.py:165
+#: ../btsyncguiapp.py:171
 msgid ""
 "If specified, all internally stored credentials, bind address, port "
 "information and storable settings will be cleared from the application "
 "preferences."
 msgstr ""
 
-#: ../btsyncstatus.py:67 ../btsyncapp.glade.h:2
+#: ../btsyncstatus.py:79 ../btsyncapp.glade.h:2
 msgid "BitTorrent Sync"
 msgstr ""
 
-#: ../btsyncstatus.py:68
+#: ../btsyncstatus.py:80
 msgid "BitTorrent Sync Status Indicator"
 msgstr ""
 
-#: ../btsyncstatus.py:71 ../btsyncstatus.py:72
+#: ../btsyncstatus.py:83 ../btsyncstatus.py:84
 msgid "BitTorrent Sync {0}:{1}"
 msgstr ""
 
-#: ../btsyncstatus.py:144
+#: ../btsyncstatus.py:156
 msgid "Connecting..."
 msgstr ""
 
-#: ../btsyncstatus.py:148 ../btsyncstatus.py:193
+#: ../btsyncstatus.py:160 ../btsyncstatus.py:205
 msgid "Idle"
 msgstr ""
 
-#: ../btsyncstatus.py:190
+#: ../btsyncstatus.py:202
 msgid "Indexing..."
 msgstr ""
 
-#: ../btsyncstatus.py:254
+#: ../btsyncstatus.py:266
 msgid "Version {0} ({0})"
 msgstr ""
 
-#: ../btsyncstatus.py:255
+#: ../btsyncstatus.py:267
 msgid "Linux UI Version {0}"
 msgstr ""
 
-#: ../btsyncstatus.py:330
+#: ../btsyncstatus.py:342
 msgid "Disconnected"
 msgstr ""
 
-#: ../btsyncstatus.py:343
+#: ../btsyncstatus.py:355
 msgid "Disconnected: Communication Error {0}"
 msgstr ""
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "bytes"
 msgstr ""
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "KB"
 msgstr ""
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "MB"
 msgstr ""
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "GB"
 msgstr ""
 
-#: ../btsyncutils.py:169
+#: ../btsyncutils.py:192
 msgid "TB"
 msgstr ""
 
-#: ../btsyncutils.py:307
+#: ../btsyncutils.py:339
 msgid "Only one full btsync-gui can run at once"
 msgstr ""
 
@@ -219,23 +225,23 @@ msgstr ""
 msgid "Please select a folder to sync"
 msgstr ""
 
-#: ../dialogs.py:423
+#: ../dialogs.py:430
 msgid ""
 "Invalid secret specified.\n"
 "Secret must have a length of 33 characters"
 msgstr ""
 
-#: ../dialogs.py:430
+#: ../dialogs.py:438
 msgid ""
 "Invalid secret specified.\n"
 "Secret must contain only alphanumeric characters"
 msgstr ""
 
-#: ../dialogs.py:477
+#: ../dialogs.py:485
 msgid "A hostname or IP address must be specified"
 msgstr ""
 
-#: ../dialogs.py:482
+#: ../dialogs.py:490
 msgid "The specified port must be a number between 1 and 65534"
 msgstr ""
 
