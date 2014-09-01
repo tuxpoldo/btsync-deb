@@ -128,6 +128,21 @@ The variable[b] DAEMON_BIND[/b] has the same purpose as the same parameter in th
 The variable [b]DAEMON_INIT_DEBUG[/b] permits to enable extended debug output of the init-script.
 
 
+[color=#000080][b]HANDLING OF SSL CERTIFICATES[/b][/color]
+
+BitTorrent Sync 1.4 supports also SSL connections to the Web UI. The default instance is automatically configured to use a self signed certificate and key created during the installation.
+
+The configuration file does not point directly to the self signed certificate but to the following symbolic links:
+[code]
+/etc/btsync/debconf-default.crt
+/etc/btsync/debconf-default.key
+[/code]
+
+The default instance can be operated also with user provided certificates without tampering with the configuration file by deleting the symbolic links and replacing them with files containing the desired certificate and key. Debconf will detect that the files are not symbolic links and leave them untouched during reconfiguration.
+
+The certificate file and key file must be accessible by the BitTorrent Sync daemon.
+
+
 [color=#000080][b]BINDING BITTORRENT SYNC TO A SPECIFIC INTERFACE[/b][/color]
 
 Unfortunately BitTorrent Sync currently does not support to bind the main service routine to a specific network interface. Currently only the internal web server providing the Web UI and the BitTorrent Sync API can be specifically bound to a specific address.
