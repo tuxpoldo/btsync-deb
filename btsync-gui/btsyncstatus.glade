@@ -6,12 +6,13 @@
     <property name="border_width">5</property>
     <property name="type_hint">dialog</property>
     <property name="program_name">BitTorrent Sync</property>
-    <property name="copyright" translatable="yes">Copyright © 2013, BitTorrent Inc.</property>
+    <property name="copyright" translatable="yes">Copyright © 2014, BitTorrent Inc.</property>
     <property name="comments" translatable="yes">Linux UI Version 0.0</property>
     <property name="website">http://www.bittorrent.com/sync</property>
-    <property name="license" translatable="yes">By using this application, you agree to our Privacy Policy and Terms.
+    <property name="license" translatable="yes">By using this application, you agree to our Privacy Policy, Terms of Use and End User License Agreement.
 http://www.bittorrent.com/legal/privacy
-http://www.bittorrent.com/legal/terms-of-use</property>
+http://www.bittorrent.com/legal/terms-of-use
+http://www.bittorrent.com/legal/eula</property>
     <property name="authors">Konstantin Lissounov and his team
 BitTorrent Inc.
 

@@ -405,7 +405,7 @@ msgid ""
 msgstr ""
 
 #: ../btsyncstatus.glade.h:6
-msgid "Copyright © 2013, BitTorrent Inc."
+msgid "Copyright © 2014, BitTorrent Inc."
 msgstr ""
 
 #: ../btsyncstatus.glade.h:7
