@@ -251,7 +251,7 @@ msgstr "Możesz wybrać poziom czułości demona BitTorrent Sync, który będzie
 #. Description
 #: ../btsync.templates:20001
 msgid "External port number reported to the tracker:"
-msgstr "Numer porrtu zewnętrznego zgłoszonego do trakera:"
+msgstr "Numer portu zewnętrznego zgłoszonego do trakera:"
 
 #. Type: string
 #. Description
@@ -275,95 +275,95 @@ msgstr "Ustaw rozmiar dla pliku loga debugowania (sync.log). Kiedy plik osiągni
 #. Description
 #: ../btsync.templates:22001
 msgid "Should BitTorrent Sync allow only SSL connections to the Web UI?"
-msgstr ""
+msgstr "Czy BitTorrent Sync ma pozwalać tylko na szyfrowane (SSL) połączenia do interfejsu WEB?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:22001
 msgid "If enabled, only SSL (http) connections will be allowed to the Web UI."
-msgstr ""
+msgstr "Jeśli ustawiono, BitTorrent Sync będzię pozwalał tylko na szyfrowane (SSL) połączenia do interfejsu WEB."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:23001
 msgid "Do you want to configure folder defaults?"
-msgstr ""
+msgstr "Czy chcesz skonfigurować domyślne ustawienia folderów?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:23001
 msgid "BitTorrent Sync allows to configure default values for shared folders. If you specify default values, all newly created folders will be initially configured with the specified default values."
-msgstr ""
+msgstr "BitTorrent Sync pozwala na skonfigurowanie domyślnych wartości dla folderów współdzielonych. Jeśli ustawisz domyślne wartości, nowo utworzone foldery będą posiadać właśnie te wartości."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:24001
 msgid "Should old version of files be preserved by default?"
-msgstr ""
+msgstr "Czy stare wersje plików mają być domyślnie zachowywane?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:24001
 msgid "If enabled, new shared folders will save old versions by default in the .SyncArchive folder located in the shared directory."
-msgstr ""
+msgstr "Jeśli ustawiono, nowo współdzielone foldery, będą zapisywać stare wersje plików domyślnie w folderze .SyncArchive zlokalizowanym w tym właśnie folderze."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:25001
 msgid "Should BitTorrent Sync use DHT by default?"
-msgstr ""
+msgstr "Czy BitTorrent Sync ma domyślnie używać DHT?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:25001
 msgid "If enabled, new shared folders will be configured to use the DHT (Distributed Hash Table) by default."
-msgstr ""
+msgstr "Jeśli ustawiono, nowo współdzielone foldery domyślne będą używać DHT (Distributed Hash Table)."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:26001
 msgid "Should BitTorrent Sync use LAN broadcasts by default?"
-msgstr ""
+msgstr "Czy BitTorrent Sync ma domyślnie używać rozgłaszania w LAN?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:26001
 msgid "If enabled, new shared folders will be configured to use LAN Broadcast for local peer discovery by default."
-msgstr ""
+msgstr "Jeśli ustawiono, nowo współdzielone foldery domyślnie będą używać rozgłaszania w LAN aby zlokalizować lokalnych peerów."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:27001
 msgid "Should BitTorrent Sync use external relay servers wheen needed?"
-msgstr ""
+msgstr "Czy  BitTorrent Sync ma używać zewnętrznych serwerów przekazujących (relay servers) jeśli to potrzebne?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:27001
 msgid "If enabled, new shared folders will be configured to use relay servers by default. Relay servers are used when it is impossible to connect to other devices directly due to NAT issues."
-msgstr ""
+msgstr "Jeśli ustawiono, nowo współdzielone foldery domyślnie będą używać serwerów przekazujących. Serwery te są używane gdy niemożliwe jest bezpośrednie połączenie do innych urządzeń ze względu na NAT."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:28001
 msgid "Should BitTorrent Sync use external tracker servers by default?"
-msgstr ""
+msgstr "Czy BitTorrent Sync ma domyślnie używać zewnętrznych serwerów trakerów?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:28001
 msgid "If enabled, new shared folders will be configured to use external tracker servers by default. Tracker servers can be enabled to facilitate communication between peers."
-msgstr ""
+msgstr "Jeśli ustawiono, nowo współdzielone foldery domyślnie będą używać zewnętrznych serwerów trakerów. Serwery trakerów mogą być włączone dla ułatwienia komunikacji pomiędzy peerami."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:29001
 msgid "Do you want to configure advanced parameters?"
-msgstr ""
+msgstr "Czy chcesz skonfigurować zaawansowane parametry?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:29001
 msgid "There are several advanced parameters that can be configured in BitTorrent Sync."
-msgstr ""
+msgstr "Zostało kilka parametrów, które mogą być skonfigurowane w BitTorrent Sync."
 
