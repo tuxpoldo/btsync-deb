@@ -2,6 +2,8 @@ btsync-gui (0.8.4-1) unstable; urgency=low
 
   * Changed "synched" to "synced" to keep consistency (Closes #137)
   * Added Hungarian translation by Dávid Szilágyi (Closes #138)
+  * Added experimental support for a set of dark icons for light
+    themes (Closes #136)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Thu, 26 Jun 2014 16:35:10 +0200
 

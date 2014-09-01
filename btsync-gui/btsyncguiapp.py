@@ -166,6 +166,7 @@ class GuiApp:
 					'bind address, port information and storable settings '\
 					'will be cleared from the application preferences.'))
 		parser.add_argument('--dark',
+					default=False,
 					action='store_true',
 					help=_('If specified, the dark indicator icon set will '\
 					'be used. This option can be made persistent with '\
