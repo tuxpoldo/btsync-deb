@@ -7,11 +7,11 @@ msgstr ""
 "Project-Id-Version: btsync-gui\n"
 "Language: pl\n"
 
-#: ../btsyncagent.py:107
+#: ../btsyncagent.py:112
 msgid "Default settings cleared."
 msgstr "Domyślne ustawienia wyczyszczone."
 
-#: ../btsyncagent.py:128
+#: ../btsyncagent.py:135
 msgid "Default settings saved."
 msgstr "Domyślne ustawienia zapisane."
 
@@ -27,7 +27,7 @@ msgstr "BitTorrent Inc."
 msgid "Now"
 msgstr "Teraz"
 
-#: ../btsyncapp.py:227 ../btsyncstatus.py:187
+#: ../btsyncapp.py:227 ../btsyncstatus.py:199
 msgid "{0:.1f} kB/s up, {1:.1f} kB/s down"
 msgstr "{0:.1f} kB/s wys, {1:.1f} kB/s pob"
 
@@ -88,63 +88,63 @@ msgstr "Opcjonalne przypisywanie adresów dla Web UI z tworzonego lokalnie agent
 msgid "Include the Web UI in the menu. This option can be made persistent with --savedefaults"
 msgstr "Obejmuje Web UI w menu. Ta opcja może być stała z --savedefaults"
 
-#: ../btsyncguiapp.py:158
+#: ../btsyncguiapp.py:164
 msgid "If specified, the optionally supplied credentials, bind address, port information and storable settings will be stored as default in the application preferences and used when launching a local BitTorrent Sync agent."
 msgstr "Jeśli określony, opcjonalnie podane poświadczenia, przypisanych adresów, informacji portu i zestawy ustawień będą zapisane jako domyślne w preferencji aplikacji i użyte kiedy zostanie uruchomiony lokalnie agent BitTorrent Sync."
 
-#: ../btsyncguiapp.py:165
+#: ../btsyncguiapp.py:171
 msgid "If specified, all internally stored credentials, bind address, port information and storable settings will be cleared from the application preferences."
 msgstr "Jeśli określony, wszystkie przechowywane poświadczenia, przypisane adresy, informacje portu i zapisane ustawienia będą wyczyszczone z preferencji aplikacji."
 
-#: ../btsyncstatus.py:67 ../btsyncapp.glade.h:2
+#: ../btsyncstatus.py:79 ../btsyncapp.glade.h:2
 msgid "BitTorrent Sync"
 msgstr "BitTorrent Sync"
 
-#: ../btsyncstatus.py:68
+#: ../btsyncstatus.py:80
 msgid "BitTorrent Sync Status Indicator"
 msgstr "Wskaźnik statusu BitTorrent Sync"
 
-#: ../btsyncstatus.py:71 ../btsyncstatus.py:72
+#: ../btsyncstatus.py:83 ../btsyncstatus.py:84
 msgid "BitTorrent Sync {0}:{1}"
 msgstr "BitTorrent Sync {0}:{1}"
 
-#: ../btsyncstatus.py:144
+#: ../btsyncstatus.py:156
 msgid "Connecting..."
 msgstr "Łączenie..."
 
-#: ../btsyncstatus.py:148 ../btsyncstatus.py:193
+#: ../btsyncstatus.py:160 ../btsyncstatus.py:205
 msgid "Idle"
 msgstr "Bezczynny"
 
-#: ../btsyncstatus.py:190
+#: ../btsyncstatus.py:202
 msgid "Indexing..."
 msgstr "Indeksowanie..."
 
-#: ../btsyncstatus.py:254
+#: ../btsyncstatus.py:266
 msgid "Version {0} ({0})"
 msgstr "Wersja {0} ({0})"
 
-#: ../btsyncstatus.py:255
+#: ../btsyncstatus.py:267
 msgid "Linux UI Version {0}"
 msgstr "Linux UI Wersja {0}"
 
-#: ../btsyncstatus.py:330
+#: ../btsyncstatus.py:342
 msgid "Disconnected"
 msgstr "Rozłączono"
 
-#: ../btsyncstatus.py:343
+#: ../btsyncstatus.py:355
 msgid "Disconnected: Communication Error {0}"
 msgstr "Rozłączono: Błąd komunikacji {0}"
 
-#: ../btsyncutils.py:307
+#: ../btsyncutils.py:339
 msgid "Only one full btsync-gui can run at once"
-msgstr "Jedynie jeden pełen btsync-gui może być uruchomiony na raz"
+msgstr "Jedynie jedna instancja btsync-gui może być uruchomiona na raz"
 
 #: ../dialogs.py:68
 msgid "This secret is invalid.\n"
 "Please generate a new secret or enter your shared folder secret."
 msgstr "Ten sekret jest nieprawidłowy.\n"
-"Proszę wygenerować nowy sekret lub wprowadzić udostępniony sekretny folder."
+"Proszę wygenerować nowy sekret lub wprowadzić sekret udostępnionego folderu."
 
 #: ../dialogs.py:73
 msgid "Can't open the destination folder."
@@ -162,23 +162,23 @@ msgstr "Nie masz uprawnień do zapisu w wybranym folderze."
 msgid "Please select a folder to sync"
 msgstr "Proszę wybrać folder do synchronizacji"
 
-#: ../dialogs.py:423
-msgid "Invalid secret specified.\n"
-"Secret must have a length of 33 characters"
-msgstr "Określono nieprawidłowy sekret. \n"
-"Sekret powinien się składać z 33 znaków"
-
 #: ../dialogs.py:430
 msgid "Invalid secret specified.\n"
-"Secret must contain only alphanumeric characters"
-msgstr "Określono nieprawidłowy sekret.\n"
-"Sekret powinien zawierać jedynie znaki alfanumeryczne"
+"Secret must have a length of 33 characters"
+msgstr "Sekret nieprawidłowy. \n"
+"Sekret musi się składać z 33 znaków"
 
-#: ../dialogs.py:477
+#: ../dialogs.py:438
+msgid "Invalid secret specified.\n"
+"Secret must contain only alphanumeric characters"
+msgstr "Sekret nieprawidłowy.\n"
+"Sekret musi zawierać jedynie znaki alfanumeryczne"
+
+#: ../dialogs.py:485
 msgid "A hostname or IP address must be specified"
 msgstr "Nazwa hosta lub adres IP muszę być określone"
 
-#: ../dialogs.py:482
+#: ../dialogs.py:490
 msgid "The specified port must be a number between 1 and 65534"
 msgstr "Określenie portu musi być liczbą pomiędzy 1 a 65534"
 
@@ -192,7 +192,7 @@ msgstr "Połączono z urządzeniem przenośnym"
 
 #: ../btsyncapp.glade.h:4
 msgid "Copies the sharing secret to the clipboard"
-msgstr "Kopiuj udostępniona sekret do schowka"
+msgstr "Kopiuje sekret do schowka"
 
 #: ../btsyncapp.glade.h:5
 msgid "Copy secret"
@@ -260,7 +260,7 @@ msgstr "Ograniczenie wysyłania do (kB/s):"
 
 #: ../btsyncapp.glade.h:21
 msgid "Listening port:"
-msgstr "Nasłuchiwany port:"
+msgstr "Port nasłuchiwania:"
 
 #: ../btsyncapp.glade.h:22
 msgid "Open Folder"
@@ -300,7 +300,7 @@ msgstr "Rozmiar"
 
 #: ../btsyncapp.glade.h:31
 msgid "Start BitTorrent Sync when Linux starts"
-msgstr "Uruchom BitTorrent Sync kiedy uruchamiany jest Linux"
+msgstr "Uruchom BitTorrent Sync kiedy uruchamiany jest system"
 
 #: ../btsyncapp.glade.h:32
 msgid "Status"
@@ -308,7 +308,7 @@ msgstr "Status"
 
 #: ../btsyncapp.glade.h:33
 msgid "This name will be shown on other devices linked to your shared folders"
-msgstr "Ta nazwa będzie wyświetlana na innym urządzenia łączącym do twoich udostępnionych folderów"
+msgstr "Ta nazwa będzie wyświetlana na innym urządzeniu łączącym się do twoich udostępnionych folderów"
 
 #: ../btsyncapp.glade.h:34
 msgid "Transfers"
@@ -320,7 +320,7 @@ msgstr "Wysyłanie"
 
 #: ../btsyncapp.glade.h:36
 msgid "Use NAT UPnP port mapping"
-msgstr "Użyj NAT UPnP port mapping"
+msgstr "Użyj mapowania portów NAT UPnP"
 
 #: ../btsyncstatus.glade.h:1
 msgid "About BitTorrent Sync"
@@ -339,12 +339,12 @@ msgstr "Używając tej aplikacji, akceptujesz Politykę Prywatności i Regulamin
 "http://www.bittorrent.com/legal/terms-of-use"
 
 #: ../btsyncstatus.glade.h:6
-msgid "Copyright © 2013, BitTorrent Inc."
-msgstr "Copyright © 2013, BitTorrent Inc."
+msgid "Copyright © 2014, BitTorrent Inc."
+msgstr "Copyright © 2014, BitTorrent Inc."
 
 #: ../btsyncstatus.glade.h:7
 msgid "Enable Debug Logging"
-msgstr "Aktywuj Debug Logging"
+msgstr "Aktywuj Debugowanie"
 
 #: ../btsyncstatus.glade.h:8
 msgid "Linux UI Version 0.0"
@@ -368,7 +368,7 @@ msgstr "Wstrzymaj synchronizację"
 
 #: ../btsyncstatus.glade.h:13
 msgid "Quit BitTorrent Sync"
-msgstr "Wyjdź z BitTorrent SYnc"
+msgstr "Wyjdź z BitTorrent Sync"
 
 #: ../btsyncstatus.glade.h:14
 msgid "Send Feedback"
@@ -412,7 +412,7 @@ msgstr "Pełen dostęp"
 
 #: ../dialogs.glade.h:10
 msgid "Full access secret"
-msgstr "Pełen dostęp sekretów"
+msgstr "Sekret pełnego dostepu"
 
 #: ../dialogs.glade.h:11
 msgid "Generate"
@@ -420,7 +420,7 @@ msgstr "Generuj"
 
 #: ../dialogs.glade.h:12
 msgid "Generate a new secret or enter shared folder secret"
-msgstr "Generuj nowy sekret lub wprowadź udostępniany sekretny folder"
+msgstr "Generuj nowy sekret lub wprowadź sekret udostępnionego folderu"
 
 #: ../dialogs.glade.h:13
 msgid "Hosts"
@@ -444,7 +444,7 @@ msgstr "Jednorazowy sekret"
 
 #: ../dialogs.glade.h:18
 msgid "One-time secret should be used within 24 hours"
-msgstr "Jednorazowy sekret powinien być wykorzystany w przeciągu 24 godzin"
+msgstr "Jednorazowy sekret powinien być wykorzystany w ciągu 24 godzin"
 
 #: ../dialogs.glade.h:20
 msgid "Read Only"
@@ -456,11 +456,11 @@ msgstr "Wyłącznie odczyt"
 
 #: ../dialogs.glade.h:22
 msgid "Read only secret"
-msgstr "Wyłącznie odczyt sekretu"
+msgstr "Sekret tylko do odczytu"
 
 #: ../dialogs.glade.h:23
 msgid "Remove Shared Folder"
-msgstr "Usuń udostępniany folder"
+msgstr "Usuń udostępniony folder"
 
 #: ../dialogs.glade.h:24
 msgid "Reset"
@@ -489,11 +489,11 @@ msgstr "Sekretne klucze"
 
 #: ../dialogs.glade.h:32
 msgid "Shared Folder Properties"
-msgstr "Właściwości udostępnianych folderów"
+msgstr "Właściwości udostępnionych folderów"
 
 #: ../dialogs.glade.h:33
 msgid "Shared secret:"
-msgstr "Udostępniane sekrety:"
+msgstr "Sekret:"
 
 #: ../dialogs.glade.h:34
 msgid "Store deleted files in SyncArchive"
@@ -523,29 +523,29 @@ msgstr "Wartość"
 msgid "Value:"
 msgstr "Wartość"
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "bytes"
 msgstr "bajtów"
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "KB"
 msgstr "KB"
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "MB"
 msgstr "MB"
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "GB"
 msgstr "GB"
 
-#: ../btsyncutils.py:169
+#: ../btsyncutils.py:192
 msgid "TB"
 msgstr "TB"
 
 #: ../dialogs.glade.h:25
 msgid "Restore modified files to original version"
-msgstr "Przywróć pliki do domyślnej konfiguracji"
+msgstr "Przywróć pliki do domyślnej wersji"
 
 #: ../dialogs.glade.h:36
 msgid "This is a folder with read-only permissions.\n"
@@ -556,4 +556,8 @@ msgstr "To jest folder z uprawnieniami tylko-do-odczytu. Modyfikacje tego folder
 #: ../dialogs.glade.h:6
 msgid "Encryption secret (read-only)"
 msgstr "Klucz szyfrowania (tylko-do-odczytu)"
+
+#: ../btsyncguiapp.py:159
+msgid "If specified, the dark indicator icon set will be used. This option can be made persistent with --savedefaults"
+msgstr ""
 
