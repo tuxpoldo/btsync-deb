@@ -7,11 +7,11 @@ msgstr ""
 "Project-Id-Version: btsync-gui\n"
 "Language: hu\n"
 
-#: ../btsyncagent.py:107
+#: ../btsyncagent.py:112
 msgid "Default settings cleared."
 msgstr "Alapértelmezett beállítások visszaállítva."
 
-#: ../btsyncagent.py:128
+#: ../btsyncagent.py:135
 msgid "Default settings saved."
 msgstr "Alapértelmezett beállítások elmentve."
 
@@ -27,7 +27,7 @@ msgstr "BitTorrent Inc."
 msgid "Now"
 msgstr "Most"
 
-#: ../btsyncapp.py:227 ../btsyncstatus.py:187
+#: ../btsyncapp.py:227 ../btsyncstatus.py:199
 msgid "{0:.1f} kB/s up, {1:.1f} kB/s down"
 msgstr "{0:.1f} kB/s fel, {1:.1f} kB/s le"
 
@@ -87,55 +87,55 @@ msgstr "A helyi BitTorrent Sync ügynök webes felületének netes címe (opcion
 msgid "Include the Web UI in the menu. This option can be made persistent with --savedefaults"
 msgstr "A webes felület elérését biztosító menüpont mutatása. Ez a beállítás elmenthető a --savedefaults opcióval."
 
-#: ../btsyncguiapp.py:158
+#: ../btsyncguiapp.py:164
 msgid "If specified, the optionally supplied credentials, bind address, port information and storable settings will be stored as default in the application preferences and used when launching a local BitTorrent Sync agent."
 msgstr "Ha meg van adva, akkor a beírt felhasználói azonosítók, hálózati cím, port információk és más beállítások elmentésre kerülnek a helyi program beállításainál és automatikusan betöltődnek a helyi BitTorrent Sync futtatásakor."
 
-#: ../btsyncguiapp.py:165
+#: ../btsyncguiapp.py:171
 msgid "If specified, all internally stored credentials, bind address, port information and storable settings will be cleared from the application preferences."
 msgstr "Ha meg van adva, akkor a beírt felhasználói azonosítók, hálózati cím, port információk és más beállítások törlésre kerülnek a helyi program beállításaiból."
 
-#: ../btsyncstatus.py:67 ../btsyncapp.glade.h:2
+#: ../btsyncstatus.py:79 ../btsyncapp.glade.h:2
 msgid "BitTorrent Sync"
 msgstr "BitTorrent Sync"
 
-#: ../btsyncstatus.py:68
+#: ../btsyncstatus.py:80
 msgid "BitTorrent Sync Status Indicator"
 msgstr "BitTorrent Sync státusz ikon"
 
-#: ../btsyncstatus.py:71 ../btsyncstatus.py:72
+#: ../btsyncstatus.py:83 ../btsyncstatus.py:84
 msgid "BitTorrent Sync {0}:{1}"
 msgstr "BitTorrent Sync {0}:{1}"
 
-#: ../btsyncstatus.py:144
+#: ../btsyncstatus.py:156
 msgid "Connecting..."
 msgstr "Kapcsolódás..."
 
-#: ../btsyncstatus.py:148 ../btsyncstatus.py:193
+#: ../btsyncstatus.py:160 ../btsyncstatus.py:205
 msgid "Idle"
 msgstr "Tétlen"
 
-#: ../btsyncstatus.py:190
+#: ../btsyncstatus.py:202
 msgid "Indexing..."
 msgstr "Összeszámolás..."
 
-#: ../btsyncstatus.py:254
+#: ../btsyncstatus.py:266
 msgid "Version {0} ({0})"
 msgstr "Verzió: {0} ({0})"
 
-#: ../btsyncstatus.py:255
+#: ../btsyncstatus.py:267
 msgid "Linux UI Version {0}"
 msgstr "Linux UI Verzió: {0}"
 
-#: ../btsyncstatus.py:330
+#: ../btsyncstatus.py:342
 msgid "Disconnected"
 msgstr "Nincs kapcsolat"
 
-#: ../btsyncstatus.py:343
+#: ../btsyncstatus.py:355
 msgid "Disconnected: Communication Error {0}"
 msgstr "Nincs kapcsolat: Kommunikációs Hiba {0}"
 
-#: ../btsyncutils.py:307
+#: ../btsyncutils.py:339
 msgid "Only one full btsync-gui can run at once"
 msgstr "A btsync-gui egyszerre csak egy példányban futhat"
 
@@ -161,23 +161,23 @@ msgstr "Nincs megfelelő jogosultság a kiválasztott mappába íráshoz."
 msgid "Please select a folder to sync"
 msgstr "Kérjük, válassza ki a szinkronizálandó mappát"
 
-#: ../dialogs.py:423
+#: ../dialogs.py:430
 msgid "Invalid secret specified.\n"
 "Secret must have a length of 33 characters"
 msgstr "A megadott titkos kód érvénytelen.\n"
 "A titkos kód pontosan 33 karakteres lehet"
 
-#: ../dialogs.py:430
+#: ../dialogs.py:438
 msgid "Invalid secret specified.\n"
 "Secret must contain only alphanumeric characters"
 msgstr "A megadott titkos kód érvénytelen.\n"
 "A titkos kód csak betűket és számokat tartalmazhat"
 
-#: ../dialogs.py:477
+#: ../dialogs.py:485
 msgid "A hostname or IP address must be specified"
 msgstr "Érvényes netes nevet vagy IP címet kell megadni"
 
-#: ../dialogs.py:482
+#: ../dialogs.py:490
 msgid "The specified port must be a number between 1 and 65534"
 msgstr "A megadott portnak 1 és 65534 között kell lennie"
 
@@ -338,8 +338,8 @@ msgstr "E program használatával elfogadja az adatkezelési szabályzatot és a
 "http://www.bittorrent.com/legal/terms-of-use"
 
 #: ../btsyncstatus.glade.h:6
-msgid "Copyright © 2013, BitTorrent Inc."
-msgstr "Copyright © 2013, BitTorrent Inc."
+msgid "Copyright © 2014, BitTorrent Inc."
+msgstr "Copyright © 2014, BitTorrent Inc."
 
 #: ../btsyncstatus.glade.h:7
 msgid "Enable Debug Logging"
@@ -522,23 +522,23 @@ msgstr "Érték"
 msgid "Value:"
 msgstr "Érték:"
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "bytes"
 msgstr "byte"
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "KB"
 msgstr "KB"
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "MB"
 msgstr "MB"
 
-#: ../btsyncutils.py:165
+#: ../btsyncutils.py:188
 msgid "GB"
 msgstr "GB"
 
-#: ../btsyncutils.py:169
+#: ../btsyncutils.py:192
 msgid "TB"
 msgstr "TB"
 
@@ -556,4 +556,8 @@ msgstr "Ennek a mappának csak olvasási jogosultságai vannak.\n"
 #: ../dialogs.glade.h:6
 msgid "Encryption secret (read-only)"
 msgstr "Kódolt titkos kulcs (csak-olvasható)"
+
+#: ../btsyncguiapp.py:159
+msgid "If specified, the dark indicator icon set will be used. This option can be made persistent with --savedefaults"
+msgstr ""
 
