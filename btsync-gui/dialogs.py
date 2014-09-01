@@ -506,6 +506,17 @@ class BtSyncPrefsAdvanced(BtBaseDialog,BtInputHelper):
 		self.prefs = self.agent.get_prefs()
 		self.create()
 
+	def set_treeview_sort_info(self,treewidget,sortinfo):
+		if sortinfo[0] is not None:
+			treemodel = treewidget.get_model()
+			treemodel.set_sort_column_id(sortinfo[0],sortinfo[1])
+			columns = treewidget.get_columns()
+			for index, value in enumerate(columns):
+				if value.get_sort_column_id() == sortinfo[0]:
+					value.set_sort_order(sortinfo[1])
+					value.set_sort_indicator(True)
+					return
+
 	def create(self):
 		BtBaseDialog.create(self)
 		# get the editing widgets
@@ -515,6 +526,10 @@ class BtSyncPrefsAdvanced(BtBaseDialog,BtInputHelper):
 		self.ap_switch_value = self.builder.get_object('ap_switch_value')
 		self.ap_entry_value = self.builder.get_object('ap_entry_value')
 		self.ap_reset_value = self.builder.get_object('ap_reset_value')
+		self.set_treeview_sort_info(
+			self.ap_tree_prefs,
+			[0, Gtk.SortType.ASCENDING]
+		)
 		# initialize content
 		self.init_editor()
 		self.init_values()
@@ -525,7 +540,7 @@ class BtSyncPrefsAdvanced(BtBaseDialog,BtInputHelper):
 		self.advancedprefs.clear()
 		for key, value in self.prefs.items():
 			valDesc = BtValueDescriptor.new_from(key,value)
-			if valDesc.Advanced:
+			if valDesc.Advanced and not valDesc.Hidden:
 				self.advancedprefs.append([
 					str(key), str(value),
 					400 if valDesc.is_default(value) else 900,

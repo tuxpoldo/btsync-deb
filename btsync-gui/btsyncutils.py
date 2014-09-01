@@ -32,7 +32,7 @@ from gi.repository import Gtk, GObject
 
 class BtValueDescriptor(GObject.GObject):
 
-	def __init__(self, Name, Type, Value, Default='', Min=None, Max=None, Allowed=None, Forbidden=None, Advanced=True):
+	def __init__(self, Name, Type, Value, Default='', Min=None, Max=None, Allowed=None, Forbidden=None, Advanced=True, Hidden=False):
 		GObject.GObject.__init__(self)
 		self.Name		= Name
 		self.Type		= Type
@@ -43,6 +43,7 @@ class BtValueDescriptor(GObject.GObject):
 		self.Allowed	= Allowed
 		self.Forbidden	= Forbidden
 		self.Advanced	= Advanced
+		self.Hidden		= Hidden
 		if self.Type == 'n' and self.Allowed is None:
 			self.Allowed = '0123456789'
 			if str(self.Value)[0:1] == '*':	# remove these stupid "I'm not a default value!"-stars from data
@@ -108,26 +109,35 @@ class BtValueDescriptor(GObject.GObject):
 		suitable BtValueDescriptor
 		"""
 		return {
+		'config_refresh_interval'			: BtValueDescriptor (Name, 'n', Value, 3600, 60, 9999999),
 		'device_name'						: BtValueDescriptor (Name, 's', Value, Advanced = False), 
 		'disk_low_priority'					: BtValueDescriptor (Name, 'b', Value, 1),
 		'download_limit'					: BtValueDescriptor (Name, 'n', Value, 0, 0, 1000000, Advanced = False),
 		'external_port'						: BtValueDescriptor (Name, 'n', Value, 0, 0, 65534),
+		'folder_defaults.delete_to_trash'	: BtValueDescriptor (Name, 'b', Value, 1),
+		'folder_defaults.known_hosts'		: BtValueDescriptor (Name, 's', Value),
+		'folder_defaults.use_dht'			: BtValueDescriptor (Name, 'b', Value, 0),
+		'folder_defaults.use_lan_broadcast'	: BtValueDescriptor (Name, 'b', Value, 1),
+		'folder_defaults.use_relay'			: BtValueDescriptor (Name, 'b', Value, 1),
+		'folder_defaults.use_tracker'		: BtValueDescriptor (Name, 'b', Value, 1),
 		'folder_rescan_interval'			: BtValueDescriptor (Name, 'n', Value, 600, 10, 999999),
 		'lan_encrypt_data'					: BtValueDescriptor (Name, 'b', Value, 1),
 		'lan_use_tcp'						: BtValueDescriptor (Name, 'b', Value, 0),
 		'lang'								: BtValueDescriptor (Name, 'e', Value, 28261, Advanced = False),
 		'listening_port'					: BtValueDescriptor (Name, 'n', Value, 0, 1025, 65534, Advanced = False),
-		'log_size'							: BtValueDescriptor (Name, 'n', Value, 10, 10, 999999),
+		'log_size'							: BtValueDescriptor (Name, 'n', Value, 100, 100, 999999),
 		'max_file_size_diff_for_patching'	: BtValueDescriptor (Name, 'n', Value, 1000, 10, 999999),
 		'max_file_size_for_versioning'		: BtValueDescriptor (Name, 'n', Value, 1000, 10, 999999),
+		'peer_expiration_days'				: BtValueDescriptor (Name, 'n', Value, 7, 1, 3650),
+		'profiler_enabled'					: BtValueDescriptor (Name, 'b', Value, 0),
 		'rate_limit_local_peers'			: BtValueDescriptor (Name, 'b', Value, 0),
-		'recv_buf_size'						: BtValueDescriptor (Name, 'n', Value, 5, 1, 100),
-		'send_buf_size'						: BtValueDescriptor (Name, 'n', Value, 5, 1, 100),
+		'recv_buf_size'						: BtValueDescriptor (Name, 'n', Value, 10, 1, 100),
+		'send_buf_size'						: BtValueDescriptor (Name, 'n', Value, 10, 1, 100),
 		'sync_max_time_diff'				: BtValueDescriptor (Name, 'n', Value, 600, 0, 999999),
 		'sync_trash_ttl'					: BtValueDescriptor (Name, 'n', Value, 30, 0, 999999),
 		'upload_limit'						: BtValueDescriptor (Name, 'n', Value, 0, 0, 1000000, Advanced = False),
 		'use_upnp'							: BtValueDescriptor (Name, 'b', Value, 1, Advanced = False),
-		}.get(Name,BtValueDescriptor (Name, 'u', Value))
+		}.get(Name,BtValueDescriptor (Name, 'u', Value, Hidden = True))
 
 	@staticmethod
 	def _to_num(value,default=0):

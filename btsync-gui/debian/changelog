@@ -4,8 +4,10 @@ btsync-gui (0.8.4-1) unstable; urgency=low
   * Added Hungarian translation by Dávid Szilágyi (Closes #138)
   * Added experimental support for a set of dark icons for light
     themes (Closes #136)
+  * Added support for new advanced configuration parameters
+    of BitTorrent Sync 1.4 (Closes #146)
 
- -- Leo Moll <leo.moll@yeasoft.com>  Thu, 26 Jun 2014 16:35:10 +0200
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 91 Sep 2014 19:15:53 +0200
 
 btsync-gui (0.8.3-1) unstable; urgency=low
 
