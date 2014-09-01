@@ -342,7 +342,7 @@ msgstr "¿Debería BitTorrent Sync usar servidores de retransmisión externos cu
 #. Description
 #: ../btsync.templates:27001
 msgid "If enabled, new shared folders will be configured to use relay servers by default. Relay servers are used when it is impossible to connect to other devices directly due to NAT issues."
-msgstr "Si se activa, las nuevas carpetas compartidas se configurarán para usar servidores de retransmisión por defecto. Los servidores de retransmisión se usan cuando no es posible conectar directamente a otros dispositivos debido al NAT."
+msgstr "Si se activa, las nuevas carpetas compartidas se configurarán para usar servidores de retransmisión por defecto. Los servidores de retransmisión se usan cuando no es posible conectar directamente a otros dispositivos debido a restricciones del NAT."
 
 #. Type: boolean
 #. Description
