@@ -338,8 +338,8 @@ msgstr "Al usar esta aplicación, usted acepta nuestros términos y política de
 "http://www.bittorrent.com/legal/terms-of-use"
 
 #: ../btsyncstatus.glade.h:6
-msgid "Copyright © 2013, BitTorrent Inc."
-msgstr "Copyright © 2013, BitTorrent Inc."
+msgid "Copyright © 2014, BitTorrent Inc."
+msgstr "Copyright © 2014, BitTorrent Inc."
 
 #: ../btsyncstatus.glade.h:7
 msgid "Enable Debug Logging"
