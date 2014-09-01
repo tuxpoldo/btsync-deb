@@ -8,11 +8,13 @@ if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
     if [ -f /usr/share/applications/btsync.desktop ] ; then
         rm -f /usr/share/applications/btsync.desktop
     fi
+    # Possibly created default certificates
+    
     if [ "$1" = "purge" ]; then
         if [ -h /etc/avahi/services/btsync.service ] ; then
             rm -f /etc/avahi/services/btsync.service
         fi
-        rm -rf /etc/btsync /var/lib/btsync /usr/lib/btsync
+        rm -rf /etc/btsync /var/lib/btsync /usr/lib/btsync /usr/share/btsync
     fi
 fi
 

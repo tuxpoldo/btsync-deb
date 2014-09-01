@@ -9,42 +9,6 @@ _Description: Do you want to define a default BitTorrent Sync instance?
  In both cases you can manually manage additional instances with
  their own configuration files.
 
-Template: btsync/bind-port
-Type: string
-Default: 0
-_Description: BitTorrent Sync Listen Port:
- Specify here the port BitTorrent Sync will listen on for the file
- synchronisation protocol.
- .
- Specify 0 to let btsync take a random port number each time
- it starts. Valid range is 1000-65534
-
-Template: btsync/use-upnp
-Type: boolean
-Default: false
-_Description: Do you want BitTorrent Sync to request port mapping via UPNP?
- Specify here if you want BitTorrent Sync to request a port mapping
- from the default router using the Universal Plug and Play protocol.
- .
- This technique is useful only if BitTorrent Sync is running behind
- a NAT SOHO router supporting UPNP.
-
-Template: btsync/limit-download
-Type: string
-Default: 0
-_Description: Download Bandwith Limit:
- Specify here a download rate limit expressed in KB/Second
- .
- If 0 is specified, no limit is applied.
-
-Template: btsync/limit-upload
-Type: string
-Default: 0
-_Description: Upload Bandwith Limit:
- Specify here an upload rate limit expressed in KB/Second
- .
- If 0 is specified, no limit is applied.
-
 Template: btsync/webgui-bindaddr
 Type: string
 Default: 0.0.0.0
@@ -66,28 +30,6 @@ _Description: Web Interface Listen Port:
  interfce. This port number in the range from 80 to 65534 shall
  not conflict with any other services running on this machine.
 
-Template: btsync/webgui-username
-Type: string
-Default: admin
-_Description: The username for accessing the web interface:
- Specify here a username for accessing the web interface. If
- left empty, no user authorisation is required to access the
- web interface.
-
-Template: btsync/webgui-password
-Type: password
-Default: AdminPassword
-_Description: The password for accessing the web interface:
- Specify here a password for accessing the web interface.
-
-Template: btsync/device-name
-Type: string
-Default:
-_Description: The visible device name of this instance:
- Specify here the visible device name for this instance. If
- left empty, a default device name based on the host name
- will be created.
-
 Template: btsync/disk_low_priority
 Type: boolean
 Default: true
@@ -102,12 +44,6 @@ Type: boolean
 Default: true
 _Description: Should BitTorrent Sync encrypt data on the local network?
  If set to true, will use encryption in the local network.
-
-Template: btsync/lan_use_tcp
-Type: boolean
-Default: false
-_Description: Should BitTorrent Sync use TCP on the local network?
- If set to true, Sync will use TCP instead of UDP in local network.
 
 Template: btsync/rate_limit_local_peers
 Type: boolean
@@ -247,4 +183,62 @@ _Description: Debug logfile size in MB:
  size, it is renamed to sync.log.old and a new sync.log file is created.
  Note: only 2 files (sync.log and sync.log.old) are kept on the hard disk at
  the same time if debug logging is enabled.
+
+Template: btsync/webgui-force-https
+Type: boolean
+Default: false
+_Description: Should BitTorrent Sync allow only SSL connections to the Web UI?
+ If enabled, only SSL (http) connections will be allowed to the Web UI.
+
+Template: btsync/folder_defaults
+Type: boolean
+Default: false
+_Description: Do you want to configure folder defaults?
+ BitTorrent Sync allows to configure default values for shared folders. If you
+ specify default values, all newly created folders will be initially
+ configured with the specified default values.
+
+Template: btsync/folder_defaults-delete_to_trash
+Type: boolean
+Default: true
+_Description: Should old version of files be preserved by default?
+ If enabled, new shared folders will save old versions by default in the
+ .SyncArchive folder located in the shared directory.
+
+Template: btsync/folder_defaults-use_dht
+Type: boolean
+Default: false
+_Description: Should BitTorrent Sync use DHT by default?
+ If enabled, new shared folders will be configured to use the DHT (Distributed
+ Hash Table) by default.
+
+Template: btsync/folder_defaults-use_lan_broadcast
+Type: boolean
+Default: true
+_Description: Should BitTorrent Sync use LAN broadcasts by default?
+ If enabled, new shared folders will be configured to use LAN Broadcast for
+ local peer discovery by default.
+
+Template: btsync/folder_defaults-use_relay
+Type: boolean
+Default: true
+_Description: Should BitTorrent Sync use external relay servers wheen needed?
+ If enabled, new shared folders will be configured to use relay servers by
+ default. Relay servers are used when it is impossible to connect to other
+ devices directly due to NAT issues.
+
+Template: btsync/folder_defaults-use_tracker
+Type: boolean
+Default: true
+_Description: Should BitTorrent Sync use external tracker servers by default?
+ If enabled, new shared folders will be configured to use external tracker
+ servers by default. Tracker servers can be enabled to facilitate communication
+ between peers.
+
+Template: btsync/advancedcfg
+Type: boolean
+Default: false
+_Description: Do you want to configure advanced parameters?
+ There are several advanced parameters that can be configured in BitTorrent
+ Sync.
 

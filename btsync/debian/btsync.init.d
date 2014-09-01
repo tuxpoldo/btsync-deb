@@ -337,7 +337,7 @@ start_btsync () {
 		--make-pidfile ${CREDENTIALS:+--chuid ${CREDENTIALS}} \
 		--background ${UMASK:+--umask ${UMASK}} \
 		--exec $DAEMON \
-		-- --nodaemon --log file --config $CONFIG_DIR/$CONFFILE $DAEMON_ARGS  || STATUS=1
+		-- --nodaemon --log sync.log --config $CONFIG_DIR/$CONFFILE $DAEMON_ARGS  || STATUS=1
 
 	if [ $STATUS -gt 0 ]; then
 		# start-stop-daemon failed. Let's exit immediately

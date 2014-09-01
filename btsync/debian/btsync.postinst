@@ -22,6 +22,10 @@ set -e
 
 CONFFILE=/etc/btsync/debconf-default.conf
 DESKFILE=/usr/share/applications/btsync.desktop
+CRTFILE=/usr/share/btsync/debconf-default.crt
+KEYFILE=/usr/share/btsync/debconf-default.key
+CRTLINK=/etc/btsync/debconf-default.crt
+KEYLINK=/etc/btsync/debconf-default.key
 
 add_btsync_system_user() {
 	if ! getent passwd btsync >/dev/null; then
@@ -34,6 +38,23 @@ add_btsync_system_user() {
 	fi
 }
 
+create_default_certificates() {
+	if [ ! -f ${CRTFILE} -o ! -f ${KEYFILE} ]; then
+		(
+		openssl req -newkey rsa:2048  -x509 -days 3652.5 -nodes \
+		-rand /dev/urandom -out ${CRTFILE} -keyout ${KEYFILE} > /dev/null 2>&1 <<+
+.
+.
+.
+BitTorrent Sync
+Administration Interface
+localhost
+root@localhost
++
+		) || echo "Warning : Bad SSL config, can't generate certificate."
+	fi
+}
+
 create_default_instance() {
 	set +e
 	db_get btsync/runas || RET="btsync"
@@ -43,28 +64,13 @@ create_default_instance() {
 	db_get btsync/nice-level || RET="0"
 	NICE_LEVEL=$(expr match "${RET}" '[ +0]*\(-*[0-9]*\)')
 	NICE_LEVEL=${NICE_LEVEL:-0}
-	db_get btsync/device-name || RET="$(hostname) - Default Instance"
-	DEVICE_NAME="${RET:-$(hostname) - Default Instance}"
-	db_get btsync/bind-port || RET=0
-	LISTENING_PORT=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
-	LISTENING_PORT=${LISTENING_PORT:-0}
 	db_get btsync/external_port || RET=0
 	EXTERNAL_PORT=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
 	EXTERNAL_PORT=${EXTERNAL_PORT:-0}
-	db_get btsync/use-upnp || RET=false
-	USE_UPNP=${RET}
-	db_get btsync/limit-download || RET=0
-	DOWNLOAD_LIMIT=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
-	DOWNLOAD_LIMIT=${DOWNLOAD_LIMIT:-0}
-	db_get btsync/limit-upload || RET=0
-	UPLOAD_LIMIT=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
-	UPLOAD_LIMIT=${UPLOAD_LIMIT:-0}
 	db_get btsync/disk_low_priority || RET="true"
 	DISK_LOW_PRIORITY=${RET}
 	db_get btsync/lan_encrypt_data || RET="true"
 	LAN_ENCRYPT_DATA=${RET}
-	db_get btsync/lan_use_tcp || RET="false"
-	LAN_USE_TCP=${RET}
 	db_get btsync/rate_limit_local_peers || RET="false"
 	RATE_LIMIT_LOCAL_PEERS=${RET}
 	db_get btsync/folder_rescan_interval || RET=600
@@ -74,10 +80,8 @@ create_default_instance() {
 	LISTEN_ADDR="${RET}"
 	db_get btsync/webgui-bindport || RET="8888"
 	LISTEN_PORT=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
-	db_get btsync/webgui-username || RET="admin"
-	LOGIN="${RET}"
-	db_get btsync/webgui-password || RET="btsyncPassword"
-	PASSWORD="${RET}"
+	db_get btsync/webgui-force-https || RET="false"
+	FORCE_HTTPS=${RET}
 	db_get btsync/api_key  || RET=""
 	API_KEY="${RET}"
 	db_get btsync/daemon_umask || RET=""
@@ -97,6 +101,18 @@ create_default_instance() {
 	db_get btsync/log_size || RET=10
 	LOG_SIZE=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
 	LOG_SIZE=${LOG_SIZE:-10}
+	db_get btsync/folder_defaults || RET="false"
+	FOLDER_DEFAULTS=${RET}
+	db_get btsync/folder_defaults-delete_to_trash || RET="true"
+	FOLDER_DEFAULTS_DELETE_TO_TRASH=${RET}
+	db_get btsync/folder_defaults-use_dht || RET="false"
+	FOLDER_DEFAULTS_USE_DHT=${RET}
+	db_get btsync/folder_defaults-use_lan_broadcast || RET="true"
+	FOLDER_DEFAULTS_USE_LAN_BROADCAST=${RET}
+	db_get btsync/folder_defaults-use_relay || RET="true"
+	FOLDER_DEFAULTS_USE_RELAY=${RET}
+	db_get btsync/folder_defaults-use_tracker || RET="true"
+	FOLDER_DEFAULTS_USE_TRACKER=${RET}
 	set -e
 	(
 	cat <<EOF
@@ -131,20 +147,25 @@ EOF
 	(
 	cat <<EOF
 {
-	"device_name": "${DEVICE_NAME}",
 	"storage_path" : "/var/lib/btsync/",
-	"listening_port" : $LISTENING_PORT,
 	"check_for_updates" : false,
-	"use_upnp" : $USE_UPNP,
-	"download_limit" : $DOWNLOAD_LIMIT,
-	"upload_limit" : $UPLOAD_LIMIT,
 	"disk_low_priority" : ${DISK_LOW_PRIORITY},
 	"lan_encrypt_data" : ${LAN_ENCRYPT_DATA},
-	"lan_use_tcp" : ${LAN_USE_TCP},
 	"rate_limit_local_peers" : ${RATE_LIMIT_LOCAL_PEERS},
 	"folder_rescan_interval" : ${FOLDER_RESCAN_INTERVAL},
 EOF
 	) >> ${CONFFILE}
+	if [ "${FOLDER_DEFAULTS}" = "true" ]; then
+		(
+		cat <<EOF
+	"folder_defaults.delete_to_trash" : ${FOLDER_DEFAULTS_DELETE_TO_TRASH},
+	"folder_defaults.use_dht" : ${FOLDER_DEFAULTS_USE_DHT},
+	"folder_defaults.use_lan_broadcast" : ${FOLDER_DEFAULTS_USE_LAN_BROADCAST},
+	"folder_defaults.use_relay" : ${FOLDER_DEFAULTS_USE_RELAY},
+	"folder_defaults.use_tracker" : ${FOLDER_DEFAULTS_USE_TRACKER},
+EOF
+		) >> ${CONFFILE}
+	fi
 	if [ -n "${MAX_FILE_DIFF_PATCH}" ]; then
 		echo "	\"max_file_size_diff_for_patching\" : ${MAX_FILE_DIFF_PATCH}," >> ${CONFFILE}
 	fi
@@ -182,23 +203,12 @@ EOF
 EOF
 		) >> ${CONFFILE}
 	fi
-	if [ "x$LOGIN" != "x" ]; then
-		(
-		cat <<EOF
-		"listen" : "${LISTEN_ADDR}:${LISTEN_PORT}",
-		"login" : "$LOGIN",
-		"password" : "$PASSWORD"
-EOF
-		) >> ${CONFFILE}
-	else
-		(
-		cat <<EOF
-		"listen" : "${LISTEN_ADDR}:${LISTEN_PORT}"
-EOF
-		) >> ${CONFFILE}
-	fi
 	(
 	cat <<EOF
+		"listen" : "${LISTEN_ADDR}:${LISTEN_PORT}",
+		"force_https" : ${FORCE_HTTPS},
+		"ssl_certificate" : "${CRTLINK}",
+		"ssl_private_key" : "${KEYLINK}"
 	}
 }
 EOF
@@ -210,61 +220,56 @@ EOF
 	"127.0.0.1")	WEBADDR="localhost";;
 	*)		WEBADDR=${LISTEN_ADDR};;
 	esac
+	WEBPROT="http"
+	[ "${FORCE_HTTPS}" = "true" ] && WEBPROT="https"
 
-        if [ -d /usr/share/applications/ -a ! -e ${DESKFILE} -a ! -L ${DESKFILE} ] ; then
-                (
-                cat <<EOF
+	if [ -d /usr/share/applications/ ] ; then
+		(
+		cat <<EOF
 [Desktop Entry]
 Name=BitTorrent Sync Management
 Comment=BitTorrent Sync default instance management interface
-Exec=sensible-browser http://${WEBADDR}:${LISTEN_PORT}
+Exec=sensible-browser ${WEBPROT}://${WEBADDR}:${LISTEN_PORT}
 Terminal=false
 Type=Application
 Icon=btsync
 Categories=Network;
 EOF
-                ) > ${DESKFILE}
-        fi
+		) > ${DESKFILE}
+	fi
 
-	unset PASSWORD
-	unset LOGIN
-	unset LISTEN_PORT
-	unset LISTEN_ADDR
-	unset UPLOAD_LIMIT
-	unset DOWNLOAD_LIMIT
-	unset USE_UPNP
-	unset LISTENING_PORT
-	unset MAX_FILE_DIFF_PATCH
-	unset MAX_FILE_VERSIONING
-	unset SEND_BUF_SIZE
-	unset RECV_BUF_SIZE
-	unset MAX_TIME_DIFF
-	unset TRASH_TTL
 	chmod 400 ${CONFFILE}
+	# if no user certificates are provided, created links to default
+	[ ! -f "${CRTLINK}" ] && ln -s "${CRTFILE}" "${CRTLINK}"
+	[ ! -f "${KEYLINK}" ] && ln -s "${KEYFILE}" "${KEYLINK}"
+	chmod 400 "${CRTLINK}" "${KEYLINK}"
 }
 
 remove_default_instance() {
 	rm -f ${CONFFILE}
 	rm -f ${DESKFILE}
+	# remove certificates only if linked to default
+	[ -h "${CRTLINK}" ] && rm "${CRTLINK}"
+	[ -h "${KEYLINK}" ] && rm "${KEYLINK}"
 }
 
 fix_permissions() {
 	if [ -f ${CONFFILE} ]; then
 		if [ "${BTGROUP}" != "default" ]; then
-			chown ${BTUSER}:${BTGROUP} ${CONFFILE}
+			chown ${BTUSER}:${BTGROUP} ${CONFFILE} ${CRTLINK} ${KEYLINK}
 			chown -R ${BTUSER}:${BTGROUP} /var/lib/btsync
 		else
 			case "${BTUSER}" in
 			btsync)
-				chown btsync:btsync ${CONFFILE}
+				chown btsync:btsync ${CONFFILE} ${CRTLINK} ${KEYLINK}
 				chown -R btsync:btsync /var/lib/btsync
 				;;
 			root)
-				chown root:root ${CONFFILE}
+				chown root:root ${CONFFILE}  ${CRTLINK} ${KEYLINK}
 				chown -R root:root /var/lib/btsync
 				;;
 			*)
-				chown ${BTUSER} ${CONFFILE}
+				chown ${BTUSER} ${CONFFILE} ${CRTLINK} ${KEYLINK}
 				chown -R ${BTUSER} /var/lib/btsync
 				;;
 			esac
@@ -278,6 +283,7 @@ configure)
 	db_get btsync/managed-configuration || RET=false
 	if [ "$RET" = "true" ]; then
 		add_btsync_system_user
+		create_default_certificates
 		create_default_instance
 		fix_permissions
 	else

@@ -1,5 +1,6 @@
 # dirs
 etc/btsync
 etc/btsync/samples
+usr/share/btsync
 usr/lib/btsync
 var/lib/btsync

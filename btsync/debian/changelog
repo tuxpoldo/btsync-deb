@@ -1,6 +1,12 @@
 btsync (1.4.0-1) unstable; urgency=low
 
+  * Add support for BitTorrent Sync 1.4
+    - Add support for SSL certificates (Closes #144)
+    - Add support for folder default settings (Closes #145)
   * Fixed storage_path in order to allow sybolic linking (Closes #140)
+  * Streamlined configuration data between configuration file and
+    Web UI (Closes #142)
+  * Removed deprecated setting lan_use_tcp (Closes #143)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Mon, 01 Sep 2014 12:00:00 +0200
 
