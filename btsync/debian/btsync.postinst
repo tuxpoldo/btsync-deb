@@ -251,6 +251,8 @@ remove_default_instance() {
 	# remove certificates only if linked to default
 	[ -h "${CRTLINK}" ] && rm "${CRTLINK}"
 	[ -h "${KEYLINK}" ] && rm "${KEYLINK}"
+	# make sure we return a positive result
+	[ 0 = 0 ]
 }
 
 fix_permissions() {
