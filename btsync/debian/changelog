@@ -1,4 +1,4 @@
-btsync (1.4.1-1) unstable; urgency=low
+btsync (1.4.0-2) unstable; urgency=low
 
   * Fixed installation error on systems with no configured
     default instance (Closes #147)
