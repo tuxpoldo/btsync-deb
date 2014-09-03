@@ -164,7 +164,7 @@ class BtSyncApi(object):
 			params['path'] = path
 		return self._request(params,throw_exceptions)
 
-	def set_file_preferences(self,secret,path,download,throw_exceptions=True):
+	def set_file_prefs(self,secret,path,download,throw_exceptions=True):
 		"""
 		Selects file for download for selective sync folders. Returns file
 		information with applied preferences.
@@ -176,7 +176,7 @@ class BtSyncApi(object):
 		download (required)	- specify if file should be downloaded (yes - 1, no - 0)		
 		"""
 		params = {
-			'method': 'set_file_preferences',
+			'method': 'set_file_prefs',
 			'secret': secret,
 			'path': path,
 			'download': download
