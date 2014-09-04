@@ -1,3 +1,13 @@
+btsync (1.4.0-3) unstable; urgency=low
+
+  * Added debconf support for new advanced settings (Closes #150)
+    - folder_defaults.known_hosts
+    - peer_expiration_days
+    - directory_root
+  * Fixed broken Simplified Chinese translation (Closes #152)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Tue, 04 Sep 2014 18:09:10 +0200
+
 btsync (1.4.0-2) unstable; urgency=low
 
   * Fixed installation error on systems with no configured

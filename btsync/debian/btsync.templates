@@ -235,10 +235,34 @@ _Description: Should BitTorrent Sync use external tracker servers by default?
  servers by default. Tracker servers can be enabled to facilitate communication
  between peers.
 
+Template: btsync/folder_defaults-known_hosts
+Type: string
+Default:
+_Description: Default known hosts list for new shared folders:
+ Default setting for folder preference "Use predefined hosts". Hosts should be
+ entered as single line of IP:port pairs comma-separated (no other delimiters
+ allowed).
+
 Template: btsync/advancedcfg
 Type: boolean
 Default: false
 _Description: Do you want to configure advanced parameters?
  There are several advanced parameters that can be configured in BitTorrent
  Sync.
+
+Template: btsync/peer_expiration_days
+Type: string
+Default:
+_Description: Peer expiration days:
+ Amount of days to pass before peer is removed from peer list. This value can
+ be set in the range from 0 to 999999. If leaved empty, the default value
+ applies (7 Days).
+
+Template: btsync/directory_root
+Type: string
+Default:
+_Description: Start path for the web interface folder browser:
+ Base path where the web interface folder browser starts. The specified path
+ must be absolute, accessible by the BitTorrent Sync process and existing. If
+ leaved empty, the whole file system can be browsed.
 
