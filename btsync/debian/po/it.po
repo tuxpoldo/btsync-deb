@@ -306,7 +306,7 @@ msgstr "Vuoi che le versioni vecchie dei files vengono mantenute?"
 #. Description
 #: ../btsync.templates:24001
 msgid "If enabled, new shared folders will save old versions by default in the .SyncArchive folder located in the shared directory."
-msgstr "Se abilitato, per default le nuove cartelle condivise salveranno le vecchie versioni nella cartellina .SyncArchive della directory condivisa."
+msgstr "Se abilitato, per default le nuove cartelle condivise salveranno le vecchie versioni nella cartellina .SyncArchive della cartella condivisa."
 
 #. Type: boolean
 #. Description
@@ -318,7 +318,7 @@ msgstr "BitTorrent Sync per default deve usare il DHT?"
 #. Description
 #: ../btsync.templates:25001
 msgid "If enabled, new shared folders will be configured to use the DHT (Distributed Hash Table) by default."
-msgstr "Se abilitato, per default le nuove cartelle condivise, saranno configurate per l'utilizzo del DHT ( Tabella di hash distribuita)"
+msgstr "Se abilitato, per default le nuove cartelle condivise saranno configurate per l'utilizzo del DHT ( Tabella di hash distribuita)"
 
 #. Type: boolean
 #. Description
@@ -330,7 +330,7 @@ msgstr "BitTorrent Sync deve usare per default il LAN broadcasts?"
 #. Description
 #: ../btsync.templates:26001
 msgid "If enabled, new shared folders will be configured to use LAN Broadcast for local peer discovery by default."
-msgstr "Se abilitato, per default le nuove cartelle condivise, saranno configurate per l'utilizzo del LAN Broadcast per la ricerca delle corrispondenze."
+msgstr "Se abilitato, per default le nuove cartelle condivise saranno configurate per l'utilizzo del LAN Broadcast per la ricerca delle corrispondenze."
 
 #. Type: boolean
 #. Description
@@ -342,7 +342,7 @@ msgstr "BitTorent Sync deve usare un server esterno di relay quando necessario?"
 #. Description
 #: ../btsync.templates:27001
 msgid "If enabled, new shared folders will be configured to use relay servers by default. Relay servers are used when it is impossible to connect to other devices directly due to NAT issues."
-msgstr "Se abilitato, per default le nuove cartelle condivise, saranno configurare per l'utilizzo del server di relay. Il server di relay é usato quando non è possibile connetterci con gli altri apparati attraverso il NAT."
+msgstr "Se abilitato, per default le nuove cartelle condivise saranno configurate per l'utilizzo del server di relay. Il server di relay é usato quando non è possibile connetterci con gli altri apparati attraverso il NAT."
 
 #. Type: boolean
 #. Description
@@ -354,17 +354,53 @@ msgstr "BitTorrent Sync deve usare un server di traccia esterno per default?"
 #. Description
 #: ../btsync.templates:28001
 msgid "If enabled, new shared folders will be configured to use external tracker servers by default. Tracker servers can be enabled to facilitate communication between peers."
-msgstr "Se abilitato, per default le nuove cartellone, saranno configurate per l'utilizzo del server di traccia. Il Server di traccia facilita le comunicazione fra i corrispondenti."
+msgstr "Se abilitato, per default le nuove cartelle condivise saranno configurate per l'utilizzo del server di traccia. Il Server di traccia facilita le comunicazione fra i corrispondenti."
 
 #. Type: boolean
 #. Description
-#: ../btsync.templates:29001
+#: ../btsync.templates:30001
 msgid "Do you want to configure advanced parameters?"
 msgstr "Vuoi configurare le impostazioni avanzate?"
 
 #. Type: boolean
 #. Description
-#: ../btsync.templates:29001
+#: ../btsync.templates:30001
 msgid "There are several advanced parameters that can be configured in BitTorrent Sync."
 msgstr "BitTorrent Sync permette di configurare vari parameteri di funzionamento avanzati."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:29001
+msgid "Default known hosts list for new shared folders:"
+msgstr "Lista default degli host predefiniti per nuove cartelle condivise:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:29001
+msgid "Default setting for folder preference \"Use predefined hosts\". Hosts should be entered as single line of IP:port pairs comma-separated (no other delimiters allowed)."
+msgstr "Se specificati, per default le nuove cartelle condivise saranno configurate con la specificata lista di host predefiniti. Gli host vanno specificati come una riga composta di paia IP:port separatati esclusivamente da virgole."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:31001
+msgid "Peer expiration days:"
+msgstr "Giorni di espirazione per peer inattivi:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:31001
+msgid "Amount of days to pass before peer is removed from peer list. This value can be set in the range from 0 to 999999. If leaved empty, the default value applies (7 Days)."
+msgstr "Numero di giorni di inattività prima che un peer sia rimosso dalla lista dei peer. Questo valore può essere impostato nell'intervallo da 0 a 999999. Se non specificato, si applicherà il valore standard (7 giorni)."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:32001
+msgid "Start path for the web interface folder browser:"
+msgstr "Percorso di base per il selettore di cartelle nell'interfaccia web:"
+
+#. Type: string
+#. Description
+#: ../btsync.templates:32001
+msgid "Base path where the web interface folder browser starts. The specified path must be absolute, accessible by the BitTorrent Sync process and existing. If leaved empty, the whole file system can be browsed."
+msgstr "Parcorso di base a partire dal quale è possibile selezionare cartelle nel selettore dell'interfaccia web. Questo percorso deve essere assoluto, accessibile dal processo BitTorrent Sync ed esistente. Se non specificato, sarà possibile selezionare qualsiasi cartella del sistema."
 
