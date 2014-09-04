@@ -357,13 +357,49 @@ msgstr "Jeśli ustawiono, nowo współdzielone foldery domyślnie będą używa�
 
 #. Type: boolean
 #. Description
-#: ../btsync.templates:29001
+#: ../btsync.templates:30001
 msgid "Do you want to configure advanced parameters?"
 msgstr "Czy chcesz skonfigurować zaawansowane parametry?"
 
 #. Type: boolean
 #. Description
-#: ../btsync.templates:29001
+#: ../btsync.templates:30001
 msgid "There are several advanced parameters that can be configured in BitTorrent Sync."
 msgstr "Zostało kilka parametrów, które mogą być skonfigurowane w BitTorrent Sync."
+
+#. Type: string
+#. Description
+#: ../btsync.templates:29001
+msgid "Default known hosts list for new shared folders:"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:29001
+msgid "Default setting for folder preference \"Use predefined hosts\". Hosts should be entered as single line of IP:port pairs comma-separated (no other delimiters allowed)."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:31001
+msgid "Peer expiration days:"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:31001
+msgid "Amount of days to pass before peer is removed from peer list. This value can be set in the range from 0 to 999999. If leaved empty, the default value applies (7 Days)."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:32001
+msgid "Start path for the web interface folder browser:"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../btsync.templates:32001
+msgid "Base path where the web interface folder browser starts. The specified path must be absolute, accessible by the BitTorrent Sync process and existing. If leaved empty, the whole file system can be browsed."
+msgstr ""
 
