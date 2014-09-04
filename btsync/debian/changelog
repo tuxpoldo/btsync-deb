@@ -5,8 +5,9 @@ btsync (1.4.0-3) unstable; urgency=low
     - peer_expiration_days
     - directory_root
   * Fixed broken Simplified Chinese translation (Closes #152)
+  * Fixed and improved service stop behaviour (Closes #149)
 
- -- Leo Moll <leo.moll@yeasoft.com>  Tue, 04 Sep 2014 18:09:10 +0200
+ -- Leo Moll <leo.moll@yeasoft.com>  Tue, 04 Sep 2014 22:58:10 +0200
 
 btsync (1.4.0-2) unstable; urgency=low
 

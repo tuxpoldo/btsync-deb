@@ -21,6 +21,7 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="P2P file synchronisation daemon(s)"
 NAME=btsync
 DAEMON=/usr/lib/btsync/btsync-daemon
+DAEMON_BINARY=btsync-daemon
 DAEMON_ARGS=""
 SCRIPTNAME=/etc/init.d/$NAME
 CONFIG_DIR=/etc/$NAME
@@ -371,11 +372,20 @@ stop_btsync () {
 	config_debug "STOP"
 	log_daemon_msg "${1:-Stopping btsync instance '${BASENAME}'}"
 	adjust_arm_alignment
+	PIDFILE=/var/run/$NAME.$BASENAME.pid
 	STATUS=0
 	start-stop-daemon --stop --quiet \
 		--retry=TERM/30/KILL/5 \
-		--exec $DAEMON --pidfile /var/run/$NAME.$BASENAME.pid  || STATUS=1
-	rm /var/run/$NAME.$BASENAME.pid
+		--exec $DAEMON --pidfile ${PIDFILE}  || STATUS=1
+	if [ -f ${PIDFILE} ]; then
+		TESTPID=$(cat ${PIDFILE})
+		if [ $(( $TESTPID )) -gt 10 ]; then
+			if [ ! -f /proc/${TESTPID}/status ]; then
+				# remove pid file only if process has really terminated
+				rm ${PIDFILE}
+			fi
+		fi
+	fi
 	adjust_storage_path
 	if [ $STATUS -gt 0 ]; then
 		log_error_msg "Failed to stop $NAME instance $BASENAME"
@@ -454,6 +464,8 @@ stop)
 		if test -z "$PIDFILE" ; then
 			log_warning_msg "No btsync instance is running."
 		fi
+		# the final hammer
+		pkill ${DAEMON_BINARY}
 	else
 		while shift ; do
 			[ -z "$1" ] && break
