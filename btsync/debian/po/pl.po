@@ -376,7 +376,7 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../btsync.templates:29001
-msgid "Default setting for folder preference \"Use predefined hosts\". Hosts should be entered as single line of IP:port pairs comma-separated (no other delimiters allowed)."
+msgid "Default setting for folder preference \"Use predefined hosts\". Hosts should be entered as single line of comma-separated IP:port or HOST:port pairs (no other delimiters allowed)."
 msgstr ""
 
 #. Type: string
