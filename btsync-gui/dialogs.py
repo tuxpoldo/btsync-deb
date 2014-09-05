@@ -69,17 +69,19 @@ class BtSyncFolderAdd(BtBaseDialog):
 						'secret or enter your shared folder secret.'
 					))
 				# test if string is an absolute path and a directory
-				elif len(self.folder) == 0 or self.folder[0] != '/' or not os.path.isdir(self.folder):
+				elif len(self.folder) == 0 or self.folder[0] != '/':
 					self.show_warning(_('Can\'t open the destination folder.'))
 				# test if the specified data is unique
 				elif self.is_duplicate_folder(self.folder,self.secret):
 					self.show_warning(_(
 						'Selected folder is already added to BitTorrent Sync.'
 					))
-				# if btsync agent is local perform more tests
-				elif self.agent.is_local():
+				# if btsync agent is under our control perform more tests
+				elif self.agent.is_primary():
 					# test if the specified directory is readable and writable
-					if not os.access(self.folder,os.W_OK) or not os.access(self.folder,os.R_OK):
+					if not os.path.isdir(self.folder):
+						self.show_warning(_('Can\'t open the destination folder.'))
+					elif not os.access(self.folder,os.W_OK) or not os.access(self.folder,os.R_OK):
 						self.show_warning(_(
 							'Don\'t have permissions to write to the selected folder.'
 						))
