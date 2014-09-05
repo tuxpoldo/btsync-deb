@@ -296,6 +296,7 @@ class BtSyncAgent(BtSyncApi):
 			cfg.write('\t"pid_file" : "{0}",\n'.format(self.pidfile))
 			cfg.write('\t"storage_path" : "{0}",\n'.format(self.storagepath))
 			# cfg.write('\t"use_gui" : false,\n')
+			cfg.write('\t"i_agree" : "yes",\n')
 			cfg.write('\t"webui" : \n\t{\n')
 			cfg.write('\t\t"listen" : "{0}:{1}",\n'.format(self.bindui,self.portui))
 			cfg.write('\t\t"login" : "{0}",\n'.format(self.username))
