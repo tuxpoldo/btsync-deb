@@ -35,7 +35,7 @@ from trayindicator import TrayIndicator
 from btsyncapp import BtSyncApp
 from btsyncutils import BtDynamicTimeout
 
-VERSION = '0.8.4'
+VERSION = '0.8.5'
 
 class BtSyncStatus:
 	DISCONNECTED	= 0
@@ -82,7 +82,7 @@ class BtSyncStatus:
 			self.menuconnection.set_label('{0}:{1}'.format(agent.get_host(),agent.get_port()))
 			self.ind.set_title(_('BitTorrent Sync {0}:{1}').format(agent.get_host(),agent.get_port()))
 			self.ind.set_tooltip_text(_('BitTorrent Sync {0}:{1}').format(agent.get_host(),agent.get_port()))
-		self.menuopenweb.set_visible(agent.is_webui())
+#		self.menuopenweb.set_visible(agent.is_webui())
 		self.ind.set_menu(self.menu)
 		self.ind.set_default_action(self.onActivate)
 
