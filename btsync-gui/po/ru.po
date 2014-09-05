@@ -562,5 +562,5 @@ msgstr "Секрет шифрования (только чтение)"
 
 #: ../btsyncguiapp.py:159
 msgid "If specified, the dark indicator icon set will be used. This option can be made persistent with --savedefaults"
-msgstr ""
+msgstr "Если включено, для индикатора будут использоваться тёмные значки. Эту настройку можно сделать постоянной, используя параметр --savedefaults."
 

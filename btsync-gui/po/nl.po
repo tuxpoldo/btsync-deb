@@ -556,5 +556,5 @@ msgstr "Encryptie secret (alleen-lezen)"
 
 #: ../btsyncguiapp.py:159
 msgid "If specified, the dark indicator icon set will be used. This option can be made persistent with --savedefaults"
-msgstr ""
+msgstr "Indien gespecificeerd, zal de donkere indicator icon set worden gebruikt. Deze optie kan persistent worden gemaakt met --savedefaults"
 

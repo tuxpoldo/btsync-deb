@@ -559,5 +559,5 @@ msgstr "Kódolt titkos kulcs (csak-olvasható)"
 
 #: ../btsyncguiapp.py:159
 msgid "If specified, the dark indicator icon set will be used. This option can be made persistent with --savedefaults"
-msgstr ""
+msgstr "Ha meg van adva, akkor a sötét színű ikon jelenik meg. Ez a beállítás elmenthető a --savedefaults opcióval."
 

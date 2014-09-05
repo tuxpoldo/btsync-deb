@@ -570,5 +570,5 @@ msgstr "Clé secrète de chiffrement (lecture seule)"
 
 #: ../btsyncguiapp.py:159
 msgid "If specified, the dark indicator icon set will be used. This option can be made persistent with --savedefaults"
-msgstr ""
+msgstr "Si spécifié, le thème d'icône sombre sera utilisé. Cette option peut être rendue persistante avec --savedefaults"
 
