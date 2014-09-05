@@ -372,35 +372,35 @@ msgstr "Er zijn meerdere geavanceerde parameters die in BitTorrent Sync kunnen w
 #. Description
 #: ../btsync.templates:29001
 msgid "Default known hosts list for new shared folders:"
-msgstr ""
+msgstr "Standaard lijst met bekende hosts voor nieuwe gedeelde mappen:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:29001
-msgid "Default setting for folder preference \"Use predefined hosts\". Hosts should be entered as single line of IP:port pairs comma-separated (no other delimiters allowed)."
-msgstr ""
+msgid "Default setting for folder preference \"Use predefined hosts\". Hosts should be entered as single line of comma-separated IP:port or HOST:port pairs (no other delimiters allowed)."
+msgstr "Standaard instelling voor map voorkeur \"Gebruik voorgedefinieerde hosts\". Hosts moeten worden ingevoerd als enkele regel met IP:poort of HOST:poort paren, gescheiden door een komma (geen andere tekens toegestaan)."
 
 #. Type: string
 #. Description
 #: ../btsync.templates:31001
 msgid "Peer expiration days:"
-msgstr ""
+msgstr "Peer expiratie-tijd in dagen:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:31001
 msgid "Amount of days to pass before peer is removed from peer list. This value can be set in the range from 0 to 999999. If leaved empty, the default value applies (7 Days)."
-msgstr ""
+msgstr "Aantal dagen te gaan voordat peer wordt verwijderd uit peer-lijst. Deze waarde kan worden ingesteld van 0 tot 999999. Indien geen waarde wordt opgegeven, is de standaard waarde van toepassing (7 dagen)."
 
 #. Type: string
 #. Description
 #: ../btsync.templates:32001
 msgid "Start path for the web interface folder browser:"
-msgstr ""
+msgstr "Start map voor de webinterface bestandsverkenner:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:32001
 msgid "Base path where the web interface folder browser starts. The specified path must be absolute, accessible by the BitTorrent Sync process and existing. If leaved empty, the whole file system can be browsed."
-msgstr ""
+msgstr "Map waar de webinterface bestandsverkenner start. Het opgegeven pad naar de map moet absoluut zijn, bereikbaar voor het BitTorrent Sync proces en de map moet bestaan. Indien geen waarde wordt opgegeven kan door het hele bestandssysteem worden gebladerd."
 
