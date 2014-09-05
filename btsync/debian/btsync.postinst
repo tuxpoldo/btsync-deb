@@ -103,18 +103,27 @@ create_default_instance() {
 	LOG_SIZE=${LOG_SIZE:-10}
 	db_get btsync/folder_defaults || RET="false"
 	FOLDER_DEFAULTS=${RET}
-	db_get btsync/folder_defaults-delete_to_trash || RET="true"
-	FOLDER_DEFAULTS_DELETE_TO_TRASH=${RET}
-	db_get btsync/folder_defaults-use_dht || RET="false"
-	FOLDER_DEFAULTS_USE_DHT=${RET}
-	db_get btsync/folder_defaults-use_lan_broadcast || RET="true"
-	FOLDER_DEFAULTS_USE_LAN_BROADCAST=${RET}
-	db_get btsync/folder_defaults-use_relay || RET="true"
-	FOLDER_DEFAULTS_USE_RELAY=${RET}
-	db_get btsync/folder_defaults-use_tracker || RET="true"
-	FOLDER_DEFAULTS_USE_TRACKER=${RET}
-	db_get btsync/folder_defaults-known_hosts || RET=""
-	FOLDER_DEFAULTS_KNOWN_HOSTS=${RET}
+	if [ "${RET}" = "true" ]; then
+		db_get btsync/folder_defaults-delete_to_trash || RET="true"
+		FOLDER_DEFAULTS_DELETE_TO_TRASH=${RET}
+		db_get btsync/folder_defaults-use_dht || RET="false"
+		FOLDER_DEFAULTS_USE_DHT=${RET}
+		db_get btsync/folder_defaults-use_lan_broadcast || RET="true"
+		FOLDER_DEFAULTS_USE_LAN_BROADCAST=${RET}
+		db_get btsync/folder_defaults-use_relay || RET="true"
+		FOLDER_DEFAULTS_USE_RELAY=${RET}
+		db_get btsync/folder_defaults-use_tracker || RET="true"
+		FOLDER_DEFAULTS_USE_TRACKER=${RET}
+		db_get btsync/folder_defaults-known_hosts || RET=""
+		FOLDER_DEFAULTS_KNOWN_HOSTS=${RET}
+	else
+		FOLDER_DEFAULTS_DELETE_TO_TRASH="true"
+		FOLDER_DEFAULTS_USE_DHT="false"
+		FOLDER_DEFAULTS_USE_LAN_BROADCAST="true"
+		FOLDER_DEFAULTS_USE_RELAY="true"
+		FOLDER_DEFAULTS_USE_TRACKER="true"
+		FOLDER_DEFAULTS_KNOWN_HOSTS=""
+	fi
 	db_get btsync/peer_expiration_days || RET=""
 	PEER_EXPIRATION_DAYS=${RET}
 	db_get btsync/directory_root || RET=""
@@ -160,11 +169,6 @@ EOF
 	"lan_encrypt_data" : ${LAN_ENCRYPT_DATA},
 	"rate_limit_local_peers" : ${RATE_LIMIT_LOCAL_PEERS},
 	"folder_rescan_interval" : ${FOLDER_RESCAN_INTERVAL},
-EOF
-	) >> ${CONFFILE}
-	if [ "${FOLDER_DEFAULTS}" = "true" ]; then
-		(
-		cat <<EOF
 	"folder_defaults.delete_to_trash" : ${FOLDER_DEFAULTS_DELETE_TO_TRASH},
 	"folder_defaults.use_dht" : ${FOLDER_DEFAULTS_USE_DHT},
 	"folder_defaults.use_lan_broadcast" : ${FOLDER_DEFAULTS_USE_LAN_BROADCAST},
@@ -172,8 +176,7 @@ EOF
 	"folder_defaults.use_tracker" : ${FOLDER_DEFAULTS_USE_TRACKER},
 	"folder_defaults.known_hosts" : "${FOLDER_DEFAULTS_KNOWN_HOSTS}",
 EOF
-		) >> ${CONFFILE}
-	fi
+	) >> ${CONFFILE}
 	if [ -n "${MAX_FILE_DIFF_PATCH}" ]; then
 		echo "	\"max_file_size_diff_for_patching\" : ${MAX_FILE_DIFF_PATCH}," >> ${CONFFILE}
 	fi

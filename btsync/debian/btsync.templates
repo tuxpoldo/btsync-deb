@@ -240,8 +240,8 @@ Type: string
 Default:
 _Description: Default known hosts list for new shared folders:
  Default setting for folder preference "Use predefined hosts". Hosts should be
- entered as single line of IP:port pairs comma-separated (no other delimiters
- allowed).
+ entered as single line of comma-separated IP:port or HOST:port pairs (no other
+ delimiters allowed).
 
 Template: btsync/advancedcfg
 Type: boolean

@@ -1,3 +1,9 @@
+btsync (1.4.0-4) unstable; urgency=low
+
+  * Fixed folder_defaults.known_hosts filter (Closes #156)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Fri, 05 Sep 2014 14:56:23 +0200
+
 btsync (1.4.0-3) unstable; urgency=low
 
   * Added debconf support for new advanced settings (Closes #150)
