@@ -148,10 +148,7 @@ class BtSyncAgent(BtSyncApi):
 		if self.args.host == 'auto':
 			# we have to handle everything
 			try:
-				if not os.path.isdir(self.configpath):
-					os.makedirs(self.configpath)
-				if not os.path.isdir(self.storagepath):
-					os.makedirs(self.storagepath)
+				self.make_local_paths()
 
 				while self.is_running():
 					logging.info ('Found running btsync agent. Stopping...')
@@ -227,13 +224,20 @@ class BtSyncAgent(BtSyncApi):
 			if isinstance(result,dict):
 				self.prefs = result
 			else:
-				print "Error: " +str(result)
+				print "Error: " + str(result)
 		except Exception as e:
 			logging.warning('Error while loading preferences: {0}'.format(e))
 			self.prefs = {}
 
+	def make_local_paths(self):
+		if not os.path.isdir(self.configpath):
+			os.makedirs(self.configpath)
+		if not os.path.isdir(self.storagepath):
+			os.makedirs(self.storagepath)
+
 	def save_prefs(self):
 		try:
+			self.make_local_paths()
 			pref = open (self.preffile, 'w')
 			os.chmod(self.preffile, stat.S_IRUSR | stat.S_IWUSR)
 			json.dump(self.prefs,pref)
