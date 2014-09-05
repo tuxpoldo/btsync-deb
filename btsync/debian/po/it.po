@@ -377,8 +377,8 @@ msgstr "Lista default degli host predefiniti per nuove cartelle condivise:"
 #. Type: string
 #. Description
 #: ../btsync.templates:29001
-msgid "Default setting for folder preference \"Use predefined hosts\". Hosts should be entered as single line of IP:port pairs comma-separated (no other delimiters allowed)."
-msgstr "Se specificati, per default le nuove cartelle condivise saranno configurate con la specificata lista di host predefiniti. Gli host vanno specificati come una riga composta di paia IP:port separatati esclusivamente da virgole."
+msgid "Default setting for folder preference \"Use predefined hosts\". Hosts should be entered as single line of comma-separated IP:port or HOST:port pairs (no other delimiters allowed)."
+msgstr "Se specificati, per default le nuove cartelle condivise saranno configurate con la specificata lista di host predefiniti. Gli host vanno specificati come una riga composta di paia IP:port o HOST:port separatati esclusivamente da virgole."
 
 #. Type: string
 #. Description
