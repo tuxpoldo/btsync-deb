@@ -372,35 +372,35 @@ msgstr "Hay varios parámetros avanzados que se pueden configurar en BitTorrent 
 #. Description
 #: ../btsync.templates:29001
 msgid "Default known hosts list for new shared folders:"
-msgstr ""
+msgstr "Lista de equipos conocidos por defecto para las nuevas carpetas compartidas:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:29001
-msgid "Default setting for folder preference \"Use predefined hosts\". Hosts should be entered as single line of IP:port pairs comma-separated (no other delimiters allowed)."
-msgstr ""
+msgid "Default setting for folder preference \"Use predefined hosts\". Hosts should be entered as single line of comma-separated IP:port or HOST:port pairs (no other delimiters allowed)."
+msgstr "Configuración por defecto para la preferencia de carpeta «Usar equipos predefinidos». Los equipos se deben introducir como una única línea de pares IP:puerto o HOST:puerto separados por comas (no se permiten otros delimitadores)."
 
 #. Type: string
 #. Description
 #: ../btsync.templates:31001
 msgid "Peer expiration days:"
-msgstr ""
+msgstr "Días para caducidad de iguales:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:31001
 msgid "Amount of days to pass before peer is removed from peer list. This value can be set in the range from 0 to 999999. If leaved empty, the default value applies (7 Days)."
-msgstr ""
+msgstr "Cantidad de días que deben transcurrir antes de que un igual se elimine de la lista de iguales.  Este valor puede establecerse en el rango de 0 a 999999. Si se deja en blanco, se aplica el valor por defecto (7 días)."
 
 #. Type: string
 #. Description
 #: ../btsync.templates:32001
 msgid "Start path for the web interface folder browser:"
-msgstr ""
+msgstr "Comienzo de la ruta para la exploración de carpetas de la interfaz web:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:32001
 msgid "Base path where the web interface folder browser starts. The specified path must be absolute, accessible by the BitTorrent Sync process and existing. If leaved empty, the whole file system can be browsed."
-msgstr ""
+msgstr "Ruta base en la que comienza la carpeta de la interfaz web. Debe indicarse una ruta absoluta, existente y accesible por el proceso de BitTorrent Sync. Si se deja en blanco, se podrá explorar el sistema de archivos completo."
 
