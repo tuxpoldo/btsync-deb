@@ -286,11 +286,17 @@ class BtSyncStatus:
 	def onSendFeedback(self,widget):
 		webbrowser.open(
 			'http://forum.bittorrent.com/topic/28106-linux-desktop-gui-unofficial-packages-for-bittorrent-sync/',
-			2
+			new = 2,
+			autoraise = True
 		)
 
 	def onOpenManual(self,widget):
-		os.system('xdg-open "/usr/share/doc/btsync-common/BitTorrentSyncUserGuide.pdf.gz"')
+		webbrowser.open(
+			'http://sync-help.bittorrent.com/',
+			new = 2,
+			autoraise = True
+		)
+#		os.system('xdg-open "/usr/share/doc/btsync-common/BitTorrentSyncUserGuide.pdf.gz"')
 
 	def onTogglePause(self,widget):
 		if widget.get_active() and not self.agent.is_paused():

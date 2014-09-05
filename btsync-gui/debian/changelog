@@ -1,9 +1,11 @@
-btsync-gui (0.8.5-1) unstable; urgency=low
+btsync-gui (0.8.5-1) unstable; urgency=high
 
   * Fixed add_folder incompatibility with btsync 1.4 (Closes #154)
   * Fixed settings file creation when local agent not already
     started (Closes #153)
   * Always enabled Web UI menu entry (Closes #148)
+  * Menu item "Open Original Manual" new opens tghe official BitTorrent
+    Sync help site that replaces the unmaintained PDF manual (Closes #157)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Fri, 05 Sep 2014 17:02:22 +0200
 
