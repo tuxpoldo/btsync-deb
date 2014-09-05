@@ -255,25 +255,30 @@ class BtMessageHelper(object):
 	def __init__(self):
 		self.msgdlg = None
 
-	def show_message(self,parent,messagetext,messagetype=Gtk.MessageType.INFO):
+	def show_message(self,parent,messagetext,messagetype=Gtk.MessageType.INFO,buttons=Gtk.ButtonsType.CLOSE):
 		self.msgdlg = Gtk.MessageDialog (
 			parent,
 			Gtk.DialogFlags.DESTROY_WITH_PARENT,
 			messagetype,
-			Gtk.ButtonsType.CLOSE,
+			buttons,
 			None
 		)
 		self.msgdlg.set_markup('<b>BitTorrent Sync</b>')
 		self.msgdlg.format_secondary_markup(messagetext)
-		self.msgdlg.run()
+		result = self.msgdlg.run()
 		self.msgdlg.destroy()
 		self.msgdlg = None
+		return result
 
 	def show_warning(self,parent,messagetext):
-		self.show_message(parent,messagetext,Gtk.MessageType.WARNING)
+		return self.show_message(parent,messagetext,Gtk.MessageType.WARNING)
 
 	def show_error(self,messagetext):
-		self.show_message(parent,messagetext,Gtk.MessageType.ERROR)
+		return self.show_message(parent,messagetext,Gtk.MessageType.ERROR)
+
+	def show_question(self,parent,messagetext):
+		return self.show_message(parent,messagetext,Gtk.MessageType.QUESTION, Gtk.ButtonsType.YES_NO)
+
 
 class BtBaseDialog(BtMessageHelper):
 

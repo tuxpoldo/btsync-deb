@@ -91,7 +91,7 @@ class BtSyncApi(object):
 			params['secret'] = secret
 		return self._request(params,throw_exceptions)
 
-	def add_folder(self,folder,secret=None,selective_sync=False,throw_exceptions=True):
+	def add_folder(self,folder,secret=None,selective_sync=False,throw_exceptions=True,force=False):
 		"""
 		Adds a folder to Sync. If a secret is not specified, it will be
 		generated automatically. The folder will have to pre-exist on the disk
@@ -106,12 +106,15 @@ class BtSyncApi(object):
 		secret (optional)			- specify folder secret
 		selective_sync (optional)	- specify sync mode, selective - 1,
 										all files (default) - 0
+		force						- force creation also if dir is not empty
 		"""
 		params = {'method': 'add_folder', 'dir': folder }
 		if secret is not None:
 			params['secret'] = secret
 		if selective_sync:
 			params['selective_sync'] = 1
+		if force:
+			params['force'] = 1
 		return self._request(params,throw_exceptions)
 
 	def remove_folder(self,secret,throw_exceptions=True):

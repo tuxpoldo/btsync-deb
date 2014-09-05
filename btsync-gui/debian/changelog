@@ -1,3 +1,9 @@
+btsync-gui (0.8.5-1) unstable; urgency=low
+
+  * Fixed add_folder incompatibility with btsync 1.4 (Closes #154)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Fri, 05 Sep 2014 01:59:22 +0200
+
 btsync-gui (0.8.4-1) unstable; urgency=low
 
   * Changed "synched" to "synced" to keep consistency (Closes #137)

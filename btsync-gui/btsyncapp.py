@@ -442,7 +442,12 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 			if result == Gtk.ResponseType.OK:
 				# all checks have already been done. let's go!
 				result = self.agent.add_folder(self.dlg.folder,self.dlg.secret)
-				if self.agent.get_error_code(result) > 0:
+				if self.agent.get_error_code(result) == 105:
+					if self.show_question(self.window,self.agent.get_error_message(result))== Gtk.ResponseType.YES:
+						result = self.agent.add_folder(self.dlg.folder,self.dlg.secret,force=True)
+						if self.agent.get_error_code(result) > 0:
+							self.show_warning(self.window,self.agent.get_error_message(result))
+				elif self.agent.get_error_code(result) > 0:
 					self.show_warning(self.window,self.agent.get_error_message(result))
 		except requests.exceptions.ConnectionError:
 			pass
