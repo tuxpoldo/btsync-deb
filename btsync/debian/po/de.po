@@ -372,13 +372,13 @@ msgstr "BitTorrent Sync erlaubt verschiedene fortgeschrittene Einstellungenspara
 #. Description
 #: ../btsync.templates:29001
 msgid "Default known hosts list for new shared folders:"
-msgstr "Standardmäßige vordefinierte Hostliste für neue geteilte Ordner:"
+msgstr "Standardmäßig vordefinierte Hostliste für neue geteilte Ordner:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:29001
-msgid "Default setting for folder preference \"Use predefined hosts\". Hosts should be entered as single line of IP:port pairs comma-separated (no other delimiters allowed)."
-msgstr "Falls eine Liste angegeben ist, werden neue geteilte Ordner dieser liste an vordefinierten Hosts konfiguriert. Die Liste muss aus einer Zeile die lediglich aus IP:port Paaren die mit Kommas getrennt sind, bestehen."
+msgid "Default setting for folder preference \"Use predefined hosts\". Hosts should be entered as single line of comma-separated IP:port or HOST:port pairs (no other delimiters allowed)."
+msgstr "Falls eine Liste angegeben ist, werden neue geteilte Ordner mit diesen vordefinierten Hosts konfiguriert. Die LIste besteht aus mit Komma getrennten IP:port bzw. HOST.port Paaren."
 
 #. Type: string
 #. Description
