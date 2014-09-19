@@ -1,3 +1,11 @@
+btsync-common (1.4.83-1) unstable; urgency=low
+
+  * New upstream release
+    - The Web UI could not save the password setting,
+      no save button was shown (Closes #159)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Fri, 19 Sep 2014 23:42:10 +0200
+
 btsync-common (1.4.75-1) unstable; urgency=low
 
   * New upstream release

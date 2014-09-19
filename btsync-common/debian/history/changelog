@@ -1,3 +1,30 @@
+1.4.83 (September 18, 2014)
+
+ - Fix UI when https usage forced (Linux only)
+
+
+1.4.82 (September 16, 2014)
+
+ - Add WebUI support for OSes with IE older than IE9
+ - Fix various crashes
+ - Linux WebUI now listens only on loopback interface (can be
+   overridden, see here for details)
+ - Remove redundant prefs in API get_prefs call
+ - Note "Beta" status of the product
+ - Fix inability to disable debug logs from UI
+ - Fix change password function in Linux WebUI
+ - Warn user when folder contains locked files
+ - Validate speed limits before applying
+ - Cosmetic and UI changes, including:
+   - UI now indicates folders are "Loading.." upon application
+     startup (previously the message "Welcome To BitTorrent Sync"
+     was shown, causing concern for some users who believed their
+     existing folders had been lost)
+   - Version number now also shown in Preferences dialog
+ - Generated Sync links now use "#" in place of "?"
+ - Columns can now be correctly resized
+
+
 1.4.75 (September 1, 2014)
 
  - Fixed cosmetic issues

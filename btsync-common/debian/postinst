@@ -21,15 +21,6 @@ set -e
 case "$1" in
 configure)
 	set +e
-#	# fix this insane i386/geode stuff...
-#	if [ -f /usr/lib/btsync-common/btsync-core-i686 ]; then
-#		# ok - we are a i386 package....
-#		if grep -i "geode" /proc/cpuinfo > /dev/null ; then
-#			ln -sf btsync-core-geode /usr/lib/btsync-common/btsync-core
-#		else
-#			ln -sf btsync-core-i686 /usr/lib/btsync-common/btsync-core
-#		fi
-#	fi
 	# try to fix all that annoying arm stuff that
 	# may prevent btsync from running....
 	if [ $(uname -m | grep -c arm) -gt 0 ]; then
