@@ -22,6 +22,7 @@
 #
 
 import os
+import sys
 import json
 import time
 import stat
@@ -47,10 +48,6 @@ class BtSyncAgentException(Exception):
 		return repr(self.retcode)
 
 class BtSyncAgent(BtSyncApi):
-	# still hardcoded - this is the binary location of btsync when installing
-	# the package btsync-common
-	BINARY = '/usr/lib/btsync-common/btsync-core'
-
 	def __init__(self,args):
 		BtSyncApi.__init__(self)
 		self.args = args
@@ -148,13 +145,17 @@ class BtSyncAgent(BtSyncApi):
 		if self.args.host == 'auto':
 			# we have to handle everything
 			try:
+				# Force-search for the binary so we can quit before trying
+				# anything if its not there
+				self.get_binary()
+
 				self.make_local_paths()
 
 				while self.is_running():
 					logging.info ('Found running btsync agent. Stopping...')
 					os.kill (self.pid, signal.SIGTERM)
 					time.sleep(1)
-					
+
 				if not self.is_paused():
 					logging.info ('Starting btsync agent...')
 					self.start_agent()
@@ -189,7 +190,7 @@ class BtSyncAgent(BtSyncApi):
 	def start_agent(self):
 		if not self.is_running():
 			self.make_config_file()
-			subprocess.call([BtSyncAgent.BINARY, '--config', self.conffile])
+			subprocess.call([self.get_binary(), '--config', self.conffile])
 			time.sleep(0.5)
 			if self.is_running():
 				# no guarantee that it's already running...
@@ -339,20 +340,66 @@ class BtSyncAgent(BtSyncApi):
 			cmdline = pid.readline()
 			pid.close()
 			fields = cmdline.split('\0')
-			if fields[0] == BtSyncAgent.BINARY:
+			if fields[0] == self.get_binary():
 				return True
 			return False
 		except Exception:
 			return False
 
+	def get_binary(self):
+		try:
+			if not hasattr(self, '_binary'):
+				self._binary = self.find_lib_file(lf_dir='btsync-common',
+						lf_name='btsync-core',
+						lf_condition=(lambda p: os.access(p, os.X_OK)))
+			return self._binary
+		except RuntimeError:
+			raise BtSyncAgentException(7, 'btsync binary not found')
+
 	@staticmethod
 	def get_api_key():
 		try:
-			akf = open('/usr/lib/btsync-gui/btsync-gui.key','r')
+			kf_path = BtSyncAgent.find_lib_file(lf_dir='btsync-gui',
+					lf_name='btsync-gui.key',
+					lf_condition=(lambda p: os.access(p, os.R_OK)))
+			akf = open(kf_path, 'r')
 			key = akf.readline()
 			akf.close()
 			return key.rstrip('\n\r')
-		except IOError:
+		except (IOError, RuntimeError):
 			logging.critical('API Key not found. Stopping application.')
 			exit (-1)
+
+	@staticmethod
+	def find_lib_file(lf_dir='btsync-common', lf_name='btsync-core',
+			lf_condition=(lambda p: os.access(p, os.X_OK))):
+		"""
+		Search for file in the system libraries
+
+		:param lf_dir       The directory within the system library directory
+							where the file is expected to be found
+		:param lf_name      Then name of the file to search
+		:param lf_condition A function to check additional contitions WRT to
+							possible file paths - by default will check if file is
+							executalble
+		"""
+		paths_to_check = []
+		files_to_check = [os.path.join(lf_dir, lf_name), lf_name, ]
+		if os.path.isabs(__file__):
+			paths_to_check.append(os.path.dirname(__file__))
+		for p in sys.path:
+			paths_to_check.append(p)
+			try:
+				paths_to_check.append(p[:p.rindex(os.path.sep + 'python')])
+			except ValueError:
+				pass
+
+		paths_to_check = [os.path.join(p, d) for p in paths_to_check for d in
+				files_to_check]
+
+		for p in paths_to_check:
+			logging.debug('Looking for %s in %s' % (lf_name, p))
+			if os.path.isfile(p) and lf_condition(p):
+				return p
+		raise RuntimeError('%s not found' % (lf_name))
 
