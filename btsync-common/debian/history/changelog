@@ -1,3 +1,31 @@
+1.4.93 (October 17, 2014)
+
+ - Fixed issue with listening port randomized when changed
+ - Fixed minimum window dimensions
+ - Fixed status behavior
+ - Fixed link validation mechanism
+
+
+1.4.92 (October 16, 2014)
+
+ - Fixed issue with Link validation (Linux)
+
+
+1.4.91 (October 10, 2014)
+
+ - Notifications shown when file changed in RO folder
+ - Added notification window for approval requests 
+ - Fixed issue with adding folders via link
+ - Fixed column resizing in Firefox for Linux
+ - Fixed issue with disappearing approval notifications
+ - Fixed inability to add non-empty RO folder on Linux
+ - Fixed issue with scrollbars for Mac
+ - Fixed issue with blank UI due to invalid CSS
+ - Fixed issue with non-saving speed limits
+ - Other minor fixes
+ - Cosmetic fixes
+
+
 1.4.83 (September 18, 2014)
 
  - Fix UI when https usage forced (Linux only)
