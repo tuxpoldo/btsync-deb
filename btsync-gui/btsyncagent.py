@@ -60,24 +60,9 @@ class BtSyncAgent(BtSyncApi):
 		self.preffile = self.configpath + '/btsync-gui.prefs'
 		self.lockfile = self.configpath + '/btsync-gui.pid'
 		self.lock = None
-		self.prefs = {}
-		# load values from preferences
+		# load values from preferences file
 		self.load_prefs()
-		# generate random credentials
-		try:
-			username = base64.b64encode(os.urandom(16))[:-2]
-			password = base64.b64encode(os.urandom(32))[:-2]
-		except NotImplementedError:
-			logging.warning('No good random generator available. Using default credentials')
-			username = 'btsync-ui'
-			password = base64.b64encode('This is really not secure!')[:-2]
-		self.username = self.get_pref('username',username)
-		self.password = self.get_pref('password',password)
-		self.bindui = self.get_pref('bindui','127.0.0.1')
-		self.portui = self.get_pref('portui',self.uid + 8999)
-		self.paused = self.get_pref('paused',False)
-		self.webui = self.get_pref('webui',False)
-		self.dark = self.get_pref('dark',False)
+		self.read_prefs()
 		# process command line arguments
 		if self.args.username is not None:
 			self.username = self.args.username
@@ -229,6 +214,25 @@ class BtSyncAgent(BtSyncApi):
 		except Exception as e:
 			logging.warning('Error while loading preferences: {0}'.format(e))
 			self.prefs = {}
+
+	def read_prefs(self):
+		# generate random credentials
+		try:
+			username = base64.b64encode(os.urandom(16))[:-2]
+			password = base64.b64encode(os.urandom(32))[:-2]
+		except NotImplementedError:
+			logging.warning('No good random generator available. Using default credentials')
+			username = 'btsync-ui'
+			password = base64.b64encode('This is really not secure!')[:-2]
+		# read in application preferences
+		self.username = self.get_pref('username',username)
+		self.password = self.get_pref('password',password)
+		self.bindui = self.get_pref('bindui','127.0.0.1')
+		self.portui = self.get_pref('portui',self.uid + 8999)
+		self.paused = self.get_pref('paused',False)
+		self.webui = self.get_pref('webui',False)
+		self.dark = self.get_pref('dark',False)
+		self.foldersmenu = self.get_pref('foldersMenu',False)
 
 	def make_local_paths(self):
 		if not os.path.isdir(self.configpath):

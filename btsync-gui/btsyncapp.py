@@ -70,6 +70,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.init_transfers_controls()
 		self.init_history_controls()
 		self.init_preferences_controls()
+		self.init_settings_controls()
 
 		# TODO: Hide pages not supported by API
 		notebook = self.builder.get_object('notebook1')
@@ -379,6 +380,18 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.limitup.set_active(self.prefs['upload_limit'] > 0)
 		self.unlock()
 
+	def init_settings_controls(self):
+		self.enableDarkIcons = self.builder.get_object('enableDarkIcons')
+		self.enableFoldersMenu = self.builder.get_object('enableFoldersMenu')
+		self.enableWebUI = self.builder.get_object('enableWebUI')
+
+	def init_settings_values(self):
+		self.lock()
+		self.attach(self.enableDarkIcons,BtValueDescriptor.new_from('dark',self.agent.dark))
+		self.attach(self.enableFoldersMenu,BtValueDescriptor.new_from('foldersMenu',self.agent.foldersmenu))
+		self.attach(self.enableWebUI,BtValueDescriptor.new_from('webui',self.agent.webui))
+		self.unlock()
+
 	def get_treeview_column_widths(self,treewidget):
 		columns = treewidget.get_columns()
 		widths = []
@@ -421,9 +434,16 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.close()
 
 	def onSaveEntry(self,widget,valDesc,newValue):
+		logging.error('Changed Setting: {0} {1}'.format(valDesc.Name, newValue))
 		try:
-			self.agent.set_prefs({valDesc.Name : newValue})
-			self.prefs[valDesc.Name] = newValue
+			if valDesc.is_local():
+				# local gui settings
+				self.agent.set_pref({valDesc.Name : newValue})
+				self.agent.read_prefs ()
+			else:
+				# bittorrent sync settings
+				self.agent.set_prefs({valDesc.Name : newValue})
+				self.prefs[valDesc.Name] = newValue
 		except requests.exceptions.ConnectionError:
 			return self.onConnectionError()
 		except requests.exceptions.HTTPError:
