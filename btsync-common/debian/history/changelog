@@ -1,3 +1,32 @@
+1.4.103 (November 12, 2014)
+
+ - Fixed issue with files not syncing ("out-of-sync")
+   in some cases. 
+ - Fixed issue with sync preventing some apps (MS Office,
+   Autocad, etc.) from saving files into synced folder.
+ - Added "/webui" command line parameter to run WebUI on
+   Windows in default browser.
+ - Fixed issue with older files replacing newer files in
+   some cases
+ - Fixed issue with blank UI caused by corrupt settings
+ - Fixed command line validation
+
+
+1.4.99 (October 31, 2014)
+
+ - Files containing non-ASCII characters in their names may not
+   sync from Linux PCs
+ - Fix PowerPC sync issue
+ - Fix issue with proxy settings not applied 
+ - Fix issue with notifications shown sometimes even if disabled
+ - Fix issue with "Out-of-sync" shown for Encrypted peers
+ - Fix application hangs
+ - Fix streams not syncing sometimes
+ - Reduce minimum window dimensions
+ - Other minor fixes
+ - Cosmetic changes and fixes
+ 
+
 1.4.93 (October 17, 2014)
 
  - Fixed issue with listening port randomized when changed
