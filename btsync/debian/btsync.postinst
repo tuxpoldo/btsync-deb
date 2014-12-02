@@ -163,7 +163,7 @@ EOF
 	cat <<EOF
 {
 	"storage_path" : "/var/lib/btsync/",
-	"check_for_updates" : false,
+	"vendor": "tuxpoldo",
 	"display_new_version": false,
 	"disk_low_priority" : ${DISK_LOW_PRIORITY},
 	"lan_encrypt_data" : ${LAN_ENCRYPT_DATA},
