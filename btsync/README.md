@@ -279,13 +279,6 @@ This will affect also the Web UI, if `0.0.0.0` is specified as the bind address.
 
 [1]: https://en.wikipedia.org/wiki/Shim_(computing)
 
-Some Remarks about Autoupdate
------------------------------
-
-The daemon scripts require that autoupdate is disabled in the configuration
-script, otherwise the instance will not be started. The reason for that is,
-that updates are handled by the Debian/Ubuntu package handling utility itself.
-
 
 Compatibility
 -------------
