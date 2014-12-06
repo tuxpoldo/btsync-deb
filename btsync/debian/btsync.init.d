@@ -153,8 +153,6 @@ config_from_conffile () {
 	PID_FILE=$(grep '^[[:space:]]*"pid_file"' ${CONFIG_DIR}/$1  | cut -d":" -f 2 | cut -d"," -f 1)
 	PID_FILE=$(expr match "${PID_FILE}" '^[[:space:]]*"\(.*\)".*')
 	PID_FILE=${PID_FILE:-${STORAGE_PATH}/sync.pid}
-	# load update check setting
-	UPDATE_CHECK_DISABLED=$(grep '^[[:space:]]*"check_for_updates"' ${CONFIG_DIR}/$1  | cut -d":" -f 2 | cut -d"/" -f 1 | cut -d"," -f 1 | grep -c false)
 }
 
 config_from_name () {
@@ -184,11 +182,6 @@ test_valid_config () {
 	# this can only happen with old style credentials encoded into the config file name
 	if [ $(ls -l ${CONFIG_DIR}/${BASENAME}.${CONFIG_EXT} ${CONFIG_DIR}/${BASENAME}.*.${CONFIG_EXT} 2> /dev/null | wc -l) -gt 1 ]; then
 		log_error_msg "Duplicate instance name $BASENAME found. Interrupting sequence."
-		exit 1
-	fi
-	# test for disabled update check
-	if [ ${UPDATE_CHECK_DISABLED} -ne 1 ]; then
-		log_error_msg "Instance name $BASENAME has autoupdate enabled. Interrupting sequence."
 		exit 1
 	fi
 	# test for undetected storage path in config file
