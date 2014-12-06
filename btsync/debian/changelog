@@ -1,3 +1,10 @@
+btsync (1.4.1-0) unstable; urgency=low
+
+  * Removed check for mandatory disablement of misinterpreted
+    "check_for_updates" setting (Closes #170)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sat, 06 Dec 2014 11:33:11 +0100
+
 btsync (1.4.0-4) unstable; urgency=low
 
   * Fixed folder_defaults.known_hosts filter (Closes #156)
