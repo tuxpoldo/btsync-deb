@@ -53,7 +53,7 @@ msgstr "Port dla interfejsu Web:"
 #. Description
 #: ../btsync.templates:3001
 msgid "Specify here the port BitTorrent Sync will listen on for the web interfce. This port number in the range from 80 to 65534 shall not conflict with any other services running on this machine."
-msgstr "Ustaw tutaj port, na którym BitTorrent Sync będzie nasłuchiwał interfejsu Web. Numer tego portu ustawiony w przedziale od 80 do 65534 nie powinien kolidować z innymi usługami działającymi na tym komputerze."
+msgstr "Ustaw port, na którym BitTorrent Sync udostępniał interfejs Web. Numer tego portu ustawiony w przedziale od 80 do 65534 nie powinien kolidować z innymi usługami działającymi na tym komputerze."
 
 #. Type: boolean
 #. Description
@@ -371,35 +371,35 @@ msgstr "Zostało kilka parametrów, które mogą być skonfigurowane w BitTorren
 #. Description
 #: ../btsync.templates:29001
 msgid "Default known hosts list for new shared folders:"
-msgstr ""
+msgstr "Domyślna lista znanych hostów dla nowo współdzielonych folderów:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:29001
 msgid "Default setting for folder preference \"Use predefined hosts\". Hosts should be entered as single line of comma-separated IP:port or HOST:port pairs (no other delimiters allowed)."
-msgstr ""
+msgstr "Domyślne wartość dla ustawienia folderu \"Użyj predefiniowanych hostów\". Hosty powinny zostać wprowadzeni jako pojedyncza linia odseparowanych przecinkiem par IP:port lub HOST:port (nie są dozwolone inne separatory)."
 
 #. Type: string
 #. Description
 #: ../btsync.templates:31001
 msgid "Peer expiration days:"
-msgstr ""
+msgstr "Ważność Peera w dniach:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:31001
 msgid "Amount of days to pass before peer is removed from peer list. This value can be set in the range from 0 to 999999. If leaved empty, the default value applies (7 Days)."
-msgstr ""
+msgstr "Ilość dni, po których peer zostanie usunięty z listy peerów. Ta wartość może mieć wartość od 0 do 999999. Jeśli puste, będzie przyjęta domyślna wartość (7 Dni)."
 
 #. Type: string
 #. Description
 #: ../btsync.templates:32001
 msgid "Start path for the web interface folder browser:"
-msgstr ""
+msgstr "Początkowa ścieżka dla webowej przeglądarki plików:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:32001
 msgid "Base path where the web interface folder browser starts. The specified path must be absolute, accessible by the BitTorrent Sync process and existing. If leaved empty, the whole file system can be browsed."
-msgstr ""
+msgstr "Podstawowa ścieżka, gdzie webowa przeglądarka plików startuje. Ustawiona ścieżka musi istnieć, być bezwzględna, dostępna dla procesu BitTorrent Sync. Jeśli puste, będzie dostępny cały system plików."
 
