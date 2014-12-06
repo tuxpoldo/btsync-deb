@@ -329,19 +329,19 @@ msgstr "Использовать широковещательную рассыл
 #. Description
 #: ../btsync.templates:26001
 msgid "If enabled, new shared folders will be configured to use LAN Broadcast for local peer discovery by default."
-msgstr "Если выбрано, то новые папки будут настраиваться на использование широковещательной рассылки внутри сети для локального поиска клиентов."
+msgstr "Если выбрано, то новые папки будут настраиваться на использование широковещательной рассылки внутри сети для локального поиска пиров."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:27001
 msgid "Should BitTorrent Sync use external relay servers wheen needed?"
-msgstr "Использовать внешние релей сервера когда необходимо?"
+msgstr "Использовать внешние релей серверы когда необходимо?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:27001
 msgid "If enabled, new shared folders will be configured to use relay servers by default. Relay servers are used when it is impossible to connect to other devices directly due to NAT issues."
-msgstr "Если выбрано, то новые папки будут настраиваться на использование релей серверов по умолчанию. Они используются когда невозможно подключиться к другим устройствам, из-за проблем с NAT."
+msgstr "Если выбрано, то новые папки будут настраиваться на использование релей серверов по умолчанию. Они используются, когда невозможно подключиться к другим устройствам, из-за проблем с NAT."
 
 #. Type: boolean
 #. Description
@@ -353,53 +353,53 @@ msgstr "Использовать внешний трекер по умолчан
 #. Description
 #: ../btsync.templates:28001
 msgid "If enabled, new shared folders will be configured to use external tracker servers by default. Tracker servers can be enabled to facilitate communication between peers."
-msgstr "Если выбрано, то новые папки будут настраиваться на использование трекера по умолчанию. Трекер может использоваться для облегчения взаимодействия между клиентами."
+msgstr "Если выбрано, то новые папки будут настраиваться на использование трекера по умолчанию. Трекер может использоваться для облегчения взаимодействия между пирами."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:30001
 msgid "Do you want to configure advanced parameters?"
-msgstr "Желаете настроить расширенные параметры?"
+msgstr "Желаете настроить дополнительные параметры?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:30001
 msgid "There are several advanced parameters that can be configured in BitTorrent Sync."
-msgstr "Здесь могут быть настроены некоторые расширенные параметры BitTorrent Sync. "
+msgstr "Здесь могут быть настроены некоторые дополнительные параметры BitTorrent Sync. "
 
 #. Type: string
 #. Description
 #: ../btsync.templates:29001
 msgid "Default known hosts list for new shared folders:"
-msgstr ""
+msgstr "Список хостов по умолчанию для новых папок."
 
 #. Type: string
 #. Description
 #: ../btsync.templates:29001
 msgid "Default setting for folder preference \"Use predefined hosts\". Hosts should be entered as single line of comma-separated IP:port or HOST:port pairs (no other delimiters allowed)."
-msgstr ""
+msgstr "Значение по умолчанию для \"Использовать хосты\". Хосты должны вводиться по одному в строку. Значения IP:порт или ИМЯ:порт разделяются только двоеточием."
 
 #. Type: string
 #. Description
 #: ../btsync.templates:31001
 msgid "Peer expiration days:"
-msgstr ""
+msgstr "Срок жизни пиров."
 
 #. Type: string
 #. Description
 #: ../btsync.templates:31001
 msgid "Amount of days to pass before peer is removed from peer list. This value can be set in the range from 0 to 999999. If leaved empty, the default value applies (7 Days)."
-msgstr ""
+msgstr "Количество дней, после которого, пир удаляется из списка пиров. Это значение может быть настроено в диапазоне от 0 до 999999. Если не заполнено, то значение по умолчанию.(7 дней)."
 
 #. Type: string
 #. Description
 #: ../btsync.templates:32001
 msgid "Start path for the web interface folder browser:"
-msgstr ""
+msgstr "Начальный путь  для отобозревателя папок в web интерфейсе."
 
 #. Type: string
 #. Description
 #: ../btsync.templates:32001
 msgid "Base path where the web interface folder browser starts. The specified path must be absolute, accessible by the BitTorrent Sync process and existing. If leaved empty, the whole file system can be browsed."
-msgstr ""
+msgstr "Путь, с которого web интерфейс, начинает отображать папки.Указаный путь должен существовать, быть абсолютным и доступным для BitTorrent Sync процесса. Если не заполнено, отображается вся файловая система."
 
