@@ -4,6 +4,8 @@ btsync (1.4.1-0) unstable; urgency=low
     "check_for_updates" setting (Closes #170)
   * Fixed redundant restart messages (Closes #166)
   * Added support for modular configuration files (Closes #124)
+  * Updated debconf localisation from poeditor.com - Thanks to all
+    volunteers
 
  -- Leo Moll <leo.moll@yeasoft.com>  Sat, 06 Dec 2014 11:33:11 +0100
 
