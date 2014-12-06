@@ -275,131 +275,131 @@ msgstr "A sync.log méretét állítja be. Amikor a fájl eléri a beállított 
 #. Description
 #: ../btsync.templates:22001
 msgid "Should BitTorrent Sync allow only SSL connections to the Web UI?"
-msgstr ""
+msgstr "Webes felület csak SSL kapcsolattal legyen elérhető?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:22001
 msgid "If enabled, only SSL (http) connections will be allowed to the Web UI."
-msgstr ""
+msgstr "Ha be van állítva, csak SSL (http) kapcsolattal lehet elérni a webes felületet."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:23001
 msgid "Do you want to configure folder defaults?"
-msgstr ""
+msgstr "Mappa alapértelmezések szerinti konfigurálása?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:23001
 msgid "BitTorrent Sync allows to configure default values for shared folders. If you specify default values, all newly created folders will be initially configured with the specified default values."
-msgstr ""
+msgstr "Megosztott mappák alapértelmezett beállításainak testreszabása. Az újonnan létrehozott mappák az itt megadott beállításokkal fognak létrejönni."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:24001
 msgid "Should old version of files be preserved by default?"
-msgstr ""
+msgstr "Alapértelmezésben a fájlok régi verzióinak megtartása?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:24001
 msgid "If enabled, new shared folders will save old versions by default in the .SyncArchive folder located in the shared directory."
-msgstr ""
+msgstr "Ha be van állítva, az újonnan létrehozott megosztott mappák megtartják a felülírt fileok eredetijét a .SyncArchive mappában."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:25001
 msgid "Should BitTorrent Sync use DHT by default?"
-msgstr ""
+msgstr "DHT engedélyezve alapértelmezetten?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:25001
 msgid "If enabled, new shared folders will be configured to use the DHT (Distributed Hash Table) by default."
-msgstr ""
+msgstr "Ha be van állítva, az újonnan létrehozott megosztott mappákra engedélyezve lesz a DHT. (Distributed Hash Table)"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:26001
 msgid "Should BitTorrent Sync use LAN broadcasts by default?"
-msgstr ""
+msgstr "LAN broadcast engedélyezve alapértelmezetten?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:26001
 msgid "If enabled, new shared folders will be configured to use LAN Broadcast for local peer discovery by default."
-msgstr ""
+msgstr "Ha be van állítva, az újonnan létrehozott megosztott mappákra engedélyezve lesz a LAN broadcast a helyi partnerek kereséséhez."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:27001
 msgid "Should BitTorrent Sync use external relay servers wheen needed?"
-msgstr ""
+msgstr "Külső átjátszó szerverek használata szükség esetén?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:27001
 msgid "If enabled, new shared folders will be configured to use relay servers by default. Relay servers are used when it is impossible to connect to other devices directly due to NAT issues."
-msgstr ""
+msgstr "Ha be van állítva,  az újonnan létrehozott megosztott mappákra engedélyezve lesz az átjátszó szerverek használata. Az átjárszó szerverekre akkor vanszükség, amikor nem lehet más partnerekhet közvetlenül csatlakozni NAT (címfordítás) miatt."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:28001
 msgid "Should BitTorrent Sync use external tracker servers by default?"
-msgstr ""
+msgstr "Külső követő szerverek engedélyezése alapértelmezetten?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:28001
 msgid "If enabled, new shared folders will be configured to use external tracker servers by default. Tracker servers can be enabled to facilitate communication between peers."
-msgstr ""
+msgstr "Ha be van állítva, újonnan létrehozott megosztott mappáknál engedélyezve lesznek a külső követő szerverek. A követő szerverek a partnerek könnyebb felfedezésében segítenek."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:30001
 msgid "Do you want to configure advanced parameters?"
-msgstr ""
+msgstr "Haladó paraméterek beállítása?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:30001
 msgid "There are several advanced parameters that can be configured in BitTorrent Sync."
-msgstr ""
+msgstr "A BitTorrent Sync-ben számos haladó paraméter állítható."
 
 #. Type: string
 #. Description
 #: ../btsync.templates:29001
 msgid "Default known hosts list for new shared folders:"
-msgstr ""
+msgstr "Alaptértelmezésben megbízható partnerek liszája az újonnan létrehozott megosztott mappákhoz."
 
 #. Type: string
 #. Description
 #: ../btsync.templates:29001
 msgid "Default setting for folder preference \"Use predefined hosts\". Hosts should be entered as single line of comma-separated IP:port or HOST:port pairs (no other delimiters allowed)."
-msgstr ""
+msgstr "Alapértelmezett mappa preferencia: \"Használj előre megadott partnereket\". A partnereket egy sorban, IP:port formában vesszővel elválasztva, vagy HOST:port formában kell megadni. (elválasztó jel nem megengedett)"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:31001
 msgid "Peer expiration days:"
-msgstr ""
+msgstr "Partner elavulási idő napokban:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:31001
 msgid "Amount of days to pass before peer is removed from peer list. This value can be set in the range from 0 to 999999. If leaved empty, the default value applies (7 Days)."
-msgstr ""
+msgstr "Adott számú nap után a partnerek eltávolításra kerülnek a partnerlistából. Ez az érték 0-tól 999999-ig állítható. Üresen hagyva az alpértelmezett érték kerül alkalmazásra."
 
 #. Type: string
 #. Description
 #: ../btsync.templates:32001
 msgid "Start path for the web interface folder browser:"
-msgstr ""
+msgstr "A webes felület tallózójának kiinduló könyvtára:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:32001
 msgid "Base path where the web interface folder browser starts. The specified path must be absolute, accessible by the BitTorrent Sync process and existing. If leaved empty, the whole file system can be browsed."
-msgstr ""
+msgstr "Kiinduló könyvtár, ahonnan a webes felület böngészője indul. Csak abszolút útvonal adható meg, melyhez van a BitTorrent Sync-nek jogosultsága hozzáférni, és létező mappára mutat. Üresen hagyva az egész fájlrendszer böngészhető."
 
