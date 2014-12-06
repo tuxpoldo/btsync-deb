@@ -251,13 +251,13 @@ msgstr "Pode especificar o nivel de prioridade do servizo do BitTorrent Sync, qu
 #. Description
 #: ../btsync.templates:20001
 msgid "External port number reported to the tracker:"
-msgstr "Número de porto externo enviado polo seguidor:"
+msgstr "Número de porto externo enviado polo localizador:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:20001
 msgid "Set external port number that Sync will report to the tracker. This port will be used for incoming TCP connections. Specify 0 to let BitTorrent Sync choose the port number."
-msgstr "Estabelece o número de porto externo que Sync enviará ao seguidor. Este porto utilizase para as conexións TCP entrantes. Especifique 0 para que sexa BitTorrent Sync quen escolla o número de porto."
+msgstr "Estabelece o número de porto externo que Sync enviará ao localizador. Este porto utilizase para as conexións TCP entrantes. Especifique 0 para que sexa BitTorrent Sync quen escolla o número de porto."
 
 #. Type: string
 #. Description
@@ -275,131 +275,132 @@ msgstr "Estabelece o tamaño do ficheiro de depuración sync.log. Cando o fichei
 #. Description
 #: ../btsync.templates:22001
 msgid "Should BitTorrent Sync allow only SSL connections to the Web UI?"
-msgstr ""
+msgstr "BitTorrent Sync debe permitir só conexións SSL coa interface web de usuario?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:22001
 msgid "If enabled, only SSL (http) connections will be allowed to the Web UI."
-msgstr ""
+msgstr "Se está activado, so se permitiran conexións SSL (http) coa interface web de usuario."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:23001
 msgid "Do you want to configure folder defaults?"
-msgstr ""
+msgstr "Quere configurar os valores predeterminados dos cartafoles?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:23001
 msgid "BitTorrent Sync allows to configure default values for shared folders. If you specify default values, all newly created folders will be initially configured with the specified default values."
-msgstr ""
+msgstr "BitTorrent Sync permite configurar os valores predeterminados para os cartafoles compartidos. Se especifica valores predeterminados, todos os cartafoles creados de novo serán configurados inicialmente cos valores predeterminados especificados."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:24001
 msgid "Should old version of files be preserved by default?"
-msgstr ""
+msgstr "Ten que manterse a versión antiga dos ficheiros de xeito predeterminado?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:24001
 msgid "If enabled, new shared folders will save old versions by default in the .SyncArchive folder located in the shared directory."
-msgstr ""
+msgstr "Se está activado, os novos cartafoles gardarán as versións antigas de xeito predeterminado no cartafol .SyncArchive situado no directorio compartido."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:25001
 msgid "Should BitTorrent Sync use DHT by default?"
-msgstr ""
+msgstr "BitTorrent Sync ten que empregar DHT de xeito predeterminado?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:25001
 msgid "If enabled, new shared folders will be configured to use the DHT (Distributed Hash Table) by default."
-msgstr ""
+msgstr "Se está activado, os novos cartafoles compartidos serán configurados para que empreguen DHT (Distributed Hash Table) de xeito predeterminado."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:26001
 msgid "Should BitTorrent Sync use LAN broadcasts by default?"
-msgstr ""
+msgstr "BitTorrent Sync ten que empregar a difusión LAN de xeito predeterminado?\n"
+""
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:26001
 msgid "If enabled, new shared folders will be configured to use LAN Broadcast for local peer discovery by default."
-msgstr ""
+msgstr "Se está activado, os novos cartafoles compartidos serán configurados para que empreguen a difusión LAN, para os pares locais atopados, de xeito predeterminado."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:27001
 msgid "Should BitTorrent Sync use external relay servers wheen needed?"
-msgstr ""
+msgstr "BitTorrent Sync terá que usar servidores de repetición externos cando sexa necesario?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:27001
 msgid "If enabled, new shared folders will be configured to use relay servers by default. Relay servers are used when it is impossible to connect to other devices directly due to NAT issues."
-msgstr ""
+msgstr "Se está activado, os novos cartafoles compartidos serán configurados para que empreguen servidores de repetición externos de xeito predeterminado. Os servidores de repetición empregaranse cando non sexa posíbel conectar directamente con outros dispositivos por mor de problemas co NAT."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:28001
 msgid "Should BitTorrent Sync use external tracker servers by default?"
-msgstr ""
+msgstr "BitTorrent Sync ten que empregar os servidores de localización externos de xeito predeterminado?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:28001
 msgid "If enabled, new shared folders will be configured to use external tracker servers by default. Tracker servers can be enabled to facilitate communication between peers."
-msgstr ""
+msgstr "Se está activado, os novos cartafoles compartidos serán configurados para que empreguen servidores de localización externos de xeito predeterminado. Os servidores de localización poden activarse para facilitar a comunicación entre pares."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:30001
 msgid "Do you want to configure advanced parameters?"
-msgstr ""
+msgstr "Quere configurar os parámetros avanzados?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:30001
 msgid "There are several advanced parameters that can be configured in BitTorrent Sync."
-msgstr ""
+msgstr "No BitTorrent Sync hai varios parámetros avanzados que poden seren configurados."
 
 #. Type: string
 #. Description
 #: ../btsync.templates:29001
 msgid "Default known hosts list for new shared folders:"
-msgstr ""
+msgstr "Lista predeterminada das máquinas coñecidas para os novos cartafoles compartidos:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:29001
 msgid "Default setting for folder preference \"Use predefined hosts\". Hosts should be entered as single line of comma-separated IP:port or HOST:port pairs (no other delimiters allowed)."
-msgstr ""
+msgstr "O axuste predeterminado nas preferencias dos cartafois é «Usar as máquinas predefinidas». As máquinas teñen que escribirse nunha soa liña, separadas por comas coa forma de pares IP:porto ou máquina:porto (non se permiten outros delimitadores)."
 
 #. Type: string
 #. Description
 #: ../btsync.templates:31001
 msgid "Peer expiration days:"
-msgstr ""
+msgstr "Días de caducidade dos pares:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:31001
 msgid "Amount of days to pass before peer is removed from peer list. This value can be set in the range from 0 to 999999. If leaved empty, the default value applies (7 Days)."
-msgstr ""
+msgstr "Número de días que teñen que pasar antes de retirar un par da lista de pares. Este valor pode establecerse no intervalo de 0 a 999999 Se o deixa baleiro, aplicarase o valor predeterminado (7 días)."
 
 #. Type: string
 #. Description
 #: ../btsync.templates:32001
 msgid "Start path for the web interface folder browser:"
-msgstr ""
+msgstr "Ruta de inicio para o navegador de cartafoles da interface web:"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:32001
 msgid "Base path where the web interface folder browser starts. The specified path must be absolute, accessible by the BitTorrent Sync process and existing. If leaved empty, the whole file system can be browsed."
-msgstr ""
+msgstr "Ruta base onde comeza o navegador de cartafoles da interface web. A ruta especificada debe ser absoluta, accesíbel polo proceso existente do BitTorrent Sync. Se o deixa baleiro, poderá navegar por todo o sistema de ficheiros."
 
