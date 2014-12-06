@@ -1,4 +1,4 @@
-btsync (1.4.1-0) unstable; urgency=low
+btsync (1.4.1-1) unstable; urgency=low
 
   * Removed check for mandatory disablement of misinterpreted
     "check_for_updates" setting (Closes #170)
@@ -7,7 +7,7 @@ btsync (1.4.1-0) unstable; urgency=low
   * Updated debconf localisation from poeditor.com - Thanks to all
     volunteers
 
- -- Leo Moll <leo.moll@yeasoft.com>  Sat, 06 Dec 2014 11:33:11 +0100
+ -- Leo Moll <leo.moll@yeasoft.com>  Sat, 06 Dec 2014 14:52:11 +0100
 
 btsync (1.4.0-4) unstable; urgency=low
 
