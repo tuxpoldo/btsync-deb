@@ -318,12 +318,22 @@ shim_end () {
 }
 
 start_btsync () {
-	shim_begin
 	config_debug "START"
-	log_daemon_msg "${1:-Starting btsync instance '${BASENAME}'}"
+
+	STATUS=0
+	pidofproc -p /var/run/$NAME.$BASENAME.pid $DAEMON_BINARY >/dev/null || STATUS=$?
+	if [ "$STATUS" = 0 ]; then
+		log_daemon_msg "btsync instance '${BASENAME}' already running."
+		log_end_msg 0
+		return 0
+	fi
+
+	shim_begin
+	log_daemon_msg "${1:-Starting btync instance '${BASENAME}'}"
 	adjust_arm_alignment
 	adjust_storage_path
 	adjust_debug_flags
+	
 	STATUS=0
 	start-stop-daemon --start --quiet --oknodo \
 		--nicelevel $NICE_LEVEL \
@@ -333,7 +343,7 @@ start_btsync () {
 		--exec $DAEMON \
 		-- --nodaemon --log sync.log --config $CONFIG_DIR/$CONFFILE $DAEMON_ARGS  || STATUS=1
 
-	if [ $STATUS -gt 0 ]; then
+	if [ "$STATUS" != 0 ]; then
 		# start-stop-daemon failed. Let's exit immediately
 		log_error_msg "Failed to start $NAME instance $BASENAME - please check the configuration file $CONFIG_DIR/$CONFFILE"
 		shim_end
