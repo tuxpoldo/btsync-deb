@@ -191,6 +191,22 @@ instance is able to read and write all files it must access:
 Some example configuration files are provided under `/etc/btsync/samples`
 
 
+### Modular Configuration Files ###
+
+Sometimes it may be useful to generate configuration files out several separate
+parts. The typical user is explained best by forum user [Jero](http://forum.bittorrent.com/user/25088-jero/)
+in this [forum message](http://forum.bittorrent.com/topic/29319-linux-split-config-in-multple-files/):
+
+> I want to have a config file per shared folder. I currently manage 10-20 linux servers. The servers are all connected with btsync.
+> I have created a system that can push scripts to the servers en executed them. But when i need to change one shared folder on one server i just want to push a new file without to touch the other parameters in the config file.
+
+If you want to create a modular configuration file, create a directory in
+`/etc/btsync` named like you would name the configuration file, but with an
+additional `.d` extension and put the parts of your configuration file in it.
+The daemon init script will generate a configuration file at every start by
+joining the parts **in alphabetical order**.
+
+
 ### Default Startup Parameters ###
 
 The additional configuration file `/etc/default/btsync` permits to specify

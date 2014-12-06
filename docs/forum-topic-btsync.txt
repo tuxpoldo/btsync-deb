@@ -104,6 +104,21 @@ By specifying [b]DAEMON_UID[/b] and [b]DAEMON_GID[/b] it is possible to specify 
 Some example configuration files are provided under [font=courier new,courier,monospace][b]/etc/btsync/samples[/b][/font]
 
 
+[color=#006400][b]Modular Configuration Files[/b][/color]
+
+Sometimes it may be useful to generate configuration files out several separate parts. The typical use case is explained best by forum user Jero:
+
+[quote name="Jero" post="82024" timestamp="1396943043"]
+Is it possible to split the linux config file in multiple files?
+ 
+I want to have a config file per shared folder. I currently manage 10-20 linux servers. The servers are all connected with btsync.
+I have created a system that can push scripts to the servers en executed them. But when i need to change one shared folder on one server i just want to push a new file without to touch the other parameters in the config file.
+[/quote]
+
+
+If you want to create a modular configuration file, create a directory in [font=courier new,courier,monospace][b]/etc/btsync[/b][/font] named like you would name the configuration file, but with an additional [font=courier new,courier,monospace][b].d[/b][/font] extension and put the parts of your configuration file in it. The daemon init script will generate a configuration file at every start by joining the parts [b]in alphabetical order[/b].
+
+
 [color=#006400][b]Default Startup Parameters[/b][/color]
 
 The additional configuration file [font=courier new,courier,monospace][b]/etc/default/btsync[/b][/font] permits to specify some default startup parameters that may affect every configured instance of BitTorrent Sync.
@@ -153,10 +168,6 @@ The BitTorrent Sync init script does detect the presence of the library and enab
 
 By specifying a valid TCP/IP address assigned to one of the interfaces of the system, the BitTorrent Sync instance will bind only to that specific address. This will affect also the Web UI, if [font=courier new,courier,monospace][b]0.0.0.0[/b][/font] is specified as the bind address.
 
-
-[color=#ff0000][b]SOME ADDITIONAL WORDS ABOUT AUTOUPDATE[/b][/color]
-
-The daemon scripts require that autoupdate is disabled in the configuration script, otherwise the instance will not be started. The reason for that is, that updates are handled by the Debian/Ubuntu package handling utility itself.
 
 [color=#ff8c00][b]COMPATIBILITY[/b][/color]
 
