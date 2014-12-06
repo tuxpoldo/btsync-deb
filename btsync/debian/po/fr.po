@@ -239,13 +239,13 @@ msgstr "Vous pouvez choisir, si vous voulez que BitTorrent Sync soit executé so
 #. Description
 #: ../btsync.templates:19001
 msgid "Niceness of the BitTorrent Sync Daemon:"
-msgstr "Agressivité du démon BitTorrent Sync :"
+msgstr "Priorité du démon BitTorrent Sync :"
 
 #. Type: string
 #. Description
 #: ../btsync.templates:19001
 msgid "You can specify the niceness level of the BitTorrent Sync Daemon, which affects process scheduling. Nicenesses range from -20 (most favorable scheduling) to 19 (least favorable). Specify 0 to let BitTorrent Sync run with the default niceness value."
-msgstr "Vous pouvez indiquer le niveau d'agressivité du démon BitTorrent Sync, qui agit sur la planification du processus. L'agressivité va de -20 (planification la plus favorable) à 19 (la moins favorable). Indiquer 0 pour que BitTorrent Sync fonctionne au niveau d'agressivité par défaut."
+msgstr "Vous pouvez indiquer le niveau de priorité du démon BitTorrent Sync, qui agit sur l'ordonnancement des processus (niceness level). La priorité va de -20 (ordonnancement le plus favorable) à 19 (le moins favorable). Indiquer 0 pour que BitTorrent Sync fonctionne au niveau de priorité par défaut."
 
 #. Type: string
 #. Description
@@ -275,13 +275,13 @@ msgstr "Définir la taille du fichier de debug sync.log. Lorsque le fichier sync
 #. Description
 #: ../btsync.templates:22001
 msgid "Should BitTorrent Sync allow only SSL connections to the Web UI?"
-msgstr ""
+msgstr "Voulez-vous forcer l'utilisation du SSL pour les connexions à l'interface web de BitTorrent Sync ?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:22001
 msgid "If enabled, only SSL (http) connections will be allowed to the Web UI."
-msgstr ""
+msgstr "Si activé, seules les connexion SSL (https) seront autorisées."
 
 #. Type: boolean
 #. Description
@@ -311,7 +311,7 @@ msgstr ""
 #. Description
 #: ../btsync.templates:25001
 msgid "Should BitTorrent Sync use DHT by default?"
-msgstr ""
+msgstr "Souhaitez-vous activer DHT par défaut ?"
 
 #. Type: boolean
 #. Description
@@ -347,25 +347,25 @@ msgstr ""
 #. Description
 #: ../btsync.templates:28001
 msgid "Should BitTorrent Sync use external tracker servers by default?"
-msgstr ""
+msgstr "Souhaitez-vous activer l'utilisation de trackers externes par défaut ?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:28001
 msgid "If enabled, new shared folders will be configured to use external tracker servers by default. Tracker servers can be enabled to facilitate communication between peers."
-msgstr ""
+msgstr "Si activé, les nouveaux dossiers partagés vont être configurés pour utiliser un tracker externe par défaut. L'activation de ce réglage peut simplifier la communication entre pairs."
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:30001
 msgid "Do you want to configure advanced parameters?"
-msgstr ""
+msgstr "Souhaitez-vous configurer des paramètres avancés ?"
 
 #. Type: boolean
 #. Description
 #: ../btsync.templates:30001
 msgid "There are several advanced parameters that can be configured in BitTorrent Sync."
-msgstr ""
+msgstr "De nombreux paramètres avancés peuvent être configurés dans BitTorrent Sync."
 
 #. Type: string
 #. Description
@@ -383,7 +383,7 @@ msgstr ""
 #. Description
 #: ../btsync.templates:31001
 msgid "Peer expiration days:"
-msgstr ""
+msgstr "Jour d'expiration des pairs :"
 
 #. Type: string
 #. Description
