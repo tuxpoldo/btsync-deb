@@ -204,7 +204,8 @@ If you want to create a modular configuration file, create a directory in
 `/etc/btsync` named like you would name the configuration file, but with an
 additional `.d` extension and put the parts of your configuration file in it.
 The daemon init script will generate a configuration file at every start by
-joining the parts **in alphabetical order**.
+joining all **in alphabetical order**. Parts must be text files with the
+extension `.part`.
 
 
 ### Default Startup Parameters ###

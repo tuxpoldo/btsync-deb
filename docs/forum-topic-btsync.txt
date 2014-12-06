@@ -116,8 +116,7 @@ I have created a system that can push scripts to the servers en executed them. B
 [/quote]
 
 
-If you want to create a modular configuration file, create a directory in [font=courier new,courier,monospace][b]/etc/btsync[/b][/font] named like you would name the configuration file, but with an additional [font=courier new,courier,monospace][b].d[/b][/font] extension and put the parts of your configuration file in it. The daemon init script will generate a configuration file at every start by joining the parts [b]in alphabetical order[/b].
-
+If you want to create a modular configuration file, create a directory in [font=courier new,courier,monospace][b]/etc/btsync[/b][/font] named like you would name the configuration file, but with an additional [font=courier new,courier,monospace][b].d[/b][/font] extension and put the parts of your configuration file in it. The daemon init script will generate a configuration file at every start by joining the parts [b]in alphabetical order[/b]. Parts must be text files with the extension [font=courier new,courier,monospace][b].part[/b][/font].
 
 [color=#006400][b]Default Startup Parameters[/b][/color]
 

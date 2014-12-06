@@ -119,7 +119,7 @@ conffile_from_confdir () {
 // THIS FILE WILL BE OVERWRITTEN AT EVERY START
 EOFF
 		) > "${CONFIG_DIR}/${CONFIG_FILE}"
-		for COMPONENT in $(find "$1" -maxdepth 1 -type f | sort); do
+		for COMPONENT in $(find "$1" -maxdepth 1 -type f -name '*.part' | sort); do
 			cat "${COMPONENT}" >> "${CONFIG_DIR}/${CONFIG_FILE}"
 		done
 	fi
