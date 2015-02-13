@@ -22,6 +22,9 @@
 #
 
 import logging
+from os import environ
+from os.path import join as path_join
+from os.path import isdir
 
 from gi.repository import Gtk, GObject
 
@@ -47,6 +50,15 @@ class TrayIndicator:
 				icon_name,
 				AppIndicator.IndicatorCategory.APPLICATION_STATUS
 			)
+			# Try to make AppIndicator respect weird paths in XDG_DATA_DIRS
+			for p in environ.get('XDG_DATA_DIRS','').split(':'):
+				if p in ('/usr/share', '/usr/local/share'):
+					continue
+				ip = path_join(p, 'icons')
+				if not isdir(ip):
+					continue
+				self.indicator.set_icon_theme_path(ip)
+				break
 			if attention_icon_name is None:
 				self.indicator.set_attention_icon(icon_name)
 			else:
