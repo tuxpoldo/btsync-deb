@@ -1,8 +1,14 @@
+btsync-common (1.4.110-1) unstable; urgency=low
+
+  * New upstream release (Closes #174)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sun, 01 Mar 2015 13:54:16 +0100
+
 btsync-common (1.4.103-1) unstable; urgency=low
 
   * New upstream release
 
- -- Leo Moll <leo.moll@yeasoft.com>  Sat, 12 Nov 2014 00:04:06 +0200
+ -- Leo Moll <leo.moll@yeasoft.com>  Sat, 12 Nov 2014 00:04:06 +0100
 
 btsync-common (1.4.93-1) unstable; urgency=low
 

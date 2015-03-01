@@ -1,3 +1,16 @@
+1.4.110 (February 5, 2015)
+
+ - Fixed issue with Sync hanging due to invalid filename characters
+ - Fixed issue with Sync preventing HDD from sleeping on NAS*
+ - Fixed some incorrect localization text
+ - Fixed issue with confusing old and new filenames in history
+   when renaming
+ - Added new advanced parameter for Linux - config_save_interval
+ - Minor fixes and changes
+ - Remove asterisks in return values of “get_prefs” API call
+ - Fixed sporadic Out-Of-Sync issues**
+
+
 1.4.103 (November 12, 2014)
 
  - Fixed issue with files not syncing ("out-of-sync")
