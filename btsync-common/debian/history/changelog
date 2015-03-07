@@ -1,3 +1,12 @@
+1.4.111 (March 4, 2015)
+
+ - Possible Out-Of-Sync issue fix (The "Out-of-Sync" can only be
+   fully fixed in 2.0 thanks to core changes introduced in 2.0.
+   If 1.4.111 does not resolve your out-of-sync, upgrade to 2.0
+   is advised.)
+ - Minor core fixes
+
+
 1.4.110 (February 5, 2015)
 
  - Fixed issue with Sync hanging due to invalid filename characters
