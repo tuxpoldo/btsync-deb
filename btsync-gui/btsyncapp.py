@@ -387,6 +387,10 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.enableDarkIcons = self.builder.get_object('enableDarkIcons')
 		self.enableFoldersMenu = self.builder.get_object('enableFoldersMenu')
 		self.enableWebUI = self.builder.get_object('enableWebUI')
+		self.buttonAdvanced = self.builder.get_object('buttonAdvanced')
+		# TODO: implement folder menus
+		self.enableFoldersMenu.set_sensitive(False)
+		self.buttonAdvanced.set_sensitive(self.agent.is_primary())
 
 	def init_settings_values(self):
 		self.lock()
