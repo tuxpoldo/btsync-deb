@@ -5,6 +5,7 @@ btsync-gui (0.9.1-1) unstable; urgency=high
     - enable/disable web ui in menu
     - enable/disable menu folders (like in btsync-user)
     - configure advanced connection settings
+  * Removed forced dependency to DBUS library (Closes #171)
 
  -- Leo Moll <leo.moll@yeasoft.com>  Sun, 08 Mar 2015 16:21:22 +0100
 

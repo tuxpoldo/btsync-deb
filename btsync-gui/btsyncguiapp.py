@@ -23,7 +23,6 @@
 
 import os
 import sys
-import dbus
 import signal
 import locale
 import gettext
@@ -36,6 +35,12 @@ from gi.repository import Gtk
 
 from btsyncagent import BtSyncAgent, BtSyncAgentException, BtSingleInstanceException
 from btsyncstatus import *
+
+try:
+	dbusloaded = True
+	import dbus
+except ImportError:
+	dbusloaded = False
 
 class GuiApp:
 
@@ -50,11 +55,14 @@ class GuiApp:
 			self.agent = BtSyncAgent(self.args)
 			# create graceful shutdown mechanisms
 			signal.signal(signal.SIGTERM, self.on_signal_term)
-			self.bus = dbus.SessionBus()
-			self.bus.call_on_disconnection(self.on_session_disconnect)
-		except dbus.DBusException as e:
-			# basically we can ignore this...
-			logging.warning('Failed to connect to session bus: '+str(e))
+			# dbus connection
+			if dbusloaded:
+				try:
+					self.bus = dbus.SessionBus()
+					self.bus.call_on_disconnection(self.on_session_disconnect)
+				except dbus.DBusException as e:
+					# basically we can ignore this...
+					logging.warning('Failed to connect to session bus: '+str(e))
 		except BtSingleInstanceException as e:
 			# we are running in auto mode and someone tries to start a
 			# second instance
