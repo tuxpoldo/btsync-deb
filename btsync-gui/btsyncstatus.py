@@ -44,6 +44,7 @@ class BtSyncStatus:
 	PAUSED			= 3
 
 	def __init__(self,agent):
+		self.agent = agent
 		self.builder = Gtk.Builder()
 		self.builder.set_translation_domain('btsync-gui')
 		self.builder.add_from_file(os.path.dirname(__file__) + "/btsyncstatus.glade")
@@ -56,24 +57,14 @@ class BtSyncStatus:
 		self.menuopenweb = self.builder.get_object('openweb')
 		self.menuopenapp = self.builder.get_object('openapp')
 		self.about = self.builder.get_object('aboutdialog')
-		if agent.dark:
-			self.icn_disconnected = 'btsync-gui-disconnected-dark'
-			self.icn_connecting = 'btsync-gui-connecting-dark'
-			self.icn_paused = 'btsync-gui-paused-dark'
-			self.icn_idle = 'btsync-gui-0-dark'
-			self.icn_activity = 'btsync-gui-{0}-dark'
-		else:
-			self.icn_disconnected = 'btsync-gui-disconnected'
-			self.icn_connecting = 'btsync-gui-connecting'
-			self.icn_paused = 'btsync-gui-paused'
-			self.icn_idle = 'btsync-gui-0'
-			self.icn_activity = 'btsync-gui-{0}'
 
+		self.init_icons()
 
 		self.ind = TrayIndicator (
 			'btsync',
 			self.icn_disconnected
 		)
+
 		if agent.is_auto():
 			self.menuconnection.set_visible(False)
 			self.ind.set_title(_('BitTorrent Sync'))
@@ -82,9 +73,10 @@ class BtSyncStatus:
 			self.menuconnection.set_label('{0}:{1}'.format(agent.get_host(),agent.get_port()))
 			self.ind.set_title(_('BitTorrent Sync {0}:{1}').format(agent.get_host(),agent.get_port()))
 			self.ind.set_tooltip_text(_('BitTorrent Sync {0}:{1}').format(agent.get_host(),agent.get_port()))
-#		self.menuopenweb.set_visible(agent.is_webui())
+
 		self.ind.set_menu(self.menu)
 		self.ind.set_default_action(self.onActivate)
+		self.refresh_menus()
 
 		# icon animator
 		self.frame = 0
@@ -99,7 +91,6 @@ class BtSyncStatus:
 		self.connection = BtSyncStatus.DISCONNECTED
 		self.connect_id = None
 		self.status_to = BtDynamicTimeout(1000,self.btsync_refresh_status)
-		self.agent = agent
 
 	def startup(self):
 		self.btsyncver = { 'version': '0.0.0' }
@@ -131,7 +122,7 @@ class BtSyncStatus:
 			self.app.window.present()
 		else:
 			try:
-				self.app = BtSyncApp(self.agent)
+				self.app = BtSyncApp(self.agent,self)
 				self.app.connect_close_signal(self.onDeleteApp)
 			except requests.exceptions.ConnectionError:
 				return self.onConnectionError()
@@ -146,6 +137,20 @@ class BtSyncStatus:
 				self.app.window.destroy()
 			del self.app
 			self.app = None
+
+	def init_icons(self):
+		if self.agent.is_dark():
+			self.icn_disconnected = 'btsync-gui-disconnected-dark'
+			self.icn_connecting = 'btsync-gui-connecting-dark'
+			self.icn_paused = 'btsync-gui-paused-dark'
+			self.icn_idle = 'btsync-gui-0-dark'
+			self.icn_activity = 'btsync-gui-{0}-dark'
+		else:
+			self.icn_disconnected = 'btsync-gui-disconnected'
+			self.icn_connecting = 'btsync-gui-connecting'
+			self.icn_paused = 'btsync-gui-paused'
+			self.icn_idle = 'btsync-gui-0'
+			self.icn_activity = 'btsync-gui-{0}'
 
 	def btsync_connect(self):
 		if self.connection is BtSyncStatus.DISCONNECTED or \
@@ -251,11 +256,17 @@ class BtSyncStatus:
 				self.ind.set_from_icon_name(self.icn_idle)
 		self.connection = connection
 
+	def refresh_status(self):
+		self.set_status(self.connection,self.transferring)
+
 	def show_status(self,statustext):
 		self.menustatus.set_label(statustext)
 
 	def is_connected(self):
 		return self.connection is BtSyncStatus.CONNECTED
+
+	def refresh_menus(self):
+		self.menuopenweb.set_visible(self.agent.is_webui())
 
 	def onActivate(self,widget):
 #		self.menu.popup(None,None,Gtk.StatusIcon.position_menu,widget,3,0)
@@ -278,7 +289,7 @@ class BtSyncStatus:
 			urllib.quote(self.agent.get_password(),''),
 			self.agent.get_host(),
 			self.agent.get_port()
-		), 2)
+		), new = 2, autoraise = True)
 
 	def onDeleteApp(self, *args):
 		self.close_app(False)

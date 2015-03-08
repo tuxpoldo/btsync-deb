@@ -78,18 +78,13 @@ class BtSyncAgent(BtSyncApi):
 			self.dark = self.args.dark
 		if self.args.cleardefaults:
 			# clear saved defaults
-			if 'username' in self.prefs:
-				del self.prefs['username']
-			if 'password' in self.prefs:
-				del self.prefs['password']
-			if 'webui' in self.prefs:
-				del self.prefs['webui']
-			if 'bindui' in self.prefs:
-				del self.prefs['bindui']
-			if 'portui' in self.prefs:
-				del self.prefs['portui']
-			if 'dark' in self.prefs:
-				del self.prefs['dark']
+			self.del_pref('username')
+			self.del_pref('password')
+			self.del_pref('webui')
+			self.del_pref('bindui')
+			self.del_pref('portui')
+			self.del_pref('dark')
+			self.del_pref('foldersmenu')
 			self.save_prefs()
 			raise BtSyncAgentException(0, _('Default settings cleared.'))
 		if self.args.savedefaults:
@@ -127,7 +122,7 @@ class BtSyncAgent(BtSyncApi):
 		self.shutdown()
 
 	def startup(self):
-		if self.args.host == 'auto':
+		if self.is_auto():
 			# we have to handle everything
 			try:
 				# Force-search for the binary so we can quit before trying
@@ -149,7 +144,7 @@ class BtSyncAgent(BtSyncApi):
 				exit (-1)
 
 	def suspend(self):
-		if self.args.host == 'auto':
+		if self.is_auto():
 			if not self.paused:
 				self.paused = True
 				self.set_pref('paused', True)
@@ -170,7 +165,7 @@ class BtSyncAgent(BtSyncApi):
 		if self.is_primary() and self.is_running():
 			logging.info ('Stopping btsync agent...')
 			self.kill_agent()
-			self.kill_config_file()
+			#self.kill_config_file()
 
 	def start_agent(self):
 		if not self.is_running():
@@ -179,7 +174,8 @@ class BtSyncAgent(BtSyncApi):
 			time.sleep(0.5)
 			if self.is_running():
 				# no guarantee that it's already running...
-				self.kill_config_file()
+				#self.kill_config_file()
+				pass
 
 	def kill_agent(self):
 		BtSyncApi.shutdown(self,throw_exceptions=False)
@@ -198,6 +194,10 @@ class BtSyncAgent(BtSyncApi):
 
 	def get_pref(self,key,default):
 		return self.prefs.get(key,default)
+
+	def del_pref(self,key):
+		if key in self.prefs:
+			del self.prefs[key]
 
 	def load_prefs(self):
 		if not os.path.isfile(self.preffile):
@@ -230,9 +230,9 @@ class BtSyncAgent(BtSyncApi):
 		self.bindui = self.get_pref('bindui','127.0.0.1')
 		self.portui = self.get_pref('portui',self.uid + 8999)
 		self.paused = self.get_pref('paused',False)
-		self.webui = self.get_pref('webui',False)
+		self.webui = self.get_pref('webui',True)
 		self.dark = self.get_pref('dark',False)
-		self.foldersmenu = self.get_pref('foldersMenu',False)
+		self.foldersmenu = self.get_pref('foldersmenu',False)
 
 	def make_local_paths(self):
 		if not os.path.isdir(self.configpath):
@@ -254,24 +254,27 @@ class BtSyncAgent(BtSyncApi):
 		return self.args.host == 'auto'
 
 	def is_primary(self):
-		return self.args.host == 'auto' and isinstance(self.lock,BtSingleton)
+		return self.is_auto() and isinstance(self.lock,BtSingleton)
 
 	def is_paused(self):
 		return self.paused;
 
 	def is_local(self):
-		return self.args.host == 'auto' or \
+		return self.is_auto() or \
 			self.args.host == 'localhost' or \
 			self.args.host == '127.0.0.1'
 
 	def is_webui(self):
 		return self.webui;
 
+	def is_dark(self):
+		return self.dark;
+
 	def get_lock_filename(self):
 		return os.environ['HOME'] + '/.config/btsync/btsync-gui.lock'
 
 	def get_host(self):
-		return 'localhost' if self.is_auto() else self.args.host
+		return '127.0.0.1' if self.is_auto() else self.args.host
 
 	def get_port(self):
 		return self.portui if self.is_auto() else self.args.port if self.args.port != 0 else 8888
@@ -283,13 +286,13 @@ class BtSyncAgent(BtSyncApi):
 		return self.password if self.is_auto() else self.args.password
 
 	def get_debug(self):
-		if self.args.host == 'auto':
+		if self.is_auto():
 			return os.path.isfile(self.storagepath + '/debug.txt')
 		else:
 			return False
 
 	def set_debug(self,activate=True):
-		if self.args.host == 'auto':
+		if self.is_auto():
 			if activate:
 				deb = open (self.storagepath + '/debug.txt', 'w')
 				deb.write('FFFF\n')
@@ -304,13 +307,14 @@ class BtSyncAgent(BtSyncApi):
 			cfg.write('{\n')
 			cfg.write('\t"pid_file" : "{0}",\n'.format(self.pidfile))
 			cfg.write('\t"storage_path" : "{0}",\n'.format(self.storagepath))
-			# cfg.write('\t"use_gui" : false,\n')
+			cfg.write('\t"vendor": "tuxpoldo",\n')
+			cfg.write('\t"display_new_version": false,\n')
 			cfg.write('\t"i_agree" : "yes",\n')
 			cfg.write('\t"webui" : \n\t{\n')
 			cfg.write('\t\t"listen" : "{0}:{1}",\n'.format(self.bindui,self.portui))
 			cfg.write('\t\t"login" : "{0}",\n'.format(self.username))
 			cfg.write('\t\t"password" : "{0}",\n'.format(self.password))
-			cfg.write('\t\t"api_key" : "{}"\n'.format(self.get_api_key()))
+			cfg.write('\t\t"api_key" : "{0}"\n'.format(self.get_api_key()))
 			cfg.write('\t}\n')
 			cfg.write('}\n')
 			cfg.close()
