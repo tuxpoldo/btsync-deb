@@ -7,317 +7,317 @@ msgstr ""
 "Project-Id-Version: btsync-gui\n"
 "Language: es\n"
 
-#: ../btsyncagent.py:112
+#: ../btsyncagent.py:235
 msgid "Default settings cleared."
 msgstr "Parámetros por defecto reiniciados."
 
-#: ../btsyncagent.py:135
+#: ../btsyncagent.py:258
 msgid "Default settings saved."
 msgstr "Parámetros por defecto guardados."
 
-#: ../btsyncapp.py:161 ../btsyncapp.py:179
+#: ../btsyncapp.py:164 ../btsyncapp.py:182
 msgid "Cannot implement due to missing API"
 msgstr "No se puede implementar debido a API faltante."
 
-#: ../btsyncapp.py:162
+#: ../btsyncapp.py:165
 msgid "BitTorrent Inc."
 msgstr "BitTorrent Inc."
 
-#: ../btsyncapp.py:178
+#: ../btsyncapp.py:181
 msgid "Now"
 msgstr "Ahora"
 
-#: ../btsyncapp.py:227 ../btsyncstatus.py:199
+#: ../btsyncapp.py:230 ../btsyncstatus.py:204
 msgid "{0:.1f} kB/s up, {1:.1f} kB/s down"
 msgstr "{0:.1f} kB/s de subida, {1:.1f} kB/s de bajada"
 
-#: ../btsyncapp.py:333
+#: ../btsyncapp.py:336
 msgid "{0} in {1} files"
 msgstr "{0} en {1} archivos"
 
-#: ../btsyncapp.py:335
+#: ../btsyncapp.py:338
 msgid "{0} in {1} files (indexing...)"
 msgstr "{0} en {1} archivos (indexando...)"
 
-#: ../btsyncapp.py:348
+#: ../btsyncapp.py:351
 msgid "Synced on {0}"
 msgstr "Sincronizado en {0}"
 
-#: ../btsyncapp.py:350
+#: ../btsyncapp.py:353
 msgid "⇧ {0}"
 msgstr "⇧ {0}"
 
-#: ../btsyncapp.py:352
+#: ../btsyncapp.py:355
 msgid "⇩ {0}"
 msgstr "⇩ {0}"
 
-#: ../btsyncapp.py:354
+#: ../btsyncapp.py:357
 msgid "⇧ {0} - ⇩ {1}"
 msgstr "⇧ {0} - ⇩ {1}"
 
-#: ../btsyncapp.py:356
+#: ../btsyncapp.py:359
 msgid "Idle..."
 msgstr "Ocioso..."
 
-#: ../btsyncguiapp.py:115
+#: ../btsyncguiapp.py:123
 msgid "Sets the logging level. By default the logging level is WARNING"
 msgstr "Establece el nivel de trazas. Por defecto el nivel de trazas es AVISO"
 
-#: ../btsyncguiapp.py:119
+#: ../btsyncguiapp.py:127
 msgid "Hostname for the connection to BitTorrent Sync. If not specified, a local BitTorrent Sync agent will be launched."
 msgstr "Nombre de servidor para la conexión a BitTorrent Sync. Si no se indica, se lanzará un agente local de BitTorrent Sync."
 
-#: ../btsyncguiapp.py:124
+#: ../btsyncguiapp.py:132
 msgid "Optional port number for the connection to BitTorrent Sync. If not specified, port 8888 is taken for a connection to a remote BitTorrent Sync agent or (8999 + uid) is taken when creating a locally launched agent. This option can be made persistent for local agents with --savedefaults"
 msgstr "Número de puerto opcional para la conexión a BitTorrent Sync. Si no se indica, se usa el puerto 8888 para la conexión a un agente BitTorrent remoto o (8999 + uid) cuando se crea un agente local. Esta opción se puede hacer persistente para agentes locales con --savedefaults."
 
-#: ../btsyncguiapp.py:132
+#: ../btsyncguiapp.py:140
 msgid "Optional user name for connecting to a remote BitTorrent Sync agent or username to use when creating a locally launched agent. This option can be made persistent for local agents with --savedefaults"
 msgstr "Nombre de usuario opcional para conectar a un agente BitTorrent Sync remoto o cuando se crea un agente local. Esta opción se puede hacer persistente para agentes locales con --savedefaults."
 
-#: ../btsyncguiapp.py:138
+#: ../btsyncguiapp.py:146
 msgid "Optional password for connecting to a remote BitTorrent Sync agent or password to use when creating a locally launched agent. This option can be made persistent for local agents with --savedefaults"
 msgstr "Contraseña opcional para conectar a un agente BitTorrent Sync remoto o cuando se crea un agente local. Esta opción se puede hacer persistente para agentes locales con --savedefaults."
 
-#: ../btsyncguiapp.py:144
+#: ../btsyncguiapp.py:152
 msgid "Optional bind address for the Web UI of a locally created BitTorrent Sync agent. By default the agent binds to 127.0.0.1. If you want the Web UI of the agent to be reachable by other computers, specify one of the available IP addresses of this computer or \"all\" to bind to all available adapters. This option can be made persistent for local agents with --savedefaults"
 msgstr "Dirección de escucha opcional para el IU Web de un agente BitTorrent Sync local. Por defecto se emplea 127.0.0.1. Si desea que el IU Web del agente sea accesible desde otros equipos, indique una de las direcciones IP de este equipo o «todas» para escuchar en todos los adaptadores disponibles. Esta opción se puede hacer persistente para agentes locales con --savedefaults."
 
-#: ../btsyncguiapp.py:154
+#: ../btsyncguiapp.py:162
 msgid "Include the Web UI in the menu. This option can be made persistent with --savedefaults"
 msgstr "Incluir el IU Web en el menú. Esta opción se puede hacer persistente con --savedefaults."
 
-#: ../btsyncguiapp.py:164
+#: ../btsyncguiapp.py:172
 msgid "If specified, the optionally supplied credentials, bind address, port information and storable settings will be stored as default in the application preferences and used when launching a local BitTorrent Sync agent."
 msgstr "Si se indica, las credenciales, dirección de escucha, información del puerto y parametros almacenables opcionalmente proporcionados serán guardados como predeterminados en las preferencias de la aplicación y usadas al arrancar un agente BitTorrent local."
 
-#: ../btsyncguiapp.py:171
+#: ../btsyncguiapp.py:179
 msgid "If specified, all internally stored credentials, bind address, port information and storable settings will be cleared from the application preferences."
 msgstr "Si se indica, todas las credenciales, dirección de escucha, información del puerto y parámetros almacenables guardados localmente serán borrados de las preferencias de la aplicación."
 
-#: ../btsyncstatus.py:79 ../btsyncapp.glade.h:2
+#: ../btsyncstatus.py:70 ../btsyncapp.glade.h:3
 msgid "BitTorrent Sync"
 msgstr "BitTorrent Sync"
 
-#: ../btsyncstatus.py:80
+#: ../btsyncstatus.py:71
 msgid "BitTorrent Sync Status Indicator"
 msgstr "Indicador de estado de BitTorrent Sync"
 
-#: ../btsyncstatus.py:83 ../btsyncstatus.py:84
+#: ../btsyncstatus.py:74 ../btsyncstatus.py:75
 msgid "BitTorrent Sync {0}:{1}"
 msgstr "BitTorrent Sync {0}:{1}"
 
-#: ../btsyncstatus.py:156
+#: ../btsyncstatus.py:161
 msgid "Connecting..."
 msgstr "Conectando..."
 
-#: ../btsyncstatus.py:160 ../btsyncstatus.py:205
+#: ../btsyncstatus.py:165 ../btsyncstatus.py:210
 msgid "Idle"
 msgstr "Ocioso"
 
-#: ../btsyncstatus.py:202
+#: ../btsyncstatus.py:207
 msgid "Indexing..."
 msgstr "Indexando..."
 
-#: ../btsyncstatus.py:266
+#: ../btsyncstatus.py:277
 msgid "Version {0} ({0})"
 msgstr "Versión {0} ({0})"
 
-#: ../btsyncstatus.py:267
+#: ../btsyncstatus.py:278
 msgid "Linux UI Version {0}"
 msgstr "Versión de IU de Linux {0}"
 
-#: ../btsyncstatus.py:342
+#: ../btsyncstatus.py:359
 msgid "Disconnected"
 msgstr "Desconectado"
 
-#: ../btsyncstatus.py:355
+#: ../btsyncstatus.py:372
 msgid "Disconnected: Communication Error {0}"
 msgstr "Desconectado: error de comunicación {0}"
 
-#: ../btsyncutils.py:339
+#: ../btsyncutils.py:357
 msgid "Only one full btsync-gui can run at once"
 msgstr "Sólo un BitTorrent Sync GUI puede ejecutar a la vez"
 
-#: ../dialogs.py:68
+#: ../dialogs.py:69
 msgid "This secret is invalid.\n"
 "Please generate a new secret or enter your shared folder secret."
 msgstr "Esta clave secreta no es válida.\n"
 "Genere una nueva clave secreta o introduzca su clave secreta de carpeta compartida."
 
-#: ../dialogs.py:73
+#: ../dialogs.py:74 ../dialogs.py:84
 msgid "Can't open the destination folder."
 msgstr "No se puede abrir la carpeta de destino."
 
-#: ../dialogs.py:77
+#: ../dialogs.py:78
 msgid "Selected folder is already added to BitTorrent Sync."
 msgstr "La carpeta seleccionada ya está incluida en BitTorrent Sync."
 
-#: ../dialogs.py:84
+#: ../dialogs.py:87
 msgid "Don't have permissions to write to the selected folder."
 msgstr "No tiene permisos para escribir en la carpeta seleccionada."
 
-#: ../dialogs.py:107
+#: ../dialogs.py:110
 msgid "Please select a folder to sync"
 msgstr "Seleccione una carpeta a sincronizar"
 
-#: ../dialogs.py:430
+#: ../dialogs.py:433
 msgid "Invalid secret specified.\n"
 "Secret must have a length of 33 characters"
 msgstr "La clave secreta especificada no es válida.\n"
 "La clave secreta debe tener una longitud de 33 caracteres."
 
-#: ../dialogs.py:438
+#: ../dialogs.py:441
 msgid "Invalid secret specified.\n"
 "Secret must contain only alphanumeric characters"
 msgstr "La clave secreta especificada no es válida.\n"
 "La clave secreta debe contener únicamente caracteres alfanuméricos."
 
-#: ../dialogs.py:485
+#: ../dialogs.py:488
 msgid "A hostname or IP address must be specified"
 msgstr "Se debe indicar un nombre de servidor o una dirección IP"
 
-#: ../dialogs.py:490
+#: ../dialogs.py:493
 msgid "The specified port must be a number between 1 and 65534"
 msgstr "El puerto indicado debe ser un número entre 1 y 65534 "
 
-#: ../btsyncapp.glade.h:1
+#: ../btsyncapp.glade.h:2
 msgid "Advanced..."
 msgstr "Avanzado..."
 
-#: ../btsyncapp.glade.h:3
+#: ../btsyncapp.glade.h:4
 msgid "Connect mobile device"
 msgstr "Conectar dispositivo móvil"
 
-#: ../btsyncapp.glade.h:4
+#: ../btsyncapp.glade.h:5
 msgid "Copies the sharing secret to the clipboard"
 msgstr "Copia la clave secreta compartida al portapapeles"
 
-#: ../btsyncapp.glade.h:5
+#: ../btsyncapp.glade.h:6
 msgid "Copy secret"
 msgstr "Copiar clave secreta"
 
-#: ../btsyncapp.glade.h:6
+#: ../btsyncapp.glade.h:7
 msgid "Date"
 msgstr "Fecha"
 
-#: ../btsyncapp.glade.h:7
+#: ../btsyncapp.glade.h:8
 msgid "Device"
 msgstr "Dispositivo"
 
-#: ../btsyncapp.glade.h:8
+#: ../btsyncapp.glade.h:9
 msgid "Device name:"
 msgstr "Nombre de dispositivo:"
 
-#: ../btsyncapp.glade.h:9
+#: ../btsyncapp.glade.h:10
 msgid "Devices"
 msgstr "Dispositivos"
 
-#: ../btsyncapp.glade.h:10
+#: ../btsyncapp.glade.h:11
 msgid "Displays a QR-code that permits easy connection of a mobile device to this folder"
 msgstr "Muestra un código-QR que permite una fácil conexión de un dispositivo móvil a esta carpeta"
 
-#: ../btsyncapp.glade.h:11
+#: ../btsyncapp.glade.h:12
 msgid "Down"
 msgstr "Bajada"
 
-#: ../btsyncapp.glade.h:12
+#: ../btsyncapp.glade.h:13
 msgid "Edit .SyncIgnore"
 msgstr "Editar .SyncIgnore"
 
-#: ../btsyncapp.glade.h:13
+#: ../btsyncapp.glade.h:14
 msgid "Edit the file containing the list or filename patterns for file not being synced"
 msgstr "Editar el archivo que contiene la lista o patrones de nombres de archivo para los archivos que no deben ser sincronizados"
 
-#: ../btsyncapp.glade.h:14
+#: ../btsyncapp.glade.h:18
 msgid "Event"
 msgstr "Evento"
 
-#: ../btsyncapp.glade.h:15
+#: ../btsyncapp.glade.h:19
 msgid "File"
 msgstr "Archivo"
 
-#: ../btsyncapp.glade.h:16
+#: ../btsyncapp.glade.h:20
 msgid "Folder"
 msgstr "Carpeta"
 
-#: ../btsyncapp.glade.h:17
+#: ../btsyncapp.glade.h:21
 msgid "Folders"
 msgstr "Carpetas"
 
-#: ../btsyncapp.glade.h:18
+#: ../btsyncapp.glade.h:22
 msgid "History"
 msgstr "Historial"
 
-#: ../btsyncapp.glade.h:19
+#: ../btsyncapp.glade.h:23
 msgid "Limit download rate to (kB/s):"
 msgstr "Velocidad máx. de bajada (kb/s):"
 
-#: ../btsyncapp.glade.h:20
+#: ../btsyncapp.glade.h:24
 msgid "Limit upload rate to (kB/s):"
 msgstr "Velocidad máx. de subida (kb/s):"
 
-#: ../btsyncapp.glade.h:21
+#: ../btsyncapp.glade.h:25
 msgid "Listening port:"
 msgstr "Puerto a escuchar:"
 
-#: ../btsyncapp.glade.h:22
+#: ../btsyncapp.glade.h:26
 msgid "Open Folder"
 msgstr "Abrir carpeta"
 
-#: ../btsyncapp.glade.h:23
+#: ../btsyncapp.glade.h:27
 msgid "Open SyncArchive"
 msgstr "Abrir SyncArchive"
 
-#: ../btsyncapp.glade.h:24
+#: ../btsyncapp.glade.h:28
 msgid "Opens the folder in the file manager"
 msgstr "Abre la carpeta en el administrador de archivos"
 
-#: ../btsyncapp.glade.h:25
+#: ../btsyncapp.glade.h:29
 msgid "Opens the preferences dialog for the shared folder"
 msgstr "Abre el diálogo de preferencias para la carpeta compartida"
 
-#: ../btsyncapp.glade.h:26
+#: ../btsyncapp.glade.h:30
 msgid "Opens the sync archive holding previous or deleted versions of files"
 msgstr "Abre el archivo de sincronización que contiene versiones anteriores o versiones borradas de los archivos"
 
-#: ../btsyncapp.glade.h:27
+#: ../btsyncapp.glade.h:31
 msgid "Path"
 msgstr "Ruta"
 
-#: ../btsyncapp.glade.h:28 ../dialogs.glade.h:19
+#: ../btsyncapp.glade.h:32 ../dialogs.glade.h:26
 msgid "Preferences"
 msgstr "Preferencias"
 
-#: ../btsyncapp.glade.h:29
+#: ../btsyncapp.glade.h:34
 msgid "Show folder preferences"
 msgstr "Mostrar las preferencias de carpetas"
 
-#: ../btsyncapp.glade.h:30
+#: ../btsyncapp.glade.h:35
 msgid "Size"
 msgstr "Tamaño"
 
-#: ../btsyncapp.glade.h:31
+#: ../btsyncapp.glade.h:36
 msgid "Start BitTorrent Sync when Linux starts"
 msgstr "Arrancar BitTorrent cuando se inicie Linux"
 
-#: ../btsyncapp.glade.h:32
+#: ../btsyncapp.glade.h:37
 msgid "Status"
 msgstr "Estado"
 
-#: ../btsyncapp.glade.h:33
+#: ../btsyncapp.glade.h:38
 msgid "This name will be shown on other devices linked to your shared folders"
 msgstr "Este nombre se mostrará en otros dispositivos enlazados a sus carpetas compartidas"
 
-#: ../btsyncapp.glade.h:34
+#: ../btsyncapp.glade.h:40
 msgid "Transfers"
 msgstr "Transferencias"
 
-#: ../btsyncapp.glade.h:35
+#: ../btsyncapp.glade.h:41
 msgid "Up"
 msgstr "Subida"
 
-#: ../btsyncapp.glade.h:36
+#: ../btsyncapp.glade.h:42
 msgid "Use NAT UPnP port mapping"
 msgstr "Usar asignación de puertos NAT con UPnP"
 
@@ -330,50 +330,53 @@ msgid "BitTorrent Status"
 msgstr "Estado de BitTorrent"
 
 #: ../btsyncstatus.glade.h:3
-msgid "By using this application, you agree to our Privacy Policy and Terms.\n"
+#, fuzzy
+msgid "By using this application, you agree to our Privacy Policy, Terms of Use and End User License Agreement.\n"
 "http://www.bittorrent.com/legal/privacy\n"
-"http://www.bittorrent.com/legal/terms-of-use"
+"http://www.bittorrent.com/legal/terms-of-use\n"
+"http://www.bittorrent.com/legal/eula"
 msgstr "Al usar esta aplicación, usted acepta nuestros términos y política de privacidad.\n"
 "http://www.bittorrent.com/legal/privacy\n"
-"http://www.bittorrent.com/legal/terms-of-use"
+"http://www.bittorrent.com/legal/terms-of-use\n"
+"http://www.bittorrent.com/legal/eula"
 
-#: ../btsyncstatus.glade.h:6
+#: ../btsyncstatus.glade.h:7
 msgid "Copyright © 2014, BitTorrent Inc."
 msgstr "Copyright © 2014, BitTorrent Inc."
 
-#: ../btsyncstatus.glade.h:7
+#: ../btsyncstatus.glade.h:8
 msgid "Enable Debug Logging"
 msgstr "Activar trazas de depuración"
 
-#: ../btsyncstatus.glade.h:8
+#: ../btsyncstatus.glade.h:9
 msgid "Linux UI Version 0.0"
 msgstr "Versión de IU de Linux 0.0"
 
-#: ../btsyncstatus.glade.h:9
+#: ../btsyncstatus.glade.h:10
 msgid "Open BitTorrent Sync..."
 msgstr "Abrir BitTorrent Sync..."
 
-#: ../btsyncstatus.glade.h:10
+#: ../btsyncstatus.glade.h:11
 msgid "Open Original Manual"
 msgstr "Abrir manual original"
 
-#: ../btsyncstatus.glade.h:11
+#: ../btsyncstatus.glade.h:12
 msgid "Open Web UI"
 msgstr "Abrir interfaz de usuario Web"
 
-#: ../btsyncstatus.glade.h:12
+#: ../btsyncstatus.glade.h:13
 msgid "Pause Syncing"
 msgstr "Detener la sincronización"
 
-#: ../btsyncstatus.glade.h:13
+#: ../btsyncstatus.glade.h:14
 msgid "Quit BitTorrent Sync"
 msgstr "Salir de BitTorrent Sync"
 
-#: ../btsyncstatus.glade.h:14
+#: ../btsyncstatus.glade.h:15
 msgid "Send Feedback"
 msgstr "Enviar comentarios"
 
-#: ../btsyncstatus.glade.h:15
+#: ../btsyncstatus.glade.h:16
 msgid "localhost:8888"
 msgstr "localhost:8888"
 
@@ -393,164 +396,164 @@ msgstr "Añadir ip:puerto o equipo:puerto de clientes conocidos"
 msgid "Advanced Preferences"
 msgstr "Preferencias avanzadas"
 
-#: ../dialogs.glade.h:5
+#: ../dialogs.glade.h:8
 msgid "Choose"
 msgstr "Seleccionar"
 
-#: ../dialogs.glade.h:7
+#: ../dialogs.glade.h:10
 msgid "Folder to sync:"
 msgstr "Carpeta a sincronizar:"
 
-#: ../dialogs.glade.h:8
+#: ../dialogs.glade.h:11
 msgid "Full Access"
 msgstr "Acceso total"
 
-#: ../dialogs.glade.h:9
+#: ../dialogs.glade.h:12
 msgid "Full access"
 msgstr "Acceso total"
 
-#: ../dialogs.glade.h:10
+#: ../dialogs.glade.h:13
 msgid "Full access secret"
 msgstr "Clave secreta de acceso completo"
 
-#: ../dialogs.glade.h:11
+#: ../dialogs.glade.h:14
 msgid "Generate"
 msgstr "Generar"
 
-#: ../dialogs.glade.h:12
+#: ../dialogs.glade.h:15
 msgid "Generate a new secret or enter shared folder secret"
 msgstr "Genera una nueva clave secreta o escribe la\n"
 "clave de una carpeta compartida."
 
-#: ../dialogs.glade.h:13
+#: ../dialogs.glade.h:16
 msgid "Hosts"
 msgstr "Servidores"
 
-#: ../dialogs.glade.h:14
+#: ../dialogs.glade.h:19
 msgid "Name"
 msgstr "Nombre"
 
-#: ../dialogs.glade.h:15
+#: ../dialogs.glade.h:20
 msgid "New Predefined Host"
 msgstr "Nuevo servidor conocido"
 
-#: ../dialogs.glade.h:16
+#: ../dialogs.glade.h:21
 msgid "New known host address:"
 msgstr "Nueva dirección de servidor conocido:"
 
-#: ../dialogs.glade.h:17
+#: ../dialogs.glade.h:22
 msgid "One-time secret"
 msgstr "Clave secreta de un solo uso"
 
-#: ../dialogs.glade.h:18
+#: ../dialogs.glade.h:23
 msgid "One-time secret should be used within 24 hours"
 msgstr "La clave de un solo uso solo es válida durante 24 horas"
 
-#: ../dialogs.glade.h:20
+#: ../dialogs.glade.h:27
 msgid "Read Only"
 msgstr "Solo lectura"
 
-#: ../dialogs.glade.h:21
+#: ../dialogs.glade.h:28
 msgid "Read only"
 msgstr "Solo lectura"
 
-#: ../dialogs.glade.h:22
+#: ../dialogs.glade.h:29
 msgid "Read only secret"
 msgstr "Clave secreta de solo lectura"
 
-#: ../dialogs.glade.h:23
+#: ../dialogs.glade.h:30
 msgid "Remove Shared Folder"
 msgstr "Eliminar carpeta compartida"
 
-#: ../dialogs.glade.h:24
+#: ../dialogs.glade.h:31
 msgid "Reset"
 msgstr "Reiniciar"
 
-#: ../dialogs.glade.h:26
+#: ../dialogs.glade.h:33
 msgid "Scan QR"
 msgstr "Escanear código QR"
 
-#: ../dialogs.glade.h:27
+#: ../dialogs.glade.h:34
 msgid "Scan this QR code with your mobile\n"
 "device to connect sync folders"
 msgstr "Escanea este código QR con tu dispositivo móvil\n"
 "para conectar las carpetas de sincronización."
 
-#: ../dialogs.glade.h:29
+#: ../dialogs.glade.h:36
 msgid "Search DHT network"
 msgstr "Buscar en la red DHT"
 
-#: ../dialogs.glade.h:30
+#: ../dialogs.glade.h:37
 msgid "Search LAN"
 msgstr "Buscar en la LAN"
 
-#: ../dialogs.glade.h:31
+#: ../dialogs.glade.h:38
 msgid "Secret Keys"
 msgstr "Claves secretas"
 
-#: ../dialogs.glade.h:32
+#: ../dialogs.glade.h:39
 msgid "Shared Folder Properties"
 msgstr "Propiedades de carpetas compartidas"
 
-#: ../dialogs.glade.h:33
+#: ../dialogs.glade.h:40
 msgid "Shared secret:"
 msgstr "Clave secreta compartida:"
 
-#: ../dialogs.glade.h:34
+#: ../dialogs.glade.h:41
 msgid "Store deleted files in SyncArchive"
 msgstr "Almacenar archivos borrados en SyncArchive"
 
-#: ../dialogs.glade.h:35
+#: ../dialogs.glade.h:42
 msgid "This folder will be removed from BitTorrent Sync and no longer synced with other devices"
 msgstr "Esta carpeta será eliminada de BitTorrentSync y no se volverá a sincronizar con otros dispositivos"
 
-#: ../dialogs.glade.h:39
+#: ../dialogs.glade.h:46
 msgid "Use predefined hosts"
 msgstr "Usar equipos predefinidos"
 
-#: ../dialogs.glade.h:40
+#: ../dialogs.glade.h:47
 msgid "Use relay server when required"
 msgstr "Usar servidor de retransmisión"
 
-#: ../dialogs.glade.h:41
+#: ../dialogs.glade.h:48
 msgid "Use tracker server"
 msgstr "Usar rastreador"
 
-#: ../dialogs.glade.h:42
+#: ../dialogs.glade.h:50
 msgid "Value"
 msgstr "Valor"
 
-#: ../dialogs.glade.h:43
+#: ../dialogs.glade.h:51
 msgid "Value:"
 msgstr "Valor:"
 
-#: ../btsyncutils.py:188
+#: ../btsyncutils.py:201
 msgid "bytes"
 msgstr "B"
 
-#: ../btsyncutils.py:188
+#: ../btsyncutils.py:201
 msgid "KB"
 msgstr "KB"
 
-#: ../btsyncutils.py:188
+#: ../btsyncutils.py:201
 msgid "MB"
 msgstr "MB"
 
-#: ../btsyncutils.py:188
+#: ../btsyncutils.py:201
 msgid "GB"
 msgstr "GB"
 
-#: ../btsyncutils.py:192
+#: ../btsyncutils.py:205
 msgid "TB"
 msgstr "TB"
 
 #. I have changed "ver." into "versión". Unless there is a problem with the length of the string the second one should be preferred.
-#: ../dialogs.glade.h:25
+#: ../dialogs.glade.h:32
 msgid "Restore modified files to original version"
 msgstr "Restaurar versión original de archivos modiﬁcados"
 
 #. For consistency with the rest of sentences I used the verb for the formal "Ud." (haga) tense instead of the more coloquial "tú" (hagas).
-#: ../dialogs.glade.h:36
+#: ../dialogs.glade.h:43
 msgid "This is a folder with read-only permissions.\n"
 "Modification made to this folder will not be displayed\n"
 "on other devices."
@@ -558,11 +561,67 @@ msgstr "Esta carpeta tiene permisos de solo lectura. Los cambios\n"
 "que haga en ella no se mostrarán en otros dispositivos\n"
 "sincronizados."
 
-#: ../dialogs.glade.h:6
+#: ../dialogs.glade.h:9
 msgid "Encryption secret (read-only)"
 msgstr "Clave de cifrado (solo lectura)"
 
-#: ../btsyncguiapp.py:159
+#: ../btsyncguiapp.py:167
 msgid "If specified, the dark indicator icon set will be used. This option can be made persistent with --savedefaults"
 msgstr "Si se especifica, se usará el conjunto de iconos de indicadores oscuro. Esta opción se puede hacer persistente con --savedefaults"
+
+#: ../btsyncapp.glade.h:1
+msgid "Advanced Connection Settings"
+msgstr ""
+
+#: ../btsyncapp.glade.h:15
+msgid "Enable Access to Web UI"
+msgstr ""
+
+#: ../btsyncapp.glade.h:16
+msgid "Enable Dark Icon Set"
+msgstr ""
+
+#: ../btsyncapp.glade.h:17
+msgid "Enable Folder Display in Menu"
+msgstr ""
+
+#: ../btsyncapp.glade.h:33
+msgid "Settings"
+msgstr ""
+
+#: ../btsyncapp.glade.h:39
+msgid "This page contains local settings that affect only the function of the BitTorrent Sync GUI. The settings are stored locally in the user's home directory."
+msgstr ""
+
+#: ../dialogs.glade.h:5
+msgid "All"
+msgstr ""
+
+#: ../dialogs.glade.h:6
+msgid "Bind Address:"
+msgstr ""
+
+#: ../dialogs.glade.h:7
+msgid "Bind Port:"
+msgstr ""
+
+#: ../dialogs.glade.h:17
+msgid "If you specify any credentials, the Web UI of Sync will be secured with the specified credentials, otherwise random credentials are created at any application start."
+msgstr ""
+
+#: ../dialogs.glade.h:18
+msgid "Local Host"
+msgstr ""
+
+#: ../dialogs.glade.h:24
+msgid "Other"
+msgstr ""
+
+#: ../dialogs.glade.h:25
+msgid "Password:"
+msgstr ""
+
+#: ../dialogs.glade.h:49
+msgid "User Name:"
+msgstr ""
 
