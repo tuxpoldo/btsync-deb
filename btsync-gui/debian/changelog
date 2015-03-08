@@ -1,4 +1,14 @@
-btsync-gui (0.8.5-1) unstable; urgency=high
+btsync-gui (0.9.1-1) unstable; urgency=high
+
+  * Added new local settings page for persistent local settings:
+    - switch between bright and dark icon set
+    - enable/disable web ui in menu
+    - enable/disable menu folders (like in btsync-user)
+    - configure advanced connection settings
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sun, 08 Mar 2015 16:21:22 +0100
+
+btsync-gui (0.8.5-1) unstable; urgency=low
 
   * Fixed add_folder incompatibility with btsync 1.4 (Closes #154)
   * Fixed settings file creation when local agent not already
