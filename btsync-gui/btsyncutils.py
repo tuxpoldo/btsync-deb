@@ -32,7 +32,7 @@ from gi.repository import Gtk, GObject
 
 class BtValueDescriptor(GObject.GObject):
 
-	def __init__(self, Name, Type, Value, Default='', Min=None, Max=None, Allowed=None, Forbidden=None, Advanced=True, Hidden=False):
+	def __init__(self, Name, Type, Value, Default='', Min=None, Max=None, Allowed=None, Forbidden=None, Advanced=True, Hidden=False, Local=False):
 		GObject.GObject.__init__(self)
 		self.Name		= Name
 		self.Type		= Type
@@ -44,6 +44,7 @@ class BtValueDescriptor(GObject.GObject):
 		self.Forbidden	= Forbidden
 		self.Advanced	= Advanced
 		self.Hidden		= Hidden
+		self.Local		= Local
 		if self.Type == 'n' and self.Allowed is None:
 			self.Allowed = '0123456789'
 			if str(self.Value)[0:1] == '*':	# remove these stupid "I'm not a default value!"-stars from data
@@ -60,6 +61,12 @@ class BtValueDescriptor(GObject.GObject):
 
 	def is_default(self,value):
 		return False if self.Default is None else str(self.Default) == str(value)
+
+	def is_hidden(self):
+		return self.Hidden
+
+	def is_local(self):
+		return self.Local
 
 	def set_default(self):
 		self.Value = self.Default
@@ -137,6 +144,12 @@ class BtValueDescriptor(GObject.GObject):
 		'sync_trash_ttl'					: BtValueDescriptor (Name, 'n', Value, 30, 0, 999999),
 		'upload_limit'						: BtValueDescriptor (Name, 'n', Value, 0, 0, 1000000, Advanced = False),
 		'use_upnp'							: BtValueDescriptor (Name, 'b', Value, 1, Advanced = False),
+		# the following values are not from btsync but only for the gui itself
+		'dark'								: BtValueDescriptor (Name, 'b', Value, False, Local=True),
+		'foldersmenu'						: BtValueDescriptor (Name, 'b', Value, False, Local=True),
+		'webui'								: BtValueDescriptor (Name, 'b', Value, True, Local=True),
+		'username'							: BtValueDescriptor (Name, 's', Value, Forbidden="\"'", Local=True),
+		'password'							: BtValueDescriptor (Name, 's', Value, Local=True)
 		}.get(Name,BtValueDescriptor (Name, 'u', Value, Hidden = True))
 
 	@staticmethod

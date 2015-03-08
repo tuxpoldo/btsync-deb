@@ -25,6 +25,7 @@ import os
 import gettext
 import qrencode
 import requests
+import logging
 
 from gettext import gettext as _
 from gi.repository import Gtk, Gdk, GdkPixbuf
@@ -493,6 +494,91 @@ class BtSyncHostAdd(BtBaseDialog):
 					))
 				else:
 					return response
+
+class BtSyncSettingsAdvanced(BtBaseDialog):
+	def __init__(self,agent):
+		BtBaseDialog.__init__(self, 'dialogs.glade', 'advsettings')
+		self.agent = agent
+		self.changed = False
+
+	def create(self):
+		BtBaseDialog.create(self)
+		self.username = self.agent.get_pref('username',None)
+		self.password = self.agent.get_pref('password',None)
+		self.bindui = self.agent.get_pref('bindui',None)
+		self.portui = self.agent.get_pref('portui',None)
+
+		self.username_w = self.builder.get_object('username_value')
+		self.password_w = self.builder.get_object('password_value')
+		self.bindportset_w = self.builder.get_object('bindport_set')
+		self.bindport_w = self.builder.get_object('bindport_value')
+		self.bindlocal_w = self.builder.get_object('bind_local')
+		self.bindall_w = self.builder.get_object('bind_all')
+		self.bindother_w = self.builder.get_object('bind_other')
+
+		self.bindportset_w.set_active(self.portui is not None)
+		self.bindport_w.set_sensitive(self.portui is not None)
+		self.bindport_w.set_range(8000, 65534)
+		self.bindport_w.set_increments(1, 100)
+		self.bindport_w.set_value(self.agent.uid + 8999 if self.portui is None else self.portui)
+		self.username_w.set_text("" if self.username is None else self.username)
+		self.password_w.set_text("" if self.password is None else self.password)
+
+		self.bindother_w.set_sensitive(False)
+		if self.bindui is None or self.bindui == '127.0.0.1' or self.bindui == 'localhost':
+			self.bindlocal_w.set_active(True)
+		elif self.bindui == '0.0.0.0' or self.bindui == 'auto':
+			self.bindall_w.set_active(True)
+		else:
+			self.bindother_w.set_active(True)
+		self.changed = False
+
+	def run(self):
+		self.dlg.set_default_response(Gtk.ResponseType.OK)
+		while True:
+			response = BtBaseDialog.run(self)
+			if response == Gtk.ResponseType.CANCEL:
+				return response
+			elif response == Gtk.ResponseType.DELETE_EVENT:
+				return response
+			elif response == Gtk.ResponseType.OK:
+				if self.changed:
+					# read settings
+					self.username = self.username_w.get_text()
+					self.password = self.password_w.get_text()
+					if self.username == '' or self.password == '':
+						self.username = None
+						self.password = None
+					self.portui = self.bindport_w.get_value_as_int() if self.bindportset_w.get_active() else None
+					if self.bindlocal_w.get_active():
+						self.bindui = None
+					elif self.bindall_w.get_active():
+						self.bindui = '0.0.0.0'
+					# process settings
+					self.agent.set_pref('username', self.username, delnone=True)
+					self.agent.set_pref('password', self.password, delnone=True)
+					self.agent.set_pref('bindui', self.bindui, delnone=True)
+					self.agent.set_pref('portui', self.portui, delnone=True)
+					# restart the whole game...
+					if self.agent.paused:
+						self.agent.load_prefs()
+						self.agent.read_prefs()
+						self.agent.reset_connection_params()
+					else:
+						self.agent.suspend()
+						self.agent.load_prefs()
+						self.agent.read_prefs()
+						self.agent.reset_connection_params()
+						self.agent.resume()
+				return response
+
+	def onChanged(self,widget):
+		self.changed = True
+
+	def onBindPortToggled(self,widget):
+		self.bindport_w.set_sensitive(widget.get_active())
+		self.changed = True
+
 
 class BtSyncPrefsAdvanced(BtBaseDialog,BtInputHelper):
 

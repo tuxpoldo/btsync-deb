@@ -33,12 +33,13 @@ from gi.repository import Gtk, Gdk, GObject, Pango
 
 from btsyncagent import BtSyncAgent
 from btsyncutils import BtInputHelper,BtMessageHelper,BtValueDescriptor,BtDynamicTimeout
-from dialogs import BtSyncFolderAdd,BtSyncFolderRemove,BtSyncFolderScanQR,BtSyncFolderPrefs,BtSyncPrefsAdvanced
+from dialogs import BtSyncFolderAdd,BtSyncFolderRemove,BtSyncFolderScanQR,BtSyncFolderPrefs,BtSyncPrefsAdvanced,BtSyncSettingsAdvanced
 
 class BtSyncApp(BtInputHelper,BtMessageHelper):
 
-	def __init__(self,agent):
-		self.agent = agent
+	def __init__(self,agent,status=None):
+		self.agent	= agent
+		self.status	= status
 
 		self.builder = Gtk.Builder()
 		self.builder.set_translation_domain('btsync-gui')
@@ -70,6 +71,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.init_transfers_controls()
 		self.init_history_controls()
 		self.init_preferences_controls()
+		self.init_settings_controls()
 
 		# TODO: Hide pages not supported by API
 		notebook = self.builder.get_object('notebook1')
@@ -83,6 +85,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 
 		self.init_folders_values()
 		self.init_preferences_values()
+		self.init_settings_values()
 
 	def close(self):
 		self.app_status_to.stop()
@@ -370,6 +373,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.attach(self.devname,BtValueDescriptor.new_from('device_name',self.prefs['device_name']))
 		# self.autostart.set_active(self.prefs[""]);
 		self.autostart.set_sensitive(False)
+		self.autostart.set_visible(False)
 		self.attach(self.listeningport,BtValueDescriptor.new_from('listening_port',self.prefs['listening_port']))
 		self.attach(self.upnp,BtValueDescriptor.new_from('use_upnp',self.prefs['use_upnp']))
 		self.attach(self.limitdnrate,BtValueDescriptor.new_from('download_limit',self.prefs['download_limit']))
@@ -377,6 +381,22 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 
 		self.limitdn.set_active(self.prefs['download_limit'] > 0)
 		self.limitup.set_active(self.prefs['upload_limit'] > 0)
+		self.unlock()
+
+	def init_settings_controls(self):
+		self.enableDarkIcons = self.builder.get_object('enableDarkIcons')
+		self.enableFoldersMenu = self.builder.get_object('enableFoldersMenu')
+		self.enableWebUI = self.builder.get_object('enableWebUI')
+		self.buttonAdvanced = self.builder.get_object('buttonAdvanced')
+		# TODO: implement folder menus
+		self.enableFoldersMenu.set_sensitive(False)
+		self.buttonAdvanced.set_sensitive(self.agent.is_primary())
+
+	def init_settings_values(self):
+		self.lock()
+		self.attach(self.enableDarkIcons,BtValueDescriptor.new_from('dark',self.agent.dark))
+		self.attach(self.enableFoldersMenu,BtValueDescriptor.new_from('foldersmenu',self.agent.foldersmenu))
+		self.attach(self.enableWebUI,BtValueDescriptor.new_from('webui',self.agent.webui))
 		self.unlock()
 
 	def get_treeview_column_widths(self,treewidget):
@@ -421,9 +441,24 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.close()
 
 	def onSaveEntry(self,widget,valDesc,newValue):
+		logging.info('Changed Setting: {0} {1}'.format(valDesc.Name, newValue))
 		try:
-			self.agent.set_prefs({valDesc.Name : newValue})
-			self.prefs[valDesc.Name] = newValue
+			if valDesc.is_local():
+				# local gui settings
+				self.agent.set_pref(valDesc.Name, newValue)
+				self.agent.read_prefs ()
+				# make changes active
+				if valDesc.Name == 'dark' and self.status is not None:
+					self.status.init_icons()
+					self.status.refresh_status()
+				if valDesc.Name == 'webui' and self.status is not None:
+					self.status.refresh_menus()
+				if valDesc.Name == 'foldersmenu' and self.status is not None:
+					self.status.refresh_menus()
+			else:
+				# bittorrent sync settings
+				self.agent.set_prefs({valDesc.Name : newValue})
+				self.prefs[valDesc.Name] = newValue
 		except requests.exceptions.ConnectionError:
 			return self.onConnectionError()
 		except requests.exceptions.HTTPError:
@@ -611,6 +646,19 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 			logging.error('onPreferencesClickedAdvanced: Unexpected exception caught: '+str(e))
 		finally:
 			if isinstance(self.dlg, BtSyncPrefsAdvanced):
+				self.dlg.destroy()
+			self.dlg = None
+
+	def onSettingsClickedAdvanced(self,widget):
+		try:
+			self.dlg = BtSyncSettingsAdvanced(self.agent)
+			self.dlg.create()
+			self.dlg.run()
+		except Exception as e:
+			# this should not really happen...
+			logging.error('onPreferencesClickedAdvanced: Unexpected exception caught: '+str(e))
+		finally:
+			if isinstance(self.dlg, BtSyncSettingsAdvanced):
 				self.dlg.destroy()
 			self.dlg = None
 
