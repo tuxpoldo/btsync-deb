@@ -60,66 +60,25 @@ class BtSyncAgent(BtSyncApi):
 		self.preffile = self.configpath + '/btsync-gui.prefs'
 		self.lockfile = self.configpath + '/btsync-gui.pid'
 		self.lock = None
-		# load values from preferences file
+		# load and process values from preferences file
 		self.load_prefs()
 		self.read_prefs()
 		# process command line arguments
-		if self.args.username is not None:
-			self.username = self.args.username
-		if self.args.password is not None:
-			self.password = self.args.password
-		if self.args.bindui is not None:
-			self.bindui = '0.0.0.0' if self.args.bindui == 'auto' else self.args.bindui
-		if self.args.port != 0:
-			self.portui = self.args.port
-		if self.args.webui:
-			self.webui = self.args.webui
-		if self.args.dark:
-			self.dark = self.args.dark
-		if self.args.cleardefaults:
-			# clear saved defaults
-			self.del_pref('username')
-			self.del_pref('password')
-			self.del_pref('webui')
-			self.del_pref('bindui')
-			self.del_pref('portui')
-			self.del_pref('dark')
-			self.del_pref('foldersmenu')
-			self.save_prefs()
-			raise BtSyncAgentException(0, _('Default settings cleared.'))
-		if self.args.savedefaults:
-			# save new defaults
-			if self.args.username is not None:
-				self.set_pref('username',self.username)
-#			else:
-#				raise BtSyncAgentException(-1,
-#					'Username must be specified when saving defaults')
-			if self.args.password is not None:
-				self.set_pref('password',self.password)
-#			else:
-#				raise BtSyncAgentException(-1,
-#					'Password must be specified when saving defaults')
-			if self.args.bindui is not None:
-				# changed bind address for web ui
-				self.set_pref('bindui',self.bindui)
-			if self.args.port != 0:
-				# changed bind port for web ui
-				self.set_pref('portui',self.portui)
-			if self.args.webui:
-				self.set_pref('webui',self.args.webui)
-			if self.args.dark:
-				self.set_pref('dark',self.args.dark)
-			raise BtSyncAgentException(0, _('Default settings saved.'))
+		self.read_args()
+		self.exec_args()
 		# initialize btsync api
-		self.set_connection_params(
-			host = self.get_host(), port = self.get_port(),
-			username = self.get_username(), password = self.get_password()
-		)
+		self.reset_connection_params()
 		if self.is_auto():
 			self.lock = BtSingleton(self.lockfile,'btsync-gui')
 
 	def __del__(self):
 		self.shutdown()
+
+	def reset_connection_params(self):
+		self.set_connection_params(
+			host = self.get_host(), port = self.get_port(),
+			username = self.get_username(), password = self.get_password()
+		)
 
 	def startup(self):
 		if self.is_auto():
@@ -153,7 +112,7 @@ class BtSyncAgent(BtSyncApi):
 					self.kill_agent()
 
 	def resume(self):
-		if self.args.host == 'auto':
+		if self.is_auto():
 			if self.paused:
 				self.paused = False
 				self.set_pref('paused', False)
@@ -187,8 +146,12 @@ class BtSyncAgent(BtSyncApi):
 				# ok the process has stopped before we tried to kill it...
 				pass
 
-	def set_pref(self,key,value,flush=True):
-		self.prefs[key] = value
+	def set_pref(self,key,value,flush=True,delnone=False):
+		if delnone and value is None:
+			if key in self.prefs:
+				del self.prefs[key]
+		else:
+			self.prefs[key] = value
 		if flush:
 			self.save_prefs()
 
@@ -234,12 +197,6 @@ class BtSyncAgent(BtSyncApi):
 		self.dark = self.get_pref('dark',False)
 		self.foldersmenu = self.get_pref('foldersmenu',False)
 
-	def make_local_paths(self):
-		if not os.path.isdir(self.configpath):
-			os.makedirs(self.configpath)
-		if not os.path.isdir(self.storagepath):
-			os.makedirs(self.storagepath)
-
 	def save_prefs(self):
 		try:
 			self.make_local_paths()
@@ -249,6 +206,56 @@ class BtSyncAgent(BtSyncApi):
 			pref.close()
 		except Exception as e:
 			logging.error('Error while saving preferences: {0}'.format(e))
+
+	def read_args(self):
+		if self.args.username is not None:
+			self.username = self.args.username
+		if self.args.password is not None:
+			self.password = self.args.password
+		if self.args.bindui is not None:
+			self.bindui = '0.0.0.0' if self.args.bindui == 'auto' else self.args.bindui
+		if self.args.port != 0:
+			self.portui = self.args.port
+		if self.args.webui:
+			self.webui = self.args.webui
+		if self.args.dark:
+			self.dark = self.args.dark
+
+	def exec_args(self):
+		if self.args.cleardefaults:
+			# clear saved defaults
+			self.del_pref('username')
+			self.del_pref('password')
+			self.del_pref('webui')
+			self.del_pref('bindui')
+			self.del_pref('portui')
+			self.del_pref('dark')
+			self.del_pref('foldersmenu')
+			self.save_prefs()
+			raise BtSyncAgentException(0, _('Default settings cleared.'))
+		if self.args.savedefaults:
+			# save new defaults
+			if self.args.username is not None:
+				self.set_pref('username',self.username)
+#			else:
+#				raise BtSyncAgentException(-1,
+#					'Username must be specified when saving defaults')
+			if self.args.password is not None:
+				self.set_pref('password',self.password)
+#			else:
+#				raise BtSyncAgentException(-1,
+#					'Password must be specified when saving defaults')
+			if self.args.bindui is not None:
+				# changed bind address for web ui
+				self.set_pref('bindui',self.bindui)
+			if self.args.port != 0:
+				# changed bind port for web ui
+				self.set_pref('portui',self.portui)
+			if self.args.webui:
+				self.set_pref('webui',self.args.webui)
+			if self.args.dark:
+				self.set_pref('dark',self.args.dark)
+			raise BtSyncAgentException(0, _('Default settings saved.'))
 
 	def is_auto(self):
 		return self.args.host == 'auto'
@@ -299,6 +306,12 @@ class BtSyncAgent(BtSyncApi):
 				deb.close
 			else:
 				os.remove (self.storagepath + '/debug.txt')
+
+	def make_local_paths(self):
+		if not os.path.isdir(self.configpath):
+			os.makedirs(self.configpath)
+		if not os.path.isdir(self.storagepath):
+			os.makedirs(self.storagepath)
 
 	def make_config_file(self):
 		try:

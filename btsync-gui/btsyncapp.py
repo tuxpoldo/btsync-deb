@@ -373,6 +373,7 @@ class BtSyncApp(BtInputHelper,BtMessageHelper):
 		self.attach(self.devname,BtValueDescriptor.new_from('device_name',self.prefs['device_name']))
 		# self.autostart.set_active(self.prefs[""]);
 		self.autostart.set_sensitive(False)
+		self.autostart.set_visible(False)
 		self.attach(self.listeningport,BtValueDescriptor.new_from('listening_port',self.prefs['listening_port']))
 		self.attach(self.upnp,BtValueDescriptor.new_from('use_upnp',self.prefs['use_upnp']))
 		self.attach(self.limitdnrate,BtValueDescriptor.new_from('download_limit',self.prefs['download_limit']))
