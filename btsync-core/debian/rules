@@ -1,0 +1,79 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# make it work without cddb since cdbs assumes that the makefile
+# will be executed from the project directory but we need this vars
+# in target get-orig-source that MUST work from every directory
+
+DEB_DEBIAN_DIR=$(dir $(firstword $(MAKEFILE_LIST)))
+DEB_UPSTREAM_VERSION=$(shell dpkg-parsechangelog -l$(DEB_DEBIAN_DIR)/changelog \
+				| sed -rne 's,^Version: ([^-]+).*,\1,p')
+DEB_SOURCE_PACKAGE=$(shell dpkg-parsechangelog -l$(DEB_DEBIAN_DIR)/changelog \
+				| sed -rne 's,^Source: (.*),\1,p')
+
+%:
+	dh $@ 
+
+override_dh_install:
+	dh_install
+	case "$(DEB_HOST_ARCH)" in \
+	i386)				dh_install btsync-core usr/lib/btsync-core; ;; \
+	amd64)				dh_install btsync-core usr/lib/btsync-core; ;; \
+	powerpc)			dh_install btsync-core usr/lib/btsync-core; ;; \
+	arm|armel|armhf)	dh_install btsync-core usr/lib/btsync-core; ;; \
+	esac
+
+override_dh_auto_build:
+	dh_auto_build
+	case "$(DEB_HOST_ARCH)" in \
+	i386)				cp -a i386/btsync btsync-core; ;; \
+	amd64)				cp -a amd64/btsync btsync-core; ;; \
+	powerpc)			cp -a powerpc/btsync btsync-core; ;; \
+	arm|armel|armhf)	cp -a arm/btsync btsync-core; ;; \
+	esac
+
+override_dh_clean:
+	rm -f btsync-core
+	dh_clean
+
+# this would not work in cross-platform builds and
+# we do not need this dependencies to be detected.
+override_dh_shlibdeps:
+
+# leave the original binaries untouched
+override_dh_strip:
+
+# clean the existent sources
+clean-orig-source:
+	rm -rf $(DEB_DEBIAN_DIR)../amd64
+	rm -rf $(DEB_DEBIAN_DIR)../arm
+	rm -rf $(DEB_DEBIAN_DIR)../i386
+	rm -rf $(DEB_DEBIAN_DIR)../powerpc
+
+# create an original source archive out of the original distribution, if not present
+get-orig-source:
+	if [ ! -f $(DEB_DEBIAN_DIR)../../$(DEB_SOURCE_PACKAGE)_$(DEB_UPSTREAM_VERSION).orig.tar.gz ]; then \
+		rm -rf temp-orig-source; \
+		mkdir -p temp-orig-source/$(DEB_SOURCE_PACKAGE); \
+		for arch in arm powerpc i386 x64; do \
+			if ! wget -q -c http://syncapp.bittorrent.com/$(DEB_UPSTREAM_VERSION)/btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; then \
+				wget -q -c http://archive.yeasoft.net/btsync/$(DEB_UPSTREAM_VERSION)/btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; \
+			fi; \
+			mkdir -p temp-orig-source/$(DEB_SOURCE_PACKAGE)/$${arch}; \
+			tar -C temp-orig-source/$(DEB_SOURCE_PACKAGE)/$${arch} -xzf btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; \
+			rm -f btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; \
+		done; \
+		mv temp-orig-source/$(DEB_SOURCE_PACKAGE)/x64 temp-orig-source/$(DEB_SOURCE_PACKAGE)/amd64; \
+		mv temp-orig-source/$(DEB_SOURCE_PACKAGE)/freebsd_x64 temp-orig-source/$(DEB_SOURCE_PACKAGE)/kfreebsd-amd64; \
+		mv temp-orig-source/$(DEB_SOURCE_PACKAGE)/freebsd_i386 temp-orig-source/$(DEB_SOURCE_PACKAGE)/kfreebsd-i386; \
+		tar -C temp-orig-source -czf $(DEB_DEBIAN_DIR)../../$(DEB_SOURCE_PACKAGE)_$(DEB_UPSTREAM_VERSION).orig.tar.gz $(DEB_SOURCE_PACKAGE); \
+		rm -rf temp-orig-source; \
+	fi

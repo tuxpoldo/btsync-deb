@@ -1,0 +1,31 @@
+# Example watch control file for uscan
+# Rename this file to "watch" and then you can run the "uscan" command
+# to check for upstream updates and more.
+# See uscan(1) for format
+
+# Compulsory line, this is a version 3 file
+version=3
+
+# since currently there is no official repository for
+# versionably btsync binaries, this file is only
+# a stub and will be updated as soon as the functionality
+# will be possible. in the meantime the yeasoft archive
+# acts as a valid source
+
+http://archive.yeasoft.net/btsync/([\d\.]+)/btsync-core-([\d\.]+)\.tar\.gz
+
+# Uncomment to examine a Webpage
+# <Webpage URL> <string match>
+#http://www.example.com/downloads.php btsync-core-(.*)\.tar\.gz
+
+# Uncomment to examine a Webserver directory
+#http://www.example.com/pub/btsync-core-(.*)\.tar\.gz
+
+# Uncommment to examine a FTP server
+#ftp://ftp.example.com/pub/btsync-core-(.*)\.tar\.gz debian uupdate
+
+# Uncomment to find new files on sourceforge, for devscripts >= 2.9
+# http://sf.net/btsync-core/btsync-core-(.*)\.tar\.gz
+
+# Uncomment to find new files on GooglePages
+# http://example.googlepages.com/foo.html btsync-core-(.*)\.tar\.gz

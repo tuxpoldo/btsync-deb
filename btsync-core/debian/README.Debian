@@ -1,0 +1,21 @@
+btsync-core for Debian
+----------------------
+
+This package installs the original btsync binary from BitTorrent Inc.
+in /usr/lib/btsync-core as btsync-core
+The original documentation including a sample configuration file and
+all included README and LICENSE files will be installed in
+/usr/share/doc/btsync-core/
+
+This package does not provide any ready to use functionality but is
+solely intended as a base for other packages like btsync-gui that
+rely on the btsync functionality
+
+THIS PACKAGE IS UNOFFICIAL AND NOT THE WORK OF BITTORRENT INC.
+PLEASE DO NOT CONTACT THE BITTORRENT INC. SUPPORT WITH
+QUESTIONS OR PROBLEMS RELATED TO THE USE OF THE PACKAGES. YOU
+WILL FIND COMPETENT HELP AND SUPPORT IN THE RELATED DISCUSSION
+THREADS IN THE SUPPORT FORUM (http://goo.gl/NN4RL5 and
+http://goo.gl/zqDyqD)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Sun, 15 Mar 2015 13:20:11 +0100
