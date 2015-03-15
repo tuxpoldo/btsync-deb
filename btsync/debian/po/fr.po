@@ -400,6 +400,6 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../btsync.templates:32001
-msgid "Base path where the web interface folder browser starts. The specified path must be absolute, accessible by the BitTorrent Sync process and existing. If leaved empty, the whole file system can be browsed."
+msgid "Base path where the web interface folder browser starts. The specified path must be absolute, writable by the BitTorrent Sync process and existing. All folders shared by linked devices will be created here by default."
 msgstr ""
 
