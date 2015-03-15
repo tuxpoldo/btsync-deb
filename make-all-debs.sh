@@ -2,7 +2,7 @@
 
 set -e
 
-SOURCES="btsync-common btsync-gui btsync-user btsync"
+SOURCES="btsync-common btsync-core btsync-gui btsync-user btsync"
 
 [ -n "$1" ] && SOURCES="$1"
 
@@ -20,7 +20,7 @@ for SRCDIR in ${SOURCES}; do
 	if [ -d ${SRCDIR} ]; then
 		enter_build ${SRCDIR}
 		# make binary targets
-		if [ "${SRCDIR}" != "btsync-common" ]; then
+		if [ "${SRCDIR}" != "btsync-common" -a "${SRCDIR}" != "btsync-core" ]; then
 			debuild clean
 			debuild -uc -us -b
 			rm -f ../*all.build

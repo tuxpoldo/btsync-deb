@@ -2,7 +2,7 @@
 
 set -e
 
-SOURCES="bind-shim btsync-common btsync-user btsync-gui btsync"
+SOURCES="bind-shim btsync-common btsync-core btsync-user btsync-gui btsync"
 
 [ -n "$1" ] && SOURCES="$1"
 
