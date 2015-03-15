@@ -208,7 +208,6 @@ msgstr "Benutzer für BitTorrent Sync:"
 #. Type: select
 #. Description
 #: ../btsync.templates:16001
-#, fuzzy
 msgid "You can choose, if you want BitTorrent Sync to run as root (not recommended), under it's own unprivileged credentials (user: btsync, group: btsync) or under an arbitrary user of your choice. WARNING: If you change this setting in an already running instance, you must take care of changing the ownership of all files in the managed folder shares in order to make sure that BitTorrent Sync will still be able to access and modify them."
 msgstr "Sie können wählen, ob BitTorrent Sync als \"root\" Benutzer (nicht empfohlen), als eigenen Systembenutzer (Benutzer: btsync, Gruppe: btsync) oder als einen beliebigen Benutzer ausgeführt werden soll. WARNUNG: Wenn Sie diese Einstellung in einer bereits konfigurierten Instanz verändern, müssen Sie sicher stellen, dass BitTorrent Sync weiterhin in der Lage ist, auf alle geteilten Dateien und Verzeichnisse sowohl lesend als auch schreibend zuzugreifen."
 
@@ -401,6 +400,6 @@ msgstr "Startpfad für die Verzeichnisauswahl in der Web Oberfläche:"
 #. Type: string
 #. Description
 #: ../btsync.templates:32001
-msgid "Base path where the web interface folder browser starts. The specified path must be absolute, accessible by the BitTorrent Sync process and existing. If leaved empty, the whole file system can be browsed."
-msgstr "Verzeichnis ab wo der Browser in der Web Oberfläche startet. Der angegebene Pfad muss absolut sein, für den BitTorrent Sync Prozess erreichbar sein und existieren. Falls nichts angegeben wird, kann aus dem gesamten Dateisystem ein Pfad gewählt werden."
+msgid "Base path where the web interface folder browser starts. The specified path must be absolute, writable by the BitTorrent Sync process and existing. All folders shared by linked devices will be created here by default."
+msgstr "Verzeichnis ab wo der Browser in der Web Oberfläche startet. Der angegebene Pfad muss absolut sein, für den BitTorrent Sync Prozess schreibbar sein und existieren. Alle geteilten Ordner verbundener Geräte werden hier erstellt."
 
