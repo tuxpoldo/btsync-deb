@@ -17,7 +17,7 @@ msgstr "是否进行默认配置设置?"
 #. Description
 #: ../btsync.templates:1001
 msgid "BitTorrent Sync can run one or more daemons based on configuration files located in /etc/btsync. You can choose to create a default instance running under root credentials that can be also reconfigured via dpkg-reconfigure or manage the whole configuration manually. In both cases you can manually manage additional instances with their own configuration files."
-msgstr "通过配置/etc/btsync中的配置文件,BitTorrent Sync可同时运行单个或多个服务"
+msgstr "通过配置 /etc/btsync 中的配置文件，BitTorrent Sync 可同时运行单个或多个服务"
 
 #. Type: string
 #. Description
@@ -400,6 +400,6 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../btsync.templates:32001
-msgid "Base path where the web interface folder browser starts. The specified path must be absolute, accessible by the BitTorrent Sync process and existing. If leaved empty, the whole file system can be browsed."
+msgid "Base path where the web interface folder browser starts. The specified path must be absolute, writable by the BitTorrent Sync process and existing. All folders shared by linked devices will be created here by default."
 msgstr ""
 
