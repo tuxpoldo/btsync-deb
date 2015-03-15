@@ -401,6 +401,7 @@ msgstr "Comienzo de la ruta para la exploración de carpetas de la interfaz web:
 #. Type: string
 #. Description
 #: ../btsync.templates:32001
-msgid "Base path where the web interface folder browser starts. The specified path must be absolute, accessible by the BitTorrent Sync process and existing. If leaved empty, the whole file system can be browsed."
-msgstr "Ruta base en la que comienza la carpeta de la interfaz web. Debe indicarse una ruta absoluta, existente y accesible por el proceso de BitTorrent Sync. Si se deja en blanco, se podrá explorar el sistema de archivos completo."
+#, fuzzy
+msgid "Base path where the web interface folder browser starts. The specified path must be absolute, writable by the BitTorrent Sync process and existing. All folders shared by linked devices will be created here by default."
+msgstr "Ruta base en la que comienza la carpeta de la interfaz web. Debe indicarse una ruta absoluta, existente y grabable por el proceso de BitTorrent Sync. All folders shared by linked devices will be created here by default."
 
