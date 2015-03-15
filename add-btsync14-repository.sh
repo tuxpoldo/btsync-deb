@@ -1,9 +1,9 @@
 #!/bin/sh
 #
-# (c) 2014 YeaSoft Int'l - Leo Moll
+# (c) 2015 YeaSoft Int'l - Leo Moll
 #
 # VERSION 0.3
-# This script adds the YeaSoft BitTorrent Sync packaging
+# This script adds the YeaSoft BitTorrent Sync 1.4 packaging
 # repositories to a machine and also adds the signer key
 
 show_error() {
@@ -111,9 +111,9 @@ fi
 
 echo "Installing repository info..."
 
-echo "# YeaSoft's BitTorrent Sync Packaging Repositoy" > ~/btsync.list.temp
-echo "deb http://debian.yeasoft.net/btsync ${CODENAME:-unstable} main" >> ~/btsync.list.temp
-echo "deb-src http://debian.yeasoft.net/btsync ${CODENAME:-unstable} main" >> ~/btsync.list.temp
+echo "# YeaSoft's BitTorrent Sync 1.4 Packaging Repositoy" > ~/btsync.list.temp
+echo "deb http://debian.yeasoft.net/btsync14 ${CODENAME:-unstable} main" >> ~/btsync.list.temp
+echo "deb-src http://debian.yeasoft.net/btsync14 ${CODENAME:-unstable} main" >> ~/btsync.list.temp
 
 if ! $SUDO mv ~/btsync.list.temp /etc/apt/sources.list.d/btsync.list; then
 	rm -f ~/btsync.list.temp
