@@ -362,7 +362,7 @@ start_btsync () {
 	adjust_arm_alignment
 	adjust_storage_path
 	adjust_debug_flags
-	
+
 	STATUS=0
 	start-stop-daemon --start --quiet --oknodo \
 		--nicelevel $NICE_LEVEL \
@@ -408,7 +408,13 @@ stop_btsync () {
 	STATUS=0
 	start-stop-daemon --stop --quiet \
 		--retry=TERM/30/KILL/5 \
-		--exec $DAEMON --pidfile ${PIDFILE}  || STATUS=1
+		--exec $DAEMON --pidfile ${PIDFILE}  || STATUS=$?
+	if [ $STATUS -ne 0 ]; then
+		start-stop-daemon --stop --quiet \
+			--retry=TERM/30/KILL/5 \
+			--pidfile ${PIDFILE}  || STATUS=$?
+	fi
+
 	if [ -f ${PIDFILE} ]; then
 		TESTPID=$(cat ${PIDFILE})
 		if [ $(( $TESTPID )) -gt 10 ]; then
@@ -419,7 +425,7 @@ stop_btsync () {
 		fi
 	fi
 	adjust_storage_path
-	if [ $STATUS -gt 0 ]; then
+	if [ $STATUS -ne 0 ]; then
 		log_error_msg "Failed to stop $NAME instance $BASENAME"
 	else
 		log_info "$NAME instance $BASENAME stopped successfully"

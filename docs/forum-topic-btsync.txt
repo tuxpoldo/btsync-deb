@@ -24,11 +24,16 @@ This topic covers only the [b]server package[/b]. If you are searching for the [
 
 [color=#008000][b]INSTALLATION ON DEBIAN, UBUNTU, LINUX MINT, RASPBIAN OR OTHER DEBIAN DERIVATES[/b][/color]
 
-The most easy and fast way to install the repository is to paste that at a terminal prompt:
+The most easy and fast way to install the repository [b]with latest stuff[/b] is to paste that at a terminal prompt:
 [code]
 sh -c "$(curl -fsSL http://debian.yeasoft.net/add-btsync-repository.sh)"
 [/code]
- 
+
+If instead you wish to [b]stay on version 1.4[/b], you should paste the following command at a terminal prompt:
+[code]
+sh -c "$(curl -fsSL http://debian.yeasoft.net/add-btsync14-repository.sh)"
+[/code]
+
 The script explains what it will do and then pauses before it does it asking for your permission. If you encounter any problems or prefer to do it manually, please [b][url=http://www.yeasoft.com/site/projects:btsync-deb:btsync-repo]look here[/url][/b].
 
 Now update the package index and install [font=courier new,courier,monospace][b]btsync[/b][/font] by pasting that at a terminal prompt:

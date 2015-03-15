@@ -271,25 +271,28 @@ remove_default_instance() {
 fix_permissions() {
 	if [ -f ${CONFFILE} ]; then
 		if [ "${BTGROUP}" != "default" ]; then
+			BTPERMS="${BTUSER}:${BTGROUP}"
 			chown ${BTUSER}:${BTGROUP} ${CONFFILE} ${CRTLINK} ${KEYLINK}
 			chown -R ${BTUSER}:${BTGROUP} /var/lib/btsync
 		else
 			case "${BTUSER}" in
 			btsync)
-				chown btsync:btsync ${CONFFILE} ${CRTLINK} ${KEYLINK}
-				chown -R btsync:btsync /var/lib/btsync
+				BTPERMS="btsync:btsync"
 				;;
 			root)
-				chown root:root ${CONFFILE}  ${CRTLINK} ${KEYLINK}
-				chown -R root:root /var/lib/btsync
+				BTPERMS="root:root"
 				;;
 			*)
-				chown ${BTUSER} ${CONFFILE} ${CRTLINK} ${KEYLINK}
-				chown -R ${BTUSER} /var/lib/btsync
+				BTPERMS="${BTUSER}"
 				;;
 			esac
 		fi
+		chown ${BTPERMS} ${CONFFILE} ${CRTLINK} ${KEYLINK}
+		chown -R ${BTPERMS} /var/lib/btsync
 		chmod 700 /var/lib/btsync
+		if [ "$(stat --printf '%U' ${DIRECTORY_ROOT})" != "${BTUSER}" ]; then
+			chmod a+rwx "${DIRECTORY_ROOT}"
+		fi
 	fi
 }
 

@@ -47,6 +47,14 @@ terminal prompt:
 sh -c "$(curl -fsSL http://debian.yeasoft.net/add-btsync-repository.sh)"
 ```
 
+If instead you wish to __stay on version 1.4__, you should paste the following
+command at a terminal prompt:
+
+```bash
+sh -c "$(curl -fsSL http://debian.yeasoft.net/add-btsync14-repository.sh)"
+```
+
+
 The script explains what it will do and then pauses before it does it asking
 for your permission. If you encounter any problems or prefer to do it manually,
 please __[look here](http://www.yeasoft.com/site/projects:btsync-deb:btsync-repo)__.

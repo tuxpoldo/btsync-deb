@@ -12,7 +12,7 @@ Package: btsync
 Architecture: all
 Pre-Depends: debconf | debconf-2.0, adduser
 Depends: ${shlibs:Depends}, ${misc:Depends}, openssl,
- btsync-common (>= 1.4.72-1)
+ btsync-core (>= 2.0.85-1)
 Suggests: bind-shim
 Provides: btsync-server-daemon
 Description: Private network P2P file synchronisation daemon(s)
