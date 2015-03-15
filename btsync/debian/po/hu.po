@@ -400,6 +400,7 @@ msgstr "A webes felület tallózójának kiinduló könyvtára:"
 #. Type: string
 #. Description
 #: ../btsync.templates:32001
-msgid "Base path where the web interface folder browser starts. The specified path must be absolute, accessible by the BitTorrent Sync process and existing. If leaved empty, the whole file system can be browsed."
-msgstr "Kiinduló könyvtár, ahonnan a webes felület böngészője indul. Csak abszolút útvonal adható meg, melyhez van a BitTorrent Sync-nek jogosultsága hozzáférni, és létező mappára mutat. Üresen hagyva az egész fájlrendszer böngészhető."
+#, fuzzy
+msgid "Base path where the web interface folder browser starts. The specified path must be absolute, writable by the BitTorrent Sync process and existing. All folders shared by linked devices will be created here by default."
+msgstr "Kiinduló könyvtár, ahonnan a webes felület böngészője indul. Csak abszolút útvonal adható meg, melyhez van a BitTorrent Sync-nek jogosultsága hozzáférni, és létező mappára mutat. All folders shared by linked devices will be created here by default."
 
