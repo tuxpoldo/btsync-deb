@@ -3,7 +3,7 @@ Upstream-Name: btsync
 Source: http://www.bittorrent.com
 
 Files: *
-Copyright: 2013-2014 Leo Moll <leo.moll@yeasoft.com>
+Copyright: 2013-2015 Leo Moll <leo.moll@yeasoft.com>
 License: GPL-2+
  This package is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
