@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: btsync\n"
 "Report-Msgid-Bugs-To: btsync@packages.debian.org\n"
-"POT-Creation-Date: 2015-03-16 00:08+0200\n"
+"POT-Creation-Date: 2015-03-16 12:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -363,7 +363,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../btsync.templates:22001
-msgid "If enabled, only SSL (http) connections will be allowed to the Web UI."
+msgid "If enabled, only SSL (https) connections will be allowed to the Web UI."
 msgstr ""
 
 #. Type: boolean
