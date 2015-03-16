@@ -280,7 +280,7 @@ msgstr "Voulez-vous forcer l'utilisation du SSL pour les connexions à l'interfa
 #. Type: boolean
 #. Description
 #: ../btsync.templates:22001
-msgid "If enabled, only SSL (http) connections will be allowed to the Web UI."
+msgid "If enabled, only SSL (https) connections will be allowed to the Web UI."
 msgstr "Si activé, seules les connexion SSL (https) seront autorisées."
 
 #. Type: boolean

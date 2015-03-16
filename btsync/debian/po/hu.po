@@ -280,8 +280,8 @@ msgstr "Webes felület csak SSL kapcsolattal legyen elérhető?"
 #. Type: boolean
 #. Description
 #: ../btsync.templates:22001
-msgid "If enabled, only SSL (http) connections will be allowed to the Web UI."
-msgstr "Ha be van állítva, csak SSL (http) kapcsolattal lehet elérni a webes felületet."
+msgid "If enabled, only SSL (https) connections will be allowed to the Web UI."
+msgstr "Ha be van állítva, csak SSL (https) kapcsolattal lehet elérni a webes felületet."
 
 #. Type: boolean
 #. Description

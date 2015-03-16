@@ -280,7 +280,7 @@ msgstr "Использовать только SSL подключение к Web-
 #. Type: boolean
 #. Description
 #: ../btsync.templates:22001
-msgid "If enabled, only SSL (http) connections will be allowed to the Web UI."
+msgid "If enabled, only SSL (https) connections will be allowed to the Web UI."
 msgstr "Если выбрано, то к Web-интерфейсу можно подключиться только через SSL соединение"
 
 #. Type: boolean
