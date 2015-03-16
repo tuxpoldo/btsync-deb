@@ -280,8 +280,8 @@ msgstr "BitTorrent Sync debe permitir só conexións SSL coa interface web de us
 #. Type: boolean
 #. Description
 #: ../btsync.templates:22001
-msgid "If enabled, only SSL (http) connections will be allowed to the Web UI."
-msgstr "Se está activado, so se permitiran conexións SSL (http) coa interface web de usuario."
+msgid "If enabled, only SSL (https) connections will be allowed to the Web UI."
+msgstr "Se está activado, so se permitiran conexións SSL (https) coa interface web de usuario."
 
 #. Type: boolean
 #. Description

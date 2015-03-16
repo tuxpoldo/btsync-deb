@@ -281,8 +281,8 @@ msgstr "Měl by BitTorrent Sync povolit jen SSL spojení do webového rozhraní?
 #. Type: boolean
 #. Description
 #: ../btsync.templates:22001
-msgid "If enabled, only SSL (http) connections will be allowed to the Web UI."
-msgstr "Při povolení, budou pro spojení s web. rozhraním povolena jen SSL (http) spojení."
+msgid "If enabled, only SSL (https) connections will be allowed to the Web UI."
+msgstr "Při povolení, budou pro spojení s web. rozhraním povolena jen SSL (https) spojení."
 
 #. Type: boolean
 #. Description

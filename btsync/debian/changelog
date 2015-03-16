@@ -1,3 +1,9 @@
+btsync (1.4.1-2) unstable; urgency=low
+
+  * Fixed typo in debconf string (Closes #175)
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Mon, 16 Dec 2015 14:47:25 +0100
+
 btsync (1.4.1-1) unstable; urgency=low
 
   * Removed check for mandatory disablement of misinterpreted

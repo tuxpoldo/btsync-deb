@@ -188,7 +188,7 @@ Template: btsync/webgui-force-https
 Type: boolean
 Default: false
 _Description: Should BitTorrent Sync allow only SSL connections to the Web UI?
- If enabled, only SSL (http) connections will be allowed to the Web UI.
+ If enabled, only SSL (https) connections will be allowed to the Web UI.
 
 Template: btsync/folder_defaults
 Type: boolean

@@ -281,8 +281,8 @@ msgstr "¿Debería BitTorrent Sync permitir únicamente conexiones SSL al IU Web
 #. Type: boolean
 #. Description
 #: ../btsync.templates:22001
-msgid "If enabled, only SSL (http) connections will be allowed to the Web UI."
-msgstr "Si se activa, solo se permitirán conexions SSL (http) al IU Web."
+msgid "If enabled, only SSL (https) connections will be allowed to the Web UI."
+msgstr "Si se activa, solo se permitirán conexions SSL (https) al IU Web."
 
 #. Type: boolean
 #. Description
