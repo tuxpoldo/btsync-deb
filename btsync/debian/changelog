@@ -1,8 +1,9 @@
 btsync (2.0.0-2) unstable; urgency=low
 
+  * Fixed installation failure (Closes #179)
   * Fixed typo in debconf string (Closes #175)
 
- -- Leo Moll <leo.moll@yeasoft.com>  Mon, 16 Dec 2015 14:47:25 +0100
+ -- Leo Moll <leo.moll@yeasoft.com>  Mon, 16 Dec 2015 15:54:51 +0100
 
 btsync (2.0.0-1) unstable; urgency=low
 
