@@ -1,3 +1,9 @@
+btsync-core (2.0.93-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Leo Moll <leo.moll@yeasoft.com>  Thu, 19 Mar 2015 23:34:56 +0100
+
 btsync-core (2.0.85-1) unstable; urgency=low
 
   * New upstream release

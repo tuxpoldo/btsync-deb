@@ -1,3 +1,23 @@
+2.0.93 (March 18, 2015)
+
+ - In “My Devices”, a “Sync all” badge is shown next to your
+   device set to sync all contents of all your folders
+ - The web UI for Linux and NAS does not have to be reloaded
+   anymore in certain circumstances
+ - Resolved an issue that could result in a device not having
+   an identity
+ - Resolved an issue that could result in a blank UI
+ - Resolved an issue that would prevent license expiration
+   notifications from displaying
+ - Sync installed in a custom directory on Windows now properly
+   launches
+ - Improved synchronization between your desktop and Android
+   devices
+ - Improved file update mechanism in certain circumstances
+ - Cosmetic enhancements
+ - Fixed various crashes
+
+
 2.0.85 (March 10, 2015)
 
 ​ - Fixed various crashes on all OS
