@@ -11,6 +11,12 @@
 /btsync*.deb
 
 # unpacked sources
+/btsync-core/amd64
+/btsync-core/arm
+/btsync-core/i386
+/btsync-core/kfreebsd-amd64
+/btsync-core/kfreebsd-i386
+/btsync-core/powerpc
 /btsync-common/amd64
 /btsync-common/arm
 /btsync-common/geode
@@ -18,7 +24,6 @@
 /btsync-common/kfreebsd-amd64
 /btsync-common/kfreebsd-i386
 /btsync-common/powerpc
-/btsync-common/BitTorrentSyncUserGuide.pdf
 
 # bind shim source and intermediate files
 /bind-shim_*
