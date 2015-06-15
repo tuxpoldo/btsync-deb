@@ -1,3 +1,66 @@
+2.0.124 (June 4, 2015)
+
+ - Minor design improvements
+
+
+2.0.120 (May 19, 2015)
+
+Features
+ - Search for folders, users, and devices in the folder list, peer list, and
+   licenses
+ - New optional column for “Owner” so you can easily see who owns which folder
+ - New optional column for “Last transferred” so you know the last time files
+   were changed in a folder
+ - Ability to hide offline devices in the My Devices list that you are not using
+   anymore
+
+Enhancements
+ - All settings in a folder's Share dialog are now remembered the next time it
+   is opened
+ - For Sync-specific options, icons have been added to the contextual menu of
+   folders and files in Explorer (Windows) and Finder (OS X)
+ - When manually installing a new version of Sync for Windows, the installer now
+   properly shuts down the existing version of Sync, making the update process
+   easier
+ - Additional usability and design improvements
+ - Many core engine improvements
+
+Fixes
+ - The UI is now properly scaled on high-resolution Windows displays, like those
+   on the Microsoft Surface Pro
+ - Improved the accuracy of files that need to be sent or received in the peer
+   list
+ - Accuracy of receiving performance statistic has been improved
+ - Resolved an issue when disconnecting/connecting a folder after changing the
+   default path
+ - Resolved an issue that would cause the incorrect path to show in the "Path"
+   column
+ - Resolved a CPU usage issue on OS X that would result in the WindowServer
+   process consuming resources
+ - On OS X, hidden items can now be selected when adding a folder if they are
+   made visible in the Finder
+ - Resolved an issue on OS X Yosemite that caused some checkboxes and radio
+   buttons to be duplicated
+ - "Pause receiving" is changed to "Cancel receiving" in a file’s contextual
+   menu when it is being received
+ - Resolved an issue that sometimes caused the Sync-specific contextual menu
+   options disappear in the Finder
+ - Resolved an issue that Sync prevents OS X from entering sleep mode
+
+2.0.105 (April 10, 2015)
+
+- Minor improvements
+
+
+2.0.104 (April 7, 2015)
+
+ - Resolved an issue preventing Sync from automatically starting after
+   installing an update
+ - Can now share a folder using a link and give the receiver owner permissions
+ - Cosmetic enhancements
+ - Some core engine improvements
+
+
 2.0.93 (March 18, 2015)
 
  - In “My Devices”, a “Sync all” badge is shown next to your
