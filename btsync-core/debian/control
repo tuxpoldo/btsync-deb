@@ -7,7 +7,7 @@ Standards-Version: 3.9.4
 Homepage: http://www.bittorrent.com/sync
 
 Package: btsync-core
-Architecture: i386 amd64 armel armhf powerpc
+Architecture: i386 amd64 armel armhf
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Breaks: btsync-user (<= 1.15.0-1)
 Description: Private network P2P file synchronisation daemon
