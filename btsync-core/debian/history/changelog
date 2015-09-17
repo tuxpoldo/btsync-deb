@@ -1,3 +1,174 @@
+2.2.1
+
+Improvements
+- List of locked files is now available for user
+
+Fixes
+- Crash during Sync startup on Windows
+- Sync crashes after seat license is added
+- Sync crashes if license request is denied sometimes
+- License is not applied until restart
+- Advanced settings are not saved after autoupdate sometimes
+- Sync does not link Windows and Mac sometimes
+- Deprecated settings prevent Linux package built by community from starting
+- Personal license does not distribute automatically on free linked devices
+- Optimize debug logs to save HDD space
+- BTS files remain in the folder sometimes
+- Sync shows stub list instead of locked files 
+
+2.2.0
+
+Changes and improvements
+- Removed 10 folders limitation for Free version
+- Trial period now should be manually enabled
+- Changed licensing flow for personal use
+- Improve compatibility to Microsoft Office, Adobe and Autodesk products
+- Make configurable delay when Sync starts processing files with certain extensions
+- Add @eaDir* and @SynoResource to default IgnoreList
+- Improving debug logs to increase chances of capturing issues
+- Optimize memory consumption when sync is minimized to tray
+- Allow to select NIC for data transfer instead of binding to all interfaces
+- Simplify welcome screen
+- Added ability to locate moved folder in "Folder preferences"
+- Added standard / advanced folder dialog choice
+- Advanced folders (aka 2.0 folders) made only available for Pro users only
+- Changed "Sync All on/off" to "Selective Sync"
+- Removed option to delete files when disconnecting folder
+
+License fixes
+- "License expired" sporadic message
+- Your license expired message after restart
+- Sharing license with Synology peer doesn't work
+- Android device steals license ownership
+- License is lost after relinking on mobile device
+- Pro license disappears after upgrade
+- Owner license is applied after adding seat license
+- License owner switches every Sync restart
+- Sync reverts back to old license if license upgraded to additional seats sometimes
+- Sync does not switch to a new license if using consumer license
+- Sync becomes unlicensed for no visible reason
+- Sync is unable to apply license and approve license seats from Linux if storage configured outside of directory_root
+
+Crash fixes
+- Crash on Mac after Sync starts up
+- Crash on Encrypted RO peer on Linux
+- Sync crashes sometimes if launched immediately after quitting
+- Sync crashed after deleting files from several peers
+- Sync crashes after permission change
+- Sync causes high CPU usage on Mac and does nothing, later crashes
+- Crash during indexing 1.4Tb file.
+- Sync doesn't generate dump files after crash
+- Intermittent crashes on Windows
+- Sync crashes on NAS when folders are renamed/moved on other device
+- Sync crashes on removing Camera Backup folder sometimes
+
+Other fixes
+- Newer file replaced by old one from offline peer
+- Cannot install Sync under user with non-latin characters in name
+- Sync closes silently if agree_to_EULA is not set when using APIv2
+- Some files are stuck and never synced sometimes
+- Sync quits silently if launched from Downloads folder
+- Files are duplicated with placeholders after restarting of Sync on OS X
+- Improve Sync DB stability
+- Sync can't be removed from favorites
+- Sync freezes on start sometimes
+- Sync creates strange files if FS connected over CIFS/SMB does not support alternate streams
+- BitTorrent Sync folder does not appear in Favorites sometimes
+- Sync moves file to archive after adding if one of peers already has .bts file counterpart with the same name
+- Sync leaves old binary when upgrading from x86 to x64 version
+- Sync returns a folder or file which was removed on Android device sometimes
+- Placeholder file popup shows up for no reason
+- Upgrading 1.4.111 to 2.x leaves old binary on HDD
+- New folders are not propagating to linked NAS via My Devices
+- No warning shown when folder owned by other sync instance is shared from Window Explorer
+- Placeholders do not appear in folders with 100k+ files
+- Control+Click does not work as Right Click on OS X
+- Sync creates duplicate offline peers when runs in config mode
+- Sync may create duplicate offline peer when killed ungracefully
+- Sync freezes on shutdown when many files are in Archive
+- Sync connects to tracker even if all options for connection are disabled
+- Sync icon disappears in system tray
+- Sync propagates older file if it was changed while Sync was offline
+- Other minor UI cosmetic fixes
+
+2.1.4
+
+Fixes
+-  Sync data download does not work in rare cases
+
+2.1.3
+
+Fixes
+ - Sync icon looks to be paused after upgrade
+ - Sync is unable to sync files and get approval requests via relay server sometimes
+
+2.1.2
+
+Fixes
+- Sync moves files to .sync/Archive sometimes
+- Sync moves newly created files to archive sometimes
+- Sync freezes when user closes it due to many files in Archive
+- Sync creates .bts.bts files sometimes
+- Peer duplicates in peer list appear if Sync is killed in an ungraceful way
+- Sync can't be removed from favorites
+- Sync on Windows freezes while transferring/indexing huge amounts of files
+- "Synced" mode applied regardless of user's choice sometimes
+- "Sync Pro license updated" event appears only on one of the linked devices
+- Old type bts placeholders in Sync 2.1 appear when subfolder is removed
+- BTS files appear as duplicates of the Synced file (while the folder is in the Sync all mode)
+- Large amount of folders causes high CPU usage and folder changes get detected only during rescan
+- Files duplicated with .bts placeholders after re-adding by the same path
+- Add "Bittorrent Sync" folder to favorites even when no devices are linked
+- New folders are not propagated to linked NAS devices sometimes
+- Synchronization gets stuck sometimes when many peers involved
+- Sync does not update users permissions when gets a new link with permissions lower than those it had
+- Sync sometimes returns a removed folder if Android device is present in mesh
+- Intermittent Sync crashes on Windows and OS X
+- Sync consumes 200% of CPU resources on OS X, then crashes
+- Sync freezes on start sometimes
+- Improve Sync speed for many small files
+- Sync default ignoreList now contains more service files (icon?, icon\r, icon^M)
+- Improve compatibility to 3rd party apps on POSIX operating systems
+- UI cosmetic fixes
+
+2.1.1
+
+- Fixed issue that would cause UI to not update (like when linking a device or adding a folder)
+
+2.1.0
+
+- Sync API v2 is enabled. For detailed information, see API page.
+- A few core engine improvements.
+
+2.0.128
+
+- Minor UI improvements
+- A few core engine improvements
+​
+2.0.127
+
+- A few core engine improvements
+
+2.0.126
+
+- A few core engine improvements
+
+2.0.125
+
+Features
+- If you have a storage device linked to your identity in “Synced” mode, capacity information about that device is shown in the My Devices window so it can be remotely monitored; that device must also be running Sync 2.0.125 or later
+- Notifications in Sync are now synchronized across your devices
+- Keyboard shortcuts have been added; “ctrl + /” on Windows and “command + /” on OS X to display the available shortcuts
+- You can now add a folder to Sync by dragging and dropping it into the main window
+
+Enhancements
+- Notifications have been added for changes in folder permissions and licensing status
+- Reduced the size of placeholder files on OS X when the folder’s “Sync all” option is off
+
+Fixes
+- “Date synced column” is not empty when peers go offline
+- Critical issues have been resolved on POSIX-based systems
+
 2.0.124 (June 4, 2015)
 
  - Minor design improvements
