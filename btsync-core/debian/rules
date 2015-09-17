@@ -65,7 +65,7 @@ get-orig-source:
 		mkdir -p temp-orig-source/$(DEB_SOURCE_PACKAGE); \
 		for arch in arm i386 x64; do \
 			mkdir -p temp-orig-source/$(DEB_SOURCE_PACKAGE)/$${arch}; \
-			if ! wget -q -c https://download-cdn.getsyncapp.com/$(DEB_UPSTREAM_VERSION)/linux-$${arch}/BitTorrent-Sync_$${arch}.tar.gz; then \
+			if ! wget -q -c https://download-cdn.getsync.com/$(DEB_UPSTREAM_VERSION)/linux-$${arch}/BitTorrent-Sync_$${arch}.tar.gz; then \
 				wget -q -c http://archive.yeasoft.net/btsync/$(DEB_UPSTREAM_VERSION)/btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; \
 				tar -C temp-orig-source/$(DEB_SOURCE_PACKAGE)/$${arch} -xzf btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; \
 				rm -f btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; \
