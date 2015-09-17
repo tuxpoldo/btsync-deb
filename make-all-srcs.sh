@@ -24,7 +24,7 @@ for SRCDIR in ${SOURCES}; do
 		# make sure the orig archive exists
 		debian/rules get-orig-source
 		# make source target
-		debuild -S -sa
+		debuild -S -sa -kFEF78709
 		# cleanup garbage
 		debuild clean
 		# return

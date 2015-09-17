@@ -69,7 +69,7 @@ get-orig-source:
 				wget -q -c http://archive.yeasoft.net/btsync/$(DEB_UPSTREAM_VERSION)/btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; \
 				tar -C temp-orig-source/$(DEB_SOURCE_PACKAGE)/$${arch} -xzf btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; \
 				rm -f btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; \
-			else; \
+			else \
 				tar -C temp-orig-source/$(DEB_SOURCE_PACKAGE)/$${arch} -xzf BitTorrent-Sync_$${arch}.tar.gz; \
 				rm BitTorrent-Sync_$${arch}.tar.gz; \
 			fi; \
