@@ -65,7 +65,7 @@ get-orig-source:
 		mkdir -p temp-orig-source/$(DEB_SOURCE_PACKAGE); \
 		for arch in arm i386 x64; do \
 			mkdir -p temp-orig-source/$(DEB_SOURCE_PACKAGE)/$${arch}; \
-			wget --show-progress --progress=dot -c https://download-cdn.getsync.com/$(DEB_UPSTREAM_VERSION)/linux-$${arch}/BitTorrent-Sync_$${arch}.tar.gz; \
+			wget --progress=dot -c https://download-cdn.getsync.com/$(DEB_UPSTREAM_VERSION)/linux-$${arch}/BitTorrent-Sync_$${arch}.tar.gz; \
 			tar -C temp-orig-source/$(DEB_SOURCE_PACKAGE)/$${arch} -xzf BitTorrent-Sync_$${arch}.tar.gz; \
 			rm BitTorrent-Sync_$${arch}.tar.gz; \
 		done; \
