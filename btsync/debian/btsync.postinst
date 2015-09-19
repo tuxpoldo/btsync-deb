@@ -106,8 +106,6 @@ create_default_instance() {
 	if [ "${RET}" = "true" ]; then
 		db_get btsync/folder_defaults-delete_to_trash || RET="true"
 		FOLDER_DEFAULTS_DELETE_TO_TRASH=${RET}
-		db_get btsync/folder_defaults-use_dht || RET="false"
-		FOLDER_DEFAULTS_USE_DHT=${RET}
 		db_get btsync/folder_defaults-use_lan_broadcast || RET="true"
 		FOLDER_DEFAULTS_USE_LAN_BROADCAST=${RET}
 		db_get btsync/folder_defaults-use_relay || RET="true"
@@ -118,7 +116,6 @@ create_default_instance() {
 		FOLDER_DEFAULTS_KNOWN_HOSTS=${RET}
 	else
 		FOLDER_DEFAULTS_DELETE_TO_TRASH="true"
-		FOLDER_DEFAULTS_USE_DHT="false"
 		FOLDER_DEFAULTS_USE_LAN_BROADCAST="true"
 		FOLDER_DEFAULTS_USE_RELAY="true"
 		FOLDER_DEFAULTS_USE_TRACKER="true"
@@ -170,7 +167,6 @@ EOF
 	"rate_limit_local_peers" : ${RATE_LIMIT_LOCAL_PEERS},
 	"folder_rescan_interval" : ${FOLDER_RESCAN_INTERVAL},
 	"folder_defaults.delete_to_trash" : ${FOLDER_DEFAULTS_DELETE_TO_TRASH},
-	"folder_defaults.use_dht" : ${FOLDER_DEFAULTS_USE_DHT},
 	"folder_defaults.use_lan_broadcast" : ${FOLDER_DEFAULTS_USE_LAN_BROADCAST},
 	"folder_defaults.use_relay" : ${FOLDER_DEFAULTS_USE_RELAY},
 	"folder_defaults.use_tracker" : ${FOLDER_DEFAULTS_USE_TRACKER},

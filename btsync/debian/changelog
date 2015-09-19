@@ -1,3 +1,10 @@
+btsync (2.2.1-1.3) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Remove use_dht as a deprecated configuration option. Thanks to @noiime and @RomanZ. 
+
+ -- Mark Lopez (Authority) <m@silvenga.com>  Wed, 17 Sep 2015 18:56:54 -0500
+
 btsync (2.2.1-1.2) unstable; urgency=medium
 
   * Non-maintainer upload.

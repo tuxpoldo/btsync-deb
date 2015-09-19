@@ -1,6 +1,8 @@
 BitTorrent Sync Packaging Project
 =================================
 
+[![Build Status](https://jenkins.silvenga.com/job/Btsync/badge/icon)](https://jenkins.silvenga.com/job/Btsync)
+
 [BitTorrent&reg; Sync][1] from BitTorrent&reg; Inc. is a simple tool that
 applies p2p protocol for direct live folder sync with maximum security, network
 speed and storage capacity. It has native versions for Mac, Windows and Linux,
