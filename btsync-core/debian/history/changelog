@@ -1,3 +1,11 @@
+2.2.2
+
+Fixes
+- Sync keeps removing file deleted once by user if this file is copied back
+- Added file gets removed in certain cases
+- Incorrect Russian localization for peer list
+- Various crashes
+
 2.2.1
 
 Improvements
