@@ -1,3 +1,17 @@
+2.2.3
+
+Improvements    
+- Default folder behavior is now "Disconnected" for all OSes except Linux
+- Added a way to apply license from the "License" menu
+- Show extended info about remote peer in "My Devices" regardless of default sync mode
+- Allow to apply "My Devices" key from manual connection to simplify linking devices procedure
+- Fix Sync icon for MacOS
+- Minor cosmetic changes
+
+Fixes    
+- Teams license cannot replace personal one
+- Nothing happens when user clicks "Get started" button in welcome screen
+
 2.2.2
 
 Fixes
