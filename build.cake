@@ -5,9 +5,9 @@ const string syncChangeLog = "http://help.getsync.com/customer/portal/articles/1
 const string historyPath = @"btsync-core\debian\history\changelog";
 const string changelogFile = @"btsync-core\debian\changelog";
 
-var target = Argument("target", "Default");
+var target = Argument("target", "default");
 
-Task("update-changelog")
+Task("default")
 	.Does(() =>
 {
 	var lastVersion = GetLastVersion(syncChangeLog);
