@@ -1,7 +1,21 @@
-BitTorrent Sync Packaging Project
-=================================
+# BitTorrent Sync Packaging Project
 
 [![Build Status](https://jenkins.silvenga.com/job/Btsync/badge/icon)](https://jenkins.silvenga.com/job/Btsync)
+
+I will be providing continued maintenance for this awesome project that Mr. Tuxpoldo has founded. Until I am accustomed to this project (or Python for the matter) I can provide support for the `btsync` and `btsync-common` packages with new binary versions and bugfixes.
+
+Debian and Ubuntu packages can be found under my private repository http://deb.silvenga.com. New versions should be automatically built and published to this location via my build server (found above) when new changelogs are released. 
+
+Cheers!
+
+\- Silvenga
+
+## TODO
+
+* Log to proper log folder.
+* Setup logrotate. 
+
+## Original README
 
 [BitTorrent&reg; Sync][1] from BitTorrent&reg; Inc. is a simple tool that
 applies p2p protocol for direct live folder sync with maximum security, network
@@ -38,8 +52,7 @@ The legacy package containing support for BitTorrent Sync as a WebUI and tray
 application for desktop users is named __btsync-user__
 
 
-Useful Links
--------------
+## Useful Links
 
 - [Project Home Page][2]
 - [BitTorrent Sync Home Page][1]
