@@ -100,8 +100,46 @@ public string CreateChangelog(Release release)
 	return changelog;
 }
 
-public class Release
+int Run(string exe, string args, string path = null)
 {
-    public string Version { get; set; }
-    public string Changes { get; set; }
+  var settings = new ProcessSettings
+  {
+    Arguments = args,
+    WorkingDirectory = path
+  };
+  return StartProcess(exe, settings);
+}
+
+string PackageToPath(string package)
+{
+  return string.Format("./{0}", package);
+}
+
+void CleanDebianWorkspace(string package, params string[] arches)
+{
+  var path = PackageToPath(package);
+  Run("debuild", "clean", path);
+  foreach(var arch in arches)
+  {
+		Information(string.Format("Cleaning for arch {0}.", arch));
+    DeleteFiles(string.Format("./*{0}.build", arch));
+    DeleteFiles(string.Format("./*{0}.changes", arch));
+  }
+}
+
+void BuildDebianPackage(string package, params string[] arches)
+{
+  var path = PackageToPath(package);
+  foreach(var arch in arches)
+  {
+		Information(string.Format("Building for arch {0}.", arch));
+    Run("debuild", "-uc -us -b -a" + arch, path);
+  }
+}
+
+void BuildDebianSrc(string package)
+{
+  var path = PackageToPath(package);
+  Run("debian/rules", "get-orig-source", path);
+  Run("debuild", "-S -sa -kFEF78709", path);
 }

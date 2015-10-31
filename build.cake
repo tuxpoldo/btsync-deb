@@ -1,11 +1,40 @@
 #load "tools/functions.cake"
+#load "tools/objects.cake"
 #addin "Cake.FileHelpers"
 
+// --target Clean
 var target = Argument<string>("target", "Default");
+// --packages btsync-common,btsync-core,btsync-gui,btsync-user,btsync
+var packageArgs = Argument<string>("packages", "btsync-core,btsync").Split(',');
+
+var packageProfiles = new List<PackageProfile>
+    {
+      new PackageProfile {
+        Name = "btsync-common",
+        Arches = "i386 amd64 armel armhf powerpc".Split()
+      },
+      new PackageProfile {
+        Name = "btsync-core",
+        Arches = "i386 amd64 armel armhf".Split()
+      },
+      new PackageProfile {
+        Name = "btsync-gui",
+        Arches = "all".Split()
+      },
+      new PackageProfile {
+        Name = "btsync-user",
+        Arches = "all".Split()
+      },
+      new PackageProfile {
+        Name = "btsync",
+        Arches = "all".Split()
+      }
+    }
+    .Where(x => packageArgs.Contains(x.Name));
 
 const string syncChangeLog = "http://help.getsync.com/customer/portal/articles/1908959";
-const string historyPath = @"btsync-core\debian\history\changelog";
-const string changelogFile = @"btsync-core\debian\changelog";
+const string historyPath = "btsync-core/debian/history/changelog";
+const string changelogFile = "btsync-core/debian/changelog";
 
 Task("Update-Changelog")
     .Does(() =>
@@ -16,7 +45,7 @@ Task("Update-Changelog")
     var currentHistory = FileReadText(historyPath);
     if(!currentHistory.Contains(lastVersion.Version))
     {
-    	Information("Updating history file.");
+      Information("Updating history file.");
     	currentHistory = CreateHistoryChangelog(lastVersion) + currentHistory;
     	FileWriteText(historyPath, currentHistory);
     }
@@ -35,6 +64,38 @@ Task("Update-Changelog")
     else
     {
     	Information("Changelog file is already up-to-date.");
+    }
+});
+
+Task("Clean")
+    .Does(() =>
+{
+    foreach(var package in packageProfiles)
+    {
+        Information(string.Format("Cleaning workspace of {0}.", package.Name));
+        CleanDebianWorkspace(package.Name, package.Arches);
+    }
+});
+
+Task("Build-Src")
+    .IsDependentOn("Clean")
+    .Does(() =>
+{
+    foreach(var package in packageProfiles)
+    {
+        Information(string.Format("Building source of {0}.", package.Name));
+        BuildDebianSrc(package.Name);
+    }
+});
+
+Task("Build-Deb")
+    .IsDependentOn("Clean")
+    .Does(() =>
+{
+    foreach(var package in packageProfiles)
+    {
+        Information(string.Format("Building Debian package for {0}.", package.Name));
+        BuildDebianPackage(package.Name, package.Arches);
     }
 });
 
