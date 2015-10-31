@@ -93,7 +93,7 @@ public string CreateChangelog(Release release)
 				+ "  * New upstream release."
 				+ Environment.NewLine
 				+ Environment.NewLine
-				+ string.Format(" -- {0}  {1}", maintainer, DateTime.Now.ToString("ddd, dd MMM yyyy HH:mm:ss zz00"))
+				+ string.Format(" -- {0}  {1}", "Mark Lopez (Authority) <m@silvenga.com>", DateTime.Now.ToString("ddd, dd MMM yyyy HH:mm:ss zz00"))
 				+ Environment.NewLine
 				+ Environment.NewLine;
 
