@@ -60,7 +60,6 @@ IEnumerable<Release> GetVersions(string url)
 	}
 }
 
-
 public Release GetLastVersion(string url)
 {
 	var lastVerson = GetVersions(url)
@@ -100,14 +99,18 @@ public string CreateChangelog(Release release)
 	return changelog;
 }
 
-int Run(string exe, string args, string path = null)
+void Run(string exe, string args, string path = "")
 {
   var settings = new ProcessSettings
   {
     Arguments = args,
     WorkingDirectory = path
   };
-  return StartProcess(exe, settings);
+  var exitCode = StartProcess(exe, settings);
+	if(exitCode != 0)
+	{
+		throw new Exception("Process did not succeed.");
+	}
 }
 
 string PackageToPath(string package)
@@ -119,27 +122,33 @@ void CleanDebianWorkspace(string package, params string[] arches)
 {
   var path = PackageToPath(package);
   Run("debuild", "clean", path);
-  foreach(var arch in arches)
-  {
-		Information(string.Format("Cleaning for arch {0}.", arch));
-    DeleteFiles(string.Format("./*{0}.build", arch));
-    DeleteFiles(string.Format("./*{0}.changes", arch));
-  }
+	DeleteFiles(string.Format("./{0}*.build", package));
+	DeleteFiles(string.Format("./{0}*.changes", package));
+	DeleteFiles(string.Format("./{0}*.deb", package));
+	DeleteFiles(string.Format("./{0}*.dsc", package));
+	DeleteFiles(string.Format("./{0}*.tar.gz", package));
 }
 
 void BuildDebianPackage(string package, params string[] arches)
 {
-  var path = PackageToPath(package);
+	Information("Extracting source.");
+	var extractOptions = string.Format("-c \"tar xvf {0}_*.orig.tar.gz -C ./\"", package);
+	Run("bash", extractOptions, "./");
+
+	var path = PackageToPath(package);
   foreach(var arch in arches)
   {
 		Information(string.Format("Building for arch {0}.", arch));
-    Run("debuild", "-uc -us -b -a" + arch, path);
+		var options = (arch == "all")
+									? "-uc -us -b"
+									: "-uc -us -b -a" + arch;
+    Run("debuild", options, path);
   }
 }
 
 void BuildDebianSrc(string package)
 {
   var path = PackageToPath(package);
-  Run("debian/rules", "get-orig-source", path);
+  Run(path + "/debian/rules", "get-orig-source", path);
   Run("debuild", "-S -sa -kFEF78709", path);
 }

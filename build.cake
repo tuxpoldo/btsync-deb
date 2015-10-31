@@ -7,7 +7,7 @@ var target = Argument<string>("target", "Default");
 // --packages btsync-common,btsync-core,btsync-gui,btsync-user,btsync
 var packageArgs = Argument<string>("packages", "btsync-core,btsync").Split(',');
 
-var packageProfiles = new List<PackageProfile>
+var availablePackageProfiles = new List<PackageProfile>()
     {
       new PackageProfile {
         Name = "btsync-common",
@@ -29,8 +29,11 @@ var packageProfiles = new List<PackageProfile>
         Name = "btsync",
         Arches = "all".Split()
       }
-    }
-    .Where(x => packageArgs.Contains(x.Name));
+    };
+
+var packageProfiles = availablePackageProfiles
+                      .Where(x => packageArgs.Contains(x.Name))
+                      .ToList();
 
 const string syncChangeLog = "http://help.getsync.com/customer/portal/articles/1908959";
 const string historyPath = "btsync-core/debian/history/changelog";
@@ -89,7 +92,7 @@ Task("Build-Src")
 });
 
 Task("Build-Deb")
-    .IsDependentOn("Clean")
+    .IsDependentOn("Build-Src")
     .Does(() =>
 {
     foreach(var package in packageProfiles)
