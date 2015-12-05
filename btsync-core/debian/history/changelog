@@ -4,6 +4,14 @@
 - Fixed issue with inability to re-apply owner license if client license is applied (business licenses only)
 - Fixed minor cosmetic issues
 
+2.2.6 (Unknown)
+
+Fixes:
+- Crashes on Linux when Sync starts in config mode, then in regular one
+- Crashes in Linux chroot'ed environments
+- "More options" shows empty list sometimes
+- Minor cosmetic fixes
+
 2.2.5 (10/09/15)
 
 - Fixed an issue with files being sent to archive if user cancels reception via Explorer extension
