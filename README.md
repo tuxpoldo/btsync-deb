@@ -11,7 +11,6 @@ Cheers!
 \- Silvenga
 
 ## Installing
--------------------------------------------
 
 Add my package signing key:
 
@@ -32,8 +31,7 @@ Install `btsync`
 apt-get install btsync
 ```
 
-## FAQ 
--------------------------------------------
+## FAQ
 
 ### Issue
 
@@ -77,13 +75,11 @@ gpg: error reading `[stream]': general error
 Make sure to run all the above commands as `root` either by using `sudo` or switching to the `root` user. 
 
 ## TODO
--------------------------------------------
 
 * Log to proper log folder.
 * Setup logrotate. 
 
 ## Original README
--------------------------------------------
 
 [BitTorrent&reg; Sync][1] from BitTorrent&reg; Inc. is a simple tool that
 applies p2p protocol for direct live folder sync with maximum security, network
