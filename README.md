@@ -10,12 +10,80 @@ Cheers!
 
 \- Silvenga
 
+## Installing
+-------------------------------------------
+
+Add my package signing key:
+
+```
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 992A3C9A3C3DE741
+```
+
+Add the btsync repository:
+
+```
+add-apt-repository "deb http://deb.silvenga.com/btsync any main"
+apt-get update
+```
+
+Install `btsync`
+
+```
+apt-get install btsync
+```
+
+## FAQ 
+-------------------------------------------
+
+### Issue
+
+You would receive something like the following when running `apt-get-repository`:
+
+```
+Traceback (most recent call last):
+  File "/usr/bin/add-apt-repository", line 167, in <module>
+    sp = SoftwareProperties(options=options)
+  File "/usr/lib/python3/dist-packages/softwareproperties/SoftwareProperties.py", line 105, in __init__
+    self.reload_sourceslist()
+  File "/usr/lib/python3/dist-packages/softwareproperties/SoftwareProperties.py", line 595, in reload_sourceslist
+    self.distro.get_sources(self.sourceslist)
+  File "/usr/lib/python3/dist-packages/aptsources/distro.py", line 89, in get_sources
+    (self.id, self.codename))
+aptsources.distro.NoDistroTemplateException: Error: could not find a distribution template for Raspbian/jessie
+```
+
+### Solution
+
+Raspbian's `add-apt-repository` seems to be broken under at last Jessie. The following commands will resolve the issues:
+
+```
+echo "deb http://deb.silvenga.com/btsync any main" > /etc/apt/sources.list.d/silvenga-btsync-deb.list
+apt-get update
+apt-get install btsync
+```
+
+### Issue
+
+Adding signing key fails with the following stacktrace:
+
+```
+gpg: requesting key 3C3DE741 from hkp server keyserver.ubuntu.com
+gpg: no writable keyring found: eof
+gpg: error reading `[stream]': general error
+```
+
+### Solution
+
+Make sure to run all the above commands as `root` either by using `sudo` or switching to the `root` user. 
+
 ## TODO
+-------------------------------------------
 
 * Log to proper log folder.
 * Setup logrotate. 
 
 ## Original README
+-------------------------------------------
 
 [BitTorrent&reg; Sync][1] from BitTorrent&reg; Inc. is a simple tool that
 applies p2p protocol for direct live folder sync with maximum security, network
