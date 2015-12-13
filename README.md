@@ -31,6 +31,8 @@ Install `btsync`
 apt-get install btsync
 ```
 
+After following the prompts, open your browser to `http://127.0.0.1:8888/gui/` (if using the default configuration).
+
 ## FAQ
 
 ### Issue
