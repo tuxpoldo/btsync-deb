@@ -1,3 +1,40 @@
+2.3 (01-21-16)
+
+Changes and improvements:
+- Added Encrypted folder support (so you can encrypt data on untrusted servers or in cloud)
+- Added ability to run Sync as a Service on Windows
+- Enhanced error handling behaviour and brushed up Sync statuses
+- Added Selective Sync on Linux
+- Sync for Linux now creates (and loads) storage folder in the current directory
+
+UI changes:
+- Complete redesign of the Add Folder flow 
+- It will be possible to change folder path only in case of ‘Folder not found’ or ‘Service files missing’ error
+- New design for very advanced (Power User) preferences
+- General hygiene usability improvements
+
+Fixes:
+- Fixed issue when Sync showed incorrect info about license after applying Pro over Free or Trial
+- Sync failed to update license info after license ownership was taken over by an Android device
+- Resolved various issues with syncing to network drives: frequent database errors, failing to sync some files, bug when .bts files weren’t re-created after deleting actual files.
+- Fixed issues with syncing database of MS Access and similar software
+- Issues when indexing or deleting more than 10K of files or renaming 1K of files
+- Sometimes certificate was lost after unexpected system restart
+- Fixed issue with failing to sync files with read-only attributes set by other apps
+- Files were re-downloaded after being restored from archive
+- Sync wouldn’t start if there were no shared folders or webui in config 
+- Sync got stuck sometimes after renaming a subfolder 
+- Synced files sometimes were duplicated with .bts files
+- Issue with getting blank UI when Sync is actually working 
+- Selective sync switch disappeared on Windows if Sync ran with /webui option or with Internet Explorer 8 or older
+- /api/v2/folders call didn’t show RW secret
+- Database error randomly appeared after system restart
+- Feedback files corruption
+- Fixed annoying tips and notifications
+
+Known issues:
+- Windows 10 claims that binary signature is corrupt or invalid (more info)
+
 2.2.7 (11-20-15)
 
 - Fixed "Database error" appearing during long time Sync operation with no obvious reason

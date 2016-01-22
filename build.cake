@@ -35,7 +35,7 @@ var packageProfiles = availablePackageProfiles
                       .Where(x => packageArgs.Contains(x.Name))
                       .ToList();
 
-const string syncChangeLog = "http://help.getsync.com/customer/portal/articles/1908959";
+const string syncChangeLog = "http://help.getsync.com/hc/en-us/articles/206216855-Sync-2-x-change-log";
 const string historyPath = "btsync-core/debian/history/changelog";
 const string changelogFile = "btsync-core/debian/changelog";
 
@@ -46,7 +46,7 @@ Task("Update-Changelog")
     Information(string.Format("Last detected version {0}.", lastVersion.Version));
 
     var currentHistory = FileReadText(historyPath);
-    if(!currentHistory.Contains(lastVersion.Version))
+    if(!currentHistory.Split('\n').Any(x => x.StartsWith(lastVersion.Version)))
     {
       Information("Updating history file.");
     	currentHistory = CreateHistoryChangelog(lastVersion) + currentHistory;
@@ -58,7 +58,7 @@ Task("Update-Changelog")
     }
 
     var currentChangelog = FileReadText(changelogFile);
-    if(!currentChangelog.Contains(lastVersion.Version))
+    if(!currentChangelog.Contains("(" + lastVersion.Version))
     {
     	Information("Updating changelog file.");
     	currentChangelog = CreateChangelog(lastVersion) + currentChangelog;

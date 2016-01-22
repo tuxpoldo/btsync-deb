@@ -12,18 +12,19 @@ IEnumerable<Release> GetVersions(string url)
 	var versionsPage = webClient.Load(url);
 
 	var versionNodes = versionsPage.DocumentNode
-			  .SelectNodes("//*[@id='support-main']/div/div[2]/div[2]/span/span/strong");
+			  .SelectNodes("//*/body/main/div/div/article/div/div[1]/p/strong");
 
 	var textNodes = versionsPage.DocumentNode
-			  .SelectNodes("//*[@id='support-main']/div/div[2]/div[2]");
+			  .SelectNodes("//*/body/main/div/div/article/div/div[1]");
 
-	if (versionNodes == null || textNodes == null)
+	if (versionNodes == null || textNodes == null || textNodes.Count() == 0)
 	{
 		throw new Exception("Changelog format changed!");
 	}
 
 	var versions = versionNodes.Select(x => x.InnerText.Trim()).ToList();
-	var text = textNodes[0].InnerText;
+	var nodes = RecurseTextNodes(textNodes[0]);
+	var text = string.Join("\n", nodes);
 
 	// Cleanup formating
 	text = text
@@ -32,6 +33,9 @@ IEnumerable<Release> GetVersions(string url)
 		.Replace("&quot;", "\"")
 		.Replace("&ldquo;", "\"")
 		.Replace("&rdquo;", "\"")
+		.Replace("\n\n", "\n")
+		.Replace("\u200B", "")
+		.Replace("&#8203;", "")
 		.Replace("&#39;", "'");
 
 	// Split on versions
@@ -48,7 +52,7 @@ IEnumerable<Release> GetVersions(string url)
 		.ToList();
 
 	// Return version objects
-	for (var i = 0; i < versions.Count; i++)
+	for (var i = 0; i < Math.Min(versions.Count, 5); i++)
 	{
 		var version = versions[i];
 		var body = logs[i];
@@ -57,6 +61,23 @@ IEnumerable<Release> GetVersions(string url)
 			Changes = body,
 			Version = version
 		};
+	}
+}
+
+public IEnumerable<string> RecurseTextNodes(HtmlNode node)
+{
+	if (node.ChildNodes.Count == 0)
+	{
+		yield return node.InnerText;
+		yield break;
+	}
+
+	foreach (var child in node.ChildNodes)
+	{
+		foreach (var r in RecurseTextNodes(child))
+		{
+			yield return r;
+		}
 	}
 }
 
