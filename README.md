@@ -37,6 +37,18 @@ After following the prompts, open your browser to `http://127.0.0.1:8888/gui/` (
 
 ### Issue
 
+Adding a new synced folder results in the following error:
+
+> Sync does not have permission to access this folder
+
+### Solution
+
+Make sure the user Btsync is running has has read and write access to the path set when prompted for the "Start path for the web interface". 
+
+Alternatively, `/` can be used. 
+
+### Issue
+
 You would receive something like the following when running `apt-get-repository`:
 
 ```
