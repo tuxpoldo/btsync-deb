@@ -43,7 +43,7 @@ Adding a new synced folder results in the following error:
 
 ### Solution
 
-Make sure the user Btsync is running has has read and write access to the path set when prompted for the "Start path for the web interface". 
+Make sure the user Btsync is running as has read and write access to the path set when prompted for the "Start path for the web interface". 
 
 Alternatively, `/` can be used. 
 
