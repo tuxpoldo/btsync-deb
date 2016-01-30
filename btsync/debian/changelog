@@ -1,3 +1,9 @@
+btsync (2.3.0-1.0) unstable; urgency=medium
+
+  * Customizable log path, RE #6. Thanks to @17Halbe. 
+
+ -- Mark Lopez (Authority) <m@silvenga.com>  Fri, 29 Jan 2016 18:11:58 -0600
+
 btsync (2.2.2-1.0) unstable; urgency=medium
 
   * Non-maintainer upload.

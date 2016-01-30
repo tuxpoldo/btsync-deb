@@ -64,6 +64,8 @@ create_default_instance() {
 	db_get btsync/nice-level || RET="0"
 	NICE_LEVEL=$(expr match "${RET}" '[ +0]*\(-*[0-9]*\)')
 	NICE_LEVEL=${NICE_LEVEL:-0}
+    db_get btsync/log-path || RET="/tmp/sync.log"
+	LOG_PATH=${RET}
 	db_get btsync/external_port || RET=0
 	EXTERNAL_PORT=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
 	EXTERNAL_PORT=${EXTERNAL_PORT:-0}
@@ -156,6 +158,7 @@ EOF
 	if [ "${NICE_LEVEL}" != "" -a "${NICE_LEVEL}" != "0" ]; then
 		echo "// DAEMON_NICE=${NICE_LEVEL}" >> ${CONFFILE}
 	fi
+    echo "// LOG_PATH=${LOG_PATH}" >> ${CONFFILE}
 	(
 	cat <<EOF
 {

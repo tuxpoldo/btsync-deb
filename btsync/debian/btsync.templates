@@ -151,7 +151,7 @@ Type: select
 Choices: ${btgids}
 Default: default
 _Description: BitTorrent Sync Daemon Group:
- You can choose, if you want BitTorrent Sync to run under a different
+ You can choose if you want BitTorrent Sync to run under a different
  group as the selected user credential.
  WARNING: If you change this setting in an already running
  instance, you must take care of changing the ownership of all files in the
@@ -166,6 +166,14 @@ _Description: Niceness of the BitTorrent Sync Daemon:
  affects process scheduling. Nicenesses range from -20 (most favorable
  scheduling) to 19 (least favorable). Specify 0 to let BitTorrent Sync run
  with the default niceness value.
+
+Template: btsync/log-path
+Type: string
+Default: /tmp/sync.log
+_Description: Log file for the BitTorrent Sync Daemon:
+ You can specify the log file for the BitTorrent Sync daemon. 
+ WARNING: Make sure the parrent folder exists and that the 
+ BitTorrent Sync daemon has permissions to read and write to said folder.  
 
 Template: btsync/external_port
 Type: string

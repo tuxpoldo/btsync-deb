@@ -96,6 +96,7 @@ config_debug () {
 		log_info_msg "PID File: '$PID_FILE'"
 		log_info_msg "Debug flags: '$DMASK'"
 		log_info_msg "Nice level: '$NICE_LEVEL'"
+		log_info_msg "Log path: '$LOG_PATH'"
 	    if [ "${DAEMON_ADDR}" != "0.0.0.0" ]; then
 			log_info_msg "Bind address: '$DAEMON_ADDR'"
 		elif [ -n "${DAEMON_BIND}" ]; then
@@ -171,6 +172,8 @@ config_from_conffile () {
 	NICE_LEVEL=$(grep 'DAEMON_NICE[ \t]*=' ${CONFIG_DIR}/$1 | cut -d= -f 2 | sed -e "s/ //g" -e "s/\t//g")
 	NICE_LEVEL=$(expr match "${NICE_LEVEL}" '\(-\{0,1\}+\{0,1\}[0-9]\{1,2\}\)')
 	NICE_LEVEL=${NICE_LEVEL:-0}
+    # log path encoded in comments in the config file
+    LOG_PATH=$(grep 'LOG_PATH[ \t]*=' ${CONFIG_DIR}/$1 | cut -d= -f 2 | sed -e "s/ //g" -e "s/\t//g")
 	# bind address of the daemon
 	DAEMON_ADDR=$(grep 'DAEMON_BIND[ \t]*=' ${CONFIG_DIR}/$1 | cut -d= -f 2 | sed -e "s/ //g" -e "s/\t//g")
 	DAEMON_ADDR=$(expr match "${DAEMON_ADDR}" '\([0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\)')
@@ -370,7 +373,10 @@ start_btsync () {
 		--make-pidfile ${CREDENTIALS:+--chuid ${CREDENTIALS}} \
 		--background ${UMASK:+--umask ${UMASK}} \
 		--exec $DAEMON \
-		-- --nodaemon --log /tmp/sync.log --config $CONFIG_DIR/$CONFFILE $DAEMON_ARGS  || STATUS=1
+		-- \
+        --nodaemon \
+        --log $LOG_PATH \
+        --config $CONFIG_DIR/$CONFFILE $DAEMON_ARGS  || STATUS=1
 
 	if [ "$STATUS" != 0 ]; then
 		# start-stop-daemon failed. Let's exit immediately
