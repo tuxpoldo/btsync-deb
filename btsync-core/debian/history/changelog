@@ -1,3 +1,25 @@
+2.3.1 (02-03-16)
+
+Changes:
+
+- Nested folder now cannot be added in Selective Sync mode
+
+Fixes:
+- Windows 10 reports Sync binary signature is invalid
+- QNAP loses identity after upgrade to 2.3
+- Sync crashes on Synology after upgrade
+- Sync crashes on exit
+- Sync crashes due to memory leak in certain cases
+- Localization issues
+- Sync corrupts the path of folder located in network after restart
+- Sync only gets 10 items when user selects many in Finder (fix is only for OS X 10.11)
+- Trial license is not replaced with Pro sometimes
+- Minor cosmetic issues
+- Several performance-related issues
+- Sync does not display images on buttons sometimes
+- Special symbols in folder pack may cause files to stop syncing
+- Files not synced in folder located on SMB share for some file types
+
 2.3 (01-21-16)
 
 Changes and improvements:
