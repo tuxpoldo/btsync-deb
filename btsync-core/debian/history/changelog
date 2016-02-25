@@ -1,3 +1,12 @@
+2.3.3 (02-24-16)
+
+- Fixed Sync crash on all OS in certain cases
+- Fixed high CPU usage on all OS
+- Fixed issue with Sync inability to rename .bts to real file extension when download finished in some cases
+
+- Fixed issue with Sync inability to download data from reconnected peer sometimes
+- Reduce debug logging
+
 2.3.2 (02-19-16)
 
 Changes and improvements:
