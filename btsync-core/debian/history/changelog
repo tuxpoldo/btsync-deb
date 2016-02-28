@@ -1,3 +1,48 @@
+2.3.3 (02-24-16)
+
+- Fixed Sync crash on all OS in certain cases
+- Fixed high CPU usage on all OS
+- Fixed issue with Sync inability to rename .bts to real file extension when download finished in some cases
+
+- Fixed issue with Sync inability to download data from reconnected peer sometimes
+- Reduce debug logging
+
+2.3.2 (02-19-16)
+
+Changes and improvements:
+- Sync automatically updates license after renewal
+
+Fixes:
+- High CPU and RAM usage by Sync in some cases
+- Folders constant indexing
+- Sync showing invalid number of seats after adding license
+- Sync stops delivering files to RO peers in some cases and consumes RAM
+- Sync delivers files to peer but does not rename it from .bts extension
+- Fix some crashes
+- Minor cosmetic fixes
+
+2.3.1 (02-03-16)
+
+Changes:
+
+- Nested folder now cannot be added in Selective Sync mode
+
+Fixes:
+- Windows 10 reports Sync binary signature is invalid
+- QNAP loses identity after upgrade to 2.3
+- Sync crashes on Synology after upgrade
+- Sync crashes on exit
+- Sync crashes due to memory leak in certain cases
+- Localization issues
+- Sync corrupts the path of folder located in network after restart
+- Sync only gets 10 items when user selects many in Finder (fix is only for OS X 10.11)
+- Trial license is not replaced with Pro sometimes
+- Minor cosmetic issues
+- Several performance-related issues
+- Sync does not display images on buttons sometimes
+- Special symbols in folder pack may cause files to stop syncing
+- Files not synced in folder located on SMB share for some file types
+
 2.3 (01-21-16)
 
 Changes and improvements:
