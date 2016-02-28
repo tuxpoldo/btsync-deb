@@ -1,6 +1,6 @@
 # BitTorrent Sync Packaging Project
 
-[![Build Status](https://jenkins.silvenga.com/job/Btsync/badge/icon)](https://jenkins.silvenga.com/job/Btsync)
+[![Build Status](https://img.shields.io/teamcity/https/teamcity.silvenga.com/e/Btsync_Build.svg?label=TeamCity&style=flat-square)](https://teamcity.silvenga.com/viewType.html?buildTypeId=Btsync_Build&guest=1)
 
 I will be providing continued maintenance for this awesome project that Mr. Tuxpoldo has founded. Until I am accustomed to this project (or Python for the matter) I can provide support for the `btsync` and `btsync-common` packages with new binary versions and bugfixes.
 
