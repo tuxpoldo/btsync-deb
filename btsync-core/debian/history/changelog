@@ -1,3 +1,11 @@
+2.3.6 (03-31-16)
+
+- Use HTTPS for receiving updates
+- Use HTTPS for sending debug data in Contact Support dialog
+- Optimize rescan of folders that constantly change
+- Fixed sporadic crashes on Mac
+- Fixed issue with Sync restoring renamed file with old name sometimes
+
 2.3.3 (02-24-16)
 
 - Fixed Sync crash on all OS in certain cases
