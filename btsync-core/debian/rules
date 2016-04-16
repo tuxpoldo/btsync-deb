@@ -28,7 +28,7 @@ override_dh_install:
 	i386)				dh_install btsync-core usr/lib/btsync-core; ;; \
 	amd64)				dh_install btsync-core usr/lib/btsync-core; ;; \
 	powerpc)			dh_install btsync-core usr/lib/btsync-core; ;; \
-	arm|armel|armhf)	dh_install btsync-core usr/lib/btsync-core; ;; \
+	arm|armel|armhf|arm64)	dh_install btsync-core usr/lib/btsync-core; ;; \
 	esac
 
 override_dh_auto_build:
@@ -37,7 +37,7 @@ override_dh_auto_build:
 	i386)				cp -a i386/btsync btsync-core; ;; \
 	amd64)				cp -a amd64/btsync btsync-core; ;; \
 	powerpc)			cp -a powerpc/btsync btsync-core; ;; \
-	arm|armel|armhf)	cp -a arm/btsync btsync-core; ;; \
+	arm|armel|armhf|arm64)	cp -a arm/btsync btsync-core; ;; \
 	esac
 
 override_dh_clean:

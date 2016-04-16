@@ -15,7 +15,7 @@ var availablePackageProfiles = new List<PackageProfile>()
       },
       new PackageProfile {
         Name = "btsync-core",
-        Arches = "i386 amd64 armel armhf".Split()
+        Arches = "i386 amd64 armel armhf arm64".Split()
       },
       new PackageProfile {
         Name = "btsync-gui",
