@@ -1,3 +1,5 @@
+![Icon](docs/images/icon.png)
+
 # BitTorrent Sync Packaging Project
 
 [![Build Status](https://img.shields.io/teamcity/https/teamcity.silvenga.com/e/Btsync_Build.svg?label=TeamCity&style=flat-square)](https://teamcity.silvenga.com/viewType.html?buildTypeId=Btsync_Build&guest=1)
