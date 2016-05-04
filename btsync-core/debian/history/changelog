@@ -1,3 +1,13 @@
+2.3.7 (05-04-16)
+
+- Fixed Sync on Windows deleting file streams sometimes
+- Fixed connectivity failures in some cases
+- Fixed infinite folder scan
+- Fixed issue with setting file attributes on exFAT
+- Fixed JavaScript security warning in WebUI on NAS
+- Other core improvements and fixes
+- Minor UI fixes
+
 2.3.6 (03-31-16)
 
 - Use HTTPS for receiving updates
