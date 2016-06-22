@@ -1,3 +1,14 @@
+2.3.8 (06-22-16)
+
+- Fixed issue with all folders disconnected by devices that reconnect after 30 days being offline
+- Fixed Sync crashing on QNAP NAS
+- Fixed Sync doesn't let HDD sleep on Synology NAS
+- Fixed bind_interface power option not working on Mac
+- Fixed files moved to Archive when unplugging USB drive with synced folder
+- Fixed inability to share the folder as Owner after disconnection
+- Added parameter to get Sync version thru API
+- Improved Sync compatibility to FlexRaid disk pool
+
 2.3.7 (05-04-16)
 
 - Fixed Sync on Windows deleting file streams sometimes
