@@ -4,6 +4,8 @@
 
 [![Build Status](https://img.shields.io/teamcity/https/teamcity.silvenga.com/e/Btsync_Build.svg?label=TeamCity&style=flat-square)](https://teamcity.silvenga.com/viewType.html?buildTypeId=Btsync_Build&guest=1)
 
+> The bellow `apt-key` was incorrectly importing my signing key, rather than my public key. If any errors on updating, run the updated command. 
+
 I will be providing continued maintenance for this awesome project that Mr. Tuxpoldo has founded. Until I am accustomed to this project (or Python for the matter) I can provide support for the `btsync` and `btsync-common` packages with new binary versions and bugfixes.
 
 Debian and Ubuntu packages can be found under my private repository http://deb.silvenga.com. New versions should be automatically built and published to this location via my build server (found above) when new changelogs are released. 
@@ -17,7 +19,7 @@ Cheers!
 Add my package signing key:
 
 ```
-apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 992A3C9A3C3DE741
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 37F1A037FEF78709
 ```
 
 Add the btsync repository:
