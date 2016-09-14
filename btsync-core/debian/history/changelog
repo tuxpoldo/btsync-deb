@@ -1,3 +1,43 @@
+2.4.0 (09-14-16)
+
+Changes and improvements:
+
+- Sync rebranding to Resilio &amp; migration from BitTorrent Sync
+ - Implemented sync schedule (Pro users only)
+ - Add ability to add selective sync folder from config
+ - Show locked and unavailable files
+ - Improve compatibility to OS X 10.12 beta
+ - Give a warning when Sync goes out of memory
+ - Indicate when Sync can't connect to relay server
+ - Store all temp files in .sync folder
+ - Prevent Sync from opening off-screen
+ - Hide inactive peers for advanced folders
+ - Allow Sync to listen all NICs when installed as service
+ - Improve debugs upload
+ - Updated Dutch localization (special thanks to Marius Schoof)
+ - Minor UI improvements
+
+Fixes
+
+- Upgrade to Pro does not work on OS X sometimes
+ - Sync crashes after adding a folder in selective sync
+ - Sync replaces new file by older one after first rescan sometimes
+ - Offline peers remain in peer list
+ - "Cannot get the list of trackers" error appears on start briefly
+ - Sync package does not start on Syno DSM6.0
+ - Proxy settings not saved
+ - Sync crashes when receiving invalid API request
+ - Sync shows IP instead of peer name when connecting over relay
+ - Don't add extra folder name to folder path when adding folder over link
+ - Sync prevents NAS from sleeping
+ - Invalid GUID cookie causes "Invalid request" page
+ - Trial license ends unexpectedly
+ - Sync crashes on start sometimes
+ - Global speed limit gets disabled after restart
+ - Sync not allows to shutdown itself gracefully sometimes
+ - Listening port reverts after restart
+ - Minor cosmetic fixes
+
 2.3.8 (06-22-16)
 
 - Fixed issue with all folders disconnected by devices that reconnect after 30 days being offline
