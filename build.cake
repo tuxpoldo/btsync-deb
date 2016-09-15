@@ -2,6 +2,8 @@
 #load "tools/objects.cake"
 #addin "Cake.FileHelpers"
 
+// https://download-cdn.getsync.com/stable/linux-x64/resilio-sync_x64.tar.gz
+
 // --target Clean
 var target = Argument<string>("target", "Default");
 // --packages btsync-common,btsync-core,btsync-gui,btsync-user,btsync
