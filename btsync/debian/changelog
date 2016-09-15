@@ -1,3 +1,9 @@
+btsync (2.4.0-1.0) unstable; urgency=medium
+
+  * Moves directory_root to root of config. 
+
+ -- Mark Lopez (Authority) <m@silvenga.com>  Wed, 14 Sep 2016 21:14:07 -0600
+
 btsync (2.3.0-1.0) unstable; urgency=medium
 
   * Customizable log path, RE #6. Thanks to @17Halbe. 

@@ -203,6 +203,9 @@ EOF
 	if [ -n "${PEER_EXPIRATION_DAYS}" -a "${PEER_EXPIRATION_DAYS}" != "7" ]; then
 		echo "	\"peer_expiration_days\" : ${PEER_EXPIRATION_DAYS}," >> ${CONFFILE}
 	fi
+	if [ -n "${DIRECTORY_ROOT}" -a "${DIRECTORY_ROOT}" != "/" ]; then
+		echo "	\"directory_root\" : \"${DIRECTORY_ROOT}\"," >> ${CONFFILE}
+	fi
 	(
 	cat <<EOF
 	"webui" :
@@ -211,9 +214,6 @@ EOF
 	) >> ${CONFFILE}
 	if [ -n "${API_KEY}" ]; then
 		echo "		\"api_key\" : \"${API_KEY}\"," >> ${CONFFILE}
-	fi
-	if [ -n "${DIRECTORY_ROOT}" -a "${DIRECTORY_ROOT}" != "/" ]; then
-		echo "		\"directory_root\" : \"${DIRECTORY_ROOT}\"," >> ${CONFFILE}
 	fi
 	(
 	cat <<EOF
