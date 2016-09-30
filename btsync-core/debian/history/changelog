@@ -1,3 +1,14 @@
+2.4.1 (09-29-16)
+
+- Fix incompatibility with files ending with asterisk
+- Fix Sync showing no folders after migration
+- Fix all devices lost in My Devices after migration on Linux
+- Fix Sync not starting on OS X sometimes
+- Fix Sync showing "No Network" when only bridge interface is available on OS X
+- Fix issue with all folders disconnecting when 30-days offline peer comes online
+- Fix Sync not launching on Linux x86
+- Cosmetic and minor issues fix
+
 2.4.0 (09-14-16)
 
 Changes and improvements:
