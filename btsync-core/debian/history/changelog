@@ -1,3 +1,22 @@
+2.4.2 (11-11-16)
+
+Changes and improvements:
+
+- Sync now keeps placeholders mtime up-to-date as on real files 
+
+Fixes
+
+- Sync crashes on shutdown
+- Sync stucks when bind_interface power option is used
+- Sync may get stuck and lose connection to peers when predefined hosts are used
+- Sync's context menu in Finder disappears when attempting to sync folder with large number of files
+- Locked files arent's shown on Linux
+- IgnoreList does not filter out arriving files and folders
+- API key expiration is not mentioned in debug log
+- Sync crashes with invalid password hash specified in config
+- "No network" error splash on startup
+- Minor cosmetic fixes
+
 2.4.1 (09-29-16)
 
 - Fix incompatibility with files ending with asterisk

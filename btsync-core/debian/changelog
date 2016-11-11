@@ -1,3 +1,10 @@
+btsync-core (2.4.2-1.0) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * New upstream release.
+
+ -- Mark Lopez (Authority) <m@silvenga.com>  Fri, 11 Nov 2016 08:24:29 -0600
+
 btsync-core (2.4.1-1.0) unstable; urgency=medium
 
   * Non-maintainer upload.
