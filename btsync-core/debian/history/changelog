@@ -1,3 +1,11 @@
+2.4.3 (12-05-16)
+
+Fixes
+
+- Sync free asks for a License upon connection to shared link
+- New files are not downloaded automatically in selectively synced subfolders under Linux
+- Sync floods logs with messages if syncing to FAT32 FS
+
 2.4.2 (11-11-16)
 
 Changes and improvements:
