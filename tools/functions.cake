@@ -171,5 +171,5 @@ void BuildDebianSrc(string package)
 {
   var path = PackageToPath(package);
   Run(path + "/debian/rules", "get-orig-source", path);
-  Run("debuild", "-S -sa -kFEF78709", path);
+  Run("debuild", "-S -sa", path);
 }
