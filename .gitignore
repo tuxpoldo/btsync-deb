@@ -45,3 +45,4 @@
 /packages
 /.fake
 /tools
+/.dotnet/

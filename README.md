@@ -2,7 +2,7 @@
 
 # BitTorrent Sync Packaging Project
 
-[![Build Status](https://img.shields.io/teamcity/https/teamcity.silvenga.com/e/Btsync_Build.svg?label=TeamCity&style=flat-square)](https://teamcity.silvenga.com/viewType.html?buildTypeId=Btsync_Build&guest=1)
+[![Build Status](https://img.shields.io/travis/Silvenga/btsync-deb.svg?style=flat-square)](https://travis-ci.org/Silvenga/btsync-deb)
 
 > The bellow `apt-key` was incorrectly importing my signing key, rather than my public key. If any errors on updating, run the updated command. 
 
