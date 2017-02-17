@@ -1,4 +1,5 @@
-#reference "tools/HtmlAgilityPack/lib/Net45/HtmlAgilityPack.dll"
+#addin nuget:?package=HtmlAgilityPack
+#reference "tools/Addins/HtmlAgilityPack/lib/Net45/HtmlAgilityPack.dll"
 using HtmlAgilityPack;
 using System.Text.RegularExpressions;
 
