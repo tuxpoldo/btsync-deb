@@ -1,6 +1,4 @@
 env:
-  global:
-    secure: R3hXkON7LOB+9Y3BxZBVO551AHSfHLtrtl0+jNPXCUboyl/PHXRfyKgG2F4Uy9BlgsygA3qA4IBZi50rFzkGNq2mz1hHvEcSUOF1yeWFbWMULHQBpUC3CKRlJPIV5XmqyiKqw4n/rntpF4xOIO94TZMVJ04WUOoRpL6vURYD2xxwX6ILy0x5ttZnMfAsP2Q7OVYXUSoE7ejxiv9eoAAxSoJTMBCrILlJRixF53EBJjFpYso2iIkh0F6BsiZJ4tdvhWfHKAOWNftAWvScL6yTtT5B5arLZLFvvdmjMsVQd32QyNgVVDaszvCliHq/W9moEDOPXul/qdp2bD9gO1CaI8O36R9EabLV1TYCjVIjsQAS0VHulZl71aStaPK64GOUx65OCl6PcS0C2zMg4lFXBDEwMxpPYhRte6HKbXhQjxFNxgRbusdXKYqjpg2RublhIvTkvaF2fMxIYM82ifVVYHVDIU88EJMvK9BObNBPwWH2qLdN1GMweVfFvOhKLZkk4TSDYCaH0B+5lkBm3ijxrqsAXD/Y2j2+Edo38tUhZqrtrgiKPgYZ+iFTNidEcdhWLWIFj65DndvdhpPKLxPi8WuiTuarJ7muJ7y6Gr3InQMqaqRzgUUMQVjEwrKR94IiNCB+9BY4i+MX7/YhVJY2YdkRc5QMM9v9NQ8mNbx0ezM=
 addons:
   apt:
     sources:
@@ -12,7 +10,7 @@ addons:
     - devscripts
     - debhelper
     - intltool
-  ssh_known_hosts: x0.silvenga.net
+  ssh_known_hosts: d4.silvenga.net
 dist: trusty
 language: csharp
 script:
@@ -22,5 +20,5 @@ after_success:
   - eval "$(ssh-agent -s)"
   - chmod 600 /tmp/deploy_rsa
   - ssh-add /tmp/deploy_rsa
-  - scp *.deb $SSH_SERVER:/var/www/aptly/incoming/btsync/
-  - ssh $SSH_SERVER "bash /var/www/aptly/incoming/import.sh btsync; bash /var/www/aptly/s3-publish.sh;"
+  - scp *.deb d4.silvenga.net:/opt/aptly/incoming/btsync/
+  - ssh d4.silvenga.net "bash /opt/aptly/incoming/import.sh btsync; bash /opt/aptly/s3-publish.sh;"
