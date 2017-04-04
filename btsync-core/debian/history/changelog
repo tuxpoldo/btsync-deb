@@ -1,3 +1,15 @@
+2.4.5 (04-04-17)
+
+- Sync now runs under rslsync user on Synology NASes and admin user is no longer mandatory
+- Fixed UI settings not saved during PC reboot without explicitly quitting Sync
+- Fixed Sync not declaring itself as HTTPS app in QNAP package
+- Fixed files not being synced when switching between selective / full sync modes
+- Fixed sync getting stuck with encrypted folders sometimes
+- Fixed Sync not being uninstalled if not closed manually before
+- Fixed Sync not startig up after upgrade on OS X 10.12 Sierra
+- Fixed system tray icon showing invalid speed data on Windows
+- Fixed Sync getting stuck while delivering xattrs on Linux
+
 2.4.4 (12-08-16)
 
 Fixes
