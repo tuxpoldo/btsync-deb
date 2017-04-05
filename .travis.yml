@@ -21,4 +21,4 @@ after_success:
   - chmod 600 /tmp/deploy_rsa
   - ssh-add /tmp/deploy_rsa
   - scp *.deb d4.silvenga.net:/opt/aptly/incoming/btsync/
-  - ssh d4.silvenga.net "bash /opt/aptly/incoming/import.sh btsync; bash /opt/aptly/s3-publish.sh;"
+  # - ssh d4.silvenga.net "bash /opt/aptly/incoming/import.sh btsync; bash /opt/aptly/s3-publish.sh;"
