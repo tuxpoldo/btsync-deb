@@ -1,3 +1,38 @@
+2.5 (05-13-17)
+
+Changes and Improvements:
+ - Product naming changes (renamed to Home &amp; Business)
+ - One Time Send feature
+ - Tabs are back! UI redesign
+ - New history tab - searchable and sortable
+ - Multi-core support for file indexing
+ - Improved IPv6 compatibility
+ - Improved folder statuses
+ - Improved file diff algorithm
+ - Added file-level de-duplication logic
+ - WAN accelerated transfers are available in Sync Business Accelerator
+ - Placeholders now keep same modification time as real files
+ - Optimized indexing speed for large number of files
+ - Optimized synchronization of huge (more than TB) files
+ - Added support for files larger than 4TB
+ - Other cosmetic changes
+
+Fixes:
+ - Sync is not properly uninstalled if not shut down
+ - OS X Finder Extension does not show status for files with special symbols
+ - "Sync to this device" does not spawn placeholders when called on subfolder
+ - Sync does not start on OS X Sierra sometimes
+ - Sync does not start download for a long time sometimes
+ - Selective Sync does not work for subfolders in WebUI
+ - Sync cannot add physical drive when it's mounted as folder
+ - Sync gets stuck when using predefined hosts sometimes
+ - Sync crashes when OS sleeps sometimes
+ - Other minor fixes
+
+Sync for Business and Sync Accelerator features only:
+ - Data de-duplicaion (file copy instead of re-download if client has file with same hash already)
+ - Rolling checksum (synchronization of only changed part of a file even with data shift)
+
 2.4.5 (04-04-17)
 
 - Sync now runs under rslsync user on Synology NASes and admin user is no longer mandatory
