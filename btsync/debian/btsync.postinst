@@ -163,13 +163,12 @@ EOF
 	cat <<EOF
 {
 	"storage_path" : "/var/lib/btsync/",
-	"vendor": "tuxpoldo",
 	"display_new_version": false,
 	"disk_low_priority" : ${DISK_LOW_PRIORITY},
 	"lan_encrypt_data" : ${LAN_ENCRYPT_DATA},
 	"rate_limit_local_peers" : ${RATE_LIMIT_LOCAL_PEERS},
 	"folder_rescan_interval" : ${FOLDER_RESCAN_INTERVAL},
-	"folder_defaults.delete_to_trash" : ${FOLDER_DEFAULTS_DELETE_TO_TRASH},
+	//"folder_defaults.delete_to_trash" : ${FOLDER_DEFAULTS_DELETE_TO_TRASH}, // TODO I should be valid...
 	"folder_defaults.use_lan_broadcast" : ${FOLDER_DEFAULTS_USE_LAN_BROADCAST},
 	"folder_defaults.use_relay" : ${FOLDER_DEFAULTS_USE_RELAY},
 	"folder_defaults.use_tracker" : ${FOLDER_DEFAULTS_USE_TRACKER},

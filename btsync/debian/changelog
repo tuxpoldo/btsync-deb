@@ -1,3 +1,10 @@
+btsync (2.5.0-1.0) unstable; urgency=medium
+
+  * Removed deprecated vender options.
+  * Disabled breaking 'folder_defaults.delete_to_trash' option temporarily (maybe?).
+
+ -- Mark Lopez (Authority) <m@silvenga.com>  Mon, 15 May 2017 19:25:30 -0600
+
 btsync (2.4.0-1.0) unstable; urgency=medium
 
   * Moves directory_root to root of config. 
