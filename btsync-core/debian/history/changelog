@@ -1,3 +1,11 @@
+2.5.1 (05-17-17)
+
+Fixes:
+ - "Choose directory" dialog does not open for Advanced or Encrypted folders
+ - Indexing progress is missing
+ - Various crashes
+ - Other minor and cosmetic fixes
+
 2.5 (05-13-17)
 
 Changes and Improvements:
