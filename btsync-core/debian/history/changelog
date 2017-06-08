@@ -1,3 +1,16 @@
+2.5.3 (06-07-17)
+
+Changes and fixes:
+ - Don't show "indexing" status for old files
+ - Added ability to manually re-check locked files
+ - Fixed Sync unable to establish direct connection between Android and Desktop
+ - Fixed Sync unable to connect to 2.4 peers
+ - Fixed "need core field" text in "Owner" column
+ - Fixed single file transfer incorrect progress
+ - Fixed Sync not seeing any peers after upgrade
+ - Fixed Sync unable to connect over proxy
+ - Other minor fixes
+
 2.5.2 (05-18-17)
 
 Fixes:
