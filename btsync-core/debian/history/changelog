@@ -1,3 +1,11 @@
+2.5.4 (06-19-17)
+
+- Added "files_default_path" parameter for arriving files location
+- Added Sync Business for NASes
+- Fixed issue with once locked files not syncing forever
+- Fixed tracker connectivity issues in China
+- Other minor fixes
+
 2.5.3 (06-07-17)
 
 Changes and fixes:
