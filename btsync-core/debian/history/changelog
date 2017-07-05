@@ -1,3 +1,11 @@
+2.5.5 (07-05-17)
+
+- Fixed crash on Sync startup
+- Fixed Sync does not display UI after sleep
+- Fixed files once locked by other process not syncing ever
+- Fixed Sync unable to Sync files over 4Gb in rare cases
+- Other minor fixes and improvements
+
 2.5.4 (06-19-17)
 
 - Added "files_default_path" parameter for arriving files location
