@@ -10,6 +10,7 @@ addons:
     - devscripts
     - debhelper
     - intltool
+    - fakeroot
   ssh_known_hosts: d4.silvenga.net
 dist: trusty
 language: csharp
