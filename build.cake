@@ -1,5 +1,5 @@
-#load "tools/functions.cake"
-#load "tools/objects.cake"
+#load "cake/functions.cake"
+#load "cake/objects.cake"
 #addin "Cake.FileHelpers"
 
 // https://download-cdn.getsync.com/stable/linux-x64/resilio-sync_x64.tar.gz
