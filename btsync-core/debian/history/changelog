@@ -1,3 +1,11 @@
+2.5.6 (07-13-17)
+
+- Added link to Customer Portal for license management
+- Added trial for Sync Business with Server support
+- Fixed Sync getting stuck with 100% CPU usage
+- Fixed several issues with locked files for single file sharing
+- Other minor fixes
+
 2.5.5 (07-05-17)
 
 - Fixed crash on Sync startup
