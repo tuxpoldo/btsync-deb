@@ -1,5 +1,103 @@
-BitTorrent Sync Packaging Project
-=================================
+![Icon](docs/images/icon.png)
+
+# BitTorrent Sync Packaging Project
+
+[![Build Status](https://img.shields.io/travis/Silvenga/btsync-deb.svg?style=flat-square)](https://travis-ci.org/Silvenga/btsync-deb)
+
+> The bellow `apt-key` was incorrectly importing my signing key, rather than my public key. If any errors on updating, run the updated command. 
+
+I will be providing continued maintenance for this awesome project that Mr. Tuxpoldo has founded. Until I am accustomed to this project (or Python for the matter) I can provide support for the `btsync` and `btsync-common` packages with new binary versions and bugfixes.
+
+Debian and Ubuntu packages can be found under my private repository http://deb.silvenga.com. New versions should be automatically built and published to this location via my build server (found above) when new changelogs are released. 
+
+Cheers!
+
+\- Silvenga
+
+## Installing
+
+Add my package signing key:
+
+```
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 37F1A037FEF78709
+```
+
+Add the btsync repository:
+
+```
+add-apt-repository "deb http://deb.silvenga.com/btsync any main"
+apt-get update
+```
+
+Install `btsync`
+
+```
+apt-get install btsync
+```
+
+After following the prompts, open your browser to `http://127.0.0.1:8888/gui/` (if using the default configuration).
+
+## FAQ
+
+### Issue
+
+Adding a new synced folder results in the following error:
+
+> Sync does not have permission to access this folder
+
+### Solution
+
+Make sure the user Btsync is running as has read and write access to the path set when prompted for the "Start path for the web interface". 
+
+Alternatively, `/` can be used. 
+
+### Issue
+
+You would receive something like the following when running `apt-get-repository`:
+
+```
+Traceback (most recent call last):
+  File "/usr/bin/add-apt-repository", line 167, in <module>
+    sp = SoftwareProperties(options=options)
+  File "/usr/lib/python3/dist-packages/softwareproperties/SoftwareProperties.py", line 105, in __init__
+    self.reload_sourceslist()
+  File "/usr/lib/python3/dist-packages/softwareproperties/SoftwareProperties.py", line 595, in reload_sourceslist
+    self.distro.get_sources(self.sourceslist)
+  File "/usr/lib/python3/dist-packages/aptsources/distro.py", line 89, in get_sources
+    (self.id, self.codename))
+aptsources.distro.NoDistroTemplateException: Error: could not find a distribution template for Raspbian/jessie
+```
+
+### Solution
+
+Raspbian's `add-apt-repository` seems to be broken under at last Jessie. The following commands will resolve the issues:
+
+```
+echo "deb http://deb.silvenga.com/btsync any main" > /etc/apt/sources.list.d/silvenga-btsync-deb.list
+apt-get update
+apt-get install btsync
+```
+
+### Issue
+
+Adding signing key fails with the following stacktrace:
+
+```
+gpg: requesting key 3C3DE741 from hkp server keyserver.ubuntu.com
+gpg: no writable keyring found: eof
+gpg: error reading `[stream]': general error
+```
+
+### Solution
+
+Make sure to run all the above commands as `root` either by using `sudo` or switching to the `root` user. 
+
+## TODO
+
+* Log to proper log folder.
+* Setup logrotate. 
+
+## Original README
 
 [BitTorrent&reg; Sync][1] from BitTorrent&reg; Inc. is a simple tool that
 applies p2p protocol for direct live folder sync with maximum security, network
@@ -36,8 +134,7 @@ The legacy package containing support for BitTorrent Sync as a WebUI and tray
 application for desktop users is named __btsync-user__
 
 
-Useful Links
--------------
+## Useful Links
 
 - [Project Home Page][2]
 - [BitTorrent Sync Home Page][1]

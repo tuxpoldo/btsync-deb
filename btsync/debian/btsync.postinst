@@ -64,6 +64,8 @@ create_default_instance() {
 	db_get btsync/nice-level || RET="0"
 	NICE_LEVEL=$(expr match "${RET}" '[ +0]*\(-*[0-9]*\)')
 	NICE_LEVEL=${NICE_LEVEL:-0}
+    db_get btsync/log-path || RET="/tmp/sync.log"
+	LOG_PATH=${RET}
 	db_get btsync/external_port || RET=0
 	EXTERNAL_PORT=$(expr match "${RET}" '[ +0]*\([0-9]*\)')
 	EXTERNAL_PORT=${EXTERNAL_PORT:-0}
@@ -106,8 +108,6 @@ create_default_instance() {
 	if [ "${RET}" = "true" ]; then
 		db_get btsync/folder_defaults-delete_to_trash || RET="true"
 		FOLDER_DEFAULTS_DELETE_TO_TRASH=${RET}
-		db_get btsync/folder_defaults-use_dht || RET="false"
-		FOLDER_DEFAULTS_USE_DHT=${RET}
 		db_get btsync/folder_defaults-use_lan_broadcast || RET="true"
 		FOLDER_DEFAULTS_USE_LAN_BROADCAST=${RET}
 		db_get btsync/folder_defaults-use_relay || RET="true"
@@ -118,7 +118,6 @@ create_default_instance() {
 		FOLDER_DEFAULTS_KNOWN_HOSTS=${RET}
 	else
 		FOLDER_DEFAULTS_DELETE_TO_TRASH="true"
-		FOLDER_DEFAULTS_USE_DHT="false"
 		FOLDER_DEFAULTS_USE_LAN_BROADCAST="true"
 		FOLDER_DEFAULTS_USE_RELAY="true"
 		FOLDER_DEFAULTS_USE_TRACKER="true"
@@ -159,18 +158,17 @@ EOF
 	if [ "${NICE_LEVEL}" != "" -a "${NICE_LEVEL}" != "0" ]; then
 		echo "// DAEMON_NICE=${NICE_LEVEL}" >> ${CONFFILE}
 	fi
+    echo "// LOG_PATH=${LOG_PATH}" >> ${CONFFILE}
 	(
 	cat <<EOF
 {
 	"storage_path" : "/var/lib/btsync/",
-	"vendor": "tuxpoldo",
 	"display_new_version": false,
 	"disk_low_priority" : ${DISK_LOW_PRIORITY},
 	"lan_encrypt_data" : ${LAN_ENCRYPT_DATA},
 	"rate_limit_local_peers" : ${RATE_LIMIT_LOCAL_PEERS},
 	"folder_rescan_interval" : ${FOLDER_RESCAN_INTERVAL},
-	"folder_defaults.delete_to_trash" : ${FOLDER_DEFAULTS_DELETE_TO_TRASH},
-	"folder_defaults.use_dht" : ${FOLDER_DEFAULTS_USE_DHT},
+	//"folder_defaults.delete_to_trash" : ${FOLDER_DEFAULTS_DELETE_TO_TRASH}, // TODO I should be valid...
 	"folder_defaults.use_lan_broadcast" : ${FOLDER_DEFAULTS_USE_LAN_BROADCAST},
 	"folder_defaults.use_relay" : ${FOLDER_DEFAULTS_USE_RELAY},
 	"folder_defaults.use_tracker" : ${FOLDER_DEFAULTS_USE_TRACKER},
@@ -204,6 +202,9 @@ EOF
 	if [ -n "${PEER_EXPIRATION_DAYS}" -a "${PEER_EXPIRATION_DAYS}" != "7" ]; then
 		echo "	\"peer_expiration_days\" : ${PEER_EXPIRATION_DAYS}," >> ${CONFFILE}
 	fi
+	if [ -n "${DIRECTORY_ROOT}" -a "${DIRECTORY_ROOT}" != "/" ]; then
+		echo "	\"directory_root\" : \"${DIRECTORY_ROOT}\"," >> ${CONFFILE}
+	fi
 	(
 	cat <<EOF
 	"webui" :
@@ -212,9 +213,6 @@ EOF
 	) >> ${CONFFILE}
 	if [ -n "${API_KEY}" ]; then
 		echo "		\"api_key\" : \"${API_KEY}\"," >> ${CONFFILE}
-	fi
-	if [ -n "${DIRECTORY_ROOT}" -a "${DIRECTORY_ROOT}" != "/" ]; then
-		echo "		\"directory_root\" : \"${DIRECTORY_ROOT}\"," >> ${CONFFILE}
 	fi
 	(
 	cat <<EOF

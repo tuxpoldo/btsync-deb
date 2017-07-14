@@ -40,3 +40,9 @@
 
 # editor debris
 *~
+
+# temp build files
+/packages
+/.fake
+/tools
+/.dotnet/

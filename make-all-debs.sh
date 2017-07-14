@@ -26,8 +26,12 @@ for SRCDIR in ${SOURCES}; do
 			rm -f ../*all.build
 			rm -f ../*all.changes
 		else
-#			for destarch in i386 amd64 armel armhf powerpc kfreebsd-amd64 kfreebsd-i386; do
-			for destarch in i386 amd64 armel armhf powerpc; do
+			tar xvf ../${SRCDIR}_*.orig.tar.gz -C ../
+			
+			ARCHS="i386 amd64 armel armhf powerpc"
+			[ "${SRCDIR}" == "btsync-core" ] && ARCHS="i386 amd64 armel armhf"
+			
+			for destarch in ${ARCHS}; do
 				debuild clean
 				debuild -uc -us -b -a${destarch}
 				rm -f ../*${destarch}.build

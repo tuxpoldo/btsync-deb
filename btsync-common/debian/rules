@@ -70,9 +70,7 @@ get-orig-source:
 		rm -rf temp-orig-source; \
 		mkdir -p temp-orig-source/$(DEB_SOURCE_PACKAGE); \
 		for arch in arm powerpc i386 x64 freebsd_i386 freebsd_x64; do \
-			if ! wget -q -c http://syncapp.bittorrent.com/$(DEB_UPSTREAM_VERSION)/btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; then \
-				wget -q -c http://archive.yeasoft.net/btsync/$(DEB_UPSTREAM_VERSION)/btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; \
-			fi; \
+			wget --progress=dot -c http://syncapp.bittorrent.com/$(DEB_UPSTREAM_VERSION)/btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; \
 			mkdir -p temp-orig-source/$(DEB_SOURCE_PACKAGE)/$${arch}; \
 			tar -C temp-orig-source/$(DEB_SOURCE_PACKAGE)/$${arch} -xzf btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; \
 			rm -f btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; \

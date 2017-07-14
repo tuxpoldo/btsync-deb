@@ -28,16 +28,16 @@ override_dh_install:
 	i386)				dh_install btsync-core usr/lib/btsync-core; ;; \
 	amd64)				dh_install btsync-core usr/lib/btsync-core; ;; \
 	powerpc)			dh_install btsync-core usr/lib/btsync-core; ;; \
-	arm|armel|armhf)	dh_install btsync-core usr/lib/btsync-core; ;; \
+	arm|armel|armhf|arm64)	dh_install btsync-core usr/lib/btsync-core; ;; \
 	esac
 
 override_dh_auto_build:
 	dh_auto_build
 	case "$(DEB_HOST_ARCH)" in \
-	i386)				cp -a i386/btsync btsync-core; ;; \
-	amd64)				cp -a amd64/btsync btsync-core; ;; \
-	powerpc)			cp -a powerpc/btsync btsync-core; ;; \
-	arm|armel|armhf)	cp -a arm/btsync btsync-core; ;; \
+	i386)				cp -a i386/rslsync btsync-core; ;; \
+	amd64)				cp -a amd64/rslsync btsync-core; ;; \
+	powerpc)			cp -a powerpc/rslsync btsync-core; ;; \
+	arm|armel|armhf|arm64)	cp -a arm/rslsync btsync-core; ;; \
 	esac
 
 override_dh_clean:
@@ -65,14 +65,9 @@ get-orig-source:
 		mkdir -p temp-orig-source/$(DEB_SOURCE_PACKAGE); \
 		for arch in arm i386 x64; do \
 			mkdir -p temp-orig-source/$(DEB_SOURCE_PACKAGE)/$${arch}; \
-			if ! wget -q -c https://download-cdn.getsyncapp.com/$(DEB_UPSTREAM_VERSION)/linux-$${arch}/BitTorrent-Sync_$${arch}.tar.gz; then \
-				wget -q -c http://archive.yeasoft.net/btsync/$(DEB_UPSTREAM_VERSION)/btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; \
-				tar -C temp-orig-source/$(DEB_SOURCE_PACKAGE)/$${arch} -xzf btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; \
-				rm -f btsync_$${arch}-$(DEB_UPSTREAM_VERSION).tar.gz; \
-			else; \
-				tar -C temp-orig-source/$(DEB_SOURCE_PACKAGE)/$${arch} -xzf BitTorrent-Sync_$${arch}.tar.gz; \
-				rm BitTorrent-Sync_$${arch}.tar.gz; \
-			fi; \
+			wget --progress=dot -c https://download-cdn.getsync.com/stable/linux-$${arch}/resilio-sync_$${arch}.tar.gz; \
+			tar -C temp-orig-source/$(DEB_SOURCE_PACKAGE)/$${arch} -xzf resilio-sync_$${arch}.tar.gz; \
+			rm resilio-sync_$${arch}.tar.gz; \
 		done; \
 		mv temp-orig-source/$(DEB_SOURCE_PACKAGE)/x64 temp-orig-source/$(DEB_SOURCE_PACKAGE)/amd64; \
 		tar -C temp-orig-source -czf $(DEB_DEBIAN_DIR)../../$(DEB_SOURCE_PACKAGE)_$(DEB_UPSTREAM_VERSION).orig.tar.gz $(DEB_SOURCE_PACKAGE); \

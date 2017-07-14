@@ -1,3 +1,50 @@
+btsync (2.5.0-1.0) unstable; urgency=medium
+
+  * Removed deprecated vender options.
+  * Disabled breaking 'folder_defaults.delete_to_trash' option temporarily (maybe?).
+
+ -- Mark Lopez (Authority) <m@silvenga.com>  Mon, 15 May 2017 19:25:30 -0600
+
+btsync (2.4.0-1.0) unstable; urgency=medium
+
+  * Moves directory_root to root of config. 
+
+ -- Mark Lopez (Authority) <m@silvenga.com>  Wed, 14 Sep 2016 21:14:07 -0600
+
+btsync (2.3.0-1.0) unstable; urgency=medium
+
+  * Customizable log path, RE #6. Thanks to @17Halbe. 
+
+ -- Mark Lopez (Authority) <m@silvenga.com>  Fri, 29 Jan 2016 18:11:58 -0600
+
+btsync (2.2.2-1.0) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * New upstream release. 
+
+ -- Mark Lopez (Authority) <m@silvenga.com>  Thu, 24 Sep 2015 21:17:11 -0500
+
+btsync (2.2.1-1.3) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Remove use_dht as a deprecated configuration option. Thanks to @noiime and @RomanZ. 
+
+ -- Mark Lopez (Authority) <m@silvenga.com>  Thu, 17 Sep 2015 18:56:54 -0500
+
+btsync (2.2.1-1.2) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Fixes startup. 
+
+ -- Mark Lopez (Authority) <m@silvenga.com>  Thu, 17 Sep 2015 18:56:54 -0500
+
+btsync (2.2.1-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * New upstream release
+
+ -- Mark Lopez (Authority) <m@silvenga.com>  Wed, 16 Sep 2015 21:01:27 -0500
+
 btsync (2.0.0-2) unstable; urgency=low
 
   * Fixed installation failure (Closes #179)
