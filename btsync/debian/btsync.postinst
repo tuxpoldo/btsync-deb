@@ -41,7 +41,7 @@ add_btsync_system_user() {
 create_default_certificates() {
 	if [ ! -f ${CRTFILE} -o ! -f ${KEYFILE} ]; then
 		(
-		openssl req -newkey rsa:2048  -x509 -days 3652.5 -nodes \
+		openssl req -newkey rsa:2048  -x509 -days 3652 -nodes \
 		-rand /dev/urandom -out ${CRTFILE} -keyout ${KEYFILE} > /dev/null 2>&1 <<+
 .
 .
